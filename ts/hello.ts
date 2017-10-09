@@ -5,4 +5,6 @@ class Startup {
     }
 }
 
-Startup.main();
+export function Hey(){
+    console.log("hey");
+}

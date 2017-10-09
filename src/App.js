@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import * as Hello from './core/hello';
 
 class App extends Component {
   render() {
@@ -16,6 +17,10 @@ class App extends Component {
       </div>
     );
   }
+}
+
+function test(){
+  Hello.Hey();
 }
 
 export default App;
