@@ -9,4 +9,9 @@ describe("sample functions", () => {
             .equal("Hello World");
     });
 
+    it("add 1 and 1 should return 2", () => {
+        // arrange
+        const result = sample.add(1, 1)        ;
+        expect(result).to.equal(2);
+    });
 });
