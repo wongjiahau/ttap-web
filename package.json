@@ -1,6 +1,7 @@
 {
   "name": "ttap-web",
   "version": "0.1.0",
+  "author": "Wong Jia Hau <hou32hou@gmail.com>",
   "private": true,
   "dependencies": {
     "react": "^16.0.0",
