@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {MuiThemeProvider} from 'material-ui'
-import {Login} from './pages/Login'
 import AppBar from 'material-ui/AppBar'
+import {Link} from 'react-router-dom'
+import Main from './Main'
 
 export default class App extends Component {
   render() {
@@ -12,7 +13,7 @@ export default class App extends Component {
           title="Timetable Arranging Program (UTAR)"
           iconClassNameRight="muidocs-icon-navigation-expand-more"/>
         <br/>
-        <Login/>
+        <Main/>
       </MuiThemeProvider>
     )
   }

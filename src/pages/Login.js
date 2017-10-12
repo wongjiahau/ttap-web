@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import Card from 'material-ui/Card';
 import './Login.css'
 
-export function Login() {
+export default function Login() {
     return (
         <Center>
             <div className="login-div">
