@@ -5,8 +5,8 @@ import Empty from './pages/Empty'
 
 const Main = () => (
     <Switch>
+        <Route exact path='/' component={Login}/>
         <Route exact path='/empty' component={Empty}/>
-        <Route exact path='/login' component={Login}/>
     </Switch>
 );
 
