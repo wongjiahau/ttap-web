@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import {Login} from './pages/Login'
 import registerServiceWorker from './registerServiceWorker';
+import 'typeface-roboto';
 
 ReactDOM.render(
     <Router >
