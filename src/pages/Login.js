@@ -3,17 +3,19 @@ import Center from 'react-center';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Card from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
 import coverImage from '../images/background.jpg';
 
 const style = {
     cover: {
+        bckgroundAttachment: 'fixed',
         backgroundImage: `url(${coverImage})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        minHeight: '600px',
         backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
-        marginTop: '-20px'
+        marginTop: '-20px',
+        minHeight: '600px',
+        opacity: '0.75'
     },
     card: {
         position: 'absolute',
@@ -47,11 +49,11 @@ const style = {
         top: '120px',
         left: '400px'
     },
-    subHeaderDiv:{
+    subHeaderDiv: {
         marginTop: '-30px'
     },
     header1: {
-        fontSize: '72px',
+        fontSize: '72px'
     }
 
 }
@@ -63,13 +65,13 @@ export default function Login() {
             <div style={style.headerDiv}>
                 <h1 style={style.header1}>Login to your
                     <br/>UTAR account</h1>
-                    <div style={style.subHeaderDiv}>
-                By clicking "Login", you agree to our  &nbsp;
-                <a href='https://www.google.com' target='_blank'>Terms of Service and Privacy Policy</a>
+                <div style={style.subHeaderDiv}>
+                    By clicking "Login", you agree to our &nbsp;
+                    <a href='https://www.google.com' target='_blank'>Terms of Service and Privacy Policy</a>
                 </div>
             </div>
             <div className="login-div">
-                <Card className="login-card" style={style.card}>
+                <Paper style={style.card} zDepth={3}>
                     <TextField
                         className="login-student-id-field"
                         floatingLabelText="Student ID"
@@ -99,7 +101,7 @@ export default function Login() {
                         label="Login"
                         primary={true}
                         style={style.button}/>
-                </Card>
+                </Paper>
             </div>
         </div>
     );
