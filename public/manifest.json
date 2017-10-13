@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "TTAP-UTAR",
+  "name": "Time Table Arranging Program for UTAR students",
   "icons": [
     {
       "src": "favicon.ico",
