@@ -65,13 +65,6 @@ const style = {
 }
 //TODO: Add the link for TOS and PP
 export default class Login extends Component {
-    clickSubmitButton() {
-        document
-            .getElementById('iframe')
-            .contentDocument
-            .getElementsByName('_submit')[0]
-            .click();
-    }
     handleClick = () => {
         var iframeDoc = document
             .getElementById('iframe')
@@ -85,7 +78,11 @@ export default class Login extends Component {
         iframeDoc.getElementsByName('kaptchafield')[0].value = document
             .getElementById('kapcha-field')
             .value;
-        this.clickSubmitButton();
+        document
+            .getElementById('iframe')
+            .contentDocument
+            .getElementsByName('_submit')[0]
+            .click();
         alert(document.getElementById('iframe').contentWindow.location.href);
     }
 
@@ -94,15 +91,19 @@ export default class Login extends Component {
             refreshIframe();
             return;
         }
+        if (masterScheduleIsLoaded()){
+            alert('master schedule is loaded');
+            return;
+        }
         loadKapchaImage();
         enableLoginButton();
         function iframeHasLoadedProperly() {
             try {
-                var html = document
+                var html = S(document
                     .getElementById('iframe')
                     .innerHTML
-                    .toLowerCase();
-                return !S(html).contains('error');
+                    .toLowerCase());
+                return ! (html.contains('error') || html.contains('The website cannot display the page'));
             } catch (e) {
                 return false;
             }
@@ -119,11 +120,16 @@ export default class Login extends Component {
         function enableLoginButton() {
             //TODO: Button should be enabled using Redux, and the default attribute, login-button.disabled should be false
         }
+        function masterScheduleIsLoaded(){
+            var currentUrl = document.getElementById('iframe').contentWindow.location.href;
+            alert(currentUrl);
+            return S(currentUrl).contains('masterSchedule');
+        }
     }
 
     handleKeyPress = (event) => {
         if (event.key == 'Enter') {
-            this.clickSubmitButton();
+            this.handleClick();
         }
     }
 
