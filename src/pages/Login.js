@@ -72,7 +72,6 @@ export default class Login extends Component {
             .getElementsByName('_submit')[0]
             .click();
     }
-    enableLoginButton() {}
     handleClick = () => {
         var iframeDoc = document
             .getElementById('iframe')
@@ -118,9 +117,7 @@ export default class Login extends Component {
                 .src = 'https://unitreg.utar.edu.my/portal/Kaptcha.jpg';
         }
         function enableLoginButton() {
-            document
-                .getelementbyid("login-button")
-                .disabled = true;
+            //TODO: Button should be enabled using Redux, and the default attribute, login-button.disabled should be false
         }
     }
 
@@ -172,7 +169,7 @@ export default class Login extends Component {
                             id="login-button"
                             label="Login"
                             primary={true}
-                            disabled={true}
+                            disabled={false}
                             onClick={this.handleClick}
                             style={style.button}/>
                         <iframe
