@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Card from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
+import S from 'string';
 import coverImage from '../images/background.jpg';
 
 const style = {
@@ -39,7 +40,8 @@ const style = {
         marginLeft: '10px',
         marginRight: '10px',
         marginBottom: '10px',
-        width: '250px'
+        width: '250px',
+        disabled: 'true'
     },
     kapcha: {
         width: '250px'
@@ -63,6 +65,14 @@ const style = {
 }
 //TODO: Add the link for TOS and PP
 export default class Login extends Component {
+    clickSubmitButton() {
+        document
+            .getElementById('iframe')
+            .contentDocument
+            .getElementsByName('_submit')[0]
+            .click();
+    }
+    enableLoginButton() {}
     handleClick = () => {
         var iframeDoc = document
             .getElementById('iframe')
@@ -76,17 +86,48 @@ export default class Login extends Component {
         iframeDoc.getElementsByName('kaptchafield')[0].value = document
             .getElementById('kapcha-field')
             .value;
-        iframeDoc
-            .getElementsByName('_submit')[0]
-            .click();
+        this.clickSubmitButton();
         alert(document.getElementById('iframe').contentWindow.location.href);
     }
 
-    loadKapchaImage = () => {
-        document
-            .getElementById('kapcha-img')
-            .src = 'https://unitreg.utar.edu.my/portal/Kaptcha.jpg';
-        alert(document.getElementById('iframe').contentWindow.location.href);
+    handleIFrameOnLoad = () => {
+        if (!iframeHasLoadedProperly()) {
+            refreshIframe();
+            return;
+        }
+        loadKapchaImage();
+        enableLoginButton();
+        function iframeHasLoadedProperly() {
+            try {
+                var html = document
+                    .getElementById('iframe')
+                    .innerHTML
+                    .toLowerCase();
+                return !S(html).contains('error');
+            } catch (e) {
+                return false;
+            }
+        }
+        function refreshIframe() {
+            var iframe = document.getElementById('iframe');
+            iframe.src = iframe.contentWindow.location.href;
+        }
+        function loadKapchaImage() {
+            document
+                .getElementById('kapcha-img')
+                .src = 'https://unitreg.utar.edu.my/portal/Kaptcha.jpg';
+        }
+        function enableLoginButton() {
+            document
+                .getelementbyid("login-button")
+                .disabled = true;
+        }
+    }
+
+    handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            this.clickSubmitButton();
+        }
     }
 
     render() {
@@ -121,21 +162,22 @@ export default class Login extends Component {
                         <TextField
                             id='kapcha-field'
                             hintText="e.g. QXtresZ"
+                            onKeyPress={this.handleKeyPress}
                             style={style.field}
                             floatingLabelText="Kaptcha"/>
                         <br/>
                         <img id='kapcha-img' style={style.kapcha} className="login-kapcha-image"/>
                         <br/>
                         <RaisedButton
-                            className="login-button"
+                            id="login-button"
                             label="Login"
                             primary={true}
+                            disabled={true}
                             onClick={this.handleClick}
                             style={style.button}/>
                         <iframe
                             id='iframe'
-                            onLoad={this.loadKapchaImage}
-                            style={style.iframe}
+                            onLoad={this.handleIFrameOnLoad}
                             src="https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp">
                             <p>Your browser does not support iframes.</p>
                         </iframe>
