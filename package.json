@@ -1,9 +1,11 @@
 {
   "name": "ttap-web",
+  "homepage": "https://wongjiahau.github.io/ttap-web",
   "version": "0.1.0",
   "author": "Wong Jia Hau <hou32hou@gmail.com>",
   "private": true,
   "dependencies": {
+    "gh-pages": "^1.0.0",
     "history": "^1.17.0",
     "material-ui": "^0.18.2",
     "material-ui-icons": "^1.0.0-beta.15",
@@ -16,6 +18,8 @@
     "typeface-roboto": "0.0.35"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
