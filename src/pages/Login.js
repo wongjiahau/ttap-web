@@ -91,7 +91,10 @@ export default class Login extends Component {
             refreshIframe();
             return;
         }
-        if (masterScheduleIsLoaded()){
+        if (masterScheduleIsLoaded()) {
+            //TODO: Parse the html into slots
+            var html = document.getElementById('iframe').contentWindow.document.body.innerHTML;
+            console.log(html);
             alert('master schedule is loaded');
             return;
         }
@@ -99,12 +102,11 @@ export default class Login extends Component {
         enableLoginButton();
         function iframeHasLoadedProperly() {
             try {
-                var html = S(document
-                    .getElementById('iframe')
-                    .innerHTML
-                    .toLowerCase());
-                return ! (html.contains('error') || html.contains('The website cannot display the page'));
+                var html = S(document.getElementById('iframe').contentWindow.document.body.innerHTML);
+                return !(html.contains('rror') || html.contains('website cannot display the page'));
             } catch (e) {
+                console.log(e);
+                alert('error');
                 return false;
             }
         }
@@ -118,10 +120,15 @@ export default class Login extends Component {
                 .src = 'https://unitreg.utar.edu.my/portal/Kaptcha.jpg';
         }
         function enableLoginButton() {
-            //TODO: Button should be enabled using Redux, and the default attribute, login-button.disabled should be false
+            // TODO: Button should be enabled using Redux, and the default attribute,
+            // login-button.disabled should be false
         }
-        function masterScheduleIsLoaded(){
-            var currentUrl = document.getElementById('iframe').contentWindow.location.href;
+        function masterScheduleIsLoaded() {
+            var currentUrl = document
+                .getElementById('iframe')
+                .contentWindow
+                .location
+                .href;
             alert(currentUrl);
             return S(currentUrl).contains('masterSchedule');
         }
