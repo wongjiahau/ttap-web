@@ -1,11 +1,22 @@
-import {expect} from "chai";
-import {Time} from "./time";
+import {
+    expect,
+} from "chai";
+import {
+    Time,
+} from "./time";
 
-describe("time", () => { 
-    it("Test_Time_Equality_1", () => {
+describe("time", () => {
+    it("Test Equal() 1", () => {
         // arrange
-        var input1 = Time.CreateTime24Hour(10, 10);
-        var input2 = Time.CreateTime24Hour(10, 10);
-        expect(input1.Equal(input2)).to.equal(true);       
+        const input1 = Time.CreateTime24Hour(10, 10);
+        const input2 = Time.CreateTime24Hour(10, 10);
+        expect(input1.Equal(input2)).to.equal(true);
+    });
+
+    it("Test Equal() 2", () => {
+        // arrange
+        const input1 = Time.CreateTime24Hour(10, 10);
+        const input2 = Time.CreateTime24Hour(11, 10);
+        expect(input1.Equal(input2)).to.equal(false);
     });
 });
