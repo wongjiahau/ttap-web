@@ -3,7 +3,7 @@ import {
 } from "chai";
 import {
     Time,
-} from "./time";
+} from "../att/time";
 
 describe("time", () => {
     it("Test Equal() 1", () => {

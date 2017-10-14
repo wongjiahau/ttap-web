@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import * as sample from "./sample";
+import * as sample from "../sample/sample";
 
 describe("sample functions", () => {
     it("should return hello world", () => {
