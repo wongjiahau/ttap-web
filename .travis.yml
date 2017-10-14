@@ -1,0 +1,18 @@
+# set notification options
+notifications: 
+  email:
+    recipients:
+      - hou32hou@gmail.com
+      - dheenodararao@gmail.com
+    on_success: [always]
+    on_failure: [always]
+
+language: node_js # specify your language
+
+before_script:
+  - npm install
+
+script:
+  - ./scripts/transpile.sh
+  - npm run build
+  - npm test
