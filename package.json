@@ -28,6 +28,8 @@
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",
-    "@types/node": "^8.0.34"
+    "@types/node": "^8.0.34",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
   }
 }
