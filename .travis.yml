@@ -23,3 +23,6 @@ script:
   - npm run build
   - npm test
   - echo "script finished."
+
+after_success:
+  - npm run deploy
