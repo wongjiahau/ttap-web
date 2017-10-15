@@ -22,28 +22,30 @@ export default class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <AppBar
-          className="App-header"
-          title="Timetable Arranging Program (UTAR)"
-          iconElementLeft={<p></p>}
-          iconElementRight={< IconButton onClick = {
-          this.handleOpen
-        } > <MenuIcon/> </IconButton>}/>
-        <br/>
-        <Drawer
-          width={200}
-          docked={false}
-          openSecondary={true}
-          open={this.state.isSecondaryDrawerOpened}>
-          <RaisedButton
-            label='hide drawer'
-            fullWidth={true}
-            secondary={true}
-            icon={<ArrowForward/>}
-            onClick={this.handleClose}/>
+        <div>
+          <AppBar
+            className="App-header"
+            title="Timetable Arranging Program (UTAR)"
+            iconElementLeft={< p > </p>}
+            iconElementRight={< IconButton onClick = {
+            this.handleOpen
+          } > <MenuIcon/> </IconButton>}/>
+          <br/>
+          <Drawer
+            width={200}
+            docked={false}
+            openSecondary={true}
+            open={this.state.isSecondaryDrawerOpened}>
+            <RaisedButton
+              label='hide drawer'
+              fullWidth={true}
+              secondary={true}
+              icon={< ArrowForward />}
+              onClick={this.handleClose}/>
             <DrawerContent/>
-        </Drawer>
-        <Main/>
+          </Drawer>
+          <Main/>
+        </div>
       </MuiThemeProvider>
     )
   }
