@@ -9,12 +9,13 @@ notifications:
 
 language: node_js # specify your language
 
+node_js: # specify version of node js
+  - "6.11.3"
+
 cache: # cache node modules so that every build don't have to reinstall those node package again
   directories:
     - "node_modules"
 
-before_script:
-  - npm i -g sync-exec
 
 script:
   - echo "Running script:"
