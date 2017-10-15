@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import S from 'string';
 import coverImage from '../images/background.jpg';
+import parseHtmlToSlot from '../core/parser/parseHtmlToSlot';
 
 const style = {
     cover: {
@@ -81,7 +82,6 @@ export default class Login extends Component {
             .contentDocument
             .getElementsByName('_submit')[0]
             .click();
-        alert(document.getElementById('iframe').contentWindow.location.href);
     }
 
     handleIFrameOnLoad = () => {
@@ -93,6 +93,8 @@ export default class Login extends Component {
             //TODO: Parse the html into slots
             var html = document.getElementById('iframe').contentWindow.document.body.innerHTML;
             console.log(html);
+            const result = parseHtmlToSlot(html);
+            console.log(result);
             alert('master schedule is loaded');
             return;
         }
@@ -127,7 +129,6 @@ export default class Login extends Component {
                 .contentWindow
                 .location
                 .href;
-            alert(currentUrl);
             return S(currentUrl).contains('masterSchedule');
         }
     }
