@@ -5,8 +5,8 @@
   "author": "Wong Jia Hau <hou32hou@gmail.com>",
   "private": true,
   "dependencies": {
+    "chai": "^4.1.2",
     "gh-pages": "^1.0.0",
-    "history": "^1.17.0",
     "material-ui": "^0.18.2",
     "material-ui-icons": "^1.0.0-beta.15",
     "react": "^16.0.0",

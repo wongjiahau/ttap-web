@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Center from 'react-center';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Card from 'material-ui/Card';
