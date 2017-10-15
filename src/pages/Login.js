@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import Card from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import S from 'string';
 import coverImage from '../images/background.jpg';
@@ -134,7 +133,7 @@ export default class Login extends Component {
     }
 
     handleKeyPress = (event) => {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
             this.handleClick();
         }
     }
@@ -148,7 +147,7 @@ export default class Login extends Component {
                         <br/>UTAR account</h1>
                     <div style={style.subHeaderDiv}>
                         By clicking "Login", you agree to our &nbsp;
-                        <a href='https://www.google.com' target='_blank'>Terms of Service and Privacy Policy</a>
+                        <a href='https://www.google.com'>Terms of Service and Privacy Policy</a>
                     </div>
                 </div>
                 <div className="login-div">
@@ -175,7 +174,7 @@ export default class Login extends Component {
                             style={style.field}
                             floatingLabelText="Kaptcha"/>
                         <br/>
-                        <img id='kapcha-img' style={style.kapcha} className="login-kapcha-image"/>
+                        <img id='kapcha-img' alt="" style={style.kapcha} className="login-kapcha-image"/>
                         <br/>
                         <RaisedButton
                             id="login-button"
@@ -186,6 +185,7 @@ export default class Login extends Component {
                             style={style.button}/>
                         <iframe
                             id='iframe'
+                            title='unitregwebsite'
                             onLoad={this.handleIFrameOnLoad}
                             src="https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp">
                             <p>Your browser does not support iframes.</p>

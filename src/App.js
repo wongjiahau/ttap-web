@@ -7,7 +7,6 @@ import Main from './Main';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import RaisedButton from 'material-ui/RaisedButton';
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {MuiThemeProvider} from 'material-ui';
 
 export default class App extends Component {
