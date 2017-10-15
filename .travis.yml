@@ -4,8 +4,8 @@ notifications:
     recipients:
       - hou32hou@gmail.com
       - dheenodararao@gmail.com
-    on_success: [always]
-    on_failure: [always]
+    on_success: always
+    on_failure: always
 
 language: node_js # specify your language
 
@@ -22,10 +22,9 @@ script:
   - ./scripts/transpile.sh
   - npm run build
   - npm test
-  - echo "script finished."
 
 after_script:
-  - ls node_modules 
+  - echo "script finished."
 
 after_success:
   - npm run deploy
