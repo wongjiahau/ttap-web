@@ -1,11 +1,32 @@
 export default class Slot {
+    private static hash: number;
     public readonly HashId: number; // Unique for every slot object
-    public readonly Uid: number; // A unique identifer for each group of slot
-    public readonly SubjectCode: string;
-    public readonly SubjectName: string;
-    public readonly Number: string;
-    public readonly Type: string;
-    public readonly TimePeriod: string;
-    public readonly Day: string;
-    public readonly WeekNumber: string;
+    public SubjectCode: string;
+    public SubjectName: string;
+    public Number: string;
+    public Type: string;
+    public Group: string;
+    public Day: string;
+    public TimePeriod: string;
+    public WeekNumber: string;
+    public Room: string;
+    constructor() {
+        this.HashId = Slot.hash;
+        Slot.hash++;
+
+    }
+    public toString = (): string => {
+        return `---
+    SubjectCode : ${this.SubjectCode     }
+    SubjectName : ${this.SubjectName     }
+    Number      : ${this.Number          }
+    Type        : ${this.Type            }
+    Group       : ${this.Group           }
+    Day         : ${this.Day             }
+    TimePeriod  : ${this.TimePeriod      }
+    WeekNumber  : ${this.WeekNumber      }
+    Room        : ${this.Room            }
+`;
+
+    }
 }
