@@ -1,5 +1,5 @@
 export default class Slot {
-    private static hash: number;
+    private static hash = 0;
     public readonly HashId: number; // Unique for every slot object
     public SubjectCode: string;
     public SubjectName: string;

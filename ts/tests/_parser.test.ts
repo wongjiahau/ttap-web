@@ -5,6 +5,14 @@ import testManager from "./testManager";
 import {FileName} from "./testManager";
 
 describe("Parser which is used to parse html into slots", () => {
+    it("jiahau_2017_sept's last slot should have hash id of 202", () => {
+        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const result = ParseHtmlToSlots(plainHtml);
+        expect(last(result).HashId)
+            .to
+            .equal(202);
+    });
+
     it("jiahau_2017_sept's data should have 203 slots", () => {
         const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
         const result = ParseHtmlToSlots(plainHtml);
@@ -20,4 +28,5 @@ describe("Parser which is used to parse html into slots", () => {
             .to
             .equal("129");
     });
+
 });
