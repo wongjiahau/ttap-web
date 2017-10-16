@@ -62,6 +62,17 @@ const style = {
         border: 0
     }
 }
+
+const urls = {
+    LoginPage: "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp",
+    CourseTimetablePreview: "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp",
+    Kaptcha: "https://unitreg.utar.edu.my/portal/Kaptcha.jpg",
+    TestServer: "http://localhost/ttap_testdata/",
+    End: "http://0.0.0.0/",
+    InvalidIdOrPassword: "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=loginError",
+    InvalidCaptcha: "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurit" +
+            "y"
+}
 //TODO: Add the link for TOS and PP
 export default class Login extends Component {
     handleClick = () => {
@@ -85,52 +96,59 @@ export default class Login extends Component {
     }
 
     handleIFrameOnLoad = () => {
-        if (!iframeHasLoadedProperly()) {
-            refreshIframe();
-            return;
-        }
-        if (masterScheduleIsLoaded()) {
-            //TODO: Parse the html into slots
-            var html = document.getElementById('iframe').contentWindow.document.body.innerHTML;
+        alert(document.getElementById('iframe').contentWindow.location.href);
+        const currentUrl = document
+            .getElementById('iframe')
+            .contentWindow
+            .location
+            .href;
+        if (currentUrl === currentUrl.EndUrl) return;
+        if (currentUrl === urls.TestServer) ExtractData();
+        else if (currentUrl === urls.InvalidIdOrPassword) DisplayLoginFailedMessage();
+        else if (currentUrl === urls.InvalidCaptcha) DisplayLoginFailedMessage();
+        else if (currentUrl === urls.LoginPage) AssertLoginPageIsLoadedProperly();
+        else if (currentUrl !== urls.CourseTimetablePreview) NavigateToCourseTimeTablePreview();
+        else if (currentUrl === urls.CourseTimetablePreview) ExtractData();
+        function ExtractData() {
+            var html = document
+                .getElementById('iframe')
+                .contentWindow
+                .document
+                .body
+                .innerHTML;
             console.log(html);
             const result = parseHtmlToSlot(html);
             console.log(result);
-            alert('master schedule is loaded');
-            return;
+
         }
-        //TODO: Add code to detect if user is logged in but not in the master schedule page
-        loadKapchaImage();
-        enableLoginButton();
-        function iframeHasLoadedProperly() {
-            try {
-                var html = S(document.getElementById('iframe').contentWindow.document.body.innerHTML);
-                return !(html.contains('rror') || html.contains('website cannot display the page'));
-            } catch (e) {
-                console.log(e);
-                alert('error');
-                return false;
-            }
+        function DisplayLoginFailedMessage() {
+            alert("Login failed. You have entered invalid id, password or kapcha");
         }
-        function refreshIframe() {
-            var iframe = document.getElementById('iframe');
-            iframe.src = iframe.contentWindow.location.href;
-        }
-        function loadKapchaImage() {
-            document
-                .getElementById('kapcha-img')
-                .src = 'https://unitreg.utar.edu.my/portal/Kaptcha.jpg';
-        }
-        function enableLoginButton() {
-            // TODO: Button should be enabled using Redux, and the default attribute,
-            // login-button.disabled should be false
-        }
-        function masterScheduleIsLoaded() {
-            var currentUrl = document
+        function AssertLoginPageIsLoadedProperly() {
+            var html = document
                 .getElementById('iframe')
                 .contentWindow
-                .location
-                .href;
-            return S(currentUrl).contains('masterSchedule');
+                .document
+                .body
+                .innerHTML;
+            if (!S(html).contains("Course Registration System")) 
+                refreshIframe();
+            else loadKapchaImage();
+            
+            function loadKapchaImage() {
+                document
+                    .getElementById('kapcha-img')
+                    .src = 'https://unitreg.utar.edu.my/portal/Kaptcha.jpg';
+            }
+
+            function refreshIframe() {
+                var iframe = document.getElementById('iframe');
+                iframe.src = iframe.contentWindow.location.href;
+            }
+        }
+        function NavigateToCourseTimeTablePreview() {
+            var iframe = document.getElementById('iframe');
+            iframe.src = urls.CourseTimetablePreview;
         }
     }
 
@@ -176,7 +194,11 @@ export default class Login extends Component {
                             style={style.field}
                             floatingLabelText="Kaptcha"/>
                         <br/>
-                        <img id='kapcha-img' alt="" style={style.kapcha} className="login-kapcha-image"/>
+                        <img
+                            id='kapcha-img'
+                            alt=""
+                            style={style.kapcha}
+                            className="login-kapcha-image"/>
                         <br/>
                         <RaisedButton
                             id="login-button"
