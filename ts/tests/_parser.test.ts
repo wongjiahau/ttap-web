@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import {last} from "lodash";
-import ParseHtmlToSlots from "../parser/parseHtmlToSlot";
+import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import testManager from "./testManager";
 import {FileName} from "./testManager";
 

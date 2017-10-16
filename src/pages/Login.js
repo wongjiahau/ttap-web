@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import S from 'string';
 import coverImage from '../images/background.jpg';
-import parseHtmlToSlot from '../core/parser/parseHtmlToSlot';
+import parseHtmlToSlot from '../core/parser/parseHtmlToRawSlot';
 
 const style = {
     cover: {
@@ -98,6 +98,7 @@ export default class Login extends Component {
             alert('master schedule is loaded');
             return;
         }
+        //TODO: Add code to detect if user is logged in but not in the master schedule page
         loadKapchaImage();
         enableLoginButton();
         function iframeHasLoadedProperly() {
