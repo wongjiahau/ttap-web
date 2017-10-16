@@ -16,16 +16,21 @@ export default function parser(html: string): RawSlot[] {
         const currentRow = tableRows[i];
         const cells = currentRow.getElementsByTagName("td");
         if (cells.length === 1) {
-            currentSubjectCode = cells[0]
-                .innerHTML
-                .split("-")[0];
-            currentSubjectName = cells[0]
-                .innerHTML
-                .split("-")[1]
-                .split("[")[0]
-                .replace("&amp;", "&")
-                .trim();
-            continue;
+            try {
+                currentSubjectCode = cells[0]
+                    .innerHTML
+                    .split("-")[0];
+                currentSubjectName = cells[0]
+                    .innerHTML
+                    .split("-")[1]
+                    .split("[")[0]
+                    .replace("&amp;", "&")
+                    .trim();
+                continue;
+            } catch (error) {
+                console.log("Error: " + error);
+                console.log("Cannot parse " + cells[0].innerHTML + " as subject name/code");
+            }
         }
         const newSlot = new RawSlot();
         newSlot.SubjectCode = currentSubjectCode;
@@ -40,16 +45,36 @@ export default function parser(html: string): RawSlot[] {
         for (let j = 0; j < cells.length; j++) {
             const cellValue = cells[j].innerHTML;
             switch (j + offset) {
-                case 0: newSlot.Number = cellValue; break;
-                case 1: newSlot.Type = cellValue; break;
-                case 2: newSlot.Group = cellValue; break;
-                case 3: newSlot.ClassSize = cellValue; break;
-                case 4: newSlot.Day = cellValue; break;
-                case 5: newSlot.TimePeriod = cellValue; break;
-                case 6: newSlot.CreditHour = cellValue; break;
-                case 7: newSlot.WeekNumber = cellValue; break;
-                case 8: newSlot.Remark = cellValue; break;
-                case 9: newSlot.Room = cellValue; break;
+                case 0:
+                    newSlot.Number = cellValue;
+                    break;
+                case 1:
+                    newSlot.Type = cellValue;
+                    break;
+                case 2:
+                    newSlot.Group = cellValue;
+                    break;
+                case 3:
+                    newSlot.ClassSize = cellValue;
+                    break;
+                case 4:
+                    newSlot.Day = cellValue;
+                    break;
+                case 5:
+                    newSlot.TimePeriod = cellValue;
+                    break;
+                case 6:
+                    newSlot.CreditHour = cellValue;
+                    break;
+                case 7:
+                    newSlot.WeekNumber = cellValue;
+                    break;
+                case 8:
+                    newSlot.Remark = cellValue;
+                    break;
+                case 9:
+                    newSlot.Room = cellValue;
+                    break;
             }
         }
         result.push(newSlot);
