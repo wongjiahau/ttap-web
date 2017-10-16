@@ -231,6 +231,7 @@ export default class Login extends Component {
                             id='iframe'
                             title='unitregwebsite'
                             onLoad={this.handleIFrameOnLoad}
+                            style={style.iframe}
                             src="https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp">
                             <p>Your browser does not support iframes.</p>
                         </iframe>
