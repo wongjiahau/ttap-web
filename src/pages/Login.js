@@ -73,6 +73,8 @@ const urls = {
     InvalidCaptcha: "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurit" +
             "y"
 }
+
+let tryCount = 0;
 //TODO: Add the link for TOS and PP
 export default class Login extends Component {
     handleClick = () => {
@@ -96,19 +98,25 @@ export default class Login extends Component {
     }
 
     handleIFrameOnLoad = () => {
-        alert(document.getElementById('iframe').contentWindow.location.href);
         const currentUrl = document
             .getElementById('iframe')
             .contentWindow
             .location
             .href;
-        if (currentUrl === currentUrl.EndUrl) return;
-        if (currentUrl === urls.TestServer) ExtractData();
-        else if (currentUrl === urls.InvalidIdOrPassword) DisplayLoginFailedMessage();
-        else if (currentUrl === urls.InvalidCaptcha) DisplayLoginFailedMessage();
-        else if (currentUrl === urls.LoginPage) AssertLoginPageIsLoadedProperly();
-        else if (currentUrl !== urls.CourseTimetablePreview) NavigateToCourseTimeTablePreview();
-        else if (currentUrl === urls.CourseTimetablePreview) ExtractData();
+        if (currentUrl === currentUrl.EndUrl) 
+            return;
+        if (currentUrl === urls.TestServer) 
+            ExtractData();
+        else if (currentUrl === urls.InvalidIdOrPassword) 
+            DisplayLoginFailedMessage();
+        else if (currentUrl === urls.InvalidCaptcha) 
+            DisplayLoginFailedMessage();
+        else if (currentUrl === urls.LoginPage) 
+            AssertLoginPageIsLoadedProperly();
+        else if (currentUrl !== urls.CourseTimetablePreview) 
+            NavigateToCourseTimeTablePreview();
+        else if (currentUrl === urls.CourseTimetablePreview) 
+            ExtractData();
         function ExtractData() {
             var html = document
                 .getElementById('iframe')
@@ -133,7 +141,8 @@ export default class Login extends Component {
                 .innerHTML;
             if (!S(html).contains("Course Registration System")) 
                 refreshIframe();
-            else loadKapchaImage();
+            else 
+                loadKapchaImage();
             
             function loadKapchaImage() {
                 document
@@ -147,8 +156,19 @@ export default class Login extends Component {
             }
         }
         function NavigateToCourseTimeTablePreview() {
+            if (tryCount > 2) {
+                alert("No record found!");
+                navigateToLoginPage();
+                tryCount = 0;
+                return;
+            }
             var iframe = document.getElementById('iframe');
             iframe.src = urls.CourseTimetablePreview;
+            tryCount++;
+            function navigateToLoginPage(){
+                var iframe = document.getElementById('iframe');
+                iframe.src = urls.LoginPage;
+            }
         }
     }
 
