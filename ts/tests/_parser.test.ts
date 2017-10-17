@@ -1,6 +1,8 @@
 import {expect} from "chai";
-import {last} from "lodash";
+import {find, last} from "lodash";
+import * as S from "string";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
+import ParseSlotToSubject from "../parser/parseSlotToSubject";
 import testManager from "./testManager";
 import {FileName} from "./testManager";
 
@@ -27,6 +29,38 @@ describe("Parser which is used to parse html into slots", () => {
         expect(last(result).Number)
             .to
             .equal("129");
+    });
+
+    it("jiahau_2017_sept's data should have 21 subjects", () => {
+        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
+        expect(result.length)
+            .to
+            .equal(21);
+    });
+
+    it("jiahau_2017_sept's data first subject (sorted by name) should be Artificial Intelligence", () => {
+        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
+        expect(result[0].Name.toLowerCase())
+            .to
+            .equal("Artificial Intelligence".toLowerCase());
+    });
+
+    it("jiahau_2017_sept's data first subject (sorted by name) should be TITAS", () => {
+        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
+        expect(S(last(result).Name.toLowerCase()).contains("titas"))
+            .to
+            .equal(true);
+    });
+
+    it("jiahau_2017_sept's data subject Management Principles should contain 7 slots", () => {
+        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
+        expect(find(result, {Name: "MANAGEMENT PRINCIPLES"}).SlotIds.length)
+            .to
+            .equal(7);
     });
 
 });
