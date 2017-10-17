@@ -18,8 +18,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "string": "^3.3.3",
-    "typeface-roboto": "0.0.35",
-    "yaca": "^1.2.0"
+    "typeface-roboto": "0.0.35"
   },
   "scripts": {
     "predeploy": "npm run build",
