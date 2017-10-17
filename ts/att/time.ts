@@ -36,4 +36,26 @@ export class Time {
         if (this.Minute < other.Minute) {return true; }
         return false;
     }
+
+    public MoreThan(other: Time): boolean {
+        if (this.Hour > other.Hour) {return true; }
+        if (this.Hour < other.Hour) {return false; }
+        if (this.Minute > other.Minute) {return true; }
+        return false;
+    }
+
+    public LessThanOrEqual(other: Time): boolean {
+        // return this.LessThan(other) || this.Equal(other);
+        throw Error;
+    }
+
+    public MoreThanOrEqual(other: Time): boolean {
+        // return this.MoreThan(other) || this.Equal(other);
+        throw Error;
+    }
+
+    public Add(other: Time): Time {
+        throw Error;
+    }
+
 }
