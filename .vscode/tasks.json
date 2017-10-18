@@ -5,7 +5,7 @@
     "tasks": [{
             "taskName": "Transpile TS to JS",
             "type": "shell",
-            "command": "./scripts/transpile.sh",
+            "command": "./scripts/watch.sh",
             "group": {
                 "kind": "build",
                 "isDefault": true
