@@ -12,6 +12,20 @@ export class Time {
         return t;
     }
 
+    public static Parse(input: string): Time {
+        // let result = new Time();
+        // no constructor with that takes no-parameter, hence the codes are modified compared to Time.cs
+        const tokens = input.split(" ");
+        const time = tokens[0].trim();
+        const amOrPm = tokens[1].trim().toLowerCase();
+        const timeTokens = time.split(":");
+        let hour = parseInt(timeTokens[0], 10);
+        const minute = parseInt(timeTokens[1], 10);
+        if (amOrPm === "pm" && hour !== 12) {hour += 12; }
+        if (amOrPm === "am" && hour === 12) {hour = 0; }
+        return Time.CreateTime24Hour(hour, minute);
+    }
+
     public Hour: number;
     public Minute: number;
 
@@ -43,19 +57,4 @@ export class Time {
         if (this.Minute > other.Minute) {return true; }
         return false;
     }
-
-    public LessThanOrEqual(other: Time): boolean {
-        // return this.LessThan(other) || this.Equal(other);
-        throw Error;
-    }
-
-    public MoreThanOrEqual(other: Time): boolean {
-        // return this.MoreThan(other) || this.Equal(other);
-        throw Error;
-    }
-
-    public Add(other: Time): Time {
-        throw Error;
-    }
-
 }
