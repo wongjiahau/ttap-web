@@ -6,6 +6,8 @@
     ],
     "jsRules": {},
     "rules": {
+        "jsx-alignment" : false,
+        "jsx-wrap-multiline" : false
     },
     "rulesDirectory": []
 }
