@@ -1,3 +1,6 @@
+# Clean the output directory
+rm -r src/core*
+
 # This script is to launch typescript compiler in watch mode
 # When this mode is turn on,
 # when you have changed a file and saved it,
