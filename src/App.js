@@ -7,6 +7,7 @@ import Main from './Main';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import RaisedButton from 'material-ui/RaisedButton';
 import React, {Component} from 'react';
+import {Playground} from './core/react/playground';
 import {MuiThemeProvider} from 'material-ui';
 import {HashRouter as Router} from 'react-router-dom'
 
@@ -47,9 +48,11 @@ export default class App extends Component {
               <DrawerContent/>
             </Drawer>
             <Main/>
+            <br/>
+            <Playground/>
           </div>
         </MuiThemeProvider>
       </Router>
-    )
+    );
   }
 }
