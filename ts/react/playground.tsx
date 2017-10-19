@@ -1,6 +1,7 @@
 import * as React from "react";
 import Slot from "../model/rawSlot";
 import {SlotView} from "./slotView";
+import {SubjectView} from "./subjectView";
 
 export interface IPlaygroundProps {
     name: string;
@@ -15,6 +16,7 @@ export class Playground extends React.Component < IPlaygroundProps, {} > {
         return (
             <div>
                 <SlotView slot={testSlot}/>
+                <SubjectView subjectName="Computer Ethics" subjectCode="MPK2134"/>
             </div>
         );
     }
