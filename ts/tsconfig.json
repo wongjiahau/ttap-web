@@ -4,6 +4,7 @@
         "module": "commonjs",
         "sourceMap": true,
         "outDir": "../src/core/",
-        "pretty": true
+        "pretty": true,
+        "jsx": "react"
     }
 }

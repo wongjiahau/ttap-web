@@ -6,6 +6,8 @@
   "private": true,
   "dependencies": {
     "@types/lodash": "^4.14.77",
+    "@types/react": "^16.0.14",
+    "@types/react-dom": "^16.0.1",
     "@types/string": "0.0.29",
     "chai": "^4.1.2",
     "gh-pages": "^1.0.0",
@@ -33,6 +35,7 @@
     "@types/mocha": "^2.2.43",
     "@types/node": "^8.0.34",
     "tslint": "^5.7.0",
+    "tslint-react": "^3.2.0",
     "typescript": "^2.5.3"
   }
 }
