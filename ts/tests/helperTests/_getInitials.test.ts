@@ -22,4 +22,24 @@ describe("GetInitial()", () => {
         expect(result).to.equal("PDP");
     });
 
+    it("should ignore conjunctive words like 'AND'", () => {
+        const result = GetInitial("Ali and Boy");
+        expect(result).to.equal("AB");
+    });
+
+    it("should convert roman numeral to arabic numeral - 1", () => {
+        const result = GetInitial("Structural Analysis I");
+        expect(result).to.equal("SA1");
+    });
+
+    it("should convert roman numeral to arabic numeral - 2", () => {
+        const result = GetInitial("Structural Analysis II");
+        expect(result).to.equal("SA2");
+    });
+
+    it("should convert roman numeral to arabic numeral - 3", () => {
+        const result = GetInitial("Tamadun Islam");
+        expect(result).to.equal("TI");
+    });
+
 });

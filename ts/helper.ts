@@ -14,7 +14,7 @@ export function Beautify(input: string): string {
 }
 
 export function GetInitial(input: string): string {
-    let result = input.trim();
+    let result = Beautify(input).trim();
     if (S(result).contains("(")) {
         result = result
             .substring(0, result.indexOf("("))
@@ -22,6 +22,17 @@ export function GetInitial(input: string): string {
     }
     return result
         .split(" ")
+        .map((word) => {
+            switch (word.toLowerCase()) {
+                case "i":
+                    return "1";
+                case "ii":
+                    return "2";
+                default:
+                    return word;
+
+            }
+        })
         .map((word) => (IsNonWhiteSpaceSymbols(word[0])
             ? word[0]
             : ""))
