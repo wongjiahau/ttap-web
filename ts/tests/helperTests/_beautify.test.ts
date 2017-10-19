@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Beautify} from "../helper";
+import {Beautify} from "../../helper";
 
 describe("Beautify()", () => {
     it("should convert AND to &", () => {

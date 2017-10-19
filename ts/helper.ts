@@ -12,3 +12,22 @@ export function Beautify(input: string): string {
         })
         .join(" ");
 }
+
+export function GetInitial(input: string): string {
+    let result = input.trim();
+    if (S(result).contains("(")) {
+        result = result
+            .substring(0, result.indexOf("("))
+            .trim();
+    }
+    return result
+        .split(" ")
+        .map((word) => (IsNonWhiteSpaceSymbols(word[0])
+            ? word[0]
+            : ""))
+        .join("");
+
+    function IsNonWhiteSpaceSymbols(char: string): boolean {
+        return char !== " " && S(char).isAlphaNumeric();
+    }
+}
