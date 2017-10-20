@@ -4,12 +4,11 @@ import TextField from "material-ui/TextField";
 import * as React from "react";
 import * as S from "string";
 import {Beautify, GetInitial} from "../helper";
-import Subject from "../model/subject";
+import {Subject} from "../model/subject";
 import {SubjectView} from "./subjectView";
 
 const divStyle : React.CSSProperties = {
-    margin: "auto",
-    width: "50%"
+    margin: "auto"
 };
 
 const paperStyle : React.CSSProperties = {
@@ -24,6 +23,7 @@ const fieldStyle : React.CSSProperties = {
 
 export interface ISubjectListViewProps {
     subjects : Subject[];
+    style : React.CSSProperties;
 }
 
 export interface ISubjectListViewState {
@@ -77,15 +77,17 @@ ISubjectListViewState > {
             ));
 
         return (
-            <div style={divStyle}>
-                <TextField
-                    style={fieldStyle}
-                    onChange={this.handleSearchBoxOnChange}
-                    hintText="e.g. he/hubungan etnik/mpu3113"
-                    floatingLabelText="Search subjects"/>
-                < Paper style={paperStyle}>
-                    <br/> {subjects}
-                </Paper>
+            <div style={this.props.style}>
+                <div style={divStyle}>
+                    <TextField
+                        style={fieldStyle}
+                        onChange={this.handleSearchBoxOnChange}
+                        hintText="e.g. he/hubungan etnik/mpu3113"
+                        floatingLabelText="Search subjects"/>
+                    < Paper style={paperStyle}>
+                        <br/> {subjects}
+                    </Paper>
+                </div>
             </div>
         );
     }

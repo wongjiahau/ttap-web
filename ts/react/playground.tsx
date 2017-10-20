@@ -3,6 +3,7 @@ import Slot from "../model/rawSlot";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import ParseSlotToSubject from "../parser/parseSlotToSubject";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
+import {CreateTimetableView} from "./createTimetableView";
 import {SlotView} from "./slotView";
 import {SubjectListView} from "./subjectListView";
 import {SubjectView} from "./subjectView";
@@ -20,8 +21,7 @@ export class Playground extends React.Component < IPlaygroundProps, {} > {
         const subjects = ParseSlotToSubject(ParseHtmlToSlots(heng_2017_sept()));
         return (
             <div>
-                <SlotView slot={testSlot}/>
-                <SubjectListView subjects={subjects}/>
+                <CreateTimetableView allSubjects={subjects}/>
             </div>
         );
     }
