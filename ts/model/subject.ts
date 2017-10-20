@@ -1,5 +1,5 @@
 import Slot from "./rawSlot";
-export default class Subject {
+export class Subject {
     public readonly Name: string;
     public readonly Code: string;
     public readonly SlotIds: number[];
