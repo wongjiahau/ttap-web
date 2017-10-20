@@ -10,13 +10,24 @@ const divStyle : React.CSSProperties = {
 export interface ITimetableViewProps {}
 
 function getTimeRow() {
-    const style : React.CSSProperties = {
-        border: "1px solid",
+    const topDivStyle : React.CSSProperties = {
+        borderBottom: "1px solid",
+        borderRight: "1px solid",
+        borderTop: "1px solid",
+        fontFamily: "roboto",
+        padding: "2px",
+        textAlign: "center"
+    };
+    const btmDivStyle: React.CSSProperties = {
+        borderBottom: "1px solid",
+        borderRight: "1px solid",
+        fontFamily: "roboto",
+        padding: "2px",
         textAlign: "center"
     };
     const result = [];
-    const minTime = 7;
-    const maxTime = 21;
+    const minTime = 7; // 7 am
+    const maxTime = 21; // 9 pm
     for (let i = 0;; i++) {
         let time = i + minTime;
         if (time > maxTime) {
@@ -27,8 +38,8 @@ function getTimeRow() {
             : time - 12;
         result.push(
             <div key={"t" + i}>
-                <div style={style}>{time + ":00"}</div>
-                <div style={style}>{time + ":30"}</div>
+                <div style={topDivStyle}>{time + ":00"}</div>
+                <div style={btmDivStyle}>{time + ":30"}</div>
             </div>
         );
     }
