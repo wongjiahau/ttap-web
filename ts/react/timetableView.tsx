@@ -9,10 +9,10 @@ const divStyle : React.CSSProperties = {
 
 export interface ITimetableViewProps {}
 
-function getTimeRows() {
+function getTimeRow() {
     const style : React.CSSProperties = {
         borderStyle: "solid",
-        textAlign : "center",
+        textAlign: "center"
     };
     const result = [];
     const minTime = 7;
@@ -22,24 +22,26 @@ function getTimeRows() {
         if (time > maxTime) {
             break;
         }
-        time = time <= 12 ? time : time - 12;
+        time = time <= 12
+            ? time
+            : time - 12;
         result.push(
-            <div key={"d" + i} >
-                <div style={style} >{time + ":00"}</div>
-                <div style={style} >{time + ":30"}</div>
+            <div key={"t" + i}>
+                <div style={style}>{time + ":00"}</div>
+                <div style={style}>{time + ":30"}</div>
             </div>
         );
     }
     return result;
 }
 
-function getTimeRowsLayout() : ReactGridLayout.Layout[] {
+function getTimeRowLayout() : ReactGridLayout.Layout[] {
     const xOffset = 2;
     const result = Array < ReactGridLayout.Layout > ();
     for (let i = 0; i < 32; i++) {
         result.push({
             h: 1,
-            i: ("d" + i),
+            i: ("t" + i),
             w: 2,
             x: i * 2 + xOffset,
             y: 0
@@ -48,12 +50,63 @@ function getTimeRowsLayout() : ReactGridLayout.Layout[] {
     return result;
 }
 
+function getDayColumn() {
+    const days = [
+        " ",
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI",
+        "SAT",
+        "SUN"
+    ];
+    const div1style : React.CSSProperties = {
+        borderStyle: "solid",
+        display: "table",
+        overflow: "hidden",
+        textAlign: "center"
+    };
+    const div2style : React.CSSProperties = {
+        display: "table-cell",
+        verticalAlign: "middle"
+    };
+    const result = [];
+    for (let i = 0; i < days.length; i++) {
+        result.push(
+            <div style={div1style} key={"d" + i}>
+                <div style={div2style}>
+                    {days[i]}
+                </div>
+            </div>
+        );
+    }
+    return result;
+}
+
+function getDayColumnLayout() : ReactGridLayout.Layout[] {
+    const yOffset = 2;
+    const result = Array < ReactGridLayout.Layout > ();
+    for (let i = 0; i < 8; i++) {
+        result.push({
+            h: 1,
+            i: ("d" + i),
+            w: 2,
+            x: 0,
+            y: i + yOffset
+        });
+    }
+    return result;
+}
+
 export const TimetableView = (props : ITimetableViewProps) => {
     const child = [];
-    child.push(getTimeRows());
+    child.push(getTimeRow());
+    child.push(getDayColumn());
     const singleUnit : number = 1;
     let layouts : ReactGridLayout.Layout[] = [];
-    layouts = layouts.concat(getTimeRowsLayout());
+    layouts = layouts.concat(getTimeRowLayout());
+    layouts = layouts.concat(getDayColumnLayout());
     const testSlot = new RawSlot();
     testSlot.SubjectName = "Hubungan Etnik";
     testSlot.SubjectCode = "MPU3113";
@@ -66,7 +119,7 @@ export const TimetableView = (props : ITimetableViewProps) => {
         <div style={divStyle}>
             <ReactGridLayout
                 cols={32}
-                maxRows={7}
+                maxRows={16}
                 rowHeight={50}
                 width={1200}
                 layout={layouts}
