@@ -121,11 +121,12 @@ export class Login extends React.Component < ILoginProps, {} > {
         }
         function DisplayLoginFailedMessage() {
             alert("Login failed. You have entered invalid id, password or kapcha");
+            GoToLoginPageAgain();
         }
         function AssertLoginPageIsLoadedProperly() {
             const html = (document.getElementById("iframe")as HTMLIFrameElement).contentWindow.document.body.innerHTML;
             if (!S(html).contains("Course Registration System")) {
-                refreshIframe();
+                GoToLoginPageAgain();
             } else {
                 loadKapchaImage();
             }
@@ -134,11 +135,10 @@ export class Login extends React.Component < ILoginProps, {} > {
                 const img = document.getElementById("kapcha-img")as HTMLImageElement;
                 img.src = "https://unitreg.utar.edu.my/portal/Kaptcha.jpg";
             }
-
-            function refreshIframe() {
-                const iframee = document.getElementById("iframe")as HTMLIFrameElement;
-                iframee.src = iframee.contentWindow.location.href;
-            }
+        }
+        function GoToLoginPageAgain() {
+            const iframee = document.getElementById("iframe")as HTMLIFrameElement;
+            iframee.src = urls.LoginPage;
         }
         function NavigateToCourseTimeTablePreview() {
             if (tryCount > 2) {
