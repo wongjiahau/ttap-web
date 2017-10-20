@@ -3,7 +3,6 @@ import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import Drawer from 'material-ui/Drawer';
 import DrawerContent from './DrawerContent';
 import IconButton from 'material-ui/IconButton';
-import Main from './Main';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import RaisedButton from 'material-ui/RaisedButton';
 import React, {Component} from 'react';
