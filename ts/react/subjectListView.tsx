@@ -1,3 +1,4 @@
+import Divider from "material-ui/Divider";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import * as React from "react";
@@ -6,11 +7,19 @@ import {Beautify, GetInitial} from "../helper";
 import Subject from "../model/subject";
 import {SubjectView} from "./subjectView";
 
-const style = {
-    paper: {
-        margin: "auto",
-        width: "50%"
-    }
+const divStyle : React.CSSProperties = {
+    margin: "auto",
+    width: "50%"
+};
+
+const paperStyle : React.CSSProperties = {
+    height: "500px",
+    overflow: "scroll"
+};
+
+const fieldStyle : React.CSSProperties = {
+    fontSize: "32",
+    fontWeight: "bold"
 };
 
 export interface ISubjectListViewProps {
@@ -58,18 +67,26 @@ ISubjectListViewState > {
         const subjects = this
             .state
             .subjects
-            .map((s) => (<SubjectView
-                subjectName={Beautify(s.Name)}
-                subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}/>));
+            .map((s) => (
+                <div>
+                    <Divider/>
+                    <SubjectView
+                        subjectName={Beautify(s.Name)}
+                        subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}/>
+                </div>
+            ));
 
         return (
-            <Paper style={style.paper}>
+            <div style={divStyle}>
                 <TextField
+                    style={fieldStyle}
                     onChange={this.handleSearchBoxOnChange}
                     hintText="e.g. he/hubungan etnik/mpu3113"
                     floatingLabelText="Search subjects"/>
-                <br/> {subjects}
-            </Paper>
+                < Paper style={paperStyle}>
+                    <br/> {subjects}
+                </Paper>
+            </div>
         );
     }
 }
