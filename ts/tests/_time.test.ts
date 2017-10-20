@@ -10,14 +10,12 @@ import {
 
 describe("time", () => {
     it("Test Equal() 1", () => {
-        // arrange
         const input1 = Time.CreateTime24Hour(10, 10);
         const input2 = Time.CreateTime24Hour(10, 10);
         expect(input1.Equal(input2)).to.equal(true);
     });
 
     it("Test Equal() 2", () => {
-        // arrange
         const input1 = Time.CreateTime24Hour(10, 10);
         const input2 = Time.CreateTime24Hour(11, 10);
         expect(input1.Equal(input2)).to.equal(false);
@@ -168,8 +166,7 @@ describe("time", () => {
         const input2 = Time.CreateTime24Hour(9, 0);
         const actual = input1.Minus(input2);
         const expected = new TimeSpan(3, 0, 0);
-        // There are no methods to compare objects hence, I compare the data member
-        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+        expect(actual.Equal(expected)).to.equal(true);
     });
 
     it("Test Minus() 2", () => {
@@ -177,23 +174,23 @@ describe("time", () => {
         const input2 = Time.CreateTime24Hour(9, 30);
         const actual = input1.Minus(input2);
         const expected = new TimeSpan(2, 30, 0);
-        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+        expect(actual.Equal(expected)).to.equal(true);
     });
 
     it("Test Minus() 3", () => {
-        const input1 = Time.CreateTime24Hour(18 , 0);
-        const input2 = Time.CreateTime24Hour(9 , 30);
+        const input1 = Time.CreateTime24Hour(18, 0);
+        const input2 = Time.CreateTime24Hour(9, 30);
         const actual = input1.Minus(input2);
         const expected = new TimeSpan(8, 30, 0);
-        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+        expect(actual.Equal(expected)).to.equal(true);
     });
 
     it("Test Minus() 4", () => {
-        const input1 = Time.CreateTime24Hour(0 , 0);
-        const input2 = Time.CreateTime24Hour(0 , 0);
+        const input1 = Time.CreateTime24Hour(0, 0);
+        const input2 = Time.CreateTime24Hour(0, 0);
         const actual = input1.Minus(input2);
         const expected = new TimeSpan(0, 0, 0);
-        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+        expect(actual.Equal(expected)).to.equal(true);
     });
 
 });

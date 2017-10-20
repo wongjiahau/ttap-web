@@ -5,7 +5,7 @@ import {
     TimeSpan,
 } from "../att/timeSpan";
 
-describe("time", () => {
+describe("timespan", () => {
     it("Test TimeSpan 1", () => {
         // arrange
         const input1 = new TimeSpan(2, 30, 0);
