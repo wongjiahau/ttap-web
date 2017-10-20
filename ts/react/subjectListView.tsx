@@ -12,8 +12,9 @@ const divStyle : React.CSSProperties = {
 };
 
 const paperStyle : React.CSSProperties = {
-    height: "500px",
-    overflow: "scroll"
+    height: "100%",
+    overflow: "scroll",
+    overflowX: "hidden"
 };
 
 const fieldStyle : React.CSSProperties = {

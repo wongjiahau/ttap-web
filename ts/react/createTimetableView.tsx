@@ -1,4 +1,4 @@
-import Dialog from "material-ui/Dialog";
+import Drawer from 'material-ui/Drawer';
 import FlatButton from "material-ui/FlatButton";
 import RaisedButton from "material-ui/RaisedButton";
 import * as React from "react";
@@ -28,7 +28,7 @@ ICreateTimetableViewStates > {
         this.state = {
             isSelectSubjectPanelOpened: false
         };
-        this.allSubjects =  props.allSubjects;
+        this.allSubjects = props.allSubjects;
     }
     public handleOpen = () => {
         this.setState({isSelectSubjectPanelOpened: true});
@@ -39,37 +39,44 @@ ICreateTimetableViewStates > {
     }
 
     public render() {
-    const actions = [
-        <FlatButton
-            key="cancel-button"
-            label="Cancel"
-            primary={true}
-            onClick={this.handleClose}
-        />,
-        <FlatButton
-            key="done-button"
-            label="Done"
-            primary={true}
-            keyboardFocused={true}
-            onClick={this.handleClose}
-        /> ];
-    return (
+        const actions = [ < FlatButton key = "cancel-button" label = "Cancel" primary = {
+                true
+            }
+            onClick = {
+                this.handleClose
+            } />, < FlatButton key = "done-button" label = "Done" primary = {
+                true
+            }
+            keyboardFocused = {
+                true
+            }
+            onClick = {
+                this.handleClose
+            } />
+        ];
+        return (
             <div>
                 <RaisedButton label="Select subjects" onClick={this.handleOpen}/>
-                <Dialog
-                    style={dialogStyle}
-                    title="Select your subjects"
-                    actions={actions}
-                    modal={true}
-                    open={this.state.isSelectSubjectPanelOpened}
-                    onRequestClose={this.handleClose}>
+                <Drawer docked={false} width={550} open={this.state.isSelectSubjectPanelOpened}>
                     <SubjectListView style={subjectListViewStyle} subjects={this.allSubjects}/>
-                </Dialog>
+                    <FlatButton
+                        key="cancel-button"
+                        label="Cancel"
+                        primary={true}
+                        onClick={this.handleClose}/>
+                    <FlatButton
+                        key="done-button"
+                        label="Done"
+                        primary={true}
+                        keyboardFocused={true}
+                        onClick={this.handleClose}/>
+
+                </Drawer>
             </div>
         );
     }
 
     public componentDidMount() {
-         this.setState({isSelectSubjectPanelOpened: true});
+        this.setState({isSelectSubjectPanelOpened: true});
     }
 }
