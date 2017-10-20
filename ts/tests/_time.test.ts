@@ -4,6 +4,9 @@ import {
 import {
     Time,
 } from "../att/time";
+import {
+    TimeSpan,
+} from "../att/timeSpan";
 
 describe("time", () => {
     it("Test Equal() 1", () => {
@@ -116,12 +119,12 @@ describe("time", () => {
     });
 
     it("Test Factory() 2", () => {
-        const t = Time.CreateTime12Hour(1 , 0 , true);
+        const t = Time.CreateTime12Hour(1, 0, true);
         expect(t.Hour === 13).to.equal(true);
     });
 
     it("Test Factory() 3", () => {
-        const t = Time.CreateTime12Hour(1 , 0 , false);
+        const t = Time.CreateTime12Hour(1, 0, false);
         expect(t.Hour === 1).to.equal(true);
     });
 
@@ -134,29 +137,63 @@ describe("time", () => {
 
     it("Test Parse() 2", () => {
         const input = "1:00 PM";
-        const expected = Time.CreateTime24Hour(13 , 0);
+        const expected = Time.CreateTime24Hour(13, 0);
         const actual = Time.Parse(input);
         expect(actual.Equal(expected)).to.equal(true);
     });
 
     it("Test Parse() 3", () => {
         const input = "1:30 PM";
-        const expected = Time.CreateTime24Hour(13 , 30);
+        const expected = Time.CreateTime24Hour(13, 30);
         const actual = Time.Parse(input);
         expect(actual.Equal(expected)).to.equal(true);
     });
 
     it("Test Parse() 4", () => {
         const input = "12:00 PM";
-        const expected = Time.CreateTime24Hour(12 , 0);
+        const expected = Time.CreateTime24Hour(12, 0);
         const actual = Time.Parse(input);
         expect(actual.Equal(expected)).to.equal(true);
     });
 
     it("Test Parse() 5", () => {
         const input = "12:00 AM";
-        const expected = Time.CreateTime24Hour(0 , 0);
+        const expected = Time.CreateTime24Hour(0, 0);
         const actual = Time.Parse(input);
         expect(actual.Equal(expected)).to.equal(true);
     });
+
+    it("Test Minus() 1", () => {
+        const input1 = Time.CreateTime24Hour(12, 0);
+        const input2 = Time.CreateTime24Hour(9, 0);
+        const actual = input1.Minus(input2);
+        const expected = new TimeSpan(3, 0, 0);
+        // There are no methods to compare objects hence, I compare the data member
+        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+    });
+
+    it("Test Minus() 2", () => {
+        const input1 = Time.CreateTime24Hour(12, 0);
+        const input2 = Time.CreateTime24Hour(9, 30);
+        const actual = input1.Minus(input2);
+        const expected = new TimeSpan(2, 30, 0);
+        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+    });
+
+    it("Test Minus() 3", () => {
+        const input1 = Time.CreateTime24Hour(18 , 0);
+        const input2 = Time.CreateTime24Hour(9 , 30);
+        const actual = input1.Minus(input2);
+        const expected = new TimeSpan(8, 30, 0);
+        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+    });
+
+    it("Test Minus() 4", () => {
+        const input1 = Time.CreateTime24Hour(0 , 0);
+        const input2 = Time.CreateTime24Hour(0 , 0);
+        const actual = input1.Minus(input2);
+        const expected = new TimeSpan(0, 0, 0);
+        expect(actual.totalSeconds === expected.totalSeconds).to.equal(true);
+    });
+
 });

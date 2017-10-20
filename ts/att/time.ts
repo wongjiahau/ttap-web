@@ -1,3 +1,4 @@
+import { TimeSpan } from "./timeSpan";
 export class Time {
 
     public static CreateTime24Hour(hour: number, minute: number): Time {
@@ -56,5 +57,16 @@ export class Time {
         if (this.Hour < other.Hour) {return false; }
         if (this.Minute > other.Minute) {return true; }
         return false;
+    }
+
+    public Minus(other: Time): TimeSpan {
+        if (this.LessThan(other)) {throw new RangeError("a is less than b, so a cannot be subtracted by b"); }
+        let finalHour = this.Hour - other.Hour;
+        let finalMinute = this.Minute - other.Minute;
+        if (finalMinute < 0) {
+            finalMinute = 60 + finalMinute;
+            finalHour--;
+        }
+        return new TimeSpan(finalHour, finalMinute, 0);
     }
 }
