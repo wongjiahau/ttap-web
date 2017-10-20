@@ -6,10 +6,12 @@
     ],
     "jsRules": {},
     "rules": {
+        "jsx-alignment": false,
+        "jsx-wrap-multiline": false,
+        "no-console": false,
+        "no-var-requires": false,
         "trailing-comma": false,
         "typedef-whitespace": false,
-        "jsx-alignment": false,
-        "jsx-wrap-multiline": false
     },
     "rulesDirectory": []
 }
