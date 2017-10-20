@@ -11,7 +11,7 @@ export interface ITimetableViewProps {}
 
 function getTimeRow() {
     const style : React.CSSProperties = {
-        borderStyle: "solid",
+        border: "1px solid",
         textAlign: "center"
     };
     const result = [];
@@ -62,13 +62,16 @@ function getDayColumn() {
         "SUN"
     ];
     const div1style : React.CSSProperties = {
-        borderStyle: "solid",
+        borderLeft: "1px solid",
+        borderRight: "1px solid",
+        borderTop: "1px solid",
         display: "table",
         overflow: "hidden",
         textAlign: "center"
     };
     const div2style : React.CSSProperties = {
         display: "table-cell",
+        fontFamily: "roboto",
         verticalAlign: "middle"
     };
     const result = [];
