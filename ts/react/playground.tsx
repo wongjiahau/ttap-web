@@ -5,8 +5,7 @@ import ParseSlotToSubject from "../parser/parseSlotToSubject";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
 import {CreateTimetableView} from "./createTimetableView";
 import {SlotView} from "./slotView";
-import {SubjectListView} from "./subjectListView";
-import {SubjectView} from "./subjectView";
+import {TimetableView} from "./timetableView";
 
 export interface IPlaygroundProps {
     id: number; // this line is just to surpress TSLint error on empty interface
@@ -22,6 +21,7 @@ export class Playground extends React.Component < IPlaygroundProps, {} > {
         return (
             <div>
                 <CreateTimetableView allSubjects={subjects}/>
+                <TimetableView/>
             </div>
         );
     }
