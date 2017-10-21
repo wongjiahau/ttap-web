@@ -57,7 +57,6 @@ export interface ISubjectListViewState {
 
 export class SubjectListView extends React.Component < ISubjectListViewProps,
 ISubjectListViewState > {
-    private readonly allSubject : Subject[];
     constructor(props : ISubjectListViewProps) {
         super(props);
         this.state = {
@@ -66,7 +65,6 @@ ISubjectListViewState > {
             showingSelectSubjectOnly: false,
             subjects: props.subjects
         };
-        this.allSubject = props.subjects;
         $(window).on("resize", this.handleWindowResizing);
     }
 
@@ -89,7 +87,8 @@ ISubjectListViewState > {
     public getMatchingSubjects = () => {
         const searchedText : string = this.state.searchedText;
         return this
-            .allSubject
+            .state
+            .subjects
             .filter((subject) => S(GetSubjectBody(subject)).contains(searchedText.toLowerCase()));
 
         function GetSubjectBody(subject : Subject) : string {
@@ -103,7 +102,8 @@ ISubjectListViewState > {
 
     public handleSelection(subjectCode : string) {
         const allSubject = this
-            .allSubject
+            .state
+            .subjects
             .slice();
         const matchedSubject = allSubject.filter((s) => s.Code === subjectCode)[0];
         matchedSubject.IsSelected = !matchedSubject.IsSelected;
@@ -117,9 +117,10 @@ ISubjectListViewState > {
         } else {
             subjectsToBeDisplayed = this.state.showingSelectSubjectOnly
                 ? this
-                    .allSubject
+                    .state
+                    .subjects
                     .filter((s) => s.IsSelected)
-                : this.allSubject;
+                : this.state.subjects;
         }
         const subjectViews = subjectsToBeDisplayed.map((s) => (
             <div>
@@ -153,7 +154,8 @@ ISubjectListViewState > {
                         icon={< IconEye />}
                         style={buttonStyle}
                         disabled={this
-                        .allSubject
+                        .state
+                        .subjects
                         .filter((s) => s.IsSelected)
                         .length === 0}
                         key="toggle-view-button"
