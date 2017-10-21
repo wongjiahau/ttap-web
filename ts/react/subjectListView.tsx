@@ -47,14 +47,16 @@ ISubjectListViewState > {
         this.state = {
             sectionStyle: this.getSectionStyle(),
             showingSelectSubjectOnly: false,
-            subjects: props.subjects,
+            subjects: props.subjects
         };
         this.allSubject = props.subjects;
         $(window).on("resize", this.handleWindowResizing);
     }
 
     public handleWindowResizing = () => {
-        this.setState({sectionStyle: this.getSectionStyle()});
+        this.setState({
+            sectionStyle: this.getSectionStyle()
+        });
     }
 
     public handleToggleView = () => {
@@ -63,7 +65,7 @@ ISubjectListViewState > {
                 showingSelectSubjectOnly: true,
                 subjects: this
                     .allSubject
-                    .filter((s) => s.IsSelected),
+                    .filter((s) => s.IsSelected)
             });
         } else {
             this.setState({subjects: this.allSubject, showingSelectSubjectOnly: false});
@@ -72,6 +74,7 @@ ISubjectListViewState > {
 
     public handleSearchBoxOnChange = (event : object, newValue : string) => {
         this.setState({
+            showingSelectSubjectOnly: false,
             subjects: this.getMatchingSubjects(newValue)
         });
     }
@@ -96,7 +99,7 @@ ISubjectListViewState > {
             .slice();
         const matchedSubject = allSubject.filter((s) => s.Code === subjectCode)[0];
         matchedSubject.IsSelected = !matchedSubject.IsSelected;
-        this.setState({subjects: allSubject});
+        this.setState({subjects: allSubject, showingSelectSubjectOnly: false});
     }
 
     public render() {
@@ -142,6 +145,10 @@ ISubjectListViewState > {
                         keyboardFocused={true}
                         onClick={this.props.handleDone}/>
                     <FlatButton
+                        disabled={this
+                        .allSubject
+                        .filter((s) => s.IsSelected)
+                        .length === 0}
                         key="toggle-view-button"
                         label={this.state.showingSelectSubjectOnly
                         ? "Show all subjects"
