@@ -41,6 +41,7 @@ export interface ISubjectListViewState {
         ?
         : string;
     subjects : Subject[];
+    showingSelectSubjectOnly : boolean;
 }
 
 export class SubjectListView extends React.Component < ISubjectListViewProps,
@@ -49,10 +50,25 @@ ISubjectListViewState > {
     constructor(props : ISubjectListViewProps) {
         super(props);
         this.state = {
-            subjects: props.subjects
+            subjects: props.subjects,
+            showingSelectSubjectOnly: false
         };
         this.allSubject = props.subjects;
     }
+
+    public handleToggleView = () => {
+        if (!this.state.showingSelectSubjectOnly) {
+            this.setState({
+                subjects: this
+                    .allSubject
+                    .filter((s) => s.IsSelected),
+                showingSelectSubjectOnly: true
+            })
+        } else {
+            this.setState({subjects: this.allSubject, showingSelectSubjectOnly: false})
+        }
+    }
+
     public handleSearchBoxOnChange = (event : object, newValue : string) => {
         this.setState({
             subjects: this.getMatchingSubjects(newValue)
@@ -73,6 +89,16 @@ ISubjectListViewState > {
         }
     }
 
+    public handleSelection(subjectCode : string) {
+        const allSubject = this.allSubject.slice();
+        const matchedSubject = allSubject.filter((s) => s.Code == subjectCode)[0];
+        matchedSubject.IsSelected = !matchedSubject.IsSelected;
+        this.setState({
+            subjects: allSubject
+        })
+        console.log(matchedSubject);
+    }
+
     public render() {
         const subjects = this
             .state
@@ -82,7 +108,9 @@ ISubjectListViewState > {
                     <Divider/>
                     <SubjectView
                         subjectName={Beautify(s.Name)}
-                        subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}/>
+                        subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
+                        handleSelection={() => this.handleSelection(s.Code)}
+                        isSelected={s.IsSelected}/>
                 </div>
             ));
 
@@ -112,6 +140,14 @@ ISubjectListViewState > {
                         primary={true}
                         keyboardFocused={true}
                         onClick={this.props.handleDone}/>
+                    <FlatButton
+                        key="toggle-view-button"
+                        label={this.state.showingSelectSubjectOnly
+                        ? "Show all subjects"
+                        : "Show selected subjects"}
+                        primary={true}
+                        keyboardFocused={true}
+                        onClick={this.handleToggleView}/>
                 </footer>
             </section>
         );

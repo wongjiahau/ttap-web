@@ -5,37 +5,25 @@ import * as React from "react";
 export interface ISubjectViewProps {
     subjectName : string;
     subjectCode : string;
-}
-
-export interface ISubjectViewStates {
     isSelected : boolean;
+    handleSelection : () => void;
 }
 
 const whenSelectedStyle : React.CSSProperties = {};
 const whenDeselectedStyle : React.CSSProperties = {};
 
-export class SubjectView extends React.Component < ISubjectViewProps,
-ISubjectViewStates > {
+export class SubjectView extends React.Component < ISubjectViewProps, {} > {
     constructor(props : ISubjectViewProps) {
         super(props);
-        this.state = {
-            isSelected: false
-        };
-
-    }
-    public handleClick = () => {
-        this.setState({
-            isSelected: !this.state.isSelected
-        });
     }
 
     public render() {
         return (
             <ListItem
-                leftCheckbox={< Checkbox />}
+                leftCheckbox={< Checkbox checked={this.props.isSelected} onClick={this.props.handleSelection}/>}
                 primaryText={this.props.subjectName}
                 secondaryText={this.props.subjectCode}
-                onClick={this.handleClick}/>
+                />
         );
     }
 }

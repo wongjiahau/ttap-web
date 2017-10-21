@@ -24,7 +24,7 @@ ICreateTimetableViewStates > {
         this.setState({isSelectSubjectPanelOpened: true});
     }
 
-    public handleClose = () => {
+    public handleDone = () => {
         this.setState({isSelectSubjectPanelOpened: false});
     }
 
@@ -33,7 +33,7 @@ ICreateTimetableViewStates > {
             <div>
                 <RaisedButton label="Select subjects" onClick={this.handleOpen}/>
                 <Drawer docked={false} width={550} open={this.state.isSelectSubjectPanelOpened}>
-                    <SubjectListView subjects={this.allSubjects} handleDone={this.handleClose}/>
+                    <SubjectListView subjects={this.allSubjects} handleDone={this.handleDone}/>
 
                 </Drawer>
             </div>
