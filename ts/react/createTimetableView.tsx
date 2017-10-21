@@ -1,4 +1,4 @@
-import Drawer from 'material-ui/Drawer';
+import Drawer from "material-ui/Drawer";
 import RaisedButton from "material-ui/RaisedButton";
 import * as React from "react";
 import {Subject} from "../model/subject";
@@ -32,7 +32,7 @@ ICreateTimetableViewStates > {
         return (
             <div>
                 <RaisedButton label="Select subjects" onClick={this.handleOpen}/>
-                <Drawer docked={false} width={550} open={this.state.isSelectSubjectPanelOpened}>
+                <Drawer docked={false} width={520} open={this.state.isSelectSubjectPanelOpened}>
                     <SubjectListView subjects={this.allSubjects} handleDone={this.handleDone}/>
 
                 </Drawer>

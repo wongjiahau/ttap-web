@@ -2,6 +2,9 @@ import * as $ from "jquery";
 import Divider from "material-ui/Divider";
 import FlatButton from "material-ui/FlatButton";
 import Paper from "material-ui/Paper";
+import RaisedButton from "material-ui/RaisedButton";
+import IconTick from "material-ui/svg-icons/action/done";
+import IconEye from "material-ui/svg-icons/image/remove-red-eye";
 import TextField from "material-ui/TextField";
 import * as React from "react";
 import * as S from "string";
@@ -9,7 +12,13 @@ import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
 import {SubjectView} from "./subjectView";
 
-const headerStyle : React.CSSProperties = {};
+const headerStyle : React.CSSProperties = {
+    fontSize: "42px",
+    fontWeight: "bold",
+    marginBottom: "-5px",
+    marginLeft: "15px",
+    marginTop: "5px"
+};
 
 const divStyle : React.CSSProperties = {
     flex: "2",
@@ -17,12 +26,21 @@ const divStyle : React.CSSProperties = {
 };
 
 const footerStyle : React.CSSProperties = {
-    minHeight: "50px"
+    margin: "10px",
+    minHeight: "36px",
+    textAlign: "right"
 };
 
-const fieldStyle : React.CSSProperties = {
-    fontSize: "32",
-    fontWeight: "bold"
+const searchBoxStyle : React.CSSProperties = {
+    fontSize: "24px",
+    fontWeight: "normal",
+    marginBottom: "10px",
+    marginTop: "-10px",
+    width: "480px"
+};
+
+const buttonStyle : React.CSSProperties = {
+    marginLeft: "10px"
 };
 
 export interface ISubjectListViewProps {
@@ -31,9 +49,7 @@ export interface ISubjectListViewProps {
 }
 
 export interface ISubjectListViewState {
-    searchedText
-        ?
-        : string;
+    searchedText : string;
     subjects : Subject[];
     showingSelectSubjectOnly : boolean;
     sectionStyle : React.CSSProperties;
@@ -45,6 +61,7 @@ ISubjectListViewState > {
     constructor(props : ISubjectListViewProps) {
         super(props);
         this.state = {
+            searchedText: "",
             sectionStyle: this.getSectionStyle(),
             showingSelectSubjectOnly: false,
             subjects: props.subjects
@@ -60,26 +77,17 @@ ISubjectListViewState > {
     }
 
     public handleToggleView = () => {
-        if (!this.state.showingSelectSubjectOnly) {
-            this.setState({
-                showingSelectSubjectOnly: true,
-                subjects: this
-                    .allSubject
-                    .filter((s) => s.IsSelected)
-            });
-        } else {
-            this.setState({subjects: this.allSubject, showingSelectSubjectOnly: false});
-        }
-    }
-
-    public handleSearchBoxOnChange = (event : object, newValue : string) => {
         this.setState({
-            showingSelectSubjectOnly: false,
-            subjects: this.getMatchingSubjects(newValue)
+            showingSelectSubjectOnly: !this.state.showingSelectSubjectOnly
         });
     }
 
-    public getMatchingSubjects = (searchedText : string) => {
+    public handleSearchBoxOnChange = (event : object, newValue : string) => {
+        this.setState({searchedText: newValue, showingSelectSubjectOnly: false});
+    }
+
+    public getMatchingSubjects = () => {
+        const searchedText : string = this.state.searchedText;
         return this
             .allSubject
             .filter((subject) => S(GetSubjectBody(subject)).contains(searchedText.toLowerCase()));
@@ -103,48 +111,47 @@ ISubjectListViewState > {
     }
 
     public render() {
-        const subjects = this
-            .state
-            .subjects
-            .map((s) => (
-                <div>
-                    <Divider/>
-                    <SubjectView
-                        subjectName={Beautify(s.Name)}
-                        subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
-                        handleSelection={() => this.handleSelection(s.Code)}
-                        isSelected={s.IsSelected}/>
-                </div>
-            ));
+        let subjectsToBeDisplayed : Subject[];
+        if (this.state.searchedText.length > 0) {
+            subjectsToBeDisplayed = this.getMatchingSubjects();
+        } else {
+            subjectsToBeDisplayed = this.state.showingSelectSubjectOnly
+                ? this
+                    .allSubject
+                    .filter((s) => s.IsSelected)
+                : this.allSubject;
+        }
+        const subjectViews = subjectsToBeDisplayed.map((s) => (
+            <div>
+                <Divider/>
+                <SubjectView
+                    subjectName={Beautify(s.Name)}
+                    subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
+                    handleSelection={() => this.handleSelection(s.Code)}
+                    isSelected={s.IsSelected}/>
+                <Divider/>
+            </div>
+        ));
 
         return (
             <section style={this.state.sectionStyle}>
                 <header style={headerStyle}>
-                    <h1>Select your subjects.</h1>
+                    Select your desired subjects.
                     <TextField
-                        style={fieldStyle}
+                        style={searchBoxStyle}
                         onChange={this.handleSearchBoxOnChange}
-                        hintText="e.g. he/hubungan etnik/mpu3113"
-                        floatingLabelText="Search subjects"/>
+                        hintText="example: he/hubungan etnik/mpu3113"
+                        floatingLabelText=" Search . . ."/>
                 </header>
-                <div style={divStyle}>
-                    <Paper>
-                        <br/> {subjects}
-                    </Paper>
-                </div>
+                <Paper style={divStyle}>
+                    <div id="subject-list-container">
+                        {subjectViews}
+                    </div>
+                </Paper>
                 <footer style={footerStyle}>
                     <FlatButton
-                        key="cancel-button"
-                        label="Cancel"
-                        primary={true}
-                        onClick={this.props.handleDone}/>
-                    <FlatButton
-                        key="done-button"
-                        label="Done"
-                        primary={true}
-                        keyboardFocused={true}
-                        onClick={this.props.handleDone}/>
-                    <FlatButton
+                        icon={< IconEye />}
+                        style={buttonStyle}
                         disabled={this
                         .allSubject
                         .filter((s) => s.IsSelected)
@@ -153,9 +160,17 @@ ISubjectListViewState > {
                         label={this.state.showingSelectSubjectOnly
                         ? "Show all subjects"
                         : "Show selected subjects"}
-                        primary={true}
+                        secondary={true}
                         keyboardFocused={true}
                         onClick={this.handleToggleView}/>
+                    <RaisedButton
+                        icon={< IconTick />}
+                        style={buttonStyle}
+                        key="done-button"
+                        label="Done"
+                        primary={true}
+                        keyboardFocused={true}
+                        onClick={this.props.handleDone}/>
                 </footer>
             </section>
         );
