@@ -1,21 +1,30 @@
 import Divider from "material-ui/Divider";
+import FlatButton from "material-ui/FlatButton";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import * as React from "react";
 import * as S from "string";
+import * as $ from "jquery";
 import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
 import {SubjectView} from "./subjectView";
 
+const sectionStyle : React.CSSProperties = {
+    display: "flex",
+    flexFlow: "column",
+    height: $(window).height()
+}
+
+const headerStyle : React.CSSProperties = {}
+
 const divStyle : React.CSSProperties = {
-    margin: "auto"
+    flex: "2",
+    overflow: "auto"
 };
 
-const paperStyle : React.CSSProperties = {
-    height: "100%",
-    overflow: "scroll",
-    overflowX: "hidden"
-};
+const footerStyle : React.CSSProperties = {
+    minHeight: "50px"
+}
 
 const fieldStyle : React.CSSProperties = {
     fontSize: "32",
@@ -24,7 +33,7 @@ const fieldStyle : React.CSSProperties = {
 
 export interface ISubjectListViewProps {
     subjects : Subject[];
-    style : React.CSSProperties;
+    handleDone : () => void;
 }
 
 export interface ISubjectListViewState {
@@ -78,18 +87,33 @@ ISubjectListViewState > {
             ));
 
         return (
-            <div style={this.props.style}>
-                <div style={divStyle}>
+            <section style={sectionStyle}>
+                <header style={headerStyle}>
                     <TextField
                         style={fieldStyle}
                         onChange={this.handleSearchBoxOnChange}
                         hintText="e.g. he/hubungan etnik/mpu3113"
                         floatingLabelText="Search subjects"/>
-                    < Paper style={paperStyle}>
+                </header>
+                <div style={divStyle}>
+                    <Paper>
                         <br/> {subjects}
                     </Paper>
                 </div>
-            </div>
+                <footer style={footerStyle}>
+                    <FlatButton
+                        key="cancel-button"
+                        label="Cancel"
+                        primary={true}
+                        onClick={this.props.handleDone}/>
+                    <FlatButton
+                        key="done-button"
+                        label="Done"
+                        primary={true}
+                        keyboardFocused={true}
+                        onClick={this.props.handleDone}/>
+                </footer>
+            </section>
         );
     }
 }
