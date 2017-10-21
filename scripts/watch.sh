@@ -1,3 +1,4 @@
+#!/bin/bash
 # Clean the output directory
 rm -r src/core*
 
