@@ -27,18 +27,16 @@ function getStub() {
 }
 
 describe('<SubjectListView/>', () => {
-    it('should render 3 buttons', () => {
+    it('should render 2 buttons', () => {
         const wrapper = getStub();
-         //wrapper.setState({searchedText: "art"});
-        console.log(wrapper.find('FlatButton').getElements())
-        expect(wrapper.find('FlatButton').length)
+        expect(wrapper.find('RaisedButton').length + wrapper.find('FlatButton').length)
             .to
-            .equal(3);
+            .equal(2);
     });
 
     it('should render a DONE button', () => {
         const wrapper = getStub();
-        var buttons = wrapper.find('FlatButton').getElements();
+        var buttons = wrapper.find('RaisedButton').getElements();
         expect(buttons.some((b)=> b.props.label === 'Done')).to.equal(true);
     });
 
@@ -46,6 +44,12 @@ describe('<SubjectListView/>', () => {
         const wrapper = getStub();
         var buttons = wrapper.find('FlatButton').getElements();
         expect(buttons.some((b)=> b.props.label === 'Show selected subjects')).to.equal(true);
+    });
+
+    it('should render 18 elements in subject-list-container', () => {
+        const wrapper = getStub();
+        var container = wrapper.find("#subject-list-container").getElements()[0];
+        expect(container.props.children.length).to.equal(18);
     });
 
 });
