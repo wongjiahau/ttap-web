@@ -122,10 +122,12 @@ ISubjectListViewState > {
                     .filter((s) => s.IsSelected)
                 : this.state.subjects;
         }
+
         const subjectViews = subjectsToBeDisplayed.map((s) => (
             <div>
                 <Divider/>
                 <SubjectView
+                    key={s.Code}
                     subjectName={Beautify(s.Name)}
                     subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
                     handleSelection={() => this.handleSelection(s.Code)}
