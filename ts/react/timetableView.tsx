@@ -1,24 +1,32 @@
+import * as $ from "jquery";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import RawSlot from "../model/rawSlot";
 import {SlotView} from "./slotView";
 
+const timetableViewWidth = 0.9 * $(window).width();
+
 const divStyle : React.CSSProperties = {
-    borderStyle: "solid"
+    borderStyle: "solid",
+    margin: "auto",
+    width: timetableViewWidth
 };
 
-export interface ITimetableViewProps {}
+export interface ITimetableViewProps {
+    slots? : RawSlot[];
+}
 
+const minTime = 8; // 8 am
+const maxTime = 20; // 8 pm
 function getTimeRow() {
     const topDivStyle : React.CSSProperties = {
         borderBottom: "1px solid",
         borderRight: "1px solid",
-        borderTop: "1px solid",
         fontFamily: "roboto",
         padding: "2px",
         textAlign: "center"
     };
-    const btmDivStyle: React.CSSProperties = {
+    const btmDivStyle : React.CSSProperties = {
         borderBottom: "1px solid",
         borderRight: "1px solid",
         fontFamily: "roboto",
@@ -26,8 +34,6 @@ function getTimeRow() {
         textAlign: "center"
     };
     const result = [];
-    const minTime = 7; // 7 am
-    const maxTime = 21; // 9 pm
     for (let i = 0;; i++) {
         let time = i + minTime;
         if (time > maxTime) {
@@ -73,7 +79,6 @@ function getDayColumn() {
         "SUN"
     ];
     const div1style : React.CSSProperties = {
-        borderLeft: "1px solid",
         borderRight: "1px solid",
         borderTop: "1px solid",
         display: "table",
@@ -132,10 +137,10 @@ export const TimetableView = (props : ITimetableViewProps) => {
     return (
         <div style={divStyle}>
             <ReactGridLayout
-                cols={32}
+                cols={((maxTime - minTime) + 2) * 2}
                 maxRows={16}
                 rowHeight={50}
-                width={1200}
+                width={timetableViewWidth}
                 layout={layouts}
                 margin={[0, 0]}
                 isDraggable={false}

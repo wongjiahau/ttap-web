@@ -14,6 +14,11 @@ const selectSubjectButtonStyle : React.CSSProperties = {
     marginLeft: "10px"
 };
 
+const centerDivStyle : React.CSSProperties = {
+    margin: "auto",
+    textAlign: "center"
+};
+
 const footerStyle : React.CSSProperties = {
     margin: "auto",
     textAlign: "center"
@@ -60,7 +65,9 @@ ICreateTimetableViewStates > {
                     secondary={true}
                     label="Select subjects"
                     onClick={this.handleOpen}/>
-                <TimetableView/>
+                <div style={centerDivStyle}>
+                    <TimetableView/>
+                </div>
                 <div style={footerStyle}>
                     <RaisedButton
                         primary={true}
