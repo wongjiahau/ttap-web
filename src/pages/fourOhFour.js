@@ -9,9 +9,16 @@ class FourOhFour extends React.Component {
         };
     }
 
+    handleClick = () => {
+        window
+            .history
+            .go(-1);
+    }
+
     render() {
         return <div>
             <h1>Sorry, this page is still under construction . . .</h1>
+            <button onClick={this.handleClick}>Click here to go back</button>
         </div>
     }
 
