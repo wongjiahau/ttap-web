@@ -39,7 +39,9 @@ describe("Parser which is used to parse html into slots", () => {
             .equal(21);
     });
 
-    it("jiahau_2017_sept's data first subject (sorted by name) should be Artificial Intelligence", () => {
+    it("jiahau_2017_sept's data first subject (sorted by name) should be Artificial Inte" +
+            "lligence",
+    () => {
         const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
         const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
         expect(result[0].Name.toLowerCase())
@@ -61,6 +63,14 @@ describe("Parser which is used to parse html into slots", () => {
         expect(find(result, {Name: "MANAGEMENT PRINCIPLES"}).SlotIds.length)
             .to
             .equal(7);
+    });
+
+    it("keli_2017_sept's data : subject UKAI3013 shold have name of E-Commerce", () => {
+        const plainHtml = new testManager().GetDataFrom(FileName.keli_2017_sept);
+        const result = ParseHtmlToSlots(plainHtml);
+        expect(result.filter((s) => S(s.SubjectCode).contains("UKAI3013"))[0].SubjectName)
+        .to
+        .equal("E-COMMERCE");
     });
 
 });

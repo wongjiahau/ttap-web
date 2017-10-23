@@ -19,10 +19,10 @@ export default function parser(html: string): RawSlot[] {
             try {
                 currentSubjectCode = cells[0]
                     .innerHTML
-                    .split("-")[0];
+                    .split(" - ")[0];
                 currentSubjectName = cells[0]
                     .innerHTML
-                    .split("-")[1]
+                    .split(" - ")[1]
                     .split("[")[0]
                     .replace("&amp;", "&")
                     .trim();
