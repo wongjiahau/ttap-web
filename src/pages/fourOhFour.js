@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-class Empty extends React.Component {
+class FourOhFour extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -11,9 +11,7 @@ class Empty extends React.Component {
 
     render() {
         return <div>
-            <p>This is an empty page.</p>
-            <Link to='login'>go to login
-            </Link>
+            <h1>Sorry, this page is still under construction . . .</h1>
         </div>
     }
 
@@ -22,4 +20,4 @@ class Empty extends React.Component {
     }
 }
 
-export default Empty;
+export default FourOhFour;

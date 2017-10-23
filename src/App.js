@@ -1,12 +1,12 @@
 import AppBar from 'material-ui/AppBar';
 import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import Drawer from 'material-ui/Drawer';
-import DrawerContent from './DrawerContent';
+import {DrawerContent} from './DrawerContent';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import RaisedButton from 'material-ui/RaisedButton';
 import React, {Component} from 'react';
-import {Body} from './core/react/body';
+import {Main} from './Main';
 import {Playground} from './core/react/playground';
 import {MuiThemeProvider} from 'material-ui';
 import {HashRouter as Router} from 'react-router-dom'
@@ -22,6 +22,11 @@ export default class App extends Component {
   handleOpen = () => this.setState({isSecondaryDrawerOpened: true});
   handleClose = () => this.setState({isSecondaryDrawerOpened: false});
   render() {
+    const menuButton = (
+      <IconButton onClick={this.handleOpen}>
+        <MenuIcon/>
+      </IconButton>
+    )
     return (
       <Router>
         <MuiThemeProvider>
@@ -29,29 +34,27 @@ export default class App extends Component {
             <AppBar
               className="App-header"
               title="Timetable Arranging Program (UTAR)"
-              iconElementLeft={< p > </p>}
-              iconElementRight={< IconButton onClick = {
-              this.handleOpen
-            } > <MenuIcon/> </IconButton>}/>
+              iconElementLeft={< p > </p >}
+              iconElementRight={menuButton}/>
             <br/>
             <Drawer
               width={200}
               docked={false}
               openSecondary={true}
-              open={this.state.isSecondaryDrawerOpened}>
+              open={this.state.isSecondaryDrawerOpened}Drawer >
               <RaisedButton
                 label='hide drawer'
                 fullWidth={true}
                 secondary={true}
                 icon={< ArrowForward />}
                 onClick={this.handleClose}/>
-              <DrawerContent/>
+              < DrawerContent onItemClick={this.handleClose}/>
             </Drawer>
-            <Body/>
+            < Main/>
             <br/>
           </div>
         </MuiThemeProvider>
       </Router>
-    );
+    )
   }
 }
