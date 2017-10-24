@@ -1,18 +1,22 @@
-import { IAction } from "./../actions/IAction";
+import {IAction} from "./../actions/IAction";
 import {actionsEnums} from "./../common/actionEnums";
+import { IUserProfileState } from "./userProfile";
 
-class UserProfileState {
-  private firstname : string;
+export interface IUserProfileState {
+  FirstName : string;
+}
 
-  constructor() {
-    this.firstname = "Default name";
+export class UserProfileState implements IUserProfileState {
+  public FirstName : string;
+
+  constructor(firstName = "Default name") {
+    this.FirstName = firstName;
   }
 }
 
-export const userProfileReducer = (state : UserProfileState = new UserProfileState(), action) => {
+export const userProfileReducer = (state : UserProfileState = new UserProfileState(), action) : IUserProfileState => {
   switch (action.type) {
     case actionsEnums.UPDATE_USERPROFILE_NAME:
-      return handleUserProfileAction(state, action);
     case actionsEnums.DELETE_USERPROFILE_NAME:
       return handleUserProfileAction(state, action);
     default:
@@ -21,9 +25,9 @@ export const userProfileReducer = (state : UserProfileState = new UserProfileSta
   return state;
 };
 
-const handleUserProfileAction = (state : UserProfileState, action : IAction<string>) => {
+const handleUserProfileAction = (state : UserProfileState, action : IAction < string >) : IUserProfileState => {
   return {
     ...state,
-    firstname: action.payload
+    FirstName: action.payload
   };
 };
