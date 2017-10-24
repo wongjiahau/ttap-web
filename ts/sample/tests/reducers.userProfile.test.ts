@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { isEqual } from "lodash";
+import { deleteUserProfileName } from "../actions/deleteUserProfileName";
 import { updateUserProfileName } from "./../actions/updateUserProfileName";
 import { IUserProfileState, userProfileReducer, UserProfileState } from "./../reducers/userProfile";
-import { deleteUserProfileName } from "../actions/deleteUserProfileName";
 
 describe("userProfile reducer", () => {
 

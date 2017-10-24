@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import { HelloWorldComponent } from "../components/helloWorld";
+import {HelloWorldComponent, IHelloWorldComponentProps } from "../components/helloWorld";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) : IHelloWorldComponentProps => {
   return {
-    userName: state.userProfileReducer.firstname
+    UserName :  state.userProfileReducer.FirstName
   };
 };
 

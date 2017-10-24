@@ -1,7 +1,11 @@
 import * as React from "react";
 
-export const HelloWorldComponent = (props : {userName : string}) => {
+export interface IHelloWorldComponentProps {
+  UserName : string;
+}
+
+export const HelloWorldComponent = (props : IHelloWorldComponentProps) => {
   return (
-    <h2>Hello Mr. {props.userName} !</h2>
+    <h2>Hello Mr. {props.UserName} !</h2>
   );
 };
