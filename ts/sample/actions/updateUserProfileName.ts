@@ -3,7 +3,7 @@ import {ActionGenerator} from "./IAction";
 
 export class UpdateUserProfileName extends ActionGenerator < IUserProfileState > {
   public constructor(newName : string) {
-    super("UPDATE_USER_PROFILE_NAME");
+    super("update user profile name");
     this.CreateAction((state : IUserProfileState) => {
       return {
         ...state,
