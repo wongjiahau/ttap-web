@@ -14,7 +14,7 @@ describe("userProfile reducer", () => {
 
     it("should handle updateUserProfileName", () => {
         const initialState = new UserProfileState();
-        const newState = userProfileReducer(initialState, UpdateUserProfileName("new name"));
+        const newState = userProfileReducer(initialState, new UpdateUserProfileName("new name").Action());
         const expectedState : IUserProfileState = {
             FirstName: "new name"
         };
@@ -23,7 +23,7 @@ describe("userProfile reducer", () => {
 
     it("should handle deleteUserProfileName", () => {
         const initialState = new UserProfileState();
-        const newState = userProfileReducer(initialState, DeleteUserProfileName());
+        const newState = userProfileReducer(initialState, new DeleteUserProfileName().Action());
         const expectedState : IUserProfileState = {
             FirstName: ""
         };
