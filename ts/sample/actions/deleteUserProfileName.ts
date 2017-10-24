@@ -1,10 +1,16 @@
-import {actionsEnums} from "../common/actionEnums";
-import {IAction} from "./IAction";
+import {IUserProfileState} from "./../reducers/userProfile";
+import {ActionGenerator} from "./IAction";
 
-export const deleteUserProfileName = () : IAction<string> => {
-  const result : IAction<string> = {
-      payload: "",
-      type: actionsEnums.DELETE_USERPROFILE_NAME,
-  };
-  return result;
-};
+export class DeleteUserProfileName extends ActionGenerator < IUserProfileState > {
+  public constructor() {
+    super("DELETE_USERPROFILE_NAME");
+    this.CreateAction(
+      (state : IUserProfileState) => {
+        return {
+          ...state,
+          FirstName : ""
+        };
+      }
+    );
+  }
+}

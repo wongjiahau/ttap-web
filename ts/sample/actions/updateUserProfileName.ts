@@ -1,10 +1,14 @@
-import {actionsEnums} from "../common/actionEnums";
-import {IAction} from "./IAction";
+import {IUserProfileState} from "./../reducers/userProfile";
+import {ActionGenerator} from "./IAction";
 
-export const updateUserProfileName = (newName : string) : IAction<string> => {
-  const result : IAction<string> = {
-      payload: newName,
-      type: actionsEnums.UPDATE_USERPROFILE_NAME,
-  };
-  return result;
-};
+export class UpdateUserProfileName extends ActionGenerator < IUserProfileState > {
+  public constructor(newName : string) {
+    super("UPDATE_USER_PROFILE_NAME");
+    this.CreateAction((state : IUserProfileState) => {
+      return {
+        ...state,
+        FirstName: newName,
+      };
+    });
+  }
+}

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { isEqual } from "lodash";
-import { deleteUserProfileName } from "../actions/deleteUserProfileName";
-import { updateUserProfileName } from "./../actions/updateUserProfileName";
+import { DeleteUserProfileName } from "../actions/deleteUserProfileName";
+import { UpdateUserProfileName } from "./../actions/updateUserProfileName";
 import { IUserProfileState, userProfileReducer, UserProfileState } from "./../reducers/userProfile";
 
 describe("userProfile reducer", () => {
@@ -14,7 +14,7 @@ describe("userProfile reducer", () => {
 
     it("should handle updateUserProfileName", () => {
         const initialState = new UserProfileState();
-        const newState = userProfileReducer(initialState, updateUserProfileName("new name"));
+        const newState = userProfileReducer(initialState, UpdateUserProfileName("new name"));
         const expectedState : IUserProfileState = {
             FirstName: "new name"
         };
@@ -23,7 +23,7 @@ describe("userProfile reducer", () => {
 
     it("should handle deleteUserProfileName", () => {
         const initialState = new UserProfileState();
-        const newState = userProfileReducer(initialState, deleteUserProfileName());
+        const newState = userProfileReducer(initialState, DeleteUserProfileName());
         const expectedState : IUserProfileState = {
             FirstName: ""
         };

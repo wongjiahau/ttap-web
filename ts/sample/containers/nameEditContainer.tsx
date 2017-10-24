@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import {deleteUserProfileName} from "../actions/deleteUserProfileName";
-import {updateUserProfileName} from "../actions/updateUserProfileName";
+import {DeleteUserProfileName} from "../actions/deleteUserProfileName";
+import {UpdateUserProfileName} from "../actions/updateUserProfileName";
 import { INameEditComponentProps, NameEditComponent } from "../components/nameEditor";
 
 const mapStateToProps = (state) => {
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) :  INameEditComponentProps => {
   return {
-    onDeleteClick : () => dispatch(deleteUserProfileName()),
-    onUpdateClick : (name : string) => dispatch(updateUserProfileName(name)),
+    onDeleteClick : () => dispatch(new DeleteUserProfileName().Action()),
+    onUpdateClick : (name : string) => dispatch(new UpdateUserProfileName(name).Action()),
   };
 };
 
