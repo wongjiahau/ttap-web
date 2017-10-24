@@ -1,9 +1,13 @@
 import {expect} from "chai";
 import {IAction} from "./../actions/IAction";
-import { updateUserProfileName } from "./../actions/updateUserProfileName";
+import {updateUserProfileName} from "./../actions/updateUserProfileName";
 import {actionsEnums} from "./../common/actionEnums";
 
 describe("deleteUserProfileName", () => {
+    it("should take a string argument which represent the new name", () => {
+        updateUserProfileName("new name");
+    });
+
     it("should return an action where type is UPDATE_USERPROFILE_NAME", () => {
         const action = updateUserProfileName("random stuff");
         expect(action.type)
