@@ -1,6 +1,4 @@
-import {has} from "lodash";
 import {GenereteReducer} from "./GenerateReducer";
-import {IUserProfileState} from "./userProfile";
 
 export interface IUserProfileState {
   FirstName : string;

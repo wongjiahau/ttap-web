@@ -5,6 +5,9 @@ import {Provider} from 'react-redux';
 import {reducers} from './core/sample/reducers';
 import {App} from './core/sample/app';
 import logger from 'redux-logger'
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
+import 'typeface-roboto';
 
 let store = createStore(reducers, applyMiddleware(logger));
 
@@ -12,7 +15,4 @@ ReactDOM.render(
   <Provider store={store}>
   <App/>
 </Provider>, document.getElementById('root'));
-// import React from 'react'; import ReactDOM from 'react-dom'; import
-// './index.css'; import App from './App'; import registerServiceWorker from
-// './registerServiceWorker'; import 'typeface-roboto'; ReactDOM.render( <App/>
-// , document.getElementById('root')); registerServiceWorker();
+registerServiceWorker();
