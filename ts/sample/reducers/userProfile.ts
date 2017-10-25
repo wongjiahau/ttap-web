@@ -1,5 +1,5 @@
 import {has} from "lodash";
-import {ReducerGenerator} from "./ReducerGenerator";
+import {GenereteReducer} from "./GenerateReducer";
 import {IUserProfileState} from "./userProfile";
 
 export interface IUserProfileState {
@@ -14,4 +14,4 @@ export class UserProfileState implements IUserProfileState {
   }
 }
 
-export const UserProfileReducer = new ReducerGenerator<IUserProfileState>(new UserProfileState()).GetReducer();
+export const UserProfileReducer = GenereteReducer(new UserProfileState());
