@@ -93,4 +93,27 @@ export class Time {
         }
         return new TimeSpan(finalHour, finalMinute, 0);
     }
+
+    public Add(other: Time): Time {
+        let finalMinutes = this.Minute + other.Minute;
+        let finalHour = this.Hour + other.Hour;
+        if (finalMinutes > 59) {
+            finalHour++;
+            finalMinutes %= 60;
+        }
+        return Time.CreateTime24Hour(finalHour, finalMinutes);
+    }
+
+    public ToConstructionString(): string {
+        return `Time.CreateTime24Hour(${this.Hour},${this.Minute})`;
+    }
+
+    public To12HourFormat(withAmOrPmLabel: boolean): string {
+        const temp = this.Hour > 12 ? this.Hour - 12 : this.Hour;
+        const hour = temp < 10 ? " " + temp : temp.toString();
+        const minute = (this.Minute < 10 ? "0" : "") + this.Minute;
+        let amOrPm = "";
+        if (withAmOrPmLabel) { amOrPm = this.Hour >= 12 ? "PM" : "AM"; }
+        return `${hour}:${minute} ${amOrPm}`;
+    }
 }
