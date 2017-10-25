@@ -4,20 +4,13 @@ export interface IAction < T > {
 }
 
 export abstract class ActionGenerator < T > {
-  private action : IAction < T >;
-  private typeName : string;
-  protected constructor(typeName : string) {
-    this.typeName = typeName;
-  }
-
   public Action() : IAction < T > {
-    return this.action;
-  }
-
-  protected CreateAction(generateNewState : (state : T) => T) {
-    this.action = {
+    const generateNewState = this.GenerateNewState.bind(this);
+    return {
       generateNewState,
-      type: this.typeName
+      type: this.TypeName()
     };
   }
+  protected abstract GenerateNewState(state : T) : T;
+  protected abstract TypeName() : string;
 }
