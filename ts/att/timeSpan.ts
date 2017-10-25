@@ -11,13 +11,13 @@ export class TimeSpan {
 
     public hours(): number {
         const numberOfSecondsPerHour = 3600;
-        return this.totalSeconds / numberOfSecondsPerHour;
+        return Math.floor(this.totalSeconds / numberOfSecondsPerHour);
     }
 
     public minutes(): number {
         const numberOfSecondsPerHour = 3600;
         const numberOfSecondsPerMinute = 60;
-        return this.totalSeconds % numberOfSecondsPerHour / numberOfSecondsPerMinute;
+        return Math.floor(this.totalSeconds % numberOfSecondsPerHour / numberOfSecondsPerMinute);
     }
 
     public seconds(): number {
