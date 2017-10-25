@@ -11,7 +11,8 @@
         "no-var-requires": false,
         "trailing-comma": false,
         "typedef-whitespace": false,
-        "jsx-no-multiline-js": false
+        "jsx-no-multiline-js": false,
+        "space-before-function-paren" : false
     },
     "rulesDirectory": []
 }
