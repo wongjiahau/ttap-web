@@ -3,7 +3,7 @@ import {HelloWorldComponent, IHelloWorldComponentProps } from "../components/hel
 
 const mapStateToProps = (state) : IHelloWorldComponentProps => {
   return {
-    UserName :  state.userProfileReducer.FirstName
+    UserName :  state.UserProfileReducer.FirstName
   };
 };
 

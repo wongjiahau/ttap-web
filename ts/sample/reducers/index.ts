@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { userProfileReducer } from "./userProfile";
+import { UserProfileReducer } from "./userProfile";
 
 export const reducers =  combineReducers({
-  userProfileReducer
+  UserProfileReducer
 });

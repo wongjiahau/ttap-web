@@ -1,4 +1,5 @@
-import {actionsEnums} from "./../common/actionEnums";
+import {has} from "lodash";
+import {ReducerGenerator} from "./ReducerGenerator";
 import {IUserProfileState} from "./userProfile";
 
 export interface IUserProfileState {
@@ -13,12 +14,4 @@ export class UserProfileState implements IUserProfileState {
   }
 }
 
-export const userProfileReducer = (state : any = new UserProfileState(), action) : IUserProfileState => {
-  try {
-    const result = action.generateNewState(state);
-    return result;
-  } catch (e) {
-    console.log(result);
-    return state;
-  }
-};
+export const UserProfileReducer = new ReducerGenerator<IUserProfileState>(new UserProfileState()).GetReducer();
