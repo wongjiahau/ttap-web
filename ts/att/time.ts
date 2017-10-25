@@ -21,6 +21,34 @@ export class Time {
         return t;
     }
 
+    public static CreateTimeFrom12Hour(numbers: string, amOrpm: string): Time {
+        const tokens = numbers.split(":");
+        let hour = parseInt(tokens[0], 10);
+        const minute = parseInt(tokens[1], 10);
+
+        if (amOrpm.toLowerCase() === "pm" && hour !== 12) {
+            hour += 12;
+        }
+        if (amOrpm.toLowerCase() === "am" && hour === 12) {
+            hour = 0;
+        }
+
+        return Time.CreateTime24Hour(hour, minute);
+    }
+
+    public static CreateTimeFrom12Hour_2(hour: number, minute: number, isPm: boolean): Time {
+        if (hour < 1 || hour > 12) {
+            throw RangeError("Expected value is between 1 to 12, but actual is {hour}");
+        }
+        if (isPm && hour !== 12) {
+            hour += 12;
+        }
+        if (!isPm && hour === 12) {
+            hour = 0;
+        }
+        return Time.CreateTime24Hour(hour, minute);
+    }
+
     public static Parse(input: string): Time {
         const tokens = input.split(" ");
         const time = tokens[0].trim();
@@ -109,11 +137,18 @@ export class Time {
     }
 
     public To12HourFormat(withAmOrPmLabel: boolean): string {
-        const temp = this.Hour > 12 ? this.Hour - 12 : this.Hour;
+        let temp = this.Hour > 12 ? this.Hour - 12 : this.Hour;
+        if (temp === 0) {temp = 12; }
         const hour = temp < 10 ? " " + temp : temp.toString();
         const minute = (this.Minute < 10 ? "0" : "") + this.Minute;
         let amOrPm = "";
-        if (withAmOrPmLabel) { amOrPm = this.Hour >= 12 ? "PM" : "AM"; }
+        if (withAmOrPmLabel) {
+            amOrPm = this.Hour >= 12 ? "PM" : "AM";
+        }
         return `${hour}:${minute} ${amOrPm}`;
+    }
+
+    public StringValue(): string {
+        return this.To12HourFormat(true);
     }
 }

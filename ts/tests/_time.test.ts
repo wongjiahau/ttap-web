@@ -251,4 +251,68 @@ describe("time", () => {
         expect(actual === expected).to.equal(true);
     });
 
+    it("Test To12HourFormat() 5", () => {
+        const input1 = Time.CreateTime24Hour(0, 5);
+        const actual = input1.To12HourFormat(true);
+        const expected = "12:05 AM" ;
+        expect(actual === expected).to.equal(true);
+    });
+
+    it("Test CreateTimeFrom12Hour() 1", () => {
+        const input1 = Time.CreateTimeFrom12Hour("2:40", "am");
+        const input2 = Time.CreateTime24Hour(2, 40);
+        expect(input1.Equal(input2)).to.equal(true);
+    });
+
+    it("Test CreateTimeFrom12Hour() 2", () => {
+        const input1 = Time.CreateTimeFrom12Hour("1:40", "pm");
+        const input2 = Time.CreateTime24Hour(13, 40);
+        expect(input1.Equal(input2)).to.equal(true);
+    });
+
+    it("Test CreateTimeFrom12Hour() 3", () => {
+        const input1 = Time.CreateTimeFrom12Hour("12:40", "am");
+        const input2 = Time.CreateTime24Hour(0, 40);
+        expect(input1.Equal(input2)).to.equal(true);
+    });
+
+    it("Test CreateTimeFrom12Hour_2() 1", () => {
+        const input1 = Time.CreateTimeFrom12Hour_2(1, 40, true);
+        const input2 = Time.CreateTime24Hour(13, 40);
+        expect(input1.Equal(input2)).to.equal(true);
+    });
+
+    it("Test CreateTimeFrom12Hour_2() 2", () => {
+        const input1 = Time.CreateTimeFrom12Hour_2(1, 40, false);
+        const input2 = Time.CreateTime24Hour(1, 40);
+        expect(input1.Equal(input2)).to.equal(true);
+    });
+
+    it("Test CreateTimeFrom12Hour_2() 3", () => {
+        const input1 = Time.CreateTimeFrom12Hour_2(12, 40, false);
+        const input2 = Time.CreateTime24Hour(0, 40);
+        expect(input1.Equal(input2)).to.equal(true);
+    });
+
+    it("Test StringValue() 1", () => {
+        const input1 = Time.CreateTime24Hour(12, 30);
+        const actual = input1.StringValue();
+        const expected = "12:30 PM";
+        expect(actual === expected).to.equal(true);
+    });
+
+    it("Test StringValue() 2", () => {
+        const input1 = Time.CreateTime24Hour(0, 30);
+        const actual = input1.StringValue();
+        const expected = "12:30 AM";
+        expect(actual === expected).to.equal(true);
+    });
+
+    it("Test StringValue() 3", () => {
+        const input1 = Time.CreateTime24Hour(2, 0);
+        const actual = input1.StringValue();
+        const expected = " 2:00 AM";
+        expect(actual === expected).to.equal(true);
+    });
+
 });
