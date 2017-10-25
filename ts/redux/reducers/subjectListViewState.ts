@@ -11,9 +11,9 @@ export class SubjectListViewState implements ISubjectListViewState {
    public SearchedText: string;
    public Subjects: Subject[];
    public IsShowingSelectedSubjectOnly: boolean;
-   public constructor() {
+   public constructor(subject = []) {
        this.SearchedText = "";
-       this.Subjects = [];
+       this.Subjects = subject;
        this.IsShowingSelectedSubjectOnly = false;
    }
 }
