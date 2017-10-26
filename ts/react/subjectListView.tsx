@@ -57,10 +57,13 @@ export interface ISubjectListViewDispatchProps {
 export interface ISubjectListViewProps extends ISubjectListViewStateProps,
 ISubjectListViewDispatchProps {}
 
-export class SubjectListView extends React.Component < ISubjectListViewProps, {} > {
+export class SubjectListView extends React.Component < ISubjectListViewProps, {sectionStyle : React.CSSProperties} > {
     constructor(props : ISubjectListViewProps) {
         super(props);
         $(window).on("resize", this.handleWindowResizing);
+        this.state = {
+            sectionStyle : this.getSectionStyle()
+        };
     }
 
     public handleWindowResizing = () => {
@@ -97,7 +100,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {}
             });
 
         return (
-            <section>
+            <section style={this.state.sectionStyle}>
                 <header style={headerStyle}>
                     Select your desired subjects.
                     <TextField
