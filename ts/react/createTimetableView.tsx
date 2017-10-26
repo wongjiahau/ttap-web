@@ -5,8 +5,8 @@ import IconList from "material-ui/svg-icons/action/list";
 import IconSave from "material-ui/svg-icons/content/save";
 import * as React from "react";
 import {Subject} from "../model/subject";
+import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {CounterView} from "./counterView";
-import {SubjectListView} from "./subjectListView";
 import {TimetableView} from "./timetableView";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -57,7 +57,7 @@ ICreateTimetableViewStates > {
         return (
             <div>
                 <Drawer docked={false} width={520} open={this.state.isSelectSubjectPanelOpened}>
-                    <SubjectListView subjects={this.allSubjects} handleDone={this.handleDone}/>
+                    <SubjectListViewContainer/>
                 </Drawer>
                 <RaisedButton
                     icon={< IconList />}

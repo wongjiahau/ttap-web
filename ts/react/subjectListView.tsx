@@ -43,28 +43,23 @@ const buttonStyle : React.CSSProperties = {
     marginLeft: "10px"
 };
 
-export interface ISubjectListViewProps {
+export interface ISubjectListViewStateProps {
     subjects : Subject[];
-    handleDone : () => void;
+    isShowingSelectedSubjectOnly : boolean;
 }
 
-export interface ISubjectListViewState {
-    searchedText : string;
-    subjects : Subject[];
-    showingSelectSubjectOnly : boolean;
-    sectionStyle : React.CSSProperties;
+export interface ISubjectListViewDispatchProps {
+    handleSearch : (searchedText : string) => void;
+    handleSelection : (subjectCode : string) => void;
+    handleToggleView : () => void;
 }
 
-export class SubjectListView extends React.Component < ISubjectListViewProps,
-ISubjectListViewState > {
+export interface ISubjectListViewProps extends ISubjectListViewStateProps,
+ISubjectListViewDispatchProps {}
+
+export class SubjectListView extends React.Component < ISubjectListViewProps, {} > {
     constructor(props : ISubjectListViewProps) {
         super(props);
-        this.state = {
-            searchedText: "",
-            sectionStyle: this.getSectionStyle(),
-            showingSelectSubjectOnly: false,
-            subjects: props.subjects
-        };
         $(window).on("resize", this.handleWindowResizing);
     }
 
@@ -74,70 +69,35 @@ ISubjectListViewState > {
         });
     }
 
-    public handleToggleView = () => {
-        this.setState({
-            showingSelectSubjectOnly: !this.state.showingSelectSubjectOnly
-        });
-    }
-
     public handleSearchBoxOnChange = (event : object, newValue : string) => {
-        this.setState({searchedText: newValue, showingSelectSubjectOnly: false});
-    }
-
-    public getMatchingSubjects = () => {
-        const searchedText : string = this.state.searchedText;
-        return this
-            .state
-            .subjects
-            .filter((subject) => S(GetSubjectBody(subject)).contains(searchedText.toLowerCase()));
-
-        function GetSubjectBody(subject : Subject) : string {
-            return subject
-                .Name
-                .toLowerCase() + subject
-                .Code
-                .toLowerCase() + GetInitial(subject.Name).toLowerCase();
-        }
-    }
-
-    public handleSelection(subjectCode : string) {
-        const allSubject = this
-            .state
-            .subjects
-            .slice();
-        const matchedSubject = allSubject.filter((s) => s.Code === subjectCode)[0];
-        matchedSubject.IsSelected = !matchedSubject.IsSelected;
-        this.setState({subjects: allSubject, showingSelectSubjectOnly: false});
+        this
+            .props
+            .handleSearch(newValue);
     }
 
     public render() {
-        let subjectsToBeDisplayed : Subject[];
-        if (this.state.searchedText.length > 0) {
-            subjectsToBeDisplayed = this.getMatchingSubjects();
-        } else {
-            subjectsToBeDisplayed = this.state.showingSelectSubjectOnly
-                ? this
-                    .state
-                    .subjects
-                    .filter((s) => s.IsSelected)
-                : this.state.subjects;
-        }
-
-        const subjectViews = subjectsToBeDisplayed.map((s) => (
-            <div>
-                <Divider/>
-                <SubjectView
-                    key={s.Code}
-                    subjectName={Beautify(s.Name)}
-                    subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
-                    handleSelection={() => this.handleSelection(s.Code)}
-                    isSelected={s.IsSelected}/>
-                <Divider/>
-            </div>
-        ));
+        const subjectViews = this
+            .props
+            .subjects
+            .map((s) => {
+                if (s.IsVisible) {
+                    return (
+                        <div>
+                            <Divider/>
+                            <SubjectView
+                                key={s.Code}
+                                subjectName={Beautify(s.Name)}
+                                subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
+                                handleSelection={() => this.props.handleSelection(s.Code)}
+                                isSelected={s.IsSelected}/>
+                            <Divider/>
+                        </div>
+                    );
+                }
+            });
 
         return (
-            <section style={this.state.sectionStyle}>
+            <section>
                 <header style={headerStyle}>
                     Select your desired subjects.
                     <TextField
@@ -156,17 +116,17 @@ ISubjectListViewState > {
                         icon={< IconEye />}
                         style={buttonStyle}
                         disabled={this
-                        .state
+                        .props
                         .subjects
                         .filter((s) => s.IsSelected)
                         .length === 0}
                         key="toggle-view-button"
-                        label={this.state.showingSelectSubjectOnly
+                        label={this.props.isShowingSelectedSubjectOnly
                         ? "Show all subjects"
                         : "Show selected subjects"}
                         secondary={true}
                         keyboardFocused={true}
-                        onClick={this.handleToggleView}/>
+                        onClick={this.props.handleToggleView}/>
                     <RaisedButton
                         icon={< IconTick />}
                         style={buttonStyle}
@@ -174,13 +134,17 @@ ISubjectListViewState > {
                         label="Done"
                         primary={true}
                         keyboardFocused={true}
-                        onClick={this.props.handleDone}/>
+                        onClick={this.handleDone}/>
                 </footer>
             </section>
         );
     }
 
-    private getSectionStyle() : React.CSSProperties {
+    public handleDone = () => {
+        alert("Not implemented yet");
+    }
+
+    private getSectionStyle(): React.CSSProperties {
         return {
             display: "flex",
             flexFlow: "column",
