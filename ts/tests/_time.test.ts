@@ -226,35 +226,35 @@ describe("time", () => {
     it("Test To12HourFormat() 1", () => {
         const input1 = Time.CreateTime24Hour(12, 30);
         const actual = input1.To12HourFormat(true);
-        const expected = "12:30 PM" ;
+        const expected = "12:30 PM";
         expect(actual === expected).to.equal(true);
     });
 
     it("Test To12HourFormat() 2", () => {
         const input1 = Time.CreateTime24Hour(12, 30);
         const actual = input1.To12HourFormat(false);
-        const expected = "12:30 " ;
+        const expected = "12:30 ";
         expect(actual === expected).to.equal(true);
     });
 
     it("Test To12HourFormat() 3", () => {
         const input1 = Time.CreateTime24Hour(14, 30);
         const actual = input1.To12HourFormat(true);
-        const expected = " 2:30 PM" ;
+        const expected = " 2:30 PM";
         expect(actual === expected).to.equal(true);
     });
 
     it("Test To12HourFormat() 4", () => {
         const input1 = Time.CreateTime24Hour(14, 5);
         const actual = input1.To12HourFormat(true);
-        const expected = " 2:05 PM" ;
+        const expected = " 2:05 PM";
         expect(actual === expected).to.equal(true);
     });
 
     it("Test To12HourFormat() 5", () => {
         const input1 = Time.CreateTime24Hour(0, 5);
         const actual = input1.To12HourFormat(true);
-        const expected = "12:05 AM" ;
+        const expected = "12:05 AM";
         expect(actual === expected).to.equal(true);
     });
 

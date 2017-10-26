@@ -17,8 +17,7 @@ export class Time {
         if (!isPm && hour === 12) {
             hour = 0;
         }
-        const t = Time.CreateTime24Hour(hour, minute);
-        return t;
+        return Time.CreateTime24Hour(hour, minute);
     }
 
     public static CreateTimeFrom12Hour(numbers: string, amOrpm: string): Time {
@@ -138,7 +137,9 @@ export class Time {
 
     public To12HourFormat(withAmOrPmLabel: boolean): string {
         let temp = this.Hour > 12 ? this.Hour - 12 : this.Hour;
-        if (temp === 0) {temp = 12; }
+        if (temp === 0) {
+            temp = 12;
+        }
         const hour = temp < 10 ? " " + temp : temp.toString();
         const minute = (this.Minute < 10 ? "0" : "") + this.Minute;
         let amOrPm = "";
