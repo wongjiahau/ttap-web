@@ -13,7 +13,7 @@ import {
 } from "./../actions/toggleSubjectListViewingOption";
 import {
     GenereteReducer
-} from "./GenerateReducer";
+} from "./generateReducer";
 
 export interface ISubjectListState {
     SearchedText: string;
