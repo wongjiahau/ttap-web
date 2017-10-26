@@ -6,6 +6,7 @@ export class SearchSubjectList extends ActionGenerator < ISubjectListViewState >
     public constructor(private searchedText : string) {
         super();
     }
+    public TypeName() : string {return "search subject list"; }
     protected GenerateNewState(state : ISubjectListViewState) : ISubjectListViewState {
         const newSubjects = state
             .Subjects
@@ -25,5 +26,4 @@ export class SearchSubjectList extends ActionGenerator < ISubjectListViewState >
         };
         return result;
     }
-    protected TypeName() : string {return "search subject list"; }
 }

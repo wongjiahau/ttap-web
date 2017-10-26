@@ -3,7 +3,7 @@ import {isEqual} from "lodash";
 import {GetTestSubjects1} from "../../tests/testDataGenerator";
 import {SearchSubjectList} from "./../actions/searchSubjectList";
 import {ISubjectListViewState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListViewState";
-describe("searchSubjectList", () => {
+describe("searchSubjectList action", () => {
     it("should render all subject to be visible if searched text is empty", () => {
         const initialState = new SubjectListViewState(GetTestSubjects1());
         const newState = SubjectListViewReducer(initialState, new SearchSubjectList("").Action());

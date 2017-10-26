@@ -11,6 +11,6 @@ export abstract class ActionGenerator < T > {
       type: this.TypeName()
     };
   }
+  public abstract TypeName() : string;
   protected abstract GenerateNewState(state : T) : T;
-  protected abstract TypeName() : string;
 }

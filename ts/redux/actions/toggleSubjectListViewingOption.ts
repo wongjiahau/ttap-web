@@ -1,6 +1,7 @@
 import {ISubjectListViewState} from "./../reducers/subjectListViewState";
 import {ActionGenerator} from "./actionGenerator";
 export class ToggleSubjectListViewingOptions extends ActionGenerator < ISubjectListViewState > {
+    public TypeName() : string {return "toggle subject list viewing option"; }
     protected GenerateNewState(state : ISubjectListViewState) : ISubjectListViewState {
         const result: ISubjectListViewState = {
             ...state,
@@ -8,6 +9,5 @@ export class ToggleSubjectListViewingOptions extends ActionGenerator < ISubjectL
         };
         return result;
     }
-    protected TypeName() : string {return "toggle subject list viewing option"; }
 
 }
