@@ -37,4 +37,20 @@ describe("searchSubjectList action", () => {
             .to
             .eq(newState.Subjects.length);
     });
+
+    it("should set the SearchedText based on input", () => {
+        const initialState = new SubjectListViewState(GetTestSubjects1());
+        const newState = SubjectListReducer(initialState, new SearchSubjectList("spongebob").Action());
+        expect(newState.SearchedText).to.eq("spongebob");
+    });
+
+    it("should allow user to search using subjects initial", () => {
+        const initialState = new SubjectListViewState(GetTestSubjects1());
+        const searchText = "acp"; // acp stands for Arts & Cultural Performance
+        const newState = SubjectListReducer(initialState, new SearchSubjectList(searchText).Action());
+        expect(newState.Subjects.filter((s) => s.IsVisible).length)
+            .to
+            .eq(1);
+    });
+
 });

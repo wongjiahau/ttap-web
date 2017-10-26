@@ -1,5 +1,5 @@
 import * as S from "string";
-import {Beautify} from "../../helper";
+import {GetInitial} from "../../helper";
 import {ISubjectListState} from "./../reducers/subjectListState";
 import {ActionGenerator} from "./actionGenerator";
 export class SearchSubjectList extends ActionGenerator < ISubjectListState > {
@@ -11,7 +11,7 @@ export class SearchSubjectList extends ActionGenerator < ISubjectListState > {
         const newSubjects = state
             .Subjects
             .map((s) => {
-                const stringToBeMatched = S((s.Code + s.Name + Beautify(s.Name)).toLowerCase());
+                const stringToBeMatched = S((s.Code + s.Name + GetInitial(s.Name)).toLowerCase());
                 return {
                     ...s,
                     IsVisible: (stringToBeMatched.contains(this.searchedText)
@@ -22,7 +22,8 @@ export class SearchSubjectList extends ActionGenerator < ISubjectListState > {
         const result: ISubjectListState = {
             ...state,
             IsShowingSelectedSubjectOnly: false,
-            Subjects: newSubjects
+            SearchedText: this.searchedText,
+            Subjects: newSubjects,
         };
         return result;
     }
