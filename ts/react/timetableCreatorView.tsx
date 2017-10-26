@@ -29,34 +29,22 @@ const footerButtonStyle : React.CSSProperties = {
     marginTop: "10px"
 };
 
-export interface ICreateTimetableViewProps {
-    allSubjects : Subject[];
+export interface ITimetableCreatorViewStateProps {
+    isSubjectListViewVisible : boolean;
 }
-export interface ICreateTimetableViewStates {
-    isSelectSubjectPanelOpened : boolean;
+
+export interface ITimetableCreatorViewDispatchProps {
+    handleToggleVisibilityOfSubjectListView : () => void;
 }
-export class CreateTimetableView extends React.Component < ICreateTimetableViewProps,
-ICreateTimetableViewStates > {
-    private allSubjects : Subject[];
-    constructor(props : ICreateTimetableViewProps) {
-        super(props);
-        this.state = {
-            isSelectSubjectPanelOpened: false
-        };
-        this.allSubjects = props.allSubjects;
-    }
-    public handleOpen = () => {
-        this.setState({isSelectSubjectPanelOpened: true});
-    }
 
-    public handleDone = () => {
-        this.setState({isSelectSubjectPanelOpened: false});
-    }
+interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
+ITimetableCreatorViewDispatchProps {}
 
+export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
         return (
             <div>
-                <Drawer docked={false} width={520} open={this.state.isSelectSubjectPanelOpened}>
+                <Drawer docked={false} width={520} open={this.props.isSubjectListViewVisible}>
                     <SubjectListViewContainer/>
                 </Drawer>
                 <RaisedButton
@@ -64,7 +52,7 @@ ICreateTimetableViewStates > {
                     style={selectSubjectButtonStyle}
                     secondary={true}
                     label="Select subjects"
-                    onClick={this.handleOpen}/>
+                    onClick={this.props.handleToggleVisibilityOfSubjectListView}/>
                 <div style={centerDivStyle}>
                     <TimetableView/>
                 </div>

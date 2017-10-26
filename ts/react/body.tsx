@@ -1,8 +1,8 @@
 import * as React from "react";
-import {CreateTimetableView} from "./createTimetableView";
-import {Login} from "./login";
 import RawSlot from "../model/rawSlot";
 import ParseSlotToSubject from "../parser/parseSlotToSubject";
+import {Login} from "./login";
+import {TimetableCreatorView} from "./timetableCreatorView";
 
 export interface IBodyStates {
     IsSlotLoaded : boolean;
@@ -19,11 +19,11 @@ IBodyStates > {
     }
     public render() {
         const result = this.state.IsSlotLoaded
-            ? <CreateTimetableView allSubjects={ParseSlotToSubject(this.state.AllSlots)}/>
-            : <Login notifyDataLoaded={this.notifyDataLoaded}/>
+            ? <TimetableCreatorView handleToggleVisibilityOfSubjectListView={null} isSubjectListViewVisible={true}/>
+            : <Login notifyDataLoaded={this.notifyDataLoaded}/>;
         return result;
     }
-    notifyDataLoaded = (loadedSlots : RawSlot[]) => {
+    public notifyDataLoaded = (loadedSlots : RawSlot[]) => {
         this.setState({AllSlots: loadedSlots, IsSlotLoaded: true});
     }
 }

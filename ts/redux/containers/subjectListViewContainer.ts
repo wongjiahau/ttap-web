@@ -9,8 +9,15 @@ import {
 import {
     SearchSubjectList
 } from "./../actions/searchSubjectList";
-import { SelectSubject } from "./../actions/selectSubject";
-import { ToggleSubjectListViewingOptions } from "./../actions/toggleSubjectListViewingOption";
+import {
+    SelectSubject
+} from "./../actions/selectSubject";
+import {
+    ToggleSubjectListViewingOptions
+} from "./../actions/toggleSubjectListViewingOption";
+import {
+    ToggleVisibilityOfSubjectListView
+} from "./../actions/toggleVisibilityOfSubjectListView";
 
 const mapStateToProps = (state): ISubjectListViewStateProps => {
     return {
@@ -21,8 +28,9 @@ const mapStateToProps = (state): ISubjectListViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
     return {
+        handleClose: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
         handleSearch: (searchedText: string) => dispatch(new SearchSubjectList(searchedText).Action()),
-        handleSelection : (subjectCode: string) => dispatch(new SelectSubject(subjectCode).Action()),
+        handleSelection: (subjectCode: string) => dispatch(new SelectSubject(subjectCode).Action()),
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions().Action())
     };
 };

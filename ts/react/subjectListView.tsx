@@ -49,6 +49,7 @@ export interface ISubjectListViewStateProps {
 }
 
 export interface ISubjectListViewDispatchProps {
+    handleClose : () => void;
     handleSearch : (searchedText : string) => void;
     handleSelection : (subjectCode : string) => void;
     handleToggleView : () => void;
@@ -57,12 +58,14 @@ export interface ISubjectListViewDispatchProps {
 export interface ISubjectListViewProps extends ISubjectListViewStateProps,
 ISubjectListViewDispatchProps {}
 
-export class SubjectListView extends React.Component < ISubjectListViewProps, {sectionStyle : React.CSSProperties} > {
+export class SubjectListView extends React.Component < ISubjectListViewProps, {
+    sectionStyle : React.CSSProperties
+} > {
     constructor(props : ISubjectListViewProps) {
         super(props);
         $(window).on("resize", this.handleWindowResizing);
         this.state = {
-            sectionStyle : this.getSectionStyle()
+            sectionStyle: this.getSectionStyle()
         };
     }
 
@@ -85,10 +88,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {s
             .map((s) => {
                 if (s.IsVisible) {
                     return (
-                        <div>
+                        <div key={s.Code}>
                             <Divider/>
                             <SubjectView
-                                key={s.Code}
                                 subjectName={Beautify(s.Name)}
                                 subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
                                 handleSelection={() => this.props.handleSelection(s.Code)}
@@ -137,14 +139,10 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {s
                         label="Done"
                         primary={true}
                         keyboardFocused={true}
-                        onClick={this.handleDone}/>
+                        onClick={this.props.handleClose}/>
                 </footer>
             </section>
         );
-    }
-
-    public handleDone = () => {
-        alert("Not implemented yet");
     }
 
     private getSectionStyle(): React.CSSProperties {
