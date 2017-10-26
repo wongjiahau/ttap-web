@@ -1,5 +1,7 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
+import {GetTestSubjects1} from "../../tests/testDataGenerator";
+import {SelectSubject} from "./../actions/selectSubject";
 import {ToggleSubjectListViewingOptions} from "./../actions/toggleSubjectListViewingOption";
 import {ISubjectListViewState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListViewState";
 
@@ -28,4 +30,20 @@ describe("ToggleSubjectListViewingOption", () => {
             .to
             .eq(false);
     });
+
+    it("should make selected subject visible and deselected subject invisible when first toggled", () => {
+        const initialState = new SubjectListViewState(GetTestSubjects1());
+        let newState = SubjectListViewReducer(initialState, new SelectSubject("MPU3113").Action());
+        newState = SubjectListViewReducer(newState, new ToggleSubjectListViewingOptions().Action());
+        expect(newState.Subjects.filter((s) => s.IsVisible)).to.have.lengthOf(1);
+    });
+
+    it("should make all subjects visible when toggled again", () => {
+        const initialState = new SubjectListViewState(GetTestSubjects1());
+        let newState = SubjectListViewReducer(initialState, new SelectSubject("MPU3113").Action());
+        newState = SubjectListViewReducer(newState, new ToggleSubjectListViewingOptions().Action());
+        newState = SubjectListViewReducer(newState, new ToggleSubjectListViewingOptions().Action());
+        expect(newState.Subjects.filter((s) => s.IsVisible)).to.have.lengthOf(newState.Subjects.length);
+    });
+
 });
