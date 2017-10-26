@@ -29,4 +29,12 @@ describe("searchSubjectList", () => {
             .eq(false);
     });
 
+    it("should make all subject visible when the searched string is empty again", () => {
+        const initialState = new SubjectListViewState(GetTestSubjects1());
+        let newState = SubjectListViewReducer(initialState, new SearchSubjectList("hubungan etnik").Action());
+        newState = SubjectListViewReducer(newState, new SearchSubjectList("").Action());
+        expect(newState.Subjects.filter((s) => s.IsVisible).length)
+            .to
+            .eq(newState.Subjects.length);
+    });
 });
