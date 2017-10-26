@@ -1,4 +1,4 @@
-import {GenereteReducer} from "./GenerateReducer";
+import {GenereteReducer} from "./generateReducer";
 
 export interface IUserProfileState {
   FirstName : string;

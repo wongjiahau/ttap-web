@@ -3,7 +3,7 @@ import {
 } from "./../actions/toggleVisibilityOfSubjectListView";
 import {
     GenereteReducer
-} from "./GenerateReducer";
+} from "./generateReducer";
 export interface ITimetableCreatorState {
     IsSubjectListViewVisible: boolean;
 }
