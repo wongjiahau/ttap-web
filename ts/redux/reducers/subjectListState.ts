@@ -18,4 +18,4 @@ export class SubjectListViewState implements ISubjectListState {
    }
 }
 
-export const SubjectListViewReducer = GenereteReducer(new SubjectListViewState());
+export const SubjectListReducer = GenereteReducer(new SubjectListViewState());
