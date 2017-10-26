@@ -1,13 +1,13 @@
 import * as S from "string";
 import {Beautify} from "../../helper";
-import {ISubjectListViewState} from "./../reducers/subjectListViewState";
+import {ISubjectListState} from "./../reducers/subjectListState";
 import {ActionGenerator} from "./actionGenerator";
-export class SearchSubjectList extends ActionGenerator < ISubjectListViewState > {
+export class SearchSubjectList extends ActionGenerator < ISubjectListState > {
     public constructor(private searchedText : string) {
         super();
     }
     public TypeName() : string {return "search subject list"; }
-    protected GenerateNewState(state : ISubjectListViewState) : ISubjectListViewState {
+    protected GenerateNewState(state : ISubjectListState) : ISubjectListState {
         const newSubjects = state
             .Subjects
             .map((s) => {
@@ -19,7 +19,7 @@ export class SearchSubjectList extends ActionGenerator < ISubjectListViewState >
                         : false)
                 };
             });
-        const result: ISubjectListViewState = {
+        const result: ISubjectListState = {
             ...state,
             IsShowingSelectedSubjectOnly: false,
             Subjects: newSubjects

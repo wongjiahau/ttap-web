@@ -2,7 +2,7 @@ import {expect} from "chai";
 import {isEqual} from "lodash";
 import {GetTestSubjects1} from "../../tests/testDataGenerator";
 import {SelectSubject} from "./../actions/selectSubject";
-import {ISubjectListViewState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListViewState";
+import {ISubjectListState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListState";
 
 describe("selectSubject action", () => {
 

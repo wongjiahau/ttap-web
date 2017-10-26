@@ -2,7 +2,7 @@ import {expect} from "chai";
 import {isEqual} from "lodash";
 import {GetTestSubjects1} from "../../tests/testDataGenerator";
 import {SearchSubjectList} from "./../actions/searchSubjectList";
-import {ISubjectListViewState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListViewState";
+import {ISubjectListState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListState";
 describe("searchSubjectList action", () => {
     it("should render all subject to be visible if searched text is empty", () => {
         const initialState = new SubjectListViewState(GetTestSubjects1());

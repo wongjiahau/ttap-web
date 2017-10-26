@@ -3,13 +3,13 @@ import {isEqual} from "lodash";
 import {GetTestSubjects1} from "../../tests/testDataGenerator";
 import {SelectSubject} from "./../actions/selectSubject";
 import {ToggleSubjectListViewingOptions} from "./../actions/toggleSubjectListViewingOption";
-import {ISubjectListViewState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListViewState";
+import {ISubjectListState, SubjectListViewReducer, SubjectListViewState} from "./../reducers/subjectListState";
 
 describe("ToggleSubjectListViewingOption", () => {
     it("should toggle property IsShowingSelectedSubjectOnly from false to true", () => {
         const initialState = new SubjectListViewState();
         const newState = SubjectListViewReducer(initialState, new ToggleSubjectListViewingOptions().Action());
-        const expectedState : ISubjectListViewState = {
+        const expectedState : ISubjectListState = {
             ...initialState,
             IsShowingSelectedSubjectOnly: true
         };
@@ -22,7 +22,7 @@ describe("ToggleSubjectListViewingOption", () => {
         const initialState = new SubjectListViewState();
         const newState1 = SubjectListViewReducer(initialState, new ToggleSubjectListViewingOptions().Action());
         const newState2 = SubjectListViewReducer(initialState, new ToggleSubjectListViewingOptions().Action());
-        const expectedState : ISubjectListViewState = {
+        const expectedState : ISubjectListState = {
             ...initialState,
             IsShowingSelectedSubjectOnly: false
         };

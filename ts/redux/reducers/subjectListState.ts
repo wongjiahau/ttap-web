@@ -1,13 +1,13 @@
 import { Subject } from "../../model/subject";
 import {GenereteReducer} from "./GenerateReducer";
 
-export interface ISubjectListViewState {
+export interface ISubjectListState {
     SearchedText : string;
     Subjects : Subject[];
     IsShowingSelectedSubjectOnly : boolean;
 }
 
-export class SubjectListViewState implements ISubjectListViewState {
+export class SubjectListViewState implements ISubjectListState {
    public SearchedText: string;
    public Subjects: Subject[];
    public IsShowingSelectedSubjectOnly: boolean;

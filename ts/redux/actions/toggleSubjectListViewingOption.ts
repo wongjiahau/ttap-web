@@ -1,8 +1,8 @@
-import {ISubjectListViewState} from "./../reducers/subjectListViewState";
+import {ISubjectListState} from "./../reducers/subjectListState";
 import {ActionGenerator} from "./actionGenerator";
-export class ToggleSubjectListViewingOptions extends ActionGenerator < ISubjectListViewState > {
+export class ToggleSubjectListViewingOptions extends ActionGenerator < ISubjectListState > {
     public TypeName() : string {return "toggle subject list viewing option"; }
-    protected GenerateNewState(state : ISubjectListViewState) : ISubjectListViewState {
+    protected GenerateNewState(state : ISubjectListState) : ISubjectListState {
         const newIsShowingSelectedSubjectOnly = !state.IsShowingSelectedSubjectOnly;
         const newSubjects = state
             .Subjects
@@ -19,7 +19,7 @@ export class ToggleSubjectListViewingOptions extends ActionGenerator < ISubjectL
                     };
                 }
             });
-        const result: ISubjectListViewState = {
+        const result: ISubjectListState = {
             ...state,
             IsShowingSelectedSubjectOnly: newIsShowingSelectedSubjectOnly,
             Subjects: newSubjects
