@@ -1,6 +1,6 @@
 import {last} from "lodash";
 import * as S from "string";
-import RawSlot from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 export default function parser(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");

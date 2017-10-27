@@ -1,7 +1,7 @@
 import * as $ from "jquery";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
-import RawSlot from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 import {SlotView} from "./slotView";
 
 const timetableViewWidth = 0.9 * $(window).width();

@@ -1,4 +1,4 @@
-import Slot from "./rawSlot";
+import {RawSlot} from "./rawSlot";
 export class Subject {
     public readonly Name: string;
     public readonly Code: string;

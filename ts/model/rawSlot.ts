@@ -1,4 +1,4 @@
-export default class RawSlot {
+export class RawSlot {
     private static hash = 0;
     public readonly HashId: number; // Unique for every slot object
     public SubjectCode: string;

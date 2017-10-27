@@ -1,6 +1,6 @@
 import {MuiThemeProvider} from "material-ui";
 import * as React from "react";
-import Slot from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import ParseSlotToSubject from "../parser/parseSlotToSubject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
@@ -16,7 +16,7 @@ export interface IPlaygroundProps {
 
 export class Playground extends React.Component < IPlaygroundProps, {} > {
     public render() {
-        const testSlot = new Slot();
+        const testSlot = new RawSlot();
         testSlot.SubjectName = "Test subject";
         testSlot.Room = "KB 204";
         testSlot.WeekNumber = "1-14";

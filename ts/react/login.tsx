@@ -3,8 +3,8 @@ import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import * as React from "react";
 import * as S from "string";
+import {RawSlot} from "../model/rawSlot";
 import parseHtmlToSlot from "../parser/parseHtmlToRawSlot";
-import RawSlot from "../model/rawSlot";
 
 const buttonStyle = {
     disabled: "true",
@@ -75,7 +75,7 @@ let tryCount = 0;
 // TODO: Add the link for TOS and PP
 
 export interface ILoginProps {
-    notifyDataLoaded : (loadedSlots : RawSlot[]) => void
+    notifyDataLoaded : (loadedSlots : RawSlot[]) => void;
 }
 export class Login extends React.Component < ILoginProps, {} > {
     public handleClick = () => {

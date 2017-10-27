@@ -1,5 +1,5 @@
 import * as React from "react";
-import RawSlot from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 import ParseSlotToSubject from "../parser/parseSlotToSubject";
 import {Login} from "./login";
 import {TimetableCreatorView} from "./timetableCreatorView";

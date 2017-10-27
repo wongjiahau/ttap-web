@@ -1,6 +1,6 @@
 import * as React from "react";
 import {GetInitial} from "../helper";
-import RawSlot from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 
 const divStyle : React.CSSProperties = {
     background : "yellow"

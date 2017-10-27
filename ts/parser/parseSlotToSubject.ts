@@ -1,5 +1,5 @@
 import {find, some, sortBy} from "lodash";
-import RawSlot from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 
 interface IKeyValue < T1, T2 > { key: T1; value: T2; }
