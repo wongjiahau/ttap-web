@@ -1,5 +1,6 @@
 //term of service and privacy policy
 import $ from 'jquery';
+import './markdown.css';
 import React, {Component} from 'react';
 import Paper from 'material-ui/Paper';
 
@@ -39,7 +40,7 @@ class MarkdownPages extends Component {
     render() {
         const ReactMarkdown = require('react-markdown');
         return (
-            <div style={divStyle}>
+            <div style={divStyle} className="markdown-body">
                 <Paper style={paperStyle}>
                     <ReactMarkdown source={this.state.markdownSource}/>
                 </Paper>
