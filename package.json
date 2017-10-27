@@ -1,6 +1,5 @@
 {
   "name": "ttap-web",
-  "homepage": "https://wongjiahau.github.io/ttap-web",
   "version": "0.1.0",
   "author": "Wong Jia Hau <hou32hou@gmail.com>",
   "private": true,
@@ -25,6 +24,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "string": "^3.3.3",
+    "surge": "^0.19.0",
     "type-name": "^2.0.2",
     "typeface-roboto": "0.0.35"
   },
