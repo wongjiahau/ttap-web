@@ -27,3 +27,8 @@ script:
 after_script:
   - echo "script finished."
 
+deploy:
+  provider: surge
+  project: ./build/
+  domain: ttap.surge.sh  
+  skip_cleanup: true
