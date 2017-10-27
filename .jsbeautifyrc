@@ -1,6 +1,5 @@
 {
     "end_with_newline": true,
     "space_in_empty_paren": false,
-    "bracepadding": true,
     "break_chained_methods": false
 }
