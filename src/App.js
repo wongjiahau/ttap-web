@@ -1,17 +1,17 @@
 import AppBar from 'material-ui/AppBar';
 import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import Drawer from 'material-ui/Drawer';
-import {DrawerContent} from './DrawerContent';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import RaisedButton from 'material-ui/RaisedButton';
 import React, {Component} from 'react';
+import {DrawerContent} from './DrawerContent';
+import {HashRouter as Router} from 'react-router-dom';
 import {Main} from './Main';
-import {Playground} from './core/react/playground';
 import {MuiThemeProvider} from 'material-ui';
-import {HashRouter as Router} from 'react-router-dom'
+import {Playground} from './core/react/playground';
 
-export default class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +50,7 @@ export default class App extends Component {
                 onClick={this.handleClose}/>
               < DrawerContent onItemClick={this.handleClose}/>
             </Drawer>
-            < Main/>
+            <Main/>            
             <br/>
           </div>
         </MuiThemeProvider>
