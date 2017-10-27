@@ -16,18 +16,19 @@ const paperStyle = {
     margin: "20px"
 }
 
-export class Tospp extends Component {
+class MarkdownPages extends Component {
     constructor(props) {
         super(props);
         this.state = {
             markdownSource: "Loading ... "
         };
+        this.src = props.src;
     }
 
     componentDidMount() {
         const setState = this.setState.bind(this);
         var http = require('http');
-        var request = http.get("https://raw.githubusercontent.com/wongjiahau/ttap-web/master/TOSPP.md", function (response) {
+        var request = http.get(this.src, function (response) {
             response
                 .on('data', function (loadedData) {
                     setState({markdownSource: loadedData.toString()});
@@ -45,4 +46,12 @@ export class Tospp extends Component {
             </div>
         );
     }
+}
+
+export const Tospp = () => {
+    return <MarkdownPages src="https://raw.githubusercontent.com/wongjiahau/ttap-web/master/TOSPP.md"/>
+}
+
+export const About = () => {
+    return <MarkdownPages src="https://raw.githubusercontent.com/wongjiahau/ttap-web/master/README.md"/>
 }

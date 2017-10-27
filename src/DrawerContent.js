@@ -45,7 +45,7 @@ export const DrawerContent = (props) => {
                     style={MenuItemStyle}
                     rightIcon={< BugIcon />}>Report a bug</MenuItem>
             </Link>
-            <Link style={linkStyle} to="404">
+            <Link style={linkStyle} to="about">
                 <MenuItem
                     onClick={props.onItemClick}
                     style={MenuItemStyle}
