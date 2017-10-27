@@ -13,7 +13,7 @@ const divStyle = {
 
 const paperStyle = {
     textAlign : "left",
-    padding: "20px",
+    padding: "40px",
     margin: "20px"
 }
 
