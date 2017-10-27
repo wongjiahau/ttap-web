@@ -3,6 +3,7 @@ import FeedbackIcon from 'material-ui-icons/Feedback';
 import HelpIcon from 'material-ui-icons/Help';
 import HomeIcon from 'material-ui-icons/Home';
 import InfoIcon from 'material-ui-icons/Info';
+import SchoolIcon from 'material-ui-icons/School';
 import MenuItem from 'material-ui/MenuItem';
 import React from 'react';
 import {Link} from 'react-router-dom';
@@ -49,6 +50,12 @@ export const DrawerContent = (props) => {
                     onClick={props.onItemClick}
                     style={MenuItemStyle}
                     rightIcon={< HelpIcon />}>About TTAP</MenuItem>
+            </Link>
+            <Link style={linkStyle} to="tospp">
+                <MenuItem
+                    onClick={props.onItemClick}
+                    style={MenuItemStyle}
+                    rightIcon={< SchoolIcon/>}>Terms of Service</MenuItem>
             </Link>
         </div>
     );

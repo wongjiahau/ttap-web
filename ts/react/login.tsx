@@ -2,6 +2,7 @@ import Paper from "material-ui/Paper";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import * as React from "react";
+import {Link} from "react-router-dom";
 import * as S from "string";
 import {RawSlot} from "../model/rawSlot";
 import parseHtmlToSlot from "../parser/parseHtmlToRawSlot";
@@ -172,7 +173,7 @@ export class Login extends React.Component < ILoginProps, {} > {
                         <br/>UTAR account</h1>
                     <div style={subHeaderDivStyle}>
                         By clicking "Login", you agree to our &nbsp;
-                        <a href="https://www.google.com">Terms of Service and Privacy Policy</a>
+                        <Link to="tospp">Terms of Service and Privacy Policy</Link>
                     </div>
                 </div>
                 <div className="login-div">
