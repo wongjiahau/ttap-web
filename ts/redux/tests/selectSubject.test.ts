@@ -8,6 +8,7 @@ describe("selectSubject action", () => {
 
     it("'s type name should be 'select subject'", () => {
         const action = new SelectSubject("");
+        expect(action.TypeName()).to.eq("select subject");
 
     });
 

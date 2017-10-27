@@ -1,6 +1,5 @@
 import * as typeName from "type-name";
 import {ActionGenerator} from "../actions/actionGenerator";
-import {ToggleVisibilityOfSubjectListView} from "./../actions/toggleVisibilityOfSubjectListView";
 import {GenereteReducer} from "./generateReducer";
 export interface ITimetableCreatorState {
     IsSubjectListViewVisible : boolean;

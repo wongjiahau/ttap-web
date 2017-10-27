@@ -2,9 +2,6 @@ import * as typeName from "type-name";
 import {Subject} from "../../model/subject";
 import {ActionGenerator} from "../actions/actionGenerator";
 import {GetTestSubjects1} from "./../../tests/testDataGenerator";
-import {SearchSubjectList} from "./../actions/searchSubjectList";
-import {SelectSubject} from "./../actions/selectSubject";
-import {ToggleSubjectListViewingOptions} from "./../actions/toggleSubjectListViewingOption";
 import {GenereteReducer} from "./generateReducer";
 
 export interface ISubjectListState {

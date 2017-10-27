@@ -1,5 +1,5 @@
 import {find, max, min} from "lodash";
-import RawSlot from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 export default class SlotStore {
     private rawSlots: RawSlot[];
     constructor(rawSlots: RawSlot[]) {
