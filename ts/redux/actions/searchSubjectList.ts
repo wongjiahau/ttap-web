@@ -1,8 +1,7 @@
 import * as S from "string";
 import {GetInitial} from "../../helper";
-import {ISubjectListState} from "./../reducers/subjectListState";
-import {ActionGenerator} from "./actionGenerator";
-export class SearchSubjectList extends ActionGenerator < ISubjectListState > {
+import {ISubjectListState, SubjectListStateActionGenerator} from "./../reducers/subjectListState";
+export class SearchSubjectList extends SubjectListStateActionGenerator {
     public constructor(private searchedText : string) {
         super();
     }

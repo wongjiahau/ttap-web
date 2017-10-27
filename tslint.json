@@ -12,7 +12,8 @@
         "trailing-comma": false,
         "typedef-whitespace": false,
         "jsx-no-multiline-js": false,
-        "space-before-function-paren" : false
+        "space-before-function-paren" : false,
+        "max-classes-per-file" : false
     },
     "rulesDirectory": []
 }

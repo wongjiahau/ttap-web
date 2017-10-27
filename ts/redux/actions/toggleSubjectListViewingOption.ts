@@ -1,6 +1,5 @@
-import {ISubjectListState} from "./../reducers/subjectListState";
-import {ActionGenerator} from "./actionGenerator";
-export class ToggleSubjectListViewingOptions extends ActionGenerator < ISubjectListState > {
+import {ISubjectListState, SubjectListStateActionGenerator} from "./../reducers/subjectListState";
+export class ToggleSubjectListViewingOptions extends SubjectListStateActionGenerator {
     public TypeName() : string {return "toggle subject list viewing option"; }
     protected GenerateNewState(state : ISubjectListState) : ISubjectListState {
         const newIsShowingSelectedSubjectOnly = !state.IsShowingSelectedSubjectOnly;
