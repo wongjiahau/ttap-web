@@ -2,7 +2,7 @@ import {expect} from "chai";
 import {find, last} from "lodash";
 import * as S from "string";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
-import ParseSlotToSubject from "../parser/parseSlotToSubject";
+import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
 import testManager from "./testManager";
 import {FileName} from "./testManager";
 

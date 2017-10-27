@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import {NotifyDataLoaded} from "./../actions/notifyDataLoaded";
-import {MainFrameState, MainFrameStateReducer} from "./../reducers/mainFrameState";
+import {MainFrameReducer, MainFrameState} from "./../reducers/mainFrameState";
 
 describe("notifyDataLoaded action", () => {
 
@@ -12,14 +12,14 @@ describe("notifyDataLoaded action", () => {
     });
 
     it("should change IsDataLoaded to true", () => {
-        const newState = MainFrameStateReducer(new MainFrameState(), new NotifyDataLoaded(null).Action());
-        expect(newState.IsDataLoaded)
+        const newState = MainFrameReducer(new MainFrameState(), new NotifyDataLoaded(null).Action());
+        expect(newState.IsSlotLoaded)
             .to
             .eq(true);
     });
 
     it("should set RawSlots based on the constructor parameter", () => {
-        const newState = MainFrameStateReducer(new MainFrameState(), new NotifyDataLoaded([null, null]).Action());
+        const newState = MainFrameReducer(new MainFrameState(), new NotifyDataLoaded([null, null]).Action());
         expect(newState.RawSlots.length)
             .to
             .eq(2);

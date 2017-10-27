@@ -3,7 +3,7 @@ import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 
 interface IKeyValue < T1, T2 > { key: T1; value: T2; }
-export default function ParseSlotToSubject(slots : RawSlot[]) : Subject[] {
+export function ParseSlotToSubject(slots : RawSlot[]) : Subject[] {
     const result = Array < Subject > ();
     const dic = new Array < IKeyValue < string, RawSlot[] >> ();
     slots.forEach((s) => {

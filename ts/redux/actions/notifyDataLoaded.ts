@@ -13,7 +13,7 @@ export class NotifyDataLoaded extends MainFrameStateActionGenerator {
     protected GenerateNewState(state: IMainFrameState): IMainFrameState {
         return {
             ...state,
-            IsDataLoaded: true,
+            IsSlotLoaded: true,
             RawSlots: this.rawSlots
         };
     }

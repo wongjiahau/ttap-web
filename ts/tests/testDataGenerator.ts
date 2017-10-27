@@ -1,5 +1,5 @@
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
-import ParseSlotToSubject from "../parser/parseSlotToSubject";
+import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
 import {Subject} from "./../model/subject";
 

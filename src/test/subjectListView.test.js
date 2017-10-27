@@ -14,7 +14,7 @@ import {SubjectListView} from '../core/react/subjectListView';
 
 //test data builder
 import ParseHtmlToSlots from "../core/parser/parseHtmlToRawSlot";
-import ParseSlotToSubject from "../core/parser/parseSlotToSubject";
+import {ParseSlotToSubject} from "../core/parser/parseSlotToSubject";
 import {heng_2017_sept} from "../core/tests/testData/heng_2017_sept";
 
 const subjects = ParseSlotToSubject(ParseHtmlToSlots(heng_2017_sept()));
