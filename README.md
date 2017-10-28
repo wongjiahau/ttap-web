@@ -7,7 +7,8 @@ This software is used to helps student's of UTAR to arrange their timetable.
 - [Microsoft's TypeScript](https://www.typescriptlang.org/)
 - [Node.js](https://nodejs.org/en/)
 - [Redux](http://redux.js.org/)
-- [GitHub  Pages](https://pages.github.com/)
+- [GitHub](https://github.com/)
+- [Surge](https://surge.sh/)
 - [Create-React-App](https://github.com/facebookincubator/create-react-app)
 
 ## How to build this app?
