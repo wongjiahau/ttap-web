@@ -1,5 +1,4 @@
-/*
-TODO:
-1. Transport code from C# to there
-2. Write test for it
-*/
+export function ParseDay(input: string) {
+    const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+    return days.indexOf(input.toLowerCase()) + 1;
+}
