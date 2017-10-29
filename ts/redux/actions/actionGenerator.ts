@@ -18,7 +18,7 @@ export abstract class ActionGenerator < T > {
                 .GenerateNewState
                 .bind(this),
             stateName: this.StateName(),
-            type: this.TypeName()
+            type: this.TypeName().toUpperCase()
         };
     }
     public abstract TypeName(): string;

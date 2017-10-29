@@ -11,38 +11,22 @@ const divStyle : React.CSSProperties = {
 
 export interface ICounterProps {
     maxInclusive : number;
+    current : number;
+    handleClickLeft : () => void;
+    handleClickRight : () => void;
 }
 
-export interface ICounterStates {
-    current : number;
-}
-export class CounterView extends React.Component < ICounterProps,
-ICounterStates > {
+export class CounterView extends React.Component < ICounterProps, {} > {
     constructor(props : ICounterProps) {
         super(props);
-        this.state = {
-            current: 1
-        };
-    }
-
-    public handleClickLeft = () => {
-        this.setState({
-            current: this.state.current - 1
-        });
-    }
-
-    public handleClickRight = () => {
-        this.setState({
-            current: this.state.current + 1
-        });
     }
 
     public render() {
         return (
             <div style={divStyle}>
-                <RaisedButton onClick={this.handleClickLeft} icon={< IconLeft />}/>
-                <RaisedButton label={this.state.current + "/" + this.props.maxInclusive}/>
-                <RaisedButton onClick={this.handleClickRight} icon={< IconRight />}/>
+                <RaisedButton onClick={this.props.handleClickLeft} icon={< IconLeft />}/>
+                <RaisedButton label={this.props.current + "/" + this.props.maxInclusive}/>
+                <RaisedButton onClick={this.props.handleClickRight} icon={< IconRight />}/>
             </div>
         );
     }
