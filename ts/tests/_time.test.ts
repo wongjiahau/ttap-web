@@ -111,6 +111,48 @@ describe("time", () => {
         expect(input1.MoreThan(input2)).to.equal(false);
     });
 
+    it("Test MoreThanOrEqual() 1", () => {
+        const input1 = Time.CreateTime24Hour(9, 0);
+        const input2 = Time.CreateTime24Hour(0, 0);
+        expect(input1.MoreThanOrEqual(input2)).to.equal(true);
+    });
+
+    it("Test MoreThanOrEqual() 2", () => {
+        const input1 = Time.CreateTime24Hour(9, 0);
+        const input2 = Time.CreateTime24Hour(10, 0);
+        expect(input1.MoreThanOrEqual(input2)).to.equal(false);
+    });
+
+    it("Test MoreThanOrEqual() 3", () => {
+        const input1 = Time.CreateTime24Hour(9, 0);
+        const input2 = Time.CreateTime24Hour(9, 0);
+        expect(input1.MoreThanOrEqual(input2)).to.equal(true);
+    });
+
+    it("Test MoreThanOrEqual() 4", () => {
+        const input1 = Time.CreateTime24Hour(9, 1);
+        const input2 = Time.CreateTime24Hour(9, 0);
+        expect(input1.MoreThanOrEqual(input2)).to.equal(true);
+    });
+
+    it("Test LessThanOrEqual() 1", () => {
+        const input1 = Time.CreateTime24Hour(7, 0);
+        const input2 = Time.CreateTime24Hour(8, 0);
+        expect(input1.LessThanOrEqual(input2)).to.equal(true);
+    });
+
+    it("Test LessThanOrEqual() 2", () => {
+        const input1 = Time.CreateTime24Hour(9, 0);
+        const input2 = Time.CreateTime24Hour(8, 0);
+        expect(input1.LessThanOrEqual(input2)).to.equal(false);
+    });
+
+    it("Test LessThanOrEqual() 3", () => {
+        const input1 = Time.CreateTime24Hour(9, 0);
+        const input2 = Time.CreateTime24Hour(9, 0);
+        expect(input1.LessThanOrEqual(input2)).to.equal(true);
+    });
+
     it("Test Factory() 1", () => {
         const t = Time.CreateTime12Hour(12, 0, true);
         expect(t.Hour === 12).to.equal(true);
