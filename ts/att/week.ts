@@ -22,9 +22,11 @@ export class Week {
         return new Week(result);
     }
 
+    public readonly BinaryData: number;
     public readonly WeekNumberList: number[];
     public constructor(weekNumberList: number[]) {
         this.WeekNumberList = weekNumberList;
+        this.BinaryData = this.GenerateBinaryForm(weekNumberList);
     }
 
     public Equals(other: Week): boolean {
@@ -32,7 +34,17 @@ export class Week {
     }
 
     public IntersectWith(other: Week): boolean {
-        return intersection(this.WeekNumberList, other.WeekNumberList).length > 0;
+        return ( this.BinaryData & other.BinaryData ) > 0;
+        // return intersection(this.WeekNumberList, other.WeekNumberList).length > 0;
+    }
+
+    private GenerateBinaryForm(weekNumberList: number[]): number {
+        // 14 zeroes signifies 14 weeks
+        const result = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];
+        weekNumberList.forEach((w) => {
+            result[w] = "1";
+        });
+        return parseInt(result.reverse().join(""), 2);
     }
 
 }

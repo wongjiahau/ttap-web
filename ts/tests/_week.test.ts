@@ -66,10 +66,10 @@ describe("week", () => {
     });
 
     it("Test Parse 5", () => {
-        const input = "1-3,4,5,11-14";
-        const expected = new Week([1, 2, 3, 4, 5, 11, 12, 13, 14]);
-        const actual = Week.Parse(input);
-        expect(actual.Equals(expected)).to.eq(true);
+        const input5 = "1-3,4,5,11-14";
+        const expected5 = new Week([1, 2, 3, 4, 5, 11, 12, 13, 14]);
+        const actual5 = Week.Parse(input5);
+        expect(actual5.Equals(expected5)).to.eq(true);
     });
 
 });
