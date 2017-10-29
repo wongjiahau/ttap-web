@@ -1,5 +1,5 @@
-import Checkbox from "material-ui/Checkbox";
-import {ListItem} from "material-ui/List";
+import Checkbox from "material-ui-next/Checkbox";
+import List, {ListItem, ListItemSecondaryAction, ListItemText} from "material-ui-next/List";
 import * as React from "react";
 
 export interface ISubjectViewProps {
@@ -19,11 +19,12 @@ export class SubjectView extends React.Component < ISubjectViewProps, {} > {
 
     public render() {
         return (
-            <ListItem
-                leftCheckbox={< Checkbox checked={this.props.isSelected} onClick={this.props.handleSelection}/>}
-                primaryText={this.props.subjectName}
-                secondaryText={this.props.subjectCode}
-                />
+            <ListItem button={true} onClick={this.props.handleSelection}>
+                <Checkbox checked={this.props.isSelected} tabIndex={-1} disableRipple={true}/>
+                <ListItemText
+                    primary={this.props.subjectName}
+                    secondary={this.props.subjectCode}/>
+            </ListItem>
         );
     }
 }

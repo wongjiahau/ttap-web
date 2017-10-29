@@ -25,7 +25,7 @@ export class Playground extends React.Component < IPlaygroundProps, {} > {
         return (
             <MuiThemeProvider>
                 <div>
-                    <MainFrameContainer/>
+                    <TimetableCreatorContainer/>
                 </div>
             </MuiThemeProvider>
         );
