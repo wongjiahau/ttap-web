@@ -27,7 +27,8 @@
     "string": "^3.3.3",
     "surge": "^0.19.0",
     "type-name": "^2.0.2",
-    "typeface-roboto": "0.0.35"
+    "typeface-roboto": "0.0.35",
+    "validator": "^9.1.1"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -47,6 +48,7 @@
     "@types/react-router-dom": "^4.0.8",
     "@types/redux": "^3.6.0",
     "@types/type-name": "^1.0.27",
+    "@types/validator": "^6.3.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "tslint": "^5.7.0",
