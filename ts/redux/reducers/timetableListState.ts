@@ -14,7 +14,7 @@ export class TimetableListState implements ITimetableListState {
     public CurrentTimetable : Timetable;
     public Timetables : Timetable[];
     public CurrentIndex : number;
-    public constructor(timetables : Timetable[] = []) {
+    public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex = 0;
         this.Timetables = timetables;
     }
@@ -26,4 +26,4 @@ export abstract class TimetableListStateActionGenerator extends ActionGenerator 
     }
 }
 
-export const TimetableListStateReducer = GenereteReducer(new TimetableListState());
+export const TimetableListReducer = GenereteReducer(new TimetableListState());

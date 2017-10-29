@@ -4,7 +4,7 @@ import IconList from "material-ui/svg-icons/action/list";
 import * as React from "react";
 import {Subject} from "../model/subject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
-import { TimetableListView } from "./timetableListView";
+import { TimetableListContainer } from "../redux/containers/timetableListContainer";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
     marginBottom: "10px",
@@ -35,7 +35,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     secondary={true}
                     label="Select subjects"
                     onClick={this.props.handleToggleVisibilityOfSubjectListView}/>
-                <TimetableListView/>
+                <TimetableListContainer/>
             </div>
         );
     }

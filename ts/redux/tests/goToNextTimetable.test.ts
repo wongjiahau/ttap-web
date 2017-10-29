@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import { GoToNextTimetable } from "./../actions/goToNextTimetable";
-import {TimetableListState, TimetableListStateReducer} from "./../reducers/timetableListState";
+import {TimetableListState, TimetableListReducer} from "./../reducers/timetableListState";
 
 describe("goToNextTimetable action", () => {
 
@@ -12,7 +12,7 @@ describe("goToNextTimetable action", () => {
 
     it("increment the current index", () => {
         const initialState = new TimetableListState([null, null]);
-        const newState = TimetableListStateReducer(initialState, new GoToNextTimetable().Action());
+        const newState = TimetableListReducer(initialState, new GoToNextTimetable().Action());
         expect(newState.CurrentIndex)
             .to
             .eq(1);
@@ -21,7 +21,7 @@ describe("goToNextTimetable action", () => {
     it("increment the current index cyclically", () => {
         const initialState = new TimetableListState([null, null, null]);
         initialState.CurrentIndex = 2;
-        const newState = TimetableListStateReducer(initialState, new GoToNextTimetable().Action());
+        const newState = TimetableListReducer(initialState, new GoToNextTimetable().Action());
         expect(newState.CurrentIndex)
             .to
             .eq(0);
@@ -29,7 +29,7 @@ describe("goToNextTimetable action", () => {
 
     it("should set the CurrentTimetable property", () => {
         const initialState = new TimetableListState([undefined, null]);
-        const newState = TimetableListStateReducer(initialState, new GoToNextTimetable().Action());
+        const newState = TimetableListReducer(initialState, new GoToNextTimetable().Action());
         expect(initialState.CurrentTimetable)
             .to
             .eq(undefined);

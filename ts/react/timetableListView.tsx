@@ -51,8 +51,8 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         icon={< IconClock />}
                         label="Set time constraint"/>
                     <CounterView
-                        current={this.props.currentIndex}
-                        maxInclusive={this.props.maxIndex}
+                        current={this.props.currentIndex + 1}
+                        maxInclusive={this.props.maxIndex + 1}
                         handleClickLeft={this.props.handleGoToPrevious}
                         handleClickRight={this.props.handleGoToNext}/>
                     <RaisedButton
