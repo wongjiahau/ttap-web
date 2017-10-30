@@ -13,7 +13,9 @@ const divStyle : React.CSSProperties = {
 };
 
 export interface ITimetableViewProps {
-    slots? : RawSlot[];
+    slots
+        ?
+        : RawSlot[];
 }
 
 const minTime = 8; // 8 am
@@ -133,7 +135,9 @@ export const TimetableView = (props : ITimetableViewProps) => {
     testSlot.Group = "2";
     testSlot.Room = "KB205";
     testSlot.WeekNumber = "1-14";
-
+    const testSlotLayout : ReactGridLayout.Layout = {i: "s1", x: 2, y: 2, w: 2, h: 1};
+    child.push(<div key="s1"><SlotView  slot={testSlot}/></div>);
+    layouts.push(testSlotLayout);
     return (
         <div style={divStyle}>
             <ReactGridLayout
