@@ -108,6 +108,14 @@ export class Time {
         return false;
     }
 
+    public LessThanOrEqual(other: Time): boolean {
+        return this.LessThan(other) || this.Equal(other);
+    }
+
+    public MoreThanOrEqual(other: Time): boolean {
+        return this.MoreThan(other) || this.Equal(other);
+    }
+
     public Minus(other: Time): TimeSpan {
         if (this.LessThan(other)) {
             throw new RangeError("a is less than b, so a cannot be subtracted by b");
