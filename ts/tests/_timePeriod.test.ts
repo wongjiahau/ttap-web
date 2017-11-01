@@ -3,10 +3,10 @@ import {
 } from "chai";
 import {
     Time,
-} from "../att/Time";
+} from "../att/time";
 import {
     TimePeriod,
-} from "../att/TimePeriod";
+} from "../att/timePeriod";
 
 describe("time period", () => {
 
