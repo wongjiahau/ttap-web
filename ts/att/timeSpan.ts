@@ -1,32 +1,32 @@
 export class TimeSpan {
 
-    public totalSeconds: number;
+    public readonly TotalSeconds: number;
 
     public constructor(hours: number, minutes: number, seconds: number) {
         if (hours < 0 || minutes < 0 || seconds < 0) {
             throw RangeError;
         }
-        this.totalSeconds = seconds + (hours * 60 + minutes) * 60;
+        this.TotalSeconds = seconds + (hours * 60 + minutes) * 60;
     }
 
-    public hours(): number {
+    public Hours(): number {
         const numberOfSecondsPerHour = 3600;
-        return Math.floor(this.totalSeconds / numberOfSecondsPerHour);
+        return Math.floor(this.TotalSeconds / numberOfSecondsPerHour);
     }
 
-    public minutes(): number {
+    public Minutes(): number {
         const numberOfSecondsPerHour = 3600;
         const numberOfSecondsPerMinute = 60;
-        return Math.floor(this.totalSeconds % numberOfSecondsPerHour / numberOfSecondsPerMinute);
+        return Math.floor(this.TotalSeconds % numberOfSecondsPerHour / numberOfSecondsPerMinute);
     }
 
-    public seconds(): number {
+    public Seconds(): number {
         const numberOfSecondsPerMinute = 60;
-        return this.totalSeconds % numberOfSecondsPerMinute;
+        return this.TotalSeconds % numberOfSecondsPerMinute;
     }
 
     public Equal(other: TimeSpan): boolean {
-        if (this.totalSeconds !== other.totalSeconds) {
+        if (this.TotalSeconds !== other.TotalSeconds) {
             return false;
         }
         return true;

@@ -9,25 +9,25 @@ describe("timespan", () => {
     it("Test TimeSpan 1", () => {
         const input1 = new TimeSpan(2, 30, 0);
         const input2 = 9000;
-        expect(input1.totalSeconds === input2).to.equal(true);
+        expect(input1.TotalSeconds === input2).to.equal(true);
     });
 
     it("Test TimeSpan Hours()", () => {
         const input1 = new TimeSpan(2, 30, 0);
         const input2 = 2;
-        expect(input1.hours() === input2).to.equal(true);
+        expect(input1.Hours() === input2).to.equal(true);
     });
 
     it("Test TimeSpan Minutes()", () => {
         const input1 = new TimeSpan(2, 30, 0);
         const input2 = 30;
-        expect(input1.minutes() === input2).to.equal(true);
+        expect(input1.Minutes() === input2).to.equal(true);
     });
 
     it("Test TimeSpan Seconds()", () => {
         const input1 = new TimeSpan(2, 30, 59);
         const input2 = 59;
-        expect(input1.seconds() === input2).to.equal(true);
+        expect(input1.Seconds() === input2).to.equal(true);
     });
 
     it("Test TimeSpan Equal()", () => {
