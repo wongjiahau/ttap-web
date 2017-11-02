@@ -8,11 +8,32 @@ import {
     TimePeriod
 } from "../att/timePeriod";
 
+describe("constructor of TimePeriod", () => {
+    it("should throw error if startTime is less than TimePeriod.Min", () => {
+        expect(() => {
+            const input = new TimePeriod(Time.CreateTime24Hour(0, 0), Time.CreateTime24Hour(10, 0));
+        }).to.throw();
+    });
+
+    it("should throw error if endTime is less than TimePeriod.Max", () => {
+        expect(() => {
+            const input = new TimePeriod(Time.CreateTime24Hour(9, 0), Time.CreateTime24Hour(23, 0));
+        }).to.throw();
+    });
+
+    it("should throw error when endTime is less than startTime", () => {
+        expect(() => {
+            const input = new TimePeriod(Time.CreateTime24Hour(10, 0), Time.CreateTime24Hour(9, 0));
+        }).to.throw();
+    });
+
+});
+
 describe("time period", () => {
 
     it("Test Equal() 1", () => {
-        const input1 = new TimePeriod(Time.CreateTime24Hour(0, 0), Time.CreateTime24Hour(0, 0));
-        const input2 = new TimePeriod(Time.CreateTime24Hour(0, 0), Time.CreateTime24Hour(0, 0));
+        const input1 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(9, 0));
+        const input2 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(9, 0));
         expect(input1.Equal(input2))
             .to
             .equal(true);
@@ -21,14 +42,6 @@ describe("time period", () => {
     it("Test Equal() 2", () => {
         const input1 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(10, 0));
         const input2 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(10, 0));
-        expect(input1.Equal(input2))
-            .to
-            .equal(true);
-    });
-
-    it("Test Equal() 3", () => {
-        const input1 = new TimePeriod(Time.CreateTime24Hour(0, 0), Time.CreateTime24Hour(0, 0));
-        const input2 = new TimePeriod(Time.CreateTime24Hour(0, 0), Time.CreateTime24Hour(0, 0));
         expect(input1.Equal(input2))
             .to
             .equal(true);
@@ -51,7 +64,7 @@ describe("time period", () => {
     });
 
     it("Test Equal() 6", () => {
-        const input1 = new TimePeriod(Time.CreateTime24Hour(7, 0), Time.CreateTime24Hour(10, 0));
+        const input1 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(10, 0));
         const input2 = new TimePeriod(Time.CreateTime24Hour(9, 0), Time.CreateTime24Hour(10, 0));
         expect(input1.Equal(input2))
             .to
@@ -59,7 +72,7 @@ describe("time period", () => {
     });
 
     it("Test GetDuplicate() 1", () => {
-        const input1 = new TimePeriod(Time.CreateTime24Hour(7, 0), Time.CreateTime24Hour(10, 0));
+        const input1 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(10, 0));
         const input2 = input1.GetDuplicate();
         expect(input1.Equal(input2))
             .to
@@ -67,7 +80,7 @@ describe("time period", () => {
     });
 
     it("Test GetDuplicate() 2", () => {
-        const input1 = new TimePeriod(Time.CreateTime24Hour(0, 0), Time.CreateTime24Hour(0, 0));
+        const input1 = new TimePeriod(Time.CreateTime24Hour(8, 30), Time.CreateTime24Hour(9, 30));
         const input2 = input1.GetDuplicate();
         expect(input1.Equal(input2))
             .to
@@ -83,8 +96,8 @@ describe("time period", () => {
     });
 
     it("Test Intersect() 2", () => {
-        const input1 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(10, 0));
-        const input2 = new TimePeriod(Time.CreateTime24Hour(7, 0), Time.CreateTime24Hour(9, 0));
+        const input1 = new TimePeriod(Time.CreateTime24Hour(8, 30), Time.CreateTime24Hour(10, 0));
+        const input2 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(9, 0));
         expect(input1.IntersectWith(input2))
             .to
             .equal(true);
@@ -99,8 +112,8 @@ describe("time period", () => {
     });
 
     it("Test Intersect() 4", () => {
-        const input1 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(10, 0));
-        const input2 = new TimePeriod(Time.CreateTime24Hour(7, 0), Time.CreateTime24Hour(11, 0));
+        const input1 = new TimePeriod(Time.CreateTime24Hour(9, 0), Time.CreateTime24Hour(10, 0));
+        const input2 = new TimePeriod(Time.CreateTime24Hour(8, 0), Time.CreateTime24Hour(11, 0));
         expect(input1.IntersectWith(input2))
             .to
             .equal(true);

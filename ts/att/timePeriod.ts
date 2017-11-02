@@ -39,6 +39,18 @@ export class TimePeriod {
     public BinaryData: number;
 
     public constructor(startTime: Time, endTime: Time) {
+        if (startTime.LessThan(TimePeriod.Min)) {
+            throw new Error("startTime of " +
+                startTime.To12HourFormat() +
+                "is less than TimePeriod.Min : " +
+                TimePeriod.Min.To12HourFormat());
+        }
+        if (endTime.MoreThan(TimePeriod.Max)) {
+            throw new Error("startTime of " +
+                startTime.To12HourFormat() +
+                "is more than TimePeriod.Min : " +
+                TimePeriod.Max.To12HourFormat());
+        }
         this.StartTime = startTime;
         this.EndTime = endTime;
         this.BinaryData = TimePeriod.GenerateBinaryForm(this);

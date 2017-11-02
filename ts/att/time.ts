@@ -118,7 +118,7 @@ export class Time {
 
     public Minus(other: Time): TimeSpan {
         if (this.LessThan(other)) {
-            throw new RangeError("a is less than b, so a cannot be subtracted by b");
+            throw new RangeError(`${this.To12HourFormat(true)} is less than ${other.To12HourFormat(true)}, so a cannot be subtracted by b`);
         }
         let finalHour = this.Hour - other.Hour;
         let finalMinute = this.Minute - other.Minute;
@@ -143,7 +143,7 @@ export class Time {
         return `Time.CreateTime24Hour(${this.Hour},${this.Minute})`;
     }
 
-    public To12HourFormat(withAmOrPmLabel: boolean): string {
+    public To12HourFormat(withAmOrPmLabel: boolean = true): string {
         let temp = this.Hour > 12 ? this.Hour - 12 : this.Hour;
         if (temp === 0) {
             temp = 12;
