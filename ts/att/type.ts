@@ -10,3 +10,9 @@ export function ParseType(group: string): number {
             throw new Error("Expected group to be L/T/P only, but received : " + group);
     }
 }
+
+export enum Type {
+    LECTURE = 0,
+    TUTORIAL = 1,
+    PRACTICAL = 2
+}

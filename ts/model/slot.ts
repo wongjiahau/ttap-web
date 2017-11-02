@@ -3,7 +3,17 @@ import {ParseType} from "../att/type";
 import {TimePeriod} from "./../att/timePeriod";
 import {Week} from "./../att/week";
 import {RawSlot} from "./rawSlot";
-export class Slot {
+
+export interface ISlot {
+    HashId?:      number;
+    SubjectCode?: number;
+    TimePeriod?:  number;
+    Group?:       number;
+    Type?:        number;
+    Day?:         number;
+    Week?:        number;
+}
+export class Slot implements ISlot {
     public readonly HashId: number;
     public SubjectCode:     number;
     public TimePeriod:      number;
