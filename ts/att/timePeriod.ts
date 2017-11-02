@@ -1,10 +1,9 @@
 import {
-    Constants
-} from "./../constants";
-import {
     Time
 } from "./time";
 export class TimePeriod {
+    public static readonly Max = Time.CreateTime12Hour(8, 0, true);
+    public static readonly Min = Time.CreateTime12Hour(8, 0, false);
 
     public static Parse(data: string): TimePeriod {
         const tokens = data.split("-");
@@ -16,12 +15,12 @@ export class TimePeriod {
     public static GenerateBinaryForm(t: TimePeriod): number {
         const MinutesInHalfHour = 30;
         const HowManyHalfHourPerHour = 2;
-        const maxWidth = (Constants.MaxTime() - Constants.MinTime()) * HowManyHalfHourPerHour;
+        const maxWidth = (TimePeriod.Max.Minus(TimePeriod.Min).TotalHours()) * HowManyHalfHourPerHour;
         const width = t
             .EndTime
             .Minus(t.StartTime)
             .TotalMinutes() / MinutesInHalfHour;
-        let startIndex = (t.StartTime.Hour - Constants.MinTime()) * 2;
+        let startIndex = (t.StartTime.Hour - TimePeriod.Min.Hour) * 2;
         if (t.StartTime.Minute === 30) {
             startIndex++;
         }
@@ -32,10 +31,6 @@ export class TimePeriod {
         for (let i = startIndex; i < startIndex + width; i++) {
             stringForm[i] = "1";
         }
-        // console.log("timeperiod = ");
-        // console.log(t);
-        // console.log("startIndex = " + startIndex);
-        // console.log("width = " + width);
         return parseInt(stringForm.reverse().join(""), 2);
     }
 
@@ -64,10 +59,6 @@ export class TimePeriod {
     }
 
     public IntersectWith(other: TimePeriod): boolean {
-        // console.log(this);
-        // console.log(this.BinaryData.toString(2));
-        // console.log(other);
-        // console.log(other.BinaryData.toString(2));
         return (this.BinaryData & other.BinaryData) > 0;
         // if (this.StartTime.MoreThanOrEqual(other.EndTime)) {
         //     return false;

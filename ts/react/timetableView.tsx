@@ -1,6 +1,7 @@
 import * as $ from "jquery";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
+import { TimePeriod } from "../att/timePeriod";
 import {RawSlot} from "../model/rawSlot";
 import {SlotView} from "./slotView";
 
@@ -18,8 +19,6 @@ export interface ITimetableViewProps {
         : RawSlot[];
 }
 
-const minTime = 8; // 8 am
-const maxTime = 20; // 8 pm
 function getTimeRow() {
     const topDivStyle : React.CSSProperties = {
         borderBottom: "1px solid",
@@ -37,8 +36,8 @@ function getTimeRow() {
     };
     const result = [];
     for (let i = 0;; i++) {
-        let time = i + minTime;
-        if (time > maxTime) {
+        let time = i + TimePeriod.Min.Hour;
+        if (time > TimePeriod.Max.Hour) {
             break;
         }
         time = time <= 12
@@ -141,7 +140,7 @@ export const TimetableView = (props : ITimetableViewProps) => {
     return (
         <div style={divStyle}>
             <ReactGridLayout
-                cols={((maxTime - minTime) + 2) * 2}
+                cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2}
                 maxRows={16}
                 rowHeight={50}
                 width={timetableViewWidth}
