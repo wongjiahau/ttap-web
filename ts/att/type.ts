@@ -1,5 +1,5 @@
 export function ParseType(group: string): number {
-    switch (group.toLowerCase()) {
+    switch (group.toUpperCase()) {
         case "L":
             return 0;
         case "T":
