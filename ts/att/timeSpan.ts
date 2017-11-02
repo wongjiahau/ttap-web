@@ -25,6 +25,14 @@ export class TimeSpan {
         return this.TotalSeconds % numberOfSecondsPerMinute;
     }
 
+    public TotalMinutes() : number {
+        return this.TotalSeconds / 60;
+    }
+
+    public TotalHours() : number {
+        return this.TotalMinutes() / 60;
+    }
+
     public Equal(other: TimeSpan): boolean {
         if (this.TotalSeconds !== other.TotalSeconds) {
             return false;
