@@ -235,6 +235,14 @@ describe("time", () => {
         expect(actual.Equal(expected)).to.equal(true);
     });
 
+    it("Test Minus() 5", () => {
+        const input1 = Time.CreateTime24Hour(8, 30);
+        const input2 = Time.CreateTime24Hour(11, 0);
+        const actual = input2.Minus(input1);
+        const expected = new TimeSpan(2, 30, 0);
+        expect(actual.Equal(expected)).to.equal(true);
+    });
+
     it("Test Add() 1", () => {
         const input1 = Time.CreateTime24Hour(12, 10);
         const input2 = Time.CreateTime24Hour(9, 40);
