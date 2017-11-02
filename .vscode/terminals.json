@@ -1,0 +1,35 @@
+{
+  "autorun": false,
+  "terminals": [
+    {
+      "name": "node server",
+      "execute": false,
+      "description": "This terminal is to run the node server",
+      "focus": true,
+      "command": "npm run start"
+    },
+    {
+      "name": "Transpile task",
+      "command": "./scripts/watch.sh"
+    },
+    {
+      "name": "Test task",
+      "commands": [
+        "echo 'Running tests'",
+        "npm run test"
+      ]
+    },
+    {
+      "name": "git bash",
+      "commands": [
+        "echo 'Welcome to Git bash!'"
+      ]
+    },
+    {
+      "name": "Only Single",
+      "open": true,
+      "onlySingle": true,
+      "command": "echo 'I will not run with the others'"
+    }
+  ]
+}
