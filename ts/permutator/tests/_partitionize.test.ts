@@ -5,46 +5,37 @@ import {
     isEqual
 } from "lodash";
 import {
-    Type
-} from "../../att/type";
-import {
     Partitionize
 } from "../partitionize";
 import {
-    ISlot
-} from "./../../model/slot";
+    IPartitionable
+} from "./../partitionize";
 
 describe("partitionize", () => {
     it("case 1", () => {
-        const slot1: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item1: IPartitionable = {
+            PartitionKey: 1
         };
-        const slot2: ISlot = {
-            Group: 2,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item2: IPartitionable = {
+            PartitionKey: 1
         };
-        const input = [slot1, slot2];
+        const input = [item1, item2];
         const actual = Partitionize(input);
         const expected = [input.slice()];
+        // console.log(actual);
+        // console.log(expected);
         expect(actual.length).to.eq(expected.length);
         expect(isEqual(expected, actual)).to.eq(true);
     });
 
     it("case 2", () => {
-        const slot1: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item1: IPartitionable = {
+            PartitionKey: 1
         };
-        const slot2: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.TUTORIAL,
+        const item2: IPartitionable = {
+            PartitionKey: 2
         };
-        const input = [slot1, slot2];
+        const input = [item1, item2];
         const actual = Partitionize(input);
         const expected = [
             [input[0]],
@@ -55,22 +46,16 @@ describe("partitionize", () => {
     });
 
     it("case 3", () => {
-        const slot1: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item1: IPartitionable = {
+            PartitionKey: 1
         };
-        const slot2: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.TUTORIAL,
+        const item2: IPartitionable = {
+            PartitionKey: 2
         };
-        const slot3: ISlot = {
-            Group: 1,
-            SubjectCode: 999,
-            Type: Type.LECTURE,
+        const item3: IPartitionable = {
+            PartitionKey: 3
         };
-        const input = [slot1, slot2, slot3];
+        const input = [item1, item2, item3];
         const actual = Partitionize(input);
         const expected = [
             [input[0]],
@@ -82,27 +67,19 @@ describe("partitionize", () => {
     });
 
     it("case 4", () => {
-        const slot1: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item1: IPartitionable = {
+            PartitionKey: 1
         };
-        const slot2: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.TUTORIAL,
+        const item2: IPartitionable = {
+            PartitionKey: 2
         };
-        const slot3: ISlot = {
-            Group: 1,
-            SubjectCode: 999,
-            Type: Type.TUTORIAL,
+        const item3: IPartitionable = {
+            PartitionKey: 3
         };
-        const slot4: ISlot = {
-            Group: 2,
-            SubjectCode: 999,
-            Type: Type.TUTORIAL,
+        const item4: IPartitionable = {
+            PartitionKey: 3
         };
-        const input = [slot1, slot2, slot3, slot4];
+        const input = [item1, item2, item3, item4];
         const actual = Partitionize(input);
         const expected = [
             [input[0]],
@@ -114,32 +91,22 @@ describe("partitionize", () => {
     });
 
     it("case 5", () => {
-        const slot1: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item1 : IPartitionable = {
+            PartitionKey: 1
         };
-        const slot2: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.TUTORIAL,
+        const item2 : IPartitionable = {
+            PartitionKey: 2
         };
-        const slot3: ISlot = {
-            Group: 1,
-            SubjectCode: 999,
-            Type: Type.TUTORIAL,
+        const item3 : IPartitionable = {
+            PartitionKey: 3
         };
-        const slot4: ISlot = {
-            Group: 2,
-            SubjectCode: 999,
-            Type: Type.TUTORIAL,
+        const item4 : IPartitionable = {
+            PartitionKey: 3
         };
-        const slot5: ISlot = {
-            Group: 2,
-            SubjectCode: 123,
-            Type: Type.TUTORIAL,
+        const item5 : IPartitionable = {
+            PartitionKey: 2
         };
-        const input = [slot1, slot2, slot3, slot4, slot5];
+        const input = [item1, item2, item3, item4, item5];
         const actual = Partitionize(input);
         const expected = [
             [input[0]],
@@ -148,44 +115,33 @@ describe("partitionize", () => {
         ];
         expect(actual.length).to.eq(expected.length);
         expect(isEqual(expected, actual)).to.eq(true);
+
     });
 
     it("case 6", () => {
-        const slot1: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item1: IPartitionable = {
+            PartitionKey: 1
         };
-        const slot2: ISlot = {
-            Group: 2,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
+        const item2: IPartitionable = {
+            PartitionKey: 2
+       };
+        const item3: IPartitionable = {
+            PartitionKey: 1
+       };
+        const item4: IPartitionable = {
+            PartitionKey: 2
+       };
+        const item5: IPartitionable = {
+            PartitionKey: 1
+       };
+        const item6: IPartitionable = {
+            PartitionKey: 2
         };
-        const slot3: ISlot = {
-            Group: 3,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
-        };
-        const slot4: ISlot = {
-            Group: 1,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
-        };
-        const slot5: ISlot = {
-            Group: 2,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
-        };
-        const slot6: ISlot = {
-            Group: 3,
-            SubjectCode: 123,
-            Type: Type.LECTURE,
-        };
-        const input = [slot1, slot2, slot3, slot4, slot5, slot6];
+        const input = [item1, item2, item3, item4, item5, item6];
         const actual = Partitionize(input);
         const expected = [
-            [input[0], input[1], input[2]],
-            [input[3], input[4], input[5]],
+            [input[0], input[2], input[4]],
+            [input[1], input[3], input[5]],
         ];
         expect(actual.length).to.eq(expected.length);
         expect(isEqual(expected, actual)).to.eq(true);

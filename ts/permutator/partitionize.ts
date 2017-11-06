@@ -1,33 +1,28 @@
 import {
-    ISlot,
-    Slot
-} from "../model/slot";
+    sortBy
+} from "lodash";
+export interface IPartitionable {
+    PartitionKey: number;
+}
 
-export function Partitionize(input: ISlot[]): ISlot[][] {
-    const result = new Array < ISlot[] > ();
-    let column = new Array < ISlot > ();
-    const copy = input.slice();
-    while (copy.length > 0) {
-        column.push(copy[0]);
-        let i = 1;
-        while (i < copy.length) {
-            let failed = false;
-            for (let j = 0; j < column.length; j++) {
-                if (copy[i].SubjectCode !== column[j].SubjectCode || copy[i].Type !== column[j].Type ||
-                    copy[i].Group === column[j].Group) {
-                    i++;
-                    failed = true;
-                    break;
-                }
-            }
-            if (!failed) {
-                column.push(copy[i]);
-                copy.splice(i, 1);
-            }
+export function Partitionize(input: IPartitionable[]): IPartitionable[][] {
+    const result = new Array < IPartitionable[] > ();
+    let column = new Array < IPartitionable > ();
+    const copy = sortBy(input, ["PartitionKey"]);
+    column.push(copy[0]);
+    let currentKey = copy[0].PartitionKey;
+    for (let i = 1; i < copy.length; i++) {
+        if (copy[i].PartitionKey === currentKey) {
+            column.push(copy[i]);
+        } else {
+            currentKey = copy[i].PartitionKey;
+            result.push(column.slice());
+            column = [];
+            column.push(copy[i]);
         }
-        result.push(column.slice());
-        column = [];
-        copy.splice(0, 1);
+        if (i === copy.length - 1) {
+            result.push(column);
+        }
     }
     return result;
 }
