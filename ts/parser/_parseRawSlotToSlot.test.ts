@@ -15,4 +15,10 @@ describe("parseRawSlotToSlot", () => {
         }).to.not.throw();
     });
 
+    it("logging results", () => {
+        const result = ParseRawSlotToSlot(GetTestRawSlot1());
+        //
+        console.log(result);
+    });
+
 });
