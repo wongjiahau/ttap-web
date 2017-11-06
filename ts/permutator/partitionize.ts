@@ -5,9 +5,9 @@ export interface IPartitionable {
     PartitionKey: number;
 }
 
-export function Partitionize(input: IPartitionable[]): IPartitionable[][] {
-    const result = new Array < IPartitionable[] > ();
-    let column = new Array < IPartitionable > ();
+export function Partitionize<T extends IPartitionable>(input: T[]): T[][] {
+    const result = new Array < T[] > ();
+    let column = new Array < T > ();
     const copy = sortBy(input, ["PartitionKey"]);
     column.push(copy[0]);
     let currentKey = copy[0].PartitionKey;
