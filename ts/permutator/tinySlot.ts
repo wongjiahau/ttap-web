@@ -1,5 +1,5 @@
 import {
-    Slot
+    ISlot
 } from "../model/slot";
 import {
     IPartitionable
@@ -10,14 +10,14 @@ export class TinySlot implements IPartitionable {
     public readonly SlotNumber: number;
     public HashIds: number[];
 
-    public constructor(s: Slot) {
+    public constructor(s: ISlot) {
         this.PartitionKey = s.SubjectCode * 10 + s.Type;
         this.SlotNumber = s.SlotNumber;
         this.HashIds = [];
         this.HashIds.push(s.HashId);
         this.State = this.GetState(s);
     }
-    private GetState(s: Slot): number[] {
+    private GetState(s: ISlot): number[] {
         const result = [0, 0, 0, 0, 0, 0, 0];
         result[s.Day] = s.TimePeriod;
         return result;

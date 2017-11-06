@@ -1,7 +1,9 @@
-import { isEqual } from 'lodash';
 import {
     expect
 } from "chai";
+import {
+    isEqual
+} from "lodash";
 import {
     CreateSlotFromInterface,
     ISlot
