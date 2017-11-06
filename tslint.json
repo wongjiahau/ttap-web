@@ -14,7 +14,8 @@
         "jsx-no-multiline-js": false,
         "space-before-function-paren" : false,
         "max-classes-per-file" : false,
-        "prefer-for-of": false
+        "prefer-for-of": false,
+        "no-bitwise": false
     },
     "rulesDirectory": []
 }
