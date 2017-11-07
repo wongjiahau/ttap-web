@@ -32,6 +32,7 @@ export function FindTimetable(input: TinySlot[]): number[][] {
                 break;
             } else {
                 state = Append(state, current.State);
+                candidate = candidate.concat(current.HashIds);
             }
         }
         if (!gotIntersection) {

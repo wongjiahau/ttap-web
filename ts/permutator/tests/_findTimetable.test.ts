@@ -2,13 +2,14 @@ import {
     expect
 } from "chai";
 import {
-    isEqual
+    concat, isEqual
 } from "lodash";
 import {
     Append,
     FindTimetable,
     GotIntersection
 } from "../findTimetable";
+import { RawSlot } from "./../../model/rawSlot";
 import {
     GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
@@ -18,9 +19,42 @@ describe("FindTimetable()", () => {
         const slots = GetTinySlotsOf("MPU3113");
         const result = FindTimetable(slots);
         expect(result.length).to.eq(3);
-        expect(isEqual(result[0], [0, 1])).to.eq(true);
-        expect(isEqual(result[1], [2, 3])).to.eq(true);
-        expect(isEqual(result[2], [4, 5])).to.eq(true);
+        expect(result[0].length).to.eq(2);
+        expect(result[1].length).to.eq(2);
+        expect(result[2].length).to.eq(2);
+    });
+
+    it("case 2", () => {
+        const hubunganEtnikSlots = GetTinySlotsOf("MPU3113");
+        const titasSlots = GetTinySlotsOf("MPU3123");
+        const input = hubunganEtnikSlots.concat(titasSlots);
+        const result = FindTimetable(input);
+        expect(result.length).to.eq(5);
+    });
+
+    it("case 3", () => {
+        const beamSlots = GetTinySlotsOf("UKMM1043");
+        const result = FindTimetable(beamSlots);
+        expect(result.length).to.eq(29);
+    });
+
+    it("case 4", () => {
+        const beamSlots = GetTinySlotsOf("UKMM1043");
+        const sunziSlots = GetTinySlotsOf("UKMM1011");
+        const waterTreamentSlots = GetTinySlotsOf("UEMX3653");
+        const input = beamSlots.concat(sunziSlots).concat(waterTreamentSlots);
+        const result = FindTimetable(input);
+        expect(result.length).to.eq(502);
+    });
+
+    it("case 5", () => {
+        const beamSlots = GetTinySlotsOf("UKMM1043");
+        const sunziSlots = GetTinySlotsOf("UKMM1011");
+        const waterTreamentSlots = GetTinySlotsOf("UEMX3653");
+        const koreanSlots = GetTinySlotsOf("UJLL1093");
+        const input = concat(beamSlots, sunziSlots, waterTreamentSlots, koreanSlots);
+        const result = FindTimetable(input);
+        expect(result.length).to.eq(1020);
     });
 });
 
