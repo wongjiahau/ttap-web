@@ -1,5 +1,5 @@
 import * as typeName from "type-name";
-import {ActionGenerator} from "../actions/actionGenerator";
+import {Action} from "../actions/action";
 import { RawSlot } from "./../../model/rawSlot";
 import {GenereteReducer} from "./generateReducer";
 export interface IMainFrameState {
@@ -18,7 +18,7 @@ export class MainFrameState implements IMainFrameState {
 
 export const MainFrameReducer = GenereteReducer(new MainFrameState());
 
-export abstract class MainFrameStateActionGenerator extends ActionGenerator < IMainFrameState > {
+export abstract class MainFrameStateAction extends Action < IMainFrameState > {
     public StateName() {
         return typeName(new MainFrameState());
     }

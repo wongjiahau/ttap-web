@@ -1,5 +1,5 @@
 import * as typeName from "type-name";
-import {ActionGenerator} from "../actions/actionGenerator";
+import {Action} from "../actions/action";
 import {GenereteReducer} from "./generateReducer";
 export interface ITimetableCreatorState {
     IsSubjectListViewVisible : boolean;
@@ -14,7 +14,7 @@ export class TimetableCreatorState implements ITimetableCreatorState {
 
 export const TimetableCreatorReducer = GenereteReducer(new TimetableCreatorState());
 
-export abstract class TimetableCreatorStateActionGenerator extends ActionGenerator < ITimetableCreatorState > {
+export abstract class TimetableCreatorStateAction extends Action < ITimetableCreatorState > {
     public StateName() {
         return typeName(new TimetableCreatorState());
     }

@@ -1,9 +1,9 @@
 import { isEqual } from "lodash";
 import { RawSlot } from "../../model/rawSlot";
-import { MainFrameStateActionGenerator } from "../reducers/mainFrameState";
+import { MainFrameStateAction } from "../reducers/mainFrameState";
 import { IMainFrameState } from "./../reducers/mainFrameState";
 
-export class NotifyDataLoaded extends MainFrameStateActionGenerator {
+export class NotifyDataLoaded extends MainFrameStateAction {
     public constructor(private rawSlots: RawSlot[]) {
         super();
     }

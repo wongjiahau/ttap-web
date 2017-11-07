@@ -1,8 +1,8 @@
 import {Subject} from "../../model/subject";
-import {SubjectListStateActionGenerator} from "../reducers/subjectListState";
+import {SubjectListStateAction} from "../reducers/subjectListState";
 import {ISubjectListState} from "./../reducers/subjectListState";
 
-export class SetSubjects extends SubjectListStateActionGenerator {
+export class SetSubjects extends SubjectListStateAction {
     public constructor(private subjects: Subject[]) {
         super();
     }

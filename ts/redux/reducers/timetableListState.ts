@@ -1,5 +1,5 @@
 import * as typeName from "type-name";
-import {ActionGenerator} from "../actions/actionGenerator";
+import {Action} from "../actions/action";
 import {Timetable} from "./../../model/timetable";
 import {GetTestSubjects1} from "./../../tests/testDataGenerator";
 import {GenereteReducer} from "./generateReducer";
@@ -20,7 +20,7 @@ export class TimetableListState implements ITimetableListState {
     }
 }
 
-export abstract class TimetableListStateActionGenerator extends ActionGenerator < ITimetableListState > {
+export abstract class TimetableListStateAction extends Action < ITimetableListState > {
     public StateName() {
         return typeName(new TimetableListState());
     }

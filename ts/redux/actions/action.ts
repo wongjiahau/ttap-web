@@ -8,10 +8,10 @@ export interface IAction < T > {
  * This class is use to generate actions
  * @export
  * @abstract
- * @class ActionGenerator
+ * @class Action
  * @template T is the type of Redux State where the action will return
  */
-export abstract class ActionGenerator < T > {
+export abstract class Action < T > {
     public Action(): IAction < T > {
         return {
             generateNewState: this

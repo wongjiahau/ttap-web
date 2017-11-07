@@ -1,7 +1,7 @@
-import {TimetableListStateActionGenerator} from "../reducers/timetableListState";
+import {TimetableListStateAction} from "../reducers/timetableListState";
 import {ITimetableListState} from "./../reducers/timetableListState";
 
-export class GoToPrevTimetable extends TimetableListStateActionGenerator {
+export class GoToPrevTimetable extends TimetableListStateAction {
     public TypeName() : string {return "go to previous timetable"; }
 
     protected GenerateNewState(state : ITimetableListState) : ITimetableListState {

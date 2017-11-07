@@ -1,7 +1,7 @@
 import * as S from "string";
 import {Beautify} from "../../helper";
-import {ISubjectListState, SubjectListStateActionGenerator} from "./../reducers/subjectListState";
-export class SelectSubject extends SubjectListStateActionGenerator {
+import {ISubjectListState, SubjectListStateAction} from "./../reducers/subjectListState";
+export class SelectSubject extends SubjectListStateAction {
     public constructor(private subjectCode: string) {
         super();
     }

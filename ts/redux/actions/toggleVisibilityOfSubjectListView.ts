@@ -1,9 +1,9 @@
 import {
     ITimetableCreatorState,
-    TimetableCreatorStateActionGenerator
+    TimetableCreatorStateAction
 } from "./../reducers/timetableCreatorState";
 
-export class ToggleVisibilityOfSubjectListView extends TimetableCreatorStateActionGenerator {
+export class ToggleVisibilityOfSubjectListView extends TimetableCreatorStateAction {
     public TypeName(): string {
         return "toggle visibility of subject list view";
     }

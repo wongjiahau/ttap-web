@@ -13,12 +13,12 @@ files.forEach(function(file) {
     const contents = fs.readFileSync(__dirname + folder + file, 'utf8');
     const words = contents.split(" ");
     words.forEach((w) => {
-        if (S(w).contains("ActionGenerator")) {
+        if (S(w).contains("Action")) {
             result.push(w);
         }
     })
 })
-result = result.filter((s) => s != "ActionGenerator" && s != "{ActionGenerator}");
+result = result.filter((s) => s != "Action" && s != "{Action}");
 console.log("Extend the action from which class ? \n");
 result.forEach((s, i) => {
     console.log("\t" + i + ":" + s);

@@ -15,7 +15,7 @@ const stateName = prompt("Enter the name of the state >> ");
 const snippet =
     `
 import * as typeName from "type-name";
-import {ActionGenerator} from "../actions/actionGenerator";
+import {Action} from "../actions/action";
 import {GenereteReducer} from "./generateReducer";
 
 export interface I${stateName} {
@@ -28,7 +28,7 @@ export class ${stateName} implements I${stateName} {
     }
 }
 
-export abstract class ${stateName}ActionGenerator extends ActionGenerator < I${stateName} > {
+export abstract class ${stateName}Action extends Action < I${stateName} > {
     public StateName() {
         return typeName(new ${stateName}());
     }
