@@ -18,6 +18,9 @@ export function FindTimetable(input: TinySlot[]): number[][] {
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
     }
+    if (input.length === 1) {
+        return [input[0].HashIds];
+    }
     const result = [];
     const partitioned = Partitionize(input);
     let indices = GenerateIndices(partitioned);

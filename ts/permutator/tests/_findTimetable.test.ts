@@ -75,6 +75,12 @@ describe("FindTimetable()", () => {
         expect(result.length).to.eq(1244);
     });
 
+    it("case 7", () => {
+        const bkaSlots = GetTinySlotsOf("MPU32013");
+        const result = FindTimetable(bkaSlots);
+        expect(result.length).to.eq(1);
+    });
+
     it("should return empty array when there is no possible timetable", () => {
         const acpSlots = GetTinySlotsOf("MPU34022");
         const bkaSlots = GetTinySlotsOf("MPU32013");
