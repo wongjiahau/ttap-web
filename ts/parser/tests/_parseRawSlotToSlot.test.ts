@@ -3,10 +3,10 @@ import {
 } from "chai";
 import {
     GetTestRawSlot1
-} from "./../tests/testDataGenerator";
+} from "./../../tests/testDataGenerator";
 import {
     ParseRawSlotToSlot
-} from "./parseRawSlotToSlot";
+} from "./../parseRawSlotToSlot";
 
 describe("parseRawSlotToSlot", () => {
     it("case 1", () => {
