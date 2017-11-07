@@ -10,7 +10,7 @@
     },
     {
       "name": "Transpile task",
-      "command": "./scripts/watch.sh"
+      "command": "./scripts/watch"
     },
     {
       "name": "Test task",
