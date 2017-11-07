@@ -2,17 +2,24 @@ import {
     expect
 } from "chai";
 import {
-    concat, isEqual
+    concat,
+    isEqual
 } from "lodash";
 import {
     Append,
     FindTimetable,
-    GotIntersection
+    GotIntersection,
+    IncrementSpecificIndex
 } from "../findTimetable";
-import { RawSlot } from "./../../model/rawSlot";
+import {
+    RawSlot
+} from "./../../model/rawSlot";
 import {
     GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
+import {
+    BoundedInt
+} from "./../boundedInt";
 
 describe("FindTimetable()", () => {
     it("case 1", () => {
@@ -56,6 +63,17 @@ describe("FindTimetable()", () => {
         const result = FindTimetable(input);
         expect(result.length).to.eq(1020);
     });
+
+    it("case 6", () => {
+        const beamSlots = GetTinySlotsOf("UKMM1043");
+        const sunziSlots = GetTinySlotsOf("UKMM1011");
+        const waterTreamentSlots = GetTinySlotsOf("UEMX3653");
+        const koreanSlots = GetTinySlotsOf("UJLL1093");
+        const japanSlots = GetTinySlotsOf("UALJ2013");
+        const input = concat(beamSlots, sunziSlots, waterTreamentSlots, koreanSlots, japanSlots);
+        const result = FindTimetable(input);
+        expect(result.length).to.eq(1244);
+    });
 });
 
 describe("GotIntersection()", () => {
@@ -95,6 +113,34 @@ describe("Append()", () => {
         const b = [parseInt("11110000", 2), 0, 0, 0, 0, 0, 0];
         const result = Append(a, b);
         expect(isEqual(result, [parseInt("11111111", 2), 0, 0, 0, 0, 0, 0])).to.eq(true);
+    });
+
+});
+
+describe("IncrementSpecificIndex", () => {
+    it("should return a new indices if the increment is possible", () => {
+        const input = [
+            new BoundedInt(1, 0),
+            new BoundedInt(1, 0),
+            new BoundedInt(1, 0),
+        ];
+        const result = IncrementSpecificIndex(input, 1);
+        const expected = [
+            new BoundedInt(1, 0),
+            new BoundedInt(1, 1),
+            new BoundedInt(1, 0),
+        ];
+        expect(isEqual(input, expected)).to.eq(true);
+    });
+
+    it("should return null if the increment is impossible", () => {
+        const input = [
+            new BoundedInt(1, 0),
+            new BoundedInt(1, 1),
+            new BoundedInt(1, 0),
+        ];
+        const result = IncrementSpecificIndex(input, 1);
+        expect(result).to.eq(null);
     });
 
 });

@@ -1,4 +1,7 @@
 import {
+    BoundedInt
+} from "./boundedInt";
+import {
     GenerateIndices
 } from "./generateIndices";
 import {
@@ -25,11 +28,18 @@ export function FindTimetable(input: TinySlot[]): number[][] {
         state = Append(state, first.State);
         candidate = first.HashIds;
         let gotIntersection = false;
-        for (let i = 1; i < indices.length; i++) {
+        const length = indices.length;
+        for (let i = 1; i < length; i++) {
             const current = partitioned[i][indices[i].Value];
             if (GotIntersection(state, current.State)) {
-                gotIntersection = true;
-                break;
+                const newIndices = IncrementSpecificIndex(indices, i);
+                if (newIndices !== null) {
+                    indices = newIndices;
+                    i--;
+                } else {
+                    gotIntersection = true;
+                    break;
+                }
             } else {
                 state = Append(state, current.State);
                 candidate = candidate.concat(current.HashIds);
@@ -72,4 +82,15 @@ export function GotIntersection(a: number[], b: number[]): boolean {
         (a[5] & b[5]) +
         (a[6] & b[6])
     ) > 0;
+}
+
+export function IncrementSpecificIndex(indices: BoundedInt[], position: number): BoundedInt[] {
+    // note : this function have side effects
+    const result = indices.slice();
+    result[position].Value++;
+    if (result[position].Value > result[position].UpperLimit) {
+        result[position].Value--;
+        return null;
+    }
+    return result;
 }
