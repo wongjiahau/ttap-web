@@ -1,14 +1,26 @@
 import {
-    Slot
+    last,
+    sortBy
+} from "lodash";
+import {
+    ISlot
 } from "../model/slot";
 import {
     TinySlot
 } from "../permutator/tinySlot";
 
-export function ParseSlotToTinySlot(slots: Slot[]): TinySlot[] {
-    const result = [];
-    for (let i = 0; i < slots.length; i++) {
-        result.push(new TinySlot(slots[i]));
+export function ParseSlotToTinySlot(slots: ISlot[]): TinySlot[] {
+    const sorted = sortBy(slots, ["SlotNumber"]);
+    const result = new Array < TinySlot > ();
+    result.push(new TinySlot(sorted[0]));
+    for (let i = 1; i < sorted.length; i++) {
+        const s = sorted[i];
+        if (s.SlotNumber === last(result).SlotNumber) {
+            last(result).HashIds.push(s.HashId);
+            last(result).State[s.Day] |= s.TimePeriod;
+        } else {
+            result.push(new TinySlot(s));
+        }
     }
     return result;
 }
