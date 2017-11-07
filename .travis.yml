@@ -20,7 +20,7 @@ cache: # cache node modules so that every build don't have to reinstall those no
 
 script:
   - echo "Running script:"
-  - ./scripts/transpile.sh
+  - ./scripts/transpile
   - npm run build
   - npm test
 

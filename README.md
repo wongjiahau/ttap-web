@@ -29,7 +29,7 @@ $ npm install
 #### 3. Compile TypeScript files into JavaScripts
 Make sure you are in the `ttap-web` directory.
 ```
-$ ./scripts/transpile.sh
+$ ./scripts/transpile
 ```
 
 #### 4. Run the app

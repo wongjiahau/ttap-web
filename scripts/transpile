@@ -26,7 +26,7 @@ else # Signify success
     echo "╚══════╝  ╚═════╝   ╚═════╝  ╚═════╝ ╚══════╝ ╚══════╝ ╚══════╝ ╚═╝"
     echo -e "\e[39mThe output files are located at: \e[35m src/core"
     echo -e "\e[39mTo run unit test, type: \e[33m npm run test"
-    echo -e "\e[39mTo edit the build output, edit \e[34m transpile.sh"
+    echo -e "\e[39mTo edit the build output, edit \e[34m transpile"
     echo " "
 fi
 
