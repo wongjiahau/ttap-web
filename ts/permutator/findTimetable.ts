@@ -11,7 +11,7 @@ import {
     TinySlot
 } from "./tinySlot";
 
-export function Permutator(input: TinySlot[]): number[][] {
+export function FindTimetable(input: TinySlot[]): number[][] {
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
     }
@@ -23,7 +23,7 @@ export function Permutator(input: TinySlot[]): number[][] {
     while (true) {
         const first = partitioned[0][indices[0].Value];
         state = Append(state, first.State);
-        candidate = candidate.concat(first.HashIds);
+        candidate = first.HashIds;
         let gotIntersection = false;
         for (let i = 1; i < indices.length; i++) {
             const current = partitioned[i][indices[i].Value];

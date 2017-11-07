@@ -6,16 +6,22 @@ import {
 } from "lodash";
 import {
     Append,
+    FindTimetable,
     GotIntersection
-} from "../permutator";
+} from "../findTimetable";
+import {
+    GetTinySlotsOf
+} from "./../../tests/testDataGenerator";
 
-describe("Permutator", () => {
-    
-    it('should behave...', () => {
-        
+describe("FindTimetable()", () => {
+    it("case 1", () => {
+        const slots = GetTinySlotsOf("MPU3113");
+        const result = FindTimetable(slots);
+        expect(result.length).to.eq(3);
+        expect(isEqual(result[0], [0, 1])).to.eq(true);
+        expect(isEqual(result[1], [2, 3])).to.eq(true);
+        expect(isEqual(result[2], [4, 5])).to.eq(true);
     });
-    
-
 });
 
 describe("GotIntersection()", () => {
