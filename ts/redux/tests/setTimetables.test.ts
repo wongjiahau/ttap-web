@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import { SetTimetables } from "./../actions/setTimetables";
-import { TimetableListState, TimetableListReducer } from "./../reducers/timetableListState";
+import { TimetableListState, TimetableListStateReducer } from "./../reducers/timetableListState";
 
 describe("setSubjects action", () => {
     it("'s type name should be 'set timetables'", () => {
@@ -12,7 +12,7 @@ describe("setSubjects action", () => {
 
     it("should set the subjects of ISubjectListState", () => {
         const initialState = new TimetableListState();
-        const newState = TimetableListReducer(initialState, new SetTimetables([null, null]).Action());
+        const newState = TimetableListStateReducer(initialState, new SetTimetables([null, null]).Action());
         expect(newState.Timetables.length).to.eq(2);
     });
 

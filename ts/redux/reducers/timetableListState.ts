@@ -26,4 +26,4 @@ export abstract class TimetableListStateAction extends Action < ITimetableListSt
     }
 }
 
-export const TimetableListReducer = GenereteReducer(new TimetableListState());
+export const TimetableListStateReducer = GenereteReducer(new TimetableListState());

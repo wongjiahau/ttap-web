@@ -4,13 +4,13 @@ import {combineReducers} from "redux";
 import {MainFrameReducer} from "./mainFrameState";
 import {SubjectListStateReducer} from "./subjectListState";
 import {TimetableCreatorReducer} from "./timetableCreatorState";
-import { TimetableListReducer } from "./timetableListState";
+import { TimetableListStateReducer } from "./timetableListState";
 // new-import
 
 export const AllReducers = combineReducers({
     MainFrameReducer,
     SubjectListStateReducer,
     TimetableCreatorReducer,
-    TimetableListReducer,
+    TimetableListStateReducer,
     // new-reducer
 });
