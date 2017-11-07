@@ -1,8 +1,4 @@
 import {
-    IntersectWith,
-    ISlot
-} from "../model/slot";
-import {
     GenerateIndices
 } from "./generateIndices";
 import {
@@ -11,39 +7,68 @@ import {
 import {
     Partitionize
 } from "./partitionize";
+import {
+    TinySlot
+} from "./tinySlot";
 
-export function Permutator(input: ISlot[]): ISlot[][] {
+export function Permutator(input: TinySlot[]): number[][] {
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
     }
     const result = [];
     const partitioned = Partitionize(input);
     let indices = GenerateIndices(partitioned);
-    let prototype = new Array(partitioned.length);
-
+    let candidate = new Array < number > (partitioned.length);
+    let state = [0, 0, 0, 0, 0, 0, 0];
     while (true) {
-        prototype.push(partitioned[0][indices[0].Value]);
+        const first = partitioned[0][indices[0].Value];
+        state = Append(state, first.State);
+        candidate = candidate.concat(first.HashIds);
         let gotIntersection = false;
         for (let i = 1; i < indices.length; i++) {
             const current = partitioned[i][indices[i].Value];
-            for (let j = 0; j < prototype.length; j++) {
-                if (IntersectWith(prototype[j], current)) {
-                    gotIntersection = true;
-                    break;
-                }
-            }
-            if (!gotIntersection) {
-                prototype.push(current);
+            if (GotIntersection(state, current.State)) {
+                gotIntersection = true;
+                break;
+            } else {
+                state = Append(state, current.State);
             }
         }
         if (!gotIntersection) {
-            result.push(prototype.slice());
+            result.push(candidate.slice());
         }
         indices = Increment(indices);
-        if (indices == null) {
+        if (indices === null) {
             break;
         }
-        prototype = [];
+        candidate = [];
+        state = [0, 0, 0, 0, 0, 0, 0];
     }
     return result;
+}
+
+export function Append(originalState: number[], newState: number[]): number[] {
+    if (originalState.length !== 7 || newState.length !== 7) {
+        throw new Error("State lengths should be 7");
+    }
+    const result = originalState.slice();
+    for (let i = 0; i < 7; i++) {
+        result[i] |= newState[i];
+    }
+    return result;
+}
+
+export function GotIntersection(a: number[], b: number[]): boolean {
+    if (a.length !== 7 || b.length !== 7) {
+        throw new Error("State lengths should be 7");
+    }
+    return (
+        (a[0] & b[0]) +
+        (a[1] & b[1]) +
+        (a[2] & b[2]) +
+        (a[3] & b[3]) +
+        (a[4] & b[4]) +
+        (a[5] & b[5]) +
+        (a[6] & b[6])
+    ) > 0;
 }
