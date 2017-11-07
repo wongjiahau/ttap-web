@@ -11,13 +11,13 @@ export class RawSlot {
     }
 
     public static GetBunch(hashIds: number[]): RawSlot[] {
-        const result = [];
+        const result = new Array < RawSlot > ();
         for (let i = 0; i < hashIds.length; i++) {
             const matched = RawSlot.allRawSlots.filter((x) => x.HashId === hashIds[i]);
             if (matched.length === 0) {
                 throw new Error(hashIds + "does not matches any HashId of any slot");
             }
-            result.push(matched);
+            result.push(matched[0]);
         }
         return result;
     }
