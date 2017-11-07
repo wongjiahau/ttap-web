@@ -74,6 +74,14 @@ describe("FindTimetable()", () => {
         const result = FindTimetable(input);
         expect(result.length).to.eq(1244);
     });
+
+    it("case 7", () => {
+        const acpSlots = GetTinySlotsOf("MPU34022");
+        const bkaSlots = GetTinySlotsOf("MPU32013");
+        const input = concat(acpSlots, bkaSlots);
+        const result = FindTimetable(input);
+        expect(result.length).to.eq(0);
+    });
 });
 
 describe("GotIntersection()", () => {
