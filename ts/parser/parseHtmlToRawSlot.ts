@@ -1,7 +1,7 @@
 import {last} from "lodash";
 import * as S from "string";
 import {RawSlot} from "../model/rawSlot";
-export default function parser(html: string): RawSlot[] {
+export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");
     const tableRows = htmlDoc
@@ -70,10 +70,10 @@ export default function parser(html: string): RawSlot[] {
                     newSlot.WeekNumber = cellValue;
                     break;
                 case 8:
-                    newSlot.Remark = cellValue;
+                    newSlot.Room = cellValue;
                     break;
                 case 9:
-                    newSlot.Room = cellValue;
+                    newSlot.Remark = cellValue;
                     break;
             }
         }

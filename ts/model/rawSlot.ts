@@ -1,4 +1,19 @@
-export class RawSlot {
+export interface IRawSlot {
+    readonly HashId: number; // Unique for every slot object
+    SubjectCode: string;
+    SubjectName: string;
+    Number: string; // Slot number, which is not necessarily unique for every slot
+    Type: string;
+    Group: string;
+    ClassSize: string;
+    Day: string;
+    TimePeriod: string;
+    CreditHour: string;
+    WeekNumber: string;
+    Room: string;
+    Remark: string;
+}
+export class RawSlot implements IRawSlot {
     public static GetOne(hashId: number): RawSlot {
         const result = RawSlot.allRawSlots.filter((x) => x.HashId === hashId);
         if (result.length > 1) {
