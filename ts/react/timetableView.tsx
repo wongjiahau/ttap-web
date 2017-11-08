@@ -104,7 +104,7 @@ function getDayColumn() {
     return result;
 }
 
-const Y_OFFSET = 2;
+const Y_OFFSET = 1;
 function getDayColumnLayout() : ReactGridLayout.Layout[] {
     const result = Array < ReactGridLayout.Layout > ();
     for (let j = 0; j < 8; j++) {
