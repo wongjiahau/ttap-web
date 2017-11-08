@@ -17,6 +17,7 @@ export class TimetableListState implements ITimetableListState {
     public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex = 0;
         this.Timetables = timetables;
+        this.CurrentTimetable = timetables[0];
     }
 }
 

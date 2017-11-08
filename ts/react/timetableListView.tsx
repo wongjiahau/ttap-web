@@ -41,7 +41,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         return (
             <div>
                 <div style={centerDivStyle}>
-                    <TimetableView/>
+                    <TimetableView timetable={this.props.currentTimetable}/>
                 </div>
                 <div style={footerStyle}>
                     <RaisedButton

@@ -1,8 +1,10 @@
 import * as $ from "jquery";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
-import { TimePeriod } from "../att/timePeriod";
+import { ParseDay } from "../att/day";
+import {TimePeriod} from "../att/timePeriod";
 import {RawSlot} from "../model/rawSlot";
+import {Timetable} from "../model/timetable";
 import {SlotView} from "./slotView";
 
 const timetableViewWidth = 0.9 * $(window).width();
@@ -14,9 +16,7 @@ const divStyle : React.CSSProperties = {
 };
 
 export interface ITimetableViewProps {
-    slots
-        ?
-        : RawSlot[];
+    timetable : Timetable;
 }
 
 function getTimeRow() {
@@ -53,15 +53,15 @@ function getTimeRow() {
     return result;
 }
 
+const X_OFFSET = 2;
 function getTimeRowLayout() : ReactGridLayout.Layout[] {
-    const xOffset = 2;
     const result = Array < ReactGridLayout.Layout > ();
     for (let i = 0; i < 32; i++) {
         result.push({
             h: 1,
             i: ("t" + i),
             w: 2,
-            x: i * 2 + xOffset,
+            x: i * 2 + X_OFFSET,
             y: 0
         });
     }
@@ -104,8 +104,8 @@ function getDayColumn() {
     return result;
 }
 
+const Y_OFFSET = 2;
 function getDayColumnLayout() : ReactGridLayout.Layout[] {
-    const yOffset = 2;
     const result = Array < ReactGridLayout.Layout > ();
     for (let i = 0; i < 8; i++) {
         result.push({
@@ -113,7 +113,7 @@ function getDayColumnLayout() : ReactGridLayout.Layout[] {
             i: ("d" + i),
             w: 2,
             x: 0,
-            y: i + yOffset
+            y: i + Y_OFFSET
         });
     }
     return result;
@@ -134,9 +134,28 @@ export const TimetableView = (props : ITimetableViewProps) => {
     testSlot.Group = "2";
     testSlot.Room = "KB205";
     testSlot.WeekNumber = "1-14";
-    const testSlotLayout : ReactGridLayout.Layout = {i: "s1", x: 2, y: 2, w: 2, h: 1};
-    child.push(<div key="s1"><SlotView  slot={testSlot}/></div>);
+    const testSlotLayout : ReactGridLayout.Layout = {
+        h: 1,
+        i: "s1",
+        w: 2,
+        x: 2,
+        y: 2
+    };
+    // child.push(     <div key="s1"><SlotView slot={testSlot}/></div> );
     layouts.push(testSlotLayout);
+    if (props.timetable) {
+        const rawSlots = RawSlot.GetBunch(props.timetable.HashIds);
+        const slotViews = rawSlots.map((x, index) => {
+            return (
+                <div key={"s" + index}><SlotView slot={x}/></div>
+            );
+        });
+        child.push(slotViews);
+        const slotLayouts = rawSlots.map((x, index) => {
+            return GetSlotLayout(x, "s" + index, X_OFFSET, Y_OFFSET);
+        });
+    }
+
     return (
         <div style={divStyle}>
             <ReactGridLayout
@@ -155,3 +174,28 @@ export const TimetableView = (props : ITimetableViewProps) => {
         </div>
     );
 };
+
+export function GetSlotLayout(rawSlot : RawSlot, index : string, xOffset : number, yOffset : number) : ReactGridLayout.Layout {
+    const day = ParseDay(rawSlot.Day) - 1;
+    const [X, W] = GetXandW(TimePeriod.Parse(rawSlot.TimePeriod));
+    const result: ReactGridLayout.Layout = {
+        h: 1,
+        i: index,
+        w: W,
+        x: X + xOffset,
+        y: day + yOffset
+    };
+    return result;
+}
+
+export function GetXandW(timePeriod : TimePeriod) : [number, number] {
+    let x = timePeriod.StartTime.Hour - TimePeriod.Min.Hour;
+    if (timePeriod.StartTime.Minute === 30) {
+        x++;
+    }
+    const w = timePeriod
+        .EndTime
+        .Minus(timePeriod.StartTime)
+        .TotalHours() * 2;
+    return [x, w];
+}
