@@ -14,7 +14,7 @@ export class UpdateTimetableListState extends SubjectListStateAction {
         super();
     }
     public TypeName(): string {
-        return "Update TimetableList State";
+        return "Update TimetableList State : " + this.action.TypeName();
     }
     protected GenerateNewState(state: ISubjectListState): ISubjectListState {
         return {

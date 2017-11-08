@@ -17,7 +17,7 @@ import {
 } from "./../actions/goToPrevTimetable";
 import {
     UpdateTimetableListState
-} from "./../actions/UpdateTimetableListState";
+} from "./../actions/updateTimetableListState";
 
 const mapStateToProps = (state): ITimetableListViewStateProps => {
     return {
