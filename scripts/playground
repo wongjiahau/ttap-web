@@ -1,0 +1,6 @@
+#!/bin/bash 
+DIRECTORY="src/core"
+if [ -d "$DIRECTORY" ]; then
+  echo "yes"
+fi
+echo "no"

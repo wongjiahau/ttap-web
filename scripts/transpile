@@ -3,8 +3,12 @@
 clear 
 
 # Clean the output directory
-echo "Cleaning output directory . . ."
-rm -r src/core*
+DIRECTORY="src/core"
+if [ -d "$DIRECTORY" ]; then
+    # Control will enter here if $DIRECTORY exists.
+    echo "Cleaning output directory . . ."
+    rm -r src/core*
+fi
 
 # Transpile TS into JS
 ts_compiler_version=$(tsc -v)
