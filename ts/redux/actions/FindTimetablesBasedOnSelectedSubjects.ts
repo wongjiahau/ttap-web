@@ -27,10 +27,13 @@ export class FindTimetablesBasedOnSelectedSubjects extends SubjectListStateActio
         super();
     }
     public TypeName(): string {
-        return "Find Timetables";
+        return "find timetables";
     }
     protected GenerateNewState(state: ISubjectListState): ISubjectListState {
         const selectedSubjects = state.Subjects.filter((x) => x.IsSelected);
+        if (selectedSubjects.length === 0) {
+            return state;
+        }
         const hashIds = [].concat.apply([], selectedSubjects.map((x) => x.SlotIds));
         const rawSlots = RawSlot.GetBunch(hashIds);
         const slots = ParseRawSlotToSlot(rawSlots);
