@@ -46,7 +46,7 @@ function getTimeRow() {
         result.push(
             <div key={"t" + i}>
                 <div style={topDivStyle}>{time + ":00"}</div>
-                <div style={btmDivStyle}>{time + ":30"}</div>
+                <div style={btmDivStyle}>{(time + 1) + ":00"}</div>
             </div>
         );
     }
@@ -107,42 +107,26 @@ function getDayColumn() {
 const Y_OFFSET = 2;
 function getDayColumnLayout() : ReactGridLayout.Layout[] {
     const result = Array < ReactGridLayout.Layout > ();
-    for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
         result.push({
             h: 1,
-            i: ("d" + i),
+            i: ("d" + j),
             w: 2,
             x: 0,
-            y: i + Y_OFFSET
+            y: j
         });
     }
     return result;
 }
 
 export const TimetableView = (props : ITimetableViewProps) => {
-    const child = [];
+    let child = [];
     child.push(getTimeRow());
     child.push(getDayColumn());
     const singleUnit : number = 1;
     let layouts : ReactGridLayout.Layout[] = [];
     layouts = layouts.concat(getTimeRowLayout());
     layouts = layouts.concat(getDayColumnLayout());
-    const testSlot = new RawSlot();
-    testSlot.SubjectName = "Hubungan Etnik";
-    testSlot.SubjectCode = "MPU3113";
-    testSlot.Type = "L";
-    testSlot.Group = "2";
-    testSlot.Room = "KB205";
-    testSlot.WeekNumber = "1-14";
-    const testSlotLayout : ReactGridLayout.Layout = {
-        h: 1,
-        i: "s1",
-        w: 2,
-        x: 2,
-        y: 2
-    };
-    // child.push(     <div key="s1"><SlotView slot={testSlot}/></div> );
-    layouts.push(testSlotLayout);
     if (props.timetable) {
         const rawSlots = RawSlot.GetBunch(props.timetable.HashIds);
         const slotViews = rawSlots.map((x, index) => {
@@ -150,10 +134,11 @@ export const TimetableView = (props : ITimetableViewProps) => {
                 <div key={"s" + index}><SlotView slot={x}/></div>
             );
         });
-        child.push(slotViews);
         const slotLayouts = rawSlots.map((x, index) => {
             return GetSlotLayout(x, "s" + index, X_OFFSET, Y_OFFSET);
         });
+        layouts = layouts.concat(slotLayouts);
+        child = child.concat(slotViews);
     }
 
     return (
@@ -168,7 +153,8 @@ export const TimetableView = (props : ITimetableViewProps) => {
                 isDraggable={false}
                 isResizable={false}
                 autoSize={true}
-                verticalCompact={true}>
+                verticalCompact={false}
+                >
                 {child}
             </ReactGridLayout>
         </div>
@@ -189,7 +175,7 @@ export function GetSlotLayout(rawSlot : RawSlot, index : string, xOffset : numbe
 }
 
 export function GetXandW(timePeriod : TimePeriod) : [number, number] {
-    let x = timePeriod.StartTime.Hour - TimePeriod.Min.Hour;
+    let x = ( timePeriod.StartTime.Hour - TimePeriod.Min.Hour ) * 2;
     if (timePeriod.StartTime.Minute === 30) {
         x++;
     }

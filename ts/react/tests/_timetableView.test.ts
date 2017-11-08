@@ -68,7 +68,22 @@ describe("TimetableView", () => {
             expect(TimePeriod.Min.Hour).to.eq(8);
             expect(x).to.eq(0);
             expect(w).to.eq(4);
+        });
 
+        it("case 2", () => {
+            const input = TimePeriod.Parse("08:30 AM - 10:00 AM");
+            const [x, w] = GetXandW(input);
+            expect(TimePeriod.Min.Hour).to.eq(8);
+            expect(x).to.eq(1);
+            expect(w).to.eq(3);
+        });
+
+        it("case 3", () => {
+            const input = TimePeriod.Parse("01:00 PM - 4:00 PM");
+            const [x, w] = GetXandW(input);
+            expect(TimePeriod.Min.Hour).to.eq(8);
+            expect(x).to.eq(10);
+            expect(w).to.eq(6);
         });
 
     });
