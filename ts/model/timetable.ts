@@ -3,8 +3,10 @@ import {
 } from "./rawSlot";
 
 export class Timetable {
-    public readonly RawSlots: RawSlot[];
-    public constructor(rawSlots: RawSlot[]) {
-        this.RawSlots = rawSlots;
+    public readonly HashIds : number[];
+    public readonly State : number[];
+    public constructor(hashIds: number[], state : number[]) {
+        this.HashIds = hashIds;
+        this.State = state;
     }
 }

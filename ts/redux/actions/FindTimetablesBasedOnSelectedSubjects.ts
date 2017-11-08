@@ -38,10 +38,7 @@ export class FindTimetablesBasedOnSelectedSubjects extends SubjectListStateActio
         const rawSlots = RawSlot.GetBunch(hashIds);
         const slots = ParseRawSlotToSlot(rawSlots);
         const tinySlots = ParseSlotToTinySlot(slots);
-        const rawTimetables = FindTimetable(tinySlots);
-        const timetables = rawTimetables.map((x) => {
-            return new Timetable(RawSlot.GetBunch(x));
-        });
+        const timetables = FindTimetable(tinySlots);
         return {
             ...state,
             TimetableListState: new TimetableListState(timetables)

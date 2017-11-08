@@ -1,4 +1,7 @@
 import {
+    Timetable
+} from "../model/timetable";
+import {
     BoundedInt
 } from "./boundedInt";
 import {
@@ -14,14 +17,16 @@ import {
     TinySlot
 } from "./tinySlot";
 
-export function FindTimetable(input: TinySlot[]): number[][] {
+export function FindTimetable(input: TinySlot[]): Timetable[] {
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
     }
     if (input.length === 1) {
-        return [input[0].HashIds];
+        let resultState = [0, 0, 0, 0, 0, 0, 0];
+        resultState = Append(resultState, input[0].State);
+        return [new Timetable(input[0].HashIds, resultState)];
     }
-    const result = [];
+    const result = new Array < Timetable > ();
     const partitioned = Partitionize(input);
     let indices = GenerateIndices(partitioned);
     let candidate = new Array < number > (partitioned.length);
@@ -49,7 +54,7 @@ export function FindTimetable(input: TinySlot[]): number[][] {
             }
         }
         if (!gotIntersection) {
-            result.push(candidate.slice());
+            result.push(new Timetable(candidate.slice(), state));
         }
         indices = Increment(indices);
         if (indices === null) {
