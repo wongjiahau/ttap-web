@@ -5,6 +5,7 @@ import { ParseDay } from "../att/day";
 import {TimePeriod} from "../att/timePeriod";
 import {RawSlot} from "../model/rawSlot";
 import {Timetable} from "../model/timetable";
+import { GenerateColorScheme } from "./colors/generateColorScheme";
 import {SlotView} from "./slotView";
 
 const timetableViewWidth = 0.9 * $(window).width();
@@ -129,15 +130,16 @@ export const TimetableView = (props : ITimetableViewProps) => {
     let child = [];
     child.push(getTimeRow());
     child.push(getDayColumn());
-    const singleUnit : number = 1;
     let layouts : ReactGridLayout.Layout[] = [];
     layouts = layouts.concat(getTimeRowLayout());
     layouts = layouts.concat(getDayColumnLayout());
     if (props.timetable) {
         const rawSlots = RawSlot.GetBunch(props.timetable.HashIds);
+        const colorSchemes = GenerateColorScheme(rawSlots);
         const slotViews = rawSlots.map((x, index) => {
+            const color =  colorSchemes.filter((c) => c.SubjectCode === x.SubjectCode)[0].Color;
             return (
-                <div key={"s" + index}><SlotView slot={x}/></div>
+                <div key={"s" + index}><SlotView slot={x} color={color}/></div>
             );
         });
         const slotLayouts = rawSlots.map((x, index) => {

@@ -1,35 +1,43 @@
 import ButtonBase from "material-ui-next/ButtonBase";
 import Tooltip from "material-ui-next/Tooltip";
 import * as React from "react";
-import {GetInitial} from "../helper";
+import {Beautify, GetInitial} from "../helper";
 import {RawSlot} from "../model/rawSlot";
-
-const buttonBaseStyle : React.CSSProperties = {
-    background:              "yellow",
-    border:                  "0.65px solid grey",
-    borderTopLeftRadius:     "5px",
-    borderBottomLeftRadius:  "5px",
-    borderTopRightRadius:    "5px",
-    borderBottomRightRadius: "5px",
-    width:                   "100%",
-};
+import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {
-    width : "100%",
+    width: "100%"
 };
 
 export interface ISlotViewProps {
     slot : RawSlot;
+    color : Colors;
 }
 
 export class SlotView extends React.Component < ISlotViewProps, {} > {
     public render() {
+        const buttonBaseStyle : React.CSSProperties = {
+            background:              this.props.color,
+            borderTop:               "0.5px solid black",
+            borderLeft:              "0.5px solid black",
+            borderRight:             "0.5px solid black",
+            borderBottom:            "0.5px solid black",
+            borderTopLeftRadius:     "2px",
+            borderBottomLeftRadius:  "2px",
+            borderTopRightRadius:    "2px",
+            borderBottomRightRadius: "2px",
+            width:                   "100%"
+        };
         const slot = this.props.slot;
         return (
-            <Tooltip title="hello this is a tooltip" placement="bottom">
+            <Tooltip
+                title={Beautify(slot.SubjectName) + " [" + slot.SubjectCode + "]"}
+                placement="bottom">
                 <ButtonBase style={buttonBaseStyle}>
                     <div style={divStyle}>
-                        {GetInitial(slot.SubjectName) + " " + slot.Type + "(" + slot.Group + ")"}
+                        <b>
+                            {GetInitial(slot.SubjectName) + " " + slot.Type + "(" + slot.Group + ")"}
+                        </b>
                         <br/> {slot.Room}
                         <br/> {slot.WeekNumber}
                     </div>
