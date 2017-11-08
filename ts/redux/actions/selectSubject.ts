@@ -1,12 +1,24 @@
 import * as S from "string";
-import {Beautify} from "../../helper";
-import {ISubjectListState, SubjectListStateAction} from "./../reducers/subjectListState";
+import {
+    Beautify
+} from "../../helper";
+import {
+    ISubjectListState,
+    SubjectListStateAction,
+    SubjectListStateReducer
+} from "./../reducers/subjectListState";
+import {
+    ToggleSubjectListViewingOptions
+} from "./toggleSubjectListViewingOption";
+
 export class SelectSubject extends SubjectListStateAction {
     public constructor(private subjectCode: string) {
         super();
     }
-    public TypeName() : string {return "select subject"; }
-    protected GenerateNewState(state : ISubjectListState) : ISubjectListState {
+    public TypeName(): string {
+        return "select subject";
+    }
+    protected GenerateNewState(state: ISubjectListState): ISubjectListState {
         const newSubjects = state
             .Subjects
             .map((s) => {
@@ -19,6 +31,15 @@ export class SelectSubject extends SubjectListStateAction {
             ...state,
             Subjects: newSubjects
         };
-        return result;
+        const allSubjectIsDeselected = newSubjects.every((x) => !x.IsSelected);
+        const newIsShowSelectedSubjectOnly = state.IsShowingSelectedSubjectOnly && !allSubjectIsDeselected;
+        const shouldToggleToShowAllSubject =
+            state.IsShowingSelectedSubjectOnly && newIsShowSelectedSubjectOnly === false;
+        if (shouldToggleToShowAllSubject) {
+            return SubjectListStateReducer(result, new ToggleSubjectListViewingOptions().Action());
+
+        } else {
+            return result;
+        }
     }
 }
