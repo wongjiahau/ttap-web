@@ -4,3 +4,7 @@ if [ -d "$DIRECTORY" ]; then
   echo "yes"
 fi
 echo "no"
+
+# List all file with test.ts extension and not prefixed with underscore
+cd ./ts
+ls -lR | grep test.ts | awk -F" " '{print $NF}'| grep "^[^_]"
