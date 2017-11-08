@@ -22,21 +22,21 @@ export interface ITimetableViewProps {
 function getTimeRow() {
     const topDivStyle : React.CSSProperties = {
         borderBottom: "1px solid",
-        borderRight: "1px solid",
-        fontFamily: "roboto",
-        padding: "2px",
-        textAlign: "center"
+        borderRight:  "1px solid",
+        fontFamily:   "roboto",
+        padding:      "2px",
+        textAlign:    "center"
     };
     const btmDivStyle : React.CSSProperties = {
         borderBottom: "1px solid",
-        borderRight: "1px solid",
-        fontFamily: "roboto",
-        padding: "2px",
-        textAlign: "center"
+        borderRight:  "1px solid",
+        fontFamily:   "roboto",
+        padding:      "2px",
+        textAlign:    "center"
     };
     const result = [];
     for (let i = 0;; i++) {
-        let time = i + TimePeriod.Min.Hour;
+        let time = i + TimePeriod.Min.Hour - 1;
         if (time > TimePeriod.Max.Hour) {
             break;
         }
@@ -53,7 +53,7 @@ function getTimeRow() {
     return result;
 }
 
-const X_OFFSET = 2;
+const X_OFFSET = 4;
 function getTimeRowLayout() : ReactGridLayout.Layout[] {
     const result = Array < ReactGridLayout.Layout > ();
     for (let i = 0; i < 32; i++) {
@@ -61,7 +61,7 @@ function getTimeRowLayout() : ReactGridLayout.Layout[] {
             h: 1,
             i: ("t" + i),
             w: 2,
-            x: i * 2 + X_OFFSET,
+            x: i * 2 + X_OFFSET - 2,
             y: 0
         });
     }
@@ -79,6 +79,12 @@ function getDayColumn() {
         "SAT",
         "SUN"
     ];
+    const firstDivStyle : React.CSSProperties = {
+        borderRight: "1px solid",
+        display: "table",
+        overflow: "hidden",
+        textAlign: "center"
+    };
     const div1style : React.CSSProperties = {
         borderRight: "1px solid",
         borderTop: "1px solid",
@@ -94,7 +100,7 @@ function getDayColumn() {
     const result = [];
     for (let i = 0; i < days.length; i++) {
         result.push(
-            <div style={div1style} key={"d" + i}>
+            <div style={i === 0 ? firstDivStyle : div1style} key={"d" + i}>
                 <div style={div2style}>
                     {days[i]}
                 </div>
@@ -144,7 +150,7 @@ export const TimetableView = (props : ITimetableViewProps) => {
     return (
         <div style={divStyle}>
             <ReactGridLayout
-                cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2}
+                cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2 + 2}
                 maxRows={16}
                 rowHeight={50}
                 width={timetableViewWidth}
