@@ -35,8 +35,8 @@ export class RawSlot {
     public TimePeriod: string;
     public CreditHour: string;
     public WeekNumber: string;
-    public Remark: string;
     public Room: string;
+    public Remark: string;
     constructor() {
         this.HashId = RawSlot.hash;
         RawSlot.hash++;
@@ -54,8 +54,8 @@ export class RawSlot {
     TimePeriod  : ${this.TimePeriod}
     CreditHour  : ${this.CreditHour}
     WeekNumber  : ${this.WeekNumber}
-    Remark      : ${this.Remark}
     Room        : ${this.Room}
+    Remark      : ${this.Remark}
 `;
     }
 
