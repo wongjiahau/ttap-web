@@ -2,6 +2,12 @@ import {
     connect
 } from "react-redux";
 import {
+    SubjectListStateAction
+} from "../reducers/subjectListState";
+import {
+    TimetableCreatorStateAction
+} from "../reducers/timetableCreatorState";
+import {
     ISubjectListViewDispatchProps,
     ISubjectListViewStateProps,
     SubjectListView
@@ -21,24 +27,32 @@ import {
 import {
     ToggleVisibilityOfSubjectListView
 } from "./../actions/toggleVisibilityOfSubjectListView";
+import {
+    UpdateSubjectListState
+} from "./../actions/updateSubjectListState";
 
 const mapStateToProps = (state): ISubjectListViewStateProps => {
+    const target = state.TimetableCreatorStateReducer.SubjectListState;
     return {
-        isShowingSelectedSubjectOnly: state.SubjectListStateReducer.IsShowingSelectedSubjectOnly,
-        subjects: state.SubjectListStateReducer.Subjects
+        isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
+        subjects:                     target.Subjects
     };
 };
 
 const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
     return {
         handleClose: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
-        handleSearch: (searchedText: string) => dispatch(new SearchSubjectList(searchedText).Action()),
+        handleSearch: (searchedText: string) => dispatch(Wrap(new SearchSubjectList(searchedText)).Action()),
         handleSelection: (subjectCode: string) => {
-            dispatch(new SelectSubject(subjectCode).Action());
-            dispatch(new FindTimetablesBasedOnSelectedSubjects().Action());
+            dispatch(Wrap(new SelectSubject(subjectCode)).Action());
+            dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
         },
-        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions().Action())
+        handleToggleView: () => dispatch(Wrap(new ToggleSubjectListViewingOptions()).Action())
     };
 };
 
 export const SubjectListViewContainer = connect(mapStateToProps, mapDispatchToProps)(SubjectListView);
+
+const Wrap = (action: SubjectListStateAction): TimetableCreatorStateAction => {
+    return new UpdateSubjectListState(action);
+};
