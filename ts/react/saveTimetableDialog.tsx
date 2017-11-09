@@ -33,7 +33,7 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
                 <DialogTitle>Save this timetable as . . .</DialogTitle>
                 <div>
                     <List>
-                        <ListItem button={true} onClick={this.props.handleSaveAsPicture}>
+                        <ListItem button={true} onClick={this.props.handleSaveAsTextFile}>
                             <ListItemIcon>
                                 <FileIcon/>
                             </ListItemIcon>
@@ -45,7 +45,7 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
                             </ListItemIcon>
                             <ListItemText primary={"Picture (*.png)"}/>
                         </ListItem>
-                        <ListItem button={true} onClick={this.props.handleSaveAsPicture}>
+                        <ListItem button={true} onClick={this.props.handleSaveToGoogleCalendar}>
                             <ListItemIcon>
                                 <CloudIcon/>
                             </ListItemIcon>

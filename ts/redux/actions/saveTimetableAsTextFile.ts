@@ -29,6 +29,7 @@ export class SaveTimetableAsTextFile extends TimetableListStateAction {
         }
         return {
             ...state,
+            IsSaveDialogOpen: false
         };
     }
 }

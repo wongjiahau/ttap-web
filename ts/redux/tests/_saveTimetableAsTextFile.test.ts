@@ -13,7 +13,7 @@ describe("SaveTimetableAsTextFile action", () => {
         const initialState = new TimetableListState();
         let newState = TimetableListStateReducer(initialState, new OpenSaveDialog().Action());
         expect(newState.IsSaveDialogOpen).to.eq(true);
-        newState = TimetableListStateReducer(initialState, new SaveTimetableAsTextFile().Action());
+        newState = TimetableListStateReducer(newState, new SaveTimetableAsTextFile().Action());
         expect(newState.IsSaveDialogOpen).to.eq(false);
     });
 
