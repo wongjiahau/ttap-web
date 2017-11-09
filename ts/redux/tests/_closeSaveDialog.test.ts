@@ -1,20 +1,20 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
+import {CloseSaveDialog} from "./../actions/closeSaveDialog";
 import { OpenSaveDialog } from "./../actions/openSaveDialog";
-import {SaveTimetableAsTextFile} from "./../actions/saveTimetableAsTextFile";
 import {ITimetableListState, TimetableListState, TimetableListStateReducer} from "./../reducers/timetableListState";
-describe("SaveTimetableAsTextFile action", () => {
-    it("'s typename should be 'save timetable as text file'", () => {
-        const action = new SaveTimetableAsTextFile();
-        expect(action.TypeName()).to.eq("save timetable as text file");
+describe("CloseSaveDialog action", () => {
+    it("'s typename should be 'close save dialog'", () => {
+        const action = new CloseSaveDialog();
+        expect(action.TypeName()).to.eq("close save dialog");
     });
 
     it("should set IsSaveDialogOpen property to false", () => {
         const initialState = new TimetableListState();
         let newState = TimetableListStateReducer(initialState, new OpenSaveDialog().Action());
         expect(newState.IsSaveDialogOpen).to.eq(true);
-        newState = TimetableListStateReducer(initialState, new SaveTimetableAsTextFile().Action());
+        const action = new CloseSaveDialog().Action();
+        newState = TimetableListStateReducer(initialState, action);
         expect(newState.IsSaveDialogOpen).to.eq(false);
     });
-
 });

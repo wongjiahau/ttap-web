@@ -4,6 +4,7 @@ import IconSave from "material-ui/svg-icons/content/save";
 import * as React from "react";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
+import {SaveTimetableDialog} from "./saveTimetableDialog";
 import {TimetableView} from "./timetableView";
 
 const centerDivStyle : React.CSSProperties = {
@@ -25,13 +26,18 @@ export interface ITimetableListViewStateProps {
     currentTimetable : Timetable;
     currentIndex : number; // non-zero based
     maxIndex : number; // non-zero based
+    isSaveDialogOpen : boolean;
 }
 
 export interface ITimetableListViewDispatchProps {
     handleGoToNext : () => void;
     handleGoToPrevious : () => void;
-    handleSave : () => void;
     handleSetTimeConstraint : () => void;
+    handleSaveAsTextFile : () => void;
+    handleSaveAsPicture : () => void;
+    handleSaveToGoogleCalendar : () => void;
+    handleOpenSaveDialog: () => void;
+    handleCloseSaveDialog: () => void;
 }
 
 export interface ITimetableListViewProps extends ITimetableListViewStateProps,
@@ -56,12 +62,18 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         handleClickLeft={this.props.handleGoToPrevious}
                         handleClickRight={this.props.handleGoToNext}/>
                     <RaisedButton
-                        onClick={this.props.handleSave}
+                        onClick={this.props.handleOpenSaveDialog}
                         primary={true}
                         style={footerButtonStyle}
                         icon={< IconSave />}
                         label="Save as . . ."/>
                 </div>
+                <SaveTimetableDialog
+                    isOpen={this.props.isSaveDialogOpen}
+                    handleClose={this.props.handleCloseSaveDialog}
+                    handleSaveAsPicture={this.props.handleSaveAsPicture}
+                    handleSaveAsTextFile={this.props.handleSaveAsTextFile}
+                    handleSaveToGoogleCalendar={this.props.handleSaveToGoogleCalendar}/>
             </div>
         );
     }

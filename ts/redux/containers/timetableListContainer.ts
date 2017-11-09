@@ -13,12 +13,20 @@ import {
     TimetableListStateAction
 } from "../reducers/timetableListState";
 import {
+    CloseSaveDialog
+} from "./../actions/closeSaveDialog";
+import {
     GoToNextTimetable
 } from "./../actions/goToNextTimetable";
 import {
     GoToPrevTimetable
 } from "./../actions/goToPrevTimetable";
-import { SaveTimetableAsTextFile } from "./../actions/saveTimetableAsTextFile";
+import {
+    OpenSaveDialog
+} from "./../actions/openSaveDialog";
+import {
+    SaveTimetableAsTextFile
+} from "./../actions/saveTimetableAsTextFile";
 import {
     UpdateSubjectListState
 } from "./../actions/updateSubjectListState";
@@ -28,14 +36,17 @@ import {
 import {
     TimetableCreatorStateAction
 } from "./../reducers/timetableCreatorState";
-import { TimetableListState } from "./../reducers/timetableListState";
+import {
+    TimetableListState
+} from "./../reducers/timetableListState";
 
 const mapStateToProps = (state): ITimetableListViewStateProps => {
     const target = state.TimetableCreatorStateReducer.SubjectListState.TimetableListState as TimetableListState;
     return {
-        currentIndex:     target.CurrentIndex,
+        isSaveDialogOpen: target.IsSaveDialogOpen,
+        currentIndex: target.CurrentIndex,
         currentTimetable: target.CurrentTimetable,
-        maxIndex:         target.Timetables.length - 1,
+        maxIndex: target.Timetables.length - 1,
     };
 };
 
@@ -43,12 +54,24 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
     return {
         handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable()).Action()),
         handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable()).Action()),
-        handleSave: () => {
-            dispatch(Wrap(new SaveTimetableAsTextFile()).Action());
-        },
         handleSetTimeConstraint: () => {
             alert("not implemented yet");
         },
+        handleSaveAsTextFile: () => {
+            dispatch(Wrap(new SaveTimetableAsTextFile()).Action());
+        },
+        handleSaveAsPicture: () => {
+            alert("not implemented yet!");
+        },
+        handleSaveToGoogleCalendar: () => {
+            alert("not implemented yet!");
+        },
+        handleOpenSaveDialog: () => {
+            dispatch(Wrap(new OpenSaveDialog()).Action());
+        },
+        handleCloseSaveDialog: () => {
+            dispatch(Wrap(new CloseSaveDialog()).Action());
+        }
     };
 };
 

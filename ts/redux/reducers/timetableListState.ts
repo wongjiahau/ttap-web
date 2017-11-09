@@ -8,9 +8,11 @@ export interface ITimetableListState {
     Timetables : Timetable[];
     CurrentTimetable : Timetable;
     CurrentIndex : number;
+    IsSaveDialogOpen : boolean;
 }
 
 export class TimetableListState implements ITimetableListState {
+    public IsSaveDialogOpen: boolean;
     public CurrentTimetable : Timetable;
     public Timetables : Timetable[];
     public CurrentIndex : number;
@@ -18,6 +20,7 @@ export class TimetableListState implements ITimetableListState {
         this.CurrentIndex = 0;
         this.Timetables = timetables;
         this.CurrentTimetable = timetables[0];
+        this.IsSaveDialogOpen = false;
     }
 }
 
