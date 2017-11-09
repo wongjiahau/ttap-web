@@ -33,12 +33,20 @@ export function GetInitial(input: string): string {
 
             }
         })
-        .map((word) => (IsNonWhiteSpaceSymbols(word[0])
-            ? word[0]
-            : ""))
+        .map((word) => (IsNonWhiteSpaceSymbols(word[0]) ?
+            word[0] :
+            ""))
         .join("");
 
     function IsNonWhiteSpaceSymbols(char: string): boolean {
         return char !== " " && S(char).isAlphaNumeric();
     }
+}
+
+export function DecToBin(digit: number, outputBinaryLength: number) {
+    let out = "";
+    while (outputBinaryLength--) {
+        out += (digit >> outputBinaryLength) & 1;
+    }
+    return out;
 }

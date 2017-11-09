@@ -12,6 +12,9 @@ import {
     ParseSlotToTinySlot
 } from "../parser/parseSlotToTinySlot";
 import {
+    FindTimetable
+} from "../permutator/findTimetable";
+import {
     TinySlot
 } from "../permutator/tinySlot";
 import {
@@ -23,6 +26,9 @@ import {
 import {
     Subject
 } from "./../model/subject";
+import {
+    Timetable
+} from "./../model/timetable";
 
 export const GetTestSubjects1 = (): Subject[] => {
     const subjects = ParseSlotToSubject(ParseHtmlToSlots(heng_2017_sept()));
@@ -49,4 +55,12 @@ export const GetTinySlotsOf = (subjectCode: string): TinySlot[] => {
     const rawSlots = RawSlot.GetBunch(subject[0].SlotIds);
     const slots = ParseRawSlotToSlot(rawSlots);
     return ParseSlotToTinySlot(slots);
+};
+
+export const GetTestTimetables1 = (): Timetable[] => {
+    const input1 = GetTinySlotsOf("UEMX3653"); // WWT
+    const input2 = GetTinySlotsOf("MPU3123"); // Titas
+    const input3 = GetTinySlotsOf("UKMM1011"); // Sun Zi
+    const allSlots = input1.concat(input2).concat(input3);
+    return FindTimetable(allSlots);
 };
