@@ -1,3 +1,4 @@
+import { SaveTimetableAsTextFile } from './../actions/saveTimetableAsTextFile';
 import {
     expect
 } from "chai";
@@ -42,7 +43,7 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable()).Action()),
         handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable()).Action()),
         handleSave: () => {
-            alert("not implemented yet");
+            dispatch(Wrap(new SaveTimetableAsTextFile()).Action());
         },
         handleSetTimeConstraint: () => {
             alert("not implemented yet");
