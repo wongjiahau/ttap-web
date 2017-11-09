@@ -1,18 +1,28 @@
 import * as typeName from "type-name";
-import {Action} from "../actions/action";
-import {GenereteReducer} from "./generateReducer";
+import {
+    Action
+} from "../actions/action";
+import {
+    GenereteReducer
+} from "./generateReducer";
 export interface ITimetableCreatorState {
-    IsSubjectListViewVisible : boolean;
+    IsSubjectListViewVisible: boolean;
+    IsSnackbarVisible: boolean;
+    SnackbarMessage: string;
 }
 
 export class TimetableCreatorState implements ITimetableCreatorState {
-    public IsSubjectListViewVisible : boolean;
-    public constructor() {
-        this.IsSubjectListViewVisible = true;
+    public IsSnackbarVisible: boolean;
+    public SnackbarMessage: string;
+    public IsSubjectListViewVisible: boolean;
+    public constructor(isSubjectListVisible = false, isSnackbarVisible = false, snackbarMessage = "") {
+        this.IsSubjectListViewVisible = isSubjectListVisible;
+        this.IsSnackbarVisible = isSnackbarVisible;
+        this.SnackbarMessage = snackbarMessage;
     }
 }
 
-export const TimetableCreatorReducer = GenereteReducer(new TimetableCreatorState());
+export const TimetableCreatorStateReducer = GenereteReducer(new TimetableCreatorState());
 
 export abstract class TimetableCreatorStateAction extends Action < ITimetableCreatorState > {
     public StateName() {

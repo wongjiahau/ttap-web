@@ -2,6 +2,9 @@ import {
     connect
 } from "react-redux";
 import {
+    HideSnackbar
+} from "../actions/hideSnackbar";
+import {
     ITimetableCreatorViewDispatchProps,
     ITimetableCreatorViewStateProps,
     TimetableCreatorView
@@ -19,18 +22,21 @@ import {
     ToggleVisibilityOfSubjectListView
 } from "./../actions/toggleVisibilityOfSubjectListView";
 import {
-    TimetableCreatorReducer
+    TimetableCreatorStateReducer
 } from "./../reducers/timetableCreatorState";
 
 const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
     return {
         isSubjectListViewVisible: state.TimetableCreatorReducer.IsSubjectListViewVisible,
+        isSnackbarVisible: state.TimetableCreatorReducer.isSnackbarVisible,
+        snackbarMessage: state.TimetableCreatorReducer.snackbarMessage,
     };
 };
 
 const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
     return {
-        handleToggleVisibilityOfSubjectListView: () => dispatch(new ToggleVisibilityOfSubjectListView().Action())
+        handleSnackbarAction: () => dispatch(new HideSnackbar().Action()),
+        handleToggleVisibilityOfSubjectListView: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
     };
 };
 

@@ -38,16 +38,18 @@ while (true) {
     }
 }
 const stateName = "I" + parentClass.split("Action")[0];
-const fileName = stateName.charAt(1).toLowerCase() + stateName.slice(2);
+const stateFileName = stateName.charAt(1).toLowerCase() + stateName.slice(2);
 const actionName = prompt("Enter name of the action : ");
+const typeName = actionName.match(/[A-Z][a-z]+/g).join(" ").toLowerCase();
+const actionFileName = actionName.charAt(0).toLowerCase() + actionName.slice(1);
 const fileSnippet = 
 `
-import {${stateName}, ${parentClass}} from "./../reducers/${fileName}";
+import {${stateName}, ${parentClass}} from "./../reducers/${stateFileName}";
 export class ${actionName} extends ${parentClass} {
     public constructor() {
         super();
     }
-    public TypeName() : string {return "${actionName}"; }
+    public TypeName() : string {return "${typeName}"; }
     protected GenerateNewState(state : ${stateName}) : ${stateName} {
         return {
             ...state,
@@ -57,30 +59,39 @@ export class ${actionName} extends ${parentClass} {
 }
 `;
 
-fs.writeFile(`${__dirname}/../ts/redux/actions/${actionName}.ts`, fileSnippet, function(err) {
+fs.writeFile(`${__dirname}/../ts/redux/actions/${actionFileName}.ts`, fileSnippet, function(err) {
     if(err) {
         return console.log(err);
     }
-    shell.exec(`code ts/redux/actions/${actionName}.ts`);
-    console.log(`${actionName}.ts is opened in VSCode!`);
+    shell.exec(`code ts/redux/actions/${actionFileName}.ts`);
+    console.log(`${actionFileName}.ts is opened in VSCode!`);
 }); 
 
 const testSnippet = 
 `import {expect} from "chai";
 import {isEqual} from "lodash";
-import {${actionName}} from "./../actions/${actionName}";
-import {${stateName}, ${stateName.slice(1)}Reducer, ${stateName.slice(1)}} from "./../reducers/${fileName}";
+import {${actionName}} from "./../actions/${actionFileName}";
+import {${stateName}, ${stateName.slice(1)}Reducer, ${stateName.slice(1)}} from "./../reducers/${stateFileName}";
 describe("${actionName} action", () => {
-    it("should . . .", () => {
+    it("'s typename should be '${typeName}'", () => {
+        const action = new ${actionName}();
+        expect(action.TypeName()).to.eq("${typeName}");
+    });
+
+    it("should set ...", () => {
+        const action = new ${actionName}().Action();
+        const initialState = new ${stateName.slice(1)}();
+        const newState = ${stateName.slice(1)}Reducer(initialState, action);
+        expect(newState).to.eq("?");
     });
 });
 `;
 
-fs.writeFile(`${__dirname}/../ts/redux/tests/${actionName}.test.ts`, testSnippet, function(err) {
+fs.writeFile(`${__dirname}/../ts/redux/tests/_${actionFileName}.test.ts`, testSnippet, function(err) {
     if(err) {
         return console.log(err);
     }
-    shell.exec(`code ts/redux/tests/${actionName}.test.ts`);
-    console.log(`${actionName}.test.ts is opened in VSCode!`);
+    shell.exec(`code ts/redux/tests/_${actionFileName}.test.ts`);
+    console.log(`_${actionFileName}.test.ts is opened in VSCode!`);
 }); 
 
