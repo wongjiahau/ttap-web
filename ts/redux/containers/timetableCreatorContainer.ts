@@ -27,9 +27,9 @@ import {
 
 const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
     return {
-        isSubjectListViewVisible: state.TimetableCreatorReducer.IsSubjectListViewVisible,
-        isSnackbarVisible: state.TimetableCreatorReducer.isSnackbarVisible,
-        snackbarMessage: state.TimetableCreatorReducer.snackbarMessage,
+        isSubjectListViewVisible: state.TimetableCreatorStateReducer.IsSubjectListViewVisible,
+        isSnackbarVisible: state.TimetableCreatorStateReducer.IsSnackbarVisible,
+        snackbarMessage: state.TimetableCreatorStateReducer.SnackbarMessage,
     };
 };
 

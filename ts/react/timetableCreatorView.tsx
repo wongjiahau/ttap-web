@@ -49,14 +49,14 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <TimetableListContainer/>
                 <Snackbar
                     action={doneButton}
-                    anchorOrigin={{
-                    horizontal: "left",
-                    vertical: "bottom"
-                }}
                     open={this.props.isSnackbarVisible}
+                    anchorOrigin={{
+                        horizontal: "left",
+                        vertical: "bottom"
+                    }}
                     SnackbarContentProps={{
-                    "aria-describedby": "message-id"
-                }}
+                        "aria-describedby": "message-id"
+                    }}
                     message={snackbarMessage}/>
             </div>
         );

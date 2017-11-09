@@ -15,7 +15,7 @@ export class TimetableCreatorState implements ITimetableCreatorState {
     public IsSnackbarVisible: boolean;
     public SnackbarMessage: string;
     public IsSubjectListViewVisible: boolean;
-    public constructor(isSubjectListVisible = false, isSnackbarVisible = false, snackbarMessage = "") {
+    public constructor(isSubjectListVisible = true, isSnackbarVisible = false, snackbarMessage = "") {
         this.IsSubjectListViewVisible = isSubjectListVisible;
         this.IsSnackbarVisible = isSnackbarVisible;
         this.SnackbarMessage = snackbarMessage;
