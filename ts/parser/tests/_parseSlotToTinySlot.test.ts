@@ -88,7 +88,7 @@ describe("ParseSlotToTinySlot", () => {
 
     it("should join timeperiod into a state for slots from the same group", () => {
         const slot1: ISlot = {
-            Day: 0, // Monday
+            Day: 1, // Monday
             Group: 1,
             HashId: 1,
             SlotNumber: 1,
@@ -97,7 +97,7 @@ describe("ParseSlotToTinySlot", () => {
             Type: 0
         };
         const slot2: ISlot = {
-            Day: 1, // Tuesday
+            Day: 2, // Tuesday
             Group: 1,
             HashId: 2,
             SlotNumber: 1,
