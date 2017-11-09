@@ -5,13 +5,22 @@ import {
     DecToBin
 } from "../../../helper";
 import {
-    GetDefinitelyOccupiedState, GetDefinitelyUnoccupiedState, GetMaybeOccupiedState
+    GenerateTotalState,
+    GetDefinitelyOccupiedState,
+    GetDefinitelyUnoccupiedState,
+    GetMaybeOccupiedState,
+    StringifyTotalState
 } from "../generateTotalState";
 import {
     GetTestTimetables1
 } from "./../../../tests/testDataGenerator";
 
 describe("GenerateTotalState", () => {
+    it("case 1", () => {
+        const timetables = GetTestTimetables1();
+        const totalStates = GenerateTotalState(timetables);
+    });
+
     describe("GetDefinitelyOccupiedState()", () => {
         it("case 1", () => {
             const timetables = GetTestTimetables1();
@@ -66,7 +75,7 @@ describe("GenerateTotalState", () => {
             maybeOccupiedState.forEach((day) => {
                 actual += (DecToBin(day, 32) + "\n").split("").reverse().join("");
             });
-            // 1 means maybe occupied or unoccupied 
+            // 1 means maybe occupied or unoccupied
             const expected = `
 00001111000000001111000000000000
 00000011001111000000000000000000
@@ -78,4 +87,24 @@ describe("GenerateTotalState", () => {
             expect(actual).to.eq(expected);
         });
     });
+
+    describe("StringifyTotalState", () => {
+        it("case 1", () => {
+            const timetables = GetTestTimetables1();
+            const totalStates = GenerateTotalState(timetables);
+            const result = StringifyTotalState(totalStates);
+            const expected = `
+----OOOO--------OOOO------
+******OO--OOOO******------
+----OOOOOOOO----OOOO------
+OOOOOO************--------
+--------------------------
+--------------------------
+--------------------------`;
+            expect(result).to.eq(expected);
+
+        });
+
+    });
+
 });
