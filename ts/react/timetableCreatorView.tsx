@@ -51,7 +51,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     action={doneButton}
                     open={this.props.isSnackbarVisible}
                     anchorOrigin={{
-                        horizontal: "left",
+                        horizontal: "right",
                         vertical: "bottom"
                     }}
                     SnackbarContentProps={{
