@@ -30,7 +30,7 @@ describe("TimetableSummary", () => {
             const input2 = GetTinySlotsOf("UEMX3653"); // WWT
             const timetables = FindTimetable(input1.concat(input2));
             const timetableSummary = new TimetableSummary(timetables[0]);
-            expect(timetableSummary.ToString()).to.eq("UEMX3653\nWater & Wastewater Treatment\nL-1 T-1 -\nUKMM1043\nBasic Economics, Accounting & Management\nL-1 T-1 -\n");
+            expect(timetableSummary.ToString()).to.eq("UEMX3653\nWater & Wastewater Treatment\nL-1 T-1 -\n\nUKMM1043\nBasic Economics, Accounting & Management\nL-1 T-1 -\n\n");
         });
     });
 

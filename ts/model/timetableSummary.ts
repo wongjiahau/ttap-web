@@ -62,6 +62,7 @@ export class TimetableSummary {
         let result = "";
         this.SubjectSummaries.forEach((s) => {
             result += s.ToString();
+            result += "\n";
         });
         return result;
     }
