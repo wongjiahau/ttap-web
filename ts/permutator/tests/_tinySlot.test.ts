@@ -9,12 +9,15 @@ import {
     ISlot
 } from "./../../model/slot";
 import {
+    GetTinySlotsOf
+} from "./../../tests/testDataGenerator";
+import {
     TinySlot
 } from "./../tinySlot";
 
 function GetTestSlot() {
     const result: ISlot = {
-        Day: 0,
+        Day: 1, // 1 means Monday
         Group: 2,
         HashId: 3,
         SlotNumber: 4,
@@ -44,7 +47,7 @@ describe("tinySlot", () => {
             expect(result.PartitionKey).to.eq(3331);
         });
 
-        it("should set State", () => {
+        it("should set State 1", () => {
             const result = new TinySlot(GetTestSlot());
             const expected = [
                 15,
@@ -56,6 +59,20 @@ describe("tinySlot", () => {
                 0,
             ];
             expect(isEqual(result.State, expected)).to.eq(true);
+        });
+
+        it("should set State 2", () => {
+            const result = GetTinySlotsOf("MPU32013");
+            const expected = [
+                0,
+                parseInt("111111", 2),
+                parseInt("111111", 2),
+                0,
+                0,
+                0,
+                0
+            ];
+            expect(result[0].State).to.deep.eq(expected);
         });
     });
 

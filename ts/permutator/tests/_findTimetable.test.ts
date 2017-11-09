@@ -88,6 +88,21 @@ describe("FindTimetable()", () => {
         const result = FindTimetable(input);
         expect(result.length).to.eq(0);
     });
+
+    it("case 1 on Timetable.State", () => {
+        const bkaSlots = GetTinySlotsOf("MPU32013");
+        const result = FindTimetable(bkaSlots);
+        expect(result[0].State).to.deep.eq([
+            0,
+            parseInt("111111", 2),
+            parseInt("111111", 2),
+            0,
+            0,
+            0,
+            0
+        ]);
+    });
+
 });
 
 describe("GotIntersection()", () => {

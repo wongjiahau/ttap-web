@@ -19,7 +19,7 @@ export class TinySlot implements IPartitionable {
     }
     private GetState(s: ISlot): number[] {
         const result = [0, 0, 0, 0, 0, 0, 0];
-        result[s.Day] = s.TimePeriod;
+        result[s.Day - 1] = s.TimePeriod;
         return result;
     }
 
