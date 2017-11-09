@@ -57,7 +57,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     SnackbarContentProps={{
                         "aria-describedby": "message-id"
                     }}
-                    message={snackbarMessage}/>
+                   message={snackbarMessage}/>
             </div>
         );
     }

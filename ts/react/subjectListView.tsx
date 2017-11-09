@@ -90,14 +90,12 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                 if (s.IsVisible) {
                     return (
                         <div key={s.Code}>
-                            <Divider/>
                             <SubjectView
                                 searchWord={this.props.searchWord}
                                 subjectName={Beautify(s.Name)}
                                 subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
                                 handleSelection={() => this.props.handleSelection(s.Code)}
                                 isSelected={s.IsSelected}/>
-                            <Divider/>
                         </div>
                     );
                 }
