@@ -16,6 +16,9 @@ import {
     FindTimetablesBasedOnSelectedSubjects
 } from "./../actions/FindTimetablesBasedOnSelectedSubjects";
 import {
+    NotifyIfTimetableIsFound
+} from "./../actions/notifyIfTimetableIsFound";
+import {
     SearchSubjectList
 } from "./../actions/searchSubjectList";
 import {
@@ -35,7 +38,7 @@ const mapStateToProps = (state): ISubjectListViewStateProps => {
     const target = state.TimetableCreatorStateReducer.SubjectListState;
     return {
         isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
-        subjects:                     target.Subjects
+        subjects: target.Subjects
     };
 };
 
@@ -46,6 +49,7 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleSelection: (subjectCode: string) => {
             dispatch(Wrap(new SelectSubject(subjectCode)).Action());
             dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
+            dispatch(new NotifyIfTimetableIsFound().Action());
         },
         handleToggleView: () => dispatch(Wrap(new ToggleSubjectListViewingOptions()).Action())
     };
