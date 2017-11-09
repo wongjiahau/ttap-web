@@ -2,7 +2,7 @@ import {
     connect
 } from "react-redux";
 import {
-    SubjectListStateAction
+    SubjectListStateAction, SubjectListState
 } from "../reducers/subjectListState";
 import {
     TimetableCreatorStateAction
@@ -35,8 +35,9 @@ import {
 } from "./../actions/updateSubjectListState";
 
 const mapStateToProps = (state): ISubjectListViewStateProps => {
-    const target = state.TimetableCreatorStateReducer.SubjectListState;
+    const target = state.TimetableCreatorStateReducer.SubjectListState as SubjectListState;
     return {
+        searchWord: target.SearchedText,
         isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
         subjects: target.Subjects
     };

@@ -44,6 +44,7 @@ const buttonStyle : React.CSSProperties = {
 };
 
 export interface ISubjectListViewStateProps {
+    searchWord : string;
     subjects : Subject[];
     isShowingSelectedSubjectOnly : boolean;
 }
@@ -91,6 +92,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         <div key={s.Code}>
                             <Divider/>
                             <SubjectView
+                                searchWord={this.props.searchWord}
                                 subjectName={Beautify(s.Name)}
                                 subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
                                 handleSelection={() => this.props.handleSelection(s.Code)}

@@ -1,6 +1,7 @@
 import {saveAs} from "file-saver";
 import {MuiThemeProvider} from "material-ui";
 import * as React from "react";
+import Highlighter = require("react-highlight-words");
 import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
@@ -21,6 +22,10 @@ export class Playground extends React.Component < IPlaygroundProps, {} > {
         return (
             <MuiThemeProvider>
                 <div>
+                    <Highlighter
+                        highlightClassName="YourHighlightClass"
+                        searchWords={[]}
+                        textToHighlight="The dog is chasing the cat. Or perhaps they're just playing?"/>
                     <TimetableCreatorContainer/>
                 </div>
             </MuiThemeProvider>
