@@ -8,10 +8,10 @@ import {
     Partitionize
 } from "../partitionize";
 import {
-    IPartitionable
+    IPartitionable, PartitionizeByKey
 } from "./../partitionize";
 
-describe("partitionize", () => {
+describe("Partitionize", () => {
     it("case 1", () => {
         const item1: IPartitionable = {
             PartitionKey: 1
@@ -147,4 +147,24 @@ describe("partitionize", () => {
         expect(isEqual(expected, actual)).to.eq(true);
     });
 
+});
+
+describe("PartitionizeByKey", () => {
+    it("case 1" , () => {
+        const a = {
+            customKey : "koko"
+        };
+        const b = {
+            customKey : "koko"
+        };
+        const c = {
+            customKey : "jojo"
+        };
+
+        const result = PartitionizeByKey([a, b, c], "customKey");
+        expect(result.length).to.eq(2);
+        expect(result[0].length).to.eq(1);
+        expect(result[1].length).to.eq(2);
+    });
+    
 });
