@@ -5,12 +5,14 @@ import { ParseDay } from "../att/day";
 import {TimePeriod} from "../att/timePeriod";
 import {RawSlot} from "../model/rawSlot";
 import {Timetable} from "../model/timetable";
+import { Colors } from "./colors/colors";
 import { GenerateColorScheme } from "./colors/generateColorScheme";
 import {SlotView} from "./slotView";
 
 const timetableViewWidth = 0.9 * $(window).width();
 
 const divStyle : React.CSSProperties = {
+    backgroundColor: Colors.WhiteSmoke,
     borderStyle: "solid",
     margin: "auto",
     width: timetableViewWidth

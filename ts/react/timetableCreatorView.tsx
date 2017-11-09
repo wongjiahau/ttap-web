@@ -29,9 +29,9 @@ ITimetableCreatorViewDispatchProps {}
 
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
-        const doneButton = (
+        const okButton = (
             <Button color="accent" dense={true} onClick={this.props.handleSnackbarAction}>
-                DONE
+                Got it
             </Button>
         );
         const snackbarMessage = <span>{this.props.snackbarMessage}</span>;
@@ -48,7 +48,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     onClick={this.props.handleToggleVisibilityOfSubjectListView}/>
                 <TimetableListContainer/>
                 <Snackbar
-                    action={doneButton}
+                    action={okButton}
                     open={this.props.isSnackbarVisible}
                     anchorOrigin={{
                         horizontal: "right",
