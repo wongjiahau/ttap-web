@@ -1,5 +1,6 @@
 import Button from "material-ui-next/Button";
 import Snackbar from "material-ui-next/Snackbar";
+import {Origin} from "material-ui-next/Snackbar";
 import Drawer from "material-ui/Drawer";
 import RaisedButton from "material-ui/RaisedButton";
 import IconList from "material-ui/svg-icons/action/list";
@@ -27,14 +28,20 @@ export interface ITimetableCreatorViewDispatchProps {
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
 ITimetableCreatorViewDispatchProps {}
 
+let viewCount = 0;
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
+        viewCount++;
         const okButton = (
             <Button color="accent" dense={true} onClick={this.props.handleSnackbarAction}>
                 Got it
             </Button>
         );
         const snackbarMessage = <span>{this.props.snackbarMessage}</span>;
+        const anchorOrigin : Origin = {
+            horizontal: "left",
+            vertical: "bottom",
+        };
         return (
             <div>
                 <Drawer docked={false} width={520} open={this.props.isSubjectListViewVisible}>
@@ -49,15 +56,20 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <TimetableListContainer/>
                 <Snackbar
                     action={okButton}
-                    open={this.props.isSnackbarVisible}
-                    anchorOrigin={{
-                        horizontal: "right",
-                        vertical: "bottom"
-                    }}
+                    open={this.props.isSnackbarVisible && (viewCount % 2 === 0)}
+                    anchorOrigin={anchorOrigin}
                     SnackbarContentProps={{
-                        "aria-describedby": "message-id"
-                    }}
-                   message={snackbarMessage}/>
+                    "aria-describedby": "message-id"
+                }}
+                    message={snackbarMessage}/>
+                <Snackbar
+                    action={okButton}
+                    open={this.props.isSnackbarVisible && (viewCount % 2 === 1)}
+                    anchorOrigin={anchorOrigin}
+                    SnackbarContentProps={{
+                    "aria-describedby": "message-id"
+                }}
+                    message={snackbarMessage}/>
             </div>
         );
     }
