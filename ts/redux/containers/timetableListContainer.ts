@@ -1,4 +1,3 @@
-import { SaveTimetableAsTextFile } from './../actions/saveTimetableAsTextFile';
 import {
     expect
 } from "chai";
@@ -19,6 +18,7 @@ import {
 import {
     GoToPrevTimetable
 } from "./../actions/goToPrevTimetable";
+import { SaveTimetableAsTextFile } from "./../actions/saveTimetableAsTextFile";
 import {
     UpdateSubjectListState
 } from "./../actions/updateSubjectListState";
@@ -28,9 +28,10 @@ import {
 import {
     TimetableCreatorStateAction
 } from "./../reducers/timetableCreatorState";
+import { TimetableListState } from "./../reducers/timetableListState";
 
 const mapStateToProps = (state): ITimetableListViewStateProps => {
-    const target = state.TimetableCreatorStateReducer.SubjectListState.TimetableListState;
+    const target = state.TimetableCreatorStateReducer.SubjectListState.TimetableListState as TimetableListState;
     return {
         currentIndex:     target.CurrentIndex,
         currentTimetable: target.CurrentTimetable,

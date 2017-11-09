@@ -22,14 +22,15 @@ import {
     ToggleVisibilityOfSubjectListView
 } from "./../actions/toggleVisibilityOfSubjectListView";
 import {
-    TimetableCreatorStateReducer
+    TimetableCreatorState, TimetableCreatorStateReducer
 } from "./../reducers/timetableCreatorState";
 
 const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
+    const target =  state.TimetableCreatorStateReducer as TimetableCreatorState;
     return {
-        isSubjectListViewVisible: state.TimetableCreatorStateReducer.IsSubjectListViewVisible,
-        isSnackbarVisible: state.TimetableCreatorStateReducer.IsSnackbarVisible,
-        snackbarMessage: state.TimetableCreatorStateReducer.SnackbarMessage,
+        isSubjectListViewVisible: target.IsSubjectListViewVisible,
+        isSnackbarVisible: target.IsSnackbarVisible,
+        snackbarMessage: target.SnackbarMessage,
     };
 };
 

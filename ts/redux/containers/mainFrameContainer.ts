@@ -4,9 +4,11 @@ import { ParseSlotToSubject } from "../../parser/parseSlotToSubject";
 import {IMainFrameDispatchProps, IMainFrameStateProps, MainFrame} from "../../react/mainFrame";
 import { NotifyDataLoaded } from "./../actions/notifyDataLoaded";
 import { SetSubjects } from "./../actions/setSubjects";
+import { MainFrameState } from "./../reducers/mainFrameState";
 
 const mapStateToProps = (state) : IMainFrameStateProps => {
-    return {IsSlotLoaded: state.MainFrameReducer.IsSlotLoaded};
+    const target = state.MainFrameReducer as MainFrameState;
+    return {IsSlotLoaded: target.IsSlotLoaded};
 };
 
 const mapDispatchToProps = (dispatch) : IMainFrameDispatchProps => {
