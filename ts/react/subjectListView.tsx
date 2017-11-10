@@ -118,6 +118,12 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
             .filter((x) => x.IsVisible)
             .length === 0;
 
+        const noSubjectIsSelected = this
+                        .props
+                        .subjects
+                        .filter((s) => s.IsSelected)
+                        .length === 0;
+
         return (
             <section style={this.state.sectionStyle}>
                 <header style={headerStyle}>
@@ -141,11 +147,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                     <FlatButton
                         icon={< IconEye />}
                         style={buttonStyle}
-                        disabled={this
-                        .props
-                        .subjects
-                        .filter((s) => s.IsSelected)
-                        .length === 0}
+                        disabled={noSubjectIsSelected}
                         key="toggle-view-button"
                         label={this.props.isShowingSelectedSubjectOnly
                         ? "Show all subjects"
@@ -156,6 +158,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                     <RaisedButton
                         icon={< IconTick />}
                         style={buttonStyle}
+                        disabled={noSubjectIsSelected}
                         key="done-button"
                         label="Done"
                         primary={true}
