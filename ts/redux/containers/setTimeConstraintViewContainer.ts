@@ -16,7 +16,7 @@ const mapStateToProps = (state): ISetTimeConstraintViewStateProps => {
     const target = state.TimetableCreatorStateReducer.SetTimeConstraintState as ISetTimeConstraintState;
     return {
         totalState: target.TotalState,
-        isSetTimeConstraintDialogOpened: target.IsSetTimeConstraintDialogOpened
+        IsOpen: target.IsOpen
     };
 };
 

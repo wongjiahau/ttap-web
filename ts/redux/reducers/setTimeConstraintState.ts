@@ -9,17 +9,17 @@ import {GenereteReducer} from "./generateReducer";
 export interface ISetTimeConstraintState {
     Timetables: Timetable[];
     TotalState: State[];
-    IsSetTimeConstraintDialogOpened: boolean;
+    IsOpen: boolean;
 }
 
 export class SetTimeConstraintState implements ISetTimeConstraintState {
     public readonly Timetables: Timetable[];
     public readonly TotalState: State[];
-    public readonly IsSetTimeConstraintDialogOpened: boolean;
+    public readonly IsOpen: boolean;
     public constructor() {
         this.Timetables = GetTestTimetables1();
         this.TotalState = GenerateTotalState(this.Timetables);
-        this.IsSetTimeConstraintDialogOpened = false;
+        this.IsOpen = false;
     }
 }
 

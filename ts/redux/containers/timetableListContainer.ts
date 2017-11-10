@@ -34,6 +34,9 @@ import {
     SaveTimetableAsGoogleCalendar
 } from "./../actions/saveTimetable/saveTimetableAsGoogleCalendar";
 import {
+    ToggleSetTimeConstraintView
+} from "./../actions/toggleSetTimeConstraintView";
+import {
     UpdateSubjectListState
 } from "./../actions/updateSubjectListState";
 import {
@@ -61,7 +64,7 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable())),
         handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable())),
         handleSetTimeConstraint: () => {
-            alert("not implemented yet");
+            dispatch(new ToggleSetTimeConstraintView(true).Action());
         },
         handleSaveAsTextFile: () => {
             dispatch(Wrap(new SaveTimetableAsTextFile()));
