@@ -1,4 +1,5 @@
 import * as $ from "jquery";
+import Typography from "material-ui-next/Typography";
 import Divider from "material-ui/Divider";
 import FlatButton from "material-ui/FlatButton";
 import Paper from "material-ui/Paper";
@@ -11,6 +12,12 @@ import * as S from "string";
 import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
 import {SubjectView} from "./subjectView";
+
+// region styles
+const errorMessageStyle : React.CSSProperties = {
+    marginTop: "10px",
+    marginLeft: "10px",
+};
 
 const headerStyle : React.CSSProperties = {
     fontSize: "42px",
@@ -43,6 +50,7 @@ const buttonStyle : React.CSSProperties = {
     marginLeft: "10px"
 };
 
+// endregion
 export interface ISubjectListViewStateProps {
     searchWord : string;
     subjects : Subject[];
@@ -101,6 +109,18 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                 }
             });
 
+        const errorMessage = (
+            <Typography style={errorMessageStyle} type="subheading" gutterBottom={true}>
+                No result is found . . .
+            </Typography>
+        );
+
+        const showErrorMessage = this
+            .props
+            .subjects
+            .filter((x) => x.IsVisible)
+            .length === 0;
+
         return (
             <section style={this.state.sectionStyle}>
                 <header style={headerStyle}>
@@ -113,7 +133,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                 </header>
                 <Paper style={divStyle}>
                     <div id="subject-list-container">
-                        {subjectViews}
+                        {!showErrorMessage
+                            ? subjectViews
+                            : errorMessage}
                     </div>
                 </Paper>
                 <footer style={footerStyle}>
