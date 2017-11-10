@@ -1,4 +1,5 @@
 import * as $ from "jquery";
+import {LinearProgress} from "material-ui-next";
 import Typography from "material-ui-next/Typography";
 import Divider from "material-ui/Divider";
 import FlatButton from "material-ui/FlatButton";
@@ -52,6 +53,7 @@ export interface ISubjectListViewStateProps {
     searchWord : string;
     subjects : Subject[];
     isShowingSelectedSubjectOnly : boolean;
+    isShowingLoadingBar : boolean;
 }
 
 export interface ISubjectListViewDispatchProps {
@@ -119,10 +121,10 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
             .length === 0;
 
         const numberOfSelectedSubjects = this
-                        .props
-                        .subjects
-                        .filter((s) => s.IsSelected)
-                        .length;
+            .props
+            .subjects
+            .filter((s) => s.IsSelected)
+            .length;
 
         const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
@@ -145,6 +147,10 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                             : errorMessage}
                     </div>
                 </Paper>
+                {this.props.isShowingLoadingBar
+                    ? <LinearProgress/>
+                    : ""
+}
                 <footer style={footerStyle}>
                     <FlatButton
                         icon={< IconEye />}
@@ -153,16 +159,20 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         key="toggle-view-button"
                         label={this.props.isShowingSelectedSubjectOnly
                         ? "Show all subjects"
-                        : (noSubjectIsSelected ? "Show selected subjects" : `Show selected subjects (${numberOfSelectedSubjects})` )}
+                        : (noSubjectIsSelected
+                            ? "Show selected subjects"
+                            : `Show selected subjects (${numberOfSelectedSubjects})`)}
                         secondary={true}
                         keyboardFocused={true}
                         onClick={this.props.handleToggleView}/>
                     <RaisedButton
                         icon={< IconTick />}
                         style={buttonStyle}
-                        disabled={noSubjectIsSelected}
+                        disabled={noSubjectIsSelected || this.props.isShowingLoadingBar}
                         key="done-button"
-                        label="Done"
+                        label={this.props.isShowingLoadingBar
+                        ? "Loading . . ."
+                        : "Done"}
                         primary={true}
                         keyboardFocused={true}
                         onClick={this.props.handleClose}/>

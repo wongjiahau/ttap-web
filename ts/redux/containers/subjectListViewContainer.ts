@@ -2,7 +2,8 @@ import {
     connect
 } from "react-redux";
 import {
-    SubjectListStateAction, SubjectListState
+    SubjectListState,
+    SubjectListStateAction
 } from "../reducers/subjectListState";
 import {
     TimetableCreatorStateAction
@@ -25,6 +26,9 @@ import {
     SelectSubject
 } from "./../actions/selectSubject";
 import {
+    ToggleLoadingBar
+} from "./../actions/toggleLoadingBar";
+import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
 import {
@@ -39,7 +43,8 @@ const mapStateToProps = (state): ISubjectListViewStateProps => {
     return {
         searchWord: target.SearchedText,
         isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
-        subjects: target.Subjects
+        subjects: target.Subjects,
+        isShowingLoadingBar: target.IsShowingLoadingBar
     };
 };
 
@@ -49,8 +54,13 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleSearch: (searchedText: string) => dispatch(Wrap(new SearchSubjectList(searchedText)).Action()),
         handleSelection: (subjectCode: string) => {
             dispatch(Wrap(new SelectSubject(subjectCode)).Action());
-            dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
-            dispatch(new NotifyIfTimetableIsFound().Action());
+            dispatch(Wrap(new ToggleLoadingBar(true)).Action());
+            // dispatch(SearchTimetables(subjectCode));
+            setTimeout(() => {
+                dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
+                dispatch(Wrap(new ToggleLoadingBar(false)).Action());
+                dispatch(new NotifyIfTimetableIsFound().Action());
+            }, 0);
         },
         handleToggleView: () => dispatch(Wrap(new ToggleSubjectListViewingOptions()).Action())
     };
@@ -61,3 +71,31 @@ export const SubjectListViewContainer = connect(mapStateToProps, mapDispatchToPr
 const Wrap = (action: SubjectListStateAction): TimetableCreatorStateAction => {
     return new UpdateSubjectListState(action);
 };
+
+function SearchTimetables(subjectCode: string) {
+    return (dispatch) => {
+        dispatch(Wrap(new SelectSubject(subjectCode)).Action());
+        dispatch(Wrap(new ToggleLoadingBar(true)).Action());
+        process.nextTick(() => {
+            dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
+            dispatch(Wrap(new ToggleLoadingBar(false)).Action());
+        });
+
+        return;
+        setTimeout(() => {
+            dispatch(Wrap(new ToggleLoadingBar(false)).Action());
+        }, 5000);
+        const searchTimetable = new Promise((resolve, reject) => {
+            let b = 1;
+            for (let i = 0; i < 9999999999; i++) {
+                b += i;
+            }
+            // dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
+            resolve();
+        });
+        searchTimetable.then(() => {
+            dispatch(Wrap(new ToggleLoadingBar(false)).Action());
+            dispatch(new NotifyIfTimetableIsFound().Action());
+        });
+    };
+}
