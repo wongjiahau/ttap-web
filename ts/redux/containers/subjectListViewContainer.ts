@@ -55,7 +55,6 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleSelection: (subjectCode: string) => {
             dispatch(Wrap(new SelectSubject(subjectCode)).Action());
             dispatch(Wrap(new ToggleLoadingBar(true)).Action());
-            // dispatch(SearchTimetables(subjectCode));
             setTimeout(() => {
                 dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
                 dispatch(Wrap(new ToggleLoadingBar(false)).Action());
@@ -71,31 +70,3 @@ export const SubjectListViewContainer = connect(mapStateToProps, mapDispatchToPr
 const Wrap = (action: SubjectListStateAction): TimetableCreatorStateAction => {
     return new UpdateSubjectListState(action);
 };
-
-function SearchTimetables(subjectCode: string) {
-    return (dispatch) => {
-        dispatch(Wrap(new SelectSubject(subjectCode)).Action());
-        dispatch(Wrap(new ToggleLoadingBar(true)).Action());
-        process.nextTick(() => {
-            dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
-            dispatch(Wrap(new ToggleLoadingBar(false)).Action());
-        });
-
-        return;
-        setTimeout(() => {
-            dispatch(Wrap(new ToggleLoadingBar(false)).Action());
-        }, 5000);
-        const searchTimetable = new Promise((resolve, reject) => {
-            let b = 1;
-            for (let i = 0; i < 9999999999; i++) {
-                b += i;
-            }
-            // dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
-            resolve();
-        });
-        searchTimetable.then(() => {
-            dispatch(Wrap(new ToggleLoadingBar(false)).Action());
-            dispatch(new NotifyIfTimetableIsFound().Action());
-        });
-    };
-}
