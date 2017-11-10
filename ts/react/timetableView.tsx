@@ -152,7 +152,7 @@ export const TimetableView = (props : ITimetableViewProps) => {
     }
 
     return (
-        <div style={divStyle}>
+        <div id="timetable-view" style={divStyle}>
             <ReactGridLayout
                 cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2 + 2}
                 maxRows={16}
@@ -168,7 +168,7 @@ export const TimetableView = (props : ITimetableViewProps) => {
                 {child}
             </ReactGridLayout>
         </div>
-    );
+);
 };
 
 export function GetSlotLayout(rawSlot : RawSlot, index : string, xOffset : number, yOffset : number) : ReactGridLayout.Layout {

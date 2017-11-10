@@ -25,6 +25,9 @@ import {
     OpenSaveDialog
 } from "./../actions/openSaveDialog";
 import {
+    SaveTimetableAsImage
+} from "./../actions/saveTimetableAsImage";
+import {
     SaveTimetableAsTextFile
 } from "./../actions/saveTimetableAsTextFile";
 import {
@@ -61,7 +64,7 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
             dispatch(Wrap(new SaveTimetableAsTextFile()).Action());
         },
         handleSaveAsPicture: () => {
-            alert("not implemented yet!");
+            dispatch(Wrap(new SaveTimetableAsImage()).Action());
         },
         handleSaveToGoogleCalendar: () => {
             alert("not implemented yet!");
