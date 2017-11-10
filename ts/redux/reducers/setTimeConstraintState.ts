@@ -1,15 +1,25 @@
-
 import * as typeName from "type-name";
+import { GenerateTotalState } from "../../model/states/generateTotalState";
+import { State } from "../../model/states/state";
 import {Action} from "../actions/action";
+import { Timetable } from "./../../model/timetable";
+import { GetTestTimetables1 } from "./../../tests/testDataGenerator";
 import {GenereteReducer} from "./generateReducer";
 
 export interface ISetTimeConstraintState {
-    // properties...
+    Timetables: Timetable[];
+    TotalState: State[];
+    IsSetTimeConstraintDialogOpened: boolean;
 }
 
 export class SetTimeConstraintState implements ISetTimeConstraintState {
+    public readonly Timetables: Timetable[];
+    public readonly TotalState: State[];
+    public readonly IsSetTimeConstraintDialogOpened: boolean;
     public constructor() {
-        // initialization
+        this.Timetables = GetTestTimetables1();
+        this.TotalState = GenerateTotalState(this.Timetables);
+        this.IsSetTimeConstraintDialogOpened = false;
     }
 }
 
