@@ -16,13 +16,10 @@ import {SubjectView} from "./subjectView";
 // region styles
 const errorMessageStyle : React.CSSProperties = {
     marginTop: "10px",
-    marginLeft: "10px",
+    marginLeft: "10px"
 };
 
 const headerStyle : React.CSSProperties = {
-    fontSize: "42px",
-    fontWeight: "bold",
-    marginBottom: "-5px",
     marginLeft: "15px",
     marginTop: "5px"
 };
@@ -124,7 +121,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         return (
             <section style={this.state.sectionStyle}>
                 <header style={headerStyle}>
-                    Select your desired subjects.
+                    <Typography type="display2" color="primary">
+                        Select your desired subjects.
+                    </Typography>
                     <TextField
                         style={searchBoxStyle}
                         onChange={this.handleSearchBoxOnChange}
