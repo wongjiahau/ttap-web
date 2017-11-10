@@ -4,9 +4,9 @@ import { OpenSaveDialog } from "../actions/openSaveDialog";
 import {SaveTimetableAsImage} from "./../actions/saveTimetableAsImage";
 import {ITimetableListState, TimetableListState, TimetableListStateReducer} from "./../reducers/timetableListState";
 describe("SaveTimetableAsImage action", () => {
-    it("'s typename should be 'save timetable as image'", () => {
+    it("'s typename should be 'save timetable as - image'", () => {
         const action = new SaveTimetableAsImage();
-        expect(action.TypeName()).to.eq("save timetable as image");
+        expect(action.TypeName()).to.eq("save timetable as - image");
     });
 
     it("should set IsSaveDialogOpen property to false", () => {

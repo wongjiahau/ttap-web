@@ -8,28 +8,19 @@ import {
     TimetableSummary
 } from "./../../model/timetableSummary";
 import {
-    ITimetableListState,
-    TimetableListStateAction
-} from "./../reducers/timetableListState";
+    SaveTimetable
+} from "./saveTimetable";
 
-export class SaveTimetableAsTextFile extends TimetableListStateAction {
-    public constructor() {
-        super();
+export class SaveTimetableAsTextFile extends SaveTimetable {
+    protected Save(timetable: Timetable) {
+        const data = new TimetableSummary(timetable).ToString();
+        const file = new File([data], "MyTimetable.txt", {
+            type: "text/plain;charset=utf-8"
+        });
+        saveAs(file);
     }
-    public TypeName(): string {
-        return "save timetable as text file";
-    }
-    protected GenerateNewState(state: ITimetableListState): ITimetableListState {
-        if (state.CurrentTimetable) {
-            const data = new TimetableSummary(state.CurrentTimetable).ToString();
-            const file = new File([data], "MyTimetable.txt", {
-                type: "text/plain;charset=utf-8"
-            });
-            saveAs(file);
-        }
-        return {
-            ...state,
-            IsSaveDialogOpen: false
-        };
+
+    protected SaveType(): string {
+        return "text file";
     }
 }
