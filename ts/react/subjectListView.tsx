@@ -118,11 +118,13 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
             .filter((x) => x.IsVisible)
             .length === 0;
 
-        const noSubjectIsSelected = this
+        const numberOfSelectedSubjects = this
                         .props
                         .subjects
                         .filter((s) => s.IsSelected)
-                        .length === 0;
+                        .length;
+
+        const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
         return (
             <section style={this.state.sectionStyle}>
@@ -151,7 +153,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         key="toggle-view-button"
                         label={this.props.isShowingSelectedSubjectOnly
                         ? "Show all subjects"
-                        : "Show selected subjects"}
+                        : (noSubjectIsSelected ? "Show selected subjects" : `Show selected subjects (${numberOfSelectedSubjects})` )}
                         secondary={true}
                         keyboardFocused={true}
                         onClick={this.props.handleToggleView}/>
