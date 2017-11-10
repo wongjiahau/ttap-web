@@ -32,3 +32,13 @@ export abstract class SaveTimetable extends TimetableListStateAction {
     protected abstract Save(timetable: Timetable);
     protected abstract SaveType() : string;
 }
+
+export class MockSaveTimetable extends SaveTimetable {
+    protected Save(timetable: Timetable) {
+        // do nothing, as the purpose of this class is for testing only
+    }
+    protected SaveType(): string {
+        return "mock";
+    }
+
+}
