@@ -39,7 +39,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         );
         const snackbarMessage = <span>{this.props.snackbarMessage}</span>;
         const anchorOrigin : Origin = {
-            horizontal: "left",
+            horizontal: "right",
             vertical: "bottom",
         };
         return (
