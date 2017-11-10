@@ -4,11 +4,11 @@ import {
 import * as html2canvas from "html2canvas";
 import {
     Timetable
-} from "../../model/timetable";
+} from "../../../model/timetable";
 import {
     ITimetableListState,
     TimetableListStateAction
-} from "./../reducers/timetableListState";
+} from "./../../reducers/timetableListState";
 import {
     SaveTimetable
 } from "./saveTimetable";

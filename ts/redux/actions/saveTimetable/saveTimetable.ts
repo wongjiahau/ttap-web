@@ -3,14 +3,14 @@ import {
 } from "file-saver";
 import {
     Timetable
-} from "./../../model/timetable";
+} from "./../../../model/timetable";
 import {
     TimetableSummary
-} from "./../../model/timetableSummary";
+} from "./../../../model/timetableSummary";
 import {
     ITimetableListState,
     TimetableListStateAction
-} from "./../reducers/timetableListState";
+} from "./../../reducers/timetableListState";
 
 export abstract class SaveTimetable extends TimetableListStateAction {
     public constructor() {

@@ -3,10 +3,10 @@ import {
 } from "file-saver";
 import {
     Timetable
-} from "./../../model/timetable";
+} from "./../../../model/timetable";
 import {
     TimetableSummary
-} from "./../../model/timetableSummary";
+} from "./../../../model/timetableSummary";
 import {
     SaveTimetable
 } from "./saveTimetable";

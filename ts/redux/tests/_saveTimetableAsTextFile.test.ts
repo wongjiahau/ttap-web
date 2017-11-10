@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
+import { SaveTimetableAsTextFile } from "../actions/saveTimetable/saveTimetableAsTextFile";
 import { OpenSaveDialog } from "./../actions/openSaveDialog";
-import {SaveTimetableAsTextFile} from "./../actions/saveTimetableAsTextFile";
 import {ITimetableListState, TimetableListState, TimetableListStateReducer} from "./../reducers/timetableListState";
 describe("SaveTimetableAsTextFile action", () => {
     it("'s typename should be 'save timetable as - text file'", () => {

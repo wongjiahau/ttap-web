@@ -10,6 +10,12 @@ import {
     TimetableListView
 } from "../../react/timetableListView";
 import {
+    SaveTimetableAsImage
+} from "../actions/saveTimetable/saveTimetableAsImage";
+import {
+    SaveTimetableAsTextFile
+} from "../actions/saveTimetable/saveTimetableAsTextFile";
+import {
     TimetableListStateAction
 } from "../reducers/timetableListState";
 import {
@@ -24,12 +30,6 @@ import {
 import {
     OpenSaveDialog
 } from "./../actions/openSaveDialog";
-import {
-    SaveTimetableAsImage
-} from "./../actions/saveTimetableAsImage";
-import {
-    SaveTimetableAsTextFile
-} from "./../actions/saveTimetableAsTextFile";
 import {
     UpdateSubjectListState
 } from "./../actions/updateSubjectListState";
