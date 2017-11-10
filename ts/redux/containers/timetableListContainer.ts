@@ -31,6 +31,9 @@ import {
     OpenSaveDialog
 } from "./../actions/openSaveDialog";
 import {
+    SaveTimetableAsGoogleCalendar
+} from "./../actions/saveTimetable/saveTimetableAsGoogleCalendar";
+import {
     UpdateSubjectListState
 } from "./../actions/updateSubjectListState";
 import {
@@ -55,31 +58,31 @@ const mapStateToProps = (state): ITimetableListViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
     return {
-        handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable()).Action()),
-        handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable()).Action()),
+        handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable())),
+        handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable())),
         handleSetTimeConstraint: () => {
             alert("not implemented yet");
         },
         handleSaveAsTextFile: () => {
-            dispatch(Wrap(new SaveTimetableAsTextFile()).Action());
+            dispatch(Wrap(new SaveTimetableAsTextFile()));
         },
         handleSaveAsPicture: () => {
-            dispatch(Wrap(new SaveTimetableAsImage()).Action());
+            dispatch(Wrap(new SaveTimetableAsImage()));
         },
         handleSaveToGoogleCalendar: () => {
-            alert("not implemented yet!");
+            dispatch(Wrap(new SaveTimetableAsGoogleCalendar()));
         },
         handleOpenSaveDialog: () => {
-            dispatch(Wrap(new OpenSaveDialog()).Action());
+            dispatch(Wrap(new OpenSaveDialog()));
         },
         handleCloseSaveDialog: () => {
-            dispatch(Wrap(new CloseSaveDialog()).Action());
+            dispatch(Wrap(new CloseSaveDialog()));
         }
     };
 };
 
 export const TimetableListContainer = connect(mapStateToProps, mapDispatchToProps)(TimetableListView);
 
-const Wrap = (action: TimetableListStateAction): TimetableCreatorStateAction => {
-    return new UpdateSubjectListState(new UpdateTimetableListState(action));
+const Wrap = (action: TimetableListStateAction): any => {
+    return new UpdateSubjectListState(new UpdateTimetableListState(action)).Action();
 };
