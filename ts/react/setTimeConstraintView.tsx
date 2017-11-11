@@ -5,6 +5,7 @@ import Typography from "material-ui-next/Typography";
 import * as React from "react";
 import {State} from "../model/states/state";
 import {Colors} from "./colors/colors";
+import {TimetableView} from "./timetableView";
 
 // region style
 const headerStyle : React.CSSProperties = {
@@ -13,6 +14,10 @@ const headerStyle : React.CSSProperties = {
 
 const divStyle : React.CSSProperties = {
     textAlign: "center"
+};
+
+const cancelButtonStyle : React.CSSProperties = {
+    marginRight: "10px"
 };
 
 const legendFrameStyle : React.CSSProperties = {
@@ -86,7 +91,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
     public render() {
         return (
             <div>
-                <Dialog open={true} fullScreen={true} transition={Transition}>
+                <Dialog open={this.props.isOpen} fullScreen={true} transition={Transition}>
                     <div style={divStyle}>
                         <Typography
                             type="display3"
@@ -96,11 +101,17 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             Set time constraint
                         </Typography>
                         <table style={legendFrameStyle}>
-                            <Legend type="red" label="Definitely no class"/>
-                            <Legend type="grey" label="Definitely have class"/>
-                            <Legend type="green" label="Click me if you don't want to have class here"/>
+                            <tbody>
+                                <Legend type="red" label="Definitely no class"/>
+                                <Legend type="grey" label="Definitely have class"/>
+                                <Legend type="green" label="Click me if you don't want to have class here"/>
+                            </tbody>
                         </table>
-                        <Button raised={true} color="primary" onClick={this.props.handleCancel}>Cancel</Button>
+                        <TimetableView timetable={null} states={this.props.totalState}/>
+                        <Button
+                            style={cancelButtonStyle}
+                            color="default"
+                            onClick={this.props.handleCancel}>Cancel</Button>
                         <Button raised={true} color="primary" onClick={this.props.handleCancel}>Done</Button>
                     </div>
                 </Dialog>
