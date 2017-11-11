@@ -46,6 +46,9 @@ import {
     UpdateTimetableListState
 } from "./../actions/updateTimetableListState";
 import {
+    UpdateTotalState
+} from "./../actions/updateTotalState";
+import {
     TimetableCreatorStateAction
 } from "./../reducers/timetableCreatorState";
 import {
@@ -85,6 +88,7 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         },
         handleOpenSetTimeConstraintView: () => {
             dispatch(Wrap(new ToggleSetTimeConstraintView(true)));
+            dispatch(Wrap(new UpdateTotalState()));
         },
         handleCloseSetTimeConstraintView: () => {
             dispatch(Wrap(new ToggleSetTimeConstraintView(false)));
