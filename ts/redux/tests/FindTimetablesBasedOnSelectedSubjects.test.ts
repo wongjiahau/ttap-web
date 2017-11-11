@@ -35,10 +35,10 @@ describe("FindTimetables action", () => {
 
     it("should set the TimetableListState when some subject is selected", () => {
         const initialState = new SubjectListState(GetTestSubjects1());
-        expect(initialState.TimetableListState.Timetables).to.have.same.members([null, undefined]);
+        expect(initialState.TimetableListState.AllTimetables).to.have.same.members([null, undefined]);
         let newState = SubjectListStateReducer(initialState, new SelectSubject("MPU3113").Action());
         newState = SubjectListStateReducer(newState, new FindTimetablesBasedOnSelectedSubjects().Action());
-        expect(newState.TimetableListState.Timetables).to.not.have.same.members([null, undefined]);
+        expect(newState.TimetableListState.AllTimetables).to.not.have.same.members([null, undefined]);
 
     });
 

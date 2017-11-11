@@ -6,27 +6,29 @@ import {GetTestSubjects1} from "./../../tests/testDataGenerator";
 import {GenereteReducer} from "./generateReducer";
 
 export interface ITimetableListState {
-    Timetables:                  Timetable[];
-    TotalState:                  State[];
-    CurrentTimetable:            Timetable;
+    AllTimetables:               Timetable[];
     CurrentIndex:                number;
+    CurrentTimetable:            Timetable;
+    FilteredTimetables:          Timetable[];
     IsSaveDialogOpen:            boolean;
     IsSetTimeConstraintViewOpen: boolean;
+    TotalState:                  State[];
 }
 
 export class TimetableListState implements ITimetableListState {
+    public AllTimetables:               Timetable[];
     public CurrentIndex:                number;
     public CurrentTimetable:            Timetable;
+    public FilteredTimetables:          Timetable[];
     public IsSaveDialogOpen:            boolean;
     public IsSetTimeConstraintViewOpen: boolean;
-    public Timetables:                  Timetable[];
     public TotalState:                  State[];
     public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex                = 0;
         this.CurrentTimetable            = timetables[0];
+        this.FilteredTimetables          = timetables;
         this.IsSaveDialogOpen            = false;
         this.IsSetTimeConstraintViewOpen = false;
-        this.Timetables                  = timetables;
         this.TotalState                  = null;
     }
 }

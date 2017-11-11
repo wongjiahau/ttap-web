@@ -10,10 +10,16 @@ describe("setSubjects action", () => {
             .eq("set timetables");
     });
 
-    it("should set the subjects of ISubjectListState", () => {
+    it("should set the property of FilteredTimetables", () => {
         const initialState = new TimetableListState();
         const newState = TimetableListStateReducer(initialState, new SetTimetables([null, null]).Action());
-        expect(newState.Timetables.length).to.eq(2);
+        expect(newState.FilteredTimetables.length).to.eq(2);
+    });
+
+    it("should set the property of AllTimetables", () => {
+        const initialState = new TimetableListState();
+        const newState = TimetableListStateReducer(initialState, new SetTimetables([null, null]).Action());
+        expect(newState.AllTimetables.length).to.eq(2);
     });
 
 });

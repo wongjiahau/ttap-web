@@ -16,7 +16,7 @@ export class UpdateTotalState extends TimetableListStateAction {
     protected GenerateNewState(state: ITimetableListState): ITimetableListState {
         return {
             ...state,
-            TotalState: GenerateTotalState(state.Timetables)
+            TotalState: GenerateTotalState(state.FilteredTimetables)
         };
     }
 }

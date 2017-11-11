@@ -61,7 +61,7 @@ const mapStateToProps = (state): ITimetableListViewStateProps => {
         isSaveDialogOpen: target.IsSaveDialogOpen,
         currentIndex: target.CurrentIndex,
         currentTimetable: target.CurrentTimetable,
-        maxIndex: target.Timetables.length - 1,
+        maxIndex: target.FilteredTimetables.length - 1,
         totalState: target.TotalState,
         isSetTimeConstraintViewOpen: target.IsSetTimeConstraintViewOpen
     };
