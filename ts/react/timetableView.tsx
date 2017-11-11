@@ -44,6 +44,11 @@ class Skeleton implements ISkeleton {
         this.Children = child;
     }
 
+    public Concat(other: ISkeleton) : void {
+        this.Children = this.Children.concat(other.Children);
+        this.Layouts = this.Layouts.concat(other.Layouts);
+    }
+
     private GetTimeRow() {
         const topDivStyle : React.CSSProperties = {
             borderBottom: "1px solid",
@@ -152,48 +157,27 @@ class Skeleton implements ISkeleton {
     }
 
 }
-export const TimetableView = (props : ITimetableViewProps) => {
-    const skeleton = new Skeleton();
-    if (props.timetable) {
-        const rawSlots = RawSlot.GetBunch(props.timetable.HashIds);
-        const colorSchemes = GenerateColorScheme(rawSlots);
-        const slotViews = rawSlots.map((x, index) => {
-            const color = colorSchemes.filter((c) => c.SubjectCode === x.SubjectCode)[0].Color;
-            return (
-                <div key={"s" + index}><SlotView slot={x} color={color}/></div>
-            );
-        });
-        const slotLayouts = rawSlots.map((x, index) => {
-            return GetSlotLayout(x, "s" + index, Skeleton.X_OFFSET, Skeleton.Y_OFFSET);
-        });
-        skeleton.Layouts = skeleton.Layouts.concat(slotLayouts);
-        skeleton.Children = skeleton.Children.concat(slotViews);
-    }
-    if (props.states) {}
 
-    return (
-        <div id="timetable-view" style={divStyle}>
-            <ReactGridLayout
-                cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2 + 2}
-                maxRows={16}
-                rowHeight={50}
-                width={timetableViewWidth}
-                layout={skeleton.Layouts}
-                margin={[0, 0]}
-                isDraggable={false}
-                isResizable={false}
-                autoSize={true}
-                verticalCompact={false}>
-                {skeleton.Children}
-            </ReactGridLayout>
-        </div>
-    );
-};
+function GenerateSlotViews(rawSlots : RawSlot[]) : ISkeleton {
+    const colorSchemes = GenerateColorScheme(rawSlots);
+    const slotViews = rawSlots.map((x, index) => {
+        const color = colorSchemes.filter((c) => c.SubjectCode === x.SubjectCode)[0].Color;
+        return (
+            <div key={"s" + index}><SlotView slot={x} color={color}/></div>
+        );
+    });
+    const slotLayouts = rawSlots.map((x, index) => {
+        return GetSlotLayout(x, "s" + index, Skeleton.X_OFFSET, Skeleton.Y_OFFSET);
+    });
+    return {
+        Children: slotViews,
+        Layouts: slotLayouts
+    };
+}
 
 export function GetSlotLayout(rawSlot : RawSlot, index : string, xOffset : number, yOffset : number) : ReactGridLayout.Layout {
     const day = ParseDay(rawSlot.Day) - 1;
-    const [X,
-        W] = GetXandW(TimePeriod.Parse(rawSlot.TimePeriod));
+    const [X, W] = GetXandW(TimePeriod.Parse(rawSlot.TimePeriod));
     const result: ReactGridLayout.Layout = {
         h: 1,
         i: index,
@@ -215,3 +199,31 @@ export function GetXandW(timePeriod : TimePeriod) : [number, number] {
         .TotalHours() * 2;
     return [x, w];
 }
+
+export const TimetableView = (props : ITimetableViewProps) => {
+    const skeleton = new Skeleton();
+    if (props.timetable) {
+        const rawSlots = RawSlot.GetBunch(props.timetable.HashIds);
+        const slotViews = GenerateSlotViews(rawSlots);
+        skeleton.Concat(slotViews);
+    }
+    if (props.states) {}
+
+    return (
+        <div id="timetable-view" style={divStyle}>
+            <ReactGridLayout
+                cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2 + 2}
+                maxRows={16}
+                rowHeight={50}
+                width={timetableViewWidth}
+                layout={skeleton.Layouts}
+                margin={[0, 0]}
+                isDraggable={false}
+                isResizable={false}
+                autoSize={true}
+                verticalCompact={false}>
+                {skeleton.Children}
+            </ReactGridLayout>
+        </div>
+    );
+};
