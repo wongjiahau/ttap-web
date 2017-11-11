@@ -6,10 +6,6 @@ import {
     GenereteReducer
 } from "./generateReducer";
 import {
-    ISetTimeConstraintState,
-    SetTimeConstraintState
-} from "./setTimeConstraintState";
-import {
     ISubjectListState,
     SubjectListState
 } from "./subjectListState";
@@ -19,7 +15,6 @@ export interface ITimetableCreatorState {
     IsSnackbarVisible: boolean;
     SnackbarMessage: string;
     SubjectListState: ISubjectListState;
-    SetTimeConstraintState: ISetTimeConstraintState;
 }
 
 export class TimetableCreatorState implements ITimetableCreatorState {
@@ -27,13 +22,11 @@ export class TimetableCreatorState implements ITimetableCreatorState {
     public SnackbarMessage: string;
     public IsSubjectListViewVisible: boolean;
     public SubjectListState: ISubjectListState;
-    public SetTimeConstraintState: ISetTimeConstraintState;
     public constructor(isSubjectListVisible = true, isSnackbarVisible = false, snackbarMessage = "") {
         this.IsSubjectListViewVisible = isSubjectListVisible;
         this.IsSnackbarVisible = isSnackbarVisible;
         this.SnackbarMessage = snackbarMessage;
         this.SubjectListState = new SubjectListState();
-        this.SetTimeConstraintState = new SetTimeConstraintState();
     }
 }
 

@@ -2,11 +2,11 @@ import RaisedButton from "material-ui/RaisedButton";
 import IconClock from "material-ui/svg-icons/action/alarm";
 import IconSave from "material-ui/svg-icons/content/save";
 import * as React from "react";
-import { State } from "../model/states/state";
+import {State} from "../model/states/state";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
 import {SaveTimetableDialog} from "./saveTimetableDialog";
-import {ISetTimeConstraintViewProps, SetTimeConstraintView} from "./setTimeConstraintView";
+import {SetTimeConstraintView} from "./setTimeConstraintView";
 import {TimetableView} from "./timetableView";
 
 const centerDivStyle : React.CSSProperties = {
@@ -29,6 +29,8 @@ export interface ITimetableListViewStateProps {
     currentIndex : number; // non-zero based
     maxIndex : number; // non-zero based
     isSaveDialogOpen : boolean;
+    totalState : State[];
+    isSetTimeConstraintViewOpen : boolean;
 }
 
 export interface ITimetableListViewDispatchProps {
@@ -40,12 +42,13 @@ export interface ITimetableListViewDispatchProps {
     handleOpenSaveDialog : () => void;
     handleCloseSaveDialog : () => void;
     handleOpenSetTimeConstraintView : () => void;
+    handleSetTimeConstraintAt : (state : State) => void;
+    handleCloseSetTimeConstraintView : () => void;
 }
 
 export interface ITimetableListViewProps extends
 ITimetableListViewStateProps,
-ITimetableListViewDispatchProps,
-ISetTimeConstraintViewProps {}
+ITimetableListViewDispatchProps {}
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
         return (
@@ -80,10 +83,9 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     handleSaveToGoogleCalendar={this.props.handleSaveToGoogleCalendar}/>
                 <SetTimeConstraintView
                     totalState={this.props.totalState}
-                    isSetTimeConstraintViewOpen={this.props.isSetTimeConstraintViewOpen}
+                    isOpen={this.props.isSetTimeConstraintViewOpen}
                     handleSetTimeConstraintAt={this.props.handleSetTimeConstraintAt}
-                    handleCancel={this.props.handleCancel}
-                    />
+                    handleCancel={this.props.handleCloseSetTimeConstraintView}/>
             </div>
         );
     }

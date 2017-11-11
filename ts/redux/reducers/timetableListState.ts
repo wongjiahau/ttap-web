@@ -1,26 +1,33 @@
 import * as typeName from "type-name";
+import { State } from "../../model/states/state";
 import {Action} from "../actions/action";
 import {Timetable} from "./../../model/timetable";
 import {GetTestSubjects1} from "./../../tests/testDataGenerator";
 import {GenereteReducer} from "./generateReducer";
 
 export interface ITimetableListState {
-    Timetables : Timetable[];
-    CurrentTimetable : Timetable;
-    CurrentIndex : number;
-    IsSaveDialogOpen : boolean;
+    Timetables:                  Timetable[];
+    TotalState:                  State[];
+    CurrentTimetable:            Timetable;
+    CurrentIndex:                number;
+    IsSaveDialogOpen:            boolean;
+    IsSetTimeConstraintViewOpen: boolean;
 }
 
 export class TimetableListState implements ITimetableListState {
-    public IsSaveDialogOpen: boolean;
-    public CurrentTimetable : Timetable;
-    public Timetables : Timetable[];
-    public CurrentIndex : number;
+    public CurrentIndex:                number;
+    public CurrentTimetable:            Timetable;
+    public IsSaveDialogOpen:            boolean;
+    public IsSetTimeConstraintViewOpen: boolean;
+    public Timetables:                  Timetable[];
+    public TotalState:                  State[];
     public constructor(timetables : Timetable[] = [null, undefined]) {
-        this.CurrentIndex = 0;
-        this.Timetables = timetables;
-        this.CurrentTimetable = timetables[0];
-        this.IsSaveDialogOpen = false;
+        this.CurrentIndex                = 0;
+        this.CurrentTimetable            = timetables[0];
+        this.IsSaveDialogOpen            = false;
+        this.IsSetTimeConstraintViewOpen = false;
+        this.Timetables                  = timetables;
+        this.TotalState                  = null;
     }
 }
 

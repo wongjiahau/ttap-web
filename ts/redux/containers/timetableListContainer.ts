@@ -5,6 +5,9 @@ import {
     connect
 } from "react-redux";
 import {
+    State
+} from "../../model/states/state";
+import {
     ITimetableListViewDispatchProps,
     ITimetableListViewStateProps,
     TimetableListView
@@ -56,6 +59,8 @@ const mapStateToProps = (state): ITimetableListViewStateProps => {
         currentIndex: target.CurrentIndex,
         currentTimetable: target.CurrentTimetable,
         maxIndex: target.Timetables.length - 1,
+        totalState: target.TotalState,
+        isSetTimeConstraintViewOpen: target.IsSetTimeConstraintViewOpen
     };
 };
 
@@ -63,9 +68,6 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
     return {
         handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable())),
         handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable())),
-        handleSetTimeConstraint: () => {
-            dispatch(new ToggleSetTimeConstraintView(true).Action());
-        },
         handleSaveAsTextFile: () => {
             dispatch(Wrap(new SaveTimetableAsTextFile()));
         },
@@ -80,7 +82,17 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         },
         handleCloseSaveDialog: () => {
             dispatch(Wrap(new CloseSaveDialog()));
+        },
+        handleOpenSetTimeConstraintView: () => {
+            dispatch(Wrap(new ToggleSetTimeConstraintView(true)));
+        },
+        handleCloseSetTimeConstraintView: () => {
+            dispatch(Wrap(new ToggleSetTimeConstraintView(false)));
+        },
+        handleSetTimeConstraintAt: (state: State) => {
+            alert("not handled yet");
         }
+
     };
 };
 

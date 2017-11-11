@@ -1,22 +1,19 @@
 import {
-    ITimetableCreatorState,
-    TimetableCreatorStateAction
-} from "./../reducers/timetableCreatorState";
+    ITimetableListState,
+    TimetableListStateAction
+} from "./../reducers/timetableListState";
 
-export class ToggleSetTimeConstraintView extends TimetableCreatorStateAction {
+export class ToggleSetTimeConstraintView extends TimetableListStateAction {
     public constructor(private open: boolean) {
         super();
     }
     public TypeName(): string {
         return this.open ? "open set time constraint view" : "close set time constraint view";
     }
-    protected GenerateNewState(state: ITimetableCreatorState): ITimetableCreatorState {
+    protected GenerateNewState(state: ITimetableListState): ITimetableListState {
         return {
             ...state,
-            SetTimeConstraintState: {
-                ...state.SetTimeConstraintState,
-                IsOpen: this.open
-            }
+            IsSetTimeConstraintViewOpen: this.open
         };
     }
 }
