@@ -44,9 +44,13 @@ class Skeleton implements ISkeleton {
         this.Children = child;
     }
 
-    public Concat(other: ISkeleton) : void {
-        this.Children = this.Children.concat(other.Children);
-        this.Layouts = this.Layouts.concat(other.Layouts);
+    public Concat(other : ISkeleton) : void {
+        this.Children = this
+            .Children
+            .concat(other.Children);
+        this.Layouts = this
+            .Layouts
+            .concat(other.Layouts);
     }
 
     private GetTimeRow() {
@@ -169,15 +173,13 @@ function GenerateSlotViews(rawSlots : RawSlot[]) : ISkeleton {
     const slotLayouts = rawSlots.map((x, index) => {
         return GetSlotLayout(x, "s" + index, Skeleton.X_OFFSET, Skeleton.Y_OFFSET);
     });
-    return {
-        Children: slotViews,
-        Layouts: slotLayouts
-    };
+    return {Children: slotViews, Layouts: slotLayouts};
 }
 
 export function GetSlotLayout(rawSlot : RawSlot, index : string, xOffset : number, yOffset : number) : ReactGridLayout.Layout {
     const day = ParseDay(rawSlot.Day) - 1;
-    const [X, W] = GetXandW(TimePeriod.Parse(rawSlot.TimePeriod));
+    const [X,
+        W] = GetXandW(TimePeriod.Parse(rawSlot.TimePeriod));
     const result: ReactGridLayout.Layout = {
         h: 1,
         i: index,
@@ -200,6 +202,42 @@ export function GetXandW(timePeriod : TimePeriod) : [number, number] {
     return [x, w];
 }
 
+export function GenerateStateViews(states : State[]) : ISkeleton {
+    const GetStateView = (kind : StateKind) => {
+        switch (kind) {
+            case StateKind.DefinitelyOccupied:
+                return "0";
+            case StateKind.DefinitelyUnoccupied:
+                return "1";
+            case StateKind.MaybeOccupied:
+                return "2";
+            case StateKind.Clicked:
+                return "3";
+            default:
+                return "X";
+        }
+    };
+    const child = [];
+    const layouts = new Array < ReactGridLayout.Layout > ();
+    states.forEach((s) => {
+        const content = GetStateView(s.Kind);
+        child.push(
+            <div key={s.Uid.toString()}>{content}</div>
+        );
+        layouts.push({
+            i: s.Uid.toString(),
+            x: s.X + Skeleton.X_OFFSET,
+            y: s.Day + Skeleton.Y_OFFSET,
+            h: 1,
+            w: 1
+        });
+    });
+    return {
+        Children: child,
+        Layouts: layouts
+    };
+}
+
 export const TimetableView = (props : ITimetableViewProps) => {
     const skeleton = new Skeleton();
     if (props.timetable) {
@@ -207,7 +245,11 @@ export const TimetableView = (props : ITimetableViewProps) => {
         const slotViews = GenerateSlotViews(rawSlots);
         skeleton.Concat(slotViews);
     }
-    if (props.states) {}
+    if (props.states) {
+        const stateViews = GenerateStateViews(props.states);
+        console.log(stateViews);
+        skeleton.Concat(stateViews);
+    }
 
     return (
         <div id="timetable-view" style={divStyle}>
