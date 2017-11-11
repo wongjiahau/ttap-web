@@ -25,6 +25,9 @@ import {
     CloseSaveDialog
 } from "./../actions/closeSaveDialog";
 import {
+    FilterTimetable
+} from "./../actions/filterTimetable";
+import {
     GoToNextTimetable
 } from "./../actions/goToNextTimetable";
 import {
@@ -94,7 +97,7 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
             dispatch(Wrap(new ToggleSetTimeConstraintView(false)));
         },
         handleSetTimeConstraintAt: (state: State) => {
-            alert("not handled yet");
+            dispatch(Wrap(new FilterTimetable(state)));
         }
 
     };

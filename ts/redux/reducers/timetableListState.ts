@@ -26,6 +26,7 @@ export class TimetableListState implements ITimetableListState {
     public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex                = 0;
         this.CurrentTimetable            = timetables[0];
+        this.AllTimetables               = timetables;
         this.FilteredTimetables          = timetables;
         this.IsSaveDialogOpen            = false;
         this.IsSetTimeConstraintViewOpen = false;

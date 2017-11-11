@@ -107,7 +107,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                                 <Legend type="green" label="Click me if you don't want to have class here"/>
                             </tbody>
                         </table>
-                        <TimetableView timetable={null} states={this.props.totalState}/>
+                        <TimetableView timetable={null} states={this.props.totalState} handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}/>
                         <Button
                             style={cancelButtonStyle}
                             color="default"

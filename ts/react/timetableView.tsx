@@ -1,4 +1,5 @@
 import * as $ from "jquery";
+import Button from "material-ui-next/Button";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {ParseDay} from "../att/day";
@@ -22,6 +23,8 @@ const divStyle : React.CSSProperties = {
 export interface ITimetableViewProps {
     timetable : Timetable;
     states : State[];
+    handleSetTimeContraintAt? : (state : State) => void;
+    handleDesetTimeContraintAt? : (state : State) => void;
 }
 interface ISkeleton {
     Layouts : ReactGridLayout.Layout[];
@@ -190,7 +193,7 @@ export function GetSlotLayout(rawSlot : RawSlot, index : string, xOffset : numbe
     return result;
 }
 
-export function GetXandW(timePeriod : TimePeriod) : [number, number] {
+export function GetXandW(timePeriod : TimePeriod) : [number, number]{
     let x = (timePeriod.StartTime.Hour - TimePeriod.Min.Hour) * 2;
     if (timePeriod.StartTime.Minute === 30) {
         x++;
@@ -202,15 +205,15 @@ export function GetXandW(timePeriod : TimePeriod) : [number, number] {
     return [x, w];
 }
 
-export function GenerateStateViews(states : State[]) : ISkeleton {
-    const GetStateView = (kind : StateKind) => {
-        switch (kind) {
+export function GenerateStateViews(states : State[], handleSetTimeContraintAt : (state : State) => void, handleDesetTimeConstraintAt : (state : State) => void) : ISkeleton {
+    const GetStateView = (state : State) => {
+        switch (state.Kind) {
             case StateKind.DefinitelyOccupied:
                 return "0";
             case StateKind.DefinitelyUnoccupied:
                 return "1";
             case StateKind.MaybeOccupied:
-                return "2";
+                return (<Button dense={true} onClick={() => { handleSetTimeContraintAt(state); }}>#</Button>);
             case StateKind.Clicked:
                 return "3";
             default:
@@ -220,22 +223,23 @@ export function GenerateStateViews(states : State[]) : ISkeleton {
     const child = [];
     const layouts = new Array < ReactGridLayout.Layout > ();
     states.forEach((s) => {
-        const content = GetStateView(s.Kind);
+        const content = GetStateView(s);
         child.push(
-            <div key={s.Uid.toString()}>{content}</div>
+            <div key={s
+                .Uid
+                .toString()}>{content}</div>
         );
         layouts.push({
-            i: s.Uid.toString(),
+            i: s
+                .Uid
+                .toString(),
             x: s.X + Skeleton.X_OFFSET,
             y: s.Day + Skeleton.Y_OFFSET,
             h: 1,
             w: 1
         });
     });
-    return {
-        Children: child,
-        Layouts: layouts
-    };
+    return {Children: child, Layouts: layouts};
 }
 
 export const TimetableView = (props : ITimetableViewProps) => {
@@ -246,8 +250,7 @@ export const TimetableView = (props : ITimetableViewProps) => {
         skeleton.Concat(slotViews);
     }
     if (props.states) {
-        const stateViews = GenerateStateViews(props.states);
-        console.log(stateViews);
+        const stateViews = GenerateStateViews(props.states, props.handleSetTimeContraintAt, props.handleDesetTimeContraintAt);
         skeleton.Concat(stateViews);
     }
 
