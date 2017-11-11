@@ -6,7 +6,6 @@ import RaisedButton from "material-ui/RaisedButton";
 import IconList from "material-ui/svg-icons/action/list";
 import * as React from "react";
 import {Subject} from "../model/subject";
-import { SetTimeConstraintViewContainer } from "../redux/containers/setTimeConstraintViewContainer";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 
@@ -55,7 +54,6 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     label="Select subjects"
                     onClick={this.props.handleToggleVisibilityOfSubjectListView}/>
                 <TimetableListContainer/>
-                <SetTimeConstraintViewContainer/>
                 <Snackbar
                     action={okButton}
                     open={this.props.isSnackbarVisible && (viewCount % 2 === 0)}

@@ -2,9 +2,11 @@ import RaisedButton from "material-ui/RaisedButton";
 import IconClock from "material-ui/svg-icons/action/alarm";
 import IconSave from "material-ui/svg-icons/content/save";
 import * as React from "react";
+import { State } from "../model/states/state";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
 import {SaveTimetableDialog} from "./saveTimetableDialog";
+import {ISetTimeConstraintViewProps, SetTimeConstraintView} from "./setTimeConstraintView";
 import {TimetableView} from "./timetableView";
 
 const centerDivStyle : React.CSSProperties = {
@@ -32,16 +34,18 @@ export interface ITimetableListViewStateProps {
 export interface ITimetableListViewDispatchProps {
     handleGoToNext : () => void;
     handleGoToPrevious : () => void;
-    handleSetTimeConstraint : () => void;
     handleSaveAsTextFile : () => void;
     handleSaveAsPicture : () => void;
     handleSaveToGoogleCalendar : () => void;
-    handleOpenSaveDialog: () => void;
-    handleCloseSaveDialog: () => void;
+    handleOpenSaveDialog : () => void;
+    handleCloseSaveDialog : () => void;
+    handleOpenSetTimeConstraintView : () => void;
 }
 
-export interface ITimetableListViewProps extends ITimetableListViewStateProps,
-ITimetableListViewDispatchProps {}
+export interface ITimetableListViewProps extends
+ITimetableListViewStateProps,
+ITimetableListViewDispatchProps,
+ISetTimeConstraintViewProps {}
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
         return (
@@ -53,7 +57,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     <RaisedButton
                         primary={true}
                         style={footerButtonStyle}
-                        onClick={this.props.handleSetTimeConstraint}
+                        onClick={this.props.handleOpenSetTimeConstraintView}
                         icon={< IconClock />}
                         label="Set time constraint"/>
                     <CounterView
@@ -74,6 +78,12 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     handleSaveAsPicture={this.props.handleSaveAsPicture}
                     handleSaveAsTextFile={this.props.handleSaveAsTextFile}
                     handleSaveToGoogleCalendar={this.props.handleSaveToGoogleCalendar}/>
+                <SetTimeConstraintView
+                    totalState={this.props.totalState}
+                    isSetTimeConstraintViewOpen={this.props.isSetTimeConstraintViewOpen}
+                    handleSetTimeConstraintAt={this.props.handleSetTimeConstraintAt}
+                    handleCancel={this.props.handleCancel}
+                    />
             </div>
         );
     }
