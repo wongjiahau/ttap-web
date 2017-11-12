@@ -61,6 +61,14 @@ describe("DefilterTimetable action", () => {
         expect(newState2.UidsOfClickedState.length).to.eq(0);
     });
 
+    it("should set property of ClickedTimeConstraint", () => {
+        const initialState = new TimetableListState(GetTestTimetables1());
+        const newState1 = TimetableListStateReducer(initialState, new FilterTimetable(state0).Action());
+        expect(newState1.ClickedTimeConstraint).to.deep.eq([16, 0, 0, 0, 0, 0, 0]);
+        const newState2 = TimetableListStateReducer(newState1, new DefilterTimetable(state1).Action());
+        expect(newState2.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
+    });
+
     it("case 1", () => {
         const initialState = new TimetableListState(GetTestTimetables1());
         const newState1 = TimetableListStateReducer(initialState, new UpdateTotalState().Action());
