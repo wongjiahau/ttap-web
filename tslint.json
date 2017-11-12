@@ -7,18 +7,19 @@
     "jsRules": {},
     "rules": {
         "jsx-alignment": false,
-        "jsx-wrap-multiline": false,
-        "no-var-requires": false,
-        "trailing-comma": false,
-        "typedef-whitespace": false,
+        "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
-        "space-before-function-paren" : false,
+        "jsx-wrap-multiline": false,
         "max-classes-per-file" : false,
-        "prefer-for-of": false,
+        "max-line-length": false,
         "no-bitwise": false,
-        "object-literal-sort-keys": false,
         "no-string-literal": false,
-        "max-line-length": false
+        "no-var-requires": false,
+        "object-literal-sort-keys": false,
+        "prefer-for-of": false,
+        "space-before-function-paren" : false,
+        "trailing-comma": false,
+        "typedef-whitespace": false
     },
     "rulesDirectory": []
 }

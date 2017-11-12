@@ -4,7 +4,7 @@ import {
 import {
     GetSlotLayout,
     GetXandW
-} from "../timetableView";
+} from "../timetableView/generateSlotViews";
 import {
     TimePeriod
 } from "./../../att/timePeriod";

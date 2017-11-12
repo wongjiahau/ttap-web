@@ -10,7 +10,7 @@ import {TimetableCreatorContainer} from "../redux/containers/timetableCreatorCon
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
 import {SlotView} from "./slotView";
 import {TimetableCreatorView} from "./timetableCreatorView";
-import {TimetableView} from "./timetableView";
+import {TimetableView} from "./timetableView/timetableView";
 
 export interface IPlaygroundProps {
     id : number; // this line is just to surpress TSLint error on empty interface

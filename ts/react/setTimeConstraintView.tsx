@@ -5,7 +5,7 @@ import Typography from "material-ui-next/Typography";
 import * as React from "react";
 import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, State} from "../model/states/state";
 import {Colors} from "./colors/colors";
-import {TimetableView} from "./timetableView";
+import {TimetableView} from "./timetableView/timetableView";
 
 // region style
 const typo1Style : React.CSSProperties = {

@@ -7,7 +7,7 @@ import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
 import {SaveTimetableDialog} from "./saveTimetableDialog";
 import {SetTimeConstraintView} from "./setTimeConstraintView";
-import {TimetableView} from "./timetableView";
+import {TimetableView} from "./timetableView/timetableView";
 
 const centerDivStyle : React.CSSProperties = {
     margin: "auto",
