@@ -8,7 +8,6 @@ import {GenereteReducer} from "./generateReducer";
 export interface ITimetableListState {
     ResidueTimetables:           Timetable[];
     CurrentIndex:                number;
-    CurrentTimetable:            Timetable;
     FiltrateTimetables:          Timetable[];
     IsSaveDialogOpen:            boolean;
     IsSetTimeConstraintViewOpen: boolean;
@@ -20,7 +19,6 @@ export interface ITimetableListState {
 export class TimetableListState implements ITimetableListState {
     public ResidueTimetables:           Timetable[];
     public CurrentIndex:                number;
-    public CurrentTimetable:            Timetable;
     public FiltrateTimetables:          Timetable[];
     public IsSaveDialogOpen:            boolean;
     public IsSetTimeConstraintViewOpen: boolean;
@@ -29,7 +27,6 @@ export class TimetableListState implements ITimetableListState {
     public ClickedTimeConstraint:       number[/*7*/];
     public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex                = 0;
-        this.CurrentTimetable            = timetables[0];
         this.ResidueTimetables           = [];
         this.FiltrateTimetables          = timetables;
         this.IsSaveDialogOpen            = false;

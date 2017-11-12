@@ -27,15 +27,4 @@ describe("goToPrevTimetable action", () => {
             .eq(2);
     });
 
-    it("should set the CurrentTimetable property", () => {
-        const initialState = new TimetableListState([undefined, null]);
-        const newState = TimetableListStateReducer(initialState, new GoToPrevTimetable().Action());
-        expect(initialState.CurrentTimetable)
-            .to
-            .eq(undefined);
-        expect(newState.CurrentTimetable)
-            .to
-            .eq(null);
-    });
-
 });

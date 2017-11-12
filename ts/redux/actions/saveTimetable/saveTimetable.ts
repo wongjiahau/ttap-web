@@ -20,8 +20,9 @@ export abstract class SaveTimetable extends TimetableListStateAction {
         return "save timetable as - " + this.SaveType();
     }
     protected GenerateNewState(state: ITimetableListState): ITimetableListState {
-        if (state.CurrentTimetable) {
-            this.Save(state.CurrentTimetable);
+        const currentTimetable = state.FiltrateTimetables[state.CurrentIndex];
+        if (currentTimetable) {
+            this.Save(currentTimetable);
         }
         return {
             ...state,

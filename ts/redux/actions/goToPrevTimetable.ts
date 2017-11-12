@@ -12,7 +12,6 @@ export class GoToPrevTimetable extends TimetableListStateAction {
         return {
             ...state,
             CurrentIndex: newIndex,
-            CurrentTimetable: state.FiltrateTimetables[newIndex]
         };
     }
 }
