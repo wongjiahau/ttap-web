@@ -12,6 +12,9 @@ import {
     FilterTimetable
 } from "./../actions/filterTimetable";
 import {
+    GoToNextTimetable
+} from "./../actions/goToNextTimetable";
+import {
     ITimetableListState,
     TimetableListState,
     TimetableListStateReducer
@@ -60,6 +63,15 @@ describe("FilterTimetable action", () => {
         const initialState = new TimetableListState(GetTestTimetables1());
         expect(initialState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
         const newState = TimetableListStateReducer(initialState, action);
-        expect(newState).to.deep.eq([16, 0, 0, 0, 0, 0, 0]);
+        expect(newState.ClickedTimeConstraint).to.deep.eq([16, 0, 0, 0, 0, 0, 0]);
+    });
+
+    it("should set property of CurrentIndex to 0", () => {
+        const action = new FilterTimetable(state).Action();
+        const initialState = new TimetableListState(GetTestTimetables1());
+        let newState = TimetableListStateReducer(initialState, new GoToNextTimetable().Action());
+        expect(newState.CurrentIndex).to.eq(1);
+        newState = TimetableListStateReducer(newState, action);
+        expect(newState.CurrentIndex).to.eq(0);
     });
 });

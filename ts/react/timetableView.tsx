@@ -5,7 +5,14 @@ import * as ReactGridLayout from "react-grid-layout";
 import {ParseDay} from "../att/day";
 import {TimePeriod} from "../att/timePeriod";
 import {RawSlot} from "../model/rawSlot";
-import {ColorOfClicked, ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, State, StateKind} from "../model/states/state";
+import {
+    ColorOfClicked,
+    ColorOfDefinitelyOccupied,
+    ColorOfDefinitelyUnoccupied,
+    ColorOfMaybeOccupied,
+    State,
+    StateKind
+} from "../model/states/state";
 import {Timetable} from "../model/timetable";
 import {Colors} from "./colors/colors";
 import {GenerateColorScheme} from "./colors/generateColorScheme";
@@ -211,13 +218,14 @@ export function GetXandW(timePeriod : TimePeriod) : [number, number]{
 
 export function GenerateStateViews(states : State[], handleSetTimeContraintAt : (state : State) => void, handleDesetTimeConstraintAt : (state : State) => void) : ISkeleton {
     const boxFrameStyle: React.CSSProperties = {
-        height: "50px",
-        width: "38px"
+        height: "49px",
+        width: "38px",
+        borderBottom: "1px solid grey"
     };
     const Box = (props : {
         color: Colors
     }) => {
-        const style = {
+        const style : React.CSSProperties = {
             ...boxFrameStyle,
             background: props.color
         };
@@ -236,11 +244,15 @@ export function GenerateStateViews(states : State[], handleSetTimeContraintAt : 
     const ClickedBox = (props : {
         handleClick: () => void
     }) => {
-        const style = {
+        const style : React.CSSProperties = {
             ...boxFrameStyle,
-            background: ColorOfClicked
+            background: ColorOfClicked,
+            fontWeight: "bold",
+            fontSize: "20px"
         };
-        return (<button onClick={props.handleClick} style={style}>X</button>);
+        return (
+            <button onClick={props.handleClick} style={style}>X</button>
+        );
     };
 
     const GetStateView = (state : State) => {
@@ -250,10 +262,9 @@ export function GenerateStateViews(states : State[], handleSetTimeContraintAt : 
             case StateKind.DefinitelyUnoccupied:
                 return (<Box color={ColorOfDefinitelyUnoccupied}/>);
             case StateKind.MaybeOccupied:
-                return ( <MaybeOccupiedBox handleClick={()=>{handleSetTimeContraintAt(state)}}/>);
+                return (<MaybeOccupiedBox handleClick={() => { handleSetTimeContraintAt(state) }}/>);
             case StateKind.Clicked:
-                return ( <ClickedBox handleClick={()=>{handleDesetTimeConstraintAt(state)}}/>);
-            default:
+                return (<ClickedBox handleClick={() => { handleDesetTimeConstraintAt(state) }}/>); default:
                 throw Error();
         }
     };
@@ -261,21 +272,37 @@ export function GenerateStateViews(states : State[], handleSetTimeContraintAt : 
     const layouts = new Array < ReactGridLayout.Layout > ();
     states.forEach((s) => {
         const content = GetStateView(s);
+        const key = s
+            .Uid
+            .toString();
         child.push(
-            <div key={s
-                .Uid
-                .toString()}>{content}</div>
+            <div key={key}>{content}</div>
         );
         layouts.push({
-            i: s
-                .Uid
-                .toString(),
+            i: key,
             x: s.X + Skeleton.X_OFFSET,
             y: s.Day + Skeleton.Y_OFFSET,
             h: 1,
             w: 1
         });
     });
+
+    // append extra boxes at the front to make the view looks normal
+    for (let day = 0; day < 7; day++) {
+        for (let x = 0; x < 2; x++) {
+            const key = "e" + day.toString() + x.toString(); // e means extraneous
+            child.push(
+                <div key={key}><Box color={ColorOfDefinitelyUnoccupied}/></div>
+            );
+            layouts.push({
+                i: key,
+                x: x + Skeleton.X_OFFSET - 2,
+                y: day + Skeleton.Y_OFFSET,
+                h: 1,
+                w: 1
+            });
+        }
+    }
     return {Children: child, Layouts: layouts};
 }
 

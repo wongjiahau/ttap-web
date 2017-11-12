@@ -8,24 +8,35 @@ import {Colors} from "./colors/colors";
 import {TimetableView} from "./timetableView";
 
 // region style
-const typoStyle : React.CSSProperties = {
-    marginTop: "15px"
+const typo1Style : React.CSSProperties = {
+    marginTop: "15px",
+    marginLeft: "65px",
+    marginRight: "10px"
+};
+
+const typo2Style : React.CSSProperties = {
+    marginTop: "8px"
 };
 
 const divStyle : React.CSSProperties = {
-    textAlign: "center"
+    textAlign: "center",
+    overflowY: "auto"
 };
 
-const cancelButtonStyle : React.CSSProperties = {
-    marginRight: "10px"
+const tableStyle : React.CSSProperties = {
+    width: "100%"
 };
 
 const legendFrameStyle : React.CSSProperties = {
     height: "100px",
     margin: "0 auto",
-    width: "50%",
+    width: "400",
     border: "solid 1px lightgrey",
-    padding: "10px"
+    padding: "10px",
+};
+
+const cancelButtonStyle : React.CSSProperties = {
+    marginRight: "10px"
 };
 // endregion style
 
@@ -96,18 +107,28 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
             <div>
                 <Dialog open={this.props.isOpen} fullScreen={true} transition={Transition}>
                     <div style={divStyle}>
-                        <Typography
-                            type="display2"
-                            style={typoStyle}
-                            gutterBottom={true}
-                            align="center">
-                            Set time constraint
-                        </Typography>
-                        <table style={legendFrameStyle}>
+                        <table style={tableStyle}>
                             <tbody>
-                                <Legend type="grey" label="Definitely no class"/>
-                                <Legend type="red" label="Definitely have class"/>
-                                <Legend type="green" label="Click me if you don't want to have class here"/>
+                                <tr>
+                                    <td>
+                                        <Typography
+                                            type="display3"
+                                            style={typo1Style}
+                                            gutterBottom={true}
+                                            align="center">
+                                            Set time constraint
+                                        </Typography>
+                                    </td>
+                                    <td>
+                                        <table style={legendFrameStyle}>
+                                            <tbody>
+                                                <Legend type="grey" label="Definitely no class"/>
+                                                <Legend type="red" label="Definitely have class"/>
+                                                <Legend type="green" label="Click me if you don't want to have class here"/>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <TimetableView
@@ -115,8 +136,8 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             states={this.props.totalState}
                             handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}
                             handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/>
-                        <Typography type="body2" style={typoStyle} gutterBottom={true} align="center">
-                            {`Removed ${this.props.numberOfRemovedTimetables} unsatisfactory timetables. ${this.props.numberOfRemainingTimetables} timetables remaining.`}
+                        <Typography type="body2" style={typo2Style} gutterBottom={true} align="center">
+                            {this.props.numberOfRemovedTimetables > 0 ? `Removed ${this.props.numberOfRemovedTimetables} unsatisfactory timetables. ${this.props.numberOfRemainingTimetables} timetables remaining.` : ""}
                         </Typography>
                         <Button
                             style={cancelButtonStyle}

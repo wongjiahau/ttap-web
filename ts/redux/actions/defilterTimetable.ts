@@ -28,6 +28,7 @@ export class DefilterTimetable extends TimetableListStateAction {
         const newResidueTimetables = unrescued;
         return {
             ...state,
+            CurrentIndex: 0,
             UidsOfClickedState: newUidsOfClickedState,
             FiltrateTimetables: newFiltrateTimetables,
             ResidueTimetables: newResidueTimetables,

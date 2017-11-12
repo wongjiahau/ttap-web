@@ -25,6 +25,6 @@ export class State {
 }
 
 export const ColorOfDefinitelyOccupied = Colors.DarkRed;
-export const ColorOfDefinitelyUnoccupied = Colors.Grey;
+export const ColorOfDefinitelyUnoccupied = Colors.DarkGrey;
 export const ColorOfMaybeOccupied = Colors.LightGreen;
 export const ColorOfClicked = Colors.LightBlue;
