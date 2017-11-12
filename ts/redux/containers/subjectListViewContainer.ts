@@ -15,7 +15,7 @@ import {
 } from "./../../react/subjectListView";
 import {
     FindTimetablesBasedOnSelectedSubjects
-} from "./../actions/FindTimetablesBasedOnSelectedSubjects";
+} from "./../actions/findTimetablesBasedOnSelectedSubjects";
 import {
     NotifyIfTimetableIsFound
 } from "./../actions/notifyIfTimetableIsFound";

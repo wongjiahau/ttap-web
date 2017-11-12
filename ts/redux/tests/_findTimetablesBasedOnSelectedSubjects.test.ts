@@ -12,7 +12,7 @@ import {
 } from "../actions/selectSubject";
 import {
     FindTimetablesBasedOnSelectedSubjects
-} from "./../actions/FindTimetablesBasedOnSelectedSubjects";
+} from "./../actions/findTimetablesBasedOnSelectedSubjects";
 import {
     ISubjectListState,
     SubjectListState,
