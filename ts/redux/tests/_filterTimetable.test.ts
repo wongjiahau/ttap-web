@@ -25,12 +25,17 @@ describe("FilterTimetable action", () => {
         expect(action.TypeName()).to.eq("filter timetable");
     });
 
-    it("should set property of FileteredTimetable", () => {
+    it("should set property of FiltrateTimetables and ResidueTimetables ", () => {
         const initialState = new TimetableListState(GetTestTimetables1());
-        expect(initialState.AllTimetables).to.deep.eq(initialState.FilteredTimetables);
-        expect(initialState.TotalState).to.eq(null);
         const newState = TimetableListStateReducer(initialState, new FilterTimetable(state).Action());
-        expect(newState.AllTimetables).to.not.deep.eq(newState.FilteredTimetables);
+        expect(newState.FiltrateTimetables).to.not.deep.eq(initialState.FiltrateTimetables);
+        expect(newState.ResidueTimetables).to.not.deep.eq(initialState.ResidueTimetables);
+    });
+
+    it("the resulting FiltrateTimetables and ResidueTimetables should equal to the original list of timetables when they concated", () => {
+        const initialState = new TimetableListState(GetTestTimetables1());
+        const newState = TimetableListStateReducer(initialState, new FilterTimetable(state).Action());
+        expect(newState.FiltrateTimetables.concat(newState.ResidueTimetables).length).to.eq(initialState.FiltrateTimetables.length);
     });
 
     it("should set property of TotalState based on the filtered timetables", () => {

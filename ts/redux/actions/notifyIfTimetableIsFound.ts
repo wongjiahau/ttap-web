@@ -12,7 +12,7 @@ export class NotifyIfTimetableIsFound extends TimetableCreatorStateAction {
     }
     protected GenerateNewState(state: ITimetableCreatorState): ITimetableCreatorState {
         const converter = require("number-to-words");
-        const numberOfTimetablesFound = state.SubjectListState.TimetableListState.AllTimetables.length;
+        const numberOfTimetablesFound = state.SubjectListState.TimetableListState.ResidueTimetables.length;
         const shouldShowSnackbar = state.SubjectListState.Subjects.some((s) => s.IsSelected);
         let x = "";
         if (numberOfTimetablesFound === 0) {

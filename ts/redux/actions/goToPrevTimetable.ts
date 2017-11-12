@@ -7,12 +7,12 @@ export class GoToPrevTimetable extends TimetableListStateAction {
     protected GenerateNewState(state : ITimetableListState) : ITimetableListState {
         let newIndex = state.CurrentIndex - 1;
         if (newIndex < 0) {
-            newIndex = state.FilteredTimetables.length - 1;
+            newIndex = state.FiltrateTimetables.length - 1;
         }
         return {
             ...state,
             CurrentIndex: newIndex,
-            CurrentTimetable: state.FilteredTimetables[newIndex]
+            CurrentTimetable: state.FiltrateTimetables[newIndex]
         };
     }
 }

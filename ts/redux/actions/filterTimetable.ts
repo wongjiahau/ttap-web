@@ -26,11 +26,12 @@ export class FilterTimetable extends TimetableListStateAction {
         return "filter timetable";
     }
     protected GenerateNewState(state: ITimetableListState): ITimetableListState {
-        const filtered = Filter(state.FilteredTimetables, this.state);
+        const [filtrate, residue] = Filter(state.FiltrateTimetables, this.state);
         return {
             ...state,
-            FilteredTimetables: filtered,
-            TotalState: GenerateTotalState(filtered)
+            FiltrateTimetables: filtrate,
+            ResidueTimetables: residue,
+            TotalState: GenerateTotalState(filtrate)
         };
     }
 }

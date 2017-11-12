@@ -1,16 +1,24 @@
-import { Timetable } from "../timetable";
-import { State, StateKind } from "./state";
+import {
+    Timetable
+} from "../timetable";
+import {
+    State,
+    StateKind
+} from "./state";
 
-export function Filter(timetables: Timetable[], state: State): Timetable[] {
+export function Filter(timetables: Timetable[], state: State): [Timetable[], Timetable[]] {
     if (state.Kind !== StateKind.MaybeOccupied) {
         throw new Error("Only state that is MaybeOccupied can call the Filter function");
     }
-    const result = [];
+    const filtrate = [];
+    const residue = [];
     for (let i = 0; i < timetables.length; i++) {
         const t = timetables[i];
         if ((t.State[state.Day] & state.TimePeriod) === 0) {
-            result.push(t);
+            filtrate.push(t);
+        } else {
+            residue.push(t);
         }
     }
-    return result;
+    return [filtrate, residue];
 }

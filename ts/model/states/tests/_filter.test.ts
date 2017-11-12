@@ -14,4 +14,11 @@ describe("Filter()", () => {
         expect(() => {Filter(timetables, new State(StateKind.MaybeOccupied, null, null, null)); }).to.not.throw();
     });
 
+    
+    it('case 1', () => {
+        // TODO: Complete code here
+        
+    });
+    
+
 });

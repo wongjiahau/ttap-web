@@ -12,8 +12,8 @@ export class SetTimetables extends TimetableListStateAction {
     protected GenerateNewState(state: ITimetableListState): ITimetableListState {
         return {
             ...state,
-            AllTimetables: this.newTimetables,
-            FilteredTimetables: this.newTimetables
+            ResidueTimetables: this.newTimetables,
+            FiltrateTimetables: this.newTimetables
         };
     }
 

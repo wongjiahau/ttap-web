@@ -6,13 +6,13 @@ export class GoToNextTimetable extends TimetableListStateAction {
 
     protected GenerateNewState(state : ITimetableListState) : ITimetableListState {
         let newIndex = state.CurrentIndex + 1;
-        if (newIndex > state.FilteredTimetables.length - 1) {
+        if (newIndex > state.FiltrateTimetables.length - 1) {
             newIndex = 0;
         }
         return {
             ...state,
             CurrentIndex: newIndex,
-            CurrentTimetable: state.FilteredTimetables[newIndex]
+            CurrentTimetable: state.FiltrateTimetables[newIndex]
         };
     }
 }
