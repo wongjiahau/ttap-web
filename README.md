@@ -38,3 +38,6 @@ $ npm run start
 ```
 #### 5. Enjoy!
 
+## This app is brought to you by : 
+* [ Dheeno ]( https://github.com/DheenodaraRao )
+* [ wjh ]( https://github.com/wongjiahau )
