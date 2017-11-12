@@ -33,16 +33,17 @@ export class Skeleton implements ISkeleton {
     }
 
     private GetTimeRow() {
-        const topDivStyle : React.CSSProperties = {
+        const divStyle : React.CSSProperties = {
             borderBottom: "1px solid",
             borderRight: "1px solid",
+            height: "20.5px",
             fontFamily: "roboto",
             padding: "2px",
             textAlign: "center"
         };
-        const btmDivStyle : React.CSSProperties = {
+        const lastDivStyle: React.CSSProperties = {
             borderBottom: "1px solid",
-            borderRight: "1px solid",
+            height: "20.5px",
             fontFamily: "roboto",
             padding: "2px",
             textAlign: "center"
@@ -50,6 +51,7 @@ export class Skeleton implements ISkeleton {
         const result = [];
         for (let i = 0;; i++) {
             let time = i + TimePeriod.Min.Hour - 1;
+            const isAtLast = time === TimePeriod.Max.Hour;
             if (time > TimePeriod.Max.Hour) {
                 break;
             }
@@ -58,8 +60,8 @@ export class Skeleton implements ISkeleton {
                 : time - 12;
             result.push(
                 <div key={"t" + i}>
-                    <div style={topDivStyle}>{time + ":00"}</div>
-                    <div style={btmDivStyle}>{(time + 1) + ":00"}</div>
+                    <div style={isAtLast ? lastDivStyle : divStyle}>{time + ":00"}</div>
+                    <div style={isAtLast ? lastDivStyle : divStyle}>{(time + 1) + ":00"}</div>
                 </div>
             );
         }
