@@ -1,3 +1,5 @@
+import { Colors } from "../../react/colors/colors";
+
 export enum StateKind {
     DefinitelyOccupied,
     DefinitelyUnoccupied,
@@ -21,3 +23,8 @@ export class State {
         }
     }
 }
+
+export const ColorOfDefinitelyOccupied = Colors.DarkRed;
+export const ColorOfDefinitelyUnoccupied = Colors.Grey;
+export const ColorOfMaybeOccupied = Colors.LightGreen;
+export const ColorOfClicked = Colors.LightBlue;

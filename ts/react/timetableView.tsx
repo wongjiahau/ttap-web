@@ -5,7 +5,7 @@ import * as ReactGridLayout from "react-grid-layout";
 import {ParseDay} from "../att/day";
 import {TimePeriod} from "../att/timePeriod";
 import {RawSlot} from "../model/rawSlot";
-import {State, StateKind} from "../model/states/state";
+import {ColorOfClicked, ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, State, StateKind} from "../model/states/state";
 import {Timetable} from "../model/timetable";
 import {Colors} from "./colors/colors";
 import {GenerateColorScheme} from "./colors/generateColorScheme";
@@ -23,8 +23,12 @@ const divStyle : React.CSSProperties = {
 export interface ITimetableViewProps {
     timetable : Timetable;
     states : State[];
-    handleSetTimeContraintAt? : (state : State) => void;
-    handleDesetTimeContraintAt? : (state : State) => void;
+    handleSetTimeContraintAt
+        ?
+        : (state : State) => void;
+    handleDesetTimeContraintAt
+        ?
+        : (state : State) => void;
 }
 interface ISkeleton {
     Layouts : ReactGridLayout.Layout[];
@@ -206,18 +210,51 @@ export function GetXandW(timePeriod : TimePeriod) : [number, number]{
 }
 
 export function GenerateStateViews(states : State[], handleSetTimeContraintAt : (state : State) => void, handleDesetTimeConstraintAt : (state : State) => void) : ISkeleton {
+    const boxFrameStyle: React.CSSProperties = {
+        height: "50px",
+        width: "38px"
+    };
+    const Box = (props : {
+        color: Colors
+    }) => {
+        const style = {
+            ...boxFrameStyle,
+            background: props.color
+        };
+        return (<div style={style}/>);
+    };
+
+    const MaybeOccupiedBox = (props : {
+        handleClick: () => void
+    }) => {
+        const style = {
+            ...boxFrameStyle,
+            background: ColorOfMaybeOccupied
+        };
+        return (<button onClick={props.handleClick} style={style}/>);
+    };
+    const ClickedBox = (props : {
+        handleClick: () => void
+    }) => {
+        const style = {
+            ...boxFrameStyle,
+            background: ColorOfClicked
+        };
+        return (<button onClick={props.handleClick} style={style}>X</button>);
+    };
+
     const GetStateView = (state : State) => {
         switch (state.Kind) {
             case StateKind.DefinitelyOccupied:
-                return "0";
+                return (<Box color={ColorOfDefinitelyOccupied}/>);
             case StateKind.DefinitelyUnoccupied:
-                return "1";
+                return (<Box color={ColorOfDefinitelyUnoccupied}/>);
             case StateKind.MaybeOccupied:
-                return (<button onClick={() => { handleSetTimeContraintAt(state); }}>O</button>);
+                return ( <MaybeOccupiedBox handleClick={()=>{handleSetTimeContraintAt(state)}}/>);
             case StateKind.Clicked:
-                return (<button onClick={() => { handleDesetTimeConstraintAt(state); }}>X</button>);
+                return ( <ClickedBox handleClick={()=>{handleDesetTimeConstraintAt(state)}}/>);
             default:
-                return "X";
+                throw Error();
         }
     };
     const child = [];

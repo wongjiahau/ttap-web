@@ -3,7 +3,7 @@ import Dialog from "material-ui-next/Dialog";
 import Slide from "material-ui-next/transitions/Slide";
 import Typography from "material-ui-next/Typography";
 import * as React from "react";
-import {State} from "../model/states/state";
+import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, State} from "../model/states/state";
 import {Colors} from "./colors/colors";
 import {TimetableView} from "./timetableView";
 
@@ -43,11 +43,11 @@ const Legend = (props : ILegendProps) => {
     const background = () => {
         switch (props.type) {
             case "red":
-                return Colors.DarkRed;
+                return ColorOfDefinitelyOccupied;
             case "grey":
-                return Colors.Grey;
+                return ColorOfDefinitelyUnoccupied;
             case "green":
-                return Colors.Green;
+                return ColorOfMaybeOccupied;
         }
     };
 
@@ -95,7 +95,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                 <Dialog open={this.props.isOpen} fullScreen={true} transition={Transition}>
                     <div style={divStyle}>
                         <Typography
-                            type="display3"
+                            type="display2"
                             style={headerStyle}
                             gutterBottom={true}
                             align="center">
@@ -103,8 +103,8 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                         </Typography>
                         <table style={legendFrameStyle}>
                             <tbody>
-                                <Legend type="red" label="Definitely no class"/>
-                                <Legend type="grey" label="Definitely have class"/>
+                                <Legend type="grey" label="Definitely no class"/>
+                                <Legend type="red" label="Definitely have class"/>
                                 <Legend type="green" label="Click me if you don't want to have class here"/>
                             </tbody>
                         </table>
