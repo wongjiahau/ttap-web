@@ -69,7 +69,9 @@ const mapStateToProps = (state): ITimetableListViewStateProps => {
         currentTimetable: target.CurrentTimetable,
         maxIndex: target.FiltrateTimetables.length - 1,
         totalState: target.TotalState,
-        isSetTimeConstraintViewOpen: target.IsSetTimeConstraintViewOpen
+        isSetTimeConstraintViewOpen: target.IsSetTimeConstraintViewOpen,
+        numberOfRemovedTimetables: target.ResidueTimetables.length,
+        numberOfRemainingTimetables: target.FiltrateTimetables.length
     };
 };
 

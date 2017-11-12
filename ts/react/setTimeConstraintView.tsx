@@ -8,7 +8,7 @@ import {Colors} from "./colors/colors";
 import {TimetableView} from "./timetableView";
 
 // region style
-const headerStyle : React.CSSProperties = {
+const typoStyle : React.CSSProperties = {
     marginTop: "15px"
 };
 
@@ -78,6 +78,8 @@ const Legend = (props : ILegendProps) => {
 export interface ISetTimeConstraintViewStateProps {
     totalState : State[];
     isOpen : boolean;
+    numberOfRemovedTimetables : number;
+    numberOfRemainingTimetables : number;
 }
 
 export interface ISetTimeConstraintViewDispatchProps {
@@ -96,7 +98,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                     <div style={divStyle}>
                         <Typography
                             type="display2"
-                            style={headerStyle}
+                            style={typoStyle}
                             gutterBottom={true}
                             align="center">
                             Set time constraint
@@ -113,6 +115,9 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             states={this.props.totalState}
                             handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}
                             handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/>
+                        <Typography type="body2" style={typoStyle} gutterBottom={true} align="center">
+                            {`Removed ${this.props.numberOfRemovedTimetables} unsatisfactory timetables. ${this.props.numberOfRemainingTimetables} timetables remaining.`}
+                        </Typography>
                         <Button
                             style={cancelButtonStyle}
                             color="default"

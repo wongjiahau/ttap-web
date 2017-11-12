@@ -31,6 +31,8 @@ export interface ITimetableListViewStateProps {
     isSaveDialogOpen : boolean;
     totalState : State[];
     isSetTimeConstraintViewOpen : boolean;
+    numberOfRemovedTimetables: number;
+    numberOfRemainingTimetables: number;
 }
 
 export interface ITimetableListViewDispatchProps {
@@ -83,6 +85,8 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     handleSaveAsTextFile={this.props.handleSaveAsTextFile}
                     handleSaveToGoogleCalendar={this.props.handleSaveToGoogleCalendar}/>
                 <SetTimeConstraintView
+                    numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
+                    numberOfRemainingTimetables={this.props.numberOfRemainingTimetables}
                     totalState={this.props.totalState}
                     isOpen={this.props.isSetTimeConstraintViewOpen}
                     handleSetTimeConstraintAt={this.props.handleSetTimeConstraintAt}
