@@ -6,13 +6,14 @@ import {GetTestSubjects1} from "./../../tests/testDataGenerator";
 import {GenereteReducer} from "./generateReducer";
 
 export interface ITimetableListState {
-    ResidueTimetables:               Timetable[];
+    ResidueTimetables:           Timetable[];
     CurrentIndex:                number;
     CurrentTimetable:            Timetable;
     FiltrateTimetables:          Timetable[];
     IsSaveDialogOpen:            boolean;
     IsSetTimeConstraintViewOpen: boolean;
     TotalState:                  State[];
+    UidsOfClickedState:          string[];
 }
 
 export class TimetableListState implements ITimetableListState {
@@ -23,6 +24,7 @@ export class TimetableListState implements ITimetableListState {
     public IsSaveDialogOpen:            boolean;
     public IsSetTimeConstraintViewOpen: boolean;
     public TotalState:                  State[];
+    public UidsOfClickedState:          string[];
     public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex                = 0;
         this.CurrentTimetable            = timetables[0];
@@ -31,6 +33,7 @@ export class TimetableListState implements ITimetableListState {
         this.IsSaveDialogOpen            = false;
         this.IsSetTimeConstraintViewOpen = false;
         this.TotalState                  = null;
+        this.UidsOfClickedState          = [];
     }
 }
 

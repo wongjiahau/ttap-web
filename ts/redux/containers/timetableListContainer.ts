@@ -90,8 +90,8 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
             dispatch(Wrap(new CloseSaveDialog()));
         },
         handleOpenSetTimeConstraintView: () => {
-            dispatch(Wrap(new ToggleSetTimeConstraintView(true)));
             dispatch(Wrap(new UpdateTotalState()));
+            dispatch(Wrap(new ToggleSetTimeConstraintView(true)));
         },
         handleCloseSetTimeConstraintView: () => {
             dispatch(Wrap(new ToggleSetTimeConstraintView(false)));

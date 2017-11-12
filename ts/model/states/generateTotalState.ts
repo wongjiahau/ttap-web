@@ -10,8 +10,8 @@ import {
     StateKind
 } from "./state";
 
-export function GenerateTotalState(timetables: Timetable[]): State[] {
-    const result = [];
+export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: string[] = []): State[] {
+    const result = new Array < State > ();
     const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables); // dos
     const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables); // dus
     const maybeOccupiedState = GetMaybeOccupiedState(definitelyOccupiedState, definitelyUnoccupiedState); // mos
@@ -46,6 +46,16 @@ export function GenerateTotalState(timetables: Timetable[]): State[] {
             }
         }
     }
+
+    for (let i = 0; i < uidsOfClickedState.length; i++) {
+        // change to clicked based on uidsOfClickedState
+        for (let j = 0; j < result.length; j++) {
+            if (result[j].Uid === uidsOfClickedState[i]) {
+                result[j].Kind = StateKind.Clicked;
+            }
+        }
+    }
+
     return result;
 }
 

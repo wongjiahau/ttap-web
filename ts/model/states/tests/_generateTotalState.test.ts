@@ -105,6 +105,24 @@ OOOOOO************--------
 
         });
 
+        it("case when some uidsOfClickedState is passed in", () => {
+            const uidsOfClickedState = ["01", "11", "21", "31", "41", "51", "61"];
+            const timetables = GetTestTimetables1();
+            const totalStates = GenerateTotalState(timetables, uidsOfClickedState);
+            const result = StringifyTotalState(totalStates);
+            const expected = `
+-X--OOOO--------OOOO------
+*X****OO--OOOO******------
+-X--OOOOOOOO----OOOO------
+OXOOOO************--------
+-X------------------------
+-X------------------------
+-X------------------------`;
+            expect(result).to.eq(expected);
+
+        });
+
     });
+
 
 });

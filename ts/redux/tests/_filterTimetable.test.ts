@@ -45,4 +45,12 @@ describe("FilterTimetable action", () => {
         const newState = TimetableListStateReducer(initialState, action);
         expect(newState.TotalState).to.not.eq(null);
     });
+
+    it("should set property of UidsOfClickedState", () => {
+        const action = new FilterTimetable(state).Action();
+        const initialState = new TimetableListState(GetTestTimetables1());
+        expect(initialState.UidsOfClickedState.length).to.eq(0);
+        const newState = TimetableListStateReducer(initialState, action);
+        expect(newState.UidsOfClickedState.length).to.eq(1);
+    });
 });
