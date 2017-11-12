@@ -69,7 +69,7 @@ export function GenerateStateViews(states : State[], handleSetTimeContraintAt : 
 const boxFrameStyle : React.CSSProperties = {
     height: "49px",
     width: "38px",
-    borderBottom: "1px solid grey"
+    borderTop: "1px solid grey"
 };
 const Box = (props : {
     color: Colors
