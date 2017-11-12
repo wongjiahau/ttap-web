@@ -1,19 +1,34 @@
-import { Timetable } from "../timetable";
-import { State, StateKind } from "./state";
+import {
+    sum
+} from "lodash";
+import {
+    Timetable
+} from "../timetable";
+import {
+    State,
+    StateKind
+} from "./state";
 
-export function Defilter(residueTimetables: Timetable[], state: State): [Timetable[], Timetable[]] {
-    if (state.Kind !== StateKind.Clicked) {
-        throw new Error("Only state that is Clicked can call the Defilter function");
+export function Defilter(residueTimetables: Timetable[], clickedTimeConstraint: number[]): [Timetable[], Timetable[]] {
+    if (clickedTimeConstraint.length !== 7) {
+        throw new Error("Length clickedTimeConstraint must be exactly 7.");
     }
     const rescuedTimetables = [];
-    const unrescudeTimetables = [];
+    const unrescuedTimetables = [];
     for (let i = 0; i < residueTimetables.length; i++) {
         const t = residueTimetables[i];
-        if ((t.State[state.Day] & state.TimePeriod) > 0) {
+        let canBeRescued = true;
+        for (let day = 0; day < 7; day++) {
+            if ((t.State[day] & clickedTimeConstraint[day]) > 0) {
+                canBeRescued = false;
+                break;
+            }
+        }
+        if (canBeRescued) {
             rescuedTimetables.push(t);
         } else {
-            unrescudeTimetables.push(t);
+            unrescuedTimetables.push(t);
         }
     }
-    return [rescuedTimetables, unrescudeTimetables];
+    return [rescuedTimetables, unrescuedTimetables];
 }

@@ -14,6 +14,7 @@ export interface ITimetableListState {
     IsSetTimeConstraintViewOpen: boolean;
     TotalState:                  State[];
     UidsOfClickedState:          string[];
+    ClickedTimeConstraint:       number[/*7*/];
 }
 
 export class TimetableListState implements ITimetableListState {
@@ -25,6 +26,7 @@ export class TimetableListState implements ITimetableListState {
     public IsSetTimeConstraintViewOpen: boolean;
     public TotalState:                  State[];
     public UidsOfClickedState:          string[];
+    public ClickedTimeConstraint:       number[/*7*/];
     public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex                = 0;
         this.CurrentTimetable            = timetables[0];
@@ -34,6 +36,7 @@ export class TimetableListState implements ITimetableListState {
         this.IsSetTimeConstraintViewOpen = false;
         this.TotalState                  = null;
         this.UidsOfClickedState          = [];
+        this.ClickedTimeConstraint       = [0, 0, 0, 0, 0, 0, 0];
     }
 }
 

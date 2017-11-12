@@ -26,8 +26,10 @@ import {
     TimetableListStateReducer
 } from "./../reducers/timetableListState";
 
-const state0 = new State(StateKind.MaybeOccupied, 0, 16, 5);
-const state1 = new State(StateKind.Clicked, 0, 16, 5);
+const state0 = new State(StateKind.MaybeOccupied, 0, 16, 5); // Monday 10-10.30 am
+const state1 = new State(StateKind.Clicked, 0, 16, 5); // Monday 10-10.30 am
+const state2 = new State(StateKind.MaybeOccupied, 2, 16, 5); // Wednesday 10-10.30 am
+const state3 = new State(StateKind.Clicked, 2, 16, 5); // Wednesday 10-10.30 am
 
 describe("DefilterTimetable action", () => {
     it("'s typename should be 'defilter timetable at [YX]'", () => {
@@ -57,5 +59,19 @@ describe("DefilterTimetable action", () => {
         expect(newState1.UidsOfClickedState.length).to.eq(1);
         const newState2 = TimetableListStateReducer(newState1, new DefilterTimetable(state1).Action());
         expect(newState2.UidsOfClickedState.length).to.eq(0);
+    });
+
+    it("case 1", () => {
+        const initialState = new TimetableListState(GetTestTimetables1());
+        const newState1 = TimetableListStateReducer(initialState, new UpdateTotalState().Action());
+        const newState2 = TimetableListStateReducer(newState1, new FilterTimetable(state0).Action());
+        expect(newState2.ResidueTimetables.length).to.eq(5);
+        expect(newState2.FiltrateTimetables.length).to.eq(24);
+        const newState3 = TimetableListStateReducer(newState2, new FilterTimetable(state2).Action());
+        expect(newState3.ResidueTimetables.length).to.eq(13);
+        expect(newState3.FiltrateTimetables.length).to.eq(16);
+        const newState4 = TimetableListStateReducer(newState3, new DefilterTimetable(state1).Action());
+        // expect(newState4.ResidueTimetables.length).to.eq(9);
+        expect(newState4.FiltrateTimetables.length).to.eq(20);
     });
 });

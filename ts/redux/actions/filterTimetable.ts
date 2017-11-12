@@ -31,7 +31,7 @@ export class FilterTimetable extends TimetableListStateAction {
         return {
             ...state,
             FiltrateTimetables: filtrate,
-            ResidueTimetables: residue,
+            ResidueTimetables: state.ResidueTimetables.concat(residue),
             TotalState: GenerateTotalState(filtrate, newUidsOfClickedState),
             UidsOfClickedState: newUidsOfClickedState
         };
