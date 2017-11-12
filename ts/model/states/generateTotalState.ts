@@ -32,7 +32,8 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
         const dus = DecToBin(definitelyUnoccupiedState[day], totalNumberOfHalfHourPerDay).split("").reverse().join("");
         for (let j = 0; j < dus.length; j++) {
             if (dus[j] === "0") {
-                result.push(new State(StateKind.DefinitelyUnoccupied, day, null, j));
+                const timeperiod = parseInt("1" + new Array(j + 1).join("0"), 2);
+                result.push(new State(StateKind.DefinitelyUnoccupied, day, timeperiod, j));
             }
         }
     }

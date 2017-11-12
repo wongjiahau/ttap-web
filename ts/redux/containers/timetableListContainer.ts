@@ -25,6 +25,9 @@ import {
     CloseSaveDialog
 } from "./../actions/closeSaveDialog";
 import {
+    DefilterTimetable
+} from "./../actions/defilterTimetable";
+import {
     FilterTimetable
 } from "./../actions/filterTimetable";
 import {
@@ -100,7 +103,7 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
             dispatch(Wrap(new FilterTimetable(state)));
         },
         handleDesetTimeConstraintAt: (state: State) => {
-
+            dispatch(Wrap(new DefilterTimetable(state)));
         }
     };
 };

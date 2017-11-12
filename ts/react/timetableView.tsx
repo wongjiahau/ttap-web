@@ -213,9 +213,9 @@ export function GenerateStateViews(states : State[], handleSetTimeContraintAt : 
             case StateKind.DefinitelyUnoccupied:
                 return "1";
             case StateKind.MaybeOccupied:
-                return (<Button dense={true} onClick={() => { handleSetTimeContraintAt(state); }}>#</Button>);
+                return (<button onClick={() => { handleSetTimeContraintAt(state); }}>O</button>);
             case StateKind.Clicked:
-                return "3";
+                return (<button onClick={() => { handleDesetTimeConstraintAt(state); }}>X</button>);
             default:
                 return "X";
         }
