@@ -98,8 +98,10 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         },
         handleSetTimeConstraintAt: (state: State) => {
             dispatch(Wrap(new FilterTimetable(state)));
-        }
+        },
+        handleDesetTimeConstraintAt: (state: State) => {
 
+        }
     };
 };
 

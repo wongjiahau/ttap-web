@@ -43,6 +43,7 @@ export interface ITimetableListViewDispatchProps {
     handleCloseSaveDialog : () => void;
     handleOpenSetTimeConstraintView : () => void;
     handleSetTimeConstraintAt : (state : State) => void;
+    handleDesetTimeConstraintAt : (state : State) => void;
     handleCloseSetTimeConstraintView : () => void;
 }
 
@@ -85,6 +86,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     totalState={this.props.totalState}
                     isOpen={this.props.isSetTimeConstraintViewOpen}
                     handleSetTimeConstraintAt={this.props.handleSetTimeConstraintAt}
+                    handleDesetTimeConstraintAt={this.props.handleDesetTimeConstraintAt}
                     handleCancel={this.props.handleCloseSetTimeConstraintView}/>
             </div>
         );

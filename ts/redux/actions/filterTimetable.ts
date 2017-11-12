@@ -23,7 +23,7 @@ export class FilterTimetable extends TimetableListStateAction {
         super();
     }
     public TypeName(): string {
-        return "filter timetable";
+        return `filter timetable at [${this.state.Uid}]`;
     }
     protected GenerateNewState(state: ITimetableListState): ITimetableListState {
         const [filtrate, residue] = Filter(state.FiltrateTimetables, this.state);

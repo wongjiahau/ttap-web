@@ -17,12 +17,12 @@ import {
     TimetableListStateReducer
 } from "./../reducers/timetableListState";
 
-const state = new State(StateKind.MaybeOccupied, 0, 16, null);
+const state = new State(StateKind.MaybeOccupied, 0, 16, 5);
 
 describe("FilterTimetable action", () => {
-    it("'s typename should be 'filter timetable'", () => {
-        const action = new FilterTimetable(null);
-        expect(action.TypeName()).to.eq("filter timetable");
+    it("'s typename should be 'filter timetable at [YX]'", () => {
+        const action = new FilterTimetable(state);
+        expect(action.TypeName()).to.eq(`filter timetable at [${state.Uid}]`);
     });
 
     it("should set property of FiltrateTimetables and ResidueTimetables ", () => {
@@ -52,5 +52,6 @@ describe("FilterTimetable action", () => {
         expect(initialState.UidsOfClickedState.length).to.eq(0);
         const newState = TimetableListStateReducer(initialState, action);
         expect(newState.UidsOfClickedState.length).to.eq(1);
+        expect(newState.UidsOfClickedState[0]).to.eq("05");
     });
 });

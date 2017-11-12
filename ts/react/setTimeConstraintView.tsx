@@ -82,6 +82,7 @@ export interface ISetTimeConstraintViewStateProps {
 
 export interface ISetTimeConstraintViewDispatchProps {
     handleSetTimeConstraintAt : (state : State) => void;
+    handleDesetTimeConstraintAt : (state : State) => void;
     handleCancel : () => void;
 }
 
@@ -107,7 +108,11 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                                 <Legend type="green" label="Click me if you don't want to have class here"/>
                             </tbody>
                         </table>
-                        <TimetableView timetable={null} states={this.props.totalState} handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}/>
+                        <TimetableView
+                            timetable={null}
+                            states={this.props.totalState}
+                            handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}
+                            handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/>
                         <Button
                             style={cancelButtonStyle}
                             color="default"
