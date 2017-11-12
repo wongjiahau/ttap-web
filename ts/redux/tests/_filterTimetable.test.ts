@@ -54,4 +54,12 @@ describe("FilterTimetable action", () => {
         expect(newState.UidsOfClickedState.length).to.eq(1);
         expect(newState.UidsOfClickedState[0]).to.eq("05");
     });
+
+    it("should set property of ClickedTimeConstraint", () => {
+        const action = new FilterTimetable(state).Action();
+        const initialState = new TimetableListState(GetTestTimetables1());
+        expect(initialState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
+        const newState = TimetableListStateReducer(initialState, action);
+        expect(newState).to.deep.eq([16, 0, 0, 0, 0, 0, 0]);
+    });
 });
