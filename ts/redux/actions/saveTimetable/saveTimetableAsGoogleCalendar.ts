@@ -2,6 +2,9 @@
 declare let gapi: any;
 import * as moment from "moment";
 import {
+    ParseDay
+} from "../../../att/day";
+import {
     Time
 } from "../../../att/time";
 import {
@@ -186,10 +189,14 @@ function sampleAddEvent() {
 }
 
 export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
+    if (semesterStartDate.getDay() !== 1) {
+        throw new Error("Expected semesterStartDay to be Monday but was " + semesterStartDate.toString());
+    }
     const t = TimePeriod.Parse(slot.TimePeriod);
     const w = Week.Parse(slot.WeekNumber);
     semesterStartDate.setHours(t.StartTime.Hour);
     semesterStartDate.setMinutes(t.StartTime.Minute);
+    semesterStartDate.setDate(semesterStartDate.getDate() + ParseDay(slot.Day) - 1);
     const dates = GetListOfDates(semesterStartDate, w.WeekNumberList);
     const startDate = moment(dates[0]).format("YYYY-MM-DD");
     const recurrence = GetRecurrence(dates.slice(1));
@@ -229,7 +236,7 @@ export function GetRecurrence(dates: Date[]): string {
 export function GetListOfDates(startDate: Date, week: number[]): Date[] {
     const result: Date[] = [];
     week.forEach((x) => {
-        result.push(AddByWeek(startDate, x));
+        result.push(AddByWeek(startDate, x - 1));
     });
     return result;
 }

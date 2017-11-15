@@ -47,7 +47,7 @@ describe("SaveTimetableAsGoogleCalendar", () => {
     describe("GetListOfDate", () => {
         it("case 1", () => {
             const startDate = new Date(2017, 10, 15, 3, 30);
-            const week = [0, 1, 2];
+            const week = [1, 2, 3];
             const expected = [
                 new Date(2017, 10, 15, 3, 30),
                 new Date(2017, 10, 22, 3, 30),
@@ -61,7 +61,7 @@ describe("SaveTimetableAsGoogleCalendar", () => {
 
         it("case 2", () => {
             const startDate = new Date(2017, 10, 15, 3, 30);
-            const week = [2, 7];
+            const week = [3, 8];
             const expected = [
                 new Date(2017, 10, 29, 3, 30),
                 new Date(2018, 0, 3, 3, 30),
@@ -95,22 +95,43 @@ describe("SaveTimetableAsGoogleCalendar", () => {
 
     describe("CreateEvent", () => {
         it("case 1", () => {
-            const rawSlots = GetTestRawSlot1()[0];
-            const semesterStartDate = new Date(2017, 10, 15);
-            const result = CreateEvent(rawSlots, semesterStartDate);
+            const testSlot = GetTestRawSlot1()[0];
+            const semesterStartDate = new Date(2017, 10, 13);
+            const result = CreateEvent(testSlot, semesterStartDate);
             const expected = {
                 summary: "Hubungan Etnik (for Local Students) (L-1)",
                 location: "KB207",
                 description: "Subject code : MPU3113, Week : 1-7",
                 start: {
-                    dateTime: "2017-11-22T08:00:00+08:00",
+                    dateTime: "2017-11-13T08:00:00+08:00",
                     timeZone: "UTC+08:00"
                 },
                 end: {
-                    dateTime: "2017-11-22T11:00:00+08:00",
+                    dateTime: "2017-11-13T11:00:00+08:00",
                     timeZone: "UTC+08:00"
                 },
-                recurrence: ["RDATE;TZID=Asia/Kuala_Lumpur:20171129T080000,20171206T080000,20171213T080000,20171220T080000,20171227T080000,20180103T080000"]
+                recurrence: ["RDATE;TZID=Asia/Kuala_Lumpur:20171120T080000,20171127T080000,20171204T080000,20171211T080000,20171218T080000,20171225T080000"]
+            };
+            expect(result).to.deep.equal(expected);
+        });
+
+        it("case 2", () => {
+            const testSlot = GetTestRawSlot1()[1];
+            const semesterStartDate = new Date(2017, 10, 13);
+            const result = CreateEvent(testSlot, semesterStartDate);
+            const expected = {
+                summary: "Hubungan Etnik (for Local Students) (L-1)",
+                location: "KB207",
+                description: "Subject code : MPU3113, Week : 1-7",
+                start: {
+                    dateTime: "2017-11-16T14:00:00+08:00",
+                    timeZone: "UTC+08:00"
+                },
+                end: {
+                    dateTime: "2017-11-16T17:00:00+08:00",
+                    timeZone: "UTC+08:00"
+                },
+                recurrence: ["RDATE;TZID=Asia/Kuala_Lumpur:20171123T140000,20171130T140000,20171207T140000,20171214T140000,20171221T140000,20171228T140000"]
             };
             expect(result).to.deep.equal(expected);
         });
