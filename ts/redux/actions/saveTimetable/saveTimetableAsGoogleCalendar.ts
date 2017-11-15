@@ -90,6 +90,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
             this.addEvents(s);
         });
         this.addWeekNumberHeader();
+        window.open("https://calendar.google.com/");
     }
 
     private addWeekNumberHeader() {
@@ -97,7 +98,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     }
 
     private addEvents(slot: RawSlot) {
-        const calenderEvent = CreateEvent(slot, new Date(2017, 10, 15));
+        const calenderEvent = CreateEvent(slot, new Date(2017, 10, 13));
         gapi // eslint-disable-line
             .client
             .calendar
