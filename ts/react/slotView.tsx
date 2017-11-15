@@ -1,5 +1,6 @@
 import ButtonBase from "material-ui-next/ButtonBase";
 import Tooltip from "material-ui-next/Tooltip";
+import Typography from "material-ui-next/Typography";
 import * as React from "react";
 import {Beautify, GetInitial} from "../helper";
 import {RawSlot} from "../model/rawSlot";
@@ -7,6 +8,10 @@ import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {
     width: "100%"
+};
+
+const typoStyle : React.CSSProperties = {
+    color: Colors.WhiteSmoke
 };
 
 export interface ISlotViewProps {
@@ -17,22 +22,21 @@ export interface ISlotViewProps {
 export class SlotView extends React.Component < ISlotViewProps, {} > {
     public render() {
         const buttonBaseStyle : React.CSSProperties = {
-            background:              this.props.color,
-            borderTop:               "0.5px solid black",
-            borderLeft:              "0.5px solid black",
-            borderRight:             "0.5px solid black",
-            borderBottom:            "0.5px solid black",
-            borderTopLeftRadius:     "2px",
-            borderBottomLeftRadius:  "2px",
-            borderTopRightRadius:    "2px",
+            background: this.props.color,
+            borderTop: "0.5px solid black",
+            borderLeft: "0.5px solid black",
+            borderRight: "0.5px solid black",
+            borderBottom: "0.5px solid black",
+            borderTopLeftRadius: "2px",
+            borderBottomLeftRadius: "2px",
+            borderTopRightRadius: "2px",
             borderBottomRightRadius: "2px",
-            width:                   "100%"
+            width: "100%"
         };
         const slot = this.props.slot;
+        const tooltipTitle = <Typography style={typoStyle}>{Beautify(slot.SubjectName) + " [" + slot.SubjectCode + "]"}</Typography>;
         return (
-            <Tooltip
-                title={Beautify(slot.SubjectName) + " [" + slot.SubjectCode + "]"}
-                placement="bottom">
+            <Tooltip title={tooltipTitle} placement="bottom">
                 <ButtonBase style={buttonBaseStyle}>
                     <div style={divStyle}>
                         <b>
