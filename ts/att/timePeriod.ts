@@ -90,4 +90,16 @@ export class TimePeriod {
             .ToConstructionString()})`;
     }
 
+    public GetStartTimeInIsoFormat(): string {
+        return this.pad(this.StartTime.Hour) + ":" + this.pad(this.StartTime.Minute);
+    }
+
+    public GetEndTimeInIsoFormat(): string {
+        return this.pad(this.EndTime.Hour) + ":" + this.pad(this.EndTime.Minute);
+    }
+
+    private pad (n: number): string {
+        // pad numbers with leading zeros if it is less than 10
+        return (n < 10) ? ("0" + n) : n.toString();
+    }
 }

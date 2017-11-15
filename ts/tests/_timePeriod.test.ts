@@ -194,4 +194,38 @@ describe("time period", () => {
         const input = TimePeriod.Parse(time);
         expect(input.BinaryData.toString(2)).to.eq("1111000000");
     });
+
+    describe("GetStarTime", () => {
+        it("case 1", () => {
+            const time = "11:00 AM - 1:00 PM";
+            const input = TimePeriod.Parse(time);
+            expect(input.GetStartTimeInIsoFormat()).to.eq("11:00");
+        });
+
+        it("case 2", () => {
+            const time = "01:00 PM - 1:00 PM";
+            const input = TimePeriod.Parse(time);
+            expect(input.GetStartTimeInIsoFormat()).to.eq("13:00");
+        });
+
+        it("case 3", () => {
+            const time = "08:00 AM - 1:00 PM";
+            const input = TimePeriod.Parse(time);
+            expect(input.GetStartTimeInIsoFormat()).to.eq("08:00");
+        });
+    });
+
+    describe("GetEndTime", () => {
+        it("case 1", () => {
+            const time = "11:00 AM - 1:00 PM";
+            const input = TimePeriod.Parse(time);
+            expect(input.GetEndTimeInIsoFormat()).to.eq("13:00");
+        });
+
+        it("case 2", () => {
+            const time = "8:00 AM - 9:00 AM";
+            const input = TimePeriod.Parse(time);
+            expect(input.GetEndTimeInIsoFormat()).to.eq("09:00");
+        });
+    });
 });
