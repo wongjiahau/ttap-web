@@ -1,5 +1,7 @@
 /* global gapi */
 declare let gapi: any;
+declare let e: any;
+declare let k: any;
 import * as moment from "moment";
 import {
     ParseDay
@@ -29,12 +31,15 @@ import {
 export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     private loginAlready = false;
     private rawSlots: RawSlot[];
-    private CLIENT_ID = "747215402741-95mierrdvdvh2ap8vn5jdk2i0u2totia.apps.googleusercontent.com";
-    // TODO: Encrypt this
-    private API_KEY = "AIzaSyAoizTbHtbJAyEtwumZDvNd_-DvybawDtw";
+    private CLIENT_ID : string;
+    private API_KEY : string;
     private DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
     private SCOPES = "https://www.googleapis.com/auth/calendar";
     protected Save(timetable: Timetable) {
+        const a = require("simple-encryptor")(e); // eslint-disable-line
+        const b = require("simple-encryptor")(k); // eslint-disable-line
+        this.API_KEY =  a.decrypt("f3af141b626f5dab66145ee333561cbff7bd88c83d7abd50bb5f6de7f869cc86f09c641e8cdddb3cf44ddc7fd8c2204dPgjEoqOTY5UemfuHfK/ml7WWwLzN4lChqlybT3OPkELjggVo+WjpBDL5Vw+/w6MN");
+        this.CLIENT_ID = b.decrypt("8b20953295764fadbf98bf150c59f0acd64c2b8991c7f37405b6cc868f40f1e1ce0aa7ff2339cddd15793dd55c383d1eyMf8J38hvNufV46B+KxyCzyDbFdio1OdEdUAxy6zCrGplsswF2UAtcCjyYLlX4H/j9burm5nUfi+2R4aF4UKuiyBnY/txYqicl+BAoxnV8c=");
         this.rawSlots = RawSlot.GetBunch(timetable.HashIds);
         this.loadClient();
     }
