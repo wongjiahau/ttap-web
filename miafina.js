@@ -46,6 +46,7 @@ function encrypt(state,key,offset){offset=offset||0;addRoundKey(state,offset,key
 subBytes(state,offset);shiftRows(state,offset);addRoundKey(state,offset,key,i)}
 function decrypt(state,key,offset){offset=offset||0;var length=key.length;addRoundKey(state,offset,key,length-16);unshiftRows(state,offset);unsubBytes(state,offset);for(var i=length-32;i>=16;i-=16){addRoundKey(state,offset,key,i);unmixColumns(state,offset);unshiftRows(state,offset);unsubBytes(state,offset)}
 addRoundKey(state,offset,key,0)}
+window. k= "API_KEY='dVPwZHGskCOom4jwqBHu9eTAxBT2MKhG8lE46HGQ_-4K';"
 function subBytes(state,offset){for(var i=offset,l=Math.min(state.length,offset+16);i<l;i++){state[i]=sBox[state[i]]}}
 function unsubBytes(state,offset){for(var i=offset,l=Math.min(state.length,offset+16);i<l;i++){state[i]=sBoxInv[state[i]]}}
 function addRoundKey(state,offset,keySchedule,keyOffset){keyOffset-=offset;for(var i=offset,l=Math.min(state.length,offset+16);i<l;i++){state[i]=state[i]^keySchedule[keyOffset+i]}}
