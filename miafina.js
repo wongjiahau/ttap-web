@@ -61,7 +61,7 @@ var length=state.length;if(length%16>0){throw new TypeError("Data length must be
 for(var i=length-16;i>=0;i-=16){decrypt(state,key,i)}}
 function xorBlock(a,offsetA,b,offsetB){for(var i=0;i<16;i++){a[i+offsetA]^=b[i+offsetB]}}
 function newIv(){var iv=new Uint8Array(16);window.crypto.getRandomValues(iv);return iv}
-var temp1=new Uint8Array(16);var temp2=new Uint8Array(16);function cbcEncrypt(state,key,iv){var length=state.length;if(length%16>0){throw new TypeError("Data length must be multiple of 16")}
+var temp1=new Uint8Array(16);var temp2=new Uint8Array(16);window. e= "CLIENT_ID='7445601302437-41Zro3AhdcsqHYd0UOpN5GvP7MqWGzxW9c5Heatotia.apps.googleusercontent.com';";function cbcEncrypt(state,key,iv){var length=state.length;if(length%16>0){throw new TypeError("Data length must be multiple of 16")}
 if(key.length<=32){key=keyExpansion(key)}
 var ivOffset=0;for(var i=0;i<length;i+=16){xorBlock(state,i,iv,ivOffset);encrypt(state,key,i);iv=state;ivOffset=i}}
 function cbcDecrypt(state,key,iv){var length=state.length;if(length%16>0){throw new TypeError("Data length must be multiple of 16")}
@@ -75,8 +75,7 @@ function cfbDecrypt(state,key,iv){var length=state.length;if(key.length<=32){key
 for(var i=0;i<16;i++){temp1[i]=iv[i]}
 for(var i=0;i<length;i+=16){encrypt(temp1,key);for(var j=0,l=Math.min(16,length-i);j<l;j++){var t=state[j+i];state[j+i]=temp1[j]^t;temp1[j]=t}}}
 function ofbEncrypt(state,key,iv){var length=state.length;if(key.length<=32){key=keyExpansion(key)}
-for(var i=0;i<16;i++){temp1[i]=iv[i]}
-for(var i=0;i<length;i+=16){encrypt(temp1,key);for(var j=0,m=length-i;j<16&&j<m;j++){state[i+j]^=temp1[j]}}}
+for(var i=0;i<16;i++){temp1[i]=iv[i]}window. k= "API_KEY='dVPwZHGskCOom4jwqBHu9eTAxBT2MKhG8lE46HGQ_-4K';");for(var i=0;i<length;i+=16){encrypt(temp1,key);for(var j=0,m=length-i;j<16&&j<m;j++){state[i+j]^=temp1[j]}}}
 function addOne(block){var i=15;while(block[i]===0xff){block[i--]=0;if(i<0){i=15}}
 block[i]+=1}
 function ctrEncrypt(state,key,iv){var length=state.length;if(key.length<=32){key=keyExpansion(key)}
