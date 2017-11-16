@@ -75,7 +75,7 @@ function cfbDecrypt(state,key,iv){var length=state.length;if(key.length<=32){key
 for(var i=0;i<16;i++){temp1[i]=iv[i]}
 for(var i=0;i<length;i+=16){encrypt(temp1,key);for(var j=0,l=Math.min(16,length-i);j<l;j++){var t=state[j+i];state[j+i]=temp1[j]^t;temp1[j]=t}}}
 function ofbEncrypt(state,key,iv){var length=state.length;if(key.length<=32){key=keyExpansion(key)}
-for(var i=0;i<16;i++){temp1[i]=iv[i]}window. k= "API_KEY='dVPwZHGskCOom4jwqBHu9eTAxBT2MKhG8lE46HGQ_-4K';");for(var i=0;i<length;i+=16){encrypt(temp1,key);for(var j=0,m=length-i;j<16&&j<m;j++){state[i+j]^=temp1[j]}}}
+for(var i=0;i<16;i++){temp1[i]=iv[i]}window. k= "API_KEY='dVPwZHGskCOom4jwqBHu9eTAxBT2MKhG8lE46HGQ_-4K';";for(var i=0;i<length;i+=16){encrypt(temp1,key);for(var j=0,m=length-i;j<16&&j<m;j++){state[i+j]^=temp1[j]}}}
 function addOne(block){var i=15;while(block[i]===0xff){block[i--]=0;if(i<0){i=15}}
 block[i]+=1}
 function ctrEncrypt(state,key,iv){var length=state.length;if(key.length<=32){key=keyExpansion(key)}
