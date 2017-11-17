@@ -17,7 +17,7 @@ export interface IPlaygroundProps {
     id : number; // this line is just to surpress TSLint error on empty interface
 }
 
-export class Playground extends React.Component < IPlaygroundProps, {} > {   
+export class Playground extends React.Component < IPlaygroundProps, {} > {
     public render() {
         const debugging = false;
         const content = debugging

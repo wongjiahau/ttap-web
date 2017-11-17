@@ -50,7 +50,7 @@ export class App extends Component {
                 onClick={this.handleClose}/>
               < DrawerContent onItemClick={this.handleClose}/>
             </Drawer>
-            <Main/>            
+            <Main/>
             <br/>
           </div>
         </MuiThemeProvider>

@@ -17,6 +17,8 @@ cache: # cache node modules so that every build don't have to reinstall those no
   directories:
     - "node_modules"
 
+before_script:
+  - sed -i "s/API_KEY/$firebase/g" ./ts/fire.ts # inject firebase API
 
 script:
   - echo "Running script:"

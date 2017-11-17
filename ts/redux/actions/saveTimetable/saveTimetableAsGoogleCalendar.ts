@@ -1,7 +1,5 @@
 /* global gapi */
 declare let gapi: any;
-declare let e: any;
-declare let k: any;
 import * as moment from "moment";
 import {
     ParseDay
@@ -9,6 +7,7 @@ import {
 import {
     Time
 } from "../../../att/time";
+import fire from "../../../fire";
 import {
     Beautify
 } from "../../../helper";
@@ -31,39 +30,42 @@ import {
 export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     private loginAlready = false;
     private rawSlots: RawSlot[];
-    private CLIENT_ID : string;
-    private API_KEY : string;
+    private CLIENT_ID: string;
     private DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
     private SCOPES = "https://www.googleapis.com/auth/calendar";
     protected Save(timetable: Timetable) {
-        const a = require("simple-encryptor")(e); // eslint-disable-line
-        const b = require("simple-encryptor")(k); // eslint-disable-line
-        this.API_KEY =  a.decrypt("f3af141b626f5dab66145ee333561cbff7bd88c83d7abd50bb5f6de7f869cc86f09c641e8cdddb3cf44ddc7fd8c2204dPgjEoqOTY5UemfuHfK/ml7WWwLzN4lChqlybT3OPkELjggVo+WjpBDL5Vw+/w6MN");
-        this.CLIENT_ID = b.decrypt("8b20953295764fadbf98bf150c59f0acd64c2b8991c7f37405b6cc868f40f1e1ce0aa7ff2339cddd15793dd55c383d1eyMf8J38hvNufV46B+KxyCzyDbFdio1OdEdUAxy6zCrGplsswF2UAtcCjyYLlX4H/j9burm5nUfi+2R4aF4UKuiyBnY/txYqicl+BAoxnV8c=");
         this.rawSlots = RawSlot.GetBunch(timetable.HashIds);
-        this.loadClient();
+        this.retrieveTokens();
     }
     protected SaveType(): string {
         return "google calendar";
     }
 
+    private retrieveTokens = () => {
+        const db = fire.database();
+        const ref = db.ref("tokens/gcal_client_id");
+        ref.on("value", (snapshot) => {
+            this.CLIENT_ID = snapshot.val();
+            this.loadClient();
+        }, (errorObject) => {
+            console.log("The read failed: " + errorObject.code);
+        });
+    }
+
     private loadClient = () => {
-        // alert(window.location.href);
         gapi.load("client:auth2", this.initClient); // eslint-disable-line
-        console.log("handleClientLoad()");
     }
 
     private initClient = () => {
         gapi // eslint-disable-line
             .client
             .init({
-                apiKey: this.API_KEY,
                 clientId: this.CLIENT_ID,
                 discoveryDocs: this.DISCOVERY_DOCS,
                 scope: this.SCOPES
             })
             .then(() => {
-                console.log("initClient() success");
+                this.CLIENT_ID = "";
                 // Listen for sign-in state changes.
                 gapi // eslint-disable-line
                     .auth2
@@ -77,7 +79,6 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     }
 
     private updateSigninStatus = (isSignedIn) => {
-        console.log("updateSigninState() where isSignedIn = " + isSignedIn);
         if (!this.loginAlready && isSignedIn) {
             // this.listUpcomingEvents();
             this.addTimetable();
@@ -131,37 +132,6 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
             .signOut();
     }
 
-    private listUpcomingEvents = () => {
-        gapi // eslint-disable-line
-            .client
-            .calendar
-            .events
-            .list({
-                calendarId: "primary",
-                timeMin: (new Date()).toISOString(),
-                showDeleted: false,
-                singleEvents: true,
-                maxResults: 10,
-                orderBy: "startTime"
-            })
-            .then((response) => {
-                const events = response.result.items;
-                console.log("Upcoming events:");
-
-                if (events.length > 0) {
-                    for (let i = 0; i < events.length; i++) {
-                        const event = events[i];
-                        let when = event.start.dateTime;
-                        if (!when) {
-                            when = event.start.date;
-                        }
-                        console.log(event.summary + " (" + when + ")");
-                    }
-                } else {
-                    console.log("No upcoming events found.");
-                }
-            });
-    }
 }
 
 function sampleAddEvent() {
