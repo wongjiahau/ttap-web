@@ -98,16 +98,12 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
         this.rawSlots.forEach((s) => {
             this.addEvents(CreateEvent(s, semStartDate));
         });
-        this.addWeekNumberHeader(semStartDate);
+        GetWeekNumberHeaders(semStartDate, GetMaxWeek(this.rawSlots)).forEach((event) => {
+            this.addEvents(event);
+        });
         window.open("https://calendar.google.com/");
     }
 
-    private addWeekNumberHeader(semStartDate: Date) {
-        if (semStartDate.getDay() !== 1) {
-            throw new Error("Semester start date must be a Monday");
-        }
-        // TODO: Add week number header for each week
-    }
 
     private addEvents(calenderEvent) {
         gapi // eslint-disable-line
@@ -169,7 +165,8 @@ function sampleAddEvent() {
 
 }
 
-export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
+export function CreateEvent(slot: RawSlot, semStartDate: Date) {
+    const semesterStartDate = moment(semStartDate).toDate();
     if (semesterStartDate.getDay() !== 1) {
         throw new Error("Expected semesterStartDay to be Monday but was " + semesterStartDate.toString());
     }
@@ -239,4 +236,31 @@ export function ToPureIsoString(date: Date): string {
 
 export function GetMaxWeek(slots: RawSlot[]) {
     return max(slots.map((s) => max(Week.Parse(s.WeekNumber).WeekNumberList)));
+}
+
+export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): any[] {
+    const numberOfDaysPerWeek = 7;
+    const result = [];
+    if (semStartDate.getDay() !== 1) {
+        throw new Error("Semester start date must be a Monday");
+    }
+    const startDate = moment(semStartDate);
+    const endDate = moment(semStartDate).add(5, "days");
+    for (let i = 0; i < maxWeek; i++) {
+        const event = {
+            summary: "Week " + (i + 1),
+            start: {
+                date: moment(startDate).format("YYYY-MM-DD"),
+                timeZone: "UTC+08:00"
+            },
+            end: {
+                date: moment(endDate).format("YYYY-MM-DD"),
+                timeZone: "UTC+08:00"
+            }
+        };
+        result.push(event);
+        startDate.add(1, "week");
+        endDate.add(1, "week");
+    }
+    return result;
 }

@@ -1,12 +1,14 @@
 import {
     expect
 } from "chai";
+import * as moment from "moment";
 import {
     AddByWeek,
     CreateEvent,
     GetListOfDates,
     GetMaxWeek,
     GetRecurrence,
+    GetWeekNumberHeaders,
     ToPureIsoString
 } from "../saveTimetableAsGoogleCalendar";
 import {
@@ -98,6 +100,13 @@ describe("SaveTimetableAsGoogleCalendar", () => {
     });
 
     describe("CreateEvent", () => {
+        it("should not mutate semStartDate", () => {
+            const testSlot = GetTestRawSlot1()[1];
+            const semesterStartDate = new Date(2017, 10, 13);
+            const result = CreateEvent(testSlot, semesterStartDate);
+            expect(semesterStartDate.getTime()).to.eq(new Date(2017, 10, 13).getTime());
+        });
+
         it("case 1", () => {
             const testSlot = GetTestRawSlot1()[0];
             const semesterStartDate = new Date(2017, 10, 13);
@@ -156,6 +165,45 @@ describe("SaveTimetableAsGoogleCalendar", () => {
             input[1].WeekNumber = "2,14";
             input[2].WeekNumber = "1-3";
             expect(GetMaxWeek(input)).to.eq(14);
+        });
+
+    });
+
+    describe("GetWeekNumberHeaders", () => {
+        it("should throw error if the passed in date is not a Monday", () => {
+            const semStartDate = moment("2017-11-14").toDate(); // Tuesday
+            expect(() => {
+                GetWeekNumberHeaders(semStartDate, 0);
+            }).to.throw();
+        });
+
+        it("case 1", () => {
+            const semStartDate = moment("2017-11-13").toDate();
+            const maxWeek = 2;
+            const weekNumberHeaders = GetWeekNumberHeaders(semStartDate, maxWeek);
+            expect(weekNumberHeaders).to.deep.eq(
+                [{
+                    summary: "Week 1",
+                    start: {
+                        date: "2017-11-13",
+                        timeZone: "UTC+08:00"
+                    },
+                    end: {
+                        date: "2017-11-18",
+                        timeZone: "UTC+08:00"
+                    }
+                }, {
+                    summary: "Week 2",
+                    start: {
+                        date: "2017-11-20",
+                        timeZone: "UTC+08:00"
+                    },
+                    end: {
+                        date: "2017-11-25",
+                        timeZone: "UTC+08:00"
+                    }
+                }]
+            );
         });
 
     });
