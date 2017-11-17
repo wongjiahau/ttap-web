@@ -5,9 +5,13 @@ import {
     AddByWeek,
     CreateEvent,
     GetListOfDates,
+    GetMaxWeek,
     GetRecurrence,
     ToPureIsoString
 } from "../saveTimetableAsGoogleCalendar";
+import {
+    RawSlot
+} from "./../../../../model/rawSlot";
 import {
     GetTestRawSlot1
 } from "./../../../../tests/testDataGenerator";
@@ -136,4 +140,24 @@ describe("SaveTimetableAsGoogleCalendar", () => {
             expect(result).to.deep.equal(expected);
         });
     });
+
+    describe("GetMaxWeek", () => {
+        it("case 1", () => {
+            const input = [0, 0, 0].map((x) => new RawSlot());
+            input[0].WeekNumber = "1-3";
+            input[1].WeekNumber = "2,4";
+            input[2].WeekNumber = "3-5";
+            expect(GetMaxWeek(input)).to.eq(5);
+        });
+
+        it("case 2", () => {
+            const input = [0, 0, 0].map((x) => new RawSlot());
+            input[0].WeekNumber = "3-5";
+            input[1].WeekNumber = "2,14";
+            input[2].WeekNumber = "1-3";
+            expect(GetMaxWeek(input)).to.eq(14);
+        });
+
+    });
+
 });

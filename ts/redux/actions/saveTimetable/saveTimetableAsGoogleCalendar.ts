@@ -1,6 +1,9 @@
-/* global gapi */
 declare let gapi: any;
+import {
+    max
+} from "lodash";
 import * as moment from "moment";
+/* global gapi */
 import {
     ParseDay
 } from "../../../att/day";
@@ -91,19 +94,22 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     }
 
     private addTimetable() {
+        const semStartDate = new Date(2017, 10, 13);
         this.rawSlots.forEach((s) => {
-            this.addEvents(s);
+            this.addEvents(CreateEvent(s, semStartDate));
         });
-        this.addWeekNumberHeader();
+        this.addWeekNumberHeader(semStartDate);
         window.open("https://calendar.google.com/");
     }
 
-    private addWeekNumberHeader() {
+    private addWeekNumberHeader(semStartDate: Date) {
+        if (semStartDate.getDay() !== 1) {
+            throw new Error("Semester start date must be a Monday");
+        }
         // TODO: Add week number header for each week
     }
 
-    private addEvents(slot: RawSlot) {
-        const calenderEvent = CreateEvent(slot, new Date(2017, 10, 13));
+    private addEvents(calenderEvent) {
         gapi // eslint-disable-line
             .client
             .calendar
@@ -229,4 +235,8 @@ export function ToPureIsoString(date: Date): string {
         pad(date.getHours()) +
         pad(date.getMinutes()) +
         pad(date.getSeconds());
+}
+
+export function GetMaxWeek(slots: RawSlot[]) {
+    return max(slots.map((s) => max(Week.Parse(s.WeekNumber).WeekNumberList)));
 }
