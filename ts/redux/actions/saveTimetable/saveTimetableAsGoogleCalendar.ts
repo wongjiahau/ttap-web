@@ -80,10 +80,9 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
 
     private updateSigninStatus = (isSignedIn) => {
         if (!this.loginAlready && isSignedIn) {
-            // this.listUpcomingEvents();
+            this.loginAlready = true;
             this.addTimetable();
             this.handleSignoutClick();
-            this.loginAlready = true;
         } else {
             if (!this.loginAlready) {
                 this.handleAuthClick();
