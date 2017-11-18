@@ -4,21 +4,15 @@ import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
 import {RawSlot} from "../../model/rawSlot";
-import { State } from "../../model/states/state";
-import { Timetable } from "../../model/timetable";
-import { Colors } from "../colors/colors";
-import { GenerateSlotViews } from "./generateSlotViews";
-import { GenerateStateViews } from "./generateStateView";
-import { Skeleton } from "./skeleton";
+import {State} from "../../model/states/state";
+import {Timetable} from "../../model/timetable";
+import {Colors} from "../colors/colors";
+import {GenerateSlotViews} from "./generateSlotViews";
+import {GenerateStateViews} from "./generateStateView";
+import {Skeleton} from "./skeleton";
 
-const timetableViewWidth = 0.9 * $(window).width();
+const getTimetableViewWidth = () => 0.9 * $(window).width();
 
-const divStyle : React.CSSProperties = {
-    backgroundColor: Colors.WhiteSmoke,
-    borderStyle: "solid",
-    margin: "auto",
-    width: timetableViewWidth
-};
 
 export interface ITimetableViewProps {
     timetable : Timetable;
@@ -27,33 +21,53 @@ export interface ITimetableViewProps {
     handleDesetTimeContraintAt ? : (state : State) => void;
 }
 
-export const TimetableView = (props : ITimetableViewProps) => {
-    const skeleton = new Skeleton();
-    if (props.timetable) {
-        const rawSlots = RawSlot.GetBunch(props.timetable.HashIds);
-        const slotViews = GenerateSlotViews(rawSlots);
-        skeleton.Concat(slotViews);
+export class TimetableView extends React.Component < ITimetableViewProps, {width: number} > {
+    public constructor(props: ITimetableViewProps) {
+        super(props);
+        $(window).on("resize", this.handleWindowResizing);
+        this.state = {
+            width: getTimetableViewWidth()
+        };
     }
-    if (props.states) {
-        const stateViews = GenerateStateViews(props.states, props.handleSetTimeContraintAt, props.handleDesetTimeContraintAt);
-        skeleton.Concat(stateViews);
+    public render() {
+        const skeleton = new Skeleton();
+        if (this.props.timetable) {
+            const rawSlots = RawSlot.GetBunch(this.props.timetable.HashIds);
+            const slotViews = GenerateSlotViews(rawSlots);
+            skeleton.Concat(slotViews);
+        }
+        if (this.props.states) {
+            const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
+            skeleton.Concat(stateViews);
+        }
+        const divStyle : React.CSSProperties = {
+            backgroundColor: Colors.WhiteSmoke,
+            borderStyle: "solid",
+            margin: "auto",
+            width: this.state.width
+        };
+        return (
+            <div id="timetable-view" style={divStyle}>
+                <ReactGridLayout
+                    cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2 + 2}
+                    maxRows={16}
+                    rowHeight={50}
+                    width={this.state.width}
+                    layout={skeleton.Layouts}
+                    margin={[0, 0]}
+                    isDraggable={false}
+                    isResizable={false}
+                    autoSize={true}
+                    verticalCompact={false}>
+                    {skeleton.Children}
+                </ReactGridLayout>
+            </div>
+        );
     }
 
-    return (
-        <div id="timetable-view" style={divStyle}>
-            <ReactGridLayout
-                cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2 + 2}
-                maxRows={16}
-                rowHeight={50}
-                width={timetableViewWidth}
-                layout={skeleton.Layouts}
-                margin={[0, 0]}
-                isDraggable={false}
-                isResizable={false}
-                autoSize={true}
-                verticalCompact={false}>
-                {skeleton.Children}
-            </ReactGridLayout>
-        </div>
-    );
-};
+    public handleWindowResizing = () => {
+        this.setState({
+            width: getTimetableViewWidth()
+        });
+    }
+}
