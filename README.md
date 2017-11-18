@@ -1,6 +1,6 @@
-# Timetable Arranging Program (TTAP) 
+# [Timetable Arranging Program - Web (TTAP)](https://github.com/wongjiahau/ttap-web)
 ## Objectives
-This software is used to helps student's of UTAR to arrange their timetable.
+This software is used to helps student's of UTAR to arrange their timetable without frustration.
 ## Technologies used :
 - [Facebook's React](https://reactjs.org/)
 - [Microsoft's Visual Studio Code](https://code.visualstudio.com/)
@@ -10,6 +10,7 @@ This software is used to helps student's of UTAR to arrange their timetable.
 - [GitHub](https://github.com/)
 - [Surge](https://surge.sh/)
 - [Create-React-App](https://github.com/facebookincubator/create-react-app)
+- [Material-UI](https://material-ui-next.com/)
 
 ## How to build this app?
 ### Prerequisites
