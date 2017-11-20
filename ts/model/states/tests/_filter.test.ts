@@ -1,18 +1,18 @@
 import { expect } from "chai";
 import { Filter } from "../filter";
 import { GetTestTimetables1 } from "./../../../tests/testDataGenerator";
-import { State, StateKind } from "./../state";
+import { StateKind, STCBox } from "./../stcBox";
 
-const state1 = new State(StateKind.MaybeOccupied, 0, 16, null); // Monday 10.00 am to 10.30 am
-const state2 = new State(StateKind.MaybeOccupied, 2, 16, null); // Wednesday 10.00 am to 10.30 am
+const state1 = new STCBox(StateKind.MaybeOccupied, 0, 16, null); // Monday 10.00 am to 10.30 am
+const state2 = new STCBox(StateKind.MaybeOccupied, 2, 16, null); // Wednesday 10.00 am to 10.30 am
 const timetables = GetTestTimetables1();
 
 describe("Filter()", () => {
     it("should throw error if state kind is not MaybeOccupied", () => {
-        expect(() => {Filter(timetables, new State(StateKind.DefinitelyUnoccupied, null, null, null)); }).to.throw();
-        expect(() => {Filter(timetables, new State(StateKind.DefinitelyOccupied, null, null, null)); }).to.throw();
-        expect(() => {Filter(timetables, new State(StateKind.Clicked, null, null, null)); }).to.throw();
-        expect(() => {Filter(timetables, new State(StateKind.MaybeOccupied, null, null, null)); }).to.not.throw();
+        expect(() => {Filter(timetables, new STCBox(StateKind.DefinitelyUnoccupied, null, null, null)); }).to.throw();
+        expect(() => {Filter(timetables, new STCBox(StateKind.DefinitelyOccupied, null, null, null)); }).to.throw();
+        expect(() => {Filter(timetables, new STCBox(StateKind.Clicked, null, null, null)); }).to.throw();
+        expect(() => {Filter(timetables, new STCBox(StateKind.MaybeOccupied, null, null, null)); }).to.not.throw();
     });
 
     it("should return a tuple : [filtrate, residue]", () => {

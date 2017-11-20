@@ -5,14 +5,14 @@ import {
     ColorOfDefinitelyOccupied,
     ColorOfDefinitelyUnoccupied,
     ColorOfMaybeOccupied,
-    State,
-    StateKind
-} from "../../model/states/state";
+    StateKind,
+    STCBox
+} from "../../model/states/stcBox";
 import {Colors} from "../colors/colors";
 import {ISkeleton, Skeleton} from "./skeleton";
 
-export function GenerateStateViews(states : State[], handleSetTimeContraintAt : (state : State) => void, handleDesetTimeConstraintAt : (state : State) => void) : ISkeleton {
-    const GetStateView = (state : State) => {
+export function GenerateStateViews(states : STCBox[], handleSetTimeContraintAt : (state : STCBox) => void, handleDesetTimeConstraintAt : (state : STCBox) => void) : ISkeleton {
+    const GetStateView = (state : STCBox) => {
         switch (state.Kind) {
             case StateKind.DefinitelyOccupied:
                 return (<Box color={ColorOfDefinitelyOccupied}/>);

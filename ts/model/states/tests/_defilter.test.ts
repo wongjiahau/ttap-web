@@ -11,14 +11,14 @@ import {
     GetTestTimetables1
 } from "./../../../tests/testDataGenerator";
 import {
-    State,
-    StateKind
-} from "./../state";
+    StateKind,
+    STCBox
+} from "./../stcBox";
 
-const state1 = new State(StateKind.MaybeOccupied, 0, 16, null); // Monday 10.00 am to 10.30 am
-const state2 = new State(StateKind.Clicked, 0, 16, null); // Monday 10.00 am to 10.30 am
-const state3 = new State(StateKind.MaybeOccupied, 2, 16, null); // Wednesday 10.00 am to 10.30 am
-const state4 = new State(StateKind.Clicked, 2, 16, null); // Wednesday 10.00 am to 10.30 am
+const state1 = new STCBox(StateKind.MaybeOccupied, 0, 16, null); // Monday 10.00 am to 10.30 am
+const state2 = new STCBox(StateKind.Clicked, 0, 16, null); // Monday 10.00 am to 10.30 am
+const state3 = new STCBox(StateKind.MaybeOccupied, 2, 16, null); // Wednesday 10.00 am to 10.30 am
+const state4 = new STCBox(StateKind.Clicked, 2, 16, null); // Wednesday 10.00 am to 10.30 am
 const timetables = GetTestTimetables1();
 
 describe("Defilter()", () => {
@@ -42,7 +42,7 @@ describe("Defilter()", () => {
     });
 
     it("case 1", () => {
-        const state = new State(StateKind.MaybeOccupied, 0, 16, null); // Monday 10.00 am to 10.30 am
+        const state = new STCBox(StateKind.MaybeOccupied, 0, 16, null); // Monday 10.00 am to 10.30 am
         const [filtrate, residue] = Filter(timetables, state);
         const clickedTimeConstraint = [0, 0, 0, 0, 0, 0, 0];
         expect(residue.length).to.eq(5);

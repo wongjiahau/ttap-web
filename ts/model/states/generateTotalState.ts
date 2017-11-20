@@ -6,12 +6,12 @@ import {
     Timetable
 } from "./../timetable";
 import {
-    State,
-    StateKind
-} from "./state";
+    StateKind,
+    STCBox
+} from "./stcBox";
 
-export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: string[] = []): State[] {
-    const result = new Array < State > ();
+export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: string[] = []): STCBox[] {
+    const result = new Array < STCBox > ();
     const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables); // dos
     const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables); // dus
     const maybeOccupiedState = GetMaybeOccupiedState(definitelyOccupiedState, definitelyUnoccupiedState); // mos
@@ -21,7 +21,7 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
         for (let j = 0; j < dos.length; j++) {
             if (dos[j] === "1") {
                 const timeperiod = parseInt("1" + new Array(j + 1).join("0"), 2);
-                result.push(new State(StateKind.DefinitelyOccupied, day, timeperiod, j));
+                result.push(new STCBox(StateKind.DefinitelyOccupied, day, timeperiod, j));
             }
 
         }
@@ -33,7 +33,7 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
         for (let j = 0; j < dus.length; j++) {
             if (dus[j] === "0") {
                 const timeperiod = parseInt("1" + new Array(j + 1).join("0"), 2);
-                result.push(new State(StateKind.DefinitelyUnoccupied, day, timeperiod, j));
+                result.push(new STCBox(StateKind.DefinitelyUnoccupied, day, timeperiod, j));
             }
         }
     }
@@ -43,7 +43,7 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
         for (let j = 0; j < mos.length; j++) {
             if (mos[j] === "1") {
                 const timeperiod = parseInt("1" + new Array(j + 1).join("0"), 2);
-                result.push(new State(StateKind.MaybeOccupied, day, timeperiod, j));
+                result.push(new STCBox(StateKind.MaybeOccupied, day, timeperiod, j));
             }
         }
     }
@@ -88,7 +88,7 @@ export function GetMaybeOccupiedState(definitelyOccupiedState: number[], definit
     return result;
 }
 
-export function StringifyTotalState(totalState: State[]): string {
+export function StringifyTotalState(totalState: STCBox[]): string {
     const data = [
         "..........................".split(""),
         "..........................".split(""),

@@ -1,5 +1,5 @@
 import * as typeName from "type-name";
-import { State } from "../../model/states/state";
+import { STCBox } from "../../model/states/stcBox";
 import {Action} from "../actions/action";
 import {Timetable} from "./../../model/timetable";
 import {GetTestSubjects1} from "./../../tests/testDataGenerator";
@@ -11,7 +11,7 @@ export interface ITimetableListState {
     FiltrateTimetables:          Timetable[];
     IsSaveDialogOpen:            boolean;
     IsSetTimeConstraintViewOpen: boolean;
-    TotalState:                  State[];
+    TotalState:                  STCBox[];
     UidsOfClickedState:          string[];
     ClickedTimeConstraint:       number[/*7*/];
 }
@@ -22,7 +22,7 @@ export class TimetableListState implements ITimetableListState {
     public FiltrateTimetables:          Timetable[];
     public IsSaveDialogOpen:            boolean;
     public IsSetTimeConstraintViewOpen: boolean;
-    public TotalState:                  State[];
+    public TotalState:                  STCBox[];
     public UidsOfClickedState:          string[];
     public ClickedTimeConstraint:       number[/*7*/];
     public constructor(timetables : Timetable[] = [null, undefined]) {

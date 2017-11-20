@@ -2,11 +2,11 @@ import {
     Timetable
 } from "../timetable";
 import {
-    State,
-    StateKind
-} from "./state";
+    StateKind,
+    STCBox
+} from "./stcBox";
 
-export function Filter(timetables: Timetable[], state: State): [Timetable[], Timetable[]] {
+export function Filter(timetables: Timetable[], state: STCBox): [Timetable[], Timetable[]] {
     if (state.Kind !== StateKind.MaybeOccupied) {
         throw new Error("Only state that is MaybeOccupied can call the Filter function");
     }

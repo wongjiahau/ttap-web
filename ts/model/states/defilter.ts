@@ -5,9 +5,9 @@ import {
     Timetable
 } from "../timetable";
 import {
-    State,
-    StateKind
-} from "./state";
+    StateKind,
+    STCBox
+} from "./stcBox";
 
 export function Defilter(residueTimetables: Timetable[], clickedTimeConstraint: number[]): [Timetable[], Timetable[]] {
     if (clickedTimeConstraint.length !== 7) {

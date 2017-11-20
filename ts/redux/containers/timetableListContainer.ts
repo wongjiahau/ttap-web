@@ -5,9 +5,6 @@ import {
     connect
 } from "react-redux";
 import {
-    State
-} from "../../model/states/state";
-import {
     ITimetableListViewDispatchProps,
     ITimetableListViewStateProps,
     TimetableListView
@@ -21,6 +18,9 @@ import {
 import {
     TimetableListStateAction
 } from "../reducers/timetableListState";
+import {
+    STCBox
+} from "./../../model/states/stcBox";
 import {
     CloseSaveDialog
 } from "./../actions/closeSaveDialog";
@@ -101,10 +101,10 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleCloseSetTimeConstraintView: () => {
             dispatch(Wrap(new ToggleSetTimeConstraintView(false)));
         },
-        handleSetTimeConstraintAt: (state: State) => {
+        handleSetTimeConstraintAt: (state: STCBox) => {
             dispatch(Wrap(new FilterTimetable(state)));
         },
-        handleDesetTimeConstraintAt: (state: State) => {
+        handleDesetTimeConstraintAt: (state: STCBox) => {
             dispatch(Wrap(new DefilterTimetable(state)));
         }
     };

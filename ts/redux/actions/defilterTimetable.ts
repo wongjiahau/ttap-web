@@ -5,15 +5,15 @@ import {
     GenerateTotalState
 } from "../../model/states/generateTotalState";
 import {
-    State
-} from "../../model/states/state";
+    STCBox
+} from "../../model/states/stcBox";
 import {
     ITimetableListState,
     TimetableListStateAction
 } from "./../reducers/timetableListState";
 
 export class DefilterTimetable extends TimetableListStateAction {
-    public constructor(private clickedState: State) {
+    public constructor(private clickedState: STCBox) {
         super();
     }
     public TypeName(): string {

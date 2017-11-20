@@ -4,7 +4,7 @@ import Slide from "material-ui-next/transitions/Slide";
 import Typography from "material-ui-next/Typography";
 import * as React from "react";
 import CountUp from "react-countup";
-import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, State} from "../model/states/state";
+import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/states/stcBox";
 import {Colors} from "./colors/colors";
 import {StackPanel} from "./panels/stackPanel";
 import {TimetableView} from "./timetableView/timetableView";
@@ -93,15 +93,15 @@ const Legend = (props : ILegendProps) => {
 };
 
 export interface ISetTimeConstraintViewStateProps {
-    totalState : State[];
+    totalState : STCBox[];
     isOpen : boolean;
     numberOfRemovedTimetables : number;
     numberOfRemainingTimetables : number;
 }
 
 export interface ISetTimeConstraintViewDispatchProps {
-    handleSetTimeConstraintAt : (state : State) => void;
-    handleDesetTimeConstraintAt : (state : State) => void;
+    handleSetTimeConstraintAt : (state : STCBox) => void;
+    handleDesetTimeConstraintAt : (state : STCBox) => void;
     handleCancel : () => void;
 }
 

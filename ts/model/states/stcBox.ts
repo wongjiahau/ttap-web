@@ -7,7 +7,12 @@ export enum StateKind {
     Clicked
 }
 
-export class State {
+/**
+ * STCBox means SetTimeConstraintBox. It is used by SetTimeConstraintView
+ * @export
+ * @class STCBox
+ */
+export class STCBox {
     public readonly Uid: string;
     public Kind: StateKind;
     public readonly Day: number;

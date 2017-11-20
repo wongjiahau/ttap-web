@@ -2,7 +2,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import IconClock from "material-ui/svg-icons/action/alarm";
 import IconSave from "material-ui/svg-icons/content/save";
 import * as React from "react";
-import {State} from "../model/states/state";
+import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
 import {SaveTimetableDialog} from "./saveTimetableDialog";
@@ -29,7 +29,7 @@ export interface ITimetableListViewStateProps {
     currentIndex : number; // non-zero based
     maxIndex : number; // non-zero based
     isSaveDialogOpen : boolean;
-    totalState : State[];
+    totalState : STCBox[];
     isSetTimeConstraintViewOpen : boolean;
     numberOfRemovedTimetables: number;
     numberOfRemainingTimetables: number;
@@ -44,8 +44,8 @@ export interface ITimetableListViewDispatchProps {
     handleOpenSaveDialog : () => void;
     handleCloseSaveDialog : () => void;
     handleOpenSetTimeConstraintView : () => void;
-    handleSetTimeConstraintAt : (state : State) => void;
-    handleDesetTimeConstraintAt : (state : State) => void;
+    handleSetTimeConstraintAt : (state : STCBox) => void;
+    handleDesetTimeConstraintAt : (state : STCBox) => void;
     handleCloseSetTimeConstraintView : () => void;
 }
 

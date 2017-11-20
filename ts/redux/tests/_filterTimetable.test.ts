@@ -2,9 +2,9 @@ import {
     expect
 } from "chai";
 import {
-    State,
-    StateKind
-} from "./../../model/states/state";
+    StateKind,
+    STCBox
+} from "./../../model/states/stcBox";
 import {
     GetTestTimetables1
 } from "./../../tests/testDataGenerator";
@@ -20,7 +20,7 @@ import {
     TimetableListStateReducer
 } from "./../reducers/timetableListState";
 
-const state = new State(StateKind.MaybeOccupied, 0, 16, 5);
+const state = new STCBox(StateKind.MaybeOccupied, 0, 16, 5);
 
 describe("FilterTimetable action", () => {
     it("'s typename should be 'filter timetable at [YX]'", () => {

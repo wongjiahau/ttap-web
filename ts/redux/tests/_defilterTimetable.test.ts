@@ -5,9 +5,9 @@ import {
     isEqual
 } from "lodash";
 import {
-    State,
-    StateKind
-} from "../../model/states/state";
+    StateKind,
+    STCBox
+} from "../../model/states/stcBox";
 import {
     GetTestTimetables1
 } from "../../tests/testDataGenerator";
@@ -29,10 +29,10 @@ import {
     TimetableListStateReducer
 } from "./../reducers/timetableListState";
 
-const state0 = new State(StateKind.MaybeOccupied, 0, 16, 5); // Monday 10-10.30 am
-const state1 = new State(StateKind.Clicked, 0, 16, 5); // Monday 10-10.30 am
-const state2 = new State(StateKind.MaybeOccupied, 2, 16, 5); // Wednesday 10-10.30 am
-const state3 = new State(StateKind.Clicked, 2, 16, 5); // Wednesday 10-10.30 am
+const state0 = new STCBox(StateKind.MaybeOccupied, 0, 16, 5); // Monday 10-10.30 am
+const state1 = new STCBox(StateKind.Clicked, 0, 16, 5); // Monday 10-10.30 am
+const state2 = new STCBox(StateKind.MaybeOccupied, 2, 16, 5); // Wednesday 10-10.30 am
+const state3 = new STCBox(StateKind.Clicked, 2, 16, 5); // Wednesday 10-10.30 am
 
 describe("DefilterTimetable action", () => {
     it("'s typename should be 'defilter timetable at [YX]'", () => {

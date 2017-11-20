@@ -2,9 +2,9 @@ import {
     expect
 } from "chai";
 import {
-    State,
-    StateKind
-} from "../../model/states/state";
+    StateKind,
+    STCBox
+} from "../../model/states/stcBox";
 import {
     GetTestTimetables1
 } from "../../tests/testDataGenerator";
@@ -43,7 +43,7 @@ describe("UpdateTotalState action", () => {
         const updateTotalState = new UpdateTotalState().Action();
         const initialState = new TimetableListState(GetTestTimetables1());
         const newState1 = TimetableListStateReducer(initialState, updateTotalState);
-        const state = new State(StateKind.MaybeOccupied, 0, 16, 5);
+        const state = new STCBox(StateKind.MaybeOccupied, 0, 16, 5);
         const newState2 = TimetableListStateReducer(newState1, new FilterTimetable(state).Action());
         const newState3 = TimetableListStateReducer(newState2, updateTotalState);
         expect(newState3.TotalState).to.deep.eq(newState2.TotalState);
