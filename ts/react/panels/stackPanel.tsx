@@ -37,10 +37,11 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
         let style = {
             ...tableStyle
         };
+        style = {...this.props.style};
         switch (this.props.horizontalAlignment) {
             case "center":
-                style.margin = "0 auto";
-                break;
+            style.margin = "0 auto";
+            break;
             case "right":
                 style.marginLeft = "auto";
                 style.marginRight = "0";
@@ -49,8 +50,6 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
                 style.marginRight = "auto";
                 style.marginLeft = "0";
                 break;
-            default:
-                style = this.props.style;
         }
         return (
             <div style={style}>
