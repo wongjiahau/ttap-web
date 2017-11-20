@@ -6,8 +6,10 @@ const tableStyle : React.CSSProperties = {
 };
 
 export type Orientation = "horizontal" | "vertical";
+export type HorizontalAlignment = "left" | "center" | "right";
 
 export interface IStackPanelProps {
+    horizontalAlignment?: HorizontalAlignment;
     orientation : Orientation;
     style?: React.CSSProperties;
 }
@@ -32,9 +34,27 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
                 </tr>
             ));
         }
+        let style = {
+            ...tableStyle
+        };
+        switch (this.props.horizontalAlignment) {
+            case "center":
+                style.margin = "0 auto";
+                break;
+            case "right":
+                style.marginLeft = "auto";
+                style.marginRight = "0";
+                break;
+            case "left":
+                style.marginRight = "auto";
+                style.marginLeft = "0";
+                break;
+            default:
+                style = this.props.style;
+        }
         return (
-            <div style={this.props.style}>
-                <table style={tableStyle}>
+            <div style={style}>
+                <table style={style}>
                     {childToBeRendered}
                 </table>
             </div>

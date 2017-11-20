@@ -12,6 +12,22 @@ export const StackPanelProofOfConcept = () => {
                 <button>bye</button>
             </StackPanel>
             <StackPanel orientation="vertical">
+                <p>vertical orientation</p>
+                <button>hello</button>
+                <button>bye</button>
+            </StackPanel>
+            <StackPanel orientation="horizontal" horizontalAlignment="right">
+                <p>right aligned</p>
+                <button>hello</button>
+                <button>bye</button>
+            </StackPanel>
+            <StackPanel orientation="horizontal" horizontalAlignment="center">
+                <p>center aligned</p>
+                <button>hello</button>
+                <button>bye</button>
+            </StackPanel>
+            <StackPanel orientation="horizontal" horizontalAlignment="left">
+                <p>Left aligned</p>
                 <button>hello</button>
                 <button>bye</button>
             </StackPanel>
