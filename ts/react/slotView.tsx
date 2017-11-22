@@ -1,5 +1,4 @@
 import ButtonBase from "material-ui-next/ButtonBase";
-import Tooltip from "material-ui-next/Tooltip";
 import Typography from "material-ui-next/Typography";
 import * as React from "react";
 import {Beautify, GetInitial} from "../helper";
@@ -34,9 +33,9 @@ export class SlotView extends React.Component < ISlotViewProps, {} > {
             width: "100%"
         };
         const slot = this.props.slot;
-        const tooltipTitle = <Typography style={typoStyle}>{Beautify(slot.SubjectName) + " [" + slot.SubjectCode + "]"}</Typography>;
+        const tooltipTitle = Beautify(slot.SubjectName) + " [" + slot.SubjectCode + "]";
         return (
-            <Tooltip title={tooltipTitle} placement="bottom">
+            <div data-balloon={tooltipTitle} data-balloon-length="medium" data-balloon-pos="down">
                 <ButtonBase style={buttonBaseStyle}>
                     <div style={divStyle}>
                         <b>
@@ -46,7 +45,7 @@ export class SlotView extends React.Component < ISlotViewProps, {} > {
                         <br/> {slot.WeekNumber}
                     </div>
                 </ButtonBase>
-            </Tooltip>
+            </div>
         );
     }
 }
