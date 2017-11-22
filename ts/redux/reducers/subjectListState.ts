@@ -6,6 +6,7 @@ import {GenereteReducer} from "./generateReducer";
 import { ITimetableListState, TimetableListState } from "./timetableListState";
 
 export interface ISubjectListState {
+    ClashingSubjectPairs : Array < [Subject, Subject] >;
     SearchedText : string;
     Subjects : Subject[];
     IsShowingSelectedSubjectOnly : boolean;
@@ -14,6 +15,7 @@ export interface ISubjectListState {
 }
 
 export class SubjectListState implements ISubjectListState {
+    public ClashingSubjectPairs: Array<[Subject, Subject]>;
     public SearchedText : string;
     public Subjects : Subject[];
     public IsShowingLoadingBar: boolean;
@@ -25,6 +27,7 @@ export class SubjectListState implements ISubjectListState {
         this.IsShowingSelectedSubjectOnly = false;
         this.IsShowingLoadingBar = false;
         this.TimetableListState = new TimetableListState();
+        this.ClashingSubjectPairs = null;
     }
 }
 

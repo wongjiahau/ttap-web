@@ -1,13 +1,19 @@
+import {reduce, uniq} from "lodash";
 import Button from "material-ui-next/Button";
+import Paper from "material-ui-next/Paper";
 import {Origin} from "material-ui-next/Snackbar";
 import Snackbar from "material-ui-next/Snackbar";
+import Typography from "material-ui-next/Typography";
 import Drawer from "material-ui/Drawer";
 import RaisedButton from "material-ui/RaisedButton";
 import IconList from "material-ui/svg-icons/action/list";
 import * as React from "react";
+import {Beautify} from "../helper";
 import {Subject} from "../model/subject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
+import {StackPanel} from "./panels/stackPanel";
+const Center = require("react-center");
 
 const selectSubjectButtonStyle : React.CSSProperties = {
     marginBottom: "10px",
@@ -18,6 +24,7 @@ export interface ITimetableCreatorViewStateProps {
     isSubjectListViewVisible : boolean;
     isSnackbarVisible : boolean;
     snackbarMessage : string;
+    clashingSubjectPairs : Array < [Subject, Subject] >;
 }
 
 export interface ITimetableCreatorViewDispatchProps {
@@ -40,7 +47,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         const snackbarMessage = <span>{this.props.snackbarMessage}</span>;
         const anchorOrigin : Origin = {
             horizontal: "right",
-            vertical: "bottom",
+            vertical: "bottom"
         };
         return (
             <div>
@@ -52,8 +59,10 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     style={selectSubjectButtonStyle}
                     secondary={true}
                     label="Select subjects"
-                    onClick={this.props.handleToggleVisibilityOfSubjectListView}/>
-                <TimetableListContainer/>
+                    onClick={this.props.handleToggleVisibilityOfSubjectListView}/> {this.props.clashingSubjectPairs !== null
+                    ? this.GenerateMessage(this.props.clashingSubjectPairs)
+                    : <TimetableListContainer/>
+}
                 <Snackbar
                     action={okButton}
                     open={this.props.isSnackbarVisible && (viewCount % 2 === 0)}
@@ -76,5 +85,45 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
 
     public componentDidMount() {
         this.setState({isSelectSubjectPanelOpened: true});
+    }
+
+    private GenerateMessage(clashingSubjectPairs : Array < [Subject, Subject] >): React.ReactNode {
+        const paperStyle: React.CSSProperties = {
+            padding: "10px"
+        };
+        const subjectsInvolved = uniq < Subject > (reduce(clashingSubjectPairs, (result, x) => result.concat(x), []));
+        const stringifySubject = (s: Subject) => Beautify(s.Name) + "(" + s.Code + ")";
+        return (
+            <Paper style={paperStyle}>
+                <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <Typography type="display2" color="inherit">
+                        No possible timetable is found because:
+                    </Typography>
+                    <br/>
+                    <table>
+                        {clashingSubjectPairs.map((pair, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{"- " + stringifySubject(pair[0])}</td>
+                                    <td>
+                                        <i>is clashing with</i>
+                                    </td>
+                                    <td>{stringifySubject(pair[1])}<br/></td>
+                                </tr>
+                            );
+                        })}
+                    </table>
+                    <br/>
+                    <Typography type="display1" color="inherit">
+                        Try deselecting one of the following subjects :
+                    </Typography>
+                    <ul>
+                        {subjectsInvolved.map((x) => (
+                            <li>{stringifySubject(x)}</li>
+                        ))}
+                    </ul>
+                </StackPanel>
+            </Paper>
+        );
     }
 }

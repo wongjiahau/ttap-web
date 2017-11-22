@@ -41,10 +41,11 @@ import {
 const mapStateToProps = (state): ISubjectListViewStateProps => {
     const target = state.TimetableCreatorStateReducer.SubjectListState as SubjectListState;
     return {
-        searchWord: target.SearchedText,
+        clashingSubjectPairs: target.ClashingSubjectPairs,
+        isShowingLoadingBar: target.IsShowingLoadingBar,
         isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
+        searchWord: target.SearchedText,
         subjects: target.Subjects,
-        isShowingLoadingBar: target.IsShowingLoadingBar
     };
 };
 

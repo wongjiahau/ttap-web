@@ -28,6 +28,7 @@ import {
 const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
     const target =  state.TimetableCreatorStateReducer as TimetableCreatorState;
     return {
+        clashingSubjectPairs: target.SubjectListState.ClashingSubjectPairs,
         isSubjectListViewVisible: target.IsSubjectListViewVisible,
         isSnackbarVisible: target.IsSnackbarVisible,
         snackbarMessage: target.SnackbarMessage,

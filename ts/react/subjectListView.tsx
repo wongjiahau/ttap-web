@@ -54,6 +54,7 @@ export interface ISubjectListViewStateProps {
     subjects : Subject[];
     isShowingSelectedSubjectOnly : boolean;
     isShowingLoadingBar : boolean;
+    clashingSubjectPairs : Array < [Subject, Subject] >;
 }
 
 export interface ISubjectListViewDispatchProps {

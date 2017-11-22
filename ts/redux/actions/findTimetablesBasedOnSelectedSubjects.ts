@@ -11,6 +11,7 @@ import {
     TimetableListState
 } from "./../reducers/timetableListState";
 
+import { GetClashingPairs } from "../../clashFinder/findClashes";
 import {
     ParseRawSlotToSlot
 } from "../../parser/parseRawSlotToSlot";
@@ -41,7 +42,8 @@ export class FindTimetablesBasedOnSelectedSubjects extends SubjectListStateActio
         const timetables = FindTimetable(tinySlots);
         return {
             ...state,
-            TimetableListState: new TimetableListState(timetables)
+            TimetableListState: new TimetableListState(timetables),
+            ClashingSubjectPairs: (timetables.length > 0 ? null : GetClashingPairs(state.Subjects.filter((x) => x.IsSelected)))
         };
     }
 }

@@ -39,7 +39,25 @@ describe("FindTimetables action", () => {
         let newState = SubjectListStateReducer(initialState, new SelectSubject("MPU3113").Action());
         newState = SubjectListStateReducer(newState, new FindTimetablesBasedOnSelectedSubjects().Action());
         expect(newState.TimetableListState.FiltrateTimetables).to.not.have.same.members([null, undefined]);
-
     });
 
+    it("should set the ClashingSubjectPair if there are ZERO possible timetables found", () => {
+        const initialState = new SubjectListState(GetTestSubjects1());
+        let newState = SubjectListStateReducer(initialState, new SelectSubject("MPU34022").Action()); // ACP
+        newState = SubjectListStateReducer(newState, new SelectSubject("MPU32013").Action()); // BKA
+        newState = SubjectListStateReducer(newState, new FindTimetablesBasedOnSelectedSubjects().Action());
+        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(0);
+        expect(newState.ClashingSubjectPairs).to.have.lengthOf(1);
+    });
+
+    it("should set the ClashingSubjectPair back to null if there are some possible timetables found", () => {
+        const initialState = new SubjectListState(GetTestSubjects1());
+        let newState = SubjectListStateReducer(initialState, new SelectSubject("MPU34022").Action()); // ACP
+        newState = SubjectListStateReducer(newState, new SelectSubject("MPU32013").Action()); // BKA
+        newState = SubjectListStateReducer(newState, new FindTimetablesBasedOnSelectedSubjects().Action());
+        expect(newState.ClashingSubjectPairs).to.not.eq(null);
+        newState = SubjectListStateReducer(newState, new SelectSubject("MPU32013").Action()); // BKA
+        newState = SubjectListStateReducer(newState, new FindTimetablesBasedOnSelectedSubjects().Action());
+        expect(newState.ClashingSubjectPairs).to.eq(null);
+    });
 });
