@@ -13,7 +13,6 @@ import {Subject} from "../model/subject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 import {StackPanel} from "./panels/stackPanel";
-const Center = require("react-center");
 
 const selectSubjectButtonStyle : React.CSSProperties = {
     marginBottom: "10px",
