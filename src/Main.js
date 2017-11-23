@@ -12,7 +12,7 @@ export const Main = () => (
         <Route exact path='/feedbackForm' component={FeedbackForm}/>
         <Route exact path='/reportBugForm' component={ReportBugForm}/>
         <Route exact path='/404' component={FourOhFour}/>
-        <Route exact path='/playground' component={Playground}/>
+        <Route exact path='/demo' component={Playground}/>
         <Route exact path='/tospp' component={Tospp}/>
         <Route exact path='/about' component={About}/>
     </Switch>
