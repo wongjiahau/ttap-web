@@ -5,7 +5,6 @@ import * as React from "react";
 import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
-import {MainFrameContainer} from "../redux/containers/mainFrameContainer";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableCreatorContainer} from "../redux/containers/timetableCreatorContainer";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
