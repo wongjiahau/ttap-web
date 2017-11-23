@@ -2,8 +2,14 @@ import {
     connect
 } from "react-redux";
 import {
+    RawSlot
+} from "../../model/rawSlot";
+import {
     HideSnackbar
 } from "../actions/hideSnackbar";
+import {
+    NotifyDataLoaded
+} from "../actions/notifyDataLoaded";
 import {
     ITimetableCreatorViewDispatchProps,
     ITimetableCreatorViewStateProps,
@@ -22,12 +28,14 @@ import {
     ToggleVisibilityOfSubjectListView
 } from "./../actions/toggleVisibilityOfSubjectListView";
 import {
-    TimetableCreatorState, TimetableCreatorStateReducer
+    TimetableCreatorState,
+    TimetableCreatorStateReducer
 } from "./../reducers/timetableCreatorState";
 
 const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
-    const target =  state.TimetableCreatorStateReducer as TimetableCreatorState;
+    const target = state.TimetableCreatorStateReducer as TimetableCreatorState;
     return {
+        isSlotLoaded: target.IsSlotLoaded,
         clashingSubjectPairs: target.SubjectListState.ClashingSubjectPairs,
         isSubjectListViewVisible: target.IsSubjectListViewVisible,
         isSnackbarVisible: target.IsSnackbarVisible,
@@ -37,6 +45,7 @@ const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
     return {
+        handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots).Action()),
         handleSnackbarAction: () => dispatch(new HideSnackbar().Action()),
         handleToggleVisibilityOfSubjectListView: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
     };

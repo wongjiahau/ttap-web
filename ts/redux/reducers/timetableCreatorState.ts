@@ -11,20 +11,23 @@ import {
 } from "./subjectListState";
 
 export interface ITimetableCreatorState {
-    IsSubjectListViewVisible: boolean;
+    IsSlotLoaded: boolean;
     IsSnackbarVisible: boolean;
+    IsSubjectListViewVisible: boolean;
     SnackbarMessage: string;
     SubjectListState: ISubjectListState;
 }
 
 export class TimetableCreatorState implements ITimetableCreatorState {
+    public IsSlotLoaded: boolean;
     public IsSnackbarVisible: boolean;
-    public SnackbarMessage: string;
     public IsSubjectListViewVisible: boolean;
+    public SnackbarMessage: string;
     public SubjectListState: ISubjectListState;
     public constructor(isSubjectListVisible = true, isSnackbarVisible = false, snackbarMessage = "") {
-        this.IsSubjectListViewVisible = isSubjectListVisible;
+        this.IsSlotLoaded = false;
         this.IsSnackbarVisible = isSnackbarVisible;
+        this.IsSubjectListViewVisible = isSubjectListVisible;
         this.SnackbarMessage = snackbarMessage;
         this.SubjectListState = new SubjectListState();
     }

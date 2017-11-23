@@ -9,9 +9,11 @@ import RaisedButton from "material-ui/RaisedButton";
 import IconList from "material-ui/svg-icons/action/list";
 import * as React from "react";
 import {Beautify} from "../helper";
+import { RawSlot } from "../model/rawSlot";
 import {Subject} from "../model/subject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
+import { Login } from "./login";
 import {StackPanel} from "./panels/stackPanel";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -21,6 +23,7 @@ const selectSubjectButtonStyle : React.CSSProperties = {
 
 export interface ITimetableCreatorViewStateProps {
     isSubjectListViewVisible : boolean;
+    isSlotLoaded: boolean;
     isSnackbarVisible : boolean;
     snackbarMessage : string;
     clashingSubjectPairs : Array < [Subject, Subject] >;
@@ -29,6 +32,7 @@ export interface ITimetableCreatorViewStateProps {
 export interface ITimetableCreatorViewDispatchProps {
     handleToggleVisibilityOfSubjectListView : () => void;
     handleSnackbarAction : () => void;
+    handleSlotLoaded : (rawSlots : RawSlot[]) => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -37,6 +41,9 @@ ITimetableCreatorViewDispatchProps {}
 let viewCount = 0;
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
+        if (!this.props.isSlotLoaded) {
+            return <Login notifyDataLoaded={this.props.handleSlotLoaded}/>;
+        }
         viewCount++;
         const okButton = (
             <Button color="accent" dense={true} onClick={this.props.handleSnackbarAction}>
@@ -91,7 +98,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
             padding: "10px"
         };
         const subjectsInvolved = uniq < Subject > (reduce(clashingSubjectPairs, (result, x) => result.concat(x), []));
-        const stringifySubject = (s: Subject) => Beautify(s.Name) + "(" + s.Code + ")";
+        const stringifySubject = (s : Subject) => Beautify(s.Name) + "(" + s.Code + ")";
         return (
             <Paper style={paperStyle}>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
