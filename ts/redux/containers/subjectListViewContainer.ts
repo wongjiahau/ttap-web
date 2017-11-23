@@ -1,6 +1,7 @@
 import {
     connect
 } from "react-redux";
+import { CheckIfAnySelectedSubjectClashesWith } from "../actions/checkIfAnySelectedSubjectClashesWith";
 import {
     SubjectListState,
     SubjectListStateAction
@@ -23,14 +24,14 @@ import {
     SearchSubjectList
 } from "./../actions/searchSubjectList";
 import {
-    SelectSubject
-} from "./../actions/selectSubject";
-import {
     ToggleLoadingBar
 } from "./../actions/toggleLoadingBar";
 import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
+import {
+    ToggleSubjectSelection
+} from "./../actions/toggleSubjectSelection";
 import {
     ToggleVisibilityOfSubjectListView
 } from "./../actions/toggleVisibilityOfSubjectListView";
@@ -54,7 +55,9 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleClose: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
         handleSearch: (searchedText: string) => dispatch(Wrap(new SearchSubjectList(searchedText)).Action()),
         handleSelection: (subjectCode: string) => {
-            dispatch(Wrap(new SelectSubject(subjectCode)).Action());
+            dispatch(Wrap(new CheckIfAnySelectedSubjectClashesWith(subjectCode)).Action());
+            dispatch(Wrap(new ToggleSubjectSelection(subjectCode)).Action());
+            // dispatch(Wrap(new ReleaseDisabledSubjectIfPossible(subjectCode)).Action());
             dispatch(Wrap(new ToggleLoadingBar(true)).Action());
             setTimeout(() => {
                 dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
