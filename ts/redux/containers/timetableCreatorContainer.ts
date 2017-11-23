@@ -19,11 +19,11 @@ import {
     SearchSubjectList
 } from "./../actions/searchSubjectList";
 import {
-    SelectSubject
-} from "./../actions/selectSubject";
-import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
+import {
+    ToggleSubjectSelection
+} from "./../actions/toggleSubjectSelection";
 import {
     ToggleVisibilityOfSubjectListView
 } from "./../actions/toggleVisibilityOfSubjectListView";

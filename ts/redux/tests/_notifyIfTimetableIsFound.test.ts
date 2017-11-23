@@ -8,8 +8,8 @@ import {
     NotifyIfTimetableIsFound
 } from "./../actions/notifyIfTimetableIsFound";
 import {
-    SelectSubject
-} from "./../actions/selectSubject";
+    ToggleSubjectSelection
+} from "./../actions/toggleSubjectSelection";
 import {
     UpdateSubjectListState
 } from "./../actions/updateSubjectListState";
@@ -30,7 +30,7 @@ describe("NotifyIfTimetableIsFound action", () => {
         const initialState = new TimetableCreatorState();
         let newState =
             TimetableCreatorStateReducer(initialState,
-                new UpdateSubjectListState(new SelectSubject("MPU3113")).Action());
+                new UpdateSubjectListState(new ToggleSubjectSelection("MPU3113")).Action());
         newState = TimetableCreatorStateReducer(newState, action);
         expect(newState.IsSnackbarVisible).to.eq(true);
     });

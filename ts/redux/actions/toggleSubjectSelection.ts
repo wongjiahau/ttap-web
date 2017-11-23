@@ -11,7 +11,7 @@ import {
     ToggleSubjectListViewingOptions
 } from "./toggleSubjectListViewingOption";
 
-export class SelectSubject extends SubjectListStateAction {
+export class ToggleSubjectSelection extends SubjectListStateAction {
     public constructor(private subjectCode: string) {
         super();
     }
