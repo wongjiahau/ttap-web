@@ -22,9 +22,9 @@ export type ClashingType = "single" | "group";
 
 export class ClashReport {
     public readonly TargetName: string;
-    public readonly ClashingType: ClashingType;
-    public constructor(clashingType: ClashingType, targetName: string = null) {
-        this.ClashingType = clashingType;
+    public readonly Type: ClashingType;
+    public constructor(type: ClashingType, targetName: string = null) {
+        this.Type = type;
         this.TargetName = targetName;
     }
 }
