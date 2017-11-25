@@ -1,4 +1,5 @@
 import { isEqual } from "lodash";
+import { FindClashes } from "../../clashFinder/findClashes";
 import { RawSlot } from "../../model/rawSlot";
 import { ParseSlotToSubject } from "../../parser/parseSlotToSubject";
 import { SubjectListState } from "../reducers/subjectListState";
@@ -13,10 +14,12 @@ export class NotifyDataLoaded extends TimetableCreatorStateAction {
         return "notify data loaded";
     }
     protected GenerateNewState(state: ITimetableCreatorState):  ITimetableCreatorState {
+        const subjects = ParseSlotToSubject(this.rawSlots);
+        FindClashes(subjects);
         return {
             ...state,
             IsSlotLoaded: true,
-            SubjectListState: new SubjectListState(ParseSlotToSubject(this.rawSlots))
+            SubjectListState: new SubjectListState(subjects)
         };
     }
 }

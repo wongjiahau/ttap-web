@@ -2,9 +2,11 @@ import Checkbox from "material-ui-next/Checkbox";
 import List, {ListItem, ListItemSecondaryAction, ListItemText} from "material-ui-next/List";
 import * as React from "react";
 import Highlighter = require("react-highlight-words");
+import { ClashReport } from "../model/subject";
 import {Colors} from "./colors/colors";
 
 export interface ISubjectViewProps {
+    clashReport: ClashReport;
     searchWord : string;
     subjectName : string;
     subjectCode : string;
@@ -34,12 +36,15 @@ export class SubjectView extends React.Component < ISubjectViewProps, {} > {
             highlightClassName="YourHighlightClass"
             searchWords={[this.props.searchWord]}
             textToHighlight={this.props.subjectCode}/>);
+
+        const clashReport = this.props.clashReport ? (<p>Cannot select this subject as it causes clashing</p>) : null;
         return (
             <div style={divStyle}>
                 <ListItem button={true} divider={true} onClick={this.props.handleSelection}>
                     <Checkbox checked={this.props.isSelected} tabIndex={-1} disableRipple={true}/>
                     <ListItemText primary={primary} secondary={secondary}/>
                 </ListItem>
+                {clashReport ? clashReport : ""}
             </div>
         );
     }

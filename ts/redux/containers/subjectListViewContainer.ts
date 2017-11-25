@@ -1,7 +1,6 @@
 import {
     connect
 } from "react-redux";
-import { CheckIfAnySelectedSubjectClashesWith } from "../actions/checkIfAnySelectedSubjectClashesWith";
 import {
     SubjectListState,
     SubjectListStateAction
@@ -55,12 +54,9 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleClose: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
         handleSearch: (searchedText: string) => dispatch(Wrap(new SearchSubjectList(searchedText)).Action()),
         handleSelection: (subjectCode: string) => {
-            dispatch(Wrap(new CheckIfAnySelectedSubjectClashesWith(subjectCode)).Action());
-            dispatch(Wrap(new ToggleSubjectSelection(subjectCode)).Action());
-            // dispatch(Wrap(new ReleaseDisabledSubjectIfPossible(subjectCode)).Action());
             dispatch(Wrap(new ToggleLoadingBar(true)).Action());
             setTimeout(() => {
-                dispatch(Wrap(new FindTimetablesBasedOnSelectedSubjects()).Action());
+                dispatch(Wrap(new ToggleSubjectSelection(subjectCode)).Action());
                 dispatch(Wrap(new ToggleLoadingBar(false)).Action());
                 dispatch(new NotifyIfTimetableIsFound().Action());
             }, 0);
