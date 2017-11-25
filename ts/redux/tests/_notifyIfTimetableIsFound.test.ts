@@ -4,6 +4,7 @@ import {
 import {
     isEqual
 } from "lodash";
+import { IndexOf } from "../../tests/testDataGenerator";
 import {
     NotifyIfTimetableIsFound
 } from "./../actions/notifyIfTimetableIsFound";
@@ -30,7 +31,7 @@ describe("NotifyIfTimetableIsFound action", () => {
         const initialState = new TimetableCreatorState();
         let newState =
             TimetableCreatorStateReducer(initialState,
-                new UpdateSubjectListState(new ToggleSubjectSelection("MPU3113")).Action());
+                new UpdateSubjectListState(new ToggleSubjectSelection(IndexOf.HE)).Action());
         newState = TimetableCreatorStateReducer(newState, action);
         expect(newState.IsSnackbarVisible).to.eq(true);
     });
