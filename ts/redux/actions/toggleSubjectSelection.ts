@@ -1,6 +1,5 @@
 import {
-    includes,
-    reduce
+    includes
 } from "lodash";
 import * as S from "string";
 import {
@@ -149,11 +148,14 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
     if (subjects.length === 0) {
         return [];
     }
-    const slotsId = reduce(subjects, (sum, x) => sum.concat((x as Subject).SlotIds), []);
+    let slotIds = [];
+    for (let i = 0; i < subjects.length; i++) {
+        slotIds = slotIds.concat(subjects[i].SlotIds);
+    }
     return FindTimetable(
         ParseSlotToTinySlot(
             ParseRawSlotToSlot(
-                RawSlot.GetBunch(slotsId)
+                RawSlot.GetBunch(slotIds)
             )
         )
     );
