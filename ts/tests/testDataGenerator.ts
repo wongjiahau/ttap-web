@@ -69,3 +69,24 @@ export enum CodeOf {
     TITA = "MPU3123",
     WWT = "UEMX3653"
 }
+
+export enum IndexOf {
+    ACP     = 0,
+    BKA     = 1,
+    BMK2    = 2,
+    BEAM    = 3,
+    CP      = 4,
+    EE      = 5,
+    HE      = 6,
+    IT      = 7,
+    ITF     = 8,
+    ITGL    = 9,
+    ITJ     = 10,
+    ITK     = 11,
+    LT      = 12,
+    MS3     = 13,
+    SA1     = 14,
+    SZAOWBS = 15,
+    TITA    = 16,
+    WWT     = 17
+}

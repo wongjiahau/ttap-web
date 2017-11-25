@@ -53,10 +53,10 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
     return {
         handleClose: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
         handleSearch: (searchedText: string) => dispatch(Wrap(new SearchSubjectList(searchedText)).Action()),
-        handleSelection: (subjectCode: string) => {
+        handleSelection: (subjectIndex: number) => {
             dispatch(Wrap(new ToggleLoadingBar(true)).Action());
             setTimeout(() => {
-                dispatch(Wrap(new ToggleSubjectSelection(subjectCode)).Action());
+                dispatch(Wrap(new ToggleSubjectSelection(subjectIndex)).Action());
                 dispatch(Wrap(new ToggleLoadingBar(false)).Action());
                 dispatch(new NotifyIfTimetableIsFound().Action());
             }, 0);

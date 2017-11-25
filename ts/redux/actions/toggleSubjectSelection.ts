@@ -41,7 +41,7 @@ import {
 } from "./toggleSubjectListViewingOption";
 
 export class ToggleSubjectSelection extends SubjectListStateAction {
-    public constructor(private subjectCode: string) {
+    public constructor(private subjectIndex: number) {
         super();
     }
     public TypeName(): string {
@@ -49,7 +49,7 @@ export class ToggleSubjectSelection extends SubjectListStateAction {
     }
     protected GenerateNewState(state: ISubjectListState): ISubjectListState {
         const newSubjects = state.Subjects.map((x) => ({ ...x }));
-        const targetSubject = newSubjects.filter((x) => x.Code === this.subjectCode)[0];
+        const targetSubject = newSubjects[this.subjectIndex];
         if (targetSubject.ClashReport !== null) {
             return state;
         }
@@ -71,7 +71,6 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
     }
     const timetables = FindTimetableBasedOn(selectedSubjects.concat([subjectToBeSelected]));
     if (timetables.length === 0) {
-        FindClashes(selectedSubjects.concat([subjectToBeSelected]));
         const clashReportz = CheckForClashesBetween(subjectToBeSelected, selectedSubjects);
         subjectToBeSelected.ClashReport = clashReportz ? clashReportz : new ClashReport("group");
         return {

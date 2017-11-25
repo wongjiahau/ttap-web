@@ -60,7 +60,7 @@ export interface ISubjectListViewStateProps {
 export interface ISubjectListViewDispatchProps {
     handleClose : () => void;
     handleSearch : (searchedText : string) => void;
-    handleSelection : (subjectCode : string) => void;
+    handleSelection : (subjectIndex: number) => void;
     handleToggleView : () => void;
 }
 
@@ -94,7 +94,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         const subjectViews = this
             .props
             .subjects
-            .map((s) => {
+            .map((s, index) => {
                 if (s.IsVisible) {
                     return (
                         <div key={s.Code}>
@@ -103,7 +103,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                 searchWord={this.props.searchWord}
                                 subjectName={Beautify(s.Name)}
                                 subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
-                                handleSelection={() => this.props.handleSelection(s.Code)}
+                                handleSelection={() => this.props.handleSelection(index)}
                                 isSelected={s.IsSelected}/>
                         </div>
                     );
