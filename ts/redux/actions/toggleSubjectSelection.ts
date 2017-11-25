@@ -71,8 +71,7 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
     }
     const timetables = FindTimetableBasedOn(selectedSubjects.concat([subjectToBeSelected]));
     if (timetables.length === 0) {
-        const clashReportz = CheckForClashesBetween(subjectToBeSelected, selectedSubjects);
-        subjectToBeSelected.ClashReport = clashReportz ? clashReportz : new ClashReport("group");
+        subjectToBeSelected.ClashReport = new ClashReport("group");
         return {
             ...state,
             Subjects: allSubjects
