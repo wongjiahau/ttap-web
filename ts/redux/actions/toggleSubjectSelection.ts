@@ -1,5 +1,6 @@
 import {
-    includes, reduce
+    includes,
+    reduce
 } from "lodash";
 import * as S from "string";
 import {
@@ -112,7 +113,15 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects: Subject[], a
         const s = disabledSubjects[i];
         switch (s.ClashReport.Type) {
             case "single":
-                if (selectedSubjects.every((subject) => !includes(subject.ClashingCounterparts, s.Code))) {
+                let stillGotClashes = false;
+                for (let j = 0; j < selectedSubjects.length; j++) {
+                    if (includes(selectedSubjects[j].ClashingCounterparts, s.Code)) {
+                        s.ClashReport = new ClashReport("single", Beautify(selectedSubjects[j].Name));
+                        stillGotClashes = true;
+                        break;
+                    }
+                }
+                if (!stillGotClashes) {
                     s.ClashReport = null;
                 }
                 break;

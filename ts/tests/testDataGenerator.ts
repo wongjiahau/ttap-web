@@ -64,3 +64,24 @@ export const GetTestTimetables1 = (): Timetable[] => {
     const allSlots = input1.concat(input2).concat(input3);
     return FindTimetable(allSlots);
 };
+
+export enum CodeOf {
+      ACP = "MPU34022",
+      BKA = "MPU32013",
+      BMK2 = "MPU3143",
+      BEAM = "UKMM1043",
+      CP = "MPU34032",
+      EE = "UEMK4343",
+      HE = "MPU3113",
+      IT = "UEGE3114",
+      ITF = "UALF1003",
+      ITGL = "UALB1003",
+      ITJ = "UALJ2013",
+      ITK = "UJLL1093",
+      LT = "MPU34152",
+      MS3 = "MPU3173",
+      SA1 = "UEMX2313",
+      SZAOWBS = "UKMM1011",
+      TITA = "MPU3123",
+      WWT = "UEMX3653"
+}

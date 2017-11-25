@@ -19,7 +19,6 @@ export class Subject {
 }
 
 export type ClashingType = "single" | "group";
-
 export class ClashReport {
     public readonly TargetName: string;
     public readonly Type: ClashingType;
