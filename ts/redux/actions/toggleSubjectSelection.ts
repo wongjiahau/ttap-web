@@ -48,9 +48,11 @@ export class ToggleSubjectSelection extends SubjectListStateAction {
         return "toggle subject selection";
     }
     protected GenerateNewState(state: ISubjectListState): ISubjectListState {
-        const newSubjects = state.Subjects.map((x) => ({ ...x
-        }));
+        const newSubjects = state.Subjects.map((x) => ({ ...x }));
         const targetSubject = newSubjects.filter((x) => x.Code === this.subjectCode)[0];
+        if (targetSubject.ClashReport !== null) {
+            return state;
+        }
         return targetSubject.IsSelected ?
             DeselectSubject(targetSubject, newSubjects, state) :
             SelectSubject(targetSubject, newSubjects, state);
