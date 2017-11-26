@@ -2,7 +2,6 @@ import * as typeName from "type-name";
 import { STCBox } from "../../model/states/stcBox";
 import {Action} from "../actions/action";
 import {Timetable} from "./../../model/timetable";
-import {GetTestSubjects1} from "./../../tests/testDataGenerator";
 import {GenereteReducer} from "./generateReducer";
 
 export interface ITimetableListState {

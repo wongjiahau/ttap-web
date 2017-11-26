@@ -29,7 +29,7 @@ export class TimetableCreatorState implements ITimetableCreatorState {
         this.IsSnackbarVisible = isSnackbarVisible;
         this.IsSubjectListViewVisible = isSubjectListVisible;
         this.SnackbarMessage = snackbarMessage;
-        this.SubjectListState = new SubjectListState();
+        this.SubjectListState = new SubjectListState(null);
     }
 }
 

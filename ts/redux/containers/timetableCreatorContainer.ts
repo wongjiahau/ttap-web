@@ -5,6 +5,9 @@ import {
     RawSlot
 } from "../../model/rawSlot";
 import {
+    GetTestRawSlot1
+} from "../../tests/testDataGenerator";
+import {
     HideSnackbar
 } from "../actions/hideSnackbar";
 import {
@@ -45,6 +48,7 @@ const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
     return {
+        handleLoadDemo: () => dispatch(new NotifyDataLoaded(GetTestRawSlot1()).Action()),
         handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots).Action()),
         handleSnackbarAction: () => dispatch(new HideSnackbar().Action()),
         handleToggleVisibilityOfSubjectListView: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),

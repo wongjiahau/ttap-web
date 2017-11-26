@@ -9,11 +9,11 @@ import RaisedButton from "material-ui/RaisedButton";
 import IconList from "material-ui/svg-icons/action/list";
 import * as React from "react";
 import {Beautify} from "../helper";
-import { RawSlot } from "../model/rawSlot";
+import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
-import { Login } from "./login";
+import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -23,7 +23,7 @@ const selectSubjectButtonStyle : React.CSSProperties = {
 
 export interface ITimetableCreatorViewStateProps {
     isSubjectListViewVisible : boolean;
-    isSlotLoaded: boolean;
+    isSlotLoaded : boolean;
     isSnackbarVisible : boolean;
     snackbarMessage : string;
     clashingSubjectPairs : Array < [Subject, Subject] >;
@@ -33,6 +33,7 @@ export interface ITimetableCreatorViewDispatchProps {
     handleToggleVisibilityOfSubjectListView : () => void;
     handleSnackbarAction : () => void;
     handleSlotLoaded : (rawSlots : RawSlot[]) => void;
+    handleLoadDemo : () => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -42,7 +43,12 @@ let viewCount = 0;
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
         if (!this.props.isSlotLoaded) {
-            return <Login notifyDataLoaded={this.props.handleSlotLoaded}/>;
+            return (
+                <div>
+                    <button onClick={this.props.handleLoadDemo}>Load demo</button>
+                    <Login notifyDataLoaded={this.props.handleSlotLoaded}/>
+                </div>
+            );
         }
         viewCount++;
         const okButton = (

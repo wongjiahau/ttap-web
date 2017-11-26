@@ -32,20 +32,20 @@ export class SubjectListState implements ISubjectListState {
     public IsShowingLoadingBar: boolean;
     public IsShowingSelectedSubjectOnly: boolean;
     public TimetableListState: ITimetableListState;
-    public constructor(subject = GetTestSubjects1()) {
+    public constructor(subjects: Subject[]) {
         this.SearchedText = "";
         this.IsShowingSelectedSubjectOnly = false;
         this.IsShowingLoadingBar = false;
         this.TimetableListState = new TimetableListState();
         this.ClashingSubjectPairs = null;
-        this.Subjects = subject;
+        this.Subjects = subjects;
     }
 }
 
 export abstract class SubjectListStateAction extends Action < ISubjectListState > {
     public StateName() {
-        return typeName(new SubjectListState());
+        return typeName(new SubjectListState(null));
     }
 }
 
-export const SubjectListStateReducer = GenereteReducer(new SubjectListState());
+export const SubjectListStateReducer = GenereteReducer(new SubjectListState(null));
