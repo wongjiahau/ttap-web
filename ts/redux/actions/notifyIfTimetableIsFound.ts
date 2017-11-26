@@ -3,6 +3,7 @@ import {
     TimetableCreatorStateAction
 } from "./../reducers/timetableCreatorState";
 
+let previousSelectedSubjectCount = 0;
 export class NotifyIfTimetableIsFound extends TimetableCreatorStateAction {
     public constructor() {
         super();
@@ -12,8 +13,10 @@ export class NotifyIfTimetableIsFound extends TimetableCreatorStateAction {
     }
     protected GenerateNewState(state: ITimetableCreatorState): ITimetableCreatorState {
         const converter = require("number-to-words");
+        const currentSelectedSubjectCount = state.SubjectListState.Subjects.filter((x) => x.IsSelected).length;
         const numberOfTimetablesFound = state.SubjectListState.TimetableListState.FiltrateTimetables.length;
-        const shouldShowSnackbar = state.SubjectListState.Subjects.some((s) => s.IsSelected);
+        const shouldShowSnackbar = state.SubjectListState.Subjects.some((s) => s.IsSelected) && previousSelectedSubjectCount !== currentSelectedSubjectCount;
+        previousSelectedSubjectCount = currentSelectedSubjectCount;
         const message = `${numberOfTimetablesFound} possible timetables found.`;
         return {
             ...state,
