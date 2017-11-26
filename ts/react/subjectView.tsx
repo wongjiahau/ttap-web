@@ -5,6 +5,16 @@ import Highlighter = require("react-highlight-words");
 import {ClashReport} from "../model/subject";
 import {Colors} from "./colors/colors";
 
+const clashReportStyle : React.CSSProperties = {
+    background: Colors.DarkRed,
+    color: Colors.White,
+    font: "Roboto",
+    fontSize: "14px",
+    overflowY: "hidden",
+    padding: "8px",
+    width: "200px"
+};
+
 export interface ISubjectViewProps {
     clashReport : ClashReport;
     searchWord : string;
@@ -37,35 +47,47 @@ export class SubjectView extends React.Component < ISubjectViewProps, {} > {
             searchWords={[this.props.searchWord]}
             textToHighlight={this.props.subjectCode}/>);
 
-        const clashReport = () => {
-            const x = this.props.clashReport;
-            if (x) {
-                if (x.Type === "single") {
-                    return (
-                        <p>Cannot select this subject as it clashes with
-                            <b>{x.TargetName}</b>
-                        </p>
-                    );
-
-                } else if (x.Type === "group") {
-                    return (
-                        <p>Cannot select this subject as it clashes with those selected subjects</p>
-                    );
-                }
-            } else {
-                return "";
-            }
-        };
+        const gotClashReport = this.props.clashReport !== null;
         return (
-            <div style={divStyle}>
-                <ListItem button={true} divider={true} onClick={this.props.handleSelection}>
-                    <Checkbox checked={this.props.isSelected} tabIndex={-1} disableRipple={true}/>
-                    <ListItemText primary={primary} secondary={secondary}/>
-                </ListItem>
-                {clashReport()}
+            <div className="ui pushable" style={{overflowY: "hidden"}}>
+                <div style={clashReportStyle}
+                    className={"ui " + (gotClashReport ? "visible" : "") + " right overlay sidebar"}>
+                    {getClashReport(this.props.clashReport)}
+                </div>
+                <div
+                    className={(gotClashReport
+                    ? "dimmed"
+                    : "") + " pusher"}>
+                    <div style={divStyle}>
+                        <ListItem button={true} divider={true} onClick={this.props.handleSelection}>
+                            {gotClashReport
+                                ? ""
+                                : <Checkbox checked={this.props.isSelected} tabIndex={-1} disableRipple={true}/>}
+                            <ListItemText primary={primary} secondary={secondary}/>
+                        </ListItem>
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
+const getClashReport = (x : ClashReport) => {
+    if (x) {
+        if (x.Type === "single") {
+            return (
+                <div>Cannot select this subject as it clashes with : <br/>
+                    <b>{x.TargetName}</b>
+                </div>
+            );
+
+        } else if (x.Type === "group") {
+            return (
+                <div>Cannot select this subject as it causes <a>Group Clashing</a></div>
+            );
+        }
+    } else {
+        return "";
+    }
+};
 export default SubjectView;

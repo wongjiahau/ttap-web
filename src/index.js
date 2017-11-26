@@ -1,4 +1,5 @@
 import './index.css';
+import './semantic-ui-sidebar.css'
 import 'typeface-roboto';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
