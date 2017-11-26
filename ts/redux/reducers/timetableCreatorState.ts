@@ -1,5 +1,8 @@
 import * as typeName from "type-name";
 import {
+    Subject
+} from "../../model/subject";
+import {
     Action
 } from "../actions/action";
 import {
@@ -24,19 +27,19 @@ export class TimetableCreatorState implements ITimetableCreatorState {
     public IsSubjectListViewVisible: boolean;
     public SnackbarMessage: string;
     public SubjectListState: ISubjectListState;
-    public constructor(isSubjectListVisible = true, isSnackbarVisible = false, snackbarMessage = "") {
+    public constructor(subjects: Subject[]) {
         this.IsSlotLoaded = false;
-        this.IsSnackbarVisible = isSnackbarVisible;
-        this.IsSubjectListViewVisible = isSubjectListVisible;
-        this.SnackbarMessage = snackbarMessage;
-        this.SubjectListState = new SubjectListState(null);
+        this.IsSnackbarVisible = false;
+        this.IsSubjectListViewVisible = true;
+        this.SnackbarMessage = "";
+        this.SubjectListState = new SubjectListState(subjects);
     }
 }
 
-export const TimetableCreatorStateReducer = GenereteReducer(new TimetableCreatorState());
+export const TimetableCreatorStateReducer = GenereteReducer(new TimetableCreatorState(null));
 
 export abstract class TimetableCreatorStateAction extends Action < ITimetableCreatorState > {
     public StateName() {
-        return typeName(new TimetableCreatorState());
+        return typeName(new TimetableCreatorState(null));
     }
 }

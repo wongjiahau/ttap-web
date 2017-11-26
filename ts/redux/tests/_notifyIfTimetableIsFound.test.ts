@@ -4,7 +4,7 @@ import {
 import {
     isEqual
 } from "lodash";
-import { IndexOf } from "../../tests/testDataGenerator";
+import { GetTestSubjects1, IndexOf } from "../../tests/testDataGenerator";
 import {
     NotifyIfTimetableIsFound
 } from "./../actions/notifyIfTimetableIsFound";
@@ -28,7 +28,7 @@ describe("NotifyIfTimetableIsFound action", () => {
 
     it("should set IsSnackBarVisible to true if some subjects is selected", () => {
         const action = new NotifyIfTimetableIsFound().Action();
-        const initialState = new TimetableCreatorState();
+        const initialState = new TimetableCreatorState(GetTestSubjects1());
         let newState =
             TimetableCreatorStateReducer(initialState,
                 new UpdateSubjectListState(new ToggleSubjectSelection(IndexOf.HE)).Action());
@@ -38,7 +38,7 @@ describe("NotifyIfTimetableIsFound action", () => {
 
     it("should set IsSnackBarVisible to false if zero subject is selected", () => {
         const action = new NotifyIfTimetableIsFound().Action();
-        const initialState = new TimetableCreatorState();
+        const initialState = new TimetableCreatorState(GetTestSubjects1());
         const newState = TimetableCreatorStateReducer(initialState, action);
         expect(newState.IsSnackbarVisible).to.eq(false);
     });

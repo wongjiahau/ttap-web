@@ -13,7 +13,6 @@ import {Timetable} from "./../model/timetable";
 
 export const GetTestSubjects1 = () : Subject[] => {
     const subjects = ParseSlotToSubject(ParseHtmlToSlots(heng_2017_sept()));
-    FindClashes(subjects);
     return subjects;
 };
 

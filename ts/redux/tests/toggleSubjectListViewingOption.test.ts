@@ -9,12 +9,12 @@ import {ISubjectListState, SubjectListState, SubjectListStateReducer} from "./..
 describe("ToggleSubjectListViewingOption", () => {
 
     it("the initial value of IsShowingSelectedSubject should be false", () => {
-        const initialState = new SubjectListState();
+        const initialState = new SubjectListState(GetTestSubjects1());
         expect(initialState.IsShowingSelectedSubjectOnly).to.eq(false);
     });
 
     it("should toggle property IsShowingSelectedSubjectOnly from false to true", () => {
-        const initialState = new SubjectListState();
+        const initialState = new SubjectListState(GetTestSubjects1());
         const newState = SubjectListStateReducer(initialState, new ToggleSubjectListViewingOptions().Action());
         expect(newState.IsShowingSelectedSubjectOnly)
             .to
@@ -22,7 +22,7 @@ describe("ToggleSubjectListViewingOption", () => {
     });
 
     it("should toggle property IsShowingSelectedSubjectOnly from true to false", () => {
-        const initialState = new SubjectListState();
+        const initialState = new SubjectListState(GetTestSubjects1());
         const newState1 = SubjectListStateReducer(initialState, new ToggleSubjectListViewingOptions().Action());
         const newState2 = SubjectListStateReducer(initialState, new ToggleSubjectListViewingOptions().Action());
         expect(newState2.IsShowingSelectedSubjectOnly)

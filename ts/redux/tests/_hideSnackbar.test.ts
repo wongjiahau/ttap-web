@@ -5,6 +5,9 @@ import {
     isEqual
 } from "lodash";
 import {
+    GetTestSubjects1
+} from "../../tests/testDataGenerator";
+import {
     HideSnackbar
 } from "./../actions/hideSnackbar";
 import {
@@ -21,7 +24,8 @@ describe("HideSnackbar action", () => {
 
     it("should set IsSnackbarVisible to false", () => {
         const action = new HideSnackbar().Action();
-        const initialState = new TimetableCreatorState(false, true, "");
+        const initialState = new TimetableCreatorState(GetTestSubjects1());
+        initialState.IsSnackbarVisible = true;
         expect(initialState.IsSnackbarVisible).to.eq(true);
         const newState = TimetableCreatorStateReducer(initialState, action);
         expect(newState.IsSnackbarVisible).to.eq(false);
