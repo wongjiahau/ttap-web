@@ -30,15 +30,15 @@ export class SubjectSummary {
 
     public ToString(): string {
         return this.SubjectCode +
-            "\n" +
+            "\r\n" +
             this.SubjectName +
-            "\n" +
-            this.Lecture +
+            "\r\n" +
+            this.Lecture +            
             " " +
             this.Tutorial +
             " " +
             this.Practical +
-            "\n";
+            "\r\n";
     }
 
     private GetSlotOf(rawSlots: RawSlot[], slotType: string) {
@@ -62,7 +62,7 @@ export class TimetableSummary {
         let result = "";
         this.SubjectSummaries.forEach((s) => {
             result += s.ToString();
-            result += "\n";
+            result += "\r\n";
         });
         return result;
     }
