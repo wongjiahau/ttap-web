@@ -94,7 +94,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     }
 
     private addTimetable() {
-        const semStartDate = new Date(2017, 10, 13);
+        const semStartDate = new Date(2018, 0, 15);
         this.rawSlots.forEach((s) => {
             this.addEvents(CreateEvent(s, semStartDate));
         });
@@ -103,7 +103,6 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
         });
         window.open("https://calendar.google.com/");
     }
-
 
     private addEvents(calenderEvent) {
         gapi // eslint-disable-line

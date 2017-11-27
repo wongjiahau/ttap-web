@@ -12,14 +12,14 @@ describe("notifyDataLoaded action", () => {
     });
 
     it("should change IsDataLoaded to true", () => {
-        const newState = TimetableCreatorStateReducer(new TimetableCreatorState(), new NotifyDataLoaded(GetTestRawSlot1()).Action());
+        const newState = TimetableCreatorStateReducer(new TimetableCreatorState(null), new NotifyDataLoaded(GetTestRawSlot1()).Action());
         expect(newState.IsSlotLoaded)
             .to
             .eq(true);
     });
 
     it("should set Subject property of SubjectListState", () => {
-        const newState = TimetableCreatorStateReducer(new TimetableCreatorState(), new NotifyDataLoaded(GetTestRawSlot1()).Action());
+        const newState = TimetableCreatorStateReducer(new TimetableCreatorState(null), new NotifyDataLoaded(GetTestRawSlot1()).Action());
         expect(newState.SubjectListState.Subjects.length).to.eq(18);
     });
 });
