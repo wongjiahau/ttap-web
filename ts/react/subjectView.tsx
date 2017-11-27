@@ -24,9 +24,6 @@ export interface ISubjectViewProps {
     handleSelection : () => void;
 }
 
-const whenSelectedStyle : React.CSSProperties = {};
-const whenDeselectedStyle : React.CSSProperties = {};
-
 export class SubjectView extends React.Component < ISubjectViewProps, {} > {
     constructor(props : ISubjectViewProps) {
         super(props);
@@ -83,7 +80,7 @@ const getClashReport = (x : ClashReport) => {
 
         } else if (x.Type === "group") {
             return (
-                <div>Cannot select this subject as it causes <a>Group Clashing</a></div>
+                <div>Cannot select this subject as it clashes with the subject(s) you selected previously.</div>
             );
         }
     } else {
