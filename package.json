@@ -24,6 +24,7 @@
     "react": "^16.0.0",
     "react-countup": "^3.0.2",
     "react-dom": "^16.0.0",
+    "react-flatpickr": "^3.6.3",
     "react-grid-layout": "^0.16.0",
     "react-highlight-words": "^0.10.0",
     "react-markdown": "^2.5.0",
