@@ -36,17 +36,18 @@ export interface ITimetableListViewStateProps {
 }
 
 export interface ITimetableListViewDispatchProps {
-    handleGoToNext : () => void;
-    handleGoToPrevious : () => void;
-    handleSaveAsTextFile : () => void;
-    handleSaveAsPicture : () => void;
-    handleSaveToGoogleCalendar : () => void;
-    handleOpenSaveDialog : () => void;
-    handleCloseSaveDialog : () => void;
-    handleOpenSetTimeConstraintView : () => void;
-    handleSetTimeConstraintAt : (state : STCBox) => void;
-    handleDesetTimeConstraintAt : (state : STCBox) => void;
-    handleCloseSetTimeConstraintView : () => void;
+    handleGoToNext:                   ()   => void;
+    handleGoToRandom:                 ()   => void;
+    handleGoToPrevious:               ()   => void;
+    handleSaveAsTextFile:             ()   => void;
+    handleSaveAsPicture:              ()   => void;
+    handleSaveToGoogleCalendar:       ()   => void;
+    handleOpenSaveDialog:             ()   => void;
+    handleCloseSaveDialog:            ()   => void;
+    handleOpenSetTimeConstraintView:  ()   => void;
+    handleSetTimeConstraintAt:        (state: STCBox) => void;
+    handleDesetTimeConstraintAt:      (state: STCBox) => void;
+    handleCloseSetTimeConstraintView: ()   => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -70,6 +71,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         current={this.props.currentIndex + 1}
                         maxInclusive={this.props.maxIndex + 1}
                         handleClickLeft={this.props.handleGoToPrevious}
+                        handleClickMiddle={this.props.handleGoToRandom}
                         handleClickRight={this.props.handleGoToNext}/>
                     <RaisedButton
                         onClick={this.props.handleOpenSaveDialog}

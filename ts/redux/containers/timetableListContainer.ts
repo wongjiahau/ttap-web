@@ -10,6 +10,9 @@ import {
     TimetableListView
 } from "../../react/timetableListView";
 import {
+    GoToRandomTimetable
+} from "../actions/goToRandomTimetable";
+import {
     SaveTimetableAsImage
 } from "../actions/saveTimetable/saveTimetableAsImage";
 import {
@@ -78,6 +81,7 @@ const mapStateToProps = (state): ITimetableListViewStateProps => {
 const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
     return {
         handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable())),
+        handleGoToRandom: () => dispatch(Wrap(new GoToRandomTimetable())),
         handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable())),
         handleSaveAsTextFile: () => {
             dispatch(Wrap(new SaveTimetableAsTextFile()));

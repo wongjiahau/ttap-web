@@ -14,6 +14,7 @@ export interface ICounterProps {
     current : number;
     handleClickLeft : () => void;
     handleClickRight : () => void;
+    handleClickMiddle : () => void;
 }
 
 export class CounterView extends React.Component < ICounterProps, {} > {
@@ -25,7 +26,7 @@ export class CounterView extends React.Component < ICounterProps, {} > {
         return (
             <div style={divStyle}>
                 <RaisedButton onClick={this.props.handleClickLeft} icon={< IconLeft />}/>
-                <RaisedButton label={this.props.current + "/" + this.props.maxInclusive}/>
+                <RaisedButton onClick={this.props.handleClickMiddle} label={this.props.current + "/" + this.props.maxInclusive}/>
                 <RaisedButton onClick={this.props.handleClickRight} icon={< IconRight />}/>
             </div>
         );
