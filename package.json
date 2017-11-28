@@ -46,7 +46,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill",
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill --coverage",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
