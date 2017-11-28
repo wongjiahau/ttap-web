@@ -6,6 +6,7 @@ import Button from "material-ui-next/Button";
 import Dialog, {DialogTitle} from "material-ui-next/Dialog";
 import List, {ListItem, ListItemIcon, ListItemText} from "material-ui-next/List";
 import * as React from "react";
+import { GetSemStartDateDialog } from "./getSemStartDateDialog";
 
 const cancelButtonStyle : React.CSSProperties = {
     marginBottom: "7px",
@@ -13,14 +14,17 @@ const cancelButtonStyle : React.CSSProperties = {
 };
 
 export interface ISaveTimetableDialogStateProps {
-    isOpen: boolean;
+    isMainDialogOpen: boolean;
+    isGetDateDialogOpen: boolean;
 }
 
 export interface ISaveTimetableDialogDispatchProps {
-    handleClose: () => void;
-    handleSaveAsTextFile: () => void;
-    handleSaveAsPicture: () => void;
-    handleSaveToGoogleCalendar: () => void;
+    handleClose:                ()          => void;
+    handleCloseGetDateDialog:   ()          => void;
+    handleOpenGetDateDialog:    ()          => void;
+    handleSaveAsPicture:        ()          => void;
+    handleSaveAsTextFile:       ()          => void;
+    handleSaveToGoogleCalendar: (semStartDate: Date) => void;
 }
 
 export interface ISaveTimetableDialogProps extends ISaveTimetableDialogStateProps,
@@ -29,7 +33,7 @@ ISaveTimetableDialogDispatchProps {}
 export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogProps, {} > {
     public render() {
         return (
-            <Dialog open={this.props.isOpen}>
+            <Dialog open={this.props.isMainDialogOpen}>
                 <DialogTitle>Save this timetable as . . .</DialogTitle>
                 <div>
                     <List>
@@ -45,7 +49,7 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
                             </ListItemIcon>
                             <ListItemText primary={"Picture (*.png)"}/>
                         </ListItem>
-                        <ListItem button={true} onClick={this.props.handleSaveToGoogleCalendar}>
+                        <ListItem button={true} onClick={this.props.handleOpenGetDateDialog}>
                             <ListItemIcon>
                                 <CloudIcon/>
                             </ListItemIcon>
@@ -54,6 +58,7 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
                     </List>
                     <Button color="primary" style={cancelButtonStyle} onClick={this.props.handleClose}>cancel</Button>
                 </div>
+                <GetSemStartDateDialog isOpen={this.props.isGetDateDialogOpen} handleClose={this.props.handleCloseGetDateDialog} handleSaveToGoogleCalendar={this.props.handleSaveToGoogleCalendar}/>
             </Dialog>
         );
     }

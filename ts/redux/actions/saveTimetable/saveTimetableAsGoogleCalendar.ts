@@ -36,10 +36,16 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     private CLIENT_ID: string;
     private DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
     private SCOPES = "https://www.googleapis.com/auth/calendar";
+
+    public constructor(private semStartDate: Date) {
+        super();
+    }
+
     protected Save(timetable: Timetable) {
         this.rawSlots = RawSlot.GetBunch(timetable.HashIds);
         this.retrieveTokens();
     }
+
     protected SaveType(): string {
         return "google calendar";
     }
@@ -94,7 +100,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     }
 
     private addTimetable() {
-        const semStartDate = new Date(2018, 0, 15);
+        const semStartDate = this.semStartDate;
         this.rawSlots.forEach((s) => {
             this.addEvents(CreateEvent(s, semStartDate));
         });

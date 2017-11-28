@@ -11,6 +11,7 @@ import * as React from "react";
 import {Beautify} from "../helper";
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
+import { SaveTimetableDialogContainer } from "../redux/containers/saveTimetableDialogContainer";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 import {Login} from "./login";
@@ -73,8 +74,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     label="Select subjects"
                     onClick={this.props.handleToggleVisibilityOfSubjectListView}/> {this.props.clashingSubjectPairs !== null
                     ? this.GenerateMessage(this.props.clashingSubjectPairs)
-                    : <TimetableListContainer/>
-}
+                    : <TimetableListContainer/> }
                 <Snackbar
                     action={okButton}
                     open={this.props.isSnackbarVisible && (viewCount % 2 === 0)}
@@ -91,6 +91,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     "aria-describedby": "message-id"
                 }}
                     message={snackbarMessage}/>
+                <SaveTimetableDialogContainer/>
             </div>
         );
     }

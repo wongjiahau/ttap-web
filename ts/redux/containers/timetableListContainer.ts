@@ -1,7 +1,4 @@
 import {
-    expect
-} from "chai";
-import {
     connect
 } from "react-redux";
 import {
@@ -13,20 +10,17 @@ import {
     GoToRandomTimetable
 } from "../actions/goToRandomTimetable";
 import {
-    SaveTimetableAsImage
-} from "../actions/saveTimetable/saveTimetableAsImage";
+    ToggleIsOpenOfSaveDialog
+} from "../actions/toggleIsOpenOfSaveDialog";
 import {
-    SaveTimetableAsTextFile
-} from "../actions/saveTimetable/saveTimetableAsTextFile";
+    UpdateSaveTimetableDialogState
+} from "../actions/updateSaveTimetableDialogState";
 import {
     TimetableListStateAction
 } from "../reducers/timetableListState";
 import {
     STCBox
 } from "./../../model/states/stcBox";
-import {
-    CloseSaveDialog
-} from "./../actions/closeSaveDialog";
 import {
     DefilterTimetable
 } from "./../actions/defilterTimetable";
@@ -39,12 +33,6 @@ import {
 import {
     GoToPrevTimetable
 } from "./../actions/goToPrevTimetable";
-import {
-    OpenSaveDialog
-} from "./../actions/openSaveDialog";
-import {
-    SaveTimetableAsGoogleCalendar
-} from "./../actions/saveTimetable/saveTimetableAsGoogleCalendar";
 import {
     ToggleSetTimeConstraintView
 } from "./../actions/toggleSetTimeConstraintView";
@@ -67,14 +55,13 @@ import {
 const mapStateToProps = (state): ITimetableListViewStateProps => {
     const target = state.TimetableCreatorStateReducer.SubjectListState.TimetableListState as TimetableListState;
     return {
-        isSaveDialogOpen: target.IsSaveDialogOpen,
         currentIndex: target.CurrentIndex,
         currentTimetable: target.FiltrateTimetables[target.CurrentIndex],
-        maxIndex: target.FiltrateTimetables.length - 1,
-        totalState: target.TotalState,
         isSetTimeConstraintViewOpen: target.IsSetTimeConstraintViewOpen,
+        maxIndex: target.FiltrateTimetables.length - 1,
+        numberOfRemainingTimetables: target.FiltrateTimetables.length,
         numberOfRemovedTimetables: target.ResidueTimetables.length,
-        numberOfRemainingTimetables: target.FiltrateTimetables.length
+        totalState: target.TotalState,
     };
 };
 
@@ -83,34 +70,14 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleGoToNext: () => dispatch(Wrap(new GoToNextTimetable())),
         handleGoToRandom: () => dispatch(Wrap(new GoToRandomTimetable())),
         handleGoToPrevious: () => dispatch(Wrap(new GoToPrevTimetable())),
-        handleSaveAsTextFile: () => {
-            dispatch(Wrap(new SaveTimetableAsTextFile()));
-        },
-        handleSaveAsPicture: () => {
-            dispatch(Wrap(new SaveTimetableAsImage()));
-        },
-        handleSaveToGoogleCalendar: () => {
-            dispatch(Wrap(new SaveTimetableAsGoogleCalendar()));
-        },
-        handleOpenSaveDialog: () => {
-            dispatch(Wrap(new OpenSaveDialog()));
-        },
-        handleCloseSaveDialog: () => {
-            dispatch(Wrap(new CloseSaveDialog()));
-        },
         handleOpenSetTimeConstraintView: () => {
             dispatch(Wrap(new UpdateTotalState()));
             dispatch(Wrap(new ToggleSetTimeConstraintView(true)));
         },
-        handleCloseSetTimeConstraintView: () => {
-            dispatch(Wrap(new ToggleSetTimeConstraintView(false)));
-        },
-        handleSetTimeConstraintAt: (state: STCBox) => {
-            dispatch(Wrap(new FilterTimetable(state)));
-        },
-        handleDesetTimeConstraintAt: (state: STCBox) => {
-            dispatch(Wrap(new DefilterTimetable(state)));
-        }
+        handleCloseSetTimeConstraintView: () => dispatch(Wrap(new ToggleSetTimeConstraintView(false))),
+        handleSetTimeConstraintAt: (state: STCBox) => dispatch(Wrap(new FilterTimetable(state))),
+        handleDesetTimeConstraintAt: (state: STCBox) => dispatch(Wrap(new DefilterTimetable(state))),
+        handleOpenSaveTimetableDialog: () => dispatch(new UpdateSaveTimetableDialogState(new ToggleIsOpenOfSaveDialog(true)).Action())
     };
 };
 

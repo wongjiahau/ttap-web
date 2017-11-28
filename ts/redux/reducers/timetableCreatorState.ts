@@ -9,6 +9,9 @@ import {
     GenereteReducer
 } from "./generateReducer";
 import {
+    ISaveTimetableDialogState, SaveTimetableDialogState
+} from "./saveTimetableDialogState";
+import {
     ISubjectListState,
     SubjectListState
 } from "./subjectListState";
@@ -19,6 +22,7 @@ export interface ITimetableCreatorState {
     IsSubjectListViewVisible: boolean;
     SnackbarMessage: string;
     SubjectListState: ISubjectListState;
+    SaveTimetableDialogState: ISaveTimetableDialogState;
 }
 
 export class TimetableCreatorState implements ITimetableCreatorState {
@@ -27,12 +31,14 @@ export class TimetableCreatorState implements ITimetableCreatorState {
     public IsSubjectListViewVisible: boolean;
     public SnackbarMessage: string;
     public SubjectListState: ISubjectListState;
+    public SaveTimetableDialogState: ISaveTimetableDialogState;
     public constructor(subjects: Subject[]) {
         this.IsSlotLoaded = false;
         this.IsSnackbarVisible = false;
         this.IsSubjectListViewVisible = true;
         this.SnackbarMessage = "";
         this.SubjectListState = new SubjectListState(subjects);
+        this.SaveTimetableDialogState = new SaveTimetableDialogState();
     }
 }
 

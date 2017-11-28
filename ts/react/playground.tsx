@@ -8,6 +8,7 @@ import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableCreatorContainer} from "../redux/containers/timetableCreatorContainer";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
+import { GetSemStartDateDialog } from "./getSemStartDateDialog";
 import {SlotView} from "./slotView";
 import {TimetableCreatorView} from "./timetableCreatorView";
 import {TimetableView} from "./timetableView/timetableView";

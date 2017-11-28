@@ -1,5 +1,4 @@
 import {expect} from "chai";
-import { OpenSaveDialog } from "../../../actions/openSaveDialog";
 import { SaveTimetableAsImage } from "../saveTimetableAsImage";
 
 describe("SaveTimetableAsImage action", () => {

@@ -8,7 +8,6 @@ export interface ITimetableListState {
     ResidueTimetables:           Timetable[];
     CurrentIndex:                number;
     FiltrateTimetables:          Timetable[];
-    IsSaveDialogOpen:            boolean;
     IsSetTimeConstraintViewOpen: boolean;
     TotalState:                  STCBox[];
     UidsOfClickedState:          string[];
@@ -19,7 +18,6 @@ export class TimetableListState implements ITimetableListState {
     public ResidueTimetables:           Timetable[];
     public CurrentIndex:                number;
     public FiltrateTimetables:          Timetable[];
-    public IsSaveDialogOpen:            boolean;
     public IsSetTimeConstraintViewOpen: boolean;
     public TotalState:                  STCBox[];
     public UidsOfClickedState:          string[];
@@ -28,7 +26,6 @@ export class TimetableListState implements ITimetableListState {
         this.CurrentIndex                = 0;
         this.ResidueTimetables           = [];
         this.FiltrateTimetables          = timetables;
-        this.IsSaveDialogOpen            = false;
         this.IsSetTimeConstraintViewOpen = false;
         this.TotalState                  = null;
         this.UidsOfClickedState          = [];

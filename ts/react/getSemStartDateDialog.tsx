@@ -6,21 +6,27 @@ import {StackPanel} from "./panels/stackPanel";
 
 export interface IGetSemStartDateDialogState {
     date : Date;
-    dateSelected : boolean;
+    dateIsSelected : boolean;
 }
 
-export class GetSemStartDateDialog extends React.Component < {},
+export interface IGetSemStartDateDialogProps {
+    isOpen : boolean;
+    handleSaveToGoogleCalendar : (semStartDate : Date) => void;
+    handleClose : () => void;
+}
+
+export class GetSemStartDateDialog extends React.Component < IGetSemStartDateDialogProps,
 IGetSemStartDateDialogState > {
     public constructor(props) {
         super(props);
         this.state = {
             date: null,
-            dateSelected: false
+            dateIsSelected: false
         };
     }
 
     public handleDateChanged = (date : Date) => {
-        this.setState({date, dateSelected: true});
+        this.setState({date, dateIsSelected: true});
     }
 
     public render() {
@@ -37,7 +43,7 @@ IGetSemStartDateDialogState > {
             marginRight: "10px"
         };
         return (
-            <Dialog open={true}>
+            <Dialog open={this.props.isOpen}>
                 <DialogTitle>Pick a date that represent the
                     <br/>
                     Monday of Week One of next semester.</DialogTitle>
@@ -46,8 +52,7 @@ IGetSemStartDateDialogState > {
                         <Flatpickr
                             placeholder="Pick date . . ."
                             options={flatpickerOptions}
-                            onChange={this.handleDateChanged}/>
-                        {""}
+                            onChange={this.handleDateChanged}/> {""}
                     </StackPanel>
                     <StackPanel
                         style={{
@@ -55,10 +60,11 @@ IGetSemStartDateDialogState > {
                     }}
                         orientation="horizontal"
                         horizontalAlignment="right">
-                        <Button style={buttonStyle}>Cancel</Button>
+                        <Button style={buttonStyle} onClick={this.props.handleClose}>Cancel</Button>
                         <Button
+                            onClick={() => this.props.handleSaveToGoogleCalendar(this.state.date)}
                             style={buttonStyle}
-                            disabled={!this.state.dateSelected}
+                            disabled={!this.state.dateIsSelected}
                             raised={true}
                             color="primary">Add to Google Calendar</Button>
                     </StackPanel>

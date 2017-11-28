@@ -1,6 +1,7 @@
 import {
     saveAs
 } from "file-saver";
+import { SaveTimetableDialogState } from "../../reducers/saveTimetableDialogState";
 import {
     Timetable
 } from "./../../../model/timetable";
@@ -8,25 +9,26 @@ import {
     TimetableSummary
 } from "./../../../model/timetableSummary";
 import {
-    ITimetableListState,
-    TimetableListStateAction
-} from "./../../reducers/timetableListState";
+    ITimetableCreatorState,
+    TimetableCreatorStateAction
+} from "./../../reducers/timetableCreatorState";
 
-export abstract class SaveTimetable extends TimetableListStateAction {
+export abstract class SaveTimetable extends TimetableCreatorStateAction {
     public constructor() {
         super();
     }
     public TypeName(): string {
         return "save timetable as - " + this.SaveType();
     }
-    protected GenerateNewState(state: ITimetableListState): ITimetableListState {
-        const currentTimetable = state.FiltrateTimetables[state.CurrentIndex];
+    protected GenerateNewState(state: ITimetableCreatorState): ITimetableCreatorState {
+        const x = state.SubjectListState.TimetableListState;
+        const currentTimetable = x.FiltrateTimetables[x.CurrentIndex];
         if (currentTimetable) {
             this.Save(currentTimetable);
         }
         return {
             ...state,
-            IsSaveDialogOpen: false
+            SaveTimetableDialogState: new SaveTimetableDialogState(false, false)
         };
     }
 

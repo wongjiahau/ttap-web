@@ -28,7 +28,6 @@ export interface ITimetableListViewStateProps {
     currentTimetable : Timetable;
     currentIndex : number; // non-zero based
     maxIndex : number; // non-zero based
-    isSaveDialogOpen : boolean;
     totalState : STCBox[];
     isSetTimeConstraintViewOpen : boolean;
     numberOfRemovedTimetables: number;
@@ -39,15 +38,11 @@ export interface ITimetableListViewDispatchProps {
     handleGoToNext:                   ()   => void;
     handleGoToRandom:                 ()   => void;
     handleGoToPrevious:               ()   => void;
-    handleSaveAsTextFile:             ()   => void;
-    handleSaveAsPicture:              ()   => void;
-    handleSaveToGoogleCalendar:       ()   => void;
-    handleOpenSaveDialog:             ()   => void;
-    handleCloseSaveDialog:            ()   => void;
     handleOpenSetTimeConstraintView:  ()   => void;
     handleSetTimeConstraintAt:        (state: STCBox) => void;
     handleDesetTimeConstraintAt:      (state: STCBox) => void;
     handleCloseSetTimeConstraintView: ()   => void;
+    handleOpenSaveTimetableDialog:    ()   => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -74,18 +69,12 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         handleClickMiddle={this.props.handleGoToRandom}
                         handleClickRight={this.props.handleGoToNext}/>
                     <RaisedButton
-                        onClick={this.props.handleOpenSaveDialog}
+                        onClick={this.props.handleOpenSaveTimetableDialog}
                         primary={true}
                         style={footerButtonStyle}
                         icon={< IconSave />}
                         label="Save as . . ."/>
                 </div>
-                <SaveTimetableDialog
-                    isOpen={this.props.isSaveDialogOpen}
-                    handleClose={this.props.handleCloseSaveDialog}
-                    handleSaveAsPicture={this.props.handleSaveAsPicture}
-                    handleSaveAsTextFile={this.props.handleSaveAsTextFile}
-                    handleSaveToGoogleCalendar={this.props.handleSaveToGoogleCalendar}/>
                 <SetTimeConstraintView
                     numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
                     numberOfRemainingTimetables={this.props.numberOfRemainingTimetables}
