@@ -170,17 +170,17 @@ function sampleAddEvent() {
 
 }
 
-export function CreateEvent(slot: RawSlot, semStartDate: Date) {
-    const semesterStartDate = moment(semStartDate).toDate();
-    if (semesterStartDate.getDay() !== 1) {
-        throw new Error("Expected semesterStartDay to be Monday but was " + semesterStartDate.toString());
+export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
+    const semStartDate = moment(semesterStartDate).toDate(); // this is to clone semesterStartDate, so that it wont mutate it
+    if (semStartDate.getDay() !== 1) {
+        throw new Error("Expected semesterStartDay to be Monday but was " + semStartDate.toString());
     }
     const t = TimePeriod.Parse(slot.TimePeriod);
     const w = Week.Parse(slot.WeekNumber);
-    semesterStartDate.setHours(t.StartTime.Hour);
-    semesterStartDate.setMinutes(t.StartTime.Minute);
-    semesterStartDate.setDate(semesterStartDate.getDate() + ParseDay(slot.Day) - 1);
-    const dates = GetListOfDates(semesterStartDate, w.WeekNumberList);
+    semStartDate.setHours(t.StartTime.Hour);
+    semStartDate.setMinutes(t.StartTime.Minute);
+    semStartDate.setDate(semStartDate.getDate() + ParseDay(slot.Day) - 1);
+    const dates = GetListOfDates(semStartDate, w.WeekNumberList);
     const startDate = moment(dates[0]).format("YYYY-MM-DD");
     const recurrence = GetRecurrence(dates.slice(1));
     const event = {

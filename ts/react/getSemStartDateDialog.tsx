@@ -25,8 +25,8 @@ IGetSemStartDateDialogState > {
         };
     }
 
-    public handleDateChanged = (date : Date) => {
-        this.setState({date, dateIsSelected: true});
+    public handleDateChanged = (dates : Date[]) => {
+        this.setState({date: dates[0], dateIsSelected: true});
     }
 
     public render() {
