@@ -6,7 +6,8 @@ import {RawSlot} from "../model/rawSlot";
 import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {
-    width: "100%"
+    width: "100%",
+    fontFamily: "roboto"
 };
 
 export interface ISlotViewProps {
