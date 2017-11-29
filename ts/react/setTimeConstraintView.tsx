@@ -37,9 +37,6 @@ const cancelButtonStyle : React.CSSProperties = {
     marginRight: "10px"
 };
 
-const feedbackStyle : React.CSSProperties = {
-    fontFamily: "roboto"
-};
 // endregion style
 
 function Transition(props) {
@@ -142,7 +139,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                                 <StackPanel
                                     orientation="horizontal"
                                     horizontalAlignment="center"
-                                    style={feedbackStyle}>
+                                    >
                                     <p>Removed</p>
                                     <CountUp start={0} end={this.props.numberOfRemovedTimetables} duration={0.65}/>
                                     <p>unsatisfactory timetables.</p>

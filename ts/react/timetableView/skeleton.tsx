@@ -39,14 +39,12 @@ export class Skeleton implements ISkeleton {
             borderBottom: "1px solid",
             borderRight: "1px solid",
             height: "20.5px",
-            fontFamily: "roboto",
             padding: "2px",
             textAlign: "center"
         };
         const lastDivStyle: React.CSSProperties = {
             borderBottom: "1px solid",
             height: "20.5px",
-            fontFamily: "roboto",
             padding: "2px",
             textAlign: "center"
         };
@@ -109,7 +107,6 @@ export class Skeleton implements ISkeleton {
         };
         const div2style : React.CSSProperties = {
             display: "table-cell",
-            fontFamily: "roboto",
             verticalAlign: "middle"
         };
         const result = [];

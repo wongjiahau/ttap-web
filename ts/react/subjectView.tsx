@@ -8,7 +8,6 @@ import {Colors} from "./colors/colors";
 const clashReportStyle : React.CSSProperties = {
     background: Colors.DarkRed,
     color: Colors.White,
-    font: "Roboto",
     fontSize: "14px",
     overflowY: "hidden",
     padding: "8px",
