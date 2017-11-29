@@ -8,16 +8,12 @@ import {CounterView} from "./counterView";
 import {StackPanel} from "./panels/stackPanel";
 import {SaveTimetableDialog} from "./saveTimetableDialog";
 import {SetTimeConstraintView} from "./setTimeConstraintView";
+import {iconStyle} from "./styles";
 import {TimetableView} from "./timetableView/timetableView";
 
 const centerDivStyle : React.CSSProperties = {
     margin: "auto",
     textAlign: "center"
-};
-
-const iconStyle : React.CSSProperties = {
-    marginRight: "5px",
-    color: "white"
 };
 
 export interface ITimetableListViewStateProps {

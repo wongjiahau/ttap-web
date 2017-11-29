@@ -1,10 +1,9 @@
 import * as $ from "jquery";
 import {LinearProgress} from "material-ui-next";
+import Button from "material-ui-next/Button";
 import Typography from "material-ui-next/Typography";
 import Divider from "material-ui/Divider";
-import FlatButton from "material-ui/FlatButton";
 import Paper from "material-ui/Paper";
-import RaisedButton from "material-ui/RaisedButton";
 import IconTick from "material-ui/svg-icons/action/done";
 import IconEye from "material-ui/svg-icons/image/remove-red-eye";
 import TextField from "material-ui/TextField";
@@ -12,6 +11,7 @@ import * as React from "react";
 import * as S from "string";
 import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
+import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";
 
 // region styles
@@ -45,7 +45,7 @@ const searchBoxStyle : React.CSSProperties = {
 };
 
 const buttonStyle : React.CSSProperties = {
-    marginLeft: "10px"
+    marginLeft: "10px",
 };
 
 // endregion
@@ -60,7 +60,7 @@ export interface ISubjectListViewStateProps {
 export interface ISubjectListViewDispatchProps {
     handleClose : () => void;
     handleSearch : (searchedText : string) => void;
-    handleSelection : (subjectIndex: number) => void;
+    handleSelection : (subjectIndex : number) => void;
     handleToggleView : () => void;
 }
 
@@ -154,30 +154,29 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                     : ""
 }
                 <footer style={footerStyle}>
-                    <FlatButton
-                        icon={< IconEye />}
+                    <Button
+                        color="accent"
                         style={buttonStyle}
                         disabled={noSubjectIsSelected}
                         key="toggle-view-button"
-                        label={this.props.isShowingSelectedSubjectOnly
-                        ? "Show all subjects"
-                        : (noSubjectIsSelected
-                            ? "Show selected subjects"
-                            : `Show selected subjects (${numberOfSelectedSubjects})`)}
-                        secondary={true}
-                        keyboardFocused={true}
-                        onClick={this.props.handleToggleView}/>
-                    <RaisedButton
-                        icon={< IconTick />}
+                        onClick={this.props.handleToggleView}>
+                        {this.props.isShowingSelectedSubjectOnly
+                            ? "Show all subjects"
+                            : (noSubjectIsSelected
+                                ? "Show selected subjects"
+                                : `Show selected subjects (${numberOfSelectedSubjects})`)}
+                    </Button>
+                    <Button
+                        raised={true}
+                        color="primary"
                         style={buttonStyle}
                         disabled={noSubjectIsSelected || this.props.isShowingLoadingBar}
                         key="done-button"
-                        label={this.props.isShowingLoadingBar
-                        ? "Loading . . ."
-                        : "Done"}
-                        primary={true}
-                        keyboardFocused={true}
-                        onClick={this.props.handleClose}/>
+                        onClick={this.props.handleClose}>
+                        {this.props.isShowingLoadingBar
+                            ? "Loading . . ."
+                            : "Done"}
+                    </Button>
                 </footer>
             </section>
         );

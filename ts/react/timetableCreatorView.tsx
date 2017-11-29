@@ -5,17 +5,17 @@ import {Origin} from "material-ui-next/Snackbar";
 import Snackbar from "material-ui-next/Snackbar";
 import Typography from "material-ui-next/Typography";
 import Drawer from "material-ui/Drawer";
-import RaisedButton from "material-ui/RaisedButton";
 import IconList from "material-ui/svg-icons/action/list";
 import * as React from "react";
 import {Beautify} from "../helper";
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
-import { SaveTimetableDialogContainer } from "../redux/containers/saveTimetableDialogContainer";
+import {SaveTimetableDialogContainer} from "../redux/containers/saveTimetableDialogContainer";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
+import {iconStyle} from "./styles";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
     marginBottom: "10px",
@@ -67,14 +67,17 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <Drawer docked={false} width={520} open={this.props.isSubjectListViewVisible}>
                     <SubjectListViewContainer/>
                 </Drawer>
-                <RaisedButton
-                    icon={< IconList />}
+                <Button
                     style={selectSubjectButtonStyle}
-                    secondary={true}
-                    label="Select subjects"
-                    onClick={this.props.handleToggleVisibilityOfSubjectListView}/> {this.props.clashingSubjectPairs !== null
+                    raised={true}
+                    color="accent"
+                    onClick={this.props.handleToggleVisibilityOfSubjectListView}>
+                    <IconList style={iconStyle}/>
+                    Select subjects
+                </Button>
+                {this.props.clashingSubjectPairs !== null
                     ? this.GenerateMessage(this.props.clashingSubjectPairs)
-                    : <TimetableListContainer/> }
+                    : <TimetableListContainer/>}
                 <Snackbar
                     action={okButton}
                     open={this.props.isSnackbarVisible && (viewCount % 2 === 0)}
