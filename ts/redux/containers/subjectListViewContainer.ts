@@ -1,6 +1,7 @@
 import {
     connect
 } from "react-redux";
+import { HideSnackbar } from "../actions/hideSnackbar";
 import {
     SubjectListState,
     SubjectListStateAction
@@ -49,7 +50,10 @@ const mapStateToProps = (state): ISubjectListViewStateProps => {
 const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
     return {
         handleClose: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
-        handleSearch: (searchedText: string) => dispatch(Wrap(new SearchSubjectList(searchedText)).Action()),
+        handleSearch: (searchedText: string) => {
+            dispatch(Wrap(new SearchSubjectList(searchedText)).Action());
+            dispatch(new HideSnackbar().Action());
+        },
         handleSelection: (subjectIndex: number) => {
             dispatch(Wrap(new ToggleLoadingBar(true)).Action());
             setTimeout(() => {
