@@ -13,6 +13,7 @@ import {Subject} from "../model/subject";
 import {SaveTimetableDialogContainer} from "../redux/containers/saveTimetableDialogContainer";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
+import { LoadTestDataView } from "./loadTestDataView";
 import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
@@ -34,7 +35,7 @@ export interface ITimetableCreatorViewDispatchProps {
     handleToggleVisibilityOfSubjectListView : () => void;
     handleSnackbarAction : () => void;
     handleSlotLoaded : (rawSlots : RawSlot[]) => void;
-    handleLoadDemo : () => void;
+    handleLoadDemo : (html: string) => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -46,7 +47,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         if (!this.props.isSlotLoaded) {
             return (
                 <div>
-                    <button onClick={this.props.handleLoadDemo}>Load demo</button>
+                    <LoadTestDataView handleLoadDemo={this.props.handleLoadDemo}/>
                     <Login notifyDataLoaded={this.props.handleSlotLoaded}/>
                 </div>
             );
