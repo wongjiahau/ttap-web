@@ -38,9 +38,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <!--Load script for Google Calendar API-->
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/wongjiahau/ttap-web@0.0.5/miafina.js" type="text/javascript"></script>
 
     <!-- Balloon css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.2.4/balloon.min.css">
@@ -59,6 +56,33 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-108857327-1');
+
+    </script>
+
+    <!--Load script for Google Calendar API-->
+    <script type="text/javascript">
+        function handleClientLoad() {
+            // Loads the client library and the auth2 library together for efficiency.
+            // Loading the auth2 library is optional here since `gapi.client.init` function will load
+            // it if not already loaded. Loading it upfront can save one network request.
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            // Initialize the client with API key and People API, and initialize OAuth with an
+            // OAuth 2.0 client ID and scopes (space delimited string) to request access.
+            gapi.client.init({
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+                clientId: "747215402741-95mierrdvdvh2ap8vn5jdk2i0u2totia.apps.googleusercontent.com",
+                scope: "https://www.googleapis.com/auth/calendar"
+            }).then(function() {
+                // refer saveTimetableAsGoogleCalendar.ts
+            });
+        }
+
+    </script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+
 
     </script>
 </body>

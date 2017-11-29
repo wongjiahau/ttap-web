@@ -10,7 +10,6 @@ import {
 import {
     Time
 } from "../../../att/time";
-import fire from "../../../fire";
 import {
     Beautify
 } from "../../../helper";
@@ -33,58 +32,27 @@ import {
 export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     private loginAlready = false;
     private rawSlots: RawSlot[];
-    private CLIENT_ID: string;
-    private DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-    private SCOPES = "https://www.googleapis.com/auth/calendar";
 
     public constructor(private semStartDate: Date) {
         super();
+        // the gapi client is already initialized at index.html
     }
 
     protected Save(timetable: Timetable) {
         this.rawSlots = RawSlot.GetBunch(timetable.HashIds);
-        this.retrieveTokens();
+
+        gapi // eslint-disable-line
+            .auth2
+            .getAuthInstance()
+            .isSignedIn
+            .listen(this.updateSigninStatus);
+
+        // Handle the initial sign-in state.
+        this.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()); // eslint-disable-line
     }
 
     protected SaveType(): string {
         return "google calendar";
-    }
-
-    private retrieveTokens = () => {
-        const db = fire.database();
-        const ref = db.ref("tokens/gcal_client_id");
-        ref.on("value", (snapshot) => {
-            this.CLIENT_ID = snapshot.val();
-            this.loadClient();
-        }, (errorObject) => {
-            console.log("The read failed: " + errorObject.code);
-        });
-    }
-
-    private loadClient = () => {
-        gapi.load("client:auth2", this.initClient); // eslint-disable-line
-    }
-
-    private initClient = () => {
-        gapi // eslint-disable-line
-            .client
-            .init({
-                clientId: this.CLIENT_ID,
-                discoveryDocs: this.DISCOVERY_DOCS,
-                scope: this.SCOPES
-            })
-            .then(() => {
-                this.CLIENT_ID = "";
-                // Listen for sign-in state changes.
-                gapi // eslint-disable-line
-                    .auth2
-                    .getAuthInstance()
-                    .isSignedIn
-                    .listen(this.updateSigninStatus);
-
-                // Handle the initial sign-in state.
-                this.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()); // eslint-disable-line
-            });
     }
 
     private updateSigninStatus = (isSignedIn) => {
@@ -92,6 +60,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
             this.loginAlready = true;
             this.addTimetable();
             this.handleSignoutClick();
+            alert("The timetable is successfully added to your Google Calendar!");
         } else {
             if (!this.loginAlready) {
                 this.handleAuthClick();
