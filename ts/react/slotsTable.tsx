@@ -17,14 +17,14 @@ const titleStyle : React.CSSProperties = {
 };
 
 export interface ISlotsTableProps {
-    slotStates: boolean[];
+    slotStates : boolean[];
     selectedSubjects : Subject[];
     isOpen : boolean;
     handleClose : () => void;
-    handleSlotCheckChanged : (slotNumber: number, checked: boolean) => void;
+    handleSlotCheckChanged : (slotNumber : number, checked : boolean) => void;
 }
 
-export class SlotsTable extends React.Component < ISlotsTableProps, {}> {
+export class SlotsTable extends React.Component < ISlotsTableProps, {} > {
     public render() {
         return (
             <Drawer anchor="right" open={this.props.isOpen}>
@@ -34,9 +34,16 @@ export class SlotsTable extends React.Component < ISlotsTableProps, {}> {
                             <IconArrowRight style={iconStyle}/>
                             HIDE
                         </Button>
-                        <Typography style={{ marginLeft: "10px" }} type="display1">Slots of selected subjects</Typography>
+                        <StackPanel orientation="vertical" style={{ marginLeft: "10px" }}>
+                            <Typography type="title">Displaying slots of selected subjects</Typography>
+                            <Typography type="subheading">You can select or deselect some specific slots.</Typography>
+                        </StackPanel>
                     </StackPanel>
-                    <Divider style={{ marginBottom: "10px", marginTop: "5px" }}/> {this
+                    <Divider
+                        style={{
+                        marginBottom: "10px",
+                        marginTop: "5px"
+                    }}/> {this
                         .props
                         .selectedSubjects
                         .map((s) => {
@@ -65,7 +72,9 @@ export class SlotsTable extends React.Component < ISlotsTableProps, {}> {
                                                     const checked = this.props.slotStates[slot.HashId];
                                                     return (
                                                         <TableRow key={index}>
-                                                            <TableCell padding="checkbox"><Checkbox checked={checked} onClick={() => this.props.handleSlotCheckChanged(slot.HashId, checked)}/></TableCell>
+                                                            <TableCell padding="checkbox"><Checkbox
+                                                                checked={checked}
+                                                                onClick={() => this.props.handleSlotCheckChanged(slot.HashId, checked)}/></TableCell>
                                                             <TableCell padding="dense">{slot.Number}</TableCell>
                                                             <TableCell padding="dense">{slot.Type}</TableCell>
                                                             <TableCell padding="dense">{slot.Group}</TableCell>
