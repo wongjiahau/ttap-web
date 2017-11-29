@@ -16,6 +16,7 @@ import {TimetableListContainer} from "../redux/containers/timetableListContainer
 import { LoadTestDataView } from "./loadTestDataView";
 import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
+import { SlotsTable } from "./slotsTable";
 import {iconStyle} from "./styles";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -25,8 +26,10 @@ const selectSubjectButtonStyle : React.CSSProperties = {
 
 export interface ITimetableCreatorViewStateProps {
     isSubjectListViewVisible : boolean;
+    isSlotsTableVisible : boolean;
     isSlotLoaded : boolean;
     isSnackbarVisible : boolean;
+    selectedSubjects : Subject[];
     snackbarMessage : string;
     clashingSubjectPairs : Array < [Subject, Subject] >;
 }
@@ -36,6 +39,7 @@ export interface ITimetableCreatorViewDispatchProps {
     handleSnackbarAction : () => void;
     handleSlotLoaded : (rawSlots : RawSlot[]) => void;
     handleLoadDemo : (html: string) => void;
+    handleCloseSlotsTable : () => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -68,6 +72,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <Drawer docked={false} width={520} open={this.props.isSubjectListViewVisible}>
                     <SubjectListViewContainer/>
                 </Drawer>
+                <SlotsTable handleClose={this.props.handleCloseSlotsTable} isOpen={this.props.isSlotsTableVisible} selectedSubjects={this.props.selectedSubjects}/>
                 <Button
                     style={selectSubjectButtonStyle}
                     raised={true}

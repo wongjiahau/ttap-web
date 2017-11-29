@@ -13,6 +13,9 @@ import {
     ToggleIsOpenOfSaveDialog
 } from "../actions/toggleIsOpenOfSaveDialog";
 import {
+    ToggleIsOpenOfSlotsTable
+} from "../actions/toggleIsOpenOfSlotsTable";
+import {
     UpdateSaveTimetableDialogState
 } from "../actions/updateSaveTimetableDialogState";
 import {
@@ -77,7 +80,8 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleCloseSetTimeConstraintView: () => dispatch(Wrap(new ToggleSetTimeConstraintView(false))),
         handleSetTimeConstraintAt: (state: STCBox) => dispatch(Wrap(new FilterTimetable(state))),
         handleDesetTimeConstraintAt: (state: STCBox) => dispatch(Wrap(new DefilterTimetable(state))),
-        handleOpenSaveTimetableDialog: () => dispatch(new UpdateSaveTimetableDialogState(new ToggleIsOpenOfSaveDialog(true)).Action())
+        handleOpenSaveTimetableDialog: () => dispatch(new UpdateSaveTimetableDialogState(new ToggleIsOpenOfSaveDialog(true)).Action()),
+        handleOpenSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(true).Action())
     };
 };
 

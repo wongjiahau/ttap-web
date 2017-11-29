@@ -14,6 +14,7 @@ import {
 import {
     NotifyDataLoaded
 } from "../actions/notifyDataLoaded";
+import { ToggleIsOpenOfSlotsTable } from "../actions/toggleIsOpenOfSlotsTable";
 import {
     ITimetableCreatorViewDispatchProps,
     ITimetableCreatorViewStateProps,
@@ -42,13 +43,16 @@ const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
         isSlotLoaded: target.IsSlotLoaded,
         clashingSubjectPairs: target.SubjectListState.ClashingSubjectPairs,
         isSubjectListViewVisible: target.IsSubjectListViewVisible,
+        isSlotsTableVisible: target.IsSlotsTableVisible,
         isSnackbarVisible: target.IsSnackbarVisible,
+        selectedSubjects: target.SubjectListState.Subjects.filter((x) => x.IsSelected),
         snackbarMessage: target.SnackbarMessage,
     };
 };
 
 const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
     return {
+        handleCloseSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(false).Action()),
         handleLoadDemo: (html: string) => dispatch(new NotifyDataLoaded(ParseHtmlToRawSlot(html)).Action()),
         handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots).Action()),
         handleSnackbarAction: () => dispatch(new HideSnackbar().Action()),

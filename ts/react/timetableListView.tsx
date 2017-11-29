@@ -1,5 +1,6 @@
 import IconClock from "material-ui-icons/Alarm";
 import IconSave from "material-ui-icons/Save";
+import IconViewList from "material-ui-icons/ViewList";
 import Button from "material-ui-next/Button";
 import * as React from "react";
 import {STCBox} from "../model/states/stcBox";
@@ -35,6 +36,7 @@ export interface ITimetableListViewDispatchProps {
     handleDesetTimeConstraintAt : (state : STCBox) => void;
     handleCloseSetTimeConstraintView : () => void;
     handleOpenSaveTimetableDialog : () => void;
+    handleOpenSlotsTable : () => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -70,6 +72,13 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         onClick={this.props.handleOpenSaveTimetableDialog}>
                         <IconSave style={iconStyle}/>
                         Save as . . .
+                    </Button>
+                    <Button
+                        raised={true}
+                        color="primary"
+                        onClick={this.props.handleOpenSlotsTable}>
+                        <IconViewList style={iconStyle}/>
+                        Show slots
                     </Button>
                 </StackPanel>
                 <SetTimeConstraintView
