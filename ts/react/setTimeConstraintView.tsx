@@ -16,10 +16,6 @@ const typo1Style : React.CSSProperties = {
     marginRight: "10px"
 };
 
-const typo2Style : React.CSSProperties = {
-    marginTop: "8px"
-};
-
 const divStyle : React.CSSProperties = {
     textAlign: "center",
     overflowY: "auto"

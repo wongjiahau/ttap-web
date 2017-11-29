@@ -9,10 +9,6 @@ const divStyle : React.CSSProperties = {
     width: "100%"
 };
 
-const typoStyle : React.CSSProperties = {
-    color: Colors.WhiteSmoke
-};
-
 export interface ISlotViewProps {
     slot : RawSlot;
     color : Colors;

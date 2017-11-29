@@ -15,11 +15,6 @@ const centerDivStyle : React.CSSProperties = {
     textAlign: "center"
 };
 
-const footerStyle : React.CSSProperties = {
-    margin: "auto",
-    textAlign: "center"
-};
-
 const iconStyle : React.CSSProperties = {
     marginRight: "5px",
     color: "white"
