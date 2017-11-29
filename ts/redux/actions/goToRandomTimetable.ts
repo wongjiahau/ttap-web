@@ -14,7 +14,11 @@ export class GoToRandomTimetable extends TimetableListStateAction {
         return "go to random timetable";
     }
     protected GenerateNewState(state: ITimetableListState): ITimetableListState {
-        const getRandom = () => random(0, state.FiltrateTimetables.length - 1);
+        const length = state.FiltrateTimetables.length;
+        if (length === 1) {
+            return state;
+        }
+        const getRandom = () => random(0, length - 1);
         let x = getRandom();
         while (x === state.CurrentIndex) {
             x = getRandom();

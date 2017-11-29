@@ -1,7 +1,17 @@
-import {expect} from "chai";
-import {isEqual} from "lodash";
-import {GoToRandomTimetable} from "./../actions/goToRandomTimetable";
-import {ITimetableListState, TimetableListState, TimetableListStateReducer} from "./../reducers/timetableListState";
+import {
+    expect
+} from "chai";
+import {
+    isEqual
+} from "lodash";
+import {
+    GoToRandomTimetable
+} from "./../actions/goToRandomTimetable";
+import {
+    ITimetableListState,
+    TimetableListState,
+    TimetableListStateReducer
+} from "./../reducers/timetableListState";
 describe("GoToRandomTimetable action", () => {
     it("'s typename should be 'go to random timetable'", () => {
         const action = new GoToRandomTimetable();
@@ -21,5 +31,13 @@ describe("GoToRandomTimetable action", () => {
         const initialState = new TimetableListState();
         const newState = TimetableListStateReducer(initialState, action);
         expect(newState.CurrentIndex).to.not.eq(initialState.CurrentIndex);
+    });
+
+    it("should not loop infinitely when there is only one timetable", () => {
+        const action = new GoToRandomTimetable().Action();
+        const initialState = new TimetableListState([null]);
+        expect(() => {
+            const newState = TimetableListStateReducer(initialState, action);
+        }).to.not.throw();
     });
 });
