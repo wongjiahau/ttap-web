@@ -9,7 +9,7 @@ import {
     ISlot
 } from "./../../model/slot";
 import {
-    GetTinySlotsOf
+    CodeOf, GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
 import {
     TinySlot
@@ -62,11 +62,11 @@ describe("tinySlot", () => {
         });
 
         it("should set State 2", () => {
-            const result = GetTinySlotsOf("MPU32013");
+            const result = GetTinySlotsOf(CodeOf.BKA);
             const expected = [
                 0,
-                parseInt("111111", 2),
-                parseInt("111111", 2),
+                parseInt("11111100", 2),
+                parseInt("11111100", 2),
                 0,
                 0,
                 0,

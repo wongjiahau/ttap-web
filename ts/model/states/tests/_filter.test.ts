@@ -3,8 +3,8 @@ import { Filter } from "../filter";
 import { GetTestTimetables1 } from "./../../../tests/testDataGenerator";
 import { StateKind, STCBox } from "./../stcBox";
 
-const state1 = new STCBox(StateKind.MaybeOccupied, 0, 16, null); // Monday 10.00 am to 10.30 am
-const state2 = new STCBox(StateKind.MaybeOccupied, 2, 16, null); // Wednesday 10.00 am to 10.30 am
+const state1 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), null); // Monday 10.00 am to 10.30 am
+const state2 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("1000000", 2), null); // Wednesday 10.00 am to 10.30 am
 const timetables = GetTestTimetables1();
 
 describe("Filter()", () => {

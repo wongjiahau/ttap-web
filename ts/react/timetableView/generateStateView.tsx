@@ -46,23 +46,6 @@ export function GenerateStateViews(states : STCBox[], handleSetTimeContraintAt :
             w: 1
         });
     });
-
-    // append extra boxes at the front to make the view looks normal
-    for (let day = 0; day < 7; day++) {
-        for (let x = 0; x < 2; x++) {
-            const key = "e" + day.toString() + x.toString(); // e means extraneous
-            child.push(
-                <div key={key}><Box color={ColorOfDefinitelyUnoccupied}/></div>
-            );
-            layouts.push({
-                i: key,
-                x: x + Skeleton.X_OFFSET - 2,
-                y: day + Skeleton.Y_OFFSET,
-                h: 1,
-                w: 1
-            });
-        }
-    }
     return {Children: child, Layouts: layouts};
 }
 

@@ -29,21 +29,19 @@ function getStub() {
 describe('<SubjectListView/>', () => {
     it('should render 2 buttons', () => {
         const wrapper = getStub();
-        expect(wrapper.find('RaisedButton').length + wrapper.find('FlatButton').length)
-            .to
-            .equal(2);
+        expect(wrapper.find('Button').length).to.equal(2);
     });
 
     it('should render a DONE button', () => {
         const wrapper = getStub();
-        var buttons = wrapper.find('RaisedButton').getElements();
-        expect(buttons.some((b)=> b.props.label === 'Done')).to.equal(true);
+        var buttons = wrapper.find('Button').getElements();
+        expect(buttons.some((b)=> b.props.children === 'Done')).to.equal(true);
     });
 
     it('should render a "Show selected subjects" button', () => {
         const wrapper = getStub();
-        var buttons = wrapper.find('FlatButton').getElements();
-        expect(buttons.some((b)=> b.props.label === 'Show selected subjects')).to.equal(true);
+        var buttons = wrapper.find('Button').getElements();
+        expect(buttons.some((b)=> b.props.children === 'Show selected subjects')).to.equal(true);
     });
 
     it('should render 18 elements in subject-list-container', () => {

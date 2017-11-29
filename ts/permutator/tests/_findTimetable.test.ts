@@ -13,7 +13,7 @@ import {
     RawSlot
 } from "./../../model/rawSlot";
 import {
-    GetTinySlotsOf
+    CodeOf, GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
 import {
     BoundedInt
@@ -80,20 +80,20 @@ describe("FindTimetable()", () => {
     });
 
     it("should return empty array when there is no possible timetable", () => {
-        const acpSlots = GetTinySlotsOf("MPU34022");
-        const bkaSlots = GetTinySlotsOf("MPU32013");
+        const acpSlots = GetTinySlotsOf(CodeOf.ACP);
+        const bkaSlots = GetTinySlotsOf(CodeOf.BKA);
         const input = concat(acpSlots, bkaSlots);
         const result = FindTimetable(input);
         expect(result.length).to.eq(0);
     });
 
     it("case 1 on Timetable.State", () => {
-        const bkaSlots = GetTinySlotsOf("MPU32013");
+        const bkaSlots = GetTinySlotsOf(CodeOf.BKA);
         const result = FindTimetable(bkaSlots);
         expect(result[0].State).to.deep.eq([
             0,
-            parseInt("111111", 2),
-            parseInt("111111", 2),
+            parseInt("11111100", 2),
+            parseInt("11111100", 2),
             0,
             0,
             0,

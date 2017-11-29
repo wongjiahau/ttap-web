@@ -3,7 +3,7 @@ import {
 } from "./time";
 export class TimePeriod {
     public static readonly Max = Time.CreateTime12Hour(8, 0, true);
-    public static readonly Min = Time.CreateTime12Hour(8, 0, false);
+    public static readonly Min = Time.CreateTime12Hour(7, 0, false);
 
     public static Parse(data: string): TimePeriod {
         const tokens = data.split("-");

@@ -29,10 +29,10 @@ import {
     TimetableListStateReducer
 } from "./../reducers/timetableListState";
 
-const state0 = new STCBox(StateKind.MaybeOccupied, 0, 16, 5); // Monday 10-10.30 am
-const state1 = new STCBox(StateKind.Clicked, 0, 16, 5); // Monday 10-10.30 am
-const state2 = new STCBox(StateKind.MaybeOccupied, 2, 16, 5); // Wednesday 10-10.30 am
-const state3 = new STCBox(StateKind.Clicked, 2, 16, 5); // Wednesday 10-10.30 am
+const state0 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
+const state1 = new STCBox(StateKind.Clicked, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
+const state2 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("1000000", 2), 5); // Wednesday 10-10.30 am
+const state3 = new STCBox(StateKind.Clicked, 2, parseInt("1000000", 2), 5); // Wednesday 10-10.30 am
 
 describe("DefilterTimetable action", () => {
     it("'s typename should be 'defilter timetable at [YX]'", () => {
@@ -67,7 +67,7 @@ describe("DefilterTimetable action", () => {
     it("should set property of ClickedTimeConstraint", () => {
         const initialState = new TimetableListState(GetTestTimetables1());
         const newState1 = TimetableListStateReducer(initialState, new FilterTimetable(state0).Action());
-        expect(newState1.ClickedTimeConstraint).to.deep.eq([16, 0, 0, 0, 0, 0, 0]);
+        expect(newState1.ClickedTimeConstraint).to.deep.eq([parseInt("1000000", 2), 0, 0, 0, 0, 0, 0]);
         const newState2 = TimetableListStateReducer(newState1, new DefilterTimetable(state1).Action());
         expect(newState2.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
     });

@@ -8,8 +8,10 @@ export interface ISkeleton {
 }
 
 export class Skeleton implements ISkeleton {
+    public static readonly TIME_ROW_HEIGHT = 1;
+    public static readonly DAY_COLUMN_WIDTH = 2;
     public static readonly Y_OFFSET = 1;
-    public static readonly X_OFFSET = 4;
+    public static readonly X_OFFSET = 2;
     public Layouts : ReactGridLayout.Layout[];
     public Children : any[];
     public constructor() {
@@ -50,9 +52,9 @@ export class Skeleton implements ISkeleton {
         };
         const result = [];
         for (let i = 0;; i++) {
-            let time = i + TimePeriod.Min.Hour - 1;
-            const isAtLast = time === TimePeriod.Max.Hour;
-            if (time > TimePeriod.Max.Hour) {
+            let time = i + TimePeriod.Min.Hour;
+            const isAtLast = time === TimePeriod.Max.Hour - 1;
+            if (time >= TimePeriod.Max.Hour) {
                 break;
             }
             time = time <= 12
@@ -74,7 +76,7 @@ export class Skeleton implements ISkeleton {
                 h: 1,
                 i: ("t" + i),
                 w: 2,
-                x: i * 2 + Skeleton.X_OFFSET - 2,
+                x: i * 2 + Skeleton.X_OFFSET,
                 y: 0
             });
         }

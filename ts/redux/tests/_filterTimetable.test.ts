@@ -20,7 +20,7 @@ import {
     TimetableListStateReducer
 } from "./../reducers/timetableListState";
 
-const state = new STCBox(StateKind.MaybeOccupied, 0, 16, 5);
+const state = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5);
 
 describe("FilterTimetable action", () => {
     it("'s typename should be 'filter timetable at [YX]'", () => {
@@ -63,7 +63,7 @@ describe("FilterTimetable action", () => {
         const initialState = new TimetableListState(GetTestTimetables1());
         expect(initialState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
         const newState = TimetableListStateReducer(initialState, action);
-        expect(newState.ClickedTimeConstraint).to.deep.eq([16, 0, 0, 0, 0, 0, 0]);
+        expect(newState.ClickedTimeConstraint).to.deep.eq([parseInt("1000000", 2), 0, 0, 0, 0, 0, 0]);
     });
 
     it("should set property of CurrentIndex to 0", () => {

@@ -180,19 +180,19 @@ describe("time period", () => {
     it("Test BinaryData 1", () => {
         const time = "8:00 AM - 11:00 AM";
         const input = TimePeriod.Parse(time);
-        expect(input.BinaryData.toString(2)).to.eq("111111");
+        expect(input.BinaryData.toString(2)).to.eq("11111100");
     });
 
     it("Test BinaryData 2", () => {
         const time = "9:00 AM - 11:30 AM";
         const input = TimePeriod.Parse(time);
-        expect(input.BinaryData.toString(2)).to.eq("1111100");
+        expect(input.BinaryData.toString(2)).to.eq("111110000");
     });
 
     it("Test BinaryData 3", () => {
         const time = "11:00 AM - 1:00 PM";
         const input = TimePeriod.Parse(time);
-        expect(input.BinaryData.toString(2)).to.eq("1111000000");
+        expect(input.BinaryData.toString(2)).to.eq("111100000000");
     });
 
     describe("GetStarTime", () => {

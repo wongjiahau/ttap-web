@@ -48,7 +48,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, {width
         return (
             <div id="timetable-view" style={divStyle}>
                 <ReactGridLayout
-                    cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour) + 2) * 2 + 2}
+                    cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour)) * 2 + 2}
                     maxRows={16}
                     rowHeight={50}
                     width={this.state.width}
