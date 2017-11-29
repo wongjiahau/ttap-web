@@ -23,12 +23,12 @@ export class CounterView extends React.Component < ICounterProps, {} > {
     public render() {
         return (
             <StackPanel orientation="horizontal">
-                <div data-balloon={this.props.leftTooltip} data-balloon-pos="down">
+                <div data-balloon={this.props.leftTooltip} data-balloon-pos="up">
                     <Button onClick={this.props.handleClickLeft} raised={true}>
                         <IconLeft/>
                     </Button>
                 </div>
-                <div data-balloon={this.props.middleTooltip} data-balloon-pos="down">
+                <div data-balloon={this.props.middleTooltip} data-balloon-pos="up">
                     <Button
                         style={{
                         height: "40px",
@@ -40,7 +40,7 @@ export class CounterView extends React.Component < ICounterProps, {} > {
                         {this.props.current + "/" + this.props.maxInclusive}
                     </Button>
                 </div>
-                <div data-balloon={this.props.rightTooltip} data-balloon-pos="down">
+                <div data-balloon={this.props.rightTooltip} data-balloon-pos="up">
                     <Button onClick={this.props.handleClickRight} raised={true}>
                         <IconRight/>
                     </Button>
