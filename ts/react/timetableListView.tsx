@@ -1,10 +1,11 @@
-import RaisedButton from "material-ui/RaisedButton";
-import IconClock from "material-ui/svg-icons/action/alarm";
-import IconSave from "material-ui/svg-icons/content/save";
+import IconClock from "material-ui-icons/Alarm";
+import IconSave from "material-ui-icons/Save";
+import Button from "material-ui-next/Button";
 import * as React from "react";
 import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
+import {StackPanel} from "./panels/stackPanel";
 import {SaveTimetableDialog} from "./saveTimetableDialog";
 import {SetTimeConstraintView} from "./setTimeConstraintView";
 import {TimetableView} from "./timetableView/timetableView";
@@ -19,9 +20,9 @@ const footerStyle : React.CSSProperties = {
     textAlign: "center"
 };
 
-const footerButtonStyle : React.CSSProperties = {
-    marginRight: "10px",
-    marginTop: "10px"
+const iconStyle : React.CSSProperties = {
+    marginRight: "5px",
+    color: "white"
 };
 
 export interface ITimetableListViewStateProps {
@@ -30,19 +31,19 @@ export interface ITimetableListViewStateProps {
     maxIndex : number; // non-zero based
     totalState : STCBox[];
     isSetTimeConstraintViewOpen : boolean;
-    numberOfRemovedTimetables: number;
-    numberOfRemainingTimetables: number;
+    numberOfRemovedTimetables : number;
+    numberOfRemainingTimetables : number;
 }
 
 export interface ITimetableListViewDispatchProps {
-    handleGoToNext:                   ()   => void;
-    handleGoToRandom:                 ()   => void;
-    handleGoToPrevious:               ()   => void;
-    handleOpenSetTimeConstraintView:  ()   => void;
-    handleSetTimeConstraintAt:        (state: STCBox) => void;
-    handleDesetTimeConstraintAt:      (state: STCBox) => void;
-    handleCloseSetTimeConstraintView: ()   => void;
-    handleOpenSaveTimetableDialog:    ()   => void;
+    handleGoToNext : () => void;
+    handleGoToRandom : () => void;
+    handleGoToPrevious : () => void;
+    handleOpenSetTimeConstraintView : () => void;
+    handleSetTimeConstraintAt : (state : STCBox) => void;
+    handleDesetTimeConstraintAt : (state : STCBox) => void;
+    handleCloseSetTimeConstraintView : () => void;
+    handleOpenSaveTimetableDialog : () => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -55,26 +56,31 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                 <div style={centerDivStyle}>
                     <TimetableView timetable={this.props.currentTimetable} states={null}/>
                 </div>
-                <div style={footerStyle}>
-                    <RaisedButton
-                        primary={true}
-                        style={footerButtonStyle}
-                        onClick={this.props.handleOpenSetTimeConstraintView}
-                        icon={< IconClock />}
-                        label="Set time constraint"/>
+                <StackPanel orientation="horizontal" horizontalAlignment="center">
+                    <Button
+                        raised={true}
+                        color="primary"
+                        onClick={this.props.handleOpenSetTimeConstraintView}>
+                        <IconClock style={iconStyle}/>
+                        Set time constraint
+                    </Button>
                     <CounterView
                         current={this.props.currentIndex + 1}
                         maxInclusive={this.props.maxIndex + 1}
+                        leftTooltip={"Go to previous timetable"}
+                        middleTooltip={"Go to random timetable"}
+                        rightTooltip={"Go to next timetable"}
                         handleClickLeft={this.props.handleGoToPrevious}
                         handleClickMiddle={this.props.handleGoToRandom}
                         handleClickRight={this.props.handleGoToNext}/>
-                    <RaisedButton
-                        onClick={this.props.handleOpenSaveTimetableDialog}
-                        primary={true}
-                        style={footerButtonStyle}
-                        icon={< IconSave />}
-                        label="Save as . . ."/>
-                </div>
+                    <Button
+                        raised={true}
+                        color="primary"
+                        onClick={this.props.handleOpenSaveTimetableDialog}>
+                        <IconSave style={iconStyle}/>
+                        Save as . . .
+                    </Button>
+                </StackPanel>
                 <SetTimeConstraintView
                     numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
                     numberOfRemainingTimetables={this.props.numberOfRemainingTimetables}
