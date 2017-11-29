@@ -11,6 +11,7 @@ import * as React from "react";
 import * as S from "string";
 import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
+import { StackPanel } from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";
 
@@ -45,7 +46,7 @@ const searchBoxStyle : React.CSSProperties = {
 };
 
 const buttonStyle : React.CSSProperties = {
-    marginLeft: "10px",
+    marginLeft: "10px"
 };
 
 // endregion
@@ -154,29 +155,38 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                     : ""
 }
                 <footer style={footerStyle}>
-                    <Button
-                        color="accent"
-                        style={buttonStyle}
-                        disabled={noSubjectIsSelected}
-                        key="toggle-view-button"
-                        onClick={this.props.handleToggleView}>
-                        {this.props.isShowingSelectedSubjectOnly
-                            ? "Show all subjects"
-                            : (noSubjectIsSelected
-                                ? "Show selected subjects"
-                                : `Show selected subjects (${numberOfSelectedSubjects})`)}
-                    </Button>
-                    <Button
-                        raised={true}
-                        color="primary"
-                        style={buttonStyle}
-                        disabled={noSubjectIsSelected || this.props.isShowingLoadingBar}
-                        key="done-button"
-                        onClick={this.props.handleClose}>
-                        {this.props.isShowingLoadingBar
-                            ? "Loading . . ."
-                            : "Done"}
-                    </Button>
+                    {this.props.isShowingLoadingBar
+                        ? (
+                            <Typography align="center" type="subheading">Finding possible timetables . . .</Typography>
+                        )
+                        : (
+                            <StackPanel orientation="horizontal" horizontalAlignment="right">
+                                <Button
+                                    color="accent"
+                                    style={buttonStyle}
+                                    disabled={noSubjectIsSelected}
+                                    key="toggle-view-button"
+                                    onClick={this.props.handleToggleView}>
+                                    {this.props.isShowingSelectedSubjectOnly
+                                        ? "Show all subjects"
+                                        : (noSubjectIsSelected
+                                            ? "Show selected subjects"
+                                            : `Show selected subjects (${numberOfSelectedSubjects})`)}
+                                </Button>
+                                <Button
+                                    raised={true}
+                                    color="primary"
+                                    style={buttonStyle}
+                                    disabled={noSubjectIsSelected || this.props.isShowingLoadingBar}
+                                    key="done-button"
+                                    onClick={this.props.handleClose}>
+                                    {this.props.isShowingLoadingBar
+                                        ? "Loading . . ."
+                                        : "Done"}
+                                </Button>
+                            </StackPanel>
+                        )
+}
                 </footer>
             </section>
         );
