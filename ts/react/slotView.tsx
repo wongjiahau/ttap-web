@@ -36,7 +36,7 @@ export class SlotView extends React.Component < ISlotViewProps, {} > {
                 <ButtonBase style={buttonBaseStyle}>
                     <div style={divStyle}>
                         <b>
-                            {GetInitial(slot.SubjectName) + " " + slot.Type + "(" + slot.Group + ")"}
+                            {GetInitial(slot.SubjectName) + " : " + slot.Type + "(" + slot.Group + ")"}
                         </b>
                         <br/> {slot.Room}
                         <br/> {slot.WeekNumber}
