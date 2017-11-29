@@ -20,14 +20,14 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
         if (this.props.orientation === "horizontal") {
             childToBeRendered = (
                 <tr>
-                    {children.map((x) => (
-                        <td>{x}</td>
+                    {children.map((x, index) => (
+                        <td key={index}>{x}</td>
                     ))}
                 </tr>
             );
         } else if (this.props.orientation === "vertical") {
-            childToBeRendered = children.map((x) => (
-                <tr>
+            childToBeRendered = children.map((x, index) => (
+                <tr key={index}>
                     <td>
                         {x}
                     </td>
@@ -37,11 +37,13 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
         let style = {
             ...tableStyle
         };
-        style = {...this.props.style};
+        style = {
+            ...this.props.style
+        };
         switch (this.props.horizontalAlignment) {
             case "center":
-            style.margin = "0 auto";
-            break;
+                style.margin = "0 auto";
+                break;
             case "right":
                 style.marginLeft = "auto";
                 style.marginRight = "0";
@@ -54,7 +56,9 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
         return (
             <div style={style}>
                 <table style={style}>
-                    {childToBeRendered}
+                    <tbody>
+                        {childToBeRendered}
+                    </tbody>
                 </table>
             </div>
         );
