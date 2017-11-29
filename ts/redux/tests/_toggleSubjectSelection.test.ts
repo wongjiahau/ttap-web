@@ -2,6 +2,8 @@ import {
     expect
 } from "chai";
 import {
+    fill,
+    find,
     isEqual
 } from "lodash";
 import {
@@ -15,11 +17,15 @@ import {
     IndexOf
 } from "../../tests/testDataGenerator";
 import {
+    CodeOf
+} from "./../../tests/testDataGenerator";
+import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
 import {
     CheckForClashesBetween,
     FindTimetableBasedOn,
+    GetSlotStates,
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
 import {
@@ -28,7 +34,7 @@ import {
     SubjectListStateReducer
 } from "./../reducers/subjectListState";
 
-const mockSubjects  = GetTestSubjects1();
+const mockSubjects = GetTestSubjects1();
 FindClashes(mockSubjects); // some test will fail if this line is not run
 
 describe("toggle subject selection action", () => {
@@ -39,6 +45,13 @@ describe("toggle subject selection action", () => {
             .to
             .eq("toggle subject selection");
 
+    });
+
+    it("should set SlotStates property", () => {
+        const initialState = new SubjectListState(mockSubjects);
+        const newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        // Note: SlotsId of Hubungan Etnik is [0,1,2,3,4,5] as it is the first subject in the list
+        expect(newState.SlotStates).to.deep.eq(fill(Array(6), true)); // HE have 6 slots
     });
 
     it("should toggle selection on a subject based on its subject index", () => {
@@ -188,7 +201,8 @@ describe("toggle subject selection action", () => {
             newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
             newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
             newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
-            expect(newState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group"); });
+            expect(newState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group");
+        });
     });
 
 });
@@ -214,6 +228,22 @@ describe("CheckForClashesBetween", () => {
         const result = CheckForClashesBetween(titas, [bmk2, wwt]);
         expect(result.Type).to.eq("single");
         expect(result.TargetName).to.eq("Water & Wastewater Treatment");
+    });
+
+});
+
+describe("GetSlotStates", () => {
+    it("case 1", () => {
+        const subjects = mockSubjects;
+        const acp = find(subjects, {
+            Code: CodeOf.ACP
+        });
+        const result = GetSlotStates([acp]);
+        expect(acp.SlotIds).to.deep.eq([18, 19, 20, 21]);
+        expect(result[18]).to.eq(true);
+        expect(result[19]).to.eq(true);
+        expect(result[20]).to.eq(true);
+        expect(result[21]).to.eq(true);
     });
 
 });

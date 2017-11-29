@@ -73,12 +73,14 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
         subjectToBeSelected.ClashReport = new ClashReport("group");
         return {
             ...state,
+            SlotStates: GetSlotStates(selectedSubjects),
             Subjects: allSubjects
         };
     }
     subjectToBeSelected.IsSelected = true;
     return {
         ...state,
+        SlotStates: GetSlotStates(selectedSubjects.concat([subjectToBeSelected])),
         Subjects: allSubjects,
         TimetableListState: new TimetableListState(timetables)
     };
@@ -92,6 +94,7 @@ export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Sub
     const result: ISubjectListState = {
         ...state,
         Subjects: allSubjects,
+        SlotStates: GetSlotStates(selectedSubjects),
         TimetableListState: new TimetableListState(timetables)
     };
 
@@ -159,4 +162,14 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
             )
         )
     );
+}
+
+export function GetSlotStates(selectedSubjects: Subject[]) : boolean[] {
+    const result = [];
+    selectedSubjects.forEach((s) => {
+        s.SlotIds.forEach((id) => {
+            result[id] = true;
+        });
+    });
+    return result;
 }

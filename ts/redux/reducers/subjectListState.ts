@@ -18,27 +18,30 @@ import {
 
 export interface ISubjectListState {
     ClashingSubjectPairs: Array < [Subject, Subject] > ;
-    SearchedText: string;
-    Subjects: Subject[];
-    IsShowingSelectedSubjectOnly: boolean;
     IsShowingLoadingBar: boolean;
+    IsShowingSelectedSubjectOnly: boolean;
+    SearchedText: string;
+    SlotStates: boolean[];
+    Subjects: Subject[];
     TimetableListState: ITimetableListState;
 }
 
 export class SubjectListState implements ISubjectListState {
     public ClashingSubjectPairs: Array < [Subject, Subject] > ;
-    public SearchedText: string;
-    public Subjects: Subject[];
     public IsShowingLoadingBar: boolean;
     public IsShowingSelectedSubjectOnly: boolean;
+    public SearchedText: string;
+    public SlotStates: boolean[];
+    public Subjects: Subject[];
     public TimetableListState: ITimetableListState;
     public constructor(subjects: Subject[]) {
-        this.SearchedText = "";
-        this.IsShowingSelectedSubjectOnly = false;
-        this.IsShowingLoadingBar = false;
-        this.TimetableListState = new TimetableListState();
         this.ClashingSubjectPairs = null;
+        this.IsShowingLoadingBar = false;
+        this.IsShowingSelectedSubjectOnly = false;
+        this.SlotStates = [];
+        this.SearchedText = "";
         this.Subjects = subjects;
+        this.TimetableListState = new TimetableListState();
     }
 }
 

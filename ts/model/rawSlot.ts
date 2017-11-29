@@ -14,6 +14,8 @@ export interface IRawSlot {
     Remark: string;
 }
 export class RawSlot implements IRawSlot {
+    public static hash = 0;
+    public static allRawSlots: RawSlot[] = [];
     public static GetOne(hashId: number): RawSlot {
         const result = RawSlot.allRawSlots.filter((x) => x.HashId === hashId);
         if (result.length > 1) {
@@ -37,8 +39,23 @@ export class RawSlot implements IRawSlot {
         return result;
     }
 
-    private static hash = 0;
-    private static allRawSlots: RawSlot[] = [];
+    public static GetRelated(hashId: number): number[] {
+        const result = [];
+        const matching = RawSlot.GetOne(hashId);
+        for (let i = 0; i < RawSlot.allRawSlots.length; i++) {
+            const slot = RawSlot.allRawSlots[i];
+            if (slot.Number === matching.Number) {
+                result.push(slot.HashId);
+            }
+        }
+        return result;
+    }
+
+    public static Reset() : void {
+        RawSlot.hash = 0;
+        RawSlot.allRawSlots = [];
+    }
+
     public readonly HashId: number; // Unique for every slot object
     public SubjectCode: string;
     public SubjectName: string;

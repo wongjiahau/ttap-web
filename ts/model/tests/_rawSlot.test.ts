@@ -47,4 +47,29 @@ describe("RawSlot", () => {
 
     });
 
+    describe("RawSlot.GetRelated()", () => {
+        it("case 1", () => {
+            // Note: 0 and 1 is the hash id for slot of Lecture-1 of Hubungan Etnik
+            const rawSlots = GetTestRawSlot1();
+            const result = RawSlot.GetRelated(0);
+            expect(result).to.deep.eq([0, 1]);
+        });
+    });
+
+    describe("RawSlot.Reset()", () => {
+        it("should set allRawSlot to empty array", () => {
+            GetTestRawSlot1();
+            expect(RawSlot.allRawSlots).to.not.deep.eq([]);
+            RawSlot.Reset();
+            expect(RawSlot.allRawSlots).to.deep.eq([]);
+        });
+
+        it("should set hash to zero", () => {
+            GetTestRawSlot1();
+            expect(RawSlot.hash).to.not.eq(0);
+            RawSlot.Reset();
+            expect(RawSlot.hash).to.eq(0);
+        });
+    });
+
 });

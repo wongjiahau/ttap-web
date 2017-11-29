@@ -13,10 +13,10 @@ import {Subject} from "../model/subject";
 import {SaveTimetableDialogContainer} from "../redux/containers/saveTimetableDialogContainer";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
-import { LoadTestDataView } from "./loadTestDataView";
+import {LoadTestDataView} from "./loadTestDataView";
 import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
-import { SlotsTable } from "./slotsTable";
+import {SlotsTable} from "./slotsTable";
 import {iconStyle} from "./styles";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -30,6 +30,7 @@ export interface ITimetableCreatorViewStateProps {
     isSlotLoaded : boolean;
     isSnackbarVisible : boolean;
     selectedSubjects : Subject[];
+    slotStates: boolean[];
     snackbarMessage : string;
     clashingSubjectPairs : Array < [Subject, Subject] >;
 }
@@ -38,8 +39,9 @@ export interface ITimetableCreatorViewDispatchProps {
     handleToggleVisibilityOfSubjectListView : () => void;
     handleSnackbarAction : () => void;
     handleSlotLoaded : (rawSlots : RawSlot[]) => void;
-    handleLoadDemo : (html: string) => void;
+    handleLoadDemo : (html : string) => void;
     handleCloseSlotsTable : () => void;
+    handleSlotCheckChanged : (slotNumber: number, checked: boolean) => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -72,7 +74,12 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <Drawer docked={false} width={520} open={this.props.isSubjectListViewVisible}>
                     <SubjectListViewContainer/>
                 </Drawer>
-                <SlotsTable handleClose={this.props.handleCloseSlotsTable} isOpen={this.props.isSlotsTableVisible} selectedSubjects={this.props.selectedSubjects}/>
+                <SlotsTable
+                    slotStates={this.props.slotStates}
+                    handleSlotCheckChanged={this.props.handleSlotCheckChanged}
+                    handleClose={this.props.handleCloseSlotsTable}
+                    isOpen={this.props.isSlotsTableVisible}
+                    selectedSubjects={this.props.selectedSubjects}/>
                 <Button
                     style={selectSubjectButtonStyle}
                     raised={true}

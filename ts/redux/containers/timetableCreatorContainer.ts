@@ -14,7 +14,15 @@ import {
 import {
     NotifyDataLoaded
 } from "../actions/notifyDataLoaded";
-import { ToggleIsOpenOfSlotsTable } from "../actions/toggleIsOpenOfSlotsTable";
+import {
+    NotifyNumberOfRemainingTimetables
+} from "../actions/notifyNumberOfRemainingTimetables";
+import {
+    ReformTimetablesBasedOnSpecificSlot
+} from "../actions/reformTimetablesBasedOnSpecificSlot";
+import {
+    ToggleIsOpenOfSlotsTable
+} from "../actions/toggleIsOpenOfSlotsTable";
 import {
     ITimetableCreatorViewDispatchProps,
     ITimetableCreatorViewStateProps,
@@ -46,6 +54,7 @@ const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
         isSlotsTableVisible: target.IsSlotsTableVisible,
         isSnackbarVisible: target.IsSnackbarVisible,
         selectedSubjects: target.SubjectListState.Subjects.filter((x) => x.IsSelected),
+        slotStates: target.SubjectListState.SlotStates,
         snackbarMessage: target.SnackbarMessage,
     };
 };
@@ -55,6 +64,10 @@ const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
         handleCloseSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(false).Action()),
         handleLoadDemo: (html: string) => dispatch(new NotifyDataLoaded(ParseHtmlToRawSlot(html)).Action()),
         handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots).Action()),
+        handleSlotCheckChanged: (slotId: number, checked: boolean) => {
+            dispatch(new ReformTimetablesBasedOnSpecificSlot(slotId, checked).Action());
+            dispatch(new NotifyNumberOfRemainingTimetables().Action());
+        },
         handleSnackbarAction: () => dispatch(new HideSnackbar().Action()),
         handleToggleVisibilityOfSubjectListView: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
     };

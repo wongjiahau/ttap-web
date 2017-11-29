@@ -17,6 +17,7 @@ export const GetTestSubjects1 = () : Subject[] => {
 };
 
 export const GetTestRawSlot1 = () : RawSlot[] => {
+    RawSlot.Reset();
     return ParseHtmlToSlots(heng_2017_sept());
 };
 

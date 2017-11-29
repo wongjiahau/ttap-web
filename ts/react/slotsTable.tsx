@@ -17,12 +17,14 @@ const titleStyle : React.CSSProperties = {
 };
 
 export interface ISlotsTableProps {
+    slotStates: boolean[];
     selectedSubjects : Subject[];
     isOpen : boolean;
     handleClose : () => void;
+    handleSlotCheckChanged : (slotNumber: number, checked: boolean) => void;
 }
 
-export class SlotsTable extends React.Component < ISlotsTableProps, {} > {
+export class SlotsTable extends React.Component < ISlotsTableProps, {}> {
     public render() {
         return (
             <Drawer anchor="right" open={this.props.isOpen}>
@@ -60,9 +62,10 @@ export class SlotsTable extends React.Component < ISlotsTableProps, {} > {
                                             {RawSlot
                                                 .GetBunch(s.SlotIds)
                                                 .map((slot, index) => {
+                                                    const checked = this.props.slotStates[slot.HashId];
                                                     return (
                                                         <TableRow key={index}>
-                                                            <TableCell padding="checkbox"><Checkbox checked={true}/></TableCell>
+                                                            <TableCell padding="checkbox"><Checkbox checked={checked} onClick={() => this.props.handleSlotCheckChanged(slot.HashId, checked)}/></TableCell>
                                                             <TableCell padding="dense">{slot.Number}</TableCell>
                                                             <TableCell padding="dense">{slot.Type}</TableCell>
                                                             <TableCell padding="dense">{slot.Group}</TableCell>
