@@ -33,5 +33,5 @@ after_script:
 deploy:
   provider: surge
   project: ./build/
-  domain: ttap.surge.sh  
+  domain: https://ttap.surge.sh  
   skip_cleanup: true
