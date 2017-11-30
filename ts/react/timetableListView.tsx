@@ -45,7 +45,7 @@ ITimetableListViewDispatchProps {}
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
         return (
-            <div>
+            <div onKeyDown={this.checkKeys} tabIndex={0}>
                 <div style={centerDivStyle}>
                     <TimetableView timetable={this.props.currentTimetable} states={null}/>
                 </div>
@@ -60,9 +60,9 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     <CounterView
                         current={this.props.currentIndex + 1}
                         maxInclusive={this.props.maxIndex + 1}
-                        leftTooltip={"Go to previous timetable"}
-                        middleTooltip={"Go to random timetable"}
-                        rightTooltip={"Go to next timetable"}
+                        leftTooltip={"Go to previous timetable (Left arrow)"}
+                        middleTooltip={"Go to random timetable (R)"}
+                        rightTooltip={"Go to next timetable (Right arrow)"}
                         handleClickLeft={this.props.handleGoToPrevious}
                         handleClickMiddle={this.props.handleGoToRandom}
                         handleClickRight={this.props.handleGoToNext}/>
@@ -91,5 +91,17 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     handleCancel={this.props.handleCloseSetTimeConstraintView}/>
             </div>
         );
+    }
+
+    private checkKeys = (e) => {
+        // refer https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
+        e = e || window.event;
+        if (e.keyCode === 37 || e.keyCode === 38) { // up or left arrow
+            this.props.handleGoToPrevious();
+        } else if (e.keyCode === 39 || e.keyCode === 40) { // down or right arrow
+            this.props.handleGoToNext();
+        } else if (e.keyCode === 82) { // R
+            this.props.handleGoToRandom();
+        }
     }
 }
