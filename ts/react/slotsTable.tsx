@@ -3,6 +3,7 @@ import Button from "material-ui-next/Button";
 import Checkbox from "material-ui-next/Checkbox";
 import Divider from "material-ui-next/Divider";
 import Drawer from "material-ui-next/Drawer";
+import Paper from "material-ui-next/Paper";
 import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui-next/Table";
 import Typography from "material-ui-next/Typography";
 import * as React from "react";
@@ -29,21 +30,23 @@ export class SlotsTable extends React.Component < ISlotsTableProps, {} > {
         return (
             <Drawer anchor="right" open={this.props.isOpen}>
                 <div>
-                    <StackPanel orientation="horizontal">
-                        <Button raised={true} color="accent" onClick={this.props.handleClose}>
-                            <IconArrowRight style={iconStyle}/>
-                            HIDE
-                        </Button>
-                        <StackPanel orientation="vertical" style={{ marginLeft: "10px" }}>
-                            <Typography type="title">Displaying slots of selected subjects</Typography>
-                            <Typography type="subheading">You can select or deselect some specific slots.</Typography>
+                    <Paper>
+                        <StackPanel orientation="horizontal">
+                            <Button raised={true} color="accent" onClick={this.props.handleClose}>
+                                <IconArrowRight style={iconStyle}/>
+                                HIDE
+                            </Button>
+                            <StackPanel
+                                orientation="vertical"
+                                style={{
+                                marginLeft: "10px"
+                            }}>
+                                <Typography type="title">Displaying slots of selected subjects</Typography>
+                                <Typography type="subheading">You can select or deselect some specific slots.</Typography>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                    <Divider
-                        style={{
-                        marginBottom: "10px",
-                        marginTop: "5px"
-                    }}/> {this
+                    </Paper>
+                     {this
                         .props
                         .selectedSubjects
                         .map((s) => {
