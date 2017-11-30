@@ -48,20 +48,23 @@ import {
 const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
     const target = state.TimetableCreatorStateReducer as TimetableCreatorState;
     return {
-        isSlotLoaded: target.IsSlotLoaded,
-        clashingSubjectPairs: target.SubjectListState.ClashingSubjectPairs,
+        clashingSubjectPairs:     target.SubjectListState.ClashingSubjectPairs,
+        isSlotLoaded:             target.IsSlotLoaded,
+        isSlotsTableVisible:      target.IsSlotsTableVisible,
+        isSnackbarVisible:        target.IsSnackbarVisible,
         isSubjectListViewVisible: target.IsSubjectListViewVisible,
-        isSlotsTableVisible: target.IsSlotsTableVisible,
-        isSnackbarVisible: target.IsSnackbarVisible,
-        selectedSubjects: target.SubjectListState.Subjects.filter((x) => x.IsSelected),
-        slotStates: target.SubjectListState.SlotStates,
-        snackbarMessage: target.SnackbarMessage,
+        selectedSubjects:         target.SubjectListState.Subjects.filter((x) => x.IsSelected),
+        slotStates:               target.SubjectListState.SlotStates,
+        snackbarMessage:          target.SnackbarMessage,
     };
 };
 
 const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
     return {
-        handleCloseSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(false).Action()),
+        handleCloseSlotsTable: () => {
+            dispatch(new ToggleIsOpenOfSlotsTable(false).Action());
+            dispatch(new HideSnackbar().Action());
+        },
         handleLoadDemo: (html: string) => dispatch(new NotifyDataLoaded(ParseHtmlToRawSlot(html)).Action()),
         handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots).Action()),
         handleSlotCheckChanged: (slotId: number, checked: boolean) => {

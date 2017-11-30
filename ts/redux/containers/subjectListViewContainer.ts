@@ -1,7 +1,9 @@
 import {
     connect
 } from "react-redux";
-import { HideSnackbar } from "../actions/hideSnackbar";
+import {
+    HideSnackbar
+} from "../actions/hideSnackbar";
 import {
     SubjectListState,
     SubjectListStateAction
@@ -39,17 +41,20 @@ import {
 const mapStateToProps = (state): ISubjectListViewStateProps => {
     const target = state.TimetableCreatorStateReducer.SubjectListState as SubjectListState;
     return {
-        clashingSubjectPairs: target.ClashingSubjectPairs,
-        isShowingLoadingBar: target.IsShowingLoadingBar,
+        clashingSubjectPairs:         target.ClashingSubjectPairs,
+        isShowingLoadingBar:          target.IsShowingLoadingBar,
         isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
-        searchWord: target.SearchedText,
-        subjects: target.Subjects,
+        searchWord:                   target.SearchedText,
+        subjects:                     target.Subjects,
     };
 };
 
 const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
     return {
-        handleClose: () => dispatch(new ToggleVisibilityOfSubjectListView().Action()),
+        handleClose: () => {
+            dispatch(new ToggleVisibilityOfSubjectListView().Action());
+            dispatch(new HideSnackbar().Action());
+        },
         handleSearch: (searchedText: string) => {
             dispatch(Wrap(new SearchSubjectList(searchedText)).Action());
             dispatch(new HideSnackbar().Action());
