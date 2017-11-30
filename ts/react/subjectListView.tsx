@@ -134,7 +134,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         return (
             <section style={this.state.sectionStyle}>
                 <header style={headerStyle}>
-                    <Typography type="display2" color="primary">
+                    <Typography type="display1" color="primary">
                         Select your desired subjects.
                     </Typography>
                     <TextField
