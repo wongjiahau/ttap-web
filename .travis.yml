@@ -20,6 +20,7 @@ cache: # cache node modules so that every build don't have to reinstall those no
 before_script:
   - sed -i "s/API_KEY/$firebase/g" ./ts/fire.ts # inject firebase API
   - sed -i "s/isProductionBuild = false/isProductionBuild = true/g" ./src/index.js # toggle production build to disable redux middleware
+  - sed -i "s/polyfill/polyfill --coverage/g" ./package.json #Add --coverage option for running test
 
 script:
   - echo "Running script:"
