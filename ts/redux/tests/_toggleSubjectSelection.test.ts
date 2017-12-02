@@ -27,6 +27,8 @@ import {
     CheckForClashesBetween,
     FindTimetableBasedOn,
     GetSlotStates,
+    GetSubjectStates,
+    Ternary,
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
 import {
@@ -54,11 +56,17 @@ describe("toggle subject selection action", () => {
 
     });
 
-    it("should set SlotStates property", () => {
+    it("should set SlotStates property of SlotTableState", () => {
         const initialState = getInitialState();
         const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         // Note: SlotsId of Hubungan Etnik is [0,1,2,3,4,5] as it is the first subject in the list
         expect(newState.SlotTableState.SlotStates).to.deep.eq(fill(Array(6), true)); // HE have 6 slots
+    });
+
+    it("should set SubjectStates property of SlotTableState", () => {
+        const initialState = getInitialState();
+        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        expect(newState.SlotTableState.SubjectStates[CodeOf.HE]).to.eq("true");
     });
 
     it("should toggle selection on a subject based on its subject index", () => {
@@ -251,6 +259,22 @@ describe("GetSlotStates", () => {
         expect(result[19]).to.eq(true);
         expect(result[20]).to.eq(true);
         expect(result[21]).to.eq(true);
+    });
+
+});
+
+describe("GetSubjectStates", () => {
+    it("case 1", () => {
+        const subjects = mockSubjects;
+        const acp = find(subjects, {
+            Code: CodeOf.ACP
+        });
+        const he = find(subjects, {
+            Code: CodeOf.HE
+        });
+        const result = GetSubjectStates([acp, he]);
+        expect(result[acp.Code]).to.eq("true");
+        expect(result[he.Code]).to.eq("true");
     });
 
 });

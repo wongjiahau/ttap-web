@@ -79,6 +79,7 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
             SlotTableState: {
                 ...state.SlotTableState,
                 SlotStates: GetSlotStates(selectedSubjects),
+                SubjectStates: GetSubjectStates(selectedSubjects)
             },
             SubjectListState: {
                 ...state.SubjectListState,
@@ -92,6 +93,7 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
         SlotTableState: {
             ...state.SlotTableState,
             SlotStates: GetSlotStates(selectedSubjects.concat([subjectToBeSelected])),
+            SubjectStates: GetSubjectStates(selectedSubjects.concat([subjectToBeSelected]))
         },
         SubjectListState: {
             ...state.SubjectListState,
@@ -116,6 +118,7 @@ export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Sub
         SlotTableState: {
             ...state.SlotTableState,
             SlotStates: GetSlotStates(selectedSubjects),
+            SubjectStates: GetSubjectStates(selectedSubjects)
         },
         TimetableListState: NewTimetableListState(timetables)
     };
@@ -193,6 +196,16 @@ export function GetSlotStates(selectedSubjects: Subject[]) : boolean[] {
         s.SlotIds.forEach((id) => {
             result[id] = true;
         });
+    });
+    return result;
+}
+
+export type Ternary = "true" | "false" | "intermediate";
+
+export function GetSubjectStates(selectedSubjects: Subject[]) : Ternary[] {
+    const result = [];
+    selectedSubjects.forEach((s) => {
+        result[s.Code] = "true";
     });
     return result;
 }

@@ -1,6 +1,7 @@
 import {
     connect
 } from "react-redux";
+import { Subject } from "../../model/subject";
 import {
     ISlotsTableViewDispatchProps,
     ISlotsTableViewInternalState,
@@ -10,6 +11,9 @@ import {
 import {
     NotifyNumberOfRemainingTimetables
 } from "../actions/notifyNumberOfRemainingTimetables";
+import {
+    ReformTimetablesBasedOnGroupOfSlots
+} from "../actions/reformTimetablesBasedOnGroupOfSlots";
 import {
     ReformTimetablesBasedOnSpecificSlot
 } from "../actions/reformTimetablesBasedOnSpecificSlot";
@@ -27,17 +31,22 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
     const slotsTableState = state.MasterStateReducer.SlotTableState as ISlotsTableState;
     const subjectListState = state.MasterStateReducer.SubjectListState as ISubjectListState;
     return {
-        isOpen: slotsTableState.IsOpen,
+        isOpen:           slotsTableState.IsOpen,
         selectedSubjects: subjectListState.Subjects.filter((s) => s.IsSelected),
-        slotStates: slotsTableState.SlotStates
+        slotStates:       slotsTableState.SlotStates,
+        subjectStates:    slotsTableState.SubjectStates
     };
 };
 
 const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
     return {
         handleClose: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
-        handleSlotCheckChanged: (slotId: number, checked: boolean) => {
-            dispatch(new ReformTimetablesBasedOnSpecificSlot(slotId, checked));
+        handleSlotCheckChanged: (slotId: number, checked: boolean, subjectCode: string) => {
+            dispatch(new ReformTimetablesBasedOnSpecificSlot(slotId, checked, subjectCode));
+            dispatch(new NotifyNumberOfRemainingTimetables());
+        },
+        handleSlotsGroupCheckChanged: (subjectCode: string) => {
+            dispatch(new ReformTimetablesBasedOnGroupOfSlots(subjectCode));
             dispatch(new NotifyNumberOfRemainingTimetables());
         }
     };
