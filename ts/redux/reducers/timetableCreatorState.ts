@@ -6,9 +6,6 @@ import {
     Action
 } from "../actions/action";
 import {
-    GenereteReducer
-} from "./generateReducer";
-import {
     ISaveTimetableDialogState
 } from "./saveTimetableDialogState";
 import {
@@ -24,8 +21,6 @@ export function NewTimetableCreatorState () : ITimetableCreatorState  {
         IsSlotLoaded: false
     };
 }
-
-export const TimetableCreatorStateReducer = GenereteReducer(NewTimetableCreatorState());
 
 export abstract class TimetableCreatorStateAction extends Action < ITimetableCreatorState > {
     public StateName() {

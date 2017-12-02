@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
 import {ToggleIsOpenOfSubjectListView} from "../actions/toggleIsOpenOfSubjectListView";
-import {MasterStateReducer, NewMasterState} from "./../reducers/masterState";
+import { MasterStateReducer, NewMasterState } from "../reducers/masterState";
 
 describe("toggle visiblity of subject list view action", () => {
 

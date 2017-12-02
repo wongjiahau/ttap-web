@@ -8,6 +8,11 @@ import {
     GetTestSubjects1
 } from "../../tests/testDataGenerator";
 import {
+    IMasterState,
+    MasterStateReducer,
+    NewMasterState
+} from "../reducers/masterState";
+import {
     NewSubjectListState
 } from "../reducers/subjectListState";
 import {
@@ -19,11 +24,6 @@ import {
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
-import {
-    IMasterState,
-    MasterStateReducer,
-    NewMasterState
-} from "./../reducers/masterState";
 
 function getInitialState(): IMasterState {
     return {

@@ -28,7 +28,7 @@ import {
     FindTimetable
 } from "../../permutator/findTimetable";
 import {
-    NewTimetableListState, TimetableListState
+    NewTimetableListState
 } from "../reducers/timetableListState";
 import {
     IMasterState,

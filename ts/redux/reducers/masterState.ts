@@ -1,6 +1,6 @@
 import * as typeName from "type-name";
 import {Action} from "../actions/action";
-import {GenereteReducer} from "./generateReducer";
+import {GenerateReducer} from "./generateReducer";
 import {ISaveTimetableDialogState, NewSaveTimetableDialogState} from "./saveTimetableDialogState";
 import {ISetTimeConstraintState, NewSetTimeConstraintState} from "./setTimeConstraintState";
 import {ISlotsTableState, NewSlotsTableState} from "./slotsTableState";
@@ -36,4 +36,4 @@ export abstract class MasterStateAction extends Action < IMasterState > {
     }
 }
 
-export const MasterStateReducer = GenereteReducer(NewMasterState());
+export const MasterStateReducer = GenerateReducer(NewMasterState());

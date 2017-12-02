@@ -16,7 +16,7 @@ import {
     ToggleIsOpenOfSlotsTable
 } from "../actions/toggleIsOpenOfSlotsTable";
 import {
-    TimetableListStateAction
+    ITimetableListState
 } from "../reducers/timetableListState";
 import {
     GoToNextTimetable
@@ -30,12 +30,9 @@ import {
 import {
     UpdateTotalState
 } from "./../actions/updateTotalState";
-import {
-    TimetableListState
-} from "./../reducers/timetableListState";
 
 const mapStateToProps = (state): ITimetableListViewStateProps => {
-    const target = state.MasterStateReducer.TimetableListState as TimetableListState;
+    const target = state.MasterStateReducer.TimetableListState as ITimetableListState;
     return {
         currentIndex: target.CurrentIndex,
         currentTimetable: target.FiltrateTimetables[target.CurrentIndex],

@@ -1,6 +1,6 @@
 import {expect} from "chai";
+import { MasterStateReducer, NewMasterState } from "../reducers/masterState";
 import { SetTimetables } from "./../actions/setTimetables";
-import { MasterStateReducer, NewMasterState } from "./../reducers/masterState";
 
 describe("setSubjects action", () => {
     it("'s type name should be 'set timetables'", () => {

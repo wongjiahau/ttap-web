@@ -8,13 +8,6 @@ import {
 import {
     GetTestSubjects1
 } from "./../../tests/testDataGenerator";
-import {
-    GenereteReducer
-} from "./generateReducer";
-import {
-    ITimetableListState,
-    TimetableListState
-} from "./timetableListState";
 
 export interface ISubjectListState {
     ClashingSubjectPairs:         Array < [Subject, Subject] > ;
@@ -41,5 +34,3 @@ export abstract class SubjectListStateAction extends Action < ISubjectListState 
         return typeName(NewSubjectListState(null));
     }
 }
-
-export const SubjectListStateReducer = GenereteReducer(NewSubjectListState(null));
