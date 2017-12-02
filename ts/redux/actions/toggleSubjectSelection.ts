@@ -202,8 +202,8 @@ export function GetSlotStates(selectedSubjects: Subject[]) : boolean[] {
 
 export type Ternary = "true" | "false" | "intermediate";
 
-export function GetSubjectStates(selectedSubjects: Subject[]) : Ternary[] {
-    const result = [];
+export function GetSubjectStates(selectedSubjects: Subject[]) : {} {
+    const result = {};
     selectedSubjects.forEach((s) => {
         result[s.Code] = "true";
     });
