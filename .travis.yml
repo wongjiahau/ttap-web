@@ -27,6 +27,7 @@ script:
   - ./scripts/transpile
   - npm run build
   - npm test
+  - codecov
 
 after_script:
   - echo "script finished."

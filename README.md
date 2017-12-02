@@ -1,4 +1,6 @@
 # [Timetable Arranging Program - Web (TTAP)](https://github.com/wongjiahau/ttap-web)
+[![travis-ci](https://travis-ci.org/wongjiahau/ttap-web.svg?branch=master)](https://travis-ci.org/wongjiahau/ttap-web)
+[![BCH compliance](https://bettercodehub.com/edge/badge/wongjiahau/ttap-web?branch=master)](https://bettercodehub.com/)
 ## Objectives
 This software is used to helps student's of UTAR to arrange their timetable without frustration.
 ## Technologies used :
