@@ -33,7 +33,7 @@ const footerStyle : React.CSSProperties = {
 
 export interface ISlotsTableViewStateProps {
     slotStates : boolean[];
-    subjectStates : Ternary[];
+    subjectStates : {};
     selectedSubjects : Subject[];
     isOpen : boolean;
 }
