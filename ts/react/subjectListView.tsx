@@ -159,10 +159,6 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {s
                                 : errorMessage}
                         </div>
                     </Paper>
-                    {this.props.isShowingLoadingBar
-                        ? <LinearProgress/>
-                        : ""
-}
                     <footer style={footerStyle}>
                         {this.props.isShowingLoadingBar
                             ? (
