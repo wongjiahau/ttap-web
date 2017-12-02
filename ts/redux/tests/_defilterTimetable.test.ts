@@ -48,8 +48,8 @@ describe("DefilterTimetable action", () => {
 
     it("should set property of FiltrateTimetables and ResidueTimetables ", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0).Action());
-        const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1).Action());
+        const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0));
+        const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1));
         expect(newState2.TimetableListState.FiltrateTimetables.length)
             .to.eq(initialState.TimetableListState.FiltrateTimetables.length);
         expect(newState2.TimetableListState.ResidueTimetables.length).to.eq(0);
@@ -57,33 +57,33 @@ describe("DefilterTimetable action", () => {
 
     it("should set property of TotalState based on the filtered timetables", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new UpdateTotalState().Action());
-        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state0).Action());
-        const newState3 = MasterStateReducer(newState2, new DefilterTimetable(state1).Action());
+        const newState1 = MasterStateReducer(initialState, new UpdateTotalState());
+        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state0));
+        const newState3 = MasterStateReducer(newState2, new DefilterTimetable(state1));
         expect(newState3.SetTimeConstraintState.TotalState)
             .to.deep.eq(newState1.SetTimeConstraintState.TotalState);
     });
 
     it("should set property of UidsOfClickedState", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0).Action());
+        const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0));
         expect(newState1.SetTimeConstraintState.UidsOfClickedState.length).to.eq(1);
-        const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1).Action());
+        const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1));
         expect(newState2.SetTimeConstraintState.UidsOfClickedState.length).to.eq(0);
     });
 
     it("should set property of ClickedTimeConstraint", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0).Action());
+        const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0));
         expect(newState1.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([parseInt("1000000", 2), 0, 0, 0, 0, 0, 0]);
-        const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1).Action());
+        const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1));
         expect(newState2.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
     });
 
     it("should set property of CurrentIndex to 0", () => {
-        const action = new DefilterTimetable(state0).Action();
+        const action = new DefilterTimetable(state0);
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new GoToNextTimetable().Action());
+        let newState = MasterStateReducer(initialState, new GoToNextTimetable());
         expect(newState.TimetableListState.CurrentIndex).to.eq(1);
         newState = MasterStateReducer(newState, action);
         expect(newState.TimetableListState.CurrentIndex).to.eq(0);
@@ -91,14 +91,14 @@ describe("DefilterTimetable action", () => {
 
     it("case 1", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new UpdateTotalState().Action());
-        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state0).Action());
+        const newState1 = MasterStateReducer(initialState, new UpdateTotalState());
+        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state0));
         expect(newState2.TimetableListState.ResidueTimetables.length).to.eq(5);
         expect(newState2.TimetableListState.FiltrateTimetables.length).to.eq(24);
-        const newState3 = MasterStateReducer(newState2, new FilterTimetable(state2).Action());
+        const newState3 = MasterStateReducer(newState2, new FilterTimetable(state2));
         expect(newState3.TimetableListState.ResidueTimetables.length).to.eq(13);
         expect(newState3.TimetableListState.FiltrateTimetables.length).to.eq(16);
-        const newState4 = MasterStateReducer(newState3, new DefilterTimetable(state1).Action());
+        const newState4 = MasterStateReducer(newState3, new DefilterTimetable(state1));
         // expect(newState4.ResidueTimetables.length).to.eq(9);
         expect(newState4.TimetableListState.FiltrateTimetables.length).to.eq(20);
     });

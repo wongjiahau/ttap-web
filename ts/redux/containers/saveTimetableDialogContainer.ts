@@ -19,12 +19,12 @@ const mapStateToProps = (state) : ISaveTimetableDialogStateProps => {
 
 const mapDispatchToProps = (dispatch) : ISaveTimetableDialogDispatchProps => {
     return {
-        handleSaveAsTextFile:       ()          => dispatch(new SaveTimetableAsTextFile().Action()),
-        handleSaveAsPicture:        ()          => dispatch(new SaveTimetableAsImage().Action()),
-        handleSaveToGoogleCalendar: (semStartDate: Date) => dispatch(new SaveTimetableAsGoogleCalendar(semStartDate).Action()),
-        handleClose:                ()          => dispatch(new ToggleIsOpenOfSaveDialog(false).Action()),
-        handleCloseGetDateDialog:   ()          => dispatch(new ToggleIsOpenOfGetDateDialog(false).Action()),
-        handleOpenGetDateDialog:    ()          => dispatch(new ToggleIsOpenOfGetDateDialog(true).Action())
+        handleSaveAsTextFile:       ()          => dispatch(new SaveTimetableAsTextFile()),
+        handleSaveAsPicture:        ()          => dispatch(new SaveTimetableAsImage()),
+        handleSaveToGoogleCalendar: (semStartDate: Date) => dispatch(new SaveTimetableAsGoogleCalendar(semStartDate)),
+        handleClose:                ()          => dispatch(new ToggleIsOpenOfSaveDialog(false)),
+        handleCloseGetDateDialog:   ()          => dispatch(new ToggleIsOpenOfGetDateDialog(false)),
+        handleOpenGetDateDialog:    ()          => dispatch(new ToggleIsOpenOfGetDateDialog(true))
     };
 };
 

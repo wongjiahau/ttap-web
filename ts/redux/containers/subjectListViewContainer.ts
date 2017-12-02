@@ -48,22 +48,22 @@ const mapStateToProps = (state): ISubjectListViewStateProps => {
 const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
     return {
         handleClose: () => {
-            dispatch(new ToggleIsOpenOfSubjectListView(false).Action());
-            dispatch(new HideSnackbar().Action());
+            dispatch(new ToggleIsOpenOfSubjectListView(false));
+            dispatch(new HideSnackbar());
         },
         handleSearch: (searchedText: string) => {
-            dispatch(new SearchSubjectList(searchedText).Action());
-            dispatch(new HideSnackbar().Action());
+            dispatch(new SearchSubjectList(searchedText));
+            dispatch(new HideSnackbar());
         },
         handleSelection: (subjectIndex: number) => {
-            dispatch(new ToggleLoadingBar(true).Action());
+            dispatch(new ToggleLoadingBar(true));
             setTimeout(() => {
-                dispatch(new ToggleSubjectSelection(subjectIndex).Action());
-                dispatch(new ToggleLoadingBar(false).Action());
-                dispatch(new NotifyIfTimetableIsFound().Action());
+                dispatch(new ToggleSubjectSelection(subjectIndex));
+                dispatch(new ToggleLoadingBar(false));
+                dispatch(new NotifyIfTimetableIsFound());
             }, 0);
         },
-        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions().Action())
+        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions())
     };
 };
 

@@ -23,7 +23,7 @@ describe("HideSnackbar action", () => {
     });
 
     it("should set SnackbarState.IsOpento false", () => {
-        const action = new HideSnackbar().Action();
+        const action = new HideSnackbar();
         const initialState = NewMasterState();
         initialState.SnackbarState.IsOpen = true;
         expect(initialState.SnackbarState.IsOpen).to.eq(true);

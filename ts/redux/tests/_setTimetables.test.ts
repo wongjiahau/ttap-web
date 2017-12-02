@@ -12,13 +12,13 @@ describe("setSubjects action", () => {
 
     it("should set the property of FilteredTimetables", () => {
         const initialState = NewMasterState();
-        const newState = MasterStateReducer(initialState, new SetTimetables([null, null]).Action());
+        const newState = MasterStateReducer(initialState, new SetTimetables([null, null]));
         expect(newState.TimetableListState.FiltrateTimetables.length).to.eq(2);
     });
 
     it("should set the property of AllTimetables", () => {
         const initialState = NewMasterState();
-        const newState = MasterStateReducer(initialState, new SetTimetables([null, null]).Action());
+        const newState = MasterStateReducer(initialState, new SetTimetables([null, null]));
         expect(newState.TimetableListState.ResidueTimetables.length).to.eq(2);
     });
 

@@ -15,7 +15,7 @@ describe("ToggleIsOpenOfSaveDialog action", () => {
     });
 
     it("should set IsMainDialogOpen property", () => {
-        const action = new ToggleIsOpenOfSaveDialog(true).Action();
+        const action = new ToggleIsOpenOfSaveDialog(true);
         const initialState = NewMasterState();
         expect(initialState.SaveTimetableDialogState.IsMainDialogOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, action);

@@ -126,7 +126,7 @@ export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Sub
     const shouldToggleToShowAllSubject =
         state.SubjectListState.IsShowingSelectedSubjectOnly && newIsShowSelectedSubjectOnly === false;
     if (shouldToggleToShowAllSubject) {
-        return MasterStateReducer(result, new ToggleSubjectListViewingOptions().Action());
+        return MasterStateReducer(result, new ToggleSubjectListViewingOptions());
     } else {
         return result;
     }

@@ -23,19 +23,19 @@ describe("notifyDataLoaded action", () => {
 
     it("should change IsDataLoaded to true", () => {
         const newState = MasterStateReducer(NewMasterState(),
-            new NotifyDataLoaded(GetTestRawSlot1()).Action());
+            new NotifyDataLoaded(GetTestRawSlot1()));
         expect(newState.TimetableCreatorState.IsSlotLoaded).to.eq(true);
     });
 
     it("should set Subject property of SubjectListState", () => {
         const newState = MasterStateReducer(NewMasterState(),
-            new NotifyDataLoaded(GetTestRawSlot1()).Action());
+            new NotifyDataLoaded(GetTestRawSlot1()));
         expect(newState.SubjectListState.Subjects.length).to.eq(18);
     });
 
     it("should set IsOpen of SubjectListView to true", () => {
         const newState = MasterStateReducer(NewMasterState(),
-            new NotifyDataLoaded(GetTestRawSlot1()).Action());
+            new NotifyDataLoaded(GetTestRawSlot1()));
         expect(newState.SubjectListState.IsOpen).to.eq(true);
     });
 

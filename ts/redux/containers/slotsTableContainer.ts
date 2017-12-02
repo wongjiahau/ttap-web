@@ -35,10 +35,10 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
     return {
-        handleClose: () => dispatch(new ToggleIsOpenOfSlotsTable(false).Action()),
+        handleClose: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
         handleSlotCheckChanged: (slotId: number, checked: boolean) => {
-            dispatch(new ReformTimetablesBasedOnSpecificSlot(slotId, checked).Action());
-            dispatch(new NotifyNumberOfRemainingTimetables().Action());
+            dispatch(new ReformTimetablesBasedOnSpecificSlot(slotId, checked));
+            dispatch(new NotifyNumberOfRemainingTimetables());
         }
     };
 };

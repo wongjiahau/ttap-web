@@ -19,7 +19,7 @@ describe("NotifyNumberOfRemainingTimetables action", () => {
     });
 
     it("should set IsSnackbarVisible to true", () => {
-        const action = new NotifyNumberOfRemainingTimetables().Action();
+        const action = new NotifyNumberOfRemainingTimetables();
         const initialState = getInitialState();
         expect(initialState.SnackbarState.IsOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, action);
@@ -27,7 +27,7 @@ describe("NotifyNumberOfRemainingTimetables action", () => {
     });
 
     it("should set SnackbarMessage", () => {
-        const action = new NotifyNumberOfRemainingTimetables().Action();
+        const action = new NotifyNumberOfRemainingTimetables();
         const initialState = getInitialState();
         const newState = MasterStateReducer(initialState, action);
         expect(newState.SnackbarState.Message).to.eq("29 timetables remaining.");

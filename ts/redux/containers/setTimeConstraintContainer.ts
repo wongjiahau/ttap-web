@@ -23,9 +23,9 @@ const mapStateToProps = (state): ISetTimeConstraintViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ISetTimeConstraintViewDispatchProps => {
     return {
-        handleCancel:                ()    => dispatch(new ToggleSetTimeConstraintView(false).Action()),
-        handleDesetTimeConstraintAt: (stcBox: STCBox) => dispatch(new DefilterTimetable(stcBox).Action()),
-        handleSetTimeConstraintAt:   (stcBox: STCBox) => dispatch(new FilterTimetable(stcBox).Action())
+        handleCancel:                ()    => dispatch(new ToggleSetTimeConstraintView(false)),
+        handleDesetTimeConstraintAt: (stcBox: STCBox) => dispatch(new DefilterTimetable(stcBox)),
+        handleSetTimeConstraintAt:   (stcBox: STCBox) => dispatch(new FilterTimetable(stcBox))
     };
 };
 

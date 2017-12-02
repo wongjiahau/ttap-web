@@ -17,17 +17,17 @@ function getInitialState() : IMasterState {
 describe("SaveTimetable action", () => {
     it("should set IsMainDialogOpen property to false", () => {
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleIsOpenOfSaveDialog(true).Action());
+        let newState = MasterStateReducer(initialState, new ToggleIsOpenOfSaveDialog(true));
         expect(newState.SaveTimetableDialogState.IsMainDialogOpen).to.eq(true);
-        newState = MasterStateReducer(newState, new MockSaveTimetable().Action());
+        newState = MasterStateReducer(newState, new MockSaveTimetable());
         expect(newState.SaveTimetableDialogState.IsMainDialogOpen).to.eq(false);
     });
 
     it("should set IsGetDateDialogOpen property to false", () => {
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleIsOpenOfGetDateDialog(true).Action());
+        let newState = MasterStateReducer(initialState, new ToggleIsOpenOfGetDateDialog(true));
         expect(newState.SaveTimetableDialogState.IsGetDateDialogOpen).to.eq(true);
-        newState = MasterStateReducer(newState, new MockSaveTimetable().Action());
+        newState = MasterStateReducer(newState, new MockSaveTimetable());
         expect(newState.SaveTimetableDialogState.IsGetDateDialogOpen).to.eq(false);
     });
 });

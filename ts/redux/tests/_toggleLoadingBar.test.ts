@@ -9,7 +9,7 @@ describe("ToggleLoadingBar action", () => {
     });
 
     it("should set IsShowingLoadingBar property to true if passed in true", () => {
-        const action = new ToggleLoadingBar(true).Action();
+        const action = new ToggleLoadingBar(true);
         const initialState = NewMasterState();
         expect(initialState.SubjectListState.IsShowingLoadingBar).to.eq(false);
         const newState = MasterStateReducer(initialState, action);
@@ -18,9 +18,9 @@ describe("ToggleLoadingBar action", () => {
 
     it("should set IsShowingLoadingBar property to false if passed in false", () => {
         const initialState = NewMasterState();
-        let newState = MasterStateReducer(initialState, new ToggleLoadingBar(true).Action());
+        let newState = MasterStateReducer(initialState, new ToggleLoadingBar(true));
         expect(newState.SubjectListState.IsShowingLoadingBar).to.eq(true);
-        newState = MasterStateReducer(initialState, new ToggleLoadingBar(false).Action());
+        newState = MasterStateReducer(initialState, new ToggleLoadingBar(false));
         expect(newState.SubjectListState.IsShowingLoadingBar).to.eq(false);
     });
 });

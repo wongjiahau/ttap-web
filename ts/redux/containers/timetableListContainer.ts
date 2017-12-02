@@ -42,15 +42,15 @@ const mapStateToProps = (state): ITimetableListViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
     return {
-        handleGoToNext: () => dispatch(new GoToNextTimetable().Action()),
-        handleGoToRandom: () => dispatch(new GoToRandomTimetable().Action()),
-        handleGoToPrevious: () => dispatch(new GoToPrevTimetable().Action()),
+        handleGoToNext: () => dispatch(new GoToNextTimetable()),
+        handleGoToRandom: () => dispatch(new GoToRandomTimetable()),
+        handleGoToPrevious: () => dispatch(new GoToPrevTimetable()),
         handleOpenSetTimeConstraintView: () => {
-            dispatch(new UpdateTotalState().Action());
-            dispatch(new ToggleSetTimeConstraintView(true).Action());
+            dispatch(new UpdateTotalState());
+            dispatch(new ToggleSetTimeConstraintView(true));
         },
-        handleOpenSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(true).Action()),
-        handleOpenSaveTimetableDialog: () => dispatch(new ToggleIsOpenOfSaveDialog(true).Action())
+        handleOpenSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
+        handleOpenSaveTimetableDialog: () => dispatch(new ToggleIsOpenOfSaveDialog(true))
     };
 };
 

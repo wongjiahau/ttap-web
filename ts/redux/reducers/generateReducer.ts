@@ -1,15 +1,18 @@
-import {has} from "lodash";
+import {
+    has
+} from "lodash";
 
+import * as S from "string";
 import * as typeName from "type-name";
 
-export function GenerateReducer < T > (initialState : T) : (state : any, action) => T {
-    return(state : any = initialState, action): T => {
-        if (!has(action, "generateNewState")) {
-            return state;
+export function GenerateReducer < T > (initialState: T): (state: any, action) => T {
+    return (state: any = initialState, action): T => {
+        if (action.hasOwnProperty("generateNewState")) {
+            return action.generateNewState(state);
         }
-        if (typeName(initialState) !== action.stateName) {
-            return state;
+        if ("GenerateNewState" in action) {
+            return action.GenerateNewState(state);
         }
-        return action.generateNewState(state);
+        return state;
     };
 }

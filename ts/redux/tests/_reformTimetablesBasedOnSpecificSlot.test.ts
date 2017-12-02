@@ -46,11 +46,11 @@ describe("ReformTimetablesBasedOnSpecificSlot action", () => {
         // When Ali deselected a slot of HE with hashId of 0
         // Ali shall see that 1 timetables is removed and 2 timetables is left
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
         const hashIdOfFirstSlotOfHubunganEtnik = 0;
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(2);
         expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(1);
     });
@@ -62,13 +62,13 @@ describe("ReformTimetablesBasedOnSpecificSlot action", () => {
         // Then when Ali selected back the same slot
         // Ali shall see that there will have 3 timetables again
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
         const hashIdOfFirstSlotOfHubunganEtnik = 0;
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true));
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, false).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, false));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
         expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(0);
     });
@@ -78,10 +78,10 @@ describe("ReformTimetablesBasedOnSpecificSlot action", () => {
         // When Ali deselected a slot of HE with hashId of 0
         // He shall see that the checkbox of slot is dechecked
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         const hashIdOfFirstSlotOfHubunganEtnik = 0;
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true));
         expect(newState.SlotTableState.SlotStates[hashIdOfFirstSlotOfHubunganEtnik]).to.eq(false);
     });
 
@@ -91,12 +91,12 @@ describe("ReformTimetablesBasedOnSpecificSlot action", () => {
         // And then Ali selected back the same slot
         // He shall see that the checkbox of slot is checked
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         const hashIdOfFirstSlotOfHubunganEtnik = 0;
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true));
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, false).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, false));
         expect(newState.SlotTableState.SlotStates[hashIdOfFirstSlotOfHubunganEtnik]).to.eq(true);
     });
 
@@ -107,10 +107,10 @@ describe("ReformTimetablesBasedOnSpecificSlot action", () => {
         // For example, HE's lecture-1 has 2 slots,
         //      so deselecting one of them will result in both being deselected
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         const hashIdOfFirstSlotOfHubunganEtnik = 0;
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true));
         // Note: slot 0 and slot 1 are both HE's Lecture-1
         expect(newState.SlotTableState.SlotStates[0]).to.eq(false);
         expect(newState.SlotTableState.SlotStates[1]).to.eq(false);
@@ -122,12 +122,12 @@ describe("ReformTimetablesBasedOnSpecificSlot action", () => {
         // And when Ali selected back the same slot
         // He shall see that related slots that is deselected just now will be selected again
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         const hashIdOfFirstSlotOfHubunganEtnik = 0;
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, true));
         newState = MasterStateReducer(newState,
-            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, false).Action());
+            new ReformTimetablesBasedOnSpecificSlot(hashIdOfFirstSlotOfHubunganEtnik, false));
         // Note: slot 0 and slot 1 are both HE's Lecture-1
         expect(newState.SlotTableState.SlotStates[0]).to.eq(true);
         expect(newState.SlotTableState.SlotStates[1]).to.eq(true);

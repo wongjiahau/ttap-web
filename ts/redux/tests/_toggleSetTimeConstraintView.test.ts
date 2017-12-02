@@ -15,7 +15,7 @@ describe("OpenSetTimeConstraintView action", () => {
     });
 
     it("should set IsOpen property of SetTimeConstraintState to true when passed in true", () => {
-        const action = new ToggleSetTimeConstraintView(true).Action();
+        const action = new ToggleSetTimeConstraintView(true);
         const initialState = NewMasterState();
         expect(initialState.SetTimeConstraintState.IsOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, action);
@@ -23,7 +23,7 @@ describe("OpenSetTimeConstraintView action", () => {
     });
 
     it("should set IsOpen property of SetTimeConstraintState to true when passed in false", () => {
-        const action = new ToggleSetTimeConstraintView(true).Action();
+        const action = new ToggleSetTimeConstraintView(true);
         const initialState = NewMasterState();
         let newState = MasterStateReducer(initialState, action);
         expect(newState.SetTimeConstraintState.IsOpen).to.eq(true);

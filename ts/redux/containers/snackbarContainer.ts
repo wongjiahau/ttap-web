@@ -23,7 +23,7 @@ const mapStateToProps = (state): ISnackbarViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ISnackbarViewDispatchProps => {
     return {
-        handleClose: () => dispatch(new HideSnackbar().Action())
+        handleClose: () => dispatch(new HideSnackbar())
     };
 };
 

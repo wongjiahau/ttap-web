@@ -32,7 +32,7 @@ describe("GoToRandomTimetable action", () => {
     });
 
     it("should set the TimetableListState.CurrentIndex property to a random value", () => {
-        const action = new GoToRandomTimetable().Action();
+        const action = new GoToRandomTimetable();
         const initialState = getInitialState([null, null, null]);
         const newState = MasterStateReducer(initialState, action);
         expect(newState.TimetableListState.CurrentIndex)
@@ -41,14 +41,14 @@ describe("GoToRandomTimetable action", () => {
     });
 
     it("should set the TimetableListState.CurrentIndex to a value that is different from previous TimetableListState.CurrentIndex", () => {
-        const action = new GoToRandomTimetable().Action();
+        const action = new GoToRandomTimetable();
         const initialState = getInitialState([null, null, null]);
         const newState = MasterStateReducer(initialState, action);
         expect(newState.TimetableListState.CurrentIndex).to.not.eq(initialState.TimetableListState.CurrentIndex);
     });
 
     it("should not loop infinitely when there is only one timetable", () => {
-        const action = new GoToRandomTimetable().Action();
+        const action = new GoToRandomTimetable();
         const initialState = getInitialState([null]);
         expect(() => {
             const newState = MasterStateReducer(initialState, action);

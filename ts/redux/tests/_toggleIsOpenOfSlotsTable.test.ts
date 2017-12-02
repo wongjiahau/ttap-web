@@ -14,7 +14,7 @@ describe("ToggleIsOpenOfSlotsTable action", () => {
     });
 
     it("should set IsOpen of SlotTableState property", () => {
-        const action = new ToggleIsOpenOfSlotsTable(true).Action();
+        const action = new ToggleIsOpenOfSlotsTable(true);
         const initialState = NewMasterState();
         expect(initialState.SlotTableState.IsOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, action);

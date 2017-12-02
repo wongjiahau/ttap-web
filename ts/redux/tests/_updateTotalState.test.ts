@@ -37,7 +37,7 @@ describe("UpdateTotalState action", () => {
     });
 
     it("should set the TotalState property", () => {
-        const action = new UpdateTotalState().Action();
+        const action = new UpdateTotalState();
         const initialState = getInitialState();
         expect(initialState.SetTimeConstraintState.TotalState).to.eq(null);
         const newState = MasterStateReducer(initialState, action);
@@ -50,11 +50,11 @@ describe("UpdateTotalState action", () => {
         // AND Ali close the SetTimeConstraintView
         // Then when Ali open the SetTimeConstraintView again
         // Ali should sees that the view is the same as previous when he closes it
-        const updateTotalState = new UpdateTotalState().Action();
+        const updateTotalState = new UpdateTotalState();
         const initialState = getInitialState();
         const newState1 = MasterStateReducer(initialState, updateTotalState);
         const state = new STCBox(StateKind.MaybeOccupied, 0, 16, 5);
-        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state).Action());
+        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state));
         const newState3 = MasterStateReducer(newState2, updateTotalState);
         expect(newState3.SetTimeConstraintState.TotalState)
             .to.deep.eq(newState2.SetTimeConstraintState.TotalState);

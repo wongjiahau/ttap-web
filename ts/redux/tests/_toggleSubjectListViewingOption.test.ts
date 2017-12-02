@@ -41,7 +41,7 @@ describe("ToggleSubjectListViewingOption", () => {
 
     it("should toggle property IsShowingSelectedSubjectOnly from false to true", () => {
         const initialState = getInitialState();
-        const newState = MasterStateReducer(initialState, new ToggleSubjectListViewingOptions().Action());
+        const newState = MasterStateReducer(initialState, new ToggleSubjectListViewingOptions());
         expect(newState.SubjectListState.IsShowingSelectedSubjectOnly)
             .to
             .eq(true);
@@ -49,8 +49,8 @@ describe("ToggleSubjectListViewingOption", () => {
 
     it("should toggle property IsShowingSelectedSubjectOnly from true to false", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new ToggleSubjectListViewingOptions().Action());
-        const newState2 = MasterStateReducer(initialState, new ToggleSubjectListViewingOptions().Action());
+        const newState1 = MasterStateReducer(initialState, new ToggleSubjectListViewingOptions());
+        const newState2 = MasterStateReducer(initialState, new ToggleSubjectListViewingOptions());
         expect(newState2.SubjectListState.IsShowingSelectedSubjectOnly)
             .to
             .eq(true);
@@ -58,16 +58,16 @@ describe("ToggleSubjectListViewingOption", () => {
 
     it("should make selected subject visible and deselected subject invisible when first toggled", () => {
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
-        newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions().Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions());
         expect(newState.SubjectListState.Subjects.filter((s) => s.IsVisible)).to.have.lengthOf(1);
     });
 
     it("should make all subjects visible when toggled again", () => {
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
-        newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions().Action());
-        newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions().Action());
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions());
+        newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions());
         expect(newState.SubjectListState.Subjects.filter((s) => s.IsVisible)).
         to.have.lengthOf(newState.SubjectListState.Subjects.length);
     });

@@ -14,7 +14,7 @@ describe("ToggleIsOpenOfGetDateDialog action", () => {
     });
 
     it("should set IsGetDateDialogOpen property", () => {
-        const action = new ToggleIsOpenOfGetDateDialog(true).Action();
+        const action = new ToggleIsOpenOfGetDateDialog(true);
         const initialState = NewMasterState();
         expect(initialState.SaveTimetableDialogState.IsGetDateDialogOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, action);

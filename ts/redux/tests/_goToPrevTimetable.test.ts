@@ -31,13 +31,13 @@ describe("goToPrevTimetable action", () => {
     it("should decrement the current index", () => {
         const initialState = getInitialState([null, null]);
         initialState.TimetableListState.CurrentIndex = 1;
-        const newState = MasterStateReducer(initialState, new GoToPrevTimetable().Action());
+        const newState = MasterStateReducer(initialState, new GoToPrevTimetable());
         expect(newState.TimetableListState.CurrentIndex).to.eq(0);
     });
 
     it("decrement the current index cyclically", () => {
         const initialState = getInitialState([null, null, null]);
-        const newState = MasterStateReducer(initialState, new GoToPrevTimetable().Action());
+        const newState = MasterStateReducer(initialState, new GoToPrevTimetable());
         expect(newState.TimetableListState.CurrentIndex).to.eq(2);
     });
 

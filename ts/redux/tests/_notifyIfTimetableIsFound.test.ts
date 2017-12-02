@@ -20,16 +20,16 @@ describe("NotifyIfTimetableIsFound action", () => {
     });
 
     it("should set IsSnackBarVisible to true if some subjects is selected", () => {
-        const action = new NotifyIfTimetableIsFound().Action();
+        const action = new NotifyIfTimetableIsFound();
         const initialState = getInitialState();
         let newState =
-            MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+            MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, action);
         expect(newState.SnackbarState.IsOpen).to.eq(true);
     });
 
     it("should set IsSnackBarVisible to false if zero subject is selected", () => {
-        const action = new NotifyIfTimetableIsFound().Action();
+        const action = new NotifyIfTimetableIsFound();
         const initialState = getInitialState();
         const newState = MasterStateReducer(initialState, action);
         expect(newState.SubjectListState.Subjects.every((s) => !s.IsSelected));

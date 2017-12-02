@@ -17,14 +17,14 @@ describe("goToNextTimetable action", () => {
 
     it("should increment the current index", () => {
         const initialState = getInitialState([null, null]);
-        const newState = MasterStateReducer(initialState, new GoToNextTimetable().Action());
+        const newState = MasterStateReducer(initialState, new GoToNextTimetable());
         expect(newState.TimetableListState.CurrentIndex).to.eq(1);
     });
 
     it("should increment the current index cyclically", () => {
         const initialState = getInitialState([null, null, null]);
         initialState.TimetableListState.CurrentIndex = 2;
-        const newState = MasterStateReducer(initialState, new GoToNextTimetable().Action());
+        const newState = MasterStateReducer(initialState, new GoToNextTimetable());
         expect(newState.TimetableListState.CurrentIndex).to.eq(0);
     });
 });
