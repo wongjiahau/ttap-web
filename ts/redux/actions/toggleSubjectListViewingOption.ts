@@ -1,9 +1,15 @@
-import {ISubjectListState, SubjectListStateAction} from "./../reducers/subjectListState";
-export class ToggleSubjectListViewingOptions extends SubjectListStateAction {
-    public TypeName() : string {return "toggle subject list viewing option"; }
-    protected GenerateNewState(state : ISubjectListState) : ISubjectListState {
-        const newIsShowingSelectedSubjectOnly = !state.IsShowingSelectedSubjectOnly;
+import {
+    IMasterState,
+    MasterStateAction
+} from "./../reducers/masterState";
+export class ToggleSubjectListViewingOptions extends MasterStateAction {
+    public TypeName(): string {
+        return "toggle subject list viewing option";
+    }
+    protected GenerateNewState(state: IMasterState): IMasterState {
+        const newIsShowingSelectedSubjectOnly = !state.SubjectListState.IsShowingSelectedSubjectOnly;
         const newSubjects = state
+            .SubjectListState
             .Subjects
             .map((s) => {
                 if (newIsShowingSelectedSubjectOnly) {
@@ -18,10 +24,13 @@ export class ToggleSubjectListViewingOptions extends SubjectListStateAction {
                     };
                 }
             });
-        const result: ISubjectListState = {
+        const result: IMasterState = {
             ...state,
-            IsShowingSelectedSubjectOnly: newIsShowingSelectedSubjectOnly,
-            Subjects: newSubjects
+            SubjectListState: {
+                ...state.SubjectListState,
+                IsShowingSelectedSubjectOnly: newIsShowingSelectedSubjectOnly,
+                Subjects: newSubjects
+            }
         };
         return result;
     }

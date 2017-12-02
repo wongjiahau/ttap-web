@@ -1,5 +1,4 @@
 import * as $ from "jquery";
-import IconArrowRight from "material-ui-icons/ArrowForward";
 import Button from "material-ui-next/Button";
 import Checkbox from "material-ui-next/Checkbox";
 import Divider from "material-ui-next/Divider";
@@ -31,21 +30,26 @@ const footerStyle : React.CSSProperties = {
     textAlign: "left"
 };
 
-export interface ISlotsTableProps {
+export interface ISlotsTableViewStateProps {
     slotStates : boolean[];
     selectedSubjects : Subject[];
     isOpen : boolean;
+}
+
+export interface ISlotsTableViewDispatchProps {
     handleClose : () => void;
     handleSlotCheckChanged : (slotNumber : number, checked : boolean) => void;
 }
 
-export interface ISlotsTableState {
+export interface ISlotsTableViewProps extends ISlotsTableViewStateProps, ISlotsTableViewDispatchProps {}
+
+export interface ISlotsTableViewInternalState {
     sectionStyle : React.CSSProperties;
 }
 
-export class SlotsTable extends React.Component < ISlotsTableProps,
-ISlotsTableState > {
-    public constructor(props : ISlotsTableProps) {
+export class SlotsTable extends React.Component < ISlotsTableViewProps,
+ISlotsTableViewInternalState > {
+    public constructor(props : ISlotsTableViewProps) {
         super(props);
         $(window).on("resize", this.handleWindowResizing);
         this.state = {

@@ -1,10 +1,10 @@
 // This file is generated,
 // please don't modify it unless you know what you're doing
 import {combineReducers} from "redux";
-import {TimetableCreatorStateReducer} from "./timetableCreatorState";
+import { MasterStateReducer } from "./masterState";
 // new-import
 
 export const AllReducers = combineReducers({
-    TimetableCreatorStateReducer,
-    // new-reducer
+    MasterStateReducer,
+// new-reducer
 });

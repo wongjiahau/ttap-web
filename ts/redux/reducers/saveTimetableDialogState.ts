@@ -11,19 +11,17 @@ export interface ISaveTimetableDialogState {
     IsGetDateDialogOpen: boolean;
 }
 
-export class SaveTimetableDialogState implements ISaveTimetableDialogState {
-    public IsMainDialogOpen: boolean;
-    public IsGetDateDialogOpen: boolean;
-    public constructor(isMainDialogOpen = false, isGetDateDialogOpen = false) {
-        this.IsMainDialogOpen = isMainDialogOpen;
-        this.IsGetDateDialogOpen = isGetDateDialogOpen;
-    }
+export function NewSaveTimetableDialogState(): ISaveTimetableDialogState{
+    return {
+        IsMainDialogOpen: false,
+        IsGetDateDialogOpen: false
+    };
 }
 
 export abstract class SaveTimetableDialogStateAction extends Action < ISaveTimetableDialogState > {
     public StateName() {
-        return typeName(new SaveTimetableDialogState());
+        return typeName(NewSaveTimetableDialogState());
     }
 }
 
-export const SaveTimetableDialogStateReducer = GenereteReducer(new SaveTimetableDialogState());
+export const SaveTimetableDialogStateReducer = GenereteReducer(NewSaveTimetableDialogState());

@@ -5,39 +5,53 @@ import {
     isEqual
 } from "lodash";
 import {
+    Timetable
+} from "../../model/timetable";
+import {
+    NewTimetableListState
+} from "../reducers/timetableListState";
+import {
     GoToRandomTimetable
 } from "./../actions/goToRandomTimetable";
 import {
-    ITimetableListState,
-    TimetableListState,
-    TimetableListStateReducer
-} from "./../reducers/timetableListState";
+    IMasterState,
+    MasterStateReducer,
+    NewMasterState
+} from "./../reducers/masterState";
+
+function getInitialState(timetables: Timetable[]): IMasterState {
+    const result = NewMasterState();
+    result.TimetableListState = NewTimetableListState(timetables);
+    return result;
+}
+
 describe("GoToRandomTimetable action", () => {
     it("'s typename should be 'go to random timetable'", () => {
         const action = new GoToRandomTimetable();
         expect(action.TypeName()).to.eq("go to random timetable");
     });
 
-    it("should set the CurrentIndex property to a random value", () => {
+    it("should set the TimetableListState.CurrentIndex property to a random value", () => {
         const action = new GoToRandomTimetable().Action();
-        const initialState = new TimetableListState();
-        const newState = TimetableListStateReducer(initialState, action);
-        expect(newState.CurrentIndex).to.most(newState.FiltrateTimetables.length - 1);
-        expect(newState.CurrentIndex).to.least(0);
+        const initialState = getInitialState([null, null, null]);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.TimetableListState.CurrentIndex)
+            .to.most(newState.TimetableListState.FiltrateTimetables.length - 1);
+        expect(newState.TimetableListState.CurrentIndex).to.least(0);
     });
 
-    it("should set the CurrentIndex to a value that is different from previous CurrentIndex", () => {
+    it("should set the TimetableListState.CurrentIndex to a value that is different from previous TimetableListState.CurrentIndex", () => {
         const action = new GoToRandomTimetable().Action();
-        const initialState = new TimetableListState();
-        const newState = TimetableListStateReducer(initialState, action);
-        expect(newState.CurrentIndex).to.not.eq(initialState.CurrentIndex);
+        const initialState = getInitialState([null, null, null]);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.TimetableListState.CurrentIndex).to.not.eq(initialState.TimetableListState.CurrentIndex);
     });
 
     it("should not loop infinitely when there is only one timetable", () => {
         const action = new GoToRandomTimetable().Action();
-        const initialState = new TimetableListState([null]);
+        const initialState = getInitialState([null]);
         expect(() => {
-            const newState = TimetableListStateReducer(initialState, action);
+            const newState = MasterStateReducer(initialState, action);
         }).to.not.throw();
     });
 });

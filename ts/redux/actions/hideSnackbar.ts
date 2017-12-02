@@ -1,14 +1,17 @@
 
-import {ITimetableCreatorState, TimetableCreatorStateAction} from "./../reducers/timetableCreatorState";
-export class HideSnackbar extends TimetableCreatorStateAction {
+import {IMasterState, MasterStateAction} from "./../reducers/masterState";
+export class HideSnackbar extends MasterStateAction {
     public constructor() {
         super();
     }
     public TypeName() : string {return "hide snackbar"; }
-    protected GenerateNewState(state : ITimetableCreatorState) : ITimetableCreatorState {
+    protected GenerateNewState(state : IMasterState) : IMasterState {
         return {
             ...state,
-            IsSnackbarVisible: false
+            SnackbarState: {
+                ...state.SnackbarState,
+                IsOpen: false
+            }
         };
     }
 }

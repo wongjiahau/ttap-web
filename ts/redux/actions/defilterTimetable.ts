@@ -8,32 +8,39 @@ import {
     STCBox
 } from "../../model/states/stcBox";
 import {
-    ITimetableListState,
-    TimetableListStateAction
-} from "./../reducers/timetableListState";
+    IMasterState,
+    MasterStateAction
+} from "../reducers/masterState";
 
-export class DefilterTimetable extends TimetableListStateAction {
+export class DefilterTimetable extends MasterStateAction {
     public constructor(private clickedState: STCBox) {
         super();
     }
     public TypeName(): string {
         return `defilter timetable at [${this.clickedState.Uid}]`;
     }
-    protected GenerateNewState(state: ITimetableListState): ITimetableListState {
-        const newClickedTimeConstraint = state.ClickedTimeConstraint.slice();
+    protected GenerateNewState(state: IMasterState): IMasterState {
+        const newClickedTimeConstraint = state.SetTimeConstraintState.ClickedTimeConstraint.slice();
         newClickedTimeConstraint[this.clickedState.Day] ^= this.clickedState.TimePeriod;
-        const newUidsOfClickedState = state.UidsOfClickedState.filter((x) => x !== this.clickedState.Uid);
-        const [rescued, unrescued] = Defilter(state.ResidueTimetables, newClickedTimeConstraint);
-        const newFiltrateTimetables = state.FiltrateTimetables.concat(rescued);
+        const newUidsOfClickedState = state.SetTimeConstraintState.UidsOfClickedState
+            .filter((x) => x !== this.clickedState.Uid);
+        const [rescued, unrescued] = Defilter(state.TimetableListState.ResidueTimetables, newClickedTimeConstraint);
+        const newFiltrateTimetables = state.TimetableListState.FiltrateTimetables.concat(rescued);
         const newResidueTimetables = unrescued;
         return {
             ...state,
-            CurrentIndex: 0,
-            UidsOfClickedState: newUidsOfClickedState,
-            FiltrateTimetables: newFiltrateTimetables,
-            ResidueTimetables: newResidueTimetables,
-            TotalState: GenerateTotalState(newFiltrateTimetables, newUidsOfClickedState),
-            ClickedTimeConstraint: newClickedTimeConstraint
+            TimetableListState: {
+                ...state.TimetableListState,
+                CurrentIndex: 0,
+                FiltrateTimetables: newFiltrateTimetables,
+                ResidueTimetables: newResidueTimetables,
+            },
+            SetTimeConstraintState: {
+                ...state.SetTimeConstraintState,
+                UidsOfClickedState: newUidsOfClickedState,
+                TotalState: GenerateTotalState(newFiltrateTimetables, newUidsOfClickedState),
+                ClickedTimeConstraint: newClickedTimeConstraint
+            }
         };
     }
 }

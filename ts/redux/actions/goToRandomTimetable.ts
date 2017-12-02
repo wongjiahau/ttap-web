@@ -2,30 +2,33 @@ import {
     random
 } from "lodash";
 import {
-    ITimetableListState,
-    TimetableListStateAction
-} from "./../reducers/timetableListState";
+    IMasterState,
+    MasterStateAction
+} from "./../reducers/masterState";
 
-export class GoToRandomTimetable extends TimetableListStateAction {
+export class GoToRandomTimetable extends MasterStateAction {
     public constructor() {
         super();
     }
     public TypeName(): string {
         return "go to random timetable";
     }
-    protected GenerateNewState(state: ITimetableListState): ITimetableListState {
-        const length = state.FiltrateTimetables.length;
+    protected GenerateNewState(state: IMasterState): IMasterState {
+        const length = state.TimetableListState.FiltrateTimetables.length;
         if (length === 1) {
             return state;
         }
         const getRandom = () => random(0, length - 1);
         let x = getRandom();
-        while (x === state.CurrentIndex) {
+        while (x === state.TimetableListState.CurrentIndex) {
             x = getRandom();
         }
         return {
             ...state,
-            CurrentIndex: x
+            TimetableListState: {
+                ...state.TimetableListState,
+                CurrentIndex: x
+            }
         };
     }
 }

@@ -1,8 +1,8 @@
 import {
-    ITimetableCreatorState,
-    TimetableCreatorStateAction
-} from "./../reducers/timetableCreatorState";
-export class ToggleIsOpenOfSlotsTable extends TimetableCreatorStateAction {
+    IMasterState,
+    MasterStateAction
+} from "./../reducers/masterState";
+export class ToggleIsOpenOfSlotsTable extends MasterStateAction {
     public constructor(private isOpen: boolean) {
         super();
     }
@@ -11,10 +11,13 @@ export class ToggleIsOpenOfSlotsTable extends TimetableCreatorStateAction {
             "open slots table" :
             "close slots table";
     }
-    protected GenerateNewState(state: ITimetableCreatorState): ITimetableCreatorState {
+    protected GenerateNewState(state: IMasterState): IMasterState {
         return {
             ...state,
-            IsSlotsTableVisible: this.isOpen
+            SlotTableState: {
+                ...state.SlotTableState,
+                IsOpen: this.isOpen
+            }
         };
     }
 }

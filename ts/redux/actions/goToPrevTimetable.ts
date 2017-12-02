@@ -1,17 +1,20 @@
-import {TimetableListStateAction} from "../reducers/timetableListState";
-import {ITimetableListState} from "./../reducers/timetableListState";
+import {MasterStateAction} from "../reducers/masterState";
+import {IMasterState} from "./../reducers/masterState";
 
-export class GoToPrevTimetable extends TimetableListStateAction {
+export class GoToPrevTimetable extends MasterStateAction {
     public TypeName() : string {return "go to previous timetable"; }
 
-    protected GenerateNewState(state : ITimetableListState) : ITimetableListState {
-        let newIndex = state.CurrentIndex - 1;
+    protected GenerateNewState(state : IMasterState) : IMasterState {
+        let newIndex = state.TimetableListState.CurrentIndex - 1;
         if (newIndex < 0) {
-            newIndex = state.FiltrateTimetables.length - 1;
+            newIndex = state.TimetableListState.FiltrateTimetables.length - 1;
         }
         return {
             ...state,
-            CurrentIndex: newIndex,
+            TimetableListState: {
+                ...state.TimetableListState,
+                CurrentIndex: newIndex,
+            }
         };
     }
 }

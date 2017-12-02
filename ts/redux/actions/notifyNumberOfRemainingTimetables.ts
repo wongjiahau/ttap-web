@@ -1,21 +1,23 @@
 import {
-    ITimetableCreatorState,
-    TimetableCreatorStateAction
-} from "./../reducers/timetableCreatorState";
-export class NotifyNumberOfRemainingTimetables extends TimetableCreatorStateAction {
+    IMasterState,
+    MasterStateAction
+} from "./../reducers/masterState";
+export class NotifyNumberOfRemainingTimetables extends MasterStateAction {
     public constructor() {
         super();
     }
     public TypeName(): string {
         return "notify number of remaining timetables";
     }
-    protected GenerateNewState(state: ITimetableCreatorState): ITimetableCreatorState {
+    protected GenerateNewState(state: IMasterState): IMasterState {
         return {
             ...state,
-            IsSnackbarVisible: true,
-            SnackbarMessage: state.SubjectListState.TimetableListState.FiltrateTimetables.length +
+            SnackbarState: {
+                ...state.SnackbarState,
+                IsOpen: true,
+                Message: state.TimetableListState.FiltrateTimetables.length +
                 " timetables remaining."
-            // your code here
+            }
         };
     }
 }

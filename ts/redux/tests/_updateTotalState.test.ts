@@ -9,16 +9,26 @@ import {
     GetTestTimetables1
 } from "../../tests/testDataGenerator";
 import {
+    NewTimetableListState
+} from "../reducers/timetableListState";
+import {
     FilterTimetable
 } from "./../actions/filterTimetable";
 import {
     UpdateTotalState
 } from "./../actions/updateTotalState";
 import {
-    ITimetableListState,
-    TimetableListState,
-    TimetableListStateReducer
-} from "./../reducers/timetableListState";
+    IMasterState,
+    MasterStateReducer,
+    NewMasterState
+} from "./../reducers/masterState";
+
+function getInitialState(): IMasterState {
+    return {
+        ...NewMasterState(),
+        TimetableListState: NewTimetableListState(GetTestTimetables1())
+    };
+}
 
 describe("UpdateTotalState action", () => {
     it("'s typename should be 'update total state'", () => {
@@ -28,10 +38,10 @@ describe("UpdateTotalState action", () => {
 
     it("should set the TotalState property", () => {
         const action = new UpdateTotalState().Action();
-        const initialState = new TimetableListState(GetTestTimetables1());
-        expect(initialState.TotalState).to.eq(null);
-        const newState = TimetableListStateReducer(initialState, action);
-        expect(newState.TotalState).to.not.eq(null);
+        const initialState = getInitialState();
+        expect(initialState.SetTimeConstraintState.TotalState).to.eq(null);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SetTimeConstraintState.TotalState).to.not.eq(null);
     });
 
     it("case 1", () => {
@@ -41,12 +51,13 @@ describe("UpdateTotalState action", () => {
         // Then when Ali open the SetTimeConstraintView again
         // Ali should sees that the view is the same as previous when he closes it
         const updateTotalState = new UpdateTotalState().Action();
-        const initialState = new TimetableListState(GetTestTimetables1());
-        const newState1 = TimetableListStateReducer(initialState, updateTotalState);
+        const initialState = getInitialState();
+        const newState1 = MasterStateReducer(initialState, updateTotalState);
         const state = new STCBox(StateKind.MaybeOccupied, 0, 16, 5);
-        const newState2 = TimetableListStateReducer(newState1, new FilterTimetable(state).Action());
-        const newState3 = TimetableListStateReducer(newState2, updateTotalState);
-        expect(newState3.TotalState).to.deep.eq(newState2.TotalState);
+        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state).Action());
+        const newState3 = MasterStateReducer(newState2, updateTotalState);
+        expect(newState3.SetTimeConstraintState.TotalState)
+            .to.deep.eq(newState2.SetTimeConstraintState.TotalState);
     });
 
 });

@@ -5,31 +5,27 @@ import {Timetable} from "./../../model/timetable";
 import {GenereteReducer} from "./generateReducer";
 
 export interface ITimetableListState {
-    ResidueTimetables:           Timetable[];
-    CurrentIndex:                number;
-    FiltrateTimetables:          Timetable[];
-    IsSetTimeConstraintViewOpen: boolean;
-    TotalState:                  STCBox[];
-    UidsOfClickedState:          string[];
-    ClickedTimeConstraint:       number[/*7*/];
+    CurrentIndex:       number;
+    FiltrateTimetables: Timetable[];
+    ResidueTimetables:  Timetable[];
+}
+
+export function NewTimetableListState(timetables: Timetable[]) : ITimetableListState {
+    return {
+        CurrentIndex: 0,
+        FiltrateTimetables: timetables,
+        ResidueTimetables: [],
+    };
 }
 
 export class TimetableListState implements ITimetableListState {
     public ResidueTimetables:           Timetable[];
     public CurrentIndex:                number;
     public FiltrateTimetables:          Timetable[];
-    public IsSetTimeConstraintViewOpen: boolean;
-    public TotalState:                  STCBox[];
-    public UidsOfClickedState:          string[];
-    public ClickedTimeConstraint:       number[/*7*/];
     public constructor(timetables : Timetable[] = [null, undefined]) {
         this.CurrentIndex                = 0;
         this.ResidueTimetables           = [];
         this.FiltrateTimetables          = timetables;
-        this.IsSetTimeConstraintViewOpen = false;
-        this.TotalState                  = null;
-        this.UidsOfClickedState          = [];
-        this.ClickedTimeConstraint       = [0, 0, 0, 0, 0, 0, 0];
     }
 }
 

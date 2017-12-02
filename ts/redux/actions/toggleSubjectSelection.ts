@@ -28,26 +28,26 @@ import {
     FindTimetable
 } from "../../permutator/findTimetable";
 import {
-    TimetableListState
+    NewTimetableListState, TimetableListState
 } from "../reducers/timetableListState";
 import {
-    ISubjectListState,
-    SubjectListStateAction,
-    SubjectListStateReducer
-} from "./../reducers/subjectListState";
+    IMasterState,
+    MasterStateAction,
+    MasterStateReducer
+} from "./../reducers/masterState";
 import {
     ToggleSubjectListViewingOptions
 } from "./toggleSubjectListViewingOption";
 
-export class ToggleSubjectSelection extends SubjectListStateAction {
+export class ToggleSubjectSelection extends MasterStateAction {
     public constructor(private subjectIndex: number) {
         super();
     }
     public TypeName(): string {
         return "toggle subject selection";
     }
-    protected GenerateNewState(state: ISubjectListState): ISubjectListState {
-        const newSubjects = state.Subjects.map((x) => ({ ...x }));
+    protected GenerateNewState(state: IMasterState): IMasterState {
+        const newSubjects = state.SubjectListState.Subjects.map((x) => ({ ...x }));
         const targetSubject = newSubjects[this.subjectIndex];
         if (targetSubject.ClashReport !== null) {
             return state;
@@ -58,14 +58,17 @@ export class ToggleSubjectSelection extends SubjectListStateAction {
     }
 }
 
-export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject[], state: ISubjectListState): ISubjectListState {
+export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject[], state: IMasterState): IMasterState {
     const selectedSubjects = allSubjects.filter((x) => x.IsSelected);
     const clashReport = CheckForClashesBetween(subjectToBeSelected, selectedSubjects);
     if (clashReport) {
         subjectToBeSelected.ClashReport = clashReport;
         return {
             ...state,
-            Subjects: allSubjects
+            SubjectListState: {
+                ...state.SubjectListState,
+                Subjects: allSubjects
+            }
         };
     }
     const timetables = FindTimetableBasedOn(selectedSubjects.concat([subjectToBeSelected]));
@@ -73,37 +76,57 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
         subjectToBeSelected.ClashReport = new ClashReport("group");
         return {
             ...state,
-            SlotStates: GetSlotStates(selectedSubjects),
-            Subjects: allSubjects
+            SlotTableState: {
+                ...state.SlotTableState,
+                SlotStates: GetSlotStates(selectedSubjects),
+            },
+            SubjectListState: {
+                ...state.SubjectListState,
+                Subjects: allSubjects
+            }
         };
     }
     subjectToBeSelected.IsSelected = true;
     return {
         ...state,
-        SlotStates: GetSlotStates(selectedSubjects.concat([subjectToBeSelected])),
-        Subjects: allSubjects,
-        TimetableListState: new TimetableListState(timetables)
+        SlotTableState: {
+            ...state.SlotTableState,
+            SlotStates: GetSlotStates(selectedSubjects.concat([subjectToBeSelected])),
+        },
+        SubjectListState: {
+            ...state.SubjectListState,
+            Subjects: allSubjects,
+        },
+        TimetableListState: NewTimetableListState(timetables)
     };
 }
 
-export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Subject[], state: ISubjectListState): ISubjectListState {
+export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Subject[], state: IMasterState): IMasterState {
     subjectToBeDeselected.IsSelected = false;
     const selectedSubjects = allSubjects.filter((x) => x.IsSelected);
     ReleaseDisabledSubjectsIfPossible(selectedSubjects, allSubjects);
     const timetables = FindTimetableBasedOn(selectedSubjects);
-    const result: ISubjectListState = {
+    const result: IMasterState = {
         ...state,
-        Subjects: allSubjects,
-        SlotStates: GetSlotStates(selectedSubjects),
-        TimetableListState: new TimetableListState(timetables)
+        SubjectListState: {
+            ...state.SubjectListState,
+            Subjects: allSubjects,
+
+        },
+        SlotTableState: {
+            ...state.SlotTableState,
+            SlotStates: GetSlotStates(selectedSubjects),
+        },
+        TimetableListState: NewTimetableListState(timetables)
     };
 
     const allSubjectIsDeselected = allSubjects.every((x) => !x.IsSelected);
-    const newIsShowSelectedSubjectOnly = state.IsShowingSelectedSubjectOnly && !allSubjectIsDeselected;
+    const newIsShowSelectedSubjectOnly =
+        state.SubjectListState.IsShowingSelectedSubjectOnly && !allSubjectIsDeselected;
     const shouldToggleToShowAllSubject =
-        state.IsShowingSelectedSubjectOnly && newIsShowSelectedSubjectOnly === false;
+        state.SubjectListState.IsShowingSelectedSubjectOnly && newIsShowSelectedSubjectOnly === false;
     if (shouldToggleToShowAllSubject) {
-        return SubjectListStateReducer(result, new ToggleSubjectListViewingOptions().Action());
+        return MasterStateReducer(result, new ToggleSubjectListViewingOptions().Action());
     } else {
         return result;
     }

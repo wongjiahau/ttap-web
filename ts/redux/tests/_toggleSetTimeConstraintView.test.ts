@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
 import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintView";
-import {ITimetableListState, TimetableListState, TimetableListStateReducer} from "./../reducers/timetableListState";
+import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 
 describe("OpenSetTimeConstraintView action", () => {
     it("'s typename should be 'open set time constraint view' if passed in true", () => {
@@ -16,18 +16,18 @@ describe("OpenSetTimeConstraintView action", () => {
 
     it("should set IsOpen property of SetTimeConstraintState to true when passed in true", () => {
         const action = new ToggleSetTimeConstraintView(true).Action();
-        const initialState = new TimetableListState();
-        expect(initialState.IsSetTimeConstraintViewOpen).to.eq(false);
-        const newState = TimetableListStateReducer(initialState, action);
-        expect(newState.IsSetTimeConstraintViewOpen).to.eq(true);
+        const initialState = NewMasterState();
+        expect(initialState.SetTimeConstraintState.IsOpen).to.eq(false);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SetTimeConstraintState.IsOpen).to.eq(true);
     });
 
     it("should set IsOpen property of SetTimeConstraintState to true when passed in false", () => {
         const action = new ToggleSetTimeConstraintView(true).Action();
-        const initialState = new TimetableListState();
-        let newState = TimetableListStateReducer(initialState, action);
-        expect(newState.IsSetTimeConstraintViewOpen).to.eq(true);
-        newState = TimetableListStateReducer(initialState, new ToggleSetTimeConstraintView(false));
-        expect(newState.IsSetTimeConstraintViewOpen).to.eq(false);
+        const initialState = NewMasterState();
+        let newState = MasterStateReducer(initialState, action);
+        expect(newState.SetTimeConstraintState.IsOpen).to.eq(true);
+        newState = MasterStateReducer(initialState, new ToggleSetTimeConstraintView(false));
+        expect(newState.SetTimeConstraintState.IsOpen).to.eq(false);
     });
 });

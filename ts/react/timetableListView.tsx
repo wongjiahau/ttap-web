@@ -21,10 +21,6 @@ export interface ITimetableListViewStateProps {
     currentTimetable : Timetable;
     currentIndex : number; // non-zero based
     maxIndex : number; // non-zero based
-    totalState : STCBox[];
-    isSetTimeConstraintViewOpen : boolean;
-    numberOfRemovedTimetables : number;
-    numberOfRemainingTimetables : number;
 }
 
 export interface ITimetableListViewDispatchProps {
@@ -32,9 +28,6 @@ export interface ITimetableListViewDispatchProps {
     handleGoToRandom : () => void;
     handleGoToPrevious : () => void;
     handleOpenSetTimeConstraintView : () => void;
-    handleSetTimeConstraintAt : (state : STCBox) => void;
-    handleDesetTimeConstraintAt : (state : STCBox) => void;
-    handleCloseSetTimeConstraintView : () => void;
     handleOpenSaveTimetableDialog : () => void;
     handleOpenSlotsTable : () => void;
 }
@@ -81,14 +74,6 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         Show slots
                     </Button>
                 </StackPanel>
-                <SetTimeConstraintView
-                    numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
-                    numberOfRemainingTimetables={this.props.numberOfRemainingTimetables}
-                    totalState={this.props.totalState}
-                    isOpen={this.props.isSetTimeConstraintViewOpen}
-                    handleSetTimeConstraintAt={this.props.handleSetTimeConstraintAt}
-                    handleDesetTimeConstraintAt={this.props.handleDesetTimeConstraintAt}
-                    handleCancel={this.props.handleCloseSetTimeConstraintView}/>
             </div>
         );
     }

@@ -1,24 +1,17 @@
-import {
-    expect
-} from "chai";
-import {
-    isEqual
-} from "lodash";
-import { GetTestSubjects1, IndexOf } from "../../tests/testDataGenerator";
-import {
-    NotifyIfTimetableIsFound
-} from "./../actions/notifyIfTimetableIsFound";
-import {
-    ToggleSubjectSelection
-} from "./../actions/toggleSubjectSelection";
-import {
-    UpdateSubjectListState
-} from "./../actions/updateSubjectListState";
-import {
-    ITimetableCreatorState,
-    TimetableCreatorState,
-    TimetableCreatorStateReducer
-} from "./../reducers/timetableCreatorState";
+import { expect } from "chai";
+import { GetTestSubjects1, GetTestTimetables1, IndexOf } from "../../tests/testDataGenerator";
+import { NotifyIfTimetableIsFound } from "../actions/notifyIfTimetableIsFound";
+import { ToggleSubjectSelection } from "../actions/toggleSubjectSelection";
+import { IMasterState, MasterStateReducer, NewMasterState } from "../reducers/masterState";
+import { NewSubjectListState } from "../reducers/subjectListState";
+import { NewTimetableListState } from "../reducers/timetableListState";
+
+function getInitialState(): IMasterState {
+    const result = NewMasterState();
+    result.SubjectListState = NewSubjectListState(GetTestSubjects1());
+    result.TimetableListState = NewTimetableListState(GetTestTimetables1());
+    return result;
+}
 
 describe("NotifyIfTimetableIsFound action", () => {
     it("'s typename should be 'notify if timetable is found'", () => {
@@ -28,18 +21,18 @@ describe("NotifyIfTimetableIsFound action", () => {
 
     it("should set IsSnackBarVisible to true if some subjects is selected", () => {
         const action = new NotifyIfTimetableIsFound().Action();
-        const initialState = new TimetableCreatorState(GetTestSubjects1());
+        const initialState = getInitialState();
         let newState =
-            TimetableCreatorStateReducer(initialState,
-                new UpdateSubjectListState(new ToggleSubjectSelection(IndexOf.HE)).Action());
-        newState = TimetableCreatorStateReducer(newState, action);
-        expect(newState.IsSnackbarVisible).to.eq(true);
+            MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        newState = MasterStateReducer(newState, action);
+        expect(newState.SnackbarState.IsOpen).to.eq(true);
     });
 
     it("should set IsSnackBarVisible to false if zero subject is selected", () => {
         const action = new NotifyIfTimetableIsFound().Action();
-        const initialState = new TimetableCreatorState(GetTestSubjects1());
-        const newState = TimetableCreatorStateReducer(initialState, action);
-        expect(newState.IsSnackbarVisible).to.eq(false);
+        const initialState = getInitialState();
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SubjectListState.Subjects.every((s) => !s.IsSelected));
+        expect(newState.SnackbarState.IsOpen).to.eq(false);
     });
 });

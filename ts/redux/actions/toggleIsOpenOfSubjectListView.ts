@@ -3,20 +3,25 @@ import {
     MasterStateAction
 } from "./../reducers/masterState";
 
-export class ToggleLoadingBar extends MasterStateAction {
-    public constructor(private showLoadingBar: boolean) {
+export class ToggleIsOpenOfSubjectListView extends MasterStateAction {
+    public constructor(private open: boolean) {
         super();
     }
+
     public TypeName(): string {
-        return "toggle loading bar";
+        return this.open ?
+            "open subject list view" :
+            "close subject list view";
     }
+
     protected GenerateNewState(state: IMasterState): IMasterState {
         return {
             ...state,
             SubjectListState: {
                 ...state.SubjectListState,
-                IsShowingLoadingBar: this.showLoadingBar
+                IsOpen: this.open
             }
         };
     }
+
 }

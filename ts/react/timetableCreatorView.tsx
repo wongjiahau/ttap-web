@@ -1,22 +1,21 @@
 import {reduce, uniq} from "lodash";
 import Button from "material-ui-next/Button";
 import Paper from "material-ui-next/Paper";
-import {Origin} from "material-ui-next/Snackbar";
-import Snackbar from "material-ui-next/Snackbar";
 import Typography from "material-ui-next/Typography";
-import Drawer from "material-ui/Drawer";
 import IconList from "material-ui/svg-icons/action/list";
 import * as React from "react";
 import {Beautify} from "../helper";
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
-import {SaveTimetableDialogContainer} from "../redux/containers/saveTimetableDialogContainer";
-import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
+import { SaveTimetableDialogContainer } from "../redux/containers/saveTimetableDialogContainer";
+import { SetTimeConstraintContainer } from "../redux/containers/setTimeConstraintContainer";
+import { SlotsTableContainer } from "../redux/containers/slotsTableContainer";
+import { SnackbarContainer } from "../redux/containers/snackbarContainer";
+import { SubjectListViewContainer } from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 import {LoadTestDataView} from "./loadTestDataView";
 import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
-import {SlotsTable} from "./slotsTable";
 import {iconStyle} from "./styles";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -25,29 +24,18 @@ const selectSubjectButtonStyle : React.CSSProperties = {
 };
 
 export interface ITimetableCreatorViewStateProps {
-    isSubjectListViewVisible : boolean;
-    isSlotsTableVisible : boolean;
-    isSlotLoaded : boolean;
-    isSnackbarVisible : boolean;
-    selectedSubjects : Subject[];
-    slotStates: boolean[];
-    snackbarMessage : string;
-    clashingSubjectPairs : Array < [Subject, Subject] >;
+    isSlotLoaded: boolean;
 }
 
 export interface ITimetableCreatorViewDispatchProps {
-    handleToggleVisibilityOfSubjectListView : () => void;
-    handleSnackbarAction : () => void;
+    handleOpenSubjectListView : () => void;
     handleSlotLoaded : (rawSlots : RawSlot[]) => void;
     handleLoadDemo : (html : string) => void;
-    handleCloseSlotsTable : () => void;
-    handleSlotCheckChanged : (slotNumber: number, checked: boolean) => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
 ITimetableCreatorViewDispatchProps {}
 
-let viewCount = 0;
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
         if (!this.props.isSlotLoaded) {
@@ -58,62 +46,24 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 </div>
             );
         }
-        viewCount++;
-        const okButton = (
-            <Button color="accent" dense={true} onClick={this.props.handleSnackbarAction}>
-                Got it
-            </Button>
-        );
-        const snackbarMessage = <span>{this.props.snackbarMessage}</span>;
-        const anchorOrigin : Origin = {
-            horizontal: "right",
-            vertical: "bottom"
-        };
         return (
             <div>
-                <Drawer docked={false} width={520} open={this.props.isSubjectListViewVisible}>
-                    <SubjectListViewContainer/>
-                </Drawer>
-                <SlotsTable
-                    slotStates={this.props.slotStates}
-                    handleSlotCheckChanged={this.props.handleSlotCheckChanged}
-                    handleClose={this.props.handleCloseSlotsTable}
-                    isOpen={this.props.isSlotsTableVisible}
-                    selectedSubjects={this.props.selectedSubjects}/>
                 <Button
                     style={selectSubjectButtonStyle}
                     raised={true}
                     color="accent"
-                    onClick={this.props.handleToggleVisibilityOfSubjectListView}>
+                    onClick={this.props.handleOpenSubjectListView}>
                     <IconList style={iconStyle}/>
                     Select subjects
                 </Button>
-                {this.props.clashingSubjectPairs !== null
-                    ? this.GenerateMessage(this.props.clashingSubjectPairs)
-                    : <TimetableListContainer/>}
-                <Snackbar
-                    action={okButton}
-                    open={this.props.isSnackbarVisible && (viewCount % 2 === 0)}
-                    anchorOrigin={anchorOrigin}
-                    SnackbarContentProps={{
-                    "aria-describedby": "message-id"
-                }}
-                    message={snackbarMessage}/>
-                <Snackbar
-                    action={okButton}
-                    open={this.props.isSnackbarVisible && (viewCount % 2 === 1)}
-                    anchorOrigin={anchorOrigin}
-                    SnackbarContentProps={{
-                    "aria-describedby": "message-id"
-                }}
-                    message={snackbarMessage}/>
+                <TimetableListContainer/>
                 <SaveTimetableDialogContainer/>
+                <SetTimeConstraintContainer/>
+                <SlotsTableContainer/>
+                <SnackbarContainer/>
+                <SubjectListViewContainer/>
             </div>
         );
-    }
-
-    public componentDidMount() {
-        this.setState({isSelectSubjectPanelOpened: true});
     }
 
     private GenerateMessage(clashingSubjectPairs : Array < [Subject, Subject] >): React.ReactNode {

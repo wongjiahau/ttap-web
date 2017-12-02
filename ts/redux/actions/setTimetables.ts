@@ -1,19 +1,22 @@
-import { TimetableListStateAction } from "../reducers/timetableListState";
+import { MasterStateAction } from "../reducers/masterState";
 import { Timetable } from "./../../model/timetable";
-import { ITimetableListState } from "./../reducers/timetableListState";
+import { IMasterState } from "./../reducers/masterState";
 
-export class SetTimetables extends TimetableListStateAction {
+export class SetTimetables extends MasterStateAction {
     public constructor (private newTimetables : Timetable[]) {
         super();
     }
     public TypeName(): string {
         return "set timetables";
     }
-    protected GenerateNewState(state: ITimetableListState): ITimetableListState {
+    protected GenerateNewState(state: IMasterState): IMasterState {
         return {
             ...state,
-            ResidueTimetables: this.newTimetables,
-            FiltrateTimetables: this.newTimetables
+            TimetableListState: {
+                ...state.TimetableListState,
+                ResidueTimetables: this.newTimetables,
+                FiltrateTimetables: this.newTimetables
+            }
         };
     }
 

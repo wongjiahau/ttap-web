@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
 import {ToggleIsOpenOfGetDateDialog} from "./../actions/toggleIsOpenOfGetDateDialog";
-import {ISaveTimetableDialogState, SaveTimetableDialogState, SaveTimetableDialogStateReducer} from "./../reducers/saveTimetableDialogState";
+import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 describe("ToggleIsOpenOfGetDateDialog action", () => {
     it("'s typename should be 'open get date dialog' when passed in true", () => {
         const action = new ToggleIsOpenOfGetDateDialog(true);
@@ -15,9 +15,9 @@ describe("ToggleIsOpenOfGetDateDialog action", () => {
 
     it("should set IsGetDateDialogOpen property", () => {
         const action = new ToggleIsOpenOfGetDateDialog(true).Action();
-        const initialState = new SaveTimetableDialogState();
-        expect(initialState.IsGetDateDialogOpen).to.eq(false);
-        const newState = SaveTimetableDialogStateReducer(initialState, action);
-        expect(newState.IsGetDateDialogOpen).to.eq(true);
+        const initialState = NewMasterState();
+        expect(initialState.SaveTimetableDialogState.IsGetDateDialogOpen).to.eq(false);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SaveTimetableDialogState.IsGetDateDialogOpen).to.eq(true);
     });
 });

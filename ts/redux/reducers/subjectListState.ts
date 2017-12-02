@@ -17,38 +17,29 @@ import {
 } from "./timetableListState";
 
 export interface ISubjectListState {
-    ClashingSubjectPairs: Array < [Subject, Subject] > ;
-    IsShowingLoadingBar: boolean;
+    ClashingSubjectPairs:         Array < [Subject, Subject] > ;
+    IsOpen:                       boolean;
+    IsShowingLoadingBar:          boolean;
     IsShowingSelectedSubjectOnly: boolean;
-    SearchedText: string;
-    SlotStates: boolean[];
-    Subjects: Subject[];
-    TimetableListState: ITimetableListState;
+    SearchedText:                 string;
+    Subjects:                     Subject[];
 }
 
-export class SubjectListState implements ISubjectListState {
-    public ClashingSubjectPairs: Array < [Subject, Subject] > ;
-    public IsShowingLoadingBar: boolean;
-    public IsShowingSelectedSubjectOnly: boolean;
-    public SearchedText: string;
-    public SlotStates: boolean[];
-    public Subjects: Subject[];
-    public TimetableListState: ITimetableListState;
-    public constructor(subjects: Subject[]) {
-        this.ClashingSubjectPairs = null;
-        this.IsShowingLoadingBar = false;
-        this.IsShowingSelectedSubjectOnly = false;
-        this.SlotStates = [];
-        this.SearchedText = "";
-        this.Subjects = subjects;
-        this.TimetableListState = new TimetableListState();
-    }
+export function NewSubjectListState(subjects: Subject[]) : ISubjectListState {
+    return {
+        ClashingSubjectPairs:         null,
+        IsOpen:                       false,
+        IsShowingLoadingBar:          false,
+        IsShowingSelectedSubjectOnly: false,
+        SearchedText:                 "",
+        Subjects:                     subjects
+    };
 }
 
 export abstract class SubjectListStateAction extends Action < ISubjectListState > {
     public StateName() {
-        return typeName(new SubjectListState(null));
+        return typeName(NewSubjectListState(null));
     }
 }
 
-export const SubjectListStateReducer = GenereteReducer(new SubjectListState(null));
+export const SubjectListStateReducer = GenereteReducer(NewSubjectListState(null));

@@ -2,21 +2,28 @@ import {
     GenerateTotalState
 } from "../../model/states/generateTotalState";
 import {
-    ITimetableListState,
-    TimetableListStateAction
-} from "./../reducers/timetableListState";
+    IMasterState,
+    MasterStateAction
+} from "./../reducers/masterState";
 
-export class UpdateTotalState extends TimetableListStateAction {
+export class UpdateTotalState extends MasterStateAction {
     public constructor() {
         super();
     }
     public TypeName(): string {
         return "update total state";
     }
-    protected GenerateNewState(state: ITimetableListState): ITimetableListState {
+    protected GenerateNewState(state: IMasterState): IMasterState {
         return {
             ...state,
-            TotalState: GenerateTotalState(state.FiltrateTimetables, state.UidsOfClickedState)
+            SetTimeConstraintState: {
+                ...state.SetTimeConstraintState,
+                TotalState:
+                    GenerateTotalState(
+                        state.TimetableListState.FiltrateTimetables,
+                        state.SetTimeConstraintState.UidsOfClickedState
+                    )
+            }
         };
     }
 }

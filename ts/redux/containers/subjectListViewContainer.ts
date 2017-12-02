@@ -4,8 +4,9 @@ import {
 import {
     HideSnackbar
 } from "../actions/hideSnackbar";
+import { ToggleIsOpenOfSubjectListView } from "../actions/toggleIsOpenOfSubjectListView";
 import {
-    SubjectListState,
+    ISubjectListState,
     SubjectListStateAction
 } from "../reducers/subjectListState";
 import {
@@ -31,17 +32,12 @@ import {
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
-import {
-    ToggleVisibilityOfSubjectListView
-} from "./../actions/toggleVisibilityOfSubjectListView";
-import {
-    UpdateSubjectListState
-} from "./../actions/updateSubjectListState";
 
 const mapStateToProps = (state): ISubjectListViewStateProps => {
-    const target = state.TimetableCreatorStateReducer.SubjectListState as SubjectListState;
+    const target = state.MasterStateReducer.SubjectListState as ISubjectListState;
     return {
         clashingSubjectPairs:         target.ClashingSubjectPairs,
+        isOpen:                       target.IsOpen,
         isShowingLoadingBar:          target.IsShowingLoadingBar,
         isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
         searchWord:                   target.SearchedText,
@@ -52,27 +48,23 @@ const mapStateToProps = (state): ISubjectListViewStateProps => {
 const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
     return {
         handleClose: () => {
-            dispatch(new ToggleVisibilityOfSubjectListView().Action());
+            dispatch(new ToggleIsOpenOfSubjectListView(false).Action());
             dispatch(new HideSnackbar().Action());
         },
         handleSearch: (searchedText: string) => {
-            dispatch(Wrap(new SearchSubjectList(searchedText)).Action());
+            dispatch(new SearchSubjectList(searchedText).Action());
             dispatch(new HideSnackbar().Action());
         },
         handleSelection: (subjectIndex: number) => {
-            dispatch(Wrap(new ToggleLoadingBar(true)).Action());
+            dispatch(new ToggleLoadingBar(true).Action());
             setTimeout(() => {
-                dispatch(Wrap(new ToggleSubjectSelection(subjectIndex)).Action());
-                dispatch(Wrap(new ToggleLoadingBar(false)).Action());
+                dispatch(new ToggleSubjectSelection(subjectIndex).Action());
+                dispatch(new ToggleLoadingBar(false).Action());
                 dispatch(new NotifyIfTimetableIsFound().Action());
             }, 0);
         },
-        handleToggleView: () => dispatch(Wrap(new ToggleSubjectListViewingOptions()).Action())
+        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions().Action())
     };
 };
 
 export const SubjectListViewContainer = connect(mapStateToProps, mapDispatchToProps)(SubjectListView);
-
-const Wrap = (action: SubjectListStateAction): TimetableCreatorStateAction => {
-    return new UpdateSubjectListState(action);
-};

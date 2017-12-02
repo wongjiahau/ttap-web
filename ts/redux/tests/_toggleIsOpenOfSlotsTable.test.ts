@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
 import {ToggleIsOpenOfSlotsTable} from "./../actions/toggleIsOpenOfSlotsTable";
-import {ITimetableCreatorState, TimetableCreatorState, TimetableCreatorStateReducer} from "./../reducers/timetableCreatorState";
+import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 describe("ToggleIsOpenOfSlotsTable action", () => {
     it("'s typename should be 'open slots table' when passed in true", () => {
         const action = new ToggleIsOpenOfSlotsTable(true);
@@ -13,11 +13,11 @@ describe("ToggleIsOpenOfSlotsTable action", () => {
         expect(action.TypeName()).to.eq("close slots table");
     });
 
-    it("should set IsSlotsTableVisible property", () => {
+    it("should set IsOpen of SlotTableState property", () => {
         const action = new ToggleIsOpenOfSlotsTable(true).Action();
-        const initialState = new TimetableCreatorState(null);
-        expect(initialState.IsSlotsTableVisible).to.eq(false);
-        const newState = TimetableCreatorStateReducer(initialState, action);
-        expect(newState.IsSlotsTableVisible).to.eq(true);
+        const initialState = NewMasterState();
+        expect(initialState.SlotTableState.IsOpen).to.eq(false);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SlotTableState.IsOpen).to.eq(true);
     });
 });

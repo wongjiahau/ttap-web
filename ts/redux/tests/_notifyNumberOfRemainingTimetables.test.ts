@@ -1,7 +1,17 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
+import { GetTestTimetables1 } from "../../tests/testDataGenerator";
+import { NewTimetableListState } from "../reducers/timetableListState";
 import {NotifyNumberOfRemainingTimetables} from "./../actions/notifyNumberOfRemainingTimetables";
-import {ITimetableCreatorState, TimetableCreatorState, TimetableCreatorStateReducer} from "./../reducers/timetableCreatorState";
+import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
+
+function getInitialState() : IMasterState {
+    return {
+        ...NewMasterState(),
+        TimetableListState: NewTimetableListState(GetTestTimetables1())
+    };
+}
+
 describe("NotifyNumberOfRemainingTimetables action", () => {
     it("'s typename should be 'notify number of remaining timetables'", () => {
         const action = new NotifyNumberOfRemainingTimetables();
@@ -10,16 +20,16 @@ describe("NotifyNumberOfRemainingTimetables action", () => {
 
     it("should set IsSnackbarVisible to true", () => {
         const action = new NotifyNumberOfRemainingTimetables().Action();
-        const initialState = new TimetableCreatorState([]);
-        expect(initialState.IsSnackbarVisible).to.eq(false);
-        const newState = TimetableCreatorStateReducer(initialState, action);
-        expect(newState.IsSnackbarVisible).to.eq(true);
+        const initialState = getInitialState();
+        expect(initialState.SnackbarState.IsOpen).to.eq(false);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SnackbarState.IsOpen).to.eq(true);
     });
 
     it("should set SnackbarMessage", () => {
         const action = new NotifyNumberOfRemainingTimetables().Action();
-        const initialState = new TimetableCreatorState([]);
-        const newState = TimetableCreatorStateReducer(initialState, action);
-        expect(newState.SnackbarMessage).to.eq("2 timetables remaining.");
+        const initialState = getInitialState();
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SnackbarState.Message).to.eq("29 timetables remaining.");
     });
 });

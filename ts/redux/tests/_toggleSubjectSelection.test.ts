@@ -16,6 +16,7 @@ import {
     GetTestSubjects1,
     IndexOf
 } from "../../tests/testDataGenerator";
+import { NewSubjectListState } from "../reducers/subjectListState";
 import {
     CodeOf
 } from "./../../tests/testDataGenerator";
@@ -29,14 +30,20 @@ import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
 import {
-    ISubjectListState,
-    SubjectListState,
-    SubjectListStateReducer
-} from "./../reducers/subjectListState";
+    IMasterState,
+    MasterStateReducer,
+    NewMasterState
+} from "./../reducers/masterState";
 
 const mockSubjects = GetTestSubjects1();
 FindClashes(mockSubjects); // some test will fail if this line is not run
 
+function getInitialState() : IMasterState {
+    return {
+        ...NewMasterState(),
+        SubjectListState: NewSubjectListState(mockSubjects)
+    };
+}
 describe("toggle subject selection action", () => {
 
     it("'s type name should be 'select subject'", () => {
@@ -48,38 +55,38 @@ describe("toggle subject selection action", () => {
     });
 
     it("should set SlotStates property", () => {
-        const initialState = new SubjectListState(mockSubjects);
-        const newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        const initialState = getInitialState();
+        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
         // Note: SlotsId of Hubungan Etnik is [0,1,2,3,4,5] as it is the first subject in the list
-        expect(newState.SlotStates).to.deep.eq(fill(Array(6), true)); // HE have 6 slots
+        expect(newState.SlotTableState.SlotStates).to.deep.eq(fill(Array(6), true)); // HE have 6 slots
     });
 
     it("should toggle selection on a subject based on its subject index", () => {
-        const initialState = new SubjectListState(mockSubjects);
-        const newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
-        expect(newState.Subjects[IndexOf.HE].IsSelected).to.eq(true);
+        const initialState = getInitialState();
+        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        expect(newState.SubjectListState.Subjects[IndexOf.HE].IsSelected).to.eq(true);
     });
 
     it("should toggle selection on subject from true to false also", () => {
-        const initialState = new SubjectListState(mockSubjects);
-        let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
-        newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
-        expect(newState.Subjects[IndexOf.HE].IsSelected).to.eq(false);
+        const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        expect(newState.SubjectListState.Subjects[IndexOf.HE].IsSelected).to.eq(false);
     });
 
     it("should show all subjects when user deselected all subjects", () => {
-        const initialState = new SubjectListState(mockSubjects);
-        let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
-        newState = SubjectListStateReducer(newState, new ToggleSubjectListViewingOptions().Action());
-        expect(newState.IsShowingSelectedSubjectOnly).to.eq(true);
-        newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
-        expect(newState.IsShowingSelectedSubjectOnly).to.eq(false);
-        expect(newState.Subjects.every((x) => x.IsVisible)).to.eq(true);
+        const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions().Action());
+        expect(newState.SubjectListState.IsShowingSelectedSubjectOnly).to.eq(true);
+        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        expect(newState.SubjectListState.IsShowingSelectedSubjectOnly).to.eq(false);
+        expect(newState.SubjectListState.Subjects.every((x) => x.IsVisible)).to.eq(true);
     });
 
     it("should set the property of timetable when selecting subject", () => {
-        const initialState = new SubjectListState(mockSubjects);
-        const newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
+        const initialState = getInitialState();
+        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE).Action());
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
 
     });
@@ -93,10 +100,10 @@ describe("toggle subject selection action", () => {
             Then Ali shall see a clash report saying 'MPU32013' cannot be selected
             And the clash report should be Single-Clashing error, not Group-Clashing error
         `;
-            const initialState = new SubjectListState(mockSubjects);
-            let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA).Action());
-            const clashReport = newState.Subjects[IndexOf.BKA].ClashReport;
+            const initialState = getInitialState();
+            let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA).Action());
+            const clashReport = newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport;
             expect(clashReport.Type).to.eq("single");
             expect(clashReport.TargetName).to.eq("Arts & Cultural Performance");
         });
@@ -110,11 +117,11 @@ describe("toggle subject selection action", () => {
             Then Ali shall see a clash report on [BEAM] saying that
                 it cannot be selected due to Group Clashing
         `;
-            const initialState = new SubjectListState(mockSubjects);
-            let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
-            expect(newState.Subjects[IndexOf.BEAM].ClashReport.Type)
+            const initialState = getInitialState();
+            let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
+            expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport.Type)
                 .to.eq("group");
         });
     });
@@ -127,11 +134,11 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'MPU32013' [BKA]
             And Then When Ali deselected subject 'MPU34022' [ACP]
             Then Ali shall see that the clash report on [BKA] is cleared `;
-            const initialState = new SubjectListState(mockSubjects);
-            let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            expect(newState.Subjects[IndexOf.BKA].ClashReport).to.eq(null);
+            const initialState = getInitialState();
+            let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            expect(newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport).to.eq(null);
         });
 
         it("case 2", () => {
@@ -142,12 +149,12 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'MPU3143' [BMK2] (which is clashing with BKA)
             And Then When Ali deselected subject 'MPU34022' [ACP]
             Then Ali shall see that the clash report's on [BKA] is updated to [BMK2] `;
-            const initialState = new SubjectListState(mockSubjects);
-            let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            expect(newState.Subjects[IndexOf.BKA].ClashReport.TargetName)
+            const initialState = getInitialState();
+            let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            expect(newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport.TargetName)
                 .to.eq("Bahasa Melayu Komunikasi 2");
         });
 
@@ -159,12 +166,12 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'UKMM1043' [BEAM]
             And Then When Ali deselected subject [ACP] or [BMK2]
             Then Ali shall see that the clash report on [BEAM] is cleared `;
-            const initialState = new SubjectListState(mockSubjects);
-            let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
-            expect(newState.Subjects[IndexOf.BEAM].ClashReport).to.eq(null);
+            const initialState = getInitialState();
+            let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
+            expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport).to.eq(null);
         });
 
         it("case 4", () => {
@@ -176,12 +183,12 @@ describe("toggle subject selection action", () => {
             And Then When Ali deselected [BMK2]
             Then Ali shall that the clash report on [BEAM] is gone`;
 
-            const initialState = new SubjectListState(mockSubjects);
-            let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
-            expect(newState.Subjects[IndexOf.BEAM].ClashReport).to.eq(null);
+            const initialState = getInitialState();
+            let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
+            expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport).to.eq(null);
         });
 
         it("case 5", () => {
@@ -195,13 +202,13 @@ describe("toggle subject selection action", () => {
             And Then When Ali deselected [HE]
             Then Ali shall that the clash report on [BEAM] is still there`;
 
-            const initialState = new SubjectListState(mockSubjects);
-            let newState = SubjectListStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
-            newState = SubjectListStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
-            expect(newState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group");
+            const initialState = getInitialState();
+            let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE).Action());
+            expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group");
         });
     });
 

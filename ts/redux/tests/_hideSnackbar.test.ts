@@ -11,10 +11,10 @@ import {
     HideSnackbar
 } from "./../actions/hideSnackbar";
 import {
-    ITimetableCreatorState,
-    TimetableCreatorState,
-    TimetableCreatorStateReducer
-} from "./../reducers/timetableCreatorState";
+    IMasterState,
+    MasterStateReducer,
+    NewMasterState
+} from "./../reducers/masterState";
 
 describe("HideSnackbar action", () => {
     it("'s typename should be 'hide snackbar'", () => {
@@ -22,12 +22,12 @@ describe("HideSnackbar action", () => {
         expect(action.TypeName()).to.eq("hide snackbar");
     });
 
-    it("should set IsSnackbarVisible to false", () => {
+    it("should set SnackbarState.IsOpento false", () => {
         const action = new HideSnackbar().Action();
-        const initialState = new TimetableCreatorState(GetTestSubjects1());
-        initialState.IsSnackbarVisible = true;
-        expect(initialState.IsSnackbarVisible).to.eq(true);
-        const newState = TimetableCreatorStateReducer(initialState, action);
-        expect(newState.IsSnackbarVisible).to.eq(false);
+        const initialState = NewMasterState();
+        initialState.SnackbarState.IsOpen = true;
+        expect(initialState.SnackbarState.IsOpen).to.eq(true);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SnackbarState.IsOpen).to.eq(false);
     });
 });

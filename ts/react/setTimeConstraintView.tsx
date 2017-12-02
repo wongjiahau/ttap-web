@@ -93,8 +93,8 @@ export interface ISetTimeConstraintViewStateProps {
 }
 
 export interface ISetTimeConstraintViewDispatchProps {
-    handleSetTimeConstraintAt : (state : STCBox) => void;
-    handleDesetTimeConstraintAt : (state : STCBox) => void;
+    handleSetTimeConstraintAt : (stcBox : STCBox) => void;
+    handleDesetTimeConstraintAt : (stcBox : STCBox) => void;
     handleCancel : () => void;
 }
 

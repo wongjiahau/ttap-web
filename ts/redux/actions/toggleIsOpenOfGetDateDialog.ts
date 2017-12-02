@@ -1,6 +1,6 @@
 
-import {ISaveTimetableDialogState, SaveTimetableDialogStateAction} from "./../reducers/saveTimetableDialogState";
-export class ToggleIsOpenOfGetDateDialog extends SaveTimetableDialogStateAction {
+import {IMasterState, MasterStateAction} from "./../reducers/masterState";
+export class ToggleIsOpenOfGetDateDialog extends MasterStateAction {
     public constructor(private isOpen: boolean) {
         super();
     }
@@ -11,10 +11,13 @@ export class ToggleIsOpenOfGetDateDialog extends SaveTimetableDialogStateAction 
             "close get date dialog";
     }
 
-    protected GenerateNewState(state : ISaveTimetableDialogState) : ISaveTimetableDialogState {
+    protected GenerateNewState(state : IMasterState) : IMasterState {
         return {
             ...state,
-            IsGetDateDialogOpen: this.isOpen
+            SaveTimetableDialogState: {
+                ...state.SaveTimetableDialogState,
+                IsGetDateDialogOpen: this.isOpen
+            }
         };
     }
 }

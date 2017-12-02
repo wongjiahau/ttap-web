@@ -3,6 +3,7 @@ import {LinearProgress} from "material-ui-next";
 import Button from "material-ui-next/Button";
 import Typography from "material-ui-next/Typography";
 import Divider from "material-ui/Divider";
+import Drawer from "material-ui/Drawer";
 import Paper from "material-ui/Paper";
 import IconTick from "material-ui/svg-icons/action/done";
 import IconEye from "material-ui/svg-icons/image/remove-red-eye";
@@ -11,7 +12,7 @@ import * as React from "react";
 import * as S from "string";
 import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
-import { StackPanel } from "./panels/stackPanel";
+import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";
 
@@ -51,11 +52,12 @@ const buttonStyle : React.CSSProperties = {
 
 // endregion
 export interface ISubjectListViewStateProps {
+    clashingSubjectPairs : Array < [Subject, Subject] >;
+    isOpen : boolean;
+    isShowingLoadingBar : boolean;
+    isShowingSelectedSubjectOnly : boolean;
     searchWord : string;
     subjects : Subject[];
-    isShowingSelectedSubjectOnly : boolean;
-    isShowingLoadingBar : boolean;
-    clashingSubjectPairs : Array < [Subject, Subject] >;
 }
 
 export interface ISubjectListViewDispatchProps {
@@ -68,14 +70,20 @@ export interface ISubjectListViewDispatchProps {
 export interface ISubjectListViewProps extends ISubjectListViewStateProps,
 ISubjectListViewDispatchProps {}
 
-export class SubjectListView extends React.Component < ISubjectListViewProps, {
-    sectionStyle : React.CSSProperties
-} > {
+export class SubjectListView extends React.Component < ISubjectListViewProps, {sectionStyle : React.CSSProperties} > {
     constructor(props : ISubjectListViewProps) {
         super(props);
         $(window).on("resize", this.handleWindowResizing);
         this.state = {
             sectionStyle: this.getSectionStyle()
+        };
+    }
+
+    public getSectionStyle(): React.CSSProperties {
+        return {
+            display: "flex",
+            flexFlow: "column",
+            height: $(window).height()
         };
     }
 
@@ -132,71 +140,65 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
         return (
-            <section style={this.state.sectionStyle}>
-                <header style={headerStyle}>
-                    <Typography type="display1" color="primary">
-                        Select your desired subjects.
-                    </Typography>
-                    <TextField
-                        style={searchBoxStyle}
-                        onChange={this.handleSearchBoxOnChange}
-                        hintText="example: he/hubungan etnik/mpu3113"
-                        floatingLabelText=" Search . . ."/>
-                </header>
-                <Paper style={divStyle}>
-                    <div id="subject-list-container">
-                        {!showErrorMessage
-                            ? subjectViews
-                            : errorMessage}
-                    </div>
-                </Paper>
-                {this.props.isShowingLoadingBar
-                    ? <LinearProgress/>
-                    : ""
-}
-                <footer style={footerStyle}>
+            <Drawer docked={false} width={520} open={this.props.isOpen}>
+                <section style={this.state.sectionStyle}>
+                    <header style={headerStyle}>
+                        <Typography type="display1" color="primary">
+                            Select your desired subjects.
+                        </Typography>
+                        <TextField
+                            style={searchBoxStyle}
+                            onChange={this.handleSearchBoxOnChange}
+                            hintText="example: he/hubungan etnik/mpu3113"
+                            floatingLabelText=" Search . . ."/>
+                    </header>
+                    <Paper style={divStyle}>
+                        <div id="subject-list-container">
+                            {!showErrorMessage
+                                ? subjectViews
+                                : errorMessage}
+                        </div>
+                    </Paper>
                     {this.props.isShowingLoadingBar
-                        ? (
-                            <Typography align="center" type="subheading">Finding possible timetables . . .</Typography>
-                        )
-                        : (
-                            <StackPanel orientation="horizontal" horizontalAlignment="right">
-                                <Button
-                                    color="accent"
-                                    style={buttonStyle}
-                                    disabled={noSubjectIsSelected}
-                                    key="toggle-view-button"
-                                    onClick={this.props.handleToggleView}>
-                                    {this.props.isShowingSelectedSubjectOnly
-                                        ? "Show all subjects"
-                                        : (noSubjectIsSelected
-                                            ? "Show selected subjects"
-                                            : `Show selected subjects (${numberOfSelectedSubjects})`)}
-                                </Button>
-                                <Button
-                                    raised={true}
-                                    color="primary"
-                                    style={buttonStyle}
-                                    disabled={noSubjectIsSelected || this.props.isShowingLoadingBar}
-                                    key="done-button"
-                                    onClick={this.props.handleClose}>
-                                    {this.props.isShowingLoadingBar
-                                        ? "Loading . . ."
-                                        : "Done"}
-                                </Button>
-                            </StackPanel>
-                        )
+                        ? <LinearProgress/>
+                        : ""
 }
-                </footer>
-            </section>
+                    <footer style={footerStyle}>
+                        {this.props.isShowingLoadingBar
+                            ? (
+                                <Typography align="center" type="subheading">Finding possible timetables . . .</Typography>
+                            )
+                            : (
+                                <StackPanel orientation="horizontal" horizontalAlignment="right">
+                                    <Button
+                                        color="accent"
+                                        style={buttonStyle}
+                                        disabled={noSubjectIsSelected}
+                                        key="toggle-view-button"
+                                        onClick={this.props.handleToggleView}>
+                                        {this.props.isShowingSelectedSubjectOnly
+                                            ? "Show all subjects"
+                                            : (noSubjectIsSelected
+                                                ? "Show selected subjects"
+                                                : `Show selected subjects (${numberOfSelectedSubjects})`)}
+                                    </Button>
+                                    <Button
+                                        raised={true}
+                                        color="primary"
+                                        style={buttonStyle}
+                                        disabled={noSubjectIsSelected || this.props.isShowingLoadingBar}
+                                        key="done-button"
+                                        onClick={this.props.handleClose}>
+                                        {this.props.isShowingLoadingBar
+                                            ? "Loading . . ."
+                                            : "Done"}
+                                    </Button>
+                                </StackPanel>
+                            )}
+                    </footer>
+                </section>
+            </Drawer>
         );
     }
 
-    private getSectionStyle(): React.CSSProperties {
-        return {
-            display: "flex",
-            flexFlow: "column",
-            height: $(window).height()
-        };
-    }
 }

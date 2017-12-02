@@ -1,7 +1,8 @@
 import {expect} from "chai";
 import {isEqual} from "lodash";
 import {ToggleIsOpenOfSaveDialog} from "./../actions/toggleIsOpenOfSaveDialog";
-import {ISaveTimetableDialogState, SaveTimetableDialogState, SaveTimetableDialogStateReducer} from "./../reducers/saveTimetableDialogState";
+import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
+
 describe("ToggleIsOpenOfSaveDialog action", () => {
     it("'s typename should be 'open save dialog' if passed in true", () => {
         const action = new ToggleIsOpenOfSaveDialog(true);
@@ -15,9 +16,9 @@ describe("ToggleIsOpenOfSaveDialog action", () => {
 
     it("should set IsMainDialogOpen property", () => {
         const action = new ToggleIsOpenOfSaveDialog(true).Action();
-        const initialState = new SaveTimetableDialogState();
-        expect(initialState.IsMainDialogOpen).to.eq(false);
-        const newState = SaveTimetableDialogStateReducer(initialState, action);
-        expect(newState.IsMainDialogOpen).to.eq(true);
+        const initialState = NewMasterState();
+        expect(initialState.SaveTimetableDialogState.IsMainDialogOpen).to.eq(false);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SaveTimetableDialogState.IsMainDialogOpen).to.eq(true);
     });
 });

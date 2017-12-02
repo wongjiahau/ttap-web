@@ -1,8 +1,8 @@
 import {
-    ISaveTimetableDialogState,
-    SaveTimetableDialogStateAction
-} from "./../reducers/saveTimetableDialogState";
-export class ToggleIsOpenOfSaveDialog extends SaveTimetableDialogStateAction {
+    IMasterState,
+    MasterStateAction
+} from "./../reducers/masterState";
+export class ToggleIsOpenOfSaveDialog extends MasterStateAction {
     public constructor(private isOpen: boolean) {
         super();
     }
@@ -13,10 +13,13 @@ export class ToggleIsOpenOfSaveDialog extends SaveTimetableDialogStateAction {
             return "close save dialog";
         }
     }
-    protected GenerateNewState(state: ISaveTimetableDialogState): ISaveTimetableDialogState {
+    protected GenerateNewState(state: IMasterState): IMasterState {
         return {
             ...state,
-            IsMainDialogOpen: this.isOpen
+            SaveTimetableDialogState: {
+                ...state.SaveTimetableDialogState,
+                IsMainDialogOpen: this.isOpen
+            }
         };
     }
 }

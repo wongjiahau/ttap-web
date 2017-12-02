@@ -4,11 +4,11 @@ import {
 } from "lodash";
 import { RawSlot } from "../../model/rawSlot";
 import {
-    ITimetableCreatorState,
-    TimetableCreatorStateAction
-} from "./../reducers/timetableCreatorState";
+    IMasterState,
+    MasterStateAction
+} from "./../reducers/masterState";
 
-export class ReformTimetablesBasedOnSpecificSlot extends TimetableCreatorStateAction {
+export class ReformTimetablesBasedOnSpecificSlot extends MasterStateAction {
     public constructor(private slotId: number, private checked: boolean) {
         super();
     }
@@ -18,10 +18,9 @@ export class ReformTimetablesBasedOnSpecificSlot extends TimetableCreatorStateAc
             `adding back timetables that contain slot (${this.slotId})`;
 
     }
-    protected GenerateNewState(state: ITimetableCreatorState): ITimetableCreatorState {
-        const cloned = clone(state);
-        let filtrateTimetables = cloned.SubjectListState.TimetableListState.FiltrateTimetables;
-        let residueTimetables = cloned.SubjectListState.TimetableListState.ResidueTimetables;
+    protected GenerateNewState(state: IMasterState): IMasterState {
+        let filtrateTimetables = clone(state.TimetableListState.FiltrateTimetables);
+        let residueTimetables = clone(state.TimetableListState.ResidueTimetables);
         if (this.checked) {
             residueTimetables = residueTimetables.concat(
                 remove(filtrateTimetables, (timetable) => {
@@ -33,14 +32,22 @@ export class ReformTimetablesBasedOnSpecificSlot extends TimetableCreatorStateAc
                     return timetable.HashIds.some((x) => x === this.slotId);
                 }));
         }
-        cloned.SubjectListState.TimetableListState.FiltrateTimetables = filtrateTimetables;
-        cloned.SubjectListState.TimetableListState.ResidueTimetables = residueTimetables;
-
         const slotIdsOfRelatedSlots = RawSlot.GetRelated(this.slotId);
+        const slotStates = clone(state.SlotTableState.SlotStates);
         slotIdsOfRelatedSlots.forEach((id) => {
-            cloned.SubjectListState.SlotStates[id] = !this.checked;
+             slotStates[id] = !this.checked;
         });
-
-        return cloned;
+        return {
+            ...state,
+            TimetableListState: {
+                ...state.TimetableListState,
+                FiltrateTimetables: filtrateTimetables,
+                ResidueTimetables: residueTimetables
+            },
+            SlotTableState: {
+                ...state.SlotTableState,
+                SlotStates: slotStates
+            }
+        };
     }
 }
