@@ -7,7 +7,11 @@ import {
     IndexOf
 } from "../../tests/testDataGenerator";
 import {
+    RawSlot
+} from "../rawSlot";
+import {
     GenerateSubjectSchema,
+    GetDiff,
     SubjectSchema
 } from "../subjectSchema";
 
@@ -76,14 +80,14 @@ describe("GenerateSubjectSchema", () => {
         const acp = subjects[IndexOf.ACP];
         const he = subjects[IndexOf.HE];
         expect(() => {
-            GenerateSubjectSchema(acp.SlotIds.concat(he.SlotIds));
+            GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotIds.concat(he.SlotIds)));
         }).to.throw();
     });
 
     it("case 1", () => {
         const subjects = GetTestSubjects1();
         const acp = subjects[IndexOf.ACP];
-        const result = GenerateSubjectSchema(acp.SlotIds);
+        const result = GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotIds));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(false);
         expect(result.GotPractical).to.eq(false);
@@ -93,7 +97,7 @@ describe("GenerateSubjectSchema", () => {
     it("case 2", () => {
         const subjects = GetTestSubjects1();
         const beam = subjects[IndexOf.BEAM];
-        const result = GenerateSubjectSchema(beam.SlotIds);
+        const result = GenerateSubjectSchema(RawSlot.GetBunch(beam.SlotIds));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(true);
         expect(result.GotPractical).to.eq(false);
@@ -103,10 +107,38 @@ describe("GenerateSubjectSchema", () => {
     it("case 3", () => {
         const subjects = GetTestSubjects1();
         const industrialTraning = subjects[IndexOf.IT];
-        const result = GenerateSubjectSchema(industrialTraning.SlotIds);
+        const result = GenerateSubjectSchema(RawSlot.GetBunch(industrialTraning.SlotIds));
         expect(result.GotLecture).to.eq(false);
         expect(result.GotTutorial).to.eq(false);
         expect(result.GotPractical).to.eq(true);
         expect(result.SubjectCode).to.eq(CodeOf.IT);
+    });
+});
+
+describe("GetDiff", () => {
+    it("should return null if schema X and schema Y are equal", () => {
+        const x = new SubjectSchema(true, true, true);
+        const y = new SubjectSchema(true, true, true);
+        expect(x.IsEqual(y)).to.eq(true);
+        expect(GetDiff(x, y)).to.eq(null);
+    });
+
+    it("should return error messages if schema X and schema Y are not equal (1)", () => {
+        const x = new SubjectSchema(true, true, true);
+        x.SubjectCode = "MPU3113";
+        const y = new SubjectSchema(false, true, true);
+        expect(x.IsEqual(y)).to.eq(false);
+        expect(GetDiff(x, y)).to.deep.eq(["At least one LECTURE is needed for MPU3113"]);
+    });
+
+    it("should return error messages if schema X and schema Y are not equal (2)", () => {
+        const x = new SubjectSchema(true, true, true);
+        x.SubjectCode = "MPU3113";
+        const y = new SubjectSchema(false, false, true);
+        expect(x.IsEqual(y)).to.eq(false);
+        expect(GetDiff(x, y)).to.deep.eq([
+            "At least one LECTURE is needed for MPU3113",
+            "At least one TUTORIAL is needed for MPU3113"
+        ]);
     });
 });

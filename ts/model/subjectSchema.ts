@@ -22,8 +22,7 @@ export class SubjectSchema {
     }
 }
 
-export function GenerateSubjectSchema(slotIds: number[]): SubjectSchema {
-    const slots = RawSlot.GetBunch(slotIds);
+export function GenerateSubjectSchema(slots: RawSlot[]): SubjectSchema {
     const subjectCode = slots[0].SubjectCode;
     for (let i = 0; i < slots.length; i++) {
         if (slots[i].SubjectCode !== subjectCode) {
@@ -45,5 +44,22 @@ export function GenerateSubjectSchema(slotIds: number[]): SubjectSchema {
                 break;
         }
     });
+    return result;
+}
+
+export function GetDiff(x: SubjectSchema, y: SubjectSchema): string[] {
+    const result: string[] = [];
+    if (x.IsEqual(y)) {
+        return null;
+    }
+    if (x.GotLecture !== y.GotLecture) {
+        result.push("At least one LECTURE is needed for " + x.SubjectCode);
+    }
+    if (x.GotTutorial !== y.GotTutorial) {
+        result.push("At least one TUTORIAL is needed for " + x.SubjectCode);
+    }
+    if (x.GotPractical !== y.GotPractical) {
+        result.push("At least one PRACTICAL is needed for " + x.SubjectCode);
+    }
     return result;
 }
