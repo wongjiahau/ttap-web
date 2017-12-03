@@ -17,31 +17,18 @@ import {
     Ternary
 } from "./toggleSubjectSelection";
 
-export class ReformTimetablesBasedOnSpecificSlot extends MasterStateAction {
+export class ToggleSelectionOnSpecificSlot extends MasterStateAction {
     public constructor(private slotId: number, private checked: boolean, private subjectCode: string) {
         super();
     }
     public TypeName(): string {
+        const slotIdsOfRelatedSlots = RawSlot.GetRelated(this.slotId);
         return this.checked ?
-            `removing timetables that contain slot (${this.slotId})` :
-            `adding back timetables that contain slot (${this.slotId})`;
+            `selecting slot (${slotIdsOfRelatedSlots.toString()})` :
+            `deselecting slot (${slotIdsOfRelatedSlots.toString()})`;
 
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
-        let filtrateTimetables = clone(state.TimetableListState.FiltrateTimetables);
-        let residueTimetables = clone(state.TimetableListState.ResidueTimetables);
-        if (this.checked) {
-            residueTimetables = residueTimetables.concat(
-                remove(filtrateTimetables, (timetable) => {
-                    return timetable.HashIds.some((x) => x === this.slotId);
-                }));
-        } else {
-            filtrateTimetables = filtrateTimetables.concat(
-                remove(residueTimetables, (timetable) => {
-                    return timetable.HashIds.some((x) => x === this.slotId);
-                }));
-        }
-
         const slotIdsOfRelatedSlots = RawSlot.GetRelated(this.slotId);
         const newSlotStates = clone(state.SlotTableState.SlotStates);
         slotIdsOfRelatedSlots.forEach((id) => {
@@ -56,11 +43,6 @@ export class ReformTimetablesBasedOnSpecificSlot extends MasterStateAction {
         newSubjectStates[this.subjectCode] = newStateOfTargetSubject;
         return {
             ...state,
-            TimetableListState: {
-                ...state.TimetableListState,
-                FiltrateTimetables: filtrateTimetables,
-                ResidueTimetables: residueTimetables
-            },
             SlotTableState: {
                 ...state.SlotTableState,
                 SlotStates: newSlotStates,

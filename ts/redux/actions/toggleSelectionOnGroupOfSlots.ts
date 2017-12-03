@@ -11,12 +11,12 @@ import {
     MasterStateAction
 } from "./../reducers/masterState";
 
-export class ReformTimetablesBasedOnGroupOfSlots extends MasterStateAction {
+export class ToggleSelectionOnGroupOfSlots extends MasterStateAction {
     public constructor(private subjectCode: string) {
         super();
     }
     public TypeName(): string {
-        return `reform timetables based on group of slots of (${this.subjectCode})`;
+        return `toggle selection on group of slots of (${this.subjectCode})`;
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
         const targetSubject = find(state.SubjectListState.Subjects, {
@@ -40,31 +40,12 @@ export class ReformTimetablesBasedOnGroupOfSlots extends MasterStateAction {
         const newSubjectStates = clone(state.SlotTableState.SubjectStates);
         newSubjectStates[this.subjectCode] = allSlotShouldBeSelected ? "true" : "false";
 
-        let newFiltrateTimetables = clone(state.TimetableListState.FiltrateTimetables);
-        let newResidueTimetables = clone(state.TimetableListState.ResidueTimetables);
-        if (allSlotShouldBeSelected) {
-            targetSubject.SlotIds.forEach((id) => {
-                newFiltrateTimetables = newFiltrateTimetables.concat(
-                    remove(newResidueTimetables, (timetable) => {
-                        return timetable.HashIds.some((x) => x === id);
-                    }));
-            });
-        } else {
-            newResidueTimetables = newFiltrateTimetables.concat(newResidueTimetables);
-            newFiltrateTimetables = [];
-        }
-
         return {
             ...state,
             SlotTableState: {
                 ...state.SlotTableState,
                 SlotStates: newSlotStates,
                 SubjectStates: newSubjectStates
-            },
-            TimetableListState: {
-                ...state.TimetableListState,
-                FiltrateTimetables: newFiltrateTimetables,
-                ResidueTimetables: newResidueTimetables
             }
         };
     }
