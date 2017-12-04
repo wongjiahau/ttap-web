@@ -6,6 +6,7 @@ import {
     RawSlot
 } from "../../model/rawSlot";
 import {
+    DiffReport,
     GenerateSubjectSchema,
     GetDiff,
     SubjectSchema
@@ -56,7 +57,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         sortBy(correctSubjectSchemas, [(o) => o.SubjectCode]);
         sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
 
-        let errorMessages = [];
+        let errorMessages : DiffReport[] = [];
         correctSubjectSchemas.forEach((s) => {
             let matchingSchema = find(currentSubjectSchemas, {
                 SubjectCode: s.SubjectCode
@@ -69,12 +70,26 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
                 errorMessages = errorMessages.concat(diff);
             }
         });
-
+        if (errorMessages.length === 0) { // if schema is tolerated
+            // check if any timetables can be found based on currently selected slots
+            if (newTimetables.length === 0) {
+                errorMessages.push(new DiffReport("", "no possible timetables found"));
+            }
+        }
+        if (errorMessages.length > 0) {
+            return {
+                ...state,
+                SlotTableState: {
+                    ...state.SlotTableState,
+                    ErrorMessages: errorMessages
+                }
+            };
+        }
         return {
             ...state,
             SlotTableState: {
                 ...state.SlotTableState,
-                ErrorMessages: errorMessages
+                ErrorMessages: null
             },
             TimetableListState: {
                 ...state.TimetableListState,

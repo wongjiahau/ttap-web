@@ -50,12 +50,13 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         expect(action.TypeName()).to.eq("find timetables based on chosen slots");
     });
 
-    it("should set property of FiltrateTimetables and ResidueTimetables", () => {
+    it("should set property of FiltrateTimetables and ResidueTimetables if there are no error", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
         newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("1", true, CodeOf.HE));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
+        expect(newState.SlotTableState.ErrorMessages).to.deep.eq(null);
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(2);
         expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(0);
     });
@@ -69,7 +70,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq([new DiffReport(CodeOf.BKA, "L")]);
     });
 
-    it("should set ErrorMessages property of SlotsTableState if there are schema intolerance(2)", () => {
+    it("should set ErrorMessages of SlotsTableState if there are schema intolerance(2)", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BKA));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.SA1));
@@ -82,4 +83,12 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         );
     });
 
+    it("should set ErrorMessages SlotsTableState if no possible timetable is found even thought the schema is tolerated", () => {
+        const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
+        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
+        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("10", true, CodeOf.ACP));
+        newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
+        expect(newState.SlotTableState.ErrorMessages).to.deep.eq([new DiffReport("", "no possible timetables found")]);
+    });
 });

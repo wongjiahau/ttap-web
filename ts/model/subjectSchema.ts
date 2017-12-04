@@ -48,10 +48,11 @@ export function GenerateSubjectSchema(slots: RawSlot[]): SubjectSchema {
     return result;
 }
 
+export type MissingSlotType = "L" | "T" | "P" | "no possible timetables found";
 export class DiffReport {
     public readonly SubjectCode: string;
-    public readonly MissingSlotType: "L" | "T" | "P";
-    public constructor(subjectCode: string, missingSlotType: "L" | "T" | "P") {
+    public readonly MissingSlotType: MissingSlotType;
+    public constructor(subjectCode: string, missingSlotType: MissingSlotType) {
         this.SubjectCode = subjectCode;
         this.MissingSlotType = missingSlotType;
     }
