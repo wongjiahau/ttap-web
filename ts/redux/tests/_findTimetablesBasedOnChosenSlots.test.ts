@@ -72,6 +72,16 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
 
     it("should set ErrorMessages of SlotsTableState if there are schema intolerance(2)", () => {
         const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BEAM));
+        newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BEAM));
+        newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
+        expect(newState.SlotTableState.ErrorMessages).to.deep.eq(
+            [new DiffReport(CodeOf.BEAM, "L"), new DiffReport(CodeOf.BEAM, "T")]
+        );
+    });
+
+    it("should set ErrorMessages of SlotsTableState if there are schema intolerance(3)", () => {
+        const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BKA));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.SA1));
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BKA));

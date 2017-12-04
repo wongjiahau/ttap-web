@@ -46,18 +46,20 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
                 }
             }
         }
-        const rawSlots = RawSlot.GetBunchFromSlotNumbers(slotNumbersOfSelectedSlots);
-        const newTimetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
-
-        const slotsOfSubjects = PartitionizeByKey(rawSlots, "SubjectCode");
-        const currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
+        let currentSubjectSchemas: SubjectSchema[] = [];
+        if (slotNumbersOfSelectedSlots.length > 0) {
+            const rawSlots = RawSlot.GetBunchFromSlotNumbers(slotNumbersOfSelectedSlots);
+            const newTimetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
+            const slotsOfSubjects = PartitionizeByKey(rawSlots, "SubjectCode");
+            currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
+            sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
+        }
 
         const selectedSubjects = state.SubjectListState.Subjects.filter((s) => s.IsSelected);
         const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(RawSlot.GetBunch(s.SlotIds)));
         sortBy(correctSubjectSchemas, [(o) => o.SubjectCode]);
-        sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
 
-        let errorMessages : DiffReport[] = [];
+        let errorMessages: DiffReport[] = [];
         correctSubjectSchemas.forEach((s) => {
             let matchingSchema = find(currentSubjectSchemas, {
                 SubjectCode: s.SubjectCode
