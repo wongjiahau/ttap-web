@@ -24,8 +24,8 @@ export class ToggleSelectionOnGroupOfSlots extends MasterStateAction {
         });
         let selectedSlotsCount = 0;
         let deselectedSlotsCount = 0;
-        targetSubject.SlotIds.forEach((id) => {
-            if (state.SlotTableState.SlotStates[id] === true) {
+        targetSubject.SlotNumbers.forEach((slotNumber) => {
+            if (state.SlotTableState.SlotStates[slotNumber] === true) {
                 selectedSlotsCount++;
             } else {
                 deselectedSlotsCount++;
@@ -34,8 +34,8 @@ export class ToggleSelectionOnGroupOfSlots extends MasterStateAction {
 
         const allSlotShouldBeSelected = deselectedSlotsCount > selectedSlotsCount;
         const newSlotStates = clone(state.SlotTableState.SlotStates);
-        targetSubject.SlotIds.forEach((id) => {
-            newSlotStates[id] = allSlotShouldBeSelected;
+        targetSubject.SlotNumbers.forEach((slotNumber) => {
+            newSlotStates[slotNumber] = allSlotShouldBeSelected;
         });
         const newSubjectStates = clone(state.SlotTableState.SubjectStates);
         newSubjectStates[this.subjectCode] = allSlotShouldBeSelected ? "true" : "false";

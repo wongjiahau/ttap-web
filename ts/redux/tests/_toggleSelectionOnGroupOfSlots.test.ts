@@ -47,9 +47,18 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // Then Ali shall see that all slots of HE is deselected
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        expect(newState.SlotTableState.SlotStates).to.deep.eq({
+            1: true,
+            2: true,
+            3: true
+        });
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
-        expect(newState.SubjectListState.Subjects[IndexOf.HE].SlotIds).to.deep.eq([0, 1, 2, 3, 4, 5]);
-        expect(newState.SlotTableState.SlotStates).to.deep.eq([false, false, false, false, false, false]);
+        expect(newState.SubjectListState.Subjects[IndexOf.HE].SlotNumbers).to.deep.eq(["1", "2", "3"]);
+        expect(newState.SlotTableState.SlotStates).to.deep.eq({
+            1: false,
+            2: false,
+            3: false
+        });
     });
 
     it("should set SlotStates property of SlotTables(2)", () => {
@@ -60,8 +69,17 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
+        expect(newState.SlotTableState.SlotStates).to.deep.eq({
+            1: false,
+            2: false,
+            3: false
+        });
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
-        expect(newState.SlotTableState.SlotStates).to.deep.eq([true, true, true, true, true, true]);
+        expect(newState.SlotTableState.SlotStates).to.deep.eq({
+            1: true,
+            2: true,
+            3: true
+        });
     });
 
     it("should set SubjectStates property of SlotTables(1)", () => {
