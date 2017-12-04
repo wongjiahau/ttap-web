@@ -12,7 +12,7 @@ import {IStringDicionary} from "../interfaces/dictionary";
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 import {DiffReport} from "../model/subjectSchema";
-import {Ternary} from "../redux/actions/toggleSubjectSelection";
+import { Ternary } from "../redux/actions/updateSlotsTableState";
 import {Colors} from "./colors/colors";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";

@@ -10,9 +10,6 @@ import {
     FindClashes
 } from "../../clashFinder/findClashes";
 import {
-    GetInitial
-} from "../../helper";
-import {
     GetTestSubjects1,
     IndexOf
 } from "../../tests/testDataGenerator";
@@ -28,9 +25,6 @@ import {
 import {
     CheckForClashesBetween,
     FindTimetableBasedOn,
-    GetSlotStates,
-    GetSubjectStates,
-    Ternary,
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
 import {
@@ -56,32 +50,6 @@ describe("toggle subject selection action", () => {
             .to
             .eq("toggle subject selection");
 
-    });
-
-    it("should set SlotStates property of SlotTableState", () => {
-        const initialState = getInitialState();
-        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
-        // Note: SlotNumbers of Hubungan Etnik is [1,2,3] as it is the first subject in the list
-        const expected = {
-            1: true,
-            2: true,
-            3: true
-        };
-        // HE have 6 slots, where each SlotNumber consist of 2 slots
-        expect(newState.SlotTableState.SlotStates).to.deep.eq(expected);
-    });
-
-    it("should set SubjectStates property of SlotTableState", () => {
-        const initialState = getInitialState();
-        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
-        expect(newState.SlotTableState.SubjectStates[CodeOf.HE]).to.eq("true");
-    });
-
-    it("should clear the error message property of SlotTableState", () => {
-        const initialState = getInitialState();
-        initialState.SlotTableState.ErrorMessages = [];
-        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
-        expect(newState.SlotTableState.ErrorMessages).to.eq(null);
     });
 
     it("should toggle selection on a subject based on its subject index", () => {
@@ -258,36 +226,6 @@ describe("CheckForClashesBetween", () => {
         const result = CheckForClashesBetween(titas, [bmk2, wwt]);
         expect(result.Type).to.eq("single");
         expect(result.TargetName).to.eq("Water & Wastewater Treatment");
-    });
-
-});
-
-describe("GetSlotStates", () => {
-    it("case 1", () => {
-        const subjects = mockSubjects;
-        const acp = find(subjects, {
-            Code: CodeOf.ACP
-        });
-        const result = GetSlotStates([acp]);
-        expect(acp.SlotNumbers).to.deep.eq(["10", "11"]);
-        expect(result[10]).to.eq(true);
-        expect(result[11]).to.eq(true);
-    });
-
-});
-
-describe("GetSubjectStates", () => {
-    it("case 1", () => {
-        const subjects = mockSubjects;
-        const acp = find(subjects, {
-            Code: CodeOf.ACP
-        });
-        const he = find(subjects, {
-            Code: CodeOf.HE
-        });
-        const result = GetSubjectStates([acp, he]);
-        expect(result[acp.Code]).to.eq("true");
-        expect(result[he.Code]).to.eq("true");
     });
 
 });

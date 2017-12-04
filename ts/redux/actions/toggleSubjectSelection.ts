@@ -31,9 +31,6 @@ import {
     FindTimetable
 } from "../../permutator/findTimetable";
 import {
-    NewSlotsTableState
-} from "../reducers/slotsTableState";
-import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 import {
@@ -83,11 +80,6 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
         subjectToBeSelected.ClashReport = new ClashReport("group");
         return {
             ...state,
-            SlotTableState: {
-                ...NewSlotsTableState(),
-                SlotStates: GetSlotStates(selectedSubjects),
-                SubjectStates: GetSubjectStates(selectedSubjects)
-            },
             SubjectListState: {
                 ...state.SubjectListState,
                 Subjects: allSubjects
@@ -97,11 +89,6 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
     subjectToBeSelected.IsSelected = true;
     return {
         ...state,
-        SlotTableState: {
-            ...NewSlotsTableState(),
-            SlotStates: GetSlotStates(selectedSubjects.concat([subjectToBeSelected])),
-            SubjectStates: GetSubjectStates(selectedSubjects.concat([subjectToBeSelected]))
-        },
         SubjectListState: {
             ...state.SubjectListState,
             Subjects: allSubjects,
@@ -121,11 +108,6 @@ export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Sub
             ...state.SubjectListState,
             Subjects: allSubjects,
 
-        },
-        SlotTableState: {
-            ...NewSlotsTableState(),
-            SlotStates: GetSlotStates(selectedSubjects),
-            SubjectStates: GetSubjectStates(selectedSubjects)
         },
         TimetableListState: NewTimetableListState(timetables)
     };
@@ -195,24 +177,4 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
             )
         )
     );
-}
-
-export function GetSlotStates(selectedSubjects: Subject[]): IStringDicionary < boolean > {
-    const result: IStringDicionary < boolean > = {};
-    selectedSubjects.forEach((s) => {
-        s.SlotNumbers.forEach((id) => {
-            result[id] = true;
-        });
-    });
-    return result;
-}
-
-export type Ternary = "true" | "false" | "intermediate";
-
-export function GetSubjectStates(selectedSubjects: Subject[]): IStringDicionary < Ternary > {
-    const result = {};
-    selectedSubjects.forEach((s) => {
-        result[s.Code] = "true";
-    });
-    return result;
 }

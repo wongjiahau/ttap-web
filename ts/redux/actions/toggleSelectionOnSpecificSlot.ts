@@ -13,9 +13,6 @@ import {
     IMasterState,
     MasterStateAction
 } from "./../reducers/masterState";
-import {
-    Ternary
-} from "./toggleSubjectSelection";
 
 export class ToggleSelectionOnSpecificSlot extends MasterStateAction {
     public constructor(private slotNumber: string, private checked: boolean, private subjectCode: string) {
