@@ -35,15 +35,17 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         return "find timetables based on chosen slots";
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
-        const slotsTableState = state.SlotTableState;
-        const idsOfSelectedSlots = [];
-        for (let i = 0; i < slotsTableState.SlotStates.length; i++) {
-            const current = slotsTableState.SlotStates[i];
-            if (current === true) {
-                idsOfSelectedSlots.push(i);
+        const slotTableState = state.SlotTableState;
+        const slotNumbersOfSelectedSlots: string[] = [];
+        for (const key in slotTableState.SlotStates) {
+            if (slotTableState.SlotStates.hasOwnProperty(key)) {
+                const current = slotTableState.SlotStates[key];
+                if (current === true) {
+                    slotNumbersOfSelectedSlots.push(key);
+                }
             }
         }
-        const rawSlots = RawSlot.GetBunch(idsOfSelectedSlots);
+        const rawSlots = RawSlot.GetBunchFromSlotNumbers(slotNumbersOfSelectedSlots);
         const newTimetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
 
         const slotsOfSubjects = PartitionizeByKey(rawSlots, "SubjectCode");
@@ -56,7 +58,9 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
 
         let errorMessages = [];
         correctSubjectSchemas.forEach((s) => {
-            let matchingSchema = find(currentSubjectSchemas, {SubjectCode: s.SubjectCode});
+            let matchingSchema = find(currentSubjectSchemas, {
+                SubjectCode: s.SubjectCode
+            });
             if (matchingSchema === undefined) {
                 matchingSchema = new SubjectSchema(false, false, false, s.SubjectCode);
             }

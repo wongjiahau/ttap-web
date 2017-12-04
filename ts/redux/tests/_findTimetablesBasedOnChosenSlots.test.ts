@@ -1,13 +1,40 @@
-import {expect} from "chai";
-import {isEqual} from "lodash";
-import { RawSlot } from "../../model/rawSlot";
-import { CodeOf, GetTestSubjects1, IndexOf } from "../../tests/testDataGenerator";
-import { ToggleSelectionOnGroupOfSlots } from "../actions/toggleSelectionOnGroupOfSlots";
-import { ToggleSelectionOnSpecificSlot } from "../actions/toggleSelectionOnSpecificSlot";
-import { ToggleSubjectSelection } from "../actions/toggleSubjectSelection";
-import { NewSubjectListState } from "../reducers/subjectListState";
-import {FindTimetablesBasedOnChosenSlots} from "./../actions/findTimetablesBasedOnChosenSlots";
-import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
+import {
+    expect
+} from "chai";
+import {
+    isEqual
+} from "lodash";
+import {
+    RawSlot
+} from "../../model/rawSlot";
+import {
+    DiffReport
+} from "../../model/subjectSchema";
+import {
+    CodeOf,
+    GetTestSubjects1,
+    IndexOf
+} from "../../tests/testDataGenerator";
+import {
+    ToggleSelectionOnGroupOfSlots
+} from "../actions/toggleSelectionOnGroupOfSlots";
+import {
+    ToggleSelectionOnSpecificSlot
+} from "../actions/toggleSelectionOnSpecificSlot";
+import {
+    ToggleSubjectSelection
+} from "../actions/toggleSubjectSelection";
+import {
+    NewSubjectListState
+} from "../reducers/subjectListState";
+import {
+    FindTimetablesBasedOnChosenSlots
+} from "./../actions/findTimetablesBasedOnChosenSlots";
+import {
+    IMasterState,
+    MasterStateReducer,
+    NewMasterState
+} from "./../reducers/masterState";
 
 function getInitialState(): IMasterState {
     RawSlot.Reset();
@@ -27,7 +54,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
-        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot(0, true, CodeOf.HE));
+        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("1", true, CodeOf.HE));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(2);
         expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(0);
@@ -39,7 +66,20 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BKA));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
-        expect(newState.SlotTableState.ErrorMessages).to.deep.eq(["At least one LECTURE is needed for Bahasa Kebangsaan A"]);
+        expect(newState.SlotTableState.ErrorMessages).to.deep.eq([new DiffReport(CodeOf.BKA, "L")]);
+    });
+
+    it("should set ErrorMessages property of SlotsTableState if there are schema intolerance(2)", () => {
+        const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BKA));
+        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.SA1));
+        newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BKA));
+        // 48 is the slot number for L-1 of Structural Analysis
+        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("48", true, CodeOf.SA1));
+        newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
+        expect(newState.SlotTableState.ErrorMessages).to.deep.eq(
+            [new DiffReport(CodeOf.BKA, "L"), new DiffReport(CodeOf.SA1, "L")]
+        );
     });
 
 });

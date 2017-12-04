@@ -12,7 +12,7 @@ import {
 describe("Subject", () => {
     describe("constructor", () => {
         it("should set static property subjectCodeAndName", () => {
-            const aSubject = new Subject("Spongebob", "MPU3113", []);
+            const aSubject = new Subject("Spongebob", "MPU3113", [], []);
             expect(Subject.GetSubjectNameOf("MPU3113")).to.eq("Spongebob");
         });
     });
@@ -25,7 +25,7 @@ describe("Subject", () => {
         });
 
         it("should return Beautified subject name", () => {
-            const aSubject = new Subject("lowercase subject name", "123", []);
+            const aSubject = new Subject("lowercase subject name", "123", [], []);
             const result = Subject.GetSubjectNameOf("123");
             expect(result).to.eq("Lowercase Subject Name");
         });
