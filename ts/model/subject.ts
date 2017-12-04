@@ -1,5 +1,11 @@
+import { Beautify } from "../helper";
 import {RawSlot} from "./rawSlot";
+
 export class Subject {
+    public static GetSubjectNameOf(subjectCode: string) : string {
+        return Beautify(Subject.subjectCodeAndName[subjectCode]);
+    }
+    private static subjectCodeAndName = {};
     public readonly Name: string;
     public readonly Code: string;
     public readonly SlotIds: number[];
@@ -15,6 +21,7 @@ export class Subject {
         this.IsVisible = true;
         this.ClashingCounterparts = [];
         this.ClashReport = null;
+        Subject.subjectCodeAndName[code] = name;
     }
 }
 
