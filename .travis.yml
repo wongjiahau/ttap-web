@@ -26,10 +26,13 @@ script:
   - ./scripts/transpile
   - npm run build
   - npm test
-  - ./scripts/upload-coverage-report
 
 after_script:
   - echo "script finished."
+
+after_success:
+  - ./scripts/upload-coverage-report
+
 
 deploy:
   provider: surge
