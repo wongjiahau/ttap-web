@@ -8,7 +8,9 @@ import {
 import {
     Beautify
 } from "../../helper";
-import { IStringDicionary } from "../../interfaces/dictionary";
+import {
+    IStringDicionary
+} from "../../interfaces/dictionary";
 import {
     RawSlot
 } from "../../model/rawSlot";
@@ -29,6 +31,9 @@ import {
     FindTimetable
 } from "../../permutator/findTimetable";
 import {
+    NewSlotsTableState
+} from "../reducers/slotsTableState";
+import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 import {
@@ -48,7 +53,8 @@ export class ToggleSubjectSelection extends MasterStateAction {
         return "toggle subject selection";
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
-        const newSubjects = state.SubjectListState.Subjects.map((x) => ({ ...x }));
+        const newSubjects = state.SubjectListState.Subjects.map((x) => ({ ...x
+        }));
         const targetSubject = newSubjects[this.subjectIndex];
         if (targetSubject.ClashReport !== null) {
             return state;
@@ -78,7 +84,7 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
         return {
             ...state,
             SlotTableState: {
-                ...state.SlotTableState,
+                ...NewSlotsTableState(),
                 SlotStates: GetSlotStates(selectedSubjects),
                 SubjectStates: GetSubjectStates(selectedSubjects)
             },
@@ -92,7 +98,7 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
     return {
         ...state,
         SlotTableState: {
-            ...state.SlotTableState,
+            ...NewSlotsTableState(),
             SlotStates: GetSlotStates(selectedSubjects.concat([subjectToBeSelected])),
             SubjectStates: GetSubjectStates(selectedSubjects.concat([subjectToBeSelected]))
         },
@@ -117,7 +123,7 @@ export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Sub
 
         },
         SlotTableState: {
-            ...state.SlotTableState,
+            ...NewSlotsTableState(),
             SlotStates: GetSlotStates(selectedSubjects),
             SubjectStates: GetSubjectStates(selectedSubjects)
         },
@@ -191,8 +197,8 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
     );
 }
 
-export function GetSlotStates(selectedSubjects: Subject[]) : IStringDicionary<boolean> {
-    const result : IStringDicionary<boolean> = {};
+export function GetSlotStates(selectedSubjects: Subject[]): IStringDicionary < boolean > {
+    const result: IStringDicionary < boolean > = {};
     selectedSubjects.forEach((s) => {
         s.SlotNumbers.forEach((id) => {
             result[id] = true;
@@ -203,7 +209,7 @@ export function GetSlotStates(selectedSubjects: Subject[]) : IStringDicionary<bo
 
 export type Ternary = "true" | "false" | "intermediate";
 
-export function GetSubjectStates(selectedSubjects: Subject[]) : IStringDicionary<Ternary> {
+export function GetSubjectStates(selectedSubjects: Subject[]): IStringDicionary < Ternary > {
     const result = {};
     selectedSubjects.forEach((s) => {
         result[s.Code] = "true";

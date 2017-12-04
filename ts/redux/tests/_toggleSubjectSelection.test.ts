@@ -77,6 +77,13 @@ describe("toggle subject selection action", () => {
         expect(newState.SlotTableState.SubjectStates[CodeOf.HE]).to.eq("true");
     });
 
+    it("should clear the error message property of SlotTableState", () => {
+        const initialState = getInitialState();
+        initialState.SlotTableState.ErrorMessages = [];
+        const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        expect(newState.SlotTableState.ErrorMessages).to.eq(null);
+    });
+
     it("should toggle selection on a subject based on its subject index", () => {
         const initialState = getInitialState();
         const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
