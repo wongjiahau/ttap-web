@@ -22,10 +22,12 @@ export function ParseSlotToSubject(slots : RawSlot[]) : Subject[] {
         const slot = item.value[0];
         const allSlotOfThisSubject = item.value;
         const slotIds = Array < number > ();
+        const slotNumbers = Array < string > ();
         allSlotOfThisSubject.forEach((s) => {
             slotIds.push(s.HashId);
+            slotNumbers.push(s.Number);
         });
-        result.push(new Subject(slot.SubjectName, slot.SubjectCode, slotIds));
+        result.push(new Subject(slot.SubjectName, slot.SubjectCode, slotIds, slotNumbers));
     });
     return sortBy(result, [(o) => o.Name]);
 }
