@@ -16,7 +16,9 @@ import {
     GetTestSubjects1,
     IndexOf
 } from "../../tests/testDataGenerator";
-import { NewSubjectListState } from "../reducers/subjectListState";
+import {
+    NewSubjectListState
+} from "../reducers/subjectListState";
 import {
     CodeOf
 } from "./../../tests/testDataGenerator";
@@ -40,7 +42,7 @@ import {
 const mockSubjects = GetTestSubjects1();
 FindClashes(mockSubjects); // some test will fail if this line is not run
 
-function getInitialState() : IMasterState {
+function getInitialState(): IMasterState {
     return {
         ...NewMasterState(),
         SubjectListState: NewSubjectListState(mockSubjects)
@@ -59,8 +61,14 @@ describe("toggle subject selection action", () => {
     it("should set SlotStates property of SlotTableState", () => {
         const initialState = getInitialState();
         const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
-        // Note: SlotsId of Hubungan Etnik is [0,1,2,3,4,5] as it is the first subject in the list
-        expect(newState.SlotTableState.SlotStates).to.deep.eq(fill(Array(6), true)); // HE have 6 slots
+        // Note: SlotNumbers of Hubungan Etnik is [1,2,3] as it is the first subject in the list
+        const expected = {
+            1: true,
+            2: true,
+            3: true
+        };
+        // HE have 6 slots, where each SlotNumber consist of 2 slots
+        expect(newState.SlotTableState.SlotStates).to.deep.eq(expected);
     });
 
     it("should set SubjectStates property of SlotTableState", () => {
@@ -254,11 +262,9 @@ describe("GetSlotStates", () => {
             Code: CodeOf.ACP
         });
         const result = GetSlotStates([acp]);
-        expect(acp.SlotIds).to.deep.eq([18, 19, 20, 21]);
-        expect(result[18]).to.eq(true);
-        expect(result[19]).to.eq(true);
-        expect(result[20]).to.eq(true);
-        expect(result[21]).to.eq(true);
+        expect(acp.SlotNumbers).to.deep.eq(["10", "11"]);
+        expect(result[10]).to.eq(true);
+        expect(result[11]).to.eq(true);
     });
 
 });

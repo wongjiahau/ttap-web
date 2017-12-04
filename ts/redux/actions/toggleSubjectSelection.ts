@@ -8,6 +8,7 @@ import {
 import {
     Beautify
 } from "../../helper";
+import { IStringDicionary } from "../../interfaces/dictionary";
 import {
     RawSlot
 } from "../../model/rawSlot";
@@ -190,10 +191,10 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
     );
 }
 
-export function GetSlotStates(selectedSubjects: Subject[]) : boolean[] {
-    const result = [];
+export function GetSlotStates(selectedSubjects: Subject[]) : IStringDicionary<boolean> {
+    const result : IStringDicionary<boolean> = {};
     selectedSubjects.forEach((s) => {
-        s.SlotIds.forEach((id) => {
+        s.SlotNumbers.forEach((id) => {
             result[id] = true;
         });
     });
@@ -202,7 +203,7 @@ export function GetSlotStates(selectedSubjects: Subject[]) : boolean[] {
 
 export type Ternary = "true" | "false" | "intermediate";
 
-export function GetSubjectStates(selectedSubjects: Subject[]) : {} {
+export function GetSubjectStates(selectedSubjects: Subject[]) : IStringDicionary<Ternary> {
     const result = {};
     selectedSubjects.forEach((s) => {
         result[s.Code] = "true";
