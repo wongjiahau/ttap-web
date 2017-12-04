@@ -17,13 +17,13 @@ function getInitialState(): IMasterState {
 describe("toggle selection on specific slot", () => {
     it("'s typename should be 'seleting slot [ 1 ]' when passed in true", () => {
         getInitialState();
-        const action = new ToggleSelectionOnSpecificSlot(1, true, null);
+        const action = new ToggleSelectionOnSpecificSlot("1", true, null);
         expect(action.TypeName()).to.eq("selecting slot [ 1 ]");
     });
 
     it("'s typename should be 'deseleting slot [ 1 ]' when passed in false", () => {
         getInitialState();
-        const action = new ToggleSelectionOnSpecificSlot(1, false, null);
+        const action = new ToggleSelectionOnSpecificSlot("1", false, null);
         expect(action.TypeName()).to.eq("deselecting slot [ 1 ]");
     });
 
@@ -33,7 +33,7 @@ describe("toggle selection on specific slot", () => {
         // He shall see that the checkbox of slot is dechecked
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
-        const slotNumberOfFirstSlotOfHubunganEtnik = 1;
+        const slotNumberOfFirstSlotOfHubunganEtnik = "1";
         newState = MasterStateReducer(newState,
             new ToggleSelectionOnSpecificSlot(slotNumberOfFirstSlotOfHubunganEtnik, true, CodeOf.HE));
         expect(newState.SlotTableState.SlotStates[slotNumberOfFirstSlotOfHubunganEtnik]).to.eq(false);
@@ -46,7 +46,7 @@ describe("toggle selection on specific slot", () => {
         // He shall see that the checkbox of slot is checked again
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
-        const slotNumberOfFirstSlotOfHubunganEtnik = 1;
+        const slotNumberOfFirstSlotOfHubunganEtnik = "1";
         newState = MasterStateReducer(newState,
             new ToggleSelectionOnSpecificSlot(slotNumberOfFirstSlotOfHubunganEtnik, true, CodeOf.HE));
         newState = MasterStateReducer(newState,

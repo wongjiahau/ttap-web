@@ -18,7 +18,7 @@ import {
 } from "./toggleSubjectSelection";
 
 export class ToggleSelectionOnSpecificSlot extends MasterStateAction {
-    public constructor(private slotNumber: number, private checked: boolean, private subjectCode: string) {
+    public constructor(private slotNumber: string, private checked: boolean, private subjectCode: string) {
         super();
     }
     public TypeName(): string {
