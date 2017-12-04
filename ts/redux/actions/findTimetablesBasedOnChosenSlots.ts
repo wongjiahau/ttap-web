@@ -93,6 +93,10 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         }
         return {
             ...state,
+            SnackbarState: {
+                IsOpen: true,
+                Message: newTimetables.length + " possible timetables found."
+            },
             SlotTableState: {
                 ...state.SlotTableState,
                 IsOpen: false,
