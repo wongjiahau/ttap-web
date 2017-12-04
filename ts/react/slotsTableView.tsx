@@ -157,7 +157,7 @@ ISlotsTableViewInternalState > {
                     <footer style={footerStyle}>
                         <StackPanel orientation="horizontal" horizontalAlignment="left">
                             <Button raised={true} color="primary" onClick={this.props.handleDone}>
-                                DONE
+                                Find new timetables
                             </Button>
                             <Button onClick={this.props.handleCancel}>
                                 Cancel
