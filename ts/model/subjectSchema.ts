@@ -48,19 +48,28 @@ export function GenerateSubjectSchema(slots: RawSlot[]): SubjectSchema {
     return result;
 }
 
-export function GetDiff(x: SubjectSchema, y: SubjectSchema): string[] {
-    const result: string[] = [];
+export class DiffReport {
+    public readonly SubjectCode: string;
+    public readonly MissingSlotType: "L" | "T" | "P";
+    public constructor(subjectCode: string, missingSlotType: "L" | "T" | "P") {
+        this.SubjectCode = subjectCode;
+        this.MissingSlotType = missingSlotType;
+    }
+}
+
+export function GetDiff(x: SubjectSchema, y: SubjectSchema): DiffReport[] {
+    const result: DiffReport[] = [];
     if (x.IsEqual(y)) {
         return null;
     }
     if (x.GotLecture !== y.GotLecture) {
-        result.push("At least one LECTURE is needed for " + x.SubjectCode);
+        result.push(new DiffReport(x.SubjectCode, "L"));
     }
     if (x.GotTutorial !== y.GotTutorial) {
-        result.push("At least one TUTORIAL is needed for " + x.SubjectCode);
+        result.push(new DiffReport(x.SubjectCode, "T"));
     }
     if (x.GotPractical !== y.GotPractical) {
-        result.push("At least one PRACTICAL is needed for " + x.SubjectCode);
+        result.push(new DiffReport(x.SubjectCode, "P"));
     }
     return result;
 }

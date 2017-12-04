@@ -10,6 +10,7 @@ import {
     RawSlot
 } from "../rawSlot";
 import {
+    DiffReport,
     GenerateSubjectSchema,
     GetDiff,
     SubjectSchema
@@ -125,7 +126,7 @@ describe("GetDiff", () => {
         const x = new SubjectSchema(true, true, true, "MPU3113");
         const y = new SubjectSchema(false, true, true);
         expect(x.IsEqual(y)).to.eq(false);
-        expect(GetDiff(x, y)).to.deep.eq(["At least one LECTURE is needed for MPU3113"]);
+        expect(GetDiff(x, y)).to.deep.eq([new DiffReport("MPU3113", "L")]);
     });
 
     it("should return error messages if schema X and schema Y are not equal (2)", () => {
@@ -133,8 +134,8 @@ describe("GetDiff", () => {
         const y = new SubjectSchema(false, false, true);
         expect(x.IsEqual(y)).to.eq(false);
         expect(GetDiff(x, y)).to.deep.eq([
-            "At least one LECTURE is needed for MPU3113",
-            "At least one TUTORIAL is needed for MPU3113"
+            new DiffReport("MPU3113", "L"),
+            new DiffReport("MPU3113", "T"),
         ]);
     });
 });
