@@ -24,6 +24,7 @@ import {
 import {
     ToggleSubjectSelection
 } from "../actions/toggleSubjectSelection";
+import { UpdateSlotsTableState } from "../actions/updateSlotsTableState";
 import {
     NewSubjectListState
 } from "../reducers/subjectListState";
@@ -53,6 +54,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     it("should set property of FiltrateTimetables and ResidueTimetables if there are no error", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
         newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("1", true, CodeOf.HE));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
@@ -65,6 +67,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BKA));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BKA));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq([new DiffReport(CodeOf.BKA, "L")]);
@@ -73,6 +76,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     it("should set ErrorMessages of SlotsTableState if there are schema intolerance(2)", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BEAM));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BEAM));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq(
@@ -84,6 +88,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BKA));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.SA1));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BKA));
         // 48 is the slot number for L-1 of Structural Analysis
         newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("48", true, CodeOf.SA1));
@@ -97,6 +102,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("10", true, CodeOf.ACP));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq([new DiffReport("", "no possible timetables found")]);
@@ -105,6 +111,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     it("should set IsOpen property of SlotTableState to false if there are no errors", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.eq(null);
         expect(newState.SlotTableState.IsOpen).to.eq(false);

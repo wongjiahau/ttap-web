@@ -19,6 +19,9 @@ import {
     ToggleSubjectSelection
 } from "../actions/toggleSubjectSelection";
 import {
+    UpdateSlotsTableState
+} from "../actions/updateSlotsTableState";
+import {
     NewSubjectListState
 } from "../reducers/subjectListState";
 import {
@@ -47,6 +50,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // Then Ali shall see that all slots of HE is deselected
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         expect(newState.SlotTableState.SlotStates).to.deep.eq({
             1: true,
             2: true,
@@ -68,6 +72,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // Then Ali shall see that all slots of HE is selected
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
         expect(newState.SlotTableState.SlotStates).to.deep.eq({
             1: false,
@@ -88,6 +93,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // Then Ali shall see that the checkbox of HE is unchecked
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
         expect(newState.SlotTableState.SubjectStates[CodeOf.HE]).to.eq("false");
     });
@@ -99,6 +105,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // Then Ali shall see that the checkbox of HE is checked
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
         expect(newState.SlotTableState.SubjectStates[CodeOf.HE]).to.eq("true");
