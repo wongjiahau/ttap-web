@@ -1,25 +1,28 @@
 import {
     connect
 } from "react-redux";
-import { Subject } from "../../model/subject";
+import {
+    Subject
+} from "../../model/subject";
 import {
     ISlotsTableViewDispatchProps,
     ISlotsTableViewInternalState,
     ISlotsTableViewStateProps,
     SlotsTable
 } from "../../react/slotsTableView";
+import { FindTimetablesBasedOnChosenSlots } from "../actions/findTimetablesBasedOnChosenSlots";
 import {
     NotifyNumberOfRemainingTimetables
 } from "../actions/notifyNumberOfRemainingTimetables";
 import {
-    ReformTimetablesBasedOnGroupOfSlots
-} from "../actions/reformTimetablesBasedOnGroupOfSlots";
-import {
-    ReformTimetablesBasedOnSpecificSlot
-} from "../actions/reformTimetablesBasedOnSpecificSlot";
-import {
     ToggleIsOpenOfSlotsTable
 } from "../actions/toggleIsOpenOfSlotsTable";
+import {
+    ToggleSelectionOnGroupOfSlots
+} from "../actions/toggleSelectionOnGroupOfSlots";
+import {
+    ToggleSelectionOnSpecificSlot
+} from "../actions/toggleSelectionOnSpecificSlot";
 import {
     ISlotsTableState
 } from "../reducers/slotsTableState";
@@ -31,6 +34,7 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
     const slotsTableState = state.MasterStateReducer.SlotTableState as ISlotsTableState;
     const subjectListState = state.MasterStateReducer.SubjectListState as ISubjectListState;
     return {
+        errorMessages:    slotsTableState.ErrorMessages,
         isOpen:           slotsTableState.IsOpen,
         selectedSubjects: subjectListState.Subjects.filter((s) => s.IsSelected),
         slotStates:       slotsTableState.SlotStates,
@@ -40,15 +44,12 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
     return {
-        handleClose: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
-        handleSlotCheckChanged: (slotId: number, checked: boolean, subjectCode: string) => {
-            dispatch(new ReformTimetablesBasedOnSpecificSlot(slotId, checked, subjectCode));
-            dispatch(new NotifyNumberOfRemainingTimetables());
-        },
-        handleSlotsGroupCheckChanged: (subjectCode: string) => {
-            dispatch(new ReformTimetablesBasedOnGroupOfSlots(subjectCode));
-            dispatch(new NotifyNumberOfRemainingTimetables());
-        }
+        handleDone: () => dispatch(new FindTimetablesBasedOnChosenSlots()),
+        handleCancel: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
+        handleSlotCheckChanged: (slotNumber: string, checked: boolean, subjectCode: string) =>
+            dispatch(new ToggleSelectionOnSpecificSlot(slotNumber, checked, subjectCode)),
+        handleSlotsGroupCheckChanged: (subjectCode: string) =>
+            dispatch(new ToggleSelectionOnGroupOfSlots(subjectCode))
     };
 };
 

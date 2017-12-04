@@ -8,8 +8,10 @@ import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui-next
 import Typography from "material-ui-next/Typography";
 import * as React from "react";
 import {Beautify} from "../helper";
+import {IStringDicionary} from "../interfaces/dictionary";
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
+import {DiffReport} from "../model/subjectSchema";
 import {Ternary} from "../redux/actions/toggleSubjectSelection";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
@@ -32,15 +34,17 @@ const footerStyle : React.CSSProperties = {
 };
 
 export interface ISlotsTableViewStateProps {
-    slotStates : boolean[];
-    subjectStates : {};
-    selectedSubjects : Subject[];
+    errorMessages : DiffReport[];
     isOpen : boolean;
+    selectedSubjects : Subject[];
+    slotStates : IStringDicionary < boolean >;
+    subjectStates : IStringDicionary < Ternary >;
 }
 
 export interface ISlotsTableViewDispatchProps {
-    handleClose : () => void;
-    handleSlotCheckChanged : (slotId : number, checked : boolean, subjectCode : string) => void;
+    handleCancel : () => void;
+    handleDone : () => void;
+    handleSlotCheckChanged : (slotNumber : string, checked : boolean, subjectCode : string) => void;
     handleSlotsGroupCheckChanged : (subjectCode : string) => void;
 }
 
@@ -120,12 +124,12 @@ ISlotsTableViewInternalState > {
                                                 {RawSlot
                                                     .GetBunch(subject.SlotIds)
                                                     .map((slot, index) => {
-                                                        const checked = this.props.slotStates[slot.HashId];
+                                                        const checked = this.props.slotStates[slot.Number];
                                                         return (
                                                             <TableRow key={index}>
                                                                 <TableCell padding="checkbox"><Checkbox
                                                                     checked={checked}
-                                                                    onClick={() => this.props.handleSlotCheckChanged(slot.HashId, checked, subject.Code)}/>
+                                                                    onClick={() => this.props.handleSlotCheckChanged(slot.Number, checked, subject.Code)}/>
                                                                 </TableCell>
                                                                 <TableCell padding="dense">{slot.Number}</TableCell>
                                                                 <TableCell padding="dense">{slot.Type}</TableCell>
@@ -144,10 +148,21 @@ ISlotsTableViewInternalState > {
                                     </div>
                                 );
                             })}</Paper>
+                            <div>
+                                {
+                                    JSON.stringify(this.props.errorMessages)
+
+                                }
+                            </div>
                     <footer style={footerStyle}>
-                        <Button raised={true} color="primary" onClick={this.props.handleClose}>
-                            DONE
-                        </Button>
+                        <StackPanel orientation="horizontal" horizontalAlignment="right">
+                            <Button raised={true} color="primary" onClick={this.props.handleDone}>
+                                DONE
+                            </Button>
+                            <Button onClick={this.props.handleCancel}>
+                                Cancel
+                            </Button>
+                        </StackPanel>
                     </footer>
                 </section>
 
