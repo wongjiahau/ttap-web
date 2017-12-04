@@ -32,9 +32,21 @@ export class RawSlot implements IRawSlot {
         for (let i = 0; i < hashIds.length; i++) {
             const matched = RawSlot.allRawSlots.filter((x) => x.HashId === hashIds[i]);
             if (matched.length === 0) {
-                throw new Error(hashIds + "does not matches any HashId of any slot");
+                throw new Error(hashIds[i] + "does not matches any HashId of any slot");
             }
             result.push(matched[0]);
+        }
+        return result;
+    }
+
+    public static GetBunchFromSlotNumbers(slotNumbers: string[]): RawSlot[] {
+        let result : RawSlot[] = [];
+        for (let i = 0; i < slotNumbers.length; i++) {
+            const matchingSlots = RawSlot.allRawSlots.filter((x) => x.Number === slotNumbers[i]);
+            if (matchingSlots.length === 0) {
+                throw new Error(slotNumbers[i] + "does not matches any SlotNumber of any slot");
+            }
+            result = result.concat(matchingSlots);
         }
         return result;
     }

@@ -5,6 +5,7 @@ import {
     RawSlot
 } from "../rawSlot";
 import {
+    CodeOf,
     GetTestRawSlot1
 } from "./../../tests/testDataGenerator";
 
@@ -45,6 +46,22 @@ describe("RawSlot", () => {
             }).to.throw();
         });
 
+    });
+
+    describe("RawSlot.GetBunchFromSlotNumbers()", () => {
+        it("should return a bunch of RawSlots", () => {
+            const input = ["1", "2", "3"];
+            const result = RawSlot.GetBunchFromSlotNumbers(input);
+            expect(result.length).to.eq(6);
+            expect(result.every((s) => s.SubjectCode === CodeOf.HE));
+        });
+
+        it("should throw error if one of the input does not matches any RawSlots's Number", () => {
+            const input = ["0"];
+            expect(() => {
+                RawSlot.GetBunchFromSlotNumbers(input);
+            }).to.throw();
+        });
     });
 
     describe("RawSlot.GetRelated()", () => {
