@@ -11,8 +11,8 @@ commit_coverage_report() {
 }
 
 upload_files() {
-  git remote add origin https://${GH_TOKEN}@github.com/wongjiahau/ttap-web.git > /dev/null 2>&1
-  git push --set-upstream origin code-cov -f
+  git remote add origin-pages https://${GH_TOKEN}@github.com/wongjiahau/ttap-web.git > /dev/null 2>&1
+  git push --set-upstream origin-pages code-cov -f
 }
 
 rm ./.travis.yml #remove this file so that travis won't run build on the code-cov branch
