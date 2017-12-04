@@ -125,11 +125,13 @@ ISlotsTableViewInternalState > {
                                                     .GetBunch(subject.SlotIds)
                                                     .map((slot, index) => {
                                                         const checked = this.props.slotStates[slot.Number];
+                                                        const clickHandler = () => this.props.handleSlotCheckChanged(slot.Number, checked, subject.Code);
                                                         return (
-                                                            <TableRow key={index}>
-                                                                <TableCell padding="checkbox"><Checkbox
-                                                                    checked={checked}
-                                                                    onClick={() => this.props.handleSlotCheckChanged(slot.Number, checked, subject.Code)}/>
+                                                            <TableRow key={index} hover={true} onClick={clickHandler}>
+                                                                <TableCell padding="checkbox">
+                                                                    <Checkbox
+                                                                        checked={checked}
+                                                                        onClick={clickHandler}/>
                                                                 </TableCell>
                                                                 <TableCell padding="dense">{slot.Number}</TableCell>
                                                                 <TableCell padding="dense">{slot.Type}</TableCell>
@@ -148,12 +150,10 @@ ISlotsTableViewInternalState > {
                                     </div>
                                 );
                             })}</Paper>
-                            <div>
-                                {
-                                    JSON.stringify(this.props.errorMessages)
-
-                                }
-                            </div>
+                    <div>
+                        {JSON.stringify(this.props.errorMessages)
+}
+                    </div>
                     <footer style={footerStyle}>
                         <StackPanel orientation="horizontal" horizontalAlignment="right">
                             <Button raised={true} color="primary" onClick={this.props.handleDone}>
