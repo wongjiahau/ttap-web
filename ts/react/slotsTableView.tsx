@@ -13,6 +13,7 @@ import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 import {DiffReport} from "../model/subjectSchema";
 import {Ternary} from "../redux/actions/toggleSubjectSelection";
+import {Colors} from "./colors/colors";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 
@@ -125,13 +126,13 @@ ISlotsTableViewInternalState > {
                                                     .GetBunch(subject.SlotIds)
                                                     .map((slot, index) => {
                                                         const checked = this.props.slotStates[slot.Number];
-                                                        const clickHandler = () => this.props.handleSlotCheckChanged(slot.Number, checked, subject.Code);
+                                                        const clickHandler = () => this
+                                                            .props
+                                                            .handleSlotCheckChanged(slot.Number, checked, subject.Code);
                                                         return (
                                                             <TableRow key={index} hover={true} onClick={clickHandler}>
                                                                 <TableCell padding="checkbox">
-                                                                    <Checkbox
-                                                                        checked={checked}
-                                                                        onClick={clickHandler}/>
+                                                                    <Checkbox checked={checked} onClick={clickHandler}/>
                                                                 </TableCell>
                                                                 <TableCell padding="dense">{slot.Number}</TableCell>
                                                                 <TableCell padding="dense">{slot.Type}</TableCell>
@@ -151,11 +152,10 @@ ISlotsTableViewInternalState > {
                                 );
                             })}</Paper>
                     <div>
-                        {JSON.stringify(this.props.errorMessages)
-}
+                        {GenerateErrorLabels(this.props.errorMessages)}
                     </div>
                     <footer style={footerStyle}>
-                        <StackPanel orientation="horizontal" horizontalAlignment="right">
+                        <StackPanel orientation="horizontal" horizontalAlignment="left">
                             <Button raised={true} color="primary" onClick={this.props.handleDone}>
                                 DONE
                             </Button>
@@ -169,4 +169,42 @@ ISlotsTableViewInternalState > {
             </Drawer>
         );
     }
+}
+
+function GenerateErrorLabels(diffReports : DiffReport[]) {
+    const errorStyle : React.CSSProperties = {
+        color: Colors.Red
+    };
+    if (!diffReports) {
+        return "";
+    }
+    if (diffReports[0].MissingSlotType === "no possible timetables found") {
+        return (
+            <div style={errorStyle}>
+                <ul>
+                    <li>
+                        The currently selected slots do not produce any possible timetables. Try selecting more slots.
+                    </li>
+                </ul>
+            </div>
+        );
+    }
+    const getType = (type : string) : string => {
+        switch (type) {
+            case "L":
+                return "LECTURE";
+            case "T":
+                return "TUTORIAL";
+            case "P":
+                return "PRACTICAL";
+        }
+    };
+    return (
+        <div style={errorStyle}>
+            <ul>{diffReports.map((r) => (
+                    <li>At least one {getType(r.MissingSlotType)}&nbsp;is needed for {Subject.GetSubjectNameOf(r.SubjectCode)}</li>
+                ))}</ul>
+        </div>
+
+    );
 }

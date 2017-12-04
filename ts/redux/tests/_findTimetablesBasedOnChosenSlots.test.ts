@@ -101,4 +101,12 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq([new DiffReport("", "no possible timetables found")]);
     });
+
+    it("should set IsOpen property of SlotTableState to false if there are no errors", () => {
+        const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
+        newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
+        expect(newState.SlotTableState.ErrorMessages).to.eq(null);
+        expect(newState.SlotTableState.IsOpen).to.eq(false);
+    });
 });

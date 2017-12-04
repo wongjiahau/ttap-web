@@ -14,6 +14,6 @@ export function NewSlotsTableState() : ISlotsTableState {
         IsOpen:        false,
         SlotStates:    {},
         SubjectStates: {},
-        ErrorMessages: []
+        ErrorMessages: null
     };
 }

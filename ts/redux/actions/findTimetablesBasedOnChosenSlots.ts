@@ -12,6 +12,9 @@ import {
     SubjectSchema
 } from "../../model/subjectSchema";
 import {
+    Timetable
+} from "../../model/timetable";
+import {
     ParseRawSlotToSlot
 } from "../../parser/parseRawSlotToSlot";
 import {
@@ -47,9 +50,10 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
             }
         }
         let currentSubjectSchemas: SubjectSchema[] = [];
+        let newTimetables: Timetable[] = [];
         if (slotNumbersOfSelectedSlots.length > 0) {
             const rawSlots = RawSlot.GetBunchFromSlotNumbers(slotNumbersOfSelectedSlots);
-            const newTimetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
+            newTimetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
             const slotsOfSubjects = PartitionizeByKey(rawSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
             sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
@@ -91,6 +95,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
             ...state,
             SlotTableState: {
                 ...state.SlotTableState,
+                IsOpen: false,
                 ErrorMessages: null
             },
             TimetableListState: {
