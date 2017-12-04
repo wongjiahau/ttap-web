@@ -46,7 +46,6 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleGoToRandom: () => dispatch(new GoToRandomTimetable()),
         handleGoToPrevious: () => dispatch(new GoToPrevTimetable()),
         handleOpenSetTimeConstraintView: () => {
-            dispatch(new UpdateTotalState());
             dispatch(new ToggleSetTimeConstraintView(true));
         },
         handleOpenSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(true)),

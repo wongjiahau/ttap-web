@@ -1,6 +1,6 @@
 import { IStringDicionary } from "../../interfaces/dictionary";
 import { DiffReport } from "../../model/subjectSchema";
-import { Ternary } from "../actions/toggleSubjectSelection";
+import { Ternary } from "../actions/updateSlotsTableState";
 
 export interface ISlotsTableState {
     ErrorMessages: DiffReport[];

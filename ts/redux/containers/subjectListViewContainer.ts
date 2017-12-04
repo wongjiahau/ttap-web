@@ -4,7 +4,15 @@ import {
 import {
     HideSnackbar
 } from "../actions/hideSnackbar";
-import { ToggleIsOpenOfSubjectListView } from "../actions/toggleIsOpenOfSubjectListView";
+import {
+    ToggleIsOpenOfSubjectListView
+} from "../actions/toggleIsOpenOfSubjectListView";
+import {
+    UpdateSlotsTableState
+} from "../actions/updateSlotsTableState";
+import {
+    UpdateTotalState
+} from "../actions/updateTotalState";
 import {
     ISubjectListState,
     SubjectListStateAction
@@ -36,12 +44,12 @@ import {
 const mapStateToProps = (state): ISubjectListViewStateProps => {
     const target = state.MasterStateReducer.SubjectListState as ISubjectListState;
     return {
-        clashingSubjectPairs:         target.ClashingSubjectPairs,
-        isOpen:                       target.IsOpen,
-        isShowingLoadingBar:          target.IsShowingLoadingBar,
+        clashingSubjectPairs: target.ClashingSubjectPairs,
+        isOpen: target.IsOpen,
+        isShowingLoadingBar: target.IsShowingLoadingBar,
         isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
-        searchWord:                   target.SearchedText,
-        subjects:                     target.Subjects,
+        searchWord: target.SearchedText,
+        subjects: target.Subjects,
     };
 };
 
@@ -50,6 +58,8 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleClose: () => {
             dispatch(new ToggleIsOpenOfSubjectListView(false));
             dispatch(new HideSnackbar());
+            dispatch(new UpdateTotalState());
+            dispatch(new UpdateSlotsTableState());
         },
         handleSearch: (searchedText: string) => {
             dispatch(new SearchSubjectList(searchedText));
