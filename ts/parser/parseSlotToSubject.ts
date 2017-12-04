@@ -1,4 +1,4 @@
-import {find, some, sortBy} from "lodash";
+import {find, some, sortBy, uniq} from "lodash";
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 
@@ -27,7 +27,7 @@ export function ParseSlotToSubject(slots : RawSlot[]) : Subject[] {
             slotIds.push(s.HashId);
             slotNumbers.push(s.Number);
         });
-        result.push(new Subject(slot.SubjectName, slot.SubjectCode, slotIds, slotNumbers));
+        result.push(new Subject(slot.SubjectName, slot.SubjectCode, slotIds, uniq(slotNumbers)));
     });
     return sortBy(result, [(o) => o.Name]);
 }
