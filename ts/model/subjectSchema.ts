@@ -8,10 +8,11 @@ export class SubjectSchema {
     public GotTutorial: boolean;
     public SubjectCode: string;
 
-    public constructor(gotLecture = false, gotTutorial = false, gotPractical = false) {
+    public constructor(gotLecture = false, gotTutorial = false, gotPractical = false, subjectCode = "") {
         this.GotLecture = gotLecture;
         this.GotTutorial = gotTutorial;
         this.GotPractical = gotPractical;
+        this.SubjectCode = subjectCode;
     }
 
     public IsEqual(other: SubjectSchema): boolean {

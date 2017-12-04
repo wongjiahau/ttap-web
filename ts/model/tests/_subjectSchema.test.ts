@@ -25,9 +25,9 @@ describe("SubjectSchema", () => {
             expect(x.GotLecture).to.eq(false);
         });
 
-        it("shold not set SubjectCode property", () => {
-            const x = new SubjectSchema();
-            expect(x.SubjectCode).to.eq(undefined);
+        it("should set SubjectCode property based on the last parameter", () => {
+            const x = new SubjectSchema(true, true, true, "MPU3113");
+            expect(x.SubjectCode).to.eq("MPU3113");
         });
     });
 
@@ -45,10 +45,8 @@ describe("SubjectSchema", () => {
         });
 
         it("should return false if SubjectCode is not equal", () => {
-            const x = new SubjectSchema(true, true, true);
-            const y = new SubjectSchema(true, true, true);
-            x.SubjectCode = "hello";
-            y.SubjectCode = "bye";
+            const x = new SubjectSchema(true, true, true, "hello");
+            const y = new SubjectSchema(true, true, true, "bye");
             expect(x.IsEqual(y)).to.eq(false);
         });
 
@@ -124,16 +122,14 @@ describe("GetDiff", () => {
     });
 
     it("should return error messages if schema X and schema Y are not equal (1)", () => {
-        const x = new SubjectSchema(true, true, true);
-        x.SubjectCode = "MPU3113";
+        const x = new SubjectSchema(true, true, true, "MPU3113");
         const y = new SubjectSchema(false, true, true);
         expect(x.IsEqual(y)).to.eq(false);
         expect(GetDiff(x, y)).to.deep.eq(["At least one LECTURE is needed for MPU3113"]);
     });
 
     it("should return error messages if schema X and schema Y are not equal (2)", () => {
-        const x = new SubjectSchema(true, true, true);
-        x.SubjectCode = "MPU3113";
+        const x = new SubjectSchema(true, true, true, "MPU3113");
         const y = new SubjectSchema(false, false, true);
         expect(x.IsEqual(y)).to.eq(false);
         expect(GetDiff(x, y)).to.deep.eq([
