@@ -20,7 +20,6 @@ export class Skeleton implements ISkeleton {
         child.push(this.GetDayColumn());
         let layouts : ReactGridLayout.Layout[] = [];
         layouts = layouts.concat(this.GetTimeRowLayout());
-        layouts = layouts.concat(this.GetDayColumnLayout());
         this.Layouts = layouts;
         this.Children = child;
     }
@@ -122,20 +121,6 @@ export class Skeleton implements ISkeleton {
                     </div>
                 </div>
             );
-        }
-        return result;
-    }
-
-    private GetDayColumnLayout() : ReactGridLayout.Layout[] {
-        const result = Array < ReactGridLayout.Layout > ();
-        for (let j = 0; j < 8; j++) {
-            result.push({
-                h: 1,
-                i: ("d" + j),
-                w: 2,
-                x: 0,
-                y: j
-            });
         }
         return result;
     }

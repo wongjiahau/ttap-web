@@ -11,12 +11,18 @@ import {
     RawSlot
 } from "../../model/rawSlot";
 
-export function GenerateSlotsLayout(rawSlots: RawSlot[], xOffset: number, yOffset: number): [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
+/**
+ * @export
+ * @param {RawSlot[]} rawSlots must be sorted according to Day
+ * @param {number} xOffset
+ * @param {number} yOffset
+ * @returns {[ReactGridLayout.Layout[], ReactGridLayout.Layout[]]} [0] is the SlotsLayout, [1] is the DayColumnLayouts
+ */
+export function GenerateSlotAndDayLayouts(rawSlots: RawSlot[], xOffset: number, yOffset: number): [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
     const dayRows = GetDayRows();
-    const slots = sortBy(rawSlots, [(o) => ParseDay(o.Day)]);
     const slotLayouts: ReactGridLayout.Layout[] = [];
-    for (let h = 0; h < slots.length; h++) {
-        const slot = slots[h];
+    for (let h = 0; h < rawSlots.length; h++) {
+        const slot = rawSlots[h];
         const Y = ParseDay(slot.Day) - 1;
         const timePeriod = TimePeriod.Parse(slot.TimePeriod);
         let extraYOffset = 0;

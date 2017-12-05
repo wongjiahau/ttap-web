@@ -7,7 +7,7 @@ import {RawSlot} from "../../model/rawSlot";
 import {STCBox} from "../../model/states/stcBox";
 import {Timetable} from "../../model/timetable";
 import {Colors} from "../colors/colors";
-import {GenerateSlotViews} from "./generateSlotViews";
+import { GenerateSlotViewsAndDayColumn } from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
 import {Skeleton} from "./skeleton";
 
@@ -20,8 +20,8 @@ export interface ITimetableViewProps {
     handleDesetTimeContraintAt ? : (state : STCBox) => void;
 }
 
-export class TimetableView extends React.Component < ITimetableViewProps, {width: number} > {
-    public constructor(props: ITimetableViewProps) {
+export class TimetableView extends React.Component < ITimetableViewProps, { width : number } > {
+    public constructor(props : ITimetableViewProps) {
         super(props);
         $(window).on("resize", this.handleWindowResizing);
         this.state = {
@@ -32,12 +32,13 @@ export class TimetableView extends React.Component < ITimetableViewProps, {width
         const skeleton = new Skeleton();
         if (this.props.timetable) {
             const rawSlots = RawSlot.GetBunch(this.props.timetable.HashIds);
-            const slotViews = GenerateSlotViews(rawSlots);
-            skeleton.Concat(slotViews);
+            const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(rawSlots);
+            skeleton.Concat(slotViewsAndDayColumn);
         }
         if (this.props.states) {
             const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
             skeleton.Concat(stateViews);
+            skeleton.Layouts = skeleton.Layouts.concat(GetStandardDayColumnLayout());
         }
         const divStyle : React.CSSProperties = {
             backgroundColor: Colors.WhiteSmoke,
@@ -65,8 +66,20 @@ export class TimetableView extends React.Component < ITimetableViewProps, {width
     }
 
     public handleWindowResizing = () => {
-        this.setState({
-            width: getTimetableViewWidth()
-        });
+        this.setState({width: getTimetableViewWidth()});
     }
 }
+
+export const GetStandardDayColumnLayout = () : ReactGridLayout.Layout[] => {
+    const result = Array < ReactGridLayout.Layout > ();
+    for (let j = 0; j < 8; j++) {
+        result.push({
+            h: 1,
+            i: ("d" + j),
+            w: 2,
+            x: 0,
+            y: j
+        });
+    }
+    return result;
+};

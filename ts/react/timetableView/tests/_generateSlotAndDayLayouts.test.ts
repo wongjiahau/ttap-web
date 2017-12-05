@@ -5,14 +5,16 @@ import {
     clone,
     find
 } from "lodash";
+import { TimePeriod } from "../../../att/timePeriod";
 import {
     RawSlot
 } from "../../../model/rawSlot";
 import {
-    GenerateSlotsLayout,
+    GenerateSlotAndDayLayouts,
     GetDayColumnLayouts,
-    GetDayRows
-} from "../generateSlotLayouts";
+    GetDayRows,
+    GetXandW
+} from "../generateSlotAndDayLayouts";
 
 describe("GenerateSlotLayouts", () => {
     it("case 1", () => {
@@ -20,7 +22,7 @@ describe("GenerateSlotLayouts", () => {
         slot1.TimePeriod = "8:00 AM - 9:00 AM";
         slot1.Day = "Mon";
         const slot2 = clone(slot1);
-        const result = GenerateSlotsLayout([slot1, slot2], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0)[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 2, y: 0 },
             { h: 1, i: "s1", w: 2, x: 2, y: 1 }
@@ -36,7 +38,7 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Mon";
         slot3.TimePeriod = "9:00 AM - 10:00 AM";
-        const result = GenerateSlotsLayout([slot1, slot2, slot3], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 2, y: 0 },
             { h: 1, i: "s1", w: 2, x: 2, y: 1 },
@@ -53,24 +55,7 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Tue";
         slot3.TimePeriod = "8:00 AM - 9:00 AM";
-        const result = GenerateSlotsLayout([slot1, slot2, slot3], 0, 0)[0];
-        const expected = [
-            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
-            { h: 1, i: "s1", w: 2, x: 2, y: 1 },
-            { h: 1, i: "s2", w: 2, x: 2, y: 2 }
-        ];
-        expect(result).to.deep.eq(expected);
-    });
-
-    it("case 4", () => {
-        const slot1 = new RawSlot();
-        slot1.TimePeriod = "8:00 AM - 9:00 AM";
-        slot1.Day = "Mon";
-        const slot2 = clone(slot1);
-        const slot3 = new RawSlot();
-        slot3.Day = "Tue";
-        slot3.TimePeriod = "8:00 AM - 9:00 AM";
-        const result = GenerateSlotsLayout([slot3, slot2, slot1], 0, 0)[0]; // this part is different from case 3. Look at the ordering
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 2, y: 0 },
             { h: 1, i: "s1", w: 2, x: 2, y: 1 },
@@ -131,7 +116,7 @@ describe("GetDayColumnLayouts", () => {
         slot1.TimePeriod = "8:00 AM - 9:00 AM";
         slot1.Day = "Mon";
         const slot2 = clone(slot1);
-        const result = GenerateSlotsLayout([slot1, slot2], 0, 0)[1];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0)[1];
         expect(result).to.deep.eq([
             { h: 1, i: "d0", w: 2, x: 0, y: 0 },
             { h: 2, i: "d1", w: 2, x: 0, y: 1 },
@@ -142,6 +127,34 @@ describe("GetDayColumnLayouts", () => {
             { h: 1, i: "d6", w: 2, x: 0, y: 7 },
             { h: 1, i: "d7", w: 2, x: 0, y: 8 },
         ]);
+    });
+
+});
+
+describe("GetXandW()", () => {
+
+    it("case 1", () => {
+        const input = TimePeriod.Parse("08:00 AM - 10:00 AM");
+        const [x, w] = GetXandW(input);
+        expect(TimePeriod.Min.Hour).to.eq(7);
+        expect(x).to.eq(2);
+        expect(w).to.eq(4);
+    });
+
+    it("case 2", () => {
+        const input = TimePeriod.Parse("08:30 AM - 10:00 AM");
+        const [x, w] = GetXandW(input);
+        expect(TimePeriod.Min.Hour).to.eq(7);
+        expect(x).to.eq(3);
+        expect(w).to.eq(3);
+    });
+
+    it("case 3", () => {
+        const input = TimePeriod.Parse("01:00 PM - 4:00 PM");
+        const [x, w] = GetXandW(input);
+        expect(TimePeriod.Min.Hour).to.eq(7);
+        expect(x).to.eq(12);
+        expect(w).to.eq(6);
     });
 
 });
