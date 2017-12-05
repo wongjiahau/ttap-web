@@ -1,0 +1,147 @@
+import {
+    expect
+} from "chai";
+import {
+    clone,
+    find
+} from "lodash";
+import {
+    RawSlot
+} from "../../../model/rawSlot";
+import {
+    GenerateSlotsLayout,
+    GetDayColumnLayouts,
+    GetDayRows
+} from "../generateSlotLayouts";
+
+describe("GenerateSlotLayouts", () => {
+    it("case 1", () => {
+        const slot1 = new RawSlot();
+        slot1.TimePeriod = "8:00 AM - 9:00 AM";
+        slot1.Day = "Mon";
+        const slot2 = clone(slot1);
+        const result = GenerateSlotsLayout([slot1, slot2], 0, 0)[0];
+        const expected = [
+            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
+            { h: 1, i: "s1", w: 2, x: 2, y: 1 }
+        ];
+        expect(result).to.deep.eq(expected);
+    });
+
+    it("case 2", () => {
+        const slot1 = new RawSlot();
+        slot1.TimePeriod = "8:00 AM - 9:00 AM";
+        slot1.Day = "Mon";
+        const slot2 = clone(slot1);
+        const slot3 = new RawSlot();
+        slot3.Day = "Mon";
+        slot3.TimePeriod = "9:00 AM - 10:00 AM";
+        const result = GenerateSlotsLayout([slot1, slot2, slot3], 0, 0)[0];
+        const expected = [
+            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
+            { h: 1, i: "s1", w: 2, x: 2, y: 1 },
+            { h: 1, i: "s2", w: 2, x: 4, y: 0 }
+        ];
+        expect(result).to.deep.eq(expected);
+    });
+
+    it("case 3", () => {
+        const slot1 = new RawSlot();
+        slot1.TimePeriod = "8:00 AM - 9:00 AM";
+        slot1.Day = "Mon";
+        const slot2 = clone(slot1);
+        const slot3 = new RawSlot();
+        slot3.Day = "Tue";
+        slot3.TimePeriod = "8:00 AM - 9:00 AM";
+        const result = GenerateSlotsLayout([slot1, slot2, slot3], 0, 0)[0];
+        const expected = [
+            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
+            { h: 1, i: "s1", w: 2, x: 2, y: 1 },
+            { h: 1, i: "s2", w: 2, x: 2, y: 2 }
+        ];
+        expect(result).to.deep.eq(expected);
+    });
+
+    it("case 4", () => {
+        const slot1 = new RawSlot();
+        slot1.TimePeriod = "8:00 AM - 9:00 AM";
+        slot1.Day = "Mon";
+        const slot2 = clone(slot1);
+        const slot3 = new RawSlot();
+        slot3.Day = "Tue";
+        slot3.TimePeriod = "8:00 AM - 9:00 AM";
+        const result = GenerateSlotsLayout([slot3, slot2, slot1], 0, 0)[0]; // this part is different from case 3. Look at the ordering
+        const expected = [
+            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
+            { h: 1, i: "s1", w: 2, x: 2, y: 1 },
+            { h: 1, i: "s2", w: 2, x: 2, y: 2 }
+        ];
+        expect(result).to.deep.eq(expected);
+    });
+
+});
+
+describe("GetDayRows", () => {
+    it("case 1", () => {
+        const result = GetDayRows();
+        expect(result).to.deep.eq([{
+            rowIndex: 0,
+            state: [0, 0, 0, 0, 0]
+        }, {
+            rowIndex: 1,
+            state: [0, 0, 0, 0, 0]
+        }, {
+            rowIndex: 2,
+            state: [0, 0, 0, 0, 0]
+        }, {
+            rowIndex: 3,
+            state: [0, 0, 0, 0, 0]
+        }, {
+            rowIndex: 4,
+            state: [0, 0, 0, 0, 0]
+        }, {
+            rowIndex: 5,
+            state: [0, 0, 0, 0, 0]
+        }, {
+            rowIndex: 6,
+            state: [0, 0, 0, 0, 0]
+        }, ]);
+    });
+
+});
+
+describe("GetDayColumnLayouts", () => {
+    it("case 1", () => {
+        const dayRows = GetDayRows();
+        const result = GetDayColumnLayouts(dayRows);
+        expect(result).to.deep.eq([
+            { h: 1, i: "d0", w: 2, x: 0, y: 0 },
+            { h: 1, i: "d1", w: 2, x: 0, y: 1 },
+            { h: 1, i: "d2", w: 2, x: 0, y: 2 },
+            { h: 1, i: "d3", w: 2, x: 0, y: 3 },
+            { h: 1, i: "d4", w: 2, x: 0, y: 4 },
+            { h: 1, i: "d5", w: 2, x: 0, y: 5 },
+            { h: 1, i: "d6", w: 2, x: 0, y: 6 },
+            { h: 1, i: "d7", w: 2, x: 0, y: 7 },
+        ]);
+    });
+
+    it("case 2", () => {
+        const slot1 = new RawSlot();
+        slot1.TimePeriod = "8:00 AM - 9:00 AM";
+        slot1.Day = "Mon";
+        const slot2 = clone(slot1);
+        const result = GenerateSlotsLayout([slot1, slot2], 0, 0)[1];
+        expect(result).to.deep.eq([
+            { h: 1, i: "d0", w: 2, x: 0, y: 0 },
+            { h: 2, i: "d1", w: 2, x: 0, y: 1 },
+            { h: 1, i: "d2", w: 2, x: 0, y: 3 },
+            { h: 1, i: "d3", w: 2, x: 0, y: 4 },
+            { h: 1, i: "d4", w: 2, x: 0, y: 5 },
+            { h: 1, i: "d5", w: 2, x: 0, y: 6 },
+            { h: 1, i: "d6", w: 2, x: 0, y: 7 },
+            { h: 1, i: "d7", w: 2, x: 0, y: 8 },
+        ]);
+    });
+
+});
