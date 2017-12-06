@@ -69,7 +69,7 @@ ILoadTestDataViewState > {
     private RequestTestFiles() : void {
         const request = require("request");
         const options = {
-            url: "https://api.github.com/repos/wongjiahau/ttap-web/contents/ts/tests/testData",
+            url: "https://api.github.com/repos/wongjiahau/ttap-sample-data/contents/",
             headers: {
                 "User-Agent": "hou32hou"
             }

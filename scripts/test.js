@@ -1,7 +1,8 @@
+
 var request = require("request");
 const options = {
-    // url: 'https://api.github.com/repos/wongjiahau/ttap-web/contents/ts/tests/testData',
-    url: 'https://raw.githubusercontent.com/wongjiahau/ttap-web/master/ts/tests/testData/heng_2017_nov.html',
+    url: 'https://api.github.com/repos/wongjiahau/ttap-sample-data/contents/',
+    // url: 'https://raw.githubusercontent.com/wongjiahau/ttap-sample-data/master/',
     headers: {
         'User-Agent': 'hou32hou'
     }
