@@ -83,7 +83,7 @@ describe("ParseSlotToTinySlot", () => {
         };
         const input = [slot1, slot2];
         const result = ParseSlotToTinySlot(input);
-        expect(isEqual(result[0].HashIds, [1, 2])).to.eq(true);
+        expect(isEqual(result[0].SlotIds, [1, 2])).to.eq(true);
     });
 
     it("should join timeperiod into a state for slots from the same group", () => {

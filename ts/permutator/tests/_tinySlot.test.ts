@@ -39,7 +39,7 @@ describe("tinySlot", () => {
 
         it("should set HashIds", () => {
             const result = new TinySlot(GetTestSlot());
-            expect(isEqual(result.HashIds, [3])).to.eq(true);
+            expect(isEqual(result.SlotIds, [3])).to.eq(true);
         });
 
         it("should set PartitionKey", () => {
