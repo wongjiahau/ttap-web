@@ -4,7 +4,9 @@ import {
 import {
     IPartitionable
 } from "./partitionize";
-import { IOptimizedSlot } from "./tinySlot";
+import {
+    IOptimizedSlot
+} from "./tinySlot";
 
 /**
  * BigSlot's difference with TinySlot is that BigSlot will include week number,
@@ -15,7 +17,7 @@ import { IOptimizedSlot } from "./tinySlot";
  */
 export class BigSlot implements IOptimizedSlot {
     public readonly PartitionKey: number;
-    public readonly State: number[ /*7 multiply numberOfWeeks*/ ];
+    public State: number[ /*7 multiply numberOfWeeks*/ ];
     public readonly SlotNumber: number;
     public SlotIds: number[];
 
@@ -24,21 +26,21 @@ export class BigSlot implements IOptimizedSlot {
         this.SlotNumber = s.SlotNumber;
         this.SlotIds = [];
         this.SlotIds.push(s.HashId);
-        this.State = this.GetState(s);
-    }
-    private GetState(s: ISlot): number[] {
-        let result = [];
-        const weekBinary = s.Week.toString(2);
-        const state = [0, 0, 0, 0, 0, 0, 0];
-        state[s.Day - 1] = s.TimePeriod;
-        for (let i = weekBinary.length - 1; i >= 0; i--) {
-            if (weekBinary[i] === "1") {
-                result = result.concat(state.slice());
-            } else {
-                result = result.concat([0, 0, 0, 0, 0, 0, 0]);
-            }
-        }
-        return result;
+        this.State = GetStateOfBigSlot(s);
     }
 
+}
+export function GetStateOfBigSlot(s: ISlot): number[] {
+    let result = [];
+    const weekBinary = s.Week.toString(2);
+    const state = [0, 0, 0, 0, 0, 0, 0];
+    state[s.Day - 1] = s.TimePeriod;
+    for (let i = weekBinary.length - 1; i >= 0; i--) {
+        if (weekBinary[i] === "1") {
+            result = result.concat(state.slice());
+        } else {
+            result = result.concat([0, 0, 0, 0, 0, 0, 0]);
+        }
+    }
+    return result;
 }

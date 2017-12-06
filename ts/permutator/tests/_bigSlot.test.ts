@@ -17,7 +17,9 @@ import TestManager, {
 import {
     BigSlot
 } from "../bigSlot";
-import { GotIntersection } from "../state";
+import {
+    GotIntersection
+} from "../state";
 
 const testSlots = ParseHtmlToRawSlot(new TestManager().GetDataFrom(FileName.cf_2017_nov));
 describe("BigSlot", () => {
@@ -39,6 +41,16 @@ describe("BigSlot", () => {
         const slot = CreateSlotFromRaw(rawSlot);
         const result = new BigSlot(slot);
         expect(result.State.length === 7 * 14);
+    });
+
+    it("case 3", () => {
+        const rawSlot = find(testSlots, {
+            Number: "1"
+        });
+        rawSlot.WeekNumber = "2";
+        const slot = CreateSlotFromRaw(rawSlot);
+        const result = new BigSlot(slot);
+        expect(result.State).to.deep.eq([0, 0, 0, 0, 0, 0, 0, 252, 0, 0, 0, 0, 0, 0]);
     });
 
     it("check for intersection 1", () => {
