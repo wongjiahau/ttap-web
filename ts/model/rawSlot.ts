@@ -5,13 +5,13 @@ export interface IRawSlot {
     Number: string; // Slot number, which is not necessarily unique for every slot
     Type: string;
     Group: string;
-    ClassSize: string;
+    ClassSize?: string;
     Day: string;
     TimePeriod: string;
-    CreditHour: string;
+    CreditHour?: string;
     WeekNumber: string;
     Room: string;
-    Remark: string;
+    Remark?: string;
 }
 export class RawSlot implements IRawSlot {
     public static hash = 0;
@@ -74,13 +74,13 @@ export class RawSlot implements IRawSlot {
     public Number: string; // Slot number, which is not necessarily unique for every slot
     public Type: string;
     public Group: string;
-    public ClassSize: string;
+    public ClassSize?: string;
     public Day: string;
     public TimePeriod: string;
-    public CreditHour: string;
+    public CreditHour?: string;
     public WeekNumber: string;
     public Room: string;
-    public Remark: string;
+    public Remark?: string;
     constructor() {
         this.HashId = RawSlot.hash;
         RawSlot.hash++;
