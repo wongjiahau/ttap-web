@@ -15,9 +15,10 @@ export function ParseSlotToTinySlot(slots: ISlot[]): TinySlot[] {
     result.push(new TinySlot(sorted[0]));
     for (let i = 1; i < sorted.length; i++) {
         const s = sorted[i];
-        if (s.SlotNumber === last(result).SlotNumber) {
-            last(result).SlotIds.push(s.HashId);
-            last(result).State[s.Day - 1] |= s.TimePeriod;
+        const prevSlot = last(result);
+        if (s.SlotNumber === prevSlot.SlotNumber) {
+            prevSlot.SlotIds.push(s.HashId);
+            prevSlot.State[s.Day - 1] |= s.TimePeriod;
         } else {
             result.push(new TinySlot(s));
         }
