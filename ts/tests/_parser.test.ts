@@ -6,9 +6,11 @@ import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
 import testManager from "./testManager";
 import {FileName} from "./testManager";
 
+const jiahau2017septHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+
 describe("Parser which is used to parse html into slots", () => {
     it("jiahau_2017_sept's last slot should have hash id of 202", () => {
-        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const plainHtml = jiahau2017septHtml;
         const result = ParseHtmlToSlots(plainHtml);
         expect(last(result).HashId)
             .to
@@ -16,7 +18,7 @@ describe("Parser which is used to parse html into slots", () => {
     });
 
     it("jiahau_2017_sept's data should have 203 slots", () => {
-        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const plainHtml = jiahau2017septHtml;
         const result = ParseHtmlToSlots(plainHtml);
         expect(result.length)
             .to
@@ -24,7 +26,7 @@ describe("Parser which is used to parse html into slots", () => {
     });
 
     it("jiahau_2017_sept's last slot should have number of 129", () => {
-        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const plainHtml = jiahau2017septHtml;
         const result = ParseHtmlToSlots(plainHtml);
         expect(last(result).Number)
             .to
@@ -32,7 +34,7 @@ describe("Parser which is used to parse html into slots", () => {
     });
 
     it("jiahau_2017_sept's data should have 21 subjects", () => {
-        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const plainHtml = jiahau2017septHtml;
         const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
         expect(result.length)
             .to
@@ -42,7 +44,7 @@ describe("Parser which is used to parse html into slots", () => {
     it("jiahau_2017_sept's data first subject (sorted by name) should be Artificial Inte" +
             "lligence",
     () => {
-        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const plainHtml = jiahau2017septHtml;
         const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
         expect(result[0].Name.toLowerCase())
             .to
@@ -50,7 +52,7 @@ describe("Parser which is used to parse html into slots", () => {
     });
 
     it("jiahau_2017_sept's data first subject (sorted by name) should be TITAS", () => {
-        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const plainHtml = jiahau2017septHtml;
         const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
         expect(S(last(result).Name.toLowerCase()).contains("titas"))
             .to
@@ -58,7 +60,7 @@ describe("Parser which is used to parse html into slots", () => {
     });
 
     it("jiahau_2017_sept's data subject Management Principles should contain 7 slots", () => {
-        const plainHtml = new testManager().GetDataFrom(FileName.jiahau_2017_sept);
+        const plainHtml = jiahau2017septHtml;
         const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
         expect(find(result, {Name: "MANAGEMENT PRINCIPLES"}).SlotIds.length)
             .to

@@ -72,4 +72,17 @@ describe("week", () => {
         expect(actual5.Equals(expected5)).to.eq(true);
     });
 
+    describe("BinaryData", () => {
+        it("case 1", () => {
+            const input = "1-14";
+            const result = Week.Parse(input).BinaryData;
+            expect(result.toString(2)).to.eq("11111111111111");
+        });
+
+        it("case 2", () => {
+            const input = "2,6";
+            const result = Week.Parse(input).BinaryData;
+            expect(result.toString(2)).to.eq("100010");
+        });
+    });
 });

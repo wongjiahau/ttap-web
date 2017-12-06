@@ -42,7 +42,7 @@ export class Week {
         // 14 zeroes signifies 14 weeks
         const result = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];
         weekNumberList.forEach((w) => {
-            result[w] = "1";
+            result[w - 1] = "1";
         });
         return parseInt(result.reverse().join(""), 2);
     }

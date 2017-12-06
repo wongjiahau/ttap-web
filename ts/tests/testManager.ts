@@ -17,6 +17,7 @@ function LoadFileFromGitHub(downloadLink: string): string {
 export enum FileName {
     jiahau_2017_sept = "jiahau_2017_sept.html",
         heng_2017_sept = "heng_2017_sept.html",
+        heng_2017_nov = "heng_2017_nov.html",
         keli_2017_sept = "keli_2017_sept.html",
         qingsheng_2017_sept = "qingsheng_2017_sept.html",
 }
