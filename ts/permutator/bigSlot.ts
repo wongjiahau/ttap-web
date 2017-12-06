@@ -4,25 +4,26 @@ import {
 import {
     IPartitionable
 } from "./partitionize";
+import { IOptimizedSlot } from "./tinySlot";
 
 /**
  * BigSlot's difference with TinySlot is that BigSlot will include week number,
  * Thus, if user want to search timetables by considering week number, BigSlot should be used instead of TinySlot
  * @export
  * @class BigSlot
- * @implements {IPartitionable}
+ * @implements {IOptimizedSlot}
  */
-export class BigSlot implements IPartitionable {
+export class BigSlot implements IOptimizedSlot {
     public readonly PartitionKey: number;
     public readonly State: number[ /*7 multiply numberOfWeeks*/ ];
     public readonly SlotNumber: number;
-    public HashIds: number[];
+    public SlotIds: number[];
 
     public constructor(s: ISlot) {
         this.PartitionKey = s.SubjectCode * 10 + s.Type;
         this.SlotNumber = s.SlotNumber;
-        this.HashIds = [];
-        this.HashIds.push(s.HashId);
+        this.SlotIds = [];
+        this.SlotIds.push(s.HashId);
         this.State = this.GetState(s);
     }
     private GetState(s: ISlot): number[] {
