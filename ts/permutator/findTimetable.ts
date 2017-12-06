@@ -1,3 +1,4 @@
+import { sortBy } from "lodash";
 import {
     Timetable
 } from "../model/timetable";
@@ -17,19 +18,20 @@ import {
     Append, GotIntersection
 } from "./state";
 import {
-    TinySlot
+    IOptimizedSlot
 } from "./tinySlot";
 
-export function FindTimetable(input: TinySlot[]): Timetable[] {
+export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
     }
     if (input.length === 1) {
         let resultState = [0, 0, 0, 0, 0, 0, 0];
         resultState = Append(resultState, input[0].State);
-        return [new Timetable(input[0].HashIds, resultState)];
+        return [new Timetable(input[0].SlotIds, resultState)];
     }
     const result = new Array < Timetable > ();
+    // const partitioned = sortBy(Partitionize(input), ["length"]);
     const partitioned = Partitionize(input);
     let indices = GenerateIndices(partitioned);
     let candidate = new Array < number > (partitioned.length);
@@ -37,7 +39,7 @@ export function FindTimetable(input: TinySlot[]): Timetable[] {
     while (true) {
         const first = partitioned[0][indices[0].Value];
         state = Append(state, first.State);
-        candidate = first.HashIds;
+        candidate = first.SlotIds;
         let gotIntersection = false;
         const length = indices.length;
         for (let i = 1; i < length; i++) {
@@ -53,7 +55,7 @@ export function FindTimetable(input: TinySlot[]): Timetable[] {
                 }
             } else {
                 state = Append(state, current.State);
-                candidate = candidate.concat(current.HashIds);
+                candidate = candidate.concat(current.SlotIds);
             }
         }
         if (!gotIntersection) {

@@ -2,8 +2,10 @@ import {FindClashes} from "../clashFinder/findClashes";
 import {Slot} from "../model/slot";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
+import { ParseSlotToBigSlot } from "../parser/parseSlotToBigSlot";
 import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
+import { BigSlot } from "../permutator/bigSlot";
 import {FindTimetable} from "../permutator/findTimetable";
 import {TinySlot} from "../permutator/tinySlot";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
@@ -37,6 +39,16 @@ export const GetTinySlotsOf = (subjectCode : string) : TinySlot[] => {
     const rawSlots = RawSlot.GetBunch(subject[0].SlotIds);
     const slots = ParseRawSlotToSlot(rawSlots);
     return ParseSlotToTinySlot(slots);
+};
+
+export const GetBigSlotsOf = (subjectCode : string) : BigSlot[] => {
+    const subject = GetTestSubjects1().filter((x) => x.Code === subjectCode);
+    if (subject.length === 0) {
+        throw new Error("No subject have the code of " + subjectCode);
+    }
+    const rawSlots = RawSlot.GetBunch(subject[0].SlotIds);
+    const slots = ParseRawSlotToSlot(rawSlots);
+    return ParseSlotToBigSlot(slots);
 };
 
 export const GetTestTimetables1 = () : Timetable[] => {
