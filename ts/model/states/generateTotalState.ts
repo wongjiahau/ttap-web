@@ -62,21 +62,21 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
 
 export function GetDefinitelyOccupiedState(timetables: Timetable[]): number[ /*7*/ ] {
     const result = [-1, -1, -1, -1, -1, -1, -1];
-    timetables.forEach((x) => {
-        for (let i = 0; i < 7; i++) {
-            result[i] &= x.State[i];
+    for (let i = 0; i < timetables.length; i++) {
+        for (let j = 0; j < 7; j++) {
+            result[j] &= timetables[i].State[j];
         }
-    });
+    }
     return result;
 }
 
 export function GetDefinitelyUnoccupiedState(timetables: Timetable[]): number[ /*7*/ ] {
     const result = [0, 0, 0, 0, 0, 0, 0];
-    timetables.forEach((x) => {
-        for (let i = 0; i < 7; i++) {
-            result[i] |= x.State[i];
+    for (let i = 0; i < timetables.length; i++) {
+        for (let j = 0; j < 7; j++) {
+            result[j] |= timetables[i].State[j];
         }
-    });
+    }
     return result;
 }
 
