@@ -31,21 +31,25 @@ export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
         return [new Timetable(input[0].SlotIds, resultState)];
     }
     const result = new Array < Timetable > ();
-    // const partitioned = sortBy(Partitionize(input), ["length"]);
     const partitioned = Partitionize(input);
     let indices = GenerateIndices(partitioned);
     let candidate = new Array < number > (partitioned.length);
     let state = [0, 0, 0, 0, 0, 0, 0];
+    let first:           IOptimizedSlot;
+    let gotIntersection: boolean;
+    let length:          number;
+    let current:         IOptimizedSlot;
+    let newIndices:       BoundedInt[];
     while (true) {
-        const first = partitioned[0][indices[0].Value];
+        first = partitioned[0][indices[0].Value];
         state = Append(state, first.State);
         candidate = first.SlotIds;
-        let gotIntersection = false;
-        const length = indices.length;
+        gotIntersection = false;
+        length = indices.length;
         for (let i = 1; i < length; i++) {
-            const current = partitioned[i][indices[i].Value];
+            current = partitioned[i][indices[i].Value];
             if (GotIntersection(state, current.State)) {
-                const newIndices = IncrementSpecificIndex(indices, i);
+                newIndices = IncrementSpecificIndex(indices, i);
                 if (newIndices !== null) {
                     indices = newIndices;
                     i--;
