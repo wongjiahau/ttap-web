@@ -37,7 +37,7 @@ export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
     let state = [0, 0, 0, 0, 0, 0, 0];
     let first:           IOptimizedSlot;
     let gotIntersection: boolean;
-    let length:          number;
+    const length = indices.length;
     let current:         IOptimizedSlot;
     let newIndices:       BoundedInt[];
     while (true) {
@@ -45,7 +45,6 @@ export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
         state = Append(state, first.State);
         candidate = first.SlotIds;
         gotIntersection = false;
-        length = indices.length;
         for (let i = 1; i < length; i++) {
             current = partitioned[i][indices[i].Value];
             if (GotIntersection(state, current.State)) {

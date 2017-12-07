@@ -1,4 +1,7 @@
 import {
+    expect
+} from "chai";
+import {
     concat
 } from "lodash";
 import {
@@ -22,6 +25,7 @@ describe("FindTimetableV2", () => {
         const isCI = require("is-ci");
         if (!isCI) {
             const result = FindTimetableV2(input);
+            expect(result).to.have.lengthOf(285696);
         }
     });
 
