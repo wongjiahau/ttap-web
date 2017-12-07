@@ -1,5 +1,4 @@
 import './index.css';
-import 'typeface-roboto';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import logger from 'redux-logger'
