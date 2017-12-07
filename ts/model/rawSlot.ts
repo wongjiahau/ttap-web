@@ -1,5 +1,5 @@
 export interface IRawSlot {
-    readonly HashId: number; // Unique for every slot object
+    HashId: number; // Unique for every slot object
     SubjectCode: string;
     SubjectName: string;
     Number: string; // Slot number, which is not necessarily unique for every slot
@@ -25,6 +25,12 @@ export class RawSlot implements IRawSlot {
             return null;
         }
         return result[0];
+    }
+
+    public static RegisterSlot (slot: IRawSlot) : void {
+        slot.HashId = RawSlot.hash;
+        RawSlot.allRawSlots.push(slot);
+        RawSlot.hash++;
     }
 
     public static GetBunch(hashIds: number[]): RawSlot[] {
@@ -68,7 +74,7 @@ export class RawSlot implements IRawSlot {
         RawSlot.allRawSlots = [];
     }
 
-    public readonly HashId: number; // Unique for every slot object
+    public HashId: number; // Unique for every slot object
     public SubjectCode: string;
     public SubjectName: string;
     public Number: string; // Slot number, which is not necessarily unique for every slot

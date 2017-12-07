@@ -19,7 +19,7 @@ import {
     BoundedInt
 } from "./../boundedInt";
 
-describe("FindTimetable()", () => {
+describe("FindTimetable() with BigSlot", () => {
     it("case 1", () => {
         const slots = GetBigSlotsOf("MPU3113");
         const result = FindTimetable(slots);

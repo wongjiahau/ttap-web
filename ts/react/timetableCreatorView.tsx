@@ -30,7 +30,6 @@ export interface ITimetableCreatorViewStateProps {
 export interface ITimetableCreatorViewDispatchProps {
     handleOpenSubjectListView : () => void;
     handleSlotLoaded : (rawSlots : RawSlot[]) => void;
-    handleLoadDemo : (html : string) => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -41,7 +40,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         if (!this.props.isSlotLoaded) {
             return (
                 <div>
-                    <LoadTestDataView handleLoadDemo={this.props.handleLoadDemo}/>
+                    <LoadTestDataView handleLoadDemo={this.props.handleSlotLoaded}/>
                     <Login notifyDataLoaded={this.props.handleSlotLoaded}/>
                 </div>
             );

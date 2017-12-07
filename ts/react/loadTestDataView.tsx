@@ -1,5 +1,8 @@
 import * as React from "react";
 import * as S from "string";
+import {RawSlot} from "../model/rawSlot";
+import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
+import { ParseJsonToRawSlot } from "../parser/parseJsonToRawSlot";
 
 interface IApiObject {
     name : string;
@@ -15,7 +18,7 @@ interface IApiObject {
 }
 
 export interface ILoadTestDataViewProps {
-    handleLoadDemo : (html : string) => void;
+    handleLoadDemo : (rawSlots : RawSlot[]) => void;
 }
 
 export interface ILoadTestDataViewState {
@@ -40,14 +43,20 @@ ILoadTestDataViewState > {
                     .testFiles
                     .map((x, index) => {
                         if (S(x.name).endsWith(".html")) {
-                            return ( <button key={index} onClick={() => this.handleClick(x.download_url)}>{x.name}</button> );
+                            return (
+                                <button key={index} onClick={() => this.handleClick(x.download_url, "html")}>{x.name}</button>
+                            );
+                        } else if (S(x.name).endsWith(".json")) {
+                            return (
+                                <button key={index} onClick={() => this.handleClick(x.download_url, "json")}>{x.name}</button>
+                            );
                         }
                     })};
             </div>
         );
     }
 
-    private handleClick = (downloadUrl : string) : void => {
+    private handleClick = (downloadUrl : string, fileType : "html" | "json") : void => {
         const request = require("request");
         const options = {
             url: downloadUrl,
@@ -56,13 +65,13 @@ ILoadTestDataViewState > {
             }
         };
         request(options, (error, response, body) => {
-            // console.log("error:", error); // Print the error if one occurred
-            // console.log("statusCode:", response && response.statusCode); // Print the
-            // response status code if a response was received console.log('body:', body);
-            // // Print the HTML for the Google homepage.
-            this
-                .props
-                .handleLoadDemo(body);
+            if (fileType === "html") {
+                this
+                    .props
+                    .handleLoadDemo(ParseHtmlToRawSlot(body));
+            } else if (fileType === "json") {
+                this.props.handleLoadDemo(ParseJsonToRawSlot(body));
+            }
         });
     }
 

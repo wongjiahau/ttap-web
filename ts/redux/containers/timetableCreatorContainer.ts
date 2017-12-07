@@ -15,7 +15,6 @@ const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
     return {
-        handleLoadDemo: (html: string) => dispatch(new NotifyDataLoaded(ParseHtmlToRawSlot(html))),
         handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots)),
         handleOpenSubjectListView: () => dispatch(new ToggleIsOpenOfSubjectListView(true))
     };
