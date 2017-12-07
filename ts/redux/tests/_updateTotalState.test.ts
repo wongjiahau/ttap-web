@@ -44,20 +44,13 @@ describe("UpdateTotalState action", () => {
         expect(newState.SetTimeConstraintState.TotalState).to.not.eq(null);
     });
 
-    it("case 1", () => {
-        // GIVEN Ali selected some subjects and got a set of timetables
-        // WHEN Ali set some time constraint
-        // AND Ali close the SetTimeConstraintView
-        // Then when Ali open the SetTimeConstraintView again
-        // Ali should sees that the view is the same as previous when he closes it
-        const updateTotalState = new UpdateTotalState();
+    it("should clear UidsOfClickedState", () => {
+        const action = new UpdateTotalState();
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, updateTotalState);
-        const state = new STCBox(StateKind.MaybeOccupied, 0, 16, 5);
-        const newState2 = MasterStateReducer(newState1, new FilterTimetable(state));
-        const newState3 = MasterStateReducer(newState2, updateTotalState);
-        expect(newState3.SetTimeConstraintState.TotalState)
-            .to.deep.eq(newState2.SetTimeConstraintState.TotalState);
+        let newState = MasterStateReducer(initialState, action);
+        const stcBox = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
+        newState = MasterStateReducer(newState, new FilterTimetable(stcBox));
+        expect(newState.SetTimeConstraintState.UidsOfClickedState).to.deep.eq(["05"]);
     });
 
 });
