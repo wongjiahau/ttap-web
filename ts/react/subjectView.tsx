@@ -15,12 +15,13 @@ const clashReportStyle : React.CSSProperties = {
 };
 
 export interface ISubjectViewProps {
-    clashReport : ClashReport;
-    searchWord : string;
-    subjectName : string;
-    subjectCode : string;
-    isSelected : boolean;
-    handleSelection : () => void;
+    clashReport:     ClashReport;
+    isLoading:       boolean;
+    isSelected:      boolean;
+    searchWord:      string;
+    subjectCode:     string;
+    subjectName:     string;
+    handleSelection: () => void;
 }
 
 export class SubjectView extends React.Component < ISubjectViewProps, {} > {
@@ -44,6 +45,7 @@ export class SubjectView extends React.Component < ISubjectViewProps, {} > {
             textToHighlight={this.props.subjectCode}/>);
 
         const gotClashReport = this.props.clashReport !== null;
+        const listItemStyle = {cursor: this.props.isLoading ?  "wait" : "default"};
         return (
             <div className="ui pushable" style={{overflowY: "hidden"}}>
                 <div style={clashReportStyle}
@@ -55,10 +57,8 @@ export class SubjectView extends React.Component < ISubjectViewProps, {} > {
                     ? "dimmed"
                     : "") + " pusher"}>
                     <div style={divStyle}>
-                        <ListItem button={true} divider={true} onClick={this.props.handleSelection}>
-                            {gotClashReport
-                                ? ""
-                                : <Checkbox checked={this.props.isSelected} tabIndex={-1} disableRipple={true}/>}
+                        <ListItem style={listItemStyle} button={true} divider={true} onClick={this.props.handleSelection}>
+                            <Checkbox checked={this.props.isSelected} tabIndex={-1} disableRipple={true}/>
                             <ListItemText primary={primary} secondary={secondary}/>
                         </ListItem>
                     </div>

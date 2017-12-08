@@ -108,6 +108,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {s
                     return (
                         <div key={s.Code}>
                             <SubjectView
+                                isLoading={this.props.isShowingLoadingBar}
                                 clashReport={s.ClashReport}
                                 searchWord={this.props.searchWord}
                                 subjectName={Beautify(s.Name)}
