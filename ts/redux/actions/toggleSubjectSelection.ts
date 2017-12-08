@@ -171,12 +171,11 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
     for (let i = 0; i < subjects.length; i++) {
         slotIds = slotIds.concat(subjects[i].SlotIds);
     }
-    return FindTimetableV2(RawSlot.GetBunch(slotIds));
-    // return FindTimetable(
-    //     ParseSlotToTinySlot(
-    //         ParseRawSlotToSlot(
-    //             RawSlot.GetBunch(slotIds)
-    //         )
-    //     )
-    // );
+    return FindTimetable(
+        ParseSlotToTinySlot(
+            ParseRawSlotToSlot(
+                RawSlot.GetBunch(slotIds)
+            )
+        )
+    );
 }
