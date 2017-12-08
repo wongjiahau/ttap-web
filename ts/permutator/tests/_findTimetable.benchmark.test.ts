@@ -1,4 +1,6 @@
-import { expect } from "chai";
+import {
+    expect
+} from "chai";
 import {
     concat,
     uniq
@@ -15,7 +17,7 @@ import {
 import {
     CodeOf,
     HENG_2017_APR
-} from "../../tests/testData/HENG_2017_APR";
+} from "../../tests/testData/heng_2017_apr";
 import {
     FindTimetable
 } from "../findTimetable";
