@@ -30,6 +30,7 @@ import {
 import {
     FindTimetable
 } from "../../permutator/findTimetable";
+import { FindTimetableV2 } from "../../permutator/findTimetableV2";
 import {
     NewTimetableListState
 } from "../reducers/timetableListState";
@@ -170,11 +171,12 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
     for (let i = 0; i < subjects.length; i++) {
         slotIds = slotIds.concat(subjects[i].SlotIds);
     }
-    return FindTimetable(
-        ParseSlotToTinySlot(
-            ParseRawSlotToSlot(
-                RawSlot.GetBunch(slotIds)
-            )
-        )
-    );
+    return FindTimetableV2(RawSlot.GetBunch(slotIds));
+    // return FindTimetable(
+    //     ParseSlotToTinySlot(
+    //         ParseRawSlotToSlot(
+    //             RawSlot.GetBunch(slotIds)
+    //         )
+    //     )
+    // );
 }
