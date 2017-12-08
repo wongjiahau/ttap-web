@@ -23,7 +23,7 @@ const seriousInput = concat(
     HENG_2017_APR.filter((x) => x.SubjectCode === CodeOf.ITBS), // Introduction To Building Services
 );
 
-describe("FindTimetableV2", () => {
+describe.skip("FindTimetableV2", () => {
     it("serious case", () => {
         const isCI = require("is-ci");
         if (!isCI) {
