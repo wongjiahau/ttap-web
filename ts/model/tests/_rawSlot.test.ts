@@ -34,6 +34,7 @@ describe("RawSlot", () => {
     describe("RawSlot.GetBunch()", () => {
 
         it("should return a bunch of RawSlots based on the argument", () => {
+            GetTestRawSlot1();
             const input = [1, 2, 3, 4];
             const result = RawSlot.GetBunch(input);
             expect(result.length).to.eq(4);

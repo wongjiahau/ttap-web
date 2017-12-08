@@ -5,48 +5,47 @@ export interface IRawSlot {
     Number: string; // Slot number, which is not necessarily unique for every slot
     Type: string;
     Group: string;
-    ClassSize?: string;
+    ClassSize ? : string;
     Day: string;
     TimePeriod: string;
-    CreditHour?: string;
+    CreditHour ? : string;
     WeekNumber: string;
     Room: string;
-    Remark?: string;
+    Remark ? : string;
 }
 export class RawSlot implements IRawSlot {
     public static hash = 0;
     public static allRawSlots: RawSlot[] = [];
     public static GetOne(hashId: number): RawSlot {
-        const result = RawSlot.allRawSlots.filter((x) => x.HashId === hashId);
-        if (result.length > 1) {
-            throw new Error("Something's wrong, each hashId should belong to one and only one slot");
-        }
-        if (result.length === 0) {
+        const matched = RawSlot.allRawSlots[hashId];
+        if (matched) {
+            return matched;
+        } else {
             return null;
         }
-        return result[0];
     }
 
-    public static RegisterSlot (slot: IRawSlot) : void {
+    public static RegisterSlot(slot: IRawSlot): void {
         slot.HashId = RawSlot.hash;
-        RawSlot.allRawSlots.push(slot);
+        RawSlot.allRawSlots[RawSlot.hash] = slot;
         RawSlot.hash++;
     }
 
     public static GetBunch(hashIds: number[]): RawSlot[] {
         const result = new Array < RawSlot > ();
         for (let i = 0; i < hashIds.length; i++) {
-            const matched = RawSlot.allRawSlots.filter((x) => x.HashId === hashIds[i]);
-            if (matched.length === 0) {
+            const matched = RawSlot.allRawSlots[hashIds[i]];
+            if (matched) {
+                result.push(matched);
+            } else {
                 throw new Error(hashIds[i] + "does not matches any HashId of any slot");
             }
-            result.push(matched[0]);
         }
         return result;
     }
 
     public static GetBunchFromSlotNumbers(slotNumbers: string[]): RawSlot[] {
-        let result : RawSlot[] = [];
+        let result: RawSlot[] = [];
         for (let i = 0; i < slotNumbers.length; i++) {
             const matchingSlots = RawSlot.allRawSlots.filter((x) => x.Number === slotNumbers[i]);
             if (matchingSlots.length === 0) {
@@ -69,7 +68,7 @@ export class RawSlot implements IRawSlot {
         return result;
     }
 
-    public static Reset() : void {
+    public static Reset(): void {
         RawSlot.hash = 0;
         RawSlot.allRawSlots = [];
     }
@@ -80,17 +79,15 @@ export class RawSlot implements IRawSlot {
     public Number: string; // Slot number, which is not necessarily unique for every slot
     public Type: string;
     public Group: string;
-    public ClassSize?: string;
+    public ClassSize ? : string;
     public Day: string;
     public TimePeriod: string;
-    public CreditHour?: string;
+    public CreditHour ? : string;
     public WeekNumber: string;
     public Room: string;
-    public Remark?: string;
+    public Remark ? : string;
     constructor() {
-        this.HashId = RawSlot.hash;
-        RawSlot.hash++;
-        RawSlot.allRawSlots.push(this);
+        RawSlot.RegisterSlot(this);
     }
     public toString = (): string => {
         return `---
