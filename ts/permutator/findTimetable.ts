@@ -40,7 +40,8 @@ export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
         return [new Timetable(input[0].SlotIds, resultState)];
     }
     const result = new Array < Timetable > ();
-    const partitioned = Partitionize(input);
+    const partitioned = sortBy(Partitionize(input), ["length"]);
+    // const partitioned = Partitionize(input);
     const indices = GenerateIndices(partitioned);
     const length = indices.length;
     const last = length - 1;

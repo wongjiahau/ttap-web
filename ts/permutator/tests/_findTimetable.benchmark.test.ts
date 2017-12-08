@@ -36,11 +36,8 @@ const tinySlots = ParseSlotToTinySlot(ParseRawSlotToSlot(input));
 describe("FindTimetable", () => {
     describe("using TinySlot", () => {
         it("case 1", () => {
-            const isCI = require("is-ci");
-            if (!isCI) {
-                const result = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(input)));
-                expect(result).to.have.lengthOf(285696);
-            }
+            const result = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(input)));
+            expect(result).to.have.lengthOf(285696);
         });
 
     });
