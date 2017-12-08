@@ -22,7 +22,7 @@ export class SearchSubjectList extends MasterStateAction {
                 const stringToBeMatched = S((s.Code + s.Name + GetInitial(s.Name)).toLowerCase());
                 return {
                     ...s,
-                    IsVisible: (stringToBeMatched.contains(this.searchedText) ?
+                    IsVisible: (stringToBeMatched.contains(this.searchedText.toLowerCase()) ?
                         true :
                         false)
                 };

@@ -29,6 +29,14 @@ describe("searchSubjectList action", () => {
             .eq(1);
     });
 
+    it("should allow searching using uppercase letter", () => {
+        const initialState = getInitialState();
+        const newState = MasterStateReducer(initialState, new SearchSubjectList("Hubungan etnik"));
+        expect(newState.SubjectListState.Subjects.filter((s) => s.IsVisible).length)
+            .to
+            .eq(1);
+    });
+
     it("should toggle IsShowSelectedSubjectsOnly to false when dispatched", () => {
         const initialState = getInitialState();
         initialState.SubjectListState.IsShowingSelectedSubjectOnly = true;
