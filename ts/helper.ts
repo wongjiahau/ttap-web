@@ -5,12 +5,11 @@ export function Beautify(input: string): string {
         .replace("dan", "&")
         .replace("and", "&")
         .split(" ")
-        .map((word) => {
-            return S(word)
-                .capitalize()
-                .s;
-        })
-        .join(" ");
+        .map((word) => S(word).capitalize().s)
+        .join(" ")
+        .replace("Ii", "II")
+        .replace("IIi", "III")
+        ;
 }
 
 export function GetInitial(input: string): string {
