@@ -31,12 +31,16 @@ export const GetTestTinySlot1 = () : TinySlot[] => {
     return ParseSlotToTinySlot(GetTestSlot1());
 };
 
-export const GetTinySlotsOf = (subjectCode : string) : TinySlot[] => {
+export const GetRawSlotsOf = (subjectCode: string) : RawSlot[] => {
     const subject = GetTestSubjects1().filter((x) => x.Code === subjectCode);
     if (subject.length === 0) {
         throw new Error("No subject have the code of " + subjectCode);
     }
-    const rawSlots = RawSlot.GetBunch(subject[0].SlotIds);
+    return RawSlot.GetBunch(subject[0].SlotIds);
+};
+
+export const GetTinySlotsOf = (subjectCode : string) : TinySlot[] => {
+    const rawSlots = GetRawSlotsOf(subjectCode);
     const slots = ParseRawSlotToSlot(rawSlots);
     return ParseSlotToTinySlot(slots);
 };

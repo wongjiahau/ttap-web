@@ -42,6 +42,10 @@ export function FindTimetableV2(input: RawSlot[]): Timetable[] {
     const last = subjects.length - 1;
     for (let i = 1; i < subjects.length; i++) {
         const filtrate = FilterOut(subjects[i], state);
+        if (filtrate.length === 0) {
+            return [];
+        }
+        // TODO: Check if the schema of filtrate is correct
         currentSlots = currentSlots.concat(filtrate);
         timetables = FindTimetable(currentSlots);
         if (i !== last) {
