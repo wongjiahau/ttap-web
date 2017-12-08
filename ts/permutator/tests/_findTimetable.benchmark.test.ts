@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import {
     concat,
     uniq
@@ -36,6 +37,7 @@ describe("FindTimetable", () => {
             const isCI = require("is-ci");
             if (!isCI) {
                 const result = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(input)));
+                expect(result).to.have.lengthOf(285696);
             }
         });
 

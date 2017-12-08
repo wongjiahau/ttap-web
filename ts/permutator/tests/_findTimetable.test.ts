@@ -7,7 +7,6 @@ import {
 } from "lodash";
 import {
     FindTimetable,
-    IncrementSpecificIndex
 } from "../findTimetable";
 import {
     RawSlot
@@ -99,34 +98,6 @@ describe("FindTimetable()", () => {
             0,
             0
         ]);
-    });
-
-});
-
-describe("IncrementSpecificIndex", () => {
-    it("should return a new indices if the increment is possible", () => {
-        const input = [
-            new BoundedInt(1, 0),
-            new BoundedInt(1, 0),
-            new BoundedInt(1, 0),
-        ];
-        const result = IncrementSpecificIndex(input, 1);
-        const expected = [
-            new BoundedInt(1, 0),
-            new BoundedInt(1, 1),
-            new BoundedInt(1, 0),
-        ];
-        expect(isEqual(input, expected)).to.eq(true);
-    });
-
-    it("should return null if the increment is impossible", () => {
-        const input = [
-            new BoundedInt(1, 0),
-            new BoundedInt(1, 1),
-            new BoundedInt(1, 0),
-        ];
-        const result = IncrementSpecificIndex(input, 1);
-        expect(result).to.eq(null);
     });
 
 });
