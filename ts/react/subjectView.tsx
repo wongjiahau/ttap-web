@@ -15,6 +15,7 @@ const clashReportStyle : React.CSSProperties = {
 };
 
 export interface ISubjectViewProps {
+    id:              string;
     clashReport:     ClashReport;
     isLoading:       boolean;
     isSelected:      boolean;
@@ -57,7 +58,7 @@ export class SubjectView extends React.Component < ISubjectViewProps, {} > {
                     ? "dimmed"
                     : "") + " pusher"}>
                     <div style={divStyle}>
-                        <ListItem style={listItemStyle} button={true} divider={true} onClick={this.props.handleSelection}>
+                        <ListItem id={this.props.id} className="subjectview" style={listItemStyle} button={true} divider={true} onClick={this.props.handleSelection}>
                             <Checkbox checked={this.props.isSelected} tabIndex={-1} disableRipple={true}/>
                             <ListItemText primary={primary} secondary={secondary}/>
                         </ListItem>

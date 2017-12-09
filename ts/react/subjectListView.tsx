@@ -10,6 +10,7 @@ import IconEye from "material-ui/svg-icons/image/remove-red-eye";
 import TextField from "material-ui/TextField";
 import * as React from "react";
 import * as S from "string";
+import {Key} from "../enums/keyCodeEnum";
 import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
 import {StackPanel} from "./panels/stackPanel";
@@ -70,7 +71,9 @@ export interface ISubjectListViewDispatchProps {
 export interface ISubjectListViewProps extends ISubjectListViewStateProps,
 ISubjectListViewDispatchProps {}
 
-export class SubjectListView extends React.Component < ISubjectListViewProps, {sectionStyle : React.CSSProperties} > {
+export class SubjectListView extends React.Component < ISubjectListViewProps, {
+    sectionStyle : React.CSSProperties
+} > {
     constructor(props : ISubjectListViewProps) {
         super(props);
         $(window).on("resize", this.handleWindowResizing);
@@ -108,6 +111,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {s
                     return (
                         <div key={s.Code}>
                             <SubjectView
+                                id={"sv" + index}
                                 isLoading={this.props.isShowingLoadingBar}
                                 clashReport={s.ClashReport}
                                 searchWord={this.props.searchWord}
@@ -142,12 +146,13 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {s
 
         return (
             <Drawer docked={false} width={520} open={this.props.isOpen}>
-                <section style={this.state.sectionStyle}>
+                <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                     <header style={headerStyle}>
                         <Typography type="display1" color="primary">
                             Select your desired subjects.
                         </Typography>
                         <TextField
+                            id="searchbar"
                             style={searchBoxStyle}
                             onChange={this.handleSearchBoxOnChange}
                             hintText="example: he/hubungan etnik/mpu3113"
@@ -198,4 +203,53 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {s
         );
     }
 
+    public componentDidMount() {
+        (document.getElementById("searchbar")as HTMLInputElement).focus();
+    }
+
+    private checkKeys = (e) => {
+        // refer
+        // https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-ja
+        // v ascript
+        e = e || window.event;
+        switch (e.keyCode) {
+            case Key.DownArrow:
+                this.Focus("next");
+                break;
+            case Key.UpArrow:
+                this.Focus("previous");
+                break;
+            case Key.Escape:
+                const searchbar = document.getElementById("searchbar")as HTMLInputElement;
+                searchbar.value = "";
+                this.props.handleSearch("");
+                searchbar.focus();
+                break;
+        }
+    }
+
+    private Focus = (where : "previous" | "next"): void => {
+        const idOfFocusedSubjectView = document.activeElement.id;
+        const subjectViews = document.getElementsByClassName("subjectview")as HTMLCollectionOf < HTMLDivElement >;
+        const length = subjectViews.length;
+        let next = null;
+        for (let i = 0; i < length; i++) {
+            if (subjectViews[i].id === idOfFocusedSubjectView) {
+                if (where === "previous") {
+                    next = i - 1;
+                    if (next < 0) {
+                        next = length - 1;
+                    }
+                } else {
+                    next = i + 1;
+                    if (next > length - 1) {
+                        next = 0;
+                    }
+                }
+                subjectViews[next].focus();
+                return;
+            }
+        }
+        subjectViews[0].focus();
+    }
 }
