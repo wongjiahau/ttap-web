@@ -10,7 +10,7 @@ const clashReportStyle : React.CSSProperties = {
     color: Colors.White,
     fontSize: "14px",
     overflowY: "hidden",
-    padding: "8px",
+    padding: "10px",
     width: "200px"
 };
 
