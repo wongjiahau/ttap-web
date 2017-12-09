@@ -3,6 +3,7 @@ import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
 import Button from "material-ui-next/Button";
 import * as React from "react";
+import { Key } from "../enums/keyCodeEnum";
 import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
@@ -81,11 +82,11 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
     private checkKeys = (e) => {
         // refer https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
         e = e || window.event;
-        if (e.keyCode === 37 || e.keyCode === 38) { // up or left arrow
+        if (e.keyCode === Key.LeftArrow || e.keyCode === Key.UpArrow) {
             this.props.handleGoToPrevious();
-        } else if (e.keyCode === 39 || e.keyCode === 40) { // down or right arrow
+        } else if (e.keyCode === Key.RightArrow || e.keyCode === Key.DownArrow) {
             this.props.handleGoToNext();
-        } else if (e.keyCode === 82) { // R
+        } else if (e.keyCode === Key.R) {
             this.props.handleGoToRandom();
         }
     }
