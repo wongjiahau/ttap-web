@@ -103,6 +103,8 @@ export class Login extends React.Component < ILoginProps, {} > {
 
     }
     public handleIFrameOnLoad = () => {
+        // TODO: Re-enable this thing
+        return;
         const currentUrl = (document.getElementById("iframe")as HTMLIFrameElement).contentWindow.location.href;
         if (currentUrl === urls.End) {
             return;
