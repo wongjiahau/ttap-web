@@ -1,6 +1,7 @@
 import * as $ from "jquery";
-import {LinearProgress} from "material-ui-next";
+import IconInfo from "material-ui-icons/Info";
 import Button from "material-ui-next/Button";
+import Tooltip from "material-ui-next/Tooltip";
 import Typography from "material-ui-next/Typography";
 import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
@@ -172,6 +173,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                             )
                             : (
                                 <StackPanel orientation="horizontal" horizontalAlignment="right">
+                                    <Tooltip title={subjectListTipsContent()} placement="top">
+                                        <IconInfo/>
+                                    </Tooltip>
                                     <Button
                                         color="accent"
                                         style={buttonStyle}
@@ -219,7 +223,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
             case Key.UpArrow:
                 this.Focus("previous");
                 break;
-            case Key.Escape:
+            case Key.Tab:
                 const searchbar = document.getElementById("searchbar")as HTMLInputElement;
                 searchbar.value = "";
                 this.props.handleSearch("");
@@ -253,3 +257,42 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         subjectViews[0].focus();
     }
 }
+
+const subjectListTipsContent = () => {
+    const style : React.CSSProperties = {
+        fontSize:      "15px",
+        paddingBottom: "5px",
+        paddingTop:    "5px",
+        textAlign:     "left",
+    };
+    return (
+        <table style={style}>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>↓ ↑</code>
+                    </td>
+                    <td>
+                        &emsp;Navigate through subjects
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Enter</code>
+                    </td>
+                    <td>
+                        &emsp;Toggle selection on focused subject
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Tab</code>
+                    </td>
+                    <td>
+                        &emsp;Clear and focus the search bar
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    );
+};
