@@ -9,7 +9,7 @@ import {Timetable} from "../../model/timetable";
 import {Colors} from "../colors/colors";
 import { GenerateSlotViewsAndDayColumn } from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
-import {Skeleton} from "./skeleton";
+import {ISkeleton, Skeleton} from "./skeleton";
 
 const getTimetableViewWidth = () => 0.9 * $(window).width();
 
@@ -34,6 +34,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, { widt
             const rawSlots = RawSlot.GetBunch(this.props.timetable.HashIds);
             const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(rawSlots);
             skeleton.Concat(slotViewsAndDayColumn);
+            const horizontalDividers = GenerateHorizontalDividers(skeleton);
+            skeleton.Concat(horizontalDividers);
         }
         if (this.props.states) {
             const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
@@ -58,6 +60,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, { widt
                     isDraggable={false}
                     isResizable={false}
                     autoSize={true}
+                    preventCollision={true}
                     verticalCompact={false}>
                     {skeleton.Children}
                 </ReactGridLayout>
@@ -83,3 +86,39 @@ export const GetStandardDayColumnLayout = () : ReactGridLayout.Layout[] => {
     }
     return result;
 };
+
+export const GenerateHorizontalDividers = (skeleton: ISkeleton) : ISkeleton => {
+    const getDivider = (layoutId: string) => {
+        const dividerStyle : React.CSSProperties = {
+            borderBottom: "1px dotted #666",
+            width: "100%"
+        };
+        return (
+            <div key={layoutId} style={dividerStyle}/>
+        );
+    };
+    const dividers = [];
+    for (let i = 1; i <= 6; i++) {
+        dividers.push(getDivider("divider" + i));
+    }
+    const dividersLayouts : ReactGridLayout.Layout[] = [];
+    for (let i = 1; i <= 6; i++) {
+        dividersLayouts.push({
+            ...skeleton.Layouts.filter((x) => x.i === "d" + i)[0],
+            i: ( "divider" + i ),
+            w: ( TimePeriod.Max.Hour - TimePeriod.Min.Hour ) * 2,
+            x: 2,
+            static: true
+        });
+    }
+    return {
+        Children: dividers,
+        Layouts: dividersLayouts
+    };
+};
+
+/*
+Note: For the horizontal borders to work, the synchronizeLayoutWithChildren function of ReactGirdLayout must be disabled,
+It can be disabled by returning the initialLayout directly
+in utils.js of ReactGridLayout folder
+*/
