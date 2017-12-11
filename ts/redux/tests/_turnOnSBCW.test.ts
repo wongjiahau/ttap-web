@@ -49,14 +49,4 @@ describe("TurnOnSBCW action", () => {
         newState = MasterStateReducer(newState, new TurnOnSBCW());
         expect(newState.SbcwDialogState.IsOpen).to.eq(false);
     });
-
-    it("should set timetables to new timetables found using the new timetablefinder", () => {
-        const initialState = NewMasterState();
-        let newState = MasterStateReducer(initialState, new NotifyDataLoaded(HENG_2017_APR()));
-        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.FM2));
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(392);
-        newState = MasterStateReducer(newState, new TurnOnSBCW());
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(420);
-    });
-
 });

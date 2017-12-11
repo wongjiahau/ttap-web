@@ -7,6 +7,9 @@ import {
     TurnOnSBCWDialog
 } from "../../react/turnOnSBCWConfirmationDialog";
 import {
+    FindTimetablesBasedOnChosenSlots
+} from "../actions/findTimetablesBasedOnChosenSlots";
+import {
     HideSnackbar
 } from "../actions/hideSnackbar";
 import {
@@ -18,6 +21,12 @@ import {
 import {
     TurnOnSBCW
 } from "../actions/turnOnSBCW";
+import {
+    UpdateSlotsTableState
+} from "../actions/updateSlotsTableState";
+import {
+    UpdateTotalState
+} from "../actions/updateTotalState";
 import {
     ISBCWDialogState
 } from "../reducers/sbcwDialogState";
@@ -37,6 +46,8 @@ const mapDispatchToProps = (dispatch): ITurnOnSBCWDialogDispatchProps => {
         handleClose: () => dispatch(new ToggleIsOpenOfSBCWDialog(false)),
         handleTurnOn: () => {
             dispatch(new TurnOnSBCW());
+            dispatch(new FindTimetablesBasedOnChosenSlots());
+            dispatch(new UpdateTotalState());
             dispatch(new NotifyIfTimetableIsFound());
         },
     };

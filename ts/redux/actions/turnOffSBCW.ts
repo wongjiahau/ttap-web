@@ -19,23 +19,13 @@ export class TurnOffSBCW extends MasterStateAction {
         return "turn off search by considering week number";
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
-        let newTimetables = null;
-        if (state.SubjectListState.Subjects !== null) {
-            newTimetables = FindTimetableBasedOn(
-                state.SubjectListState.Subjects.filter((s) => s.IsSelected),
-                FindTimetableWithoutConsideringWeekNumber
-            );
-        } else {
-            newTimetables = state.TimetableListState.FiltrateTimetables;
-        }
         return {
             ...state,
             SettingsState: {
                 ...state.SettingsState,
                 SearchByConsideringWeekNumber: false,
                 TimetableFinder: FindTimetableWithoutConsideringWeekNumber
-            },
-            TimetableListState: NewTimetableListState(newTimetables)
+            }
         };
     }
 }

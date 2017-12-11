@@ -19,15 +19,6 @@ export class TurnOnSBCW extends MasterStateAction {
         return "turn on search by considering week number";
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
-        let newTimetables = null;
-        if (state.SubjectListState.Subjects !== null) {
-            newTimetables = FindTimetableBasedOn(
-                state.SubjectListState.Subjects.filter((s) => s.IsSelected),
-                FindTimetableByConsideringWeekNumber
-            );
-        } else {
-            newTimetables = state.TimetableListState.FiltrateTimetables;
-        }
         return {
             ...state,
             SettingsState: {
@@ -38,8 +29,7 @@ export class TurnOnSBCW extends MasterStateAction {
             SbcwDialogState: {
                 ...state.SbcwDialogState,
                 IsOpen: false
-            },
-            TimetableListState: NewTimetableListState(newTimetables)
+            }
         };
     }
 }

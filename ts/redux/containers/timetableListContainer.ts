@@ -7,9 +7,14 @@ import {
     TimetableListView
 } from "../../react/timetableListView";
 import {
+    FindTimetablesBasedOnChosenSlots
+} from "../actions/findTimetablesBasedOnChosenSlots";
+import {
     GoToRandomTimetable
 } from "../actions/goToRandomTimetable";
-import { NotifyIfTimetableIsFound } from "../actions/notifyIfTimetableIsFound";
+import {
+    NotifyIfTimetableIsFound
+} from "../actions/notifyIfTimetableIsFound";
 import {
     ToggleIsOpenOfSaveDialog
 } from "../actions/toggleIsOpenOfSaveDialog";
@@ -22,6 +27,9 @@ import {
 import {
     TurnOffSBCW
 } from "../actions/turnOffSBCW";
+import {
+    UpdateSlotsTableState
+} from "../actions/updateSlotsTableState";
 import {
     ISettingsState
 } from "../reducers/settingsState";
@@ -63,6 +71,8 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
         handleTurnOffSBCW:               () => {
             dispatch(new TurnOffSBCW());
+            dispatch(new FindTimetablesBasedOnChosenSlots());
+            dispatch(new UpdateTotalState());
             dispatch(new NotifyIfTimetableIsFound());
         }
     };

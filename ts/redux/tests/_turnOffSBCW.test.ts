@@ -55,15 +55,4 @@ describe("TurnOffSBCW action", () => {
         expect(newState.SettingsState.TimetableFinder.toString())
             .to.eq(FindTimetableWithoutConsideringWeekNumber.toString());
     });
-
-    it("should set timetables to new timetables found using the new timetablefinder", () => {
-        const initialState = NewMasterState();
-        let newState = MasterStateReducer(initialState, new NotifyDataLoaded(HENG_2017_APR()));
-        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.FM2));
-        newState = MasterStateReducer(newState, new TurnOnSBCW());
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(420);
-        newState = MasterStateReducer(newState, new TurnOffSBCW());
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(392);
-    });
-
 });
