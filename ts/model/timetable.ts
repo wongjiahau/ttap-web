@@ -7,7 +7,14 @@ export class Timetable {
     public readonly State : number[];
     public constructor(hashIds: number[], state : number[]) {
         this.HashIds = hashIds;
-        this.State = state;
+        this.State = CompressState(state);
     }
-    // TODO: Write state compressor here
+}
+
+export function CompressState(state: number[]) : number[] {
+    const result = [0, 0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < state.length; i++) {
+        result[i % 7] |= state[i]; // 7 means the numberOfDayPerWeek
+    }
+    return result;
 }
