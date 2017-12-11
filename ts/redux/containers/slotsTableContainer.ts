@@ -10,7 +10,12 @@ import {
     ISlotsTableViewStateProps,
     SlotsTable
 } from "../../react/slotsTableView";
-import { FindTimetablesBasedOnChosenSlots } from "../actions/findTimetablesBasedOnChosenSlots";
+import {
+    FindTimetablesBasedOnChosenSlots
+} from "../actions/findTimetablesBasedOnChosenSlots";
+import {
+    NotifyIfTimetableIsFound
+} from "../actions/notifyIfTimetableIsFound";
 import {
     NotifyNumberOfRemainingTimetables
 } from "../actions/notifyNumberOfRemainingTimetables";
@@ -44,7 +49,10 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
     return {
-        handleDone: () => dispatch(new FindTimetablesBasedOnChosenSlots()),
+        handleDone: () => {
+            dispatch(new FindTimetablesBasedOnChosenSlots());
+            dispatch(new NotifyIfTimetableIsFound());
+        },
         handleCancel: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
         handleSlotCheckChanged: (slotNumber: string, checked: boolean, subjectCode: string) =>
             dispatch(new ToggleSelectionOnSpecificSlot(slotNumber, checked, subjectCode)),

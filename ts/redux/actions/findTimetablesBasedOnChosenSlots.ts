@@ -18,6 +18,9 @@ import {
     PartitionizeByKey
 } from "../../permutator/partitionize";
 import {
+    NewTimetableListState
+} from "../reducers/timetableListState";
+import {
     IMasterState,
     MasterStateAction
 } from "./../reducers/masterState";
@@ -84,20 +87,12 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         }
         return {
             ...state,
-            SnackbarState: {
-                IsOpen: true,
-                Message: newTimetables.length + " possible timetables found."
-            },
             SlotTableState: {
                 ...state.SlotTableState,
                 IsOpen: false,
                 ErrorMessages: null
             },
-            TimetableListState: {
-                ...state.TimetableListState,
-                FiltrateTimetables: newTimetables,
-                ResidueTimetables: []
-            }
+            TimetableListState: NewTimetableListState(newTimetables)
         };
     }
 }
