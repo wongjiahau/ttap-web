@@ -1,10 +1,11 @@
 import IconClock from "material-ui-icons/Alarm";
+import IconGrid from "material-ui-icons/GridOn";
 import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
-import { Switch } from "material-ui-next";
+import {Switch} from "material-ui-next";
 import Button from "material-ui-next/Button";
 import * as React from "react";
-import { Key } from "../enums/keyCodeEnum";
+import {Key} from "../enums/keyCodeEnum";
 import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
@@ -42,12 +43,17 @@ ITimetableListViewStateProps,
 ITimetableListViewDispatchProps {}
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
+        if (this.props.currentTimetable === undefined) {
+            return Logo();
+        }
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <StackPanel horizontalAlignment="right" orientation="horizontal">
                         Search by considering week number
-                        <Switch checked={this.props.isSbcwTurnedOn} onChange={this.handleSwitchToggled}/>
+                        <Switch
+                            checked={this.props.isSbcwTurnedOn}
+                            onChange={this.handleSwitchToggled}/>
                     </StackPanel>
                     <TimetableView timetable={this.props.currentTimetable} states={null}/>
                 </StackPanel>
@@ -75,10 +81,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         <IconSave style={iconStyle}/>
                         Save as . . .
                     </Button>
-                    <Button
-                        raised={true}
-                        color="primary"
-                        onClick={this.props.handleOpenSlotsTable}>
+                    <Button raised={true} color="primary" onClick={this.props.handleOpenSlotsTable}>
                         <IconViewList style={iconStyle}/>
                         Show slots
                     </Button>
@@ -87,22 +90,53 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         );
     }
 
-    private handleSwitchToggled = (event: object, checked: boolean) => {
+    private handleSwitchToggled = (event : object, checked : boolean) => {
         if (checked) {
-            this.props.handleOpenSbcwDialog();
+            this
+                .props
+                .handleOpenSbcwDialog();
         } else {
-            this.props.handleTurnOffSBCW();
+            this
+                .props
+                .handleTurnOffSBCW();
         }
     }
     private checkKeys = (e) => {
-        // refer https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
+        // refer
+        // https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-jav
+        // ascript
         e = e || window.event;
         if (e.keyCode === Key.LeftArrow || e.keyCode === Key.UpArrow) {
-            this.props.handleGoToPrevious();
+            this
+                .props
+                .handleGoToPrevious();
         } else if (e.keyCode === Key.RightArrow || e.keyCode === Key.DownArrow) {
-            this.props.handleGoToNext();
+            this
+                .props
+                .handleGoToNext();
         } else if (e.keyCode === Key.R) {
-            this.props.handleGoToRandom();
+            this
+                .props
+                .handleGoToRandom();
         }
     }
+}
+
+function Logo() {
+    const gridIconStyle : React.CSSProperties = {
+        // width: "50px",
+        // height: "50px",
+    };
+    const stackPanelStyle : React.CSSProperties = {
+        position: "absolute",
+        right: "1%",
+        bottom: "1%",
+        // fontSize: "36px"
+    };
+    return (
+        <StackPanel orientation="horizontal" style={stackPanelStyle}>
+            <IconGrid style={gridIconStyle}/>
+            TTAP
+        </StackPanel>
+    );
 }
