@@ -22,16 +22,6 @@ import {
     Timetable
 } from "../../model/timetable";
 import {
-    ParseRawSlotToSlot
-} from "../../parser/parseRawSlotToSlot";
-import {
-    ParseSlotToTinySlot
-} from "../../parser/parseSlotToTinySlot";
-import {
-    FindTimetable
-} from "../../permutator/findTimetable";
-import { FindTimetableV2 } from "../../permutator/findTimetableV2";
-import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 import {
@@ -43,6 +33,8 @@ import {
     ToggleSubjectListViewingOptions
 } from "./toggleSubjectListViewingOption";
 
+let CurrentTimetableFinder: (rawSlots: RawSlot[]) => Timetable[];
+
 export class ToggleSubjectSelection extends MasterStateAction {
     public constructor(private subjectIndex: number) {
         super();
@@ -51,6 +43,7 @@ export class ToggleSubjectSelection extends MasterStateAction {
         return "toggle subject selection";
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
+        CurrentTimetableFinder = state.SettingsState.TimetableFinder;
         const newSubjects = state.SubjectListState.Subjects.map((x) => ({ ...x
         }));
         const targetSubject = newSubjects[this.subjectIndex];
@@ -76,7 +69,7 @@ export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject
             }
         };
     }
-    const timetables = FindTimetableBasedOn(selectedSubjects.concat([subjectToBeSelected]));
+    const timetables = FindTimetableBasedOn(selectedSubjects.concat([subjectToBeSelected]), CurrentTimetableFinder);
     if (timetables.length === 0) {
         subjectToBeSelected.ClashReport = new ClashReport("group");
         return {
@@ -102,7 +95,7 @@ export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Sub
     subjectToBeDeselected.IsSelected = false;
     const selectedSubjects = allSubjects.filter((x) => x.IsSelected);
     ReleaseDisabledSubjectsIfPossible(selectedSubjects, allSubjects);
-    const timetables = FindTimetableBasedOn(selectedSubjects);
+    const timetables = FindTimetableBasedOn(selectedSubjects, CurrentTimetableFinder);
     const result: IMasterState = {
         ...state,
         SubjectListState: {
@@ -144,7 +137,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects: Subject[], a
                 }
                 break;
             case "group":
-                if (FindTimetableBasedOn(selectedSubjects.concat([s])).length > 0) {
+                if (FindTimetableBasedOn(selectedSubjects.concat([s]), CurrentTimetableFinder).length > 0) {
                     s.ClashReport = null;
                 }
                 break;
@@ -163,7 +156,9 @@ export function CheckForClashesBetween(s: Subject, subjects: Subject[]): ClashRe
     return null;
 }
 
-export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
+export function FindTimetableBasedOn(
+    subjects: Subject[],
+    timetableFinder: (rawSlots: RawSlot[]) => Timetable[] ): Timetable[] {
     if (subjects.length === 0) {
         return [];
     }
@@ -171,11 +166,5 @@ export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
     for (let i = 0; i < subjects.length; i++) {
         slotIds = slotIds.concat(subjects[i].SlotIds);
     }
-    return FindTimetable(
-        ParseSlotToTinySlot(
-            ParseRawSlotToSlot(
-                RawSlot.GetBunch(slotIds)
-            )
-        )
-    );
+    return timetableFinder(RawSlot.GetBunch(slotIds));
 }

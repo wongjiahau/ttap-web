@@ -34,6 +34,7 @@ export interface ITimetableListViewDispatchProps {
     handleOpenSbcwDialog:            () => void;
     handleOpenSetTimeConstraintView: () => void;
     handleOpenSlotsTable:            () => void;
+    handleTurnOffSBCW:               () => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -90,7 +91,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         if (checked) {
             this.props.handleOpenSbcwDialog();
         } else {
-
+            this.props.handleTurnOffSBCW();
         }
     }
     private checkKeys = (e) => {

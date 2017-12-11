@@ -9,6 +9,7 @@ import {
 import {
     GoToRandomTimetable
 } from "../actions/goToRandomTimetable";
+import { NotifyIfTimetableIsFound } from "../actions/notifyIfTimetableIsFound";
 import {
     ToggleIsOpenOfSaveDialog
 } from "../actions/toggleIsOpenOfSaveDialog";
@@ -18,6 +19,9 @@ import {
 import {
     ToggleIsOpenOfSlotsTable
 } from "../actions/toggleIsOpenOfSlotsTable";
+import {
+    TurnOffSBCW
+} from "../actions/turnOffSBCW";
 import {
     ISettingsState
 } from "../reducers/settingsState";
@@ -57,6 +61,10 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
         handleOpenSbcwDialog:            () => dispatch(new ToggleIsOpenOfSBCWDialog(true)),
         handleOpenSetTimeConstraintView: () => dispatch(new ToggleSetTimeConstraintView(true)),
         handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
+        handleTurnOffSBCW:               () => {
+            dispatch(new TurnOffSBCW());
+            dispatch(new NotifyIfTimetableIsFound());
+        }
     };
 };
 

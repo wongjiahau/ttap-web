@@ -9,4 +9,5 @@ export class Timetable {
         this.HashIds = hashIds;
         this.State = state;
     }
+    // TODO: Write state compressor here
 }

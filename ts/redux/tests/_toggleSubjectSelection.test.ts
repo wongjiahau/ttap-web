@@ -10,6 +10,9 @@ import {
     FindClashes
 } from "../../clashFinder/findClashes";
 import {
+    FindTimetableWithoutConsideringWeekNumber
+} from "../../permutator/findTimetable";
+import {
     GetTestSubjects1,
     IndexOf
 } from "../../tests/testDataGenerator";
@@ -210,7 +213,7 @@ describe("FindTimetableBasedOn", () => {
         const subjects = mockSubjects;
         const titas = subjects[IndexOf.TITA];
         const wwt = subjects[IndexOf.WWT];
-        const timetables = FindTimetableBasedOn([wwt, titas]);
+        const timetables = FindTimetableBasedOn([wwt, titas], FindTimetableWithoutConsideringWeekNumber);
         expect(timetables).to.have.lengthOf(5);
     });
 

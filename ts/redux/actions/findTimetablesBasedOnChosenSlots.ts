@@ -15,15 +15,6 @@ import {
     Timetable
 } from "../../model/timetable";
 import {
-    ParseRawSlotToSlot
-} from "../../parser/parseRawSlotToSlot";
-import {
-    ParseSlotToTinySlot
-} from "../../parser/parseSlotToTinySlot";
-import {
-    FindTimetable
-} from "../../permutator/findTimetable";
-import {
     PartitionizeByKey
 } from "../../permutator/partitionize";
 import {
@@ -53,7 +44,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         let newTimetables: Timetable[] = [];
         if (slotNumbersOfSelectedSlots.length > 0) {
             const rawSlots = RawSlot.GetBunchFromSlotNumbers(slotNumbersOfSelectedSlots);
-            newTimetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
+            newTimetables = state.SettingsState.TimetableFinder(rawSlots);
             const slotsOfSubjects = PartitionizeByKey(rawSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
             sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);

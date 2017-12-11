@@ -24,7 +24,7 @@ export class TurnOnSBCWDialog extends React.Component<ITurnOnSBCWDialogProps, {}
                 <DialogContent>
                     <DialogContentText>
                         Turning on this feature will allow TTAP to search for more timetables.
-                        WARNING: This will <i>slow</i> down the search process.
+                        WARNING: This will <b><i>slow</i></b> down the search process.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
