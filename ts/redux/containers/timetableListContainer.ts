@@ -13,8 +13,14 @@ import {
     ToggleIsOpenOfSaveDialog
 } from "../actions/toggleIsOpenOfSaveDialog";
 import {
+    ToggleIsOpenOfSBCWDialog
+} from "../actions/toggleIsOpenOfSBCWDialog";
+import {
     ToggleIsOpenOfSlotsTable
 } from "../actions/toggleIsOpenOfSlotsTable";
+import {
+    ISettingsState
+} from "../reducers/settingsState";
 import {
     ITimetableListState
 } from "../reducers/timetableListState";
@@ -32,24 +38,25 @@ import {
 } from "./../actions/updateTotalState";
 
 const mapStateToProps = (state): ITimetableListViewStateProps => {
-    const target = state.MasterStateReducer.TimetableListState as ITimetableListState;
+    const timetableListStae = state.MasterStateReducer.TimetableListState as ITimetableListState;
+    const settingsState = state.MasterStateReducer.SettingsState as ISettingsState;
     return {
-        currentIndex: target.CurrentIndex,
-        currentTimetable: target.FiltrateTimetables[target.CurrentIndex],
-        maxIndex: target.FiltrateTimetables.length - 1,
+        currentIndex:     timetableListStae.CurrentIndex,
+        currentTimetable: timetableListStae.FiltrateTimetables[timetableListStae.CurrentIndex],
+        isSbcwTurnedOn:   settingsState.SearchByConsideringWeekNumber,
+        maxIndex:         timetableListStae.FiltrateTimetables.length - 1,
     };
 };
 
 const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
     return {
-        handleGoToNext: () => dispatch(new GoToNextTimetable()),
-        handleGoToRandom: () => dispatch(new GoToRandomTimetable()),
-        handleGoToPrevious: () => dispatch(new GoToPrevTimetable()),
-        handleOpenSetTimeConstraintView: () => {
-            dispatch(new ToggleSetTimeConstraintView(true));
-        },
-        handleOpenSlotsTable: () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
-        handleOpenSaveTimetableDialog: () => dispatch(new ToggleIsOpenOfSaveDialog(true))
+        handleGoToNext:                  () => dispatch(new GoToNextTimetable()),
+        handleGoToPrevious:              () => dispatch(new GoToPrevTimetable()),
+        handleGoToRandom:                () => dispatch(new GoToRandomTimetable()),
+        handleOpenSaveTimetableDialog:   () => dispatch(new ToggleIsOpenOfSaveDialog(true)),
+        handleOpenSbcwDialog:            () => dispatch(new ToggleIsOpenOfSBCWDialog(true)),
+        handleOpenSetTimeConstraintView: () => dispatch(new ToggleSetTimeConstraintView(true)),
+        handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
     };
 };
 

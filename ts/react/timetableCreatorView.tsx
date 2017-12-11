@@ -13,6 +13,7 @@ import { SlotsTableContainer } from "../redux/containers/slotsTableContainer";
 import { SnackbarContainer } from "../redux/containers/snackbarContainer";
 import { SubjectListViewContainer } from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
+import { SBCWDialogContainer } from "../redux/containers/turnOnSBCWDialogContainer";
 import {LoadTestDataView} from "./loadTestDataView";
 import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
@@ -57,6 +58,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 </Button>
                 <TimetableListContainer/>
                 <SaveTimetableDialogContainer/>
+                <SBCWDialogContainer/>
                 <SetTimeConstraintContainer/>
                 <SlotsTableContainer/>
                 <SnackbarContainer/>

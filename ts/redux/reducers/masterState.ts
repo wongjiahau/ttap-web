@@ -2,7 +2,9 @@ import * as typeName from "type-name";
 import {Action} from "../actions/action";
 import {GenerateReducer} from "./generateReducer";
 import {ISaveTimetableDialogState, NewSaveTimetableDialogState} from "./saveTimetableDialogState";
+import { ISBCWDialogState, NewSbcwDialogstate } from "./sbcwDialogState";
 import {ISetTimeConstraintState, NewSetTimeConstraintState} from "./setTimeConstraintState";
+import { ISettingsState, NewSettingsState } from "./settingsState";
 import {ISlotsTableState, NewSlotsTableState} from "./slotsTableState";
 import {ISnackbarState, NewSnackbarState} from "./snackbarState";
 import {ISubjectListState, NewSubjectListState} from "./subjectListState";
@@ -11,7 +13,9 @@ import {ITimetableListState, NewTimetableListState} from "./timetableListState";
 
 export interface IMasterState {
     SaveTimetableDialogState: ISaveTimetableDialogState;
+    SbcwDialogState:          ISBCWDialogState;
     SetTimeConstraintState:   ISetTimeConstraintState;
+    SettingsState:            ISettingsState;
     SlotTableState:           ISlotsTableState;
     SnackbarState:            ISnackbarState;
     SubjectListState:         ISubjectListState;
@@ -22,7 +26,9 @@ export interface IMasterState {
 export function NewMasterState() : IMasterState {
     return {
         SaveTimetableDialogState: NewSaveTimetableDialogState(),
+        SbcwDialogState:          NewSbcwDialogstate (),
         SetTimeConstraintState:   NewSetTimeConstraintState(null),
+        SettingsState:            NewSettingsState(),
         SlotTableState:           NewSlotsTableState(),
         SnackbarState:            NewSnackbarState(),
         SubjectListState:         NewSubjectListState(null),

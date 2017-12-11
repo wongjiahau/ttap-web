@@ -1,6 +1,7 @@
 import IconClock from "material-ui-icons/Alarm";
 import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
+import { Switch } from "material-ui-next";
 import Button from "material-ui-next/Button";
 import * as React from "react";
 import { Key } from "../enums/keyCodeEnum";
@@ -19,18 +20,20 @@ const centerDivStyle : React.CSSProperties = {
 };
 
 export interface ITimetableListViewStateProps {
-    currentTimetable : Timetable;
-    currentIndex : number; // non-zero based
-    maxIndex : number; // non-zero based
+    currentIndex:     number; // non-zero based
+    currentTimetable: Timetable;
+    maxIndex:         number; // non-zero based
+    isSbcwTurnedOn:   boolean;
 }
 
 export interface ITimetableListViewDispatchProps {
-    handleGoToNext : () => void;
-    handleGoToRandom : () => void;
-    handleGoToPrevious : () => void;
-    handleOpenSetTimeConstraintView : () => void;
-    handleOpenSaveTimetableDialog : () => void;
-    handleOpenSlotsTable : () => void;
+    handleGoToNext:                  () => void;
+    handleGoToPrevious:              () => void;
+    handleGoToRandom:                () => void;
+    handleOpenSaveTimetableDialog:   () => void;
+    handleOpenSbcwDialog:            () => void;
+    handleOpenSetTimeConstraintView: () => void;
+    handleOpenSlotsTable:            () => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -40,9 +43,13 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
     public render() {
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
-                <div style={centerDivStyle}>
+                <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <StackPanel horizontalAlignment="right" orientation="horizontal">
+                        Search by considering week number
+                        <Switch checked={this.props.isSbcwTurnedOn} onChange={this.handleSwitchToggled}/>
+                    </StackPanel>
                     <TimetableView timetable={this.props.currentTimetable} states={null}/>
-                </div>
+                </StackPanel>
                 <StackPanel orientation="horizontal" horizontalAlignment="center">
                     <Button
                         raised={true}
@@ -79,6 +86,13 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         );
     }
 
+    private handleSwitchToggled = (event: object, checked: boolean) => {
+        if (checked) {
+            this.props.handleOpenSbcwDialog();
+        } else {
+
+        }
+    }
     private checkKeys = (e) => {
         // refer https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
         e = e || window.event;
