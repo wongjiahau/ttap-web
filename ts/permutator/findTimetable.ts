@@ -2,9 +2,13 @@ import {
     concat,
     sortBy
 } from "lodash";
+import { RawSlot } from "../model/rawSlot";
 import {
     Timetable
 } from "../model/timetable";
+import { ParseRawSlotToSlot } from "../parser/parseRawSlotToSlot";
+import { ParseSlotToBigSlot } from "../parser/parseSlotToBigSlot";
+import { ParseSlotToTinySlot } from "../parser/parseSlotToTinySlot";
 import {
     BoundedInt
 } from "./boundedInt";
@@ -96,4 +100,20 @@ export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
             }
         }
     }
+}
+
+export function FindTimetableWithoutConsideringWeekNumber(rawSlots: RawSlot[]) : Timetable[] {
+    return FindTimetable(
+        ParseSlotToTinySlot(
+            ParseRawSlotToSlot(rawSlots)
+        )
+    );
+}
+
+export function FindTimetableByConsideringWeekNumber(rawSlots: RawSlot[]) : Timetable[] {
+    return FindTimetable(
+        ParseSlotToBigSlot(
+            ParseRawSlotToSlot(rawSlots)
+        )
+    );
 }

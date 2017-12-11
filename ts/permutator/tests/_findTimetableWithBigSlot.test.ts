@@ -6,13 +6,23 @@ import {
     isEqual
 } from "lodash";
 import {
+    ParseRawSlotToSlot
+} from "../../parser/parseRawSlotToSlot";
+import {
+    ParseSlotToBigSlot
+} from "../../parser/parseSlotToBigSlot";
+import {
+    CodeOf,
+    HENG_2017_APR
+} from "../../tests/testData/heng_2017_apr";
+import {
     FindTimetable
 } from "../findTimetable";
 import {
     RawSlot
 } from "./../../model/rawSlot";
 import {
-    CodeOf, GetBigSlotsOf
+    GetBigSlotsOf
 } from "./../../tests/testDataGenerator";
 import {
     BoundedInt
@@ -76,6 +86,13 @@ describe("FindTimetable() with BigSlot", () => {
         const bkaSlots = GetBigSlotsOf("MPU32013");
         const result = FindTimetable(bkaSlots);
         expect(result.length).to.eq(1);
+    });
+
+    it("case 8", () => {
+        const fm2Slots = HENG_2017_APR().filter((s) => s.SubjectCode === CodeOf.FM2);
+        const bigSlots = ParseSlotToBigSlot(ParseRawSlotToSlot(fm2Slots));
+        const result = FindTimetable(bigSlots);
+        expect(result.length).to.eq(420);
     });
 
     it("should return empty array when there is no possible timetable", () => {

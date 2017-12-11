@@ -1,49 +1,95 @@
 import {
-    IRawSlot
+    IRawSlot, RawSlot
 } from "../../model/rawSlot";
 
 export enum CodeOf {
-    HE = "MPU3113",
-        TITA = "MPU3123",
-        BMK2 = "MPU3143",
-        MS3 = "MPU3173",
-        BKA = "MPU32013",
-        EFE = "MPU32043",
-        EIS = "MPU33183",
-        SEP = "MPU34012",
-        ACP = "MPU34022",
-        ACD = "MPU34072",
-        ITGL = "UALB1003",
-        ITF = "UALF1003",
-        ITJ = "UALJ2013",
-        MFE1 = "UECM1653",
-        MFE2 = "UECM1713",
-        NMS = "UECM2623",
-        FOP = "UECS1643",
-        ET1 = "UEME1112",
-        S = "UEME1132",
-        EDC = "UEME1252",
-        FM1 = "UEME2123",
-        FM2 = "UEME3112",
-        ITBS = "UEMX1133",
-        S1 = "UEMX1843",
-        SA2 = "UEMX2323",
-        CSD2 = "UEMX2363",
-        GE = "UEMX2423",
-        H = "UEMX2513",
-        SSD = "UEMX3333",
-        HT = "UEMX3813",
-        FEMISE = "UEMX4293",
-        ASSD = "UEMX4313",
-        CT = "UEMX4393",
-        EAIE = "UEMX4963",
-        ITK = "UJLL1093",
+        ACD     = "MPU34072",
+        ACP     = "MPU34022",
+        ASSD    = "UEMX4313",
+        BEAM    = "UKMM1043",
+        BKA     = "MPU32013",
+        BMK2    = "MPU3143",
+        CSD2    = "UEMX2363",
+        CT      = "UEMX4393",
+        EAIE    = "UEMX4963",
+        EDC     = "UEME1252",
+        EFE     = "MPU32043",
+        EIS     = "MPU33183",
+        ET1     = "UEME1112",
+        FEMISE  = "UEMX4293",
+        FM1     = "UEME2123",
+        FM2     = "UEME3112",
+        FOP     = "UECS1643",
+        GE      = "UEMX2423",
+        H       = "UEMX2513",
+        HT      = "UEMX3813",
+        IDP     = "UEMX4913",
+        ITBS    = "UEMX1133",
+        ITF     = "UALF1003",
+        ITGL    = "UALB1003",
+        ITJ     = "UALJ2013",
+        ITK     = "UJLL1093",
+        MFE1    = "UECM1653",
+        MFE2    = "UECM1713",
+        MS3     = "MPU3173",
+        NMS     = "UECM2623",
+        S       = "UEME1132",
+        S1      = "UEMX1843",
+        SA2     = "UEMX2323",
+        SEP     = "MPU34012",
+        SSD     = "UEMX3333",
         SZAOWBS = "UKMM1011",
-        BEAM = "UKMM1043",
-        IDP = "UEMX4913",
+        TITA    = "MPU3123",
+        HE      = "MPU3113",
 }
 
-export const HENG_2017_APR: IRawSlot[] = [{
+export enum IndexOf {
+        ACD     = 0,
+        ACP     = 1,
+        ASSD    = 2,
+        BEAM    = 3,
+        BKA     = 4,
+        BMK2    = 5,
+        CSD2    = 6,
+        CT      = 7,
+        EAIE    = 8,
+        EDC     = 9,
+        EFE     = 10,
+        EIS     = 11,
+        ET1     = 12,
+        FEMISE  = 13,
+        FM1     = 14,
+        FM2     = 15,
+        FOP     = 16,
+        GE      = 17,
+        H       = 18,
+        HT      = 19,
+        IDP     = 20,
+        ITBS    = 21,
+        ITF     = 22,
+        ITGL    = 23,
+        ITJ     = 24,
+        ITK     = 25,
+        MFE1    = 26,
+        MFE2    = 27,
+        MS3     = 28,
+        NMS     = 29,
+        S       = 30,
+        S1      = 31,
+        SA2     = 32,
+        SEP     = 33,
+        SSD     = 34,
+        SZAOWBS = 35,
+        TITA    = 36,
+        HE      = 37
+}
+
+let cache : IRawSlot[] = null;
+export const HENG_2017_APR = () : IRawSlot[] =>  {
+    if (cache !== null) {
+        return cache;
+    }
+    cache = [{
         HashId: 1,
         SubjectCode: "MPU3113",
         SubjectName: "Hubungan Etnik (for Local Students)",
@@ -4363,5 +4409,9 @@ export const HENG_2017_APR: IRawSlot[] = [{
         WeekNumber: "1-14",
         Room: "KB318"
     },
-
-];
+    ];
+    cache.forEach((slot) => {
+        RawSlot.RegisterSlot(slot);
+    });
+    return cache;
+};
