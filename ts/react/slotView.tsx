@@ -7,7 +7,7 @@ import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {
     width: "100%",
-    fontFamily: "roboto"
+    fontFamily: "roboto",
 };
 
 export interface ISlotViewProps {
@@ -33,10 +33,10 @@ export class SlotView extends React.Component < ISlotViewProps, {} > {
         const tooltipTitle = Beautify(slot.SubjectName) + " [" + slot.SubjectCode + "]";
         return (
             <div data-balloon={tooltipTitle} data-balloon-length="medium" data-balloon-pos="down">
-                <ButtonBase style={buttonBaseStyle}>
+                <ButtonBase style={buttonBaseStyle} onClick={() => console.log(this.props.slot)}>
                     <div style={divStyle}>
                         <b>
-                            {GetInitial(slot.SubjectName) + " : " + slot.Type + "(" + slot.Group + ")"}
+                            {GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group}
                         </b>
                         <br/> {slot.Room}
                         <br/> {slot.WeekNumber}
