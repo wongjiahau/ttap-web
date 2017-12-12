@@ -1,6 +1,5 @@
 //term of service and privacy policy
 import $ from 'jquery';
-import './markdown.css';
 import React, {Component} from 'react';
 import Paper from 'material-ui/Paper';
 

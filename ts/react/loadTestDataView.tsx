@@ -1,28 +1,16 @@
 import * as React from "react";
 import * as S from "string";
+import { IGithubApiObject } from "../interfaces/githubApiObject";
 import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import { ParseJsonToRawSlot } from "../parser/parseJsonToRawSlot";
-
-interface IApiObject {
-    name : string;
-    path : string;
-    sha : string;
-    size : string;
-    url : string;
-    html_url : string;
-    git_url : string;
-    download_url : string;
-    type : string;
-    _links : string;
-}
 
 export interface ILoadTestDataViewProps {
     handleLoadDemo : (rawSlots : RawSlot[]) => void;
 }
 
 export interface ILoadTestDataViewState {
-    testFiles : IApiObject[];
+    testFiles : IGithubApiObject[];
 }
 
 export class LoadTestDataView extends React.Component < ILoadTestDataViewProps,

@@ -5,14 +5,14 @@ import * as React from "react";
 import {StackPanel} from "./panels/stackPanel";
 
 export interface ICounterProps {
-    leftTooltip : string;
-    middleTooltip : string;
-    rightTooltip : string;
+    leftTooltip? : string;
+    middleTooltip? : string;
+    rightTooltip? : string;
     maxInclusive : number;
     current : number;
     handleClickLeft : () => void;
     handleClickRight : () => void;
-    handleClickMiddle : () => void;
+    handleClickMiddle? : () => void;
 }
 
 export class CounterView extends React.Component < ICounterProps, {} > {
