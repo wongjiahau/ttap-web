@@ -1,11 +1,14 @@
+import * as $ from "jquery";
 import {Button} from "material-ui-next";
+import IconLeft from "material-ui/svg-icons/hardware/keyboard-arrow-left";
+import IconRight from "material-ui/svg-icons/hardware/keyboard-arrow-right";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {IGithubApiObject} from "../../interfaces/githubApiObject";
-import {CounterView} from "../counterView";
 import {StackPanel} from "../panels/stackPanel";
 import {MarkdownPage} from "./markdownPage";
-
+const width = 0.7 * $(window).width();
+const height = 0.825 * $(window).height();
 const skipButtonStyle : React.CSSProperties = {
     position: "absolute",
     right: "10px",
@@ -36,15 +39,18 @@ ITutorialState > {
             return <Redirect push={true} to="/play"/>;
         }
         return (
-            <StackPanel orientation="vertical" horizontalAlignment="center">
-                <MarkdownPage src={this.state.currentUrl}/>
-                <CounterView
-                    handleClickLeft={this.handleClickLeft}
-                    handleClickRight={this.handleClickRight}
-                    maxInclusive={this.downloadUrls.length}
-                    current={this.state.currentIndex + 1}/>
+            <div>
+                <StackPanel orientation="horizontal" horizontalAlignment="center">
+                    <Button
+                        onClick={this.handleClickLeft}
+                        style={{ height}}><IconLeft/></Button>
+                    <MarkdownPage id="mdtut" src={this.state.currentUrl} width={width} minHeight={height}/>
+                    <Button
+                        onClick={this.handleClickRight}
+                        style={{ height }}><IconRight/></Button>
+                </StackPanel>
                 <Button style={skipButtonStyle} onClick={this.handleSkip}>Skip tutorial</Button>
-            </StackPanel>
+            </div>
         );
 
     }
