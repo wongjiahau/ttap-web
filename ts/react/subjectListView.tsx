@@ -224,6 +224,10 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                 this.Focus("previous");
                 break;
             case Key.Tab:
+            case Key.Backspace:
+                if (document.activeElement.id === "searchbar") {
+                    break;
+                }
                 const searchbar = document.getElementById("searchbar")as HTMLInputElement;
                 searchbar.value = "";
                 this.props.handleSearch("");
@@ -286,7 +290,7 @@ const subjectListTipsContent = () => {
                 </tr>
                 <tr>
                     <td>
-                        <code>Tab</code>
+                        <code>Backspace</code>
                     </td>
                     <td>
                         &emsp;Clear and focus the search bar
