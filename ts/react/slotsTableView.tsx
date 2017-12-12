@@ -17,6 +17,10 @@ import {Colors} from "./colors/colors";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 
+const headerStyle : React.CSSProperties = {
+    marginLeft: "10px"
+};
+
 const titleStyle : React.CSSProperties = {
     fontWeight: "bold",
     marginLeft: "15px",
@@ -84,12 +88,8 @@ ISlotsTableViewInternalState > {
         return (
             <Drawer anchor="right" open={this.props.isOpen}>
                 <section style={this.state.sectionStyle}>
-                    <header>
-                        <StackPanel
-                            orientation="vertical"
-                            style={{
-                            marginLeft: "5px"
-                        }}>
+                    <header style={headerStyle}>
+                        <StackPanel orientation="vertical">
                             <Typography type="display1" color="primary">Below are the time slots of selected subjects.</Typography>
                             <Typography type="subheading" gutterBottom={true}>You can select or deselect some specific time slots.</Typography>
                         </StackPanel>
