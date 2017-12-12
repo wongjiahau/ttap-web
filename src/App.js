@@ -10,6 +10,7 @@ import {HashRouter as Router} from 'react-router-dom';
 import {Main} from './Main';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Playground} from './core/react/playground';
+import 'react-tippy/dist/tippy.css'
 
 export class App extends Component {
   constructor(props) {

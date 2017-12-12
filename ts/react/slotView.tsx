@@ -1,13 +1,14 @@
 import ButtonBase from "material-ui-next/ButtonBase";
 import Typography from "material-ui-next/Typography";
 import * as React from "react";
+import { Tooltip } from "react-tippy";
 import {Beautify, GetInitial} from "../helper";
 import {RawSlot} from "../model/rawSlot";
 import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {
     width: "100%",
-    fontFamily: "roboto",
+    fontFamily: "roboto"
 };
 
 export interface ISlotViewProps {
@@ -30,10 +31,11 @@ export class SlotView extends React.Component < ISlotViewProps, {} > {
             width: "100%"
         };
         const slot = this.props.slot;
-        const tooltipTitle = Beautify(slot.SubjectName) + " [" + slot.SubjectCode + "]";
         return (
-            <div data-balloon={tooltipTitle} data-balloon-length="medium" data-balloon-pos="down">
-                <ButtonBase style={buttonBaseStyle} onClick={() => console.log(this.props.slot)}>
+            <Tooltip arrow={true} html={tooltipTitle(slot)}>
+                <ButtonBase
+                    style={buttonBaseStyle}
+                    onClick={() => console.log(this.props.slot)}>
                     <div style={divStyle}>
                         <b>
                             {GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group}
@@ -42,7 +44,21 @@ export class SlotView extends React.Component < ISlotViewProps, {} > {
                         <br/> {slot.WeekNumber}
                     </div>
                 </ButtonBase>
-            </div>
+            </Tooltip>
+
         );
     }
+
+}
+
+function tooltipTitle(s: RawSlot)  {
+    const style : React.CSSProperties = {
+        fontSize: "12px"
+    };
+    return (
+        <div style={style}>
+            {Beautify(s.SubjectName)} <br/>
+            [{s.SubjectCode}]
+        </div>
+    );
 }
