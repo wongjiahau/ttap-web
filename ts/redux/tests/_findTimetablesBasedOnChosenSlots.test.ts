@@ -116,4 +116,13 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         expect(newState.SlotTableState.ErrorMessages).to.eq(null);
         expect(newState.SlotTableState.IsOpen).to.eq(false);
     });
+
+    it("should notify user about number of timetables found if there are no errors", () => {
+        const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
+        newState = MasterStateReducer(newState, new UpdateSlotsTableState());
+        newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
+        expect(newState.SlotTableState.ErrorMessages).to.eq(null);
+        expect(newState.SnackbarState.IsOpen).to.eq(true);
+    });
 });

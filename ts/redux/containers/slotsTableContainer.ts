@@ -49,15 +49,12 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
 
 const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
     return {
-        handleDone: () => {
-            dispatch(new FindTimetablesBasedOnChosenSlots());
-            dispatch(new NotifyIfTimetableIsFound());
-        },
+        handleDone: () => dispatch(new FindTimetablesBasedOnChosenSlots()),
         handleCancel: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
         handleSlotCheckChanged: (slotNumber: string, checked: boolean, subjectCode: string) =>
-            dispatch(new ToggleSelectionOnSpecificSlot(slotNumber, checked, subjectCode)),
+        dispatch(new ToggleSelectionOnSpecificSlot(slotNumber, checked, subjectCode)),
         handleSlotsGroupCheckChanged: (subjectCode: string) =>
-            dispatch(new ToggleSelectionOnGroupOfSlots(subjectCode))
+        dispatch(new ToggleSelectionOnGroupOfSlots(subjectCode))
     };
 };
 
