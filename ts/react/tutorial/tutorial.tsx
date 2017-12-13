@@ -7,12 +7,17 @@ import {Redirect} from "react-router";
 import {IGithubApiObject} from "../../interfaces/githubApiObject";
 import {StackPanel} from "../panels/stackPanel";
 import {MarkdownPage} from "./markdownPage";
-const width = 0.7 * $(window).width();
-const height = 0.825 * $(window).height();
+const WIDTH = $(window).width();
+const HEIGHT = 0.83 * $(window).height();
 const skipButtonStyle : React.CSSProperties = {
-    position: "absolute",
+    position: "fixed",
     right: "10px",
     bottom: "10px"
+};
+
+const leftRightButtonStyle : React.CSSProperties = {
+    height: HEIGHT,
+    width: 0.05 * WIDTH
 };
 
 interface ITutorialState {
@@ -43,11 +48,11 @@ ITutorialState > {
                 <StackPanel orientation="horizontal" horizontalAlignment="center">
                     <Button
                         onClick={this.handleClickLeft}
-                        style={{ height}}><IconLeft/></Button>
-                    <MarkdownPage id="mdtut" src={this.state.currentUrl} width={width} minHeight={height}/>
+                        style={leftRightButtonStyle}><IconLeft/></Button>
+                    <MarkdownPage id="mdtut" src={this.state.currentUrl} width={0.6 * WIDTH} height={HEIGHT}/>
                     <Button
                         onClick={this.handleClickRight}
-                        style={{ height }}><IconRight/></Button>
+                        style={leftRightButtonStyle}><IconRight/></Button>
                 </StackPanel>
                 <Button style={skipButtonStyle} onClick={this.handleSkip}>Skip tutorial</Button>
             </div>

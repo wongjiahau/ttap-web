@@ -1,4 +1,5 @@
 // term of service and privacy policy
+import { CircularProgress } from "material-ui-next";
 import Paper from "material-ui/Paper";
 import * as React from "react";
 import * as ReactMarkdown from "react-markdown";
@@ -15,25 +16,29 @@ interface IMarkdownPageProp {
     id?: string;
     src: string;
     width: number;
-    minHeight: number;
+    height: number;
 }
 
 export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownPageState> {
     constructor(props) {
         super(props);
         this.state = {
-            markdownSource: "Loading ... ",
+            markdownSource: null,
         };
     }
 
     public render() {
+        if (this.state.markdownSource === null) {
+            return <CircularProgress size={50}/>;
+        }
         const paperStyle : React.CSSProperties = {
+            overflowY: "scroll",
             textAlign : "left",
             paddingTop: "15px",
             paddingRight: "40px",
             paddingLeft: "40px",
             width: this.props.width,
-            minHeight: this.props.minHeight
+            height: this.props.height
         };
         return (
             <div id={this.props.id} style={divStyle} className="markdown-body">
