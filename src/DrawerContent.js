@@ -25,7 +25,7 @@ export const DrawerContent = (props) => {
                 <MenuItem
                     onClick={props.onItemClick}
                     style={MenuItemStyle}
-                    rightIcon={<HomeIcon/>}>Home</MenuItem>
+                    rightIcon={< HelpIcon/>}>Help</MenuItem>
             </Link>
             <Link style={linkStyle} to="feedbackForm">
                 <MenuItem
@@ -43,7 +43,7 @@ export const DrawerContent = (props) => {
                 <MenuItem
                     onClick={props.onItemClick}
                     style={MenuItemStyle}
-                    rightIcon={< HelpIcon />}>About TTAP</MenuItem>
+                    rightIcon={< InfoIcon />}>About TTAP</MenuItem>
             </Link>
             <Link style={linkStyle} to="tospp">
                 <MenuItem
@@ -54,10 +54,3 @@ export const DrawerContent = (props) => {
         </div>
     );
 }
-// Help Icon that is removed : 
-// <Link style={linkStyle} to="404">
-//     <MenuItem
-//         onClick={props.onItemClick}
-//         style={MenuItemStyle}
-//         rightIcon={< InfoIcon />}>Help</MenuItem>
-// </Link>
