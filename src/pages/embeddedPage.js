@@ -22,10 +22,10 @@ const EmbeddedPage = (props) => {
 
 export const FeedbackForm = () => {
     return (<EmbeddedPage
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfVvbGipUSiuwaKoFSH_Er4PTDqTnKv3w9wxEKyhFYDBlLMLw/viewform?embedded=true"/>);
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeaHX6ckUye3r-MSNk0cSSyc8D2i-UHQdi4QasFgwH920olgg/viewform?embedded=true"/>);
 }
 
 export const ReportBugForm = () => {
     return (<EmbeddedPage
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfO9jhqH8tSfRswDI5sU5YAFrtTS-Xdk3Kysp3MtJ4yPuFToQ/viewform?embedded=true"/>);
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfgVvjrplcc4pVc4tadmP0wadj9lX_vYL9KCpAQwrA_0KVJ3w/viewform?embedded=true"/>);
 }
