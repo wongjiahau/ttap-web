@@ -3,13 +3,13 @@ import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import Drawer from 'material-ui/Drawer';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import React, {Component} from 'react';
 import {DrawerContent} from './DrawerContent';
+import {GetFeedbackDialog} from './core/react/getFeedbackDialog';
 import {HashRouter as Router} from 'react-router-dom';
 import {Main} from './Main';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Playground} from './core/react/playground';
 import 'react-tippy/dist/tippy.css'
 
 export class App extends Component {
@@ -51,6 +51,7 @@ export class App extends Component {
                 onClick={this.handleClose}/>
               < DrawerContent onItemClick={this.handleClose}/>
             </Drawer>
+            <GetFeedbackDialog/>
             <Main/>
             <br/>
           </div>
