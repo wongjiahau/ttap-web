@@ -41,13 +41,13 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
                             <ListItemIcon>
                                 <FileIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={"Text file (*.txt)"}/>
+                            <ListItemText primary={"Text file"}/>
                         </ListItem>
                         <ListItem button={true} onClick={this.props.handleSaveAsPicture}>
                             <ListItemIcon>
                                 <PictureIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={"Picture (*.png)"}/>
+                            <ListItemText primary={"Picture"}/>
                         </ListItem>
                         <ListItem button={true} onClick={this.props.handleOpenGetDateDialog}>
                             <ListItemIcon>

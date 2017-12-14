@@ -44,7 +44,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, { widt
             backgroundColor: Colors.WhiteSmoke,
             borderStyle: "solid",
             margin: "auto",
-            width: this.state.width
+            width: this.state.width,
+            fontFamily: "roboto"
         };
         return (
             <div id="timetable-view" style={divStyle}>
