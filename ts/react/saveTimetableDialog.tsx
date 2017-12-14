@@ -32,29 +32,24 @@ ISaveTimetableDialogDispatchProps {}
 
 export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogProps, {} > {
     public render() {
+        const getListItem = (text, icon, handler) => {
+            return (
+                <ListItem button={true} onClick={handler}>
+                    <ListItemIcon>
+                        {icon}
+                    </ListItemIcon>
+                    <ListItemText primary={text}/>
+                </ListItem>
+            );
+        };
         return (
             <Dialog open={this.props.isMainDialogOpen}>
                 <DialogTitle>Save this timetable as . . .</DialogTitle>
                 <div>
                     <List>
-                        <ListItem button={true} onClick={this.props.handleSaveAsTextFile}>
-                            <ListItemIcon>
-                                <FileIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={"Text file"}/>
-                        </ListItem>
-                        <ListItem button={true} onClick={this.props.handleSaveAsPicture}>
-                            <ListItemIcon>
-                                <PictureIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={"Picture"}/>
-                        </ListItem>
-                        <ListItem button={true} onClick={this.props.handleOpenGetDateDialog}>
-                            <ListItemIcon>
-                                <CloudIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={"Google Calendar"}/>
-                        </ListItem>
+                        {getListItem("Text file"      , <FileIcon/>   , this.props.handleSaveAsTextFile)}
+                        {getListItem("Picture"        , <PictureIcon/>, this.props.handleSaveAsPicture)}
+                        {getListItem("Google Calendar", <CloudIcon/>  , this.props.handleOpenGetDateDialog)}
                     </List>
                     <Button color="primary" style={cancelButtonStyle} onClick={this.props.handleClose}>cancel</Button>
                 </div>
