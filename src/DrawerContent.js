@@ -19,38 +19,23 @@ const MenuItemStyle = {
 
 const ReadMeUrl = "https://github.com/wongjiahau/TTAP-UTAR/blob/master/README.md";
 export const DrawerContent = (props) => {
+    const getLink = (icon, text, to) => {
+        return (
+            <Link style={linkStyle} to={to}>
+                <MenuItem
+                    onClick={props.onItemClick}
+                    style={MenuItemStyle}
+                    rightIcon={icon}>{text}</MenuItem>
+            </Link>
+        )
+    };
     return (
         <div>
-            <Link style={linkStyle} to="/">
-                <MenuItem
-                    onClick={props.onItemClick}
-                    style={MenuItemStyle}
-                    rightIcon={< HelpIcon/>}>Help</MenuItem>
-            </Link>
-            <Link style={linkStyle} to="feedbackForm">
-                <MenuItem
-                    onClick={props.onItemClick}
-                    style={MenuItemStyle}
-                    rightIcon={< FeedbackIcon />}>Feedback</MenuItem>
-            </Link>
-            <Link style={linkStyle} to="reportBugForm">
-                <MenuItem
-                    onClick={props.onItemClick}
-                    style={MenuItemStyle}
-                    rightIcon={< BugIcon />}>Report a bug</MenuItem>
-            </Link>
-            <Link style={linkStyle} to="about">
-                <MenuItem
-                    onClick={props.onItemClick}
-                    style={MenuItemStyle}
-                    rightIcon={< InfoIcon />}>About TTAP</MenuItem>
-            </Link>
-            <Link style={linkStyle} to="tospp">
-                <MenuItem
-                    onClick={props.onItemClick}
-                    style={MenuItemStyle}
-                    rightIcon={< SchoolIcon/>}>Terms of Service</MenuItem>
-            </Link>
+            {getLink(<HelpIcon/>, "Help", "/")}
+            {getLink(<FeedbackIcon/>, "Feedback", "feedbackForm")}
+            {getLink(<BugIcon/>, "Report a bug", "reportBugForm")}
+            {getLink(<InfoIcon/>, "About TTAP", "about")}
+            {getLink(<SchoolIcon/>, "Terms of Service", "tospp")}
         </div>
     );
 }
