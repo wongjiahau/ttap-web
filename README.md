@@ -2,6 +2,7 @@
 [![travis-ci](https://travis-ci.org/wongjiahau/ttap-web.svg?branch=master)](https://travis-ci.org/wongjiahau/ttap-web)
 [![BCH compliance](https://bettercodehub.com/edge/badge/wongjiahau/ttap-web?branch=master)](https://bettercodehub.com/)
 [![codecov](https://codecov.io/gh/wongjiahau/ttap-web/branch/code-cov/graph/badge.svg)](https://codecov.io/gh/wongjiahau/ttap-web/branch/code-cov)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5ce98f451482c90bfce6/maintainability)](https://codeclimate.com/github/wongjiahau/ttap-web/maintainability)
 ## Objectives
 This software is used to helps student's of UTAR to arrange their timetable without frustration.
 ## Technologies used :
