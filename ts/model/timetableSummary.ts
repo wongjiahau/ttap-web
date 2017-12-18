@@ -33,7 +33,7 @@ export class SubjectSummary {
             "\r\n" +
             this.SubjectName +
             "\r\n" +
-            this.Lecture +            
+            this.Lecture +
             " " +
             this.Tutorial +
             " " +
