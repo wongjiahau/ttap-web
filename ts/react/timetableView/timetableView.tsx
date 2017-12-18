@@ -20,11 +20,12 @@ interface ITimetableViewProps {
     states : STCBox[];
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;
+    handleToggleIsOpenOfSummary: () => void;
+    isSummaryOpen: boolean;
 }
 
 interface ITimetableViewState {
     width: number;
-    isSummaryOpen: boolean;
 }
 
 export class TimetableView extends React.Component < ITimetableViewProps, ITimetableViewState> {
@@ -33,7 +34,6 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
         $(window).on("resize", this.handleWindowResizing);
         this.state = {
             width: getTimetableViewWidth(),
-            isSummaryOpen: false
         };
     }
     public render() {
@@ -82,13 +82,13 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                             {skeleton.Children}
                         </ReactGridLayout>
                         {this.props.timetable ?
-                        <Button style={buttonStyle} onClick={this.handleOnClick}>
-                            {this.state.isSummaryOpen ? "hide summary" : "show summary"}
+                        <Button style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
+                            {this.props.isSummaryOpen ? "hide summary" : "show summary"}
                         </Button>
                         : null}
                     </div>
                     {
-                        this.state.isSummaryOpen ?
+                        this.props.isSummaryOpen ?
                         <TimetableSummaryView Timetable={this.props.timetable}/>
                         : null
                     }
@@ -99,10 +99,6 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
 
     public handleWindowResizing = () => {
         this.setState({width: getTimetableViewWidth()});
-    }
-
-    public handleOnClick = () => {
-        this.setState({isSummaryOpen: !this.state.isSummaryOpen});
     }
 }
 

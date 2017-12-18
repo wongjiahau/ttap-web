@@ -24,6 +24,7 @@ import {
 import {
     ToggleIsOpenOfSlotsTable
 } from "../actions/toggleIsOpenOfSlotsTable";
+import { ToggleIsOpenOfSummary } from "../actions/toggleIsOpenOfSummary";
 import {
     TurnOffSBCW
 } from "../actions/turnOffSBCW";
@@ -50,13 +51,15 @@ import {
 } from "./../actions/updateTotalState";
 
 const mapStateToProps = (state): ITimetableListViewStateProps => {
-    const timetableListStae = state.MasterStateReducer.TimetableListState as ITimetableListState;
+    const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
     const settingsState = state.MasterStateReducer.SettingsState as ISettingsState;
     return {
-        currentIndex:     timetableListStae.CurrentIndex,
-        currentTimetable: timetableListStae.FiltrateTimetables[timetableListStae.CurrentIndex],
+        currentIndex:     timetableListState.CurrentIndex,
+        currentTimetable: timetableListState.FiltrateTimetables[timetableListState.CurrentIndex],
         isSbcwTurnedOn:   settingsState.SearchByConsideringWeekNumber,
-        maxIndex:         timetableListStae.FiltrateTimetables.length - 1,
+        isSummaryOpen:    timetableListState.IsSummaryOpen,
+        maxIndex:         timetableListState.FiltrateTimetables.length - 1,
+
     };
 };
 
@@ -74,7 +77,8 @@ const mapDispatchToProps = (dispatch): ITimetableListViewDispatchProps => {
             dispatch(new FindTimetablesBasedOnChosenSlots());
             dispatch(new UpdateTotalState());
             dispatch(new NotifyIfTimetableIsFound());
-        }
+        },
+        handleToggleIsOpenOfSummary: () => dispatch(new ToggleIsOpenOfSummary())
     };
 };
 

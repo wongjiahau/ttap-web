@@ -6,6 +6,7 @@ import {Timetable} from "./../../model/timetable";
 export interface ITimetableListState {
     CurrentIndex:       number;
     FiltrateTimetables: Timetable[];
+    IsSummaryOpen:      boolean;
     ResidueTimetables:  Timetable[];
 }
 
@@ -13,6 +14,7 @@ export function NewTimetableListState(timetables: Timetable[]) : ITimetableListS
     return {
         CurrentIndex: 0,
         FiltrateTimetables: timetables,
+        IsSummaryOpen: false,
         ResidueTimetables: [],
     };
 }

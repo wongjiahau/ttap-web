@@ -26,21 +26,23 @@ const switchStyle : React.CSSProperties = {
 };
 
 export interface ITimetableListViewStateProps {
-    currentIndex : number; // non-zero based
-    currentTimetable : Timetable;
-    maxIndex : number; // non-zero based
-    isSbcwTurnedOn : boolean;
+    currentIndex:     number; // non-zero based
+    currentTimetable: Timetable;
+    isSbcwTurnedOn:   boolean;
+    isSummaryOpen:    boolean;
+    maxIndex:         number; // non-zero based
 }
 
 export interface ITimetableListViewDispatchProps {
-    handleGoToNext : () => void;
-    handleGoToPrevious : () => void;
-    handleGoToRandom : () => void;
-    handleOpenSaveTimetableDialog : () => void;
-    handleOpenSbcwDialog : () => void;
-    handleOpenSetTimeConstraintView : () => void;
-    handleOpenSlotsTable : () => void;
-    handleTurnOffSBCW : () => void;
+    handleGoToNext:                  () => void;
+    handleGoToPrevious:              () => void;
+    handleGoToRandom:                () => void;
+    handleOpenSaveTimetableDialog:   () => void;
+    handleOpenSbcwDialog:            () => void;
+    handleOpenSetTimeConstraintView: () => void;
+    handleOpenSlotsTable:            () => void;
+    handleToggleIsOpenOfSummary: () => void;
+    handleTurnOffSBCW:               () => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -63,7 +65,11 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     </StackPanel>
                 </div>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
-                    <TimetableView timetable={this.props.currentTimetable} states={null}/>
+                    <TimetableView
+                        timetable={this.props.currentTimetable}
+                        states={null}
+                        isSummaryOpen={this.props.isSummaryOpen}
+                        handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <StackPanel orientation="horizontal">
                         <Button
                             raised={true}
