@@ -32,10 +32,11 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
                         {getTd("Practical")}
                     </tr>
                 {
-                    colorSchemes.map((c) => {
+                    colorSchemes.map((c, index) => {
                         return this.generateSubjectSummaryView(
                             find(subjectSummaries, {SubjectCode: c.SubjectCode}),
-                            c.Color
+                            c.Color,
+                            index
                         );
                     })
                 }</tbody>
@@ -43,12 +44,12 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
         );
     }
 
-    private generateSubjectSummaryView(x : SubjectSummary, backgroundColor: Colors) {
+    private generateSubjectSummaryView(x : SubjectSummary, backgroundColor: Colors, index: number) {
         const style : React.CSSProperties = {
             backgroundColor: backgroundColor.toString()
         };
         return (
-            <tr style={style}>
+            <tr key={index.toString()} style={style}>
                 {getTd(x.SubjectCode)}
                 {getTd(x.SubjectName)}
                 {getTd(x.Lecture)}

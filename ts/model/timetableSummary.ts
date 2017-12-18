@@ -54,7 +54,9 @@ export class TimetableSummary {
         const rawSlots = RawSlot.GetBunch(timetable.HashIds);
         const subjects = PartitionizeByKey(rawSlots, "SubjectCode");
         subjects.forEach((partition) => {
-            this.SubjectSummaries.push(new SubjectSummary(partition));
+            if (partition.length > 0) {
+                this.SubjectSummaries.push(new SubjectSummary(partition));
+            }
         });
     }
 

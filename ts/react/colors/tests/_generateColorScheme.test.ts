@@ -1,6 +1,7 @@
 import {
     expect
 } from "chai";
+import { CodeOf, HENG_2017_APR } from "../../../tests/testData/heng_2017_apr";
 import {
     GenerateColorScheme
 } from "../generateColorScheme";
@@ -23,6 +24,14 @@ describe("GenerateColorScheme()", () => {
         const colorSchemes1 = GenerateColorScheme(input1);
         const colorSchemes2 = GenerateColorScheme(input2);
         expect(colorSchemes1).to.deep.eq(colorSchemes2);
+    });
+
+    it("should not throw errors when there is only 1 subjects passed in", () => {
+        const rawSlots = HENG_2017_APR();
+        const input = rawSlots.filter((x) => x.SubjectCode === CodeOf.ACD);
+        const colorSchemes = GenerateColorScheme(input);
+        console.log(colorSchemes);
+        expect(colorSchemes.length).to.eq(1);
     });
 
 });

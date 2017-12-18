@@ -1,9 +1,12 @@
 import {
     expect
 } from "chai";
+import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
+import { ParseSlotToTinySlot } from "../../parser/parseSlotToTinySlot";
 import {
     FindTimetable
 } from "../../permutator/findTimetable";
+import { CodeOf, HENG_2017_APR } from "../../tests/testData/heng_2017_apr";
 import {
     GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
@@ -35,6 +38,19 @@ describe("TimetableSummary", () => {
     });
 
     it("case 1", () => {
+        // 1 subjects
+        const input1 = GetTinySlotsOf("UEMX3653"); // BEAM
+        const timetables = FindTimetable(input1);
+        const timetableSummary = new TimetableSummary(timetables[0]);
+        const subjectSummary1 = timetableSummary.SubjectSummaries[0];
+        expect(subjectSummary1.SubjectCode).to.eq("UEMX3653");
+        expect(subjectSummary1.SubjectName).to.eq("Water & Wastewater Treatment");
+        expect(subjectSummary1.Lecture).to.eq("L-1");
+        expect(subjectSummary1.Tutorial).to.eq("T-1");
+        expect(subjectSummary1.Practical).to.eq("-");
+    });
+
+    it("case 2", () => {
         // 2 subjects
         const input1 = GetTinySlotsOf("UKMM1043"); // BEAM
         const input2 = GetTinySlotsOf("UEMX3653"); // WWT
@@ -46,6 +62,16 @@ describe("TimetableSummary", () => {
         expect(subjectSummary1.Lecture).to.eq("L-1");
         expect(subjectSummary1.Tutorial).to.eq("T-1");
         expect(subjectSummary1.Practical).to.eq("-");
+    });
+
+    it("case 3", () => {
+        const rawSlots = HENG_2017_APR().filter((x) => x.SubjectCode ===  CodeOf.ACD);
+        const slots = ParseRawSlotToSlot(rawSlots);
+        const tinyslots = ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots));
+        const timetable = FindTimetable(tinyslots)[0];
+        const timetableSummary = new TimetableSummary(timetable);
+
+        expect(timetableSummary.SubjectSummaries).to.have.lengthOf(1);
     });
 
 });

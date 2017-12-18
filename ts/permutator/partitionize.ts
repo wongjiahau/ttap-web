@@ -26,6 +26,9 @@ export function PartitionizeByKey<T>(input : T[], keyName: string) : T[][] {
             result.push(column);
         }
     }
+    if (result.length === 0) {
+        result.push(column);
+    }
     return result;
 
 }
