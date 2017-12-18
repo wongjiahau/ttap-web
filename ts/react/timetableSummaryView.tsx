@@ -12,6 +12,9 @@ interface ITimetableSummaryViewProps {
 
 export class TimetableSummaryView extends React.Component < ITimetableSummaryViewProps, {} > {
     public render() {
+        if (!this.props.Timetable) {
+            return false;
+        }
         const subjectSummaries = new TimetableSummary(this.props.Timetable).SubjectSummaries;
         const colorSchemes = GenerateColorScheme(RawSlot.GetBunch(this.props.Timetable.HashIds));
         const tableStyle : React.CSSProperties = {
