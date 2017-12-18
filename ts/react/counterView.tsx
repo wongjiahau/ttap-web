@@ -1,6 +1,6 @@
+import IconLeft from "material-ui-icons/KeyboardArrowLeft";
+import IconRight from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui-next/Button";
-import IconLeft from "material-ui/svg-icons/hardware/keyboard-arrow-left";
-import IconRight from "material-ui/svg-icons/hardware/keyboard-arrow-right";
 import * as React from "react";
 import {StackPanel} from "./panels/stackPanel";
 

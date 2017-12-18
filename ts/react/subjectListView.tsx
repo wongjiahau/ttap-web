@@ -6,8 +6,6 @@ import Typography from "material-ui-next/Typography";
 import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import Paper from "material-ui/Paper";
-import IconTick from "material-ui/svg-icons/action/done";
-import IconEye from "material-ui/svg-icons/image/remove-red-eye";
 import TextField from "material-ui/TextField";
 import * as React from "react";
 import * as S from "string";
