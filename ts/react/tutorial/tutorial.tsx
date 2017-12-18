@@ -33,7 +33,7 @@ ITutorialState > {
         super(props);
         this.state = {
             currentIndex: 0,
-            currentUrl: "",
+            currentUrl: null,
             redirect: false
         };
         this.downloadUrls = [];

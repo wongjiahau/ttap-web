@@ -25,6 +25,9 @@ export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownP
         this.state = {
             markdownSource: null,
         };
+        if (this.props.src) {
+            this.requestMarkdownSource(this.props.src);
+        }
     }
 
     public render() {
