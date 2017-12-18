@@ -1,10 +1,10 @@
 import AppBar from 'material-ui/AppBar';
-import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
+// import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import Drawer from 'material-ui/Drawer';
 import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui/svg-icons/navigation/menu';
+// import MenuIcon from 'material-ui/svg-icons/navigation/menu';
+// import Button from 'material-ui/Button';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
 import React, {Component} from 'react';
 import {DrawerContent} from './DrawerContent';
 import {GetFeedbackDialog} from './core/react/getFeedbackDialog';
@@ -28,6 +28,7 @@ export class App extends Component {
         <MenuIcon/>
       </IconButton>
     )
+    return null;
     return (
       <Router>
         <MuiThemeProvider>
@@ -43,7 +44,7 @@ export class App extends Component {
               docked={false}
               openSecondary={true}
               open={this.state.isSecondaryDrawerOpened}Drawer >
-              <RaisedButton
+              <Button
                 label='hide drawer'
                 fullWidth={true}
                 secondary={true}

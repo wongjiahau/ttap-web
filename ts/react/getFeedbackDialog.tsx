@@ -1,4 +1,3 @@
-import StarIcon from "material-ui-icons/Star";
 import {
     Button,
     Dialog,
@@ -7,7 +6,8 @@ import {
     DialogContentText,
     DialogTitle,
     Typography
-} from "material-ui-next";
+} from "material-ui";
+import StarIcon from "material-ui-icons/Star";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {StackPanel} from "./panels/stackPanel";

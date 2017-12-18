@@ -1,5 +1,5 @@
-import ButtonBase from "material-ui-next/ButtonBase";
-import Typography from "material-ui-next/Typography";
+import ButtonBase from "material-ui/ButtonBase";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import { Tooltip } from "react-tippy";
 import {Beautify, GetInitial} from "../helper";

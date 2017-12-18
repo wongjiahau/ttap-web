@@ -1,7 +1,7 @@
 import * as $ from "jquery";
-import {Button} from "material-ui-next";
-import IconLeft from "material-ui/svg-icons/hardware/keyboard-arrow-left";
-import IconRight from "material-ui/svg-icons/hardware/keyboard-arrow-right";
+import {Button} from "material-ui";
+import IconLeft from "material-ui-icons/KeyboardArrowLeft";
+import IconRight from "material-ui-icons/KeyboardArrowRight";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {IGithubApiObject} from "../../interfaces/githubApiObject";

@@ -1,12 +1,12 @@
 import * as $ from "jquery";
 import IconInfo from "material-ui-icons/Info";
-import Button from "material-ui-next/Button";
-import Tooltip from "material-ui-next/Tooltip";
-import Typography from "material-ui-next/Typography";
+import Button from "material-ui/Button";
 import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
+import Tooltip from "material-ui/Tooltip";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import * as S from "string";
 import {Key} from "../enums/keyCodeEnum";
@@ -95,10 +95,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         });
     }
 
-    public handleSearchBoxOnChange = (event : object, newValue : string) => {
-        this
-            .props
-            .handleSearch(newValue);
+    public handleSearchBoxOnChange = (event : object) => {
+        const searchedText = (document.getElementById("searchbar") as HTMLInputElement).value;
+        this.props.handleSearch(searchedText);
     }
 
     public render() {
@@ -144,18 +143,18 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
         return (
-            <Drawer docked={false} width={520} open={this.props.isOpen}>
+            <Drawer open={this.props.isOpen}>
                 <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                     <header style={headerStyle}>
-                        <Typography type="display1" color="primary">
+                        <Typography gutterBottom={true} type="display1" color="primary">
                             Select your desired subjects.
                         </Typography>
                         <TextField
                             id="searchbar"
                             style={searchBoxStyle}
                             onChange={this.handleSearchBoxOnChange}
-                            hintText="example: he/hubungan etnik/mpu3113"
-                            floatingLabelText=" Search . . ."/>
+                            placeholder="example: he/hubungan etnik/mpu3113"
+                            label=" Search . . ."/>
                     </header>
                     <Paper style={divStyle}>
                         <div id="subject-list-container">

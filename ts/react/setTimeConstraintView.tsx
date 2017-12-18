@@ -1,7 +1,7 @@
-import Button from "material-ui-next/Button";
-import Dialog from "material-ui-next/Dialog";
-import Slide from "material-ui-next/transitions/Slide";
-import Typography from "material-ui-next/Typography";
+import Button from "material-ui/Button";
+import Dialog from "material-ui/Dialog";
+// import Slide from "material-ui/transitions/Slide";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import CountUp from "react-countup";
 import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/states/stcBox";
@@ -39,9 +39,9 @@ const cancelButtonStyle : React.CSSProperties = {
 
 // endregion style
 
-function Transition(props) {
-    return <Slide direction="up" {...props}/>;
-}
+// function Transition(props) {
+//     return <Slide direction="up" {...props}/>;
+// }
 
 type LegendType = "red" | "grey" | "green";
 interface ILegendProps {
@@ -104,7 +104,8 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
     public render() {
         return (
             <div>
-                <Dialog open={this.props.isOpen} fullScreen={true} transition={Transition}>
+                <Dialog open={this.props.isOpen} fullScreen={true}>
+                {/* transition={Transition}> */}
                     <div style={divStyle}>
                         <table style={tableStyle}>
                             <tbody>

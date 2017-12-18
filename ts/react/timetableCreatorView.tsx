@@ -1,8 +1,8 @@
 import {reduce, uniq} from "lodash";
 import IconList from "material-ui-icons/List";
-import Button from "material-ui-next/Button";
-import Paper from "material-ui-next/Paper";
-import Typography from "material-ui-next/Typography";
+import Button from "material-ui/Button";
+import Paper from "material-ui/Paper";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Beautify} from "../helper";
 import {RawSlot} from "../model/rawSlot";

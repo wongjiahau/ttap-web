@@ -2,9 +2,9 @@ import AddIcon from "material-ui-icons/Add";
 import CloudIcon from "material-ui-icons/CloudUpload";
 import FileIcon from "material-ui-icons/InsertDriveFile";
 import PictureIcon from "material-ui-icons/InsertPhoto";
-import Button from "material-ui-next/Button";
-import Dialog, {DialogTitle} from "material-ui-next/Dialog";
-import List, {ListItem, ListItemIcon, ListItemText} from "material-ui-next/List";
+import Button from "material-ui/Button";
+import Dialog, {DialogTitle} from "material-ui/Dialog";
+import List, {ListItem, ListItemIcon, ListItemText} from "material-ui/List";
 import * as React from "react";
 import { GetSemStartDateDialog } from "./getSemStartDateDialog";
 

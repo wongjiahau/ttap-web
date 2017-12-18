@@ -1,5 +1,5 @@
+import { Button } from "material-ui";
 import Paper from "material-ui/Paper";
-import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import * as React from "react";
 import {Link} from "react-router-dom";
@@ -7,7 +7,7 @@ import * as S from "string";
 import {RawSlot} from "../model/rawSlot";
 import parseHtmlToSlot from "../parser/parseHtmlToRawSlot";
 
-const buttonStyle = {
+const buttonStyle : React.CSSProperties = {
     disabled: "true",
     fontSize: "20px",
     fontWeight: "bold",
@@ -17,7 +17,7 @@ const buttonStyle = {
     marginTop: "10px",
     width: "250px"
 };
-const cardStyle = {
+const cardStyle : React.CSSProperties = {
     color: "white",
     left: "50px",
     position: "absolute",
@@ -179,38 +179,34 @@ export class Login extends React.Component < ILoginProps, {} > {
                     </div>
                 </div>
                 <div className="login-div">
-                    <Paper style={cardStyle} zDepth={4}>
+                    <Paper elevation={4}>
                         <TextField
                             id="student-id-field"
                             className="login-student-id-field"
-                            floatingLabelText="Student ID"
+                            label="Student ID"
                             style={fieldStyle}
-                            hintText="e.g. 1500181"/>
+                            placeholder="e.g. 1500181"/>
                         <br/>
                         <TextField
                             id="password-field"
                             className="login-password-field"
-                            floatingLabelText="Password"
-                            hintText="e.g. 960707-43-1234"
+                            label="Password"
+                            placeholder="e.g. 960707-43-1234"
                             style={fieldStyle}
                             type="password"/>
                         <br/>
                         <TextField
                             id="kapcha-field"
-                            hintText="e.g. QXtresZ"
+                            placeholder="e.g. QXtresZ"
                             onKeyPress={this.handleKeyPress}
                             style={fieldStyle}
-                            floatingLabelText="Kaptcha"/>
+                            label="Kaptcha"/>
                         <br/>
                         <img id="kapcha-img" alt="" style={kapchaStyle} className="login-kapcha-image"/>
                         <br/>
-                        <RaisedButton
-                            id="login-button"
-                            label="Login"
-                            primary={true}
-                            disabled={false}
-                            onClick={this.handleClick}
-                            style={buttonStyle}/>
+                        <Button onClick={this.handleClick} style={buttonStyle} color="primary" raised={true}>
+                            login
+                        </Button>
                         <iframe
                             id="iframe"
                             title="unitregwebsite"

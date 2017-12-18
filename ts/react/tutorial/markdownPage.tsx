@@ -1,5 +1,5 @@
 // term of service and privacy policy
-import { CircularProgress } from "material-ui-next";
+import { CircularProgress } from "material-ui";
 import Paper from "material-ui/Paper";
 import * as React from "react";
 import * as ReactMarkdown from "react-markdown";

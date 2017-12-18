@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import logger from 'redux-logger'
 import registerServiceWorker from './registerServiceWorker';
 import {AllReducers} from './core/redux/reducers/allReducers';
-import {App} from './App';
+import { App } from './core/react/app';
 import {Playground} from './core/react/playground';
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';

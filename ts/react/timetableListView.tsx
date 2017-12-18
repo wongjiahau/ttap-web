@@ -1,10 +1,10 @@
 import * as $ from "jquery";
+import {Switch} from "material-ui";
 import IconClock from "material-ui-icons/Alarm";
 import IconGrid from "material-ui-icons/GridOn";
 import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
-import {Switch} from "material-ui-next";
-import Button from "material-ui-next/Button";
+import Button from "material-ui/Button";
 import * as React from "react";
 import {Key} from "../enums/keyCodeEnum";
 import {STCBox} from "../model/states/stcBox";

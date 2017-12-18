@@ -1,5 +1,5 @@
-import Button from "material-ui-next/Button";
-import Dialog, {DialogTitle} from "material-ui-next/Dialog";
+import Button from "material-ui/Button";
+import Dialog, {DialogTitle} from "material-ui/Dialog";
 import * as React from "react";
 import Flatpickr from "react-flatpickr";
 import {StackPanel} from "./panels/stackPanel";

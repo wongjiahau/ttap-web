@@ -1,11 +1,11 @@
 import * as $ from "jquery";
-import Button from "material-ui-next/Button";
-import Checkbox from "material-ui-next/Checkbox";
-import Divider from "material-ui-next/Divider";
-import Drawer from "material-ui-next/Drawer";
-import Paper from "material-ui-next/Paper";
-import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui-next/Table";
-import Typography from "material-ui-next/Typography";
+import Button from "material-ui/Button";
+import Checkbox from "material-ui/Checkbox";
+import Divider from "material-ui/Divider";
+import Drawer from "material-ui/Drawer";
+import Paper from "material-ui/Paper";
+import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui/Table";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Beautify} from "../helper";
 import {IStringDicionary} from "../interfaces/dictionary";

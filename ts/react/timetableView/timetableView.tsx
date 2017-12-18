@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import Button from "material-ui-next/Button";
+import Button from "material-ui/Button";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";

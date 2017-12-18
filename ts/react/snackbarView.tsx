@@ -1,6 +1,6 @@
-import Button from "material-ui-next/Button";
-import {Origin} from "material-ui-next/Snackbar";
-import Snackbar from "material-ui-next/Snackbar";
+import Button from "material-ui/Button";
+import {Origin} from "material-ui/Snackbar";
+import Snackbar from "material-ui/Snackbar";
 import * as React from "react";
 
 export interface ISnackbarViewStateProps {
