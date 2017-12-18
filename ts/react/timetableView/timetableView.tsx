@@ -7,25 +7,33 @@ import {RawSlot} from "../../model/rawSlot";
 import {STCBox} from "../../model/states/stcBox";
 import {Timetable} from "../../model/timetable";
 import {Colors} from "../colors/colors";
-import { GenerateSlotViewsAndDayColumn } from "./generateSlotViewsAndDayColumn";
+import {StackPanel} from "../panels/stackPanel";
+import {TimetableSummaryView} from "../timetableSummaryView";
+import {GenerateSlotViewsAndDayColumn} from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
 import {Skeleton} from "./skeleton";
 
 const getTimetableViewWidth = () => 0.9 * $(window).width();
 
-export interface ITimetableViewProps {
+interface ITimetableViewProps {
     timetable : Timetable;
     states : STCBox[];
-    handleSetTimeContraintAt ? : (state : STCBox) => void;
-    handleDesetTimeContraintAt ? : (state : STCBox) => void;
+    handleSetTimeContraintAt?: (state : STCBox) => void;
+    handleDesetTimeContraintAt?: (state : STCBox) => void;
 }
 
-export class TimetableView extends React.Component < ITimetableViewProps, { width : number } > {
+interface ITimetableViewState {
+    width: number;
+    isSummaryOpen: boolean;
+}
+
+export class TimetableView extends React.Component < ITimetableViewProps, ITimetableViewState> {
     public constructor(props : ITimetableViewProps) {
         super(props);
         $(window).on("resize", this.handleWindowResizing);
         this.state = {
-            width: getTimetableViewWidth()
+            width: getTimetableViewWidth(),
+            isSummaryOpen: false
         };
     }
     public render() {
@@ -38,36 +46,63 @@ export class TimetableView extends React.Component < ITimetableViewProps, { widt
         if (this.props.states) {
             const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
             skeleton.Concat(stateViews);
-            skeleton.Layouts = skeleton.Layouts.concat(GetStandardDayColumnLayout());
+            skeleton.Layouts = skeleton
+                .Layouts
+                .concat(GetStandardDayColumnLayout());
         }
         const divStyle : React.CSSProperties = {
             backgroundColor: Colors.WhiteSmoke,
-            borderStyle: "solid",
-            margin: "auto",
-            width: this.state.width,
-            fontFamily: "roboto"
+            borderStyle:     "solid",
+            fontFamily:      "roboto",
+            margin:          "auto",
+            position:        "relative",
+            width:           this.state.width,
+        };
+        const buttonStyle: React.CSSProperties = {
+            bottom:   "0",
+            fontSize: "12px",
+            position: "absolute",
+            right:    "0",
         };
         return (
-            <div id="timetable-view" style={divStyle}>
-                <ReactGridLayout
-                    cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour)) * 2 + 2}
-                    maxRows={16}
-                    rowHeight={50}
-                    width={this.state.width}
-                    layout={skeleton.Layouts}
-                    margin={[0, 0]}
-                    isDraggable={false}
-                    isResizable={false}
-                    autoSize={true}
-                    verticalCompact={false}>
-                    {skeleton.Children}
-                </ReactGridLayout>
+            <div id="timetable-view">
+                <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <div style={divStyle}>
+                        <ReactGridLayout
+                            cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour)) * 2 + 2}
+                            maxRows={16}
+                            rowHeight={50}
+                            width={this.state.width}
+                            layout={skeleton.Layouts}
+                            margin={[0, 0]}
+                            isDraggable={false}
+                            isResizable={false}
+                            autoSize={true}
+                            verticalCompact={false}>
+                            {skeleton.Children}
+                        </ReactGridLayout>
+                        {this.props.timetable ?
+                        <Button style={buttonStyle} onClick={this.handleOnClick}>
+                            {this.state.isSummaryOpen ? "hide summary" : "show summary"}
+                        </Button>
+                        : null}
+                    </div>
+                    {
+                        this.state.isSummaryOpen ?
+                        <TimetableSummaryView Timetable={this.props.timetable}/>
+                        : null
+                    }
+                </StackPanel>
             </div>
         );
     }
 
     public handleWindowResizing = () => {
         this.setState({width: getTimetableViewWidth()});
+    }
+
+    public handleOnClick = () => {
+        this.setState({isSummaryOpen: !this.state.isSummaryOpen});
     }
 }
 
