@@ -20,8 +20,8 @@ interface ITimetableViewProps {
     states : STCBox[];
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;
-    handleToggleIsOpenOfSummary: () => void;
-    isSummaryOpen: boolean;
+    handleToggleIsOpenOfSummary?: () => void;
+    isSummaryOpen?: boolean;
 }
 
 interface ITimetableViewState {
@@ -82,16 +82,14 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                             {skeleton.Children}
                         </ReactGridLayout>
                         {this.props.timetable ?
-                        <Button style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
+                        <Button id="summary-btn" style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
                             {this.props.isSummaryOpen ? "hide summary" : "show summary"}
                         </Button>
                         : null}
                     </div>
-                    {
-                        this.props.isSummaryOpen ?
+                    <div style={{display: this.props.isSummaryOpen ? "inline" : "none"}}>
                         <TimetableSummaryView Timetable={this.props.timetable}/>
-                        : null
-                    }
+                    </div>
                 </StackPanel>
             </div>
         );
