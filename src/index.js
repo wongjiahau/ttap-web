@@ -1,7 +1,6 @@
 import './index.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import logger from 'redux-logger'
 import registerServiceWorker from './registerServiceWorker';
 import {AllReducers} from './core/redux/reducers/allReducers';
 import { App } from './core/react/app';
@@ -18,6 +17,10 @@ const isProductionBuild = false; // do not modify this line at all unless you kn
 if (isProductionBuild) {
   store = createStore(AllReducers, applyMiddleware(actionExtractor))
 } else {
+  const createLogger = require("redux-logger").createLogger;
+  const logger = createLogger({
+    collapsed: true
+  });
   store = createStore(AllReducers, applyMiddleware(actionExtractor, logger));
 }
 
