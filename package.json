@@ -41,6 +41,7 @@
     "validator": "^9.1.1"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
