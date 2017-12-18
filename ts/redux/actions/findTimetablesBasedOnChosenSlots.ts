@@ -1,7 +1,5 @@
-import {
-    find,
-    sortBy
-} from "lodash";
+const find = require("lodash.find");
+const sortBy = require("lodash.sortby");
 import {
     RawSlot
 } from "../../model/rawSlot";

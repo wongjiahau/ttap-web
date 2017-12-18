@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {isEqual} from "lodash";
+const isEqual = require("lodash.isequal");
 import {ToggleIsOpenOfSBCWDialog} from "./../actions/toggleIsOpenOfSBCWDialog";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 describe("ToggleIsOpenOfSBCWDialog action", () => {

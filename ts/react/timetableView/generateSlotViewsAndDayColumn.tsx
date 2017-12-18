@@ -1,4 +1,4 @@
-import { sortBy } from "lodash";
+const sortBy = require("lodash.sortby");
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {ParseDay} from "../../att/day";

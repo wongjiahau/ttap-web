@@ -1,4 +1,4 @@
-import {last} from "lodash";
+const last = require("lodash.last");
 import * as S from "string";
 import {RawSlot} from "../model/rawSlot";
 export default function ParseHtmlToRawSlot(html: string): RawSlot[] {

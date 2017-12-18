@@ -69,7 +69,7 @@ fs.writeFile(`${__dirname}/../ts/redux/actions/${actionFileName}.ts`, fileSnippe
 
 const testSnippet = 
 `import {expect} from "chai";
-import {isEqual} from "lodash";
+const isEqual = require("lodash.isequal");
 import {${actionName}} from "./../actions/${actionFileName}";
 import {${stateName}, ${stateName.slice(1)}Reducer, ${stateName.slice(1)}} from "./../reducers/${stateFileName}";
 describe("${actionName} action", () => {

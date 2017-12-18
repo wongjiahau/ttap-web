@@ -1,6 +1,4 @@
-import {
-    random
-} from "lodash";
+const random = require("lodash.random");
 import {
     IMasterState,
     MasterStateAction

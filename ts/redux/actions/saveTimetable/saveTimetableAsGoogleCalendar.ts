@@ -1,7 +1,5 @@
 declare let gapi: any;
-import {
-    max
-} from "lodash";
+const max = require("lodash.max");
 import * as moment from "moment";
 /* global gapi */
 import {

@@ -1,7 +1,5 @@
-import {
-    last,
-    sortBy
-} from "lodash";
+const last = require("lodash.last");
+const sortBy = require("lodash.sortby");
 import {
     ISlot
 } from "../model/slot";

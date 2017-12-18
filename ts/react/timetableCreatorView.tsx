@@ -1,4 +1,5 @@
-import {reduce, uniq} from "lodash";
+const uniq = require("lodash.uniq");
+const reduce = require("lodash.reduce");
 import IconList from "material-ui-icons/List";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
@@ -71,7 +72,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         const paperStyle: React.CSSProperties = {
             padding: "10px"
         };
-        const subjectsInvolved = uniq < Subject > (reduce(clashingSubjectPairs, (result, x) => result.concat(x), []));
+        const subjectsInvolved = uniq(reduce(clashingSubjectPairs, (result, x) => result.concat(x), []));
         const stringifySubject = (s : Subject) => Beautify(s.Name) + "(" + s.Code + ")";
         return (
             <Paper style={paperStyle}>

@@ -1,6 +1,4 @@
-import {
-    includes
-} from "lodash";
+const includes = require("lodash.includes");
 import * as S from "string";
 import {
     FindClashes

@@ -1,10 +1,8 @@
 import {
     expect
 } from "chai";
-import {
-    clone,
-    find
-} from "lodash";
+const clone = require("lodash.clone");
+const find = require("lodash.find");
 import { TimePeriod } from "../../../att/timePeriod";
 import {
     RawSlot

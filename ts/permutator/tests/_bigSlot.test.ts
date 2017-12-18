@@ -1,9 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    find
-} from "lodash";
+const find = require("lodash.find");
 import {
     RawSlot
 } from "../../model/rawSlot";

@@ -1,9 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    isEqual
-} from "lodash";
+const isEqual = require("lodash.isequal");
 import {
     Partitionize
 } from "../partitionize";
@@ -166,5 +164,5 @@ describe("PartitionizeByKey", () => {
         expect(result[0].length).to.eq(1);
         expect(result[1].length).to.eq(2);
     });
-    
+
 });

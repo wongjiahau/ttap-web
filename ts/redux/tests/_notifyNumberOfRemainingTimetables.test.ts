@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {isEqual} from "lodash";
+const isEqual = require("lodash.isequal");
 import { GetTestTimetables1 } from "../../tests/testDataGenerator";
 import { NewTimetableListState } from "../reducers/timetableListState";
 import {NotifyNumberOfRemainingTimetables} from "./../actions/notifyNumberOfRemainingTimetables";

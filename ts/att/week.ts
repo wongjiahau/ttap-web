@@ -1,7 +1,5 @@
-import {
-    intersection,
-    isEqual
-} from "lodash";
+const intersection = require("lodash.intersection");
+const isEqual = require("lodash.isequal");
 import * as isInt from "validator/lib/isInt";
 export class Week {
     public static Parse(s: string): Week {

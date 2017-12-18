@@ -1,4 +1,4 @@
-import {find} from "lodash";
+const find = require("lodash.find");
 import * as React from "react";
 import {RawSlot} from "../model/rawSlot";
 import {Timetable} from "../model/timetable";

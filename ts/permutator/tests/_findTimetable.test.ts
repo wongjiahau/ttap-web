@@ -1,10 +1,8 @@
 import {
     expect
 } from "chai";
-import {
-    concat,
-    isEqual
-} from "lodash";
+const concat = require("lodash.concat");
+const isEqual = require("lodash.isequal");
 import {
     ParseRawSlotToSlot
 } from "../../parser/parseRawSlotToSlot";

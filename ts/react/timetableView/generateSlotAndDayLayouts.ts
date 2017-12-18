@@ -1,6 +1,4 @@
-import {
-    sortBy
-} from "lodash";
+const sortBy = require("lodash.sortby");
 import {
     ParseDay
 } from "../../att/day";

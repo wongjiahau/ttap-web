@@ -1,6 +1,4 @@
-import {
-    sum
-} from "lodash";
+const sum = require("lodash.sum");
 import {
     Timetable
 } from "../timetable";

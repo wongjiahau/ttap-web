@@ -1,10 +1,8 @@
 import {
     expect
 } from "chai";
-import {
-    isEqual,
-    omit
-} from "lodash";
+const isEqual = require("lodash.isequal");
+const omit = require("lodash.omit");
 import {
     RawSlot
 } from "../../model/rawSlot";

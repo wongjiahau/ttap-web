@@ -1,7 +1,5 @@
-import {
-    sortBy,
-    uniqBy
-} from "lodash";
+const sortBy = require("lodash.sortby");
+const uniqBy = require("lodash.uniqby");
 import {
     RawSlot
 } from "../../model/rawSlot";

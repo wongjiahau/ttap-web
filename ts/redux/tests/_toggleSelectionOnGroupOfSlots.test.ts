@@ -1,9 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    isEqual
-} from "lodash";
+const isEqual = require("lodash.isequal");
 import {
     RawSlot
 } from "../../model/rawSlot";

@@ -1,5 +1,7 @@
 import {expect} from "chai";
-import {find, last} from "lodash";
+
+const find = require("lodash.find");
+const last = require("lodash.last");
 import * as S from "string";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseSlotToSubject} from "../parser/parseSlotToSubject";

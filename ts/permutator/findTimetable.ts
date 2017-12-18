@@ -1,7 +1,5 @@
-import {
-    concat,
-    sortBy
-} from "lodash";
+const concat = require("lodash.concat");
+const sortBy = require("lodash.sortby");
 import { RawSlot } from "../model/rawSlot";
 import {
     Timetable

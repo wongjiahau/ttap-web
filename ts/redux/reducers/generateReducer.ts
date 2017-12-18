@@ -1,6 +1,4 @@
-import {
-    has
-} from "lodash";
+const has = require("lodash.has");
 
 import * as S from "string";
 import * as typeName from "type-name";

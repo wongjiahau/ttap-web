@@ -1,7 +1,7 @@
 import * as Combinatorics from "js-combinatorics";
-import {
-    sortBy, uniqBy
-} from "lodash";
+const sortBy = require("lodash.sortby");
+const uniqBy = require("lodash.uniqby");
+import { request } from "https";
 import {
     RawSlot
 } from "../model/rawSlot";

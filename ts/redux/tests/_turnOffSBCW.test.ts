@@ -1,9 +1,8 @@
 import {
     expect
 } from "chai";
-import {
-    isEqual
-} from "lodash";
+
+const isEqual = require("lodash.isequal");
 import {
     FindTimetableWithoutConsideringWeekNumber
 } from "../../permutator/findTimetable";

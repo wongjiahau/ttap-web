@@ -1,4 +1,4 @@
-import { min } from "lodash";
+const min = require("lodash.min");
 
 export function Append(originalState: number[], newState: number[]): number[] {
     const result = originalState.slice();

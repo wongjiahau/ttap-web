@@ -1,10 +1,8 @@
 import {
     expect
 } from "chai";
-import {
-    concat,
-    uniq
-} from "lodash";
+const concat = require("lodash.concat");
+const uniq = require("lodash.uniq");
 import {
     ParseRawSlotToSlot
 } from "../../parser/parseRawSlotToSlot";

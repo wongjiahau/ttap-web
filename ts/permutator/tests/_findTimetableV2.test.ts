@@ -1,9 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    concat
-} from "lodash";
+const concat = require("lodash.concat");
 import {
     CodeOf,
     HENG_2017_APR

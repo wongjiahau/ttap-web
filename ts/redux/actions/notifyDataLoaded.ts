@@ -1,6 +1,4 @@
-import {
-    isEqual
-} from "lodash";
+const isEqual = require("lodash.isequal");
 import {
     FindClashes
 } from "../../clashFinder/findClashes";

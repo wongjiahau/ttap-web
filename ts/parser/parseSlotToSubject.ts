@@ -1,4 +1,7 @@
-import {find, some, sortBy, uniq} from "lodash";
+const find = require("lodash.find");
+const some = require("lodash.some");
+const sortBy = require("lodash.sortby");
+const uniq = require("lodash.uniq");
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 

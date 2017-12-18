@@ -1,11 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    fill,
-    find,
-    isEqual
-} from "lodash";
+const isEqual = require("lodash.isequal");
 import {
     FindClashes
 } from "../../clashFinder/findClashes";
