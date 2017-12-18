@@ -1,5 +1,5 @@
 import Button from "material-ui/Button";
-import {Origin} from "material-ui/Snackbar";
+import {SnackBarOrigin} from "material-ui/Snackbar";
 import Snackbar from "material-ui/Snackbar";
 import * as React from "react";
 
@@ -25,7 +25,7 @@ export class SnackbarView extends React.Component < ISnackbarProps, {} > {
             </Button>
         );
         const snackbarMessage = <span>{this.props.message}</span>;
-        const anchorOrigin : Origin = {
+        const anchorOrigin : SnackBarOrigin = {
             horizontal: "center",
             vertical: "bottom"
         };

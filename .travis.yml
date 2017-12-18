@@ -24,8 +24,10 @@ before_script:
 script:
   - echo "Running script:"
   - ./scripts/transpile
-  - npm run build
   - npm test
+  - rm -rf  ./src/core/tests/testData/ # remove test data which is not needed in production build
+  - rm ./src/core/tests/testDataGenerator.js
+  - npm run build
 
 after_script:
   - echo "script finished."

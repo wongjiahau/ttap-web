@@ -7,8 +7,6 @@ import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
 import {SubjectListViewContainer} from "../redux/containers/subjectListViewContainer";
 import {TimetableCreatorContainer} from "../redux/containers/timetableCreatorContainer";
-import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
-import { GetTestTimetables1 } from "../tests/testDataGenerator";
 import { GetSemStartDateDialog } from "./getSemStartDateDialog";
 import {SlotView} from "./slotView";
 import {TimetableCreatorView} from "./timetableCreatorView";
@@ -25,15 +23,16 @@ export class Playground extends React.Component < IPlaygroundProps, {} > {
         const content = debugging
             ? ""
             : (<TimetableCreatorContainer/>);
-        const timetable = GetTestTimetables1()[0];
-        return (
-            <div>
-                <MuiThemeProvider>
-                    <div>
-                        <TimetableSummaryView Timetable={timetable}/>
-                    </div>
-                </MuiThemeProvider>
-            </div>
-        );
+        return "This is a playground";
+        // const timetable = GetTestTimetables1()[0];
+        // return (
+        //     <div>
+        //         <MuiThemeProvider>
+        //             <div>
+        //                 <TimetableSummaryView Timetable={timetable}/>
+        //             </div>
+        //         </MuiThemeProvider>
+        //     </div>
+        // );
     }
 }
