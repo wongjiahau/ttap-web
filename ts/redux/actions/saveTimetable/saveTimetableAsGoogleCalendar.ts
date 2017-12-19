@@ -1,6 +1,8 @@
 declare let gapi: any;
+const addWeeks = require("date-fns/add_weeks");
+const format = require("date-fns/format");
+const addDays = require("date-fns/add_days");
 const max = require("lodash.max");
-import * as moment from "moment";
 /* global gapi */
 import {
     ParseDay
@@ -138,7 +140,7 @@ function sampleAddEvent() {
 }
 
 export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
-    const semStartDate = moment(semesterStartDate).toDate(); // this is to clone semesterStartDate, so that it wont mutate it
+    const semStartDate = new Date(semesterStartDate.getTime());
     if (semStartDate.getDay() !== 1) {
         throw new Error("Expected semesterStartDay to be Monday but was " + semStartDate.toString());
     }
@@ -148,7 +150,7 @@ export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
     semStartDate.setMinutes(t.StartTime.Minute);
     semStartDate.setDate(semStartDate.getDate() + ParseDay(slot.Day) - 1);
     const dates = GetListOfDates(semStartDate, w.WeekNumberList);
-    const startDate = moment(dates[0]).format("YYYY-MM-DD");
+    const startDate = format(dates[0], "YYYY-MM-DD");
     const recurrence = GetRecurrence(dates.slice(1));
     const event = {
         summary: `${Beautify(slot.SubjectName)} (${slot.Type}-${slot.Group})`,
@@ -216,23 +218,23 @@ export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): any[]
     if (semStartDate.getDay() !== 1) {
         throw new Error("Semester start date must be a Monday");
     }
-    const startDate = moment(semStartDate);
-    const endDate = moment(semStartDate).add(5, "days");
+    let startDate = semStartDate;
+    let endDate = addDays(semStartDate, 5);
     for (let i = 0; i < maxWeek; i++) {
         const event = {
             summary: "Week " + (i + 1),
             start: {
-                date: moment(startDate).format("YYYY-MM-DD"),
+                date: format(startDate, "YYYY-MM-DD"),
                 timeZone: "UTC+08:00"
             },
             end: {
-                date: moment(endDate).format("YYYY-MM-DD"),
+                date: format(endDate, "YYYY-MM-DD"),
                 timeZone: "UTC+08:00"
             }
         };
         result.push(event);
-        startDate.add(1, "week");
-        endDate.add(1, "week");
+        startDate = addWeeks(startDate, 1);
+        endDate = addWeeks(endDate, 1);
     }
     return result;
 }
