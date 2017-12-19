@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import {Switch} from "material-ui";
 import IconClock from "material-ui-icons/Alarm";
 import IconGrid from "material-ui-icons/GridOn";
@@ -22,7 +21,7 @@ const centerDivStyle : React.CSSProperties = {
 };
 
 const switchStyle : React.CSSProperties = {
-    marginRight: 0.03 * $(window).width()
+    marginRight: 0.03 * window.innerWidth
 };
 
 export interface ITimetableListViewStateProps {

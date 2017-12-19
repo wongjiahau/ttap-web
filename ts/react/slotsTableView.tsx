@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import Button from "material-ui/Button";
 import Checkbox from "material-ui/Checkbox";
 import Divider from "material-ui/Divider";
@@ -64,23 +63,16 @@ export class SlotsTable extends React.Component < ISlotsTableViewProps,
 ISlotsTableViewInternalState > {
     public constructor(props : ISlotsTableViewProps) {
         super(props);
-        $(window).on("resize", this.handleWindowResizing);
         this.state = {
             sectionStyle: this.getSectionStyle()
         };
-    }
-
-    public handleWindowResizing = () => {
-        this.setState({
-            sectionStyle: this.getSectionStyle()
-        });
     }
 
     public getSectionStyle() : React.CSSProperties {
         return {
             display: "flex",
             flexFlow: "column",
-            height: $(window).height()
+            height: window.innerHeight
         };
     }
 

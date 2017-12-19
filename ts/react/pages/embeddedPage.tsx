@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import * as React from "react";
 
 const divStyle = {
@@ -11,8 +10,8 @@ const EmbeddedPage = (props) => {
         <div style={divStyle}>
             <iframe
                 src={props.src}
-                width={0.9 * $(window).width()}
-                height={0.825 * $(window).height()}
+                width={0.9 * window.innerWidth}
+                height={0.825 * window.innerHeight}
                 >Loading...</iframe>
         </div>
     );

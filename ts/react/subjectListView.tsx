@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import IconInfo from "material-ui-icons/Info";
 import Button from "material-ui/Button";
 import Divider from "material-ui/Divider";
@@ -75,7 +74,6 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
 } > {
     constructor(props : ISubjectListViewProps) {
         super(props);
-        $(window).on("resize", this.handleWindowResizing);
         this.state = {
             sectionStyle: this.getSectionStyle()
         };
@@ -85,14 +83,8 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         return {
             display: "flex",
             flexFlow: "column",
-            height: $(window).height()
+            height: window.innerHeight
         };
-    }
-
-    public handleWindowResizing = () => {
-        this.setState({
-            sectionStyle: this.getSectionStyle()
-        });
     }
 
     public handleSearchBoxOnChange = (event : object) => {

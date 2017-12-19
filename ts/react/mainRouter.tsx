@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import * as React from "react";
 import {Route, Switch} from "react-router-dom";
 import {MasterView} from "./masterView";
@@ -9,8 +8,8 @@ import {Playground} from "./playground";
 import {MarkdownPage} from "./tutorial/markdownPage";
 import {Tutorial} from "./tutorial/tutorial";
 
-const width = 0.9 * $(window).width();
-const height = 0.825 * $(window).height();
+const width = 0.9 * window.innerWidth;
+const height = 0.825 * window.innerHeight;
 
 const Page = (src) => {
     return (

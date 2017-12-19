@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import Button from "material-ui/Button";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
@@ -13,7 +12,7 @@ import {GenerateSlotViewsAndDayColumn} from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
 import {Skeleton} from "./skeleton";
 
-const getTimetableViewWidth = () => 0.9 * $(window).width();
+const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
 interface ITimetableViewProps {
     timetable : Timetable;
@@ -31,7 +30,7 @@ interface ITimetableViewState {
 export class TimetableView extends React.Component < ITimetableViewProps, ITimetableViewState> {
     public constructor(props : ITimetableViewProps) {
         super(props);
-        $(window).on("resize", this.handleWindowResizing);
+        window.onresize = this.handleWindowResizing;
         this.state = {
             width: getTimetableViewWidth(),
         };

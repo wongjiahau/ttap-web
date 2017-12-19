@@ -1,4 +1,3 @@
-import * as $ from "jquery";
 import {Button} from "material-ui";
 import IconLeft from "material-ui-icons/KeyboardArrowLeft";
 import IconRight from "material-ui-icons/KeyboardArrowRight";
@@ -7,8 +6,8 @@ import {Redirect} from "react-router";
 import {IGithubApiObject} from "../../interfaces/githubApiObject";
 import {StackPanel} from "../panels/stackPanel";
 import {MarkdownPage} from "./markdownPage";
-const WIDTH = $(window).width();
-const HEIGHT = 0.83 * $(window).height();
+const WIDTH = window.innerWidth;
+const HEIGHT = 0.83 * window.innerHeight;
 const skipButtonStyle : React.CSSProperties = {
     position: "fixed",
     right: "10px",
