@@ -197,7 +197,10 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
     }
 
     public componentDidMount() {
-        (document.getElementById("searchbar")as HTMLInputElement).focus();
+        const searchbar  = (document.getElementById("searchbar")as HTMLInputElement);
+        if (searchbar) {
+            searchbar.focus();
+        }
     }
 
     private checkKeys = (e) => {
