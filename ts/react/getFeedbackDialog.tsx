@@ -1,13 +1,7 @@
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Typography
-} from "material-ui";
 import StarIcon from "material-ui-icons/Star";
+import Button from "material-ui/Button";
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {StackPanel} from "./panels/stackPanel";

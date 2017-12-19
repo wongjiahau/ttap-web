@@ -1,7 +1,6 @@
 import {
     expect
 } from "chai";
-import * as moment from "moment";
 import {
     AddByWeek,
     CreateEvent,
@@ -17,6 +16,7 @@ import {
 import {
     GetTestRawSlot1
 } from "./../../../../tests/testDataGenerator";
+const parse = require("date-fns/parse");
 
 describe("SaveTimetableAsGoogleCalendar", () => {
     describe("AddByWeek", () => {
@@ -171,14 +171,14 @@ describe("SaveTimetableAsGoogleCalendar", () => {
 
     describe("GetWeekNumberHeaders", () => {
         it("should throw error if the passed in date is not a Monday", () => {
-            const semStartDate = moment("2017-11-14").toDate(); // Tuesday
+            const semStartDate = parse("2017-11-14");
             expect(() => {
                 GetWeekNumberHeaders(semStartDate, 0);
             }).to.throw();
         });
 
         it("case 1", () => {
-            const semStartDate = moment("2017-11-13").toDate();
+            const semStartDate = parse("2017-11-13");
             const maxWeek = 2;
             const weekNumberHeaders = GetWeekNumberHeaders(semStartDate, maxWeek);
             expect(weekNumberHeaders).to.deep.eq(

@@ -1,4 +1,4 @@
-import { Button } from "material-ui";
+import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import * as React from "react";

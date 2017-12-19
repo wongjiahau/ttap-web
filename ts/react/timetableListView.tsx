@@ -1,9 +1,9 @@
-import {Switch} from "material-ui";
 import IconClock from "material-ui-icons/Alarm";
 import IconGrid from "material-ui-icons/GridOn";
 import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
 import Button from "material-ui/Button";
+import Switch from "material-ui/Switch";
 import * as React from "react";
 import {Key} from "../enums/keyCodeEnum";
 import {STCBox} from "../model/states/stcBox";

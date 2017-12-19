@@ -1,6 +1,5 @@
 /* global gapi */
 declare var gapi : any;
-import {MuiThemeProvider} from "material-ui";
 import * as React from "react";
 import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
