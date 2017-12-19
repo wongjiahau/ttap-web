@@ -25,8 +25,8 @@ script:
   - echo "Running script:"
   - ./scripts/transpile
   - npm test
-  - rm -rf  ./src/core/tests/testData/ # remove test data which is not needed in production build
-  - rm ./src/core/tests/testDataGenerator.js
+  - rm -rf  ./src/core/tests/ # remove test data which is not needed in production build
+  - cp modifiedNodeModules/phin.js node_modules/phin/lib/phin.js # use ES5 phin.js because the original one cannot be minified properly
   - npm run build
 
 after_script:

@@ -45,38 +45,38 @@ ILoadTestDataViewState > {
     }
 
     private handleClick = (downloadUrl : string, fileType : "html" | "json") : void => {
-        const request = require("request");
+        const request = require("phin");
         const options = {
             url: downloadUrl,
             headers: {
                 "User-Agent": "hou32hou"
             }
         };
-        request(options, (error, response, body) => {
+        request(options, (error, response) => {
             if (fileType === "html") {
                 this
                     .props
-                    .handleLoadDemo(ParseHtmlToRawSlot(body));
+                    .handleLoadDemo(ParseHtmlToRawSlot(response.body.toString()));
             } else if (fileType === "json") {
-                this.props.handleLoadDemo(ParseJsonToRawSlot(body));
+                this.props.handleLoadDemo(ParseJsonToRawSlot(response.body.toString()));
             }
         });
     }
 
     private RequestTestFiles() : void {
-        const request = require("request");
+        const request = require("phin");
         const options = {
             url: "https://api.github.com/repos/wongjiahau/ttap-sample-data/contents/",
             headers: {
                 "User-Agent": "hou32hou"
             }
         };
-        request(options, (error, response, body) => {
+        request(options, (error, response) => {
             // console.log("error:", error); // Print the error if one occurred
             // console.log("statusCode:", response && response.statusCode); // Print the
             // response status code if a response was received console.log('body:', body);
             // // Print the HTML for the Google homepage.
-            const result = JSON.parse(body);
+            const result = JSON.parse(response.body.toString());
             this.setState({testFiles: result});
         });
     }
