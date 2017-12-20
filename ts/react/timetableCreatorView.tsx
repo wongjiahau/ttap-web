@@ -18,6 +18,7 @@ import { SBCWDialogContainer } from "../redux/containers/turnOnSBCWDialogContain
 import {LoadTestDataView} from "./loadTestDataView";
 import {Login} from "./login";
 import {StackPanel} from "./panels/stackPanel";
+import { SelectCourse } from "./selectCourse";
 import {iconStyle} from "./styles";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -42,8 +43,9 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         if (!this.props.isSlotLoaded) {
             return (
                 <div>
-                    <LoadTestDataView handleLoadDemo={this.props.handleSlotLoaded}/>
-                    <Login notifyDataLoaded={this.props.handleSlotLoaded}/>
+                    {/* <LoadTestDataView handleLoadDemo={this.props.handleSlotLoaded}/>
+                    <Login notifyDataLoaded={this.props.handleSlotLoaded}/> */}
+                    <SelectCourse handleLoadSlot={this.props.handleSlotLoaded}/>
                 </div>
             );
         }
