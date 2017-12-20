@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Redirect} from "react-router";
 import {Route, Switch} from "react-router-dom";
 import {SelectCourseViewContainer} from "../redux/containers/selectCourseContainer";
 import {MasterView} from "./masterView";
@@ -11,7 +12,8 @@ import {Tutorial} from "./tutorial/tutorial";
 
 export const MainRouter = () => (
     <Switch>
-        <Route exact={true} path="/" component={Tutorial}/>
+        <Route exact={true} path="/" component={RedirectToLearn}/>
+        <Route exact={true} path="/learn" component={Tutorial}/>
         <Route exact={true} path="/select" component={SelectCourseViewContainer}/>
         <Route exact={true} path="/play" component={MasterView}/>
         <Route exact={true} path="/feedbackForm" component={FeedbackForm}/>
@@ -22,6 +24,10 @@ export const MainRouter = () => (
         <Route exact={true} path="/about" component={About}/>
     </Switch>
 );
+
+const RedirectToLearn = () => {
+    return <Redirect push={true} to="/learn"/>;
+};
 
 const width = 0.9 * window.innerWidth;
 const height = 0.825 * window.innerHeight;
