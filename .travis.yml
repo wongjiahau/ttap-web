@@ -25,15 +25,15 @@ script:
   - echo "Running script:"
   - ./scripts/transpile
   - npm test
-  - rm -rf  ./src/core/tests/ # remove test data which is not needed in production build
-  - cp modifiedNodeModules/phin.js node_modules/phin/lib/phin.js # use ES5 phin.js because the original one cannot be minified properly
-  - npm run build
 
 after_script:
   - echo "script finished."
 
 after_success:
   - ./scripts/upload-coverage-report
+  - rm -rf  ./src/core/tests/ # remove test data which is not needed in production build
+  - cp modifiedNodeModules/phin.js node_modules/phin/lib/phin.js # use ES5 phin.js because the original one cannot be minified properly
+  - npm run build
 
 
 deploy:
