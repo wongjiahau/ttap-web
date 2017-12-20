@@ -11,6 +11,7 @@ import * as S from "string";
 import {Key} from "../enums/keyCodeEnum";
 import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
+import { ISubjectListState } from "../redux/reducers/subjectListState";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";
@@ -50,14 +51,6 @@ const buttonStyle : React.CSSProperties = {
 };
 
 // endregion
-export interface ISubjectListViewStateProps {
-    clashingSubjectPairs : Array < [Subject, Subject] >;
-    isOpen : boolean;
-    isShowingLoadingBar : boolean;
-    isShowingSelectedSubjectOnly : boolean;
-    searchWord : string;
-    subjects : Subject[];
-}
 
 export interface ISubjectListViewDispatchProps {
     handleClose : () => void;
@@ -66,7 +59,7 @@ export interface ISubjectListViewDispatchProps {
     handleToggleView : () => void;
 }
 
-export interface ISubjectListViewProps extends ISubjectListViewStateProps,
+export interface ISubjectListViewProps extends ISubjectListState,
 ISubjectListViewDispatchProps {}
 
 export class SubjectListView extends React.Component < ISubjectListViewProps, {
@@ -95,16 +88,16 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
     public render() {
         const subjectViews = this
             .props
-            .subjects
+            .Subjects
             .map((s, index) => {
                 if (s.IsVisible) {
                     return (
                         <div key={s.Code}>
                             <SubjectView
                                 id={"sv" + index}
-                                isLoading={this.props.isShowingLoadingBar}
+                                isLoading={this.props.IsShowingLoadingBar}
                                 clashReport={s.ClashReport}
-                                searchWord={this.props.searchWord}
+                                searchWord={this.props.SearchedText}
                                 subjectName={Beautify(s.Name)}
                                 subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
                                 handleSelection={() => this.props.handleSelection(index)}
@@ -122,20 +115,20 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
 
         const showErrorMessage = this
             .props
-            .subjects
+            .Subjects
             .filter((x) => x.IsVisible)
             .length === 0;
 
         const numberOfSelectedSubjects = this
             .props
-            .subjects
+            .Subjects
             .filter((s) => s.IsSelected)
             .length;
 
         const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
         return (
-            <Drawer open={this.props.isOpen}>
+            <Drawer open={this.props.IsOpen}>
                 <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                     <header style={headerStyle}>
                         <Typography gutterBottom={true} type="display1" color="primary">
@@ -156,7 +149,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         </div>
                     </Paper>
                     <footer style={footerStyle}>
-                        {this.props.isShowingLoadingBar
+                        {this.props.IsShowingLoadingBar
                             ? (
                                 <Typography align="center" type="subheading">Finding possible timetables . . .</Typography>
                             )
@@ -171,7 +164,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                         disabled={noSubjectIsSelected}
                                         key="toggle-view-button"
                                         onClick={this.props.handleToggleView}>
-                                        {this.props.isShowingSelectedSubjectOnly
+                                        {this.props.IsShowingSelectedSubjectOnly
                                             ? "Show all subjects"
                                             : (noSubjectIsSelected
                                                 ? "Show selected subjects"
@@ -181,10 +174,10 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                         raised={true}
                                         color="primary"
                                         style={buttonStyle}
-                                        disabled={noSubjectIsSelected || this.props.isShowingLoadingBar}
+                                        disabled={noSubjectIsSelected || this.props.IsShowingLoadingBar}
                                         key="done-button"
                                         onClick={this.props.handleClose}>
-                                        {this.props.isShowingLoadingBar
+                                        {this.props.IsShowingLoadingBar
                                             ? "Loading . . ."
                                             : "Done"}
                                     </Button>
@@ -261,33 +254,20 @@ const subjectListTipsContent = () => {
         paddingTop:    "5px",
         textAlign:     "left",
     };
+    const getRow = (key: string, description: string) => {
+        return (
+            <tr>
+                <td><code>{key}</code></td>
+                <td>&emsp;{description}</td>
+            </tr>
+        );
+    };
     return (
         <table style={style}>
             <tbody>
-                <tr>
-                    <td>
-                        <code>↓ ↑</code>
-                    </td>
-                    <td>
-                        &emsp;Navigate through subjects
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <code>Enter</code>
-                    </td>
-                    <td>
-                        &emsp;Toggle selection on focused subject
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <code>Backspace</code>
-                    </td>
-                    <td>
-                        &emsp;Clear and focus the search bar
-                    </td>
-                </tr>
+                {getRow("↓ ↑", "Navigate through subjects" )}
+                {getRow("Enter", "Toggle selection on focused subject" )}
+                {getRow("Backspace", "Clear and focus the search bar" )}
             </tbody>
         </table>
     );

@@ -22,7 +22,6 @@ import {
 } from "../reducers/timetableCreatorState";
 import {
     ISubjectListViewDispatchProps,
-    ISubjectListViewStateProps,
     SubjectListView
 } from "./../../react/subjectListView";
 import {
@@ -41,15 +40,15 @@ import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
 
-const mapStateToProps = (state): ISubjectListViewStateProps => {
+const mapStateToProps = (state): ISubjectListState => {
     const target = state.MasterStateReducer.SubjectListState as ISubjectListState;
     return {
-        clashingSubjectPairs: target.ClashingSubjectPairs,
-        isOpen: target.IsOpen,
-        isShowingLoadingBar: target.IsShowingLoadingBar,
-        isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
-        searchWord: target.SearchedText,
-        subjects: target.Subjects,
+        ClashingSubjectPairs: target.ClashingSubjectPairs,
+        IsOpen: target.IsOpen,
+        IsShowingLoadingBar: target.IsShowingLoadingBar,
+        IsShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
+        SearchedText: target.SearchedText,
+        Subjects: target.Subjects,
     };
 };
 
