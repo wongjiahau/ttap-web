@@ -103,7 +103,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             const download_url = this
                 .state
                 .apiObjects
-                .filter((x) => x.name === this.state.value)[0]
+                .filter((x) => S(x.name.toLowerCase()).contains(this.state.value.toLowerCase()))[0]
                 .download_url;
             this.LoadSelectedData(download_url, this.state.value.split(".")[1]);
         } catch (e) {
@@ -167,7 +167,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
 }
 
 function getSuggestions(value : string, basket : string[]) : string[] {
-    const result = basket.filter((x) => S(x).contains(value));
+    const result = basket.filter((x) => S(x.toLowerCase()).contains(value.toLowerCase()) && !S(x).contains("_"));
     return result;
 }
 
