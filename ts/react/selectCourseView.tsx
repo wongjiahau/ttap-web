@@ -143,16 +143,16 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                 alert("Please retry again.");
                 return;
             }
-            this.setState({redirect: true});
             if (fileType === "html") {
                 this
-                    .props
-                    .handleLoadSlot(ParseHtmlToRawSlot(response.body.toString()));
+                .props
+                .handleLoadSlot(ParseHtmlToRawSlot(response.body.toString()));
             } else if (fileType === "json") {
                 this
-                    .props
-                    .handleLoadSlot(ParseJsonToRawSlot(response.body.toString()));
+                .props
+                .handleLoadSlot(ParseJsonToRawSlot(response.body.toString()));
             }
+            this.setState({redirect: true});
         });
 
     }
