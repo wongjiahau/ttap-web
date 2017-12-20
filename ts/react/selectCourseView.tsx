@@ -2,6 +2,7 @@ import Button from "material-ui/Button";
 import CircularProgress from "material-ui/Progress/CircularProgress";
 import * as React from "react";
 import * as Autosuggest from "react-autosuggest";
+import {Redirect} from "react-router";
 import * as S from "string";
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
@@ -10,24 +11,25 @@ import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
 import {StackPanel} from "./panels/stackPanel";
 
-interface ISelectCourseProps {
+export interface ISelectCourseViewDispatchProps {
     handleLoadSlot : (rawSlots : RawSlot[]) => void;
 }
 
-interface ISelectCourseState {
+interface ISelectCourseViewState {
     apiObjects : IGithubApiObject[]; // modify this line for integrating UTAR API
     currentSuggestions : string[];
+    redirect: boolean;
     value : string;
 }
 
-export class SelectCourse extends React.Component < ISelectCourseProps,
-ISelectCourseState > {
+export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
     private allSuggestions : string[];
     public constructor(props) {
         super(props);
         this.state = {
             apiObjects: null,
             currentSuggestions: [],
+            redirect: false,
             value: ""
         };
         this.RequestTestFiles();
@@ -38,6 +40,9 @@ ISelectCourseState > {
     }
 
     public render() {
+        if (this.state.redirect) {
+            return <Redirect push={true} to="/play"/>;
+        }
         const inputProps = {
             placeholder: "Type your course name here",
             value: this.state.value,
@@ -122,6 +127,11 @@ ISelectCourseState > {
             }
         };
         request(options, (error, response) => {
+            if (error) {
+                alert("Please retry again.");
+                return;
+            }
+            this.setState({redirect: true});
             if (fileType === "html") {
                 this
                     .props

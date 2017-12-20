@@ -1,13 +1,8 @@
-const uniq = require("lodash.uniq");
-const reduce = require("lodash.reduce");
 import IconList from "material-ui-icons/List";
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
-import Typography from "material-ui/Typography";
 import * as React from "react";
-import {Beautify} from "../helper";
+import { Redirect } from "react-router";
 import {RawSlot} from "../model/rawSlot";
-import {Subject} from "../model/subject";
 import { SaveTimetableDialogContainer } from "../redux/containers/saveTimetableDialogContainer";
 import { SetTimeConstraintContainer } from "../redux/containers/setTimeConstraintContainer";
 import { SlotsTableContainer } from "../redux/containers/slotsTableContainer";
@@ -15,10 +10,6 @@ import { SnackbarContainer } from "../redux/containers/snackbarContainer";
 import { SubjectListViewContainer } from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 import { SBCWDialogContainer } from "../redux/containers/turnOnSBCWDialogContainer";
-import {LoadTestDataView} from "./loadTestDataView";
-import {Login} from "./login";
-import {StackPanel} from "./panels/stackPanel";
-import { SelectCourse } from "./selectCourse";
 import {iconStyle} from "./styles";
 
 const selectSubjectButtonStyle : React.CSSProperties = {
@@ -41,13 +32,7 @@ ITimetableCreatorViewDispatchProps {}
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
         if (!this.props.isSlotLoaded) {
-            return (
-                <div>
-                    {/* <LoadTestDataView handleLoadDemo={this.props.handleSlotLoaded}/>
-                    <Login notifyDataLoaded={this.props.handleSlotLoaded}/> */}
-                    <SelectCourse handleLoadSlot={this.props.handleSlotLoaded}/>
-                </div>
-            );
+            return <Redirect push={true} to="/select"/>;
         }
         return (
             <div>
@@ -67,46 +52,6 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <SnackbarContainer/>
                 <SubjectListViewContainer/>
             </div>
-        );
-    }
-
-    private GenerateMessage(clashingSubjectPairs : Array < [Subject, Subject] >): React.ReactNode {
-        const paperStyle: React.CSSProperties = {
-            padding: "10px"
-        };
-        const subjectsInvolved = uniq(reduce(clashingSubjectPairs, (result, x) => result.concat(x), []));
-        const stringifySubject = (s : Subject) => Beautify(s.Name) + "(" + s.Code + ")";
-        return (
-            <Paper style={paperStyle}>
-                <StackPanel orientation="vertical" horizontalAlignment="center">
-                    <Typography type="display2" color="inherit">
-                        No possible timetable is found because:
-                    </Typography>
-                    <br/>
-                    <table>
-                        {clashingSubjectPairs.map((pair, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{"- " + stringifySubject(pair[0])}</td>
-                                    <td>
-                                        <i>is clashing with</i>
-                                    </td>
-                                    <td>{stringifySubject(pair[1])}<br/></td>
-                                </tr>
-                            );
-                        })}
-                    </table>
-                    <br/>
-                    <Typography type="display1" color="inherit">
-                        Try deselecting one of the following subjects :
-                    </Typography>
-                    <ul>
-                        {subjectsInvolved.map((x) => (
-                            <li>{stringifySubject(x)}</li>
-                        ))}
-                    </ul>
-                </StackPanel>
-            </Paper>
         );
     }
 }
