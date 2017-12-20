@@ -2,6 +2,7 @@ import Button from "material-ui/Button";
 import CircularProgress from "material-ui/Progress/CircularProgress";
 import * as React from "react";
 import * as Autosuggest from "react-autosuggest";
+import Highlighter = require("react-highlight-words");
 import {Redirect} from "react-router";
 import * as S from "string";
 import { Key } from "../enums/keyCodeEnum";
@@ -21,6 +22,7 @@ interface ISelectCourseViewState {
     redirect: boolean;
     value : string;
     error: string;
+    loading: boolean;
 }
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
@@ -32,7 +34,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             currentSuggestions: [],
             redirect: false,
             value: "",
-            error: null
+            error: null,
+            loading: true
         };
         this.RequestTestFiles();
     }
@@ -50,7 +53,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             value: this.state.value,
             onChange: this.onChange
         };
-        if (this.state.apiObjects === null) {
+        if (this.state.loading) {
             return getLoadingElement();
         }
         return (
@@ -88,9 +91,11 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     }
 
     public renderSuggestion = (suggestion) => {
-        return (
-            <span onClick={this.handleOnClick}>{suggestion}</span>
-        );
+        return (<div onClick={this.handleOnClick}>
+                    <Highlighter
+                        searchWords={[this.state.value]}
+                        textToHighlight={suggestion}/>
+                </div>);
     }
 
     public handleOnClick = () => {
@@ -100,7 +105,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                 .apiObjects
                 .filter((x) => x.name === this.state.value)[0]
                 .download_url;
-            this.LoadSelectedData(download_url, "html");
+            this.LoadSelectedData(download_url, this.state.value.split(".")[1]);
         } catch (e) {
             this.setState({
                 error:  "'" + this.state.value + "' is not a valid course name. Please try other name."
@@ -122,7 +127,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             // response status code if a response was received console.log('body:', body);
             // // Print the HTML for the Google homepage.
             const result = JSON.parse(response.body.toString());
-            this.setState({apiObjects: result});
+            this.setState({apiObjects: result, loading: false});
             this.allSuggestions = this
                 .state
                 .apiObjects
@@ -130,7 +135,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         });
     }
 
-    private LoadSelectedData = (downloadUrl : string, fileType : "html" | "json") : void => {
+    private LoadSelectedData = (downloadUrl : string, fileType : string) : void => {
+        this.setState({loading: true});
         const request = require("phin");
         const options = {
             url: downloadUrl,
@@ -151,6 +157,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                 this
                 .props
                 .handleLoadSlot(ParseJsonToRawSlot(response.body.toString()));
+            } else {
+                throw new Error("Unknown file type: " + fileType);
             }
             this.setState({redirect: true});
         });
