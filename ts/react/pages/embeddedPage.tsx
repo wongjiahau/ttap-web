@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Backable } from "../backable";
 
 const divStyle = {
     margin: "auto",
@@ -7,13 +8,15 @@ const divStyle = {
 
 const EmbeddedPage = (props) => {
     return (
-        <div style={divStyle}>
-            <iframe
-                src={props.src}
-                width={0.9 * window.innerWidth}
-                height={0.825 * window.innerHeight}
-                >Loading...</iframe>
-        </div>
+        <Backable>
+            <div style={divStyle}>
+                <iframe
+                    src={props.src}
+                    width={0.9 * window.innerWidth}
+                    height={0.80 * window.innerHeight}
+                    >Loading...</iframe>
+            </div>
+        </Backable>
     );
 };
 
