@@ -29,24 +29,17 @@ export class SnackbarView extends React.Component < ISnackbarProps, {} > {
             horizontal: "center",
             vertical: "bottom"
         };
+        const getSnackbar = (open: boolean) =>
+                <Snackbar
+                    action={okButton}
+                    open={open}
+                    anchorOrigin={anchorOrigin}
+                    SnackbarContentProps={{ "aria-describedby": "message-id" }}
+                    message={snackbarMessage}/>;
         return (
             <div>
-                <Snackbar
-                    action={okButton}
-                    open={this.props.isOpen && (viewCount % 2 === 0)}
-                    anchorOrigin={anchorOrigin}
-                    SnackbarContentProps={{
-                    "aria-describedby": "message-id"
-                }}
-                    message={snackbarMessage}/>
-                <Snackbar
-                    action={okButton}
-                    open={this.props.isOpen && (viewCount % 2 === 1)}
-                    anchorOrigin={anchorOrigin}
-                    SnackbarContentProps={{
-                    "aria-describedby": "message-id"
-                }}
-                    message={snackbarMessage}/>
+                {getSnackbar(this.props.isOpen && (viewCount % 2 === 0))}
+                {getSnackbar(this.props.isOpen && (viewCount % 2 === 1))}
             </div>
         );
     }
