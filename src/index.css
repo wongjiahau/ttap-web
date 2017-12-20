@@ -23,7 +23,7 @@ code {
 }
 
 .react-autosuggest__input {
-  width: 240px;
+  width: 460px;
   height: 30px;
   padding: 10px 20px;
   font-family: roboto;
@@ -50,7 +50,7 @@ code {
   display: block;
   position: absolute;
   top: 51px;
-  width: 280px;
+  width: 500px;
   border: 1px solid #aaa;
   background-color: #fff;
   font-family: roboto;

@@ -20,6 +20,7 @@ interface ISelectCourseViewState {
     currentSuggestions : string[];
     redirect: boolean;
     value : string;
+    error: string;
 }
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
@@ -30,7 +31,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             apiObjects: null,
             currentSuggestions: [],
             redirect: false,
-            value: ""
+            value: "",
+            error: null
         };
         this.RequestTestFiles();
     }
@@ -53,19 +55,23 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         }
         return (
             <div onKeyDown={handleKeyDown}>
-                <StackPanel orientation="horizontal" horizontalAlignment="center">
-                    <Autosuggest
-                        suggestions={this.state.currentSuggestions}
-                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                        getSuggestionValue={(suggestion) => suggestion}
-                        renderSuggestion={this.renderSuggestion}
-                        inputProps={inputProps}/>
-                    <Button style={{ height: "50px" }}
-                        id="gobtn"
-                        raised={true}
-                        onClick={this.handleOnClick}
-                        color="accent">GO</Button>
+                <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <StackPanel orientation="horizontal" horizontalAlignment="center">
+                        <Autosuggest
+                            suggestions={this.state.currentSuggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            getSuggestionValue={(suggestion) => suggestion}
+                            renderSuggestion={this.renderSuggestion}
+                            inputProps={inputProps}/>
+                        <Button style={{ height: "50px" }}
+                            id="gobtn"
+                            raised={true}
+                            onClick={this.handleOnClick}
+                            color="accent">GO</Button>
+                    </StackPanel>
+                    {!this.state.error ? null :
+                        <p style={{color: "Red"}}>{this.state.error}</p>}
                 </StackPanel>
             </div>
         );
@@ -88,12 +94,18 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     }
 
     public handleOnClick = () => {
-        const download_url = this
-            .state
-            .apiObjects
-            .filter((x) => x.name === this.state.value)[0]
-            .download_url;
-        this.LoadSelectedData(download_url, "html");
+        try {
+            const download_url = this
+                .state
+                .apiObjects
+                .filter((x) => x.name === this.state.value)[0]
+                .download_url;
+            this.LoadSelectedData(download_url, "html");
+        } catch (e) {
+            this.setState({
+                error:  "'" + this.state.value + "' is not a valid course name. Please try other name."
+            });
+        }
     }
 
     private RequestTestFiles() : void {
