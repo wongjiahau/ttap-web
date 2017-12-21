@@ -20,14 +20,9 @@ const centerDivStyle : React.CSSProperties = {
     textAlign: "center"
 };
 
-const switchStyle : React.CSSProperties = {
-    marginRight: 0.03 * window.innerWidth
-};
-
 export interface ITimetableListViewStateProps {
     currentIndex:     number; // non-zero based
     currentTimetable: Timetable;
-    isSbcwTurnedOn:   boolean;
     isSummaryOpen:    boolean;
     maxIndex:         number; // non-zero based
 }
@@ -37,11 +32,9 @@ export interface ITimetableListViewDispatchProps {
     handleGoToPrevious:              () => void;
     handleGoToRandom:                () => void;
     handleOpenSaveTimetableDialog:   () => void;
-    handleOpenSbcwDialog:            () => void;
     handleOpenSetTimeConstraintView: () => void;
     handleOpenSlotsTable:            () => void;
     handleToggleIsOpenOfSummary: () => void;
-    handleTurnOffSBCW:               () => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -54,15 +47,6 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         }
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
-                <div style={switchStyle}>
-                    <StackPanel horizontalAlignment="right" orientation="horizontal">
-                        Search by considering week number
-                        <Switch
-                            style={switchStyle}
-                            checked={this.props.isSbcwTurnedOn}
-                            onChange={this.handleSwitchToggled}/>
-                    </StackPanel>
-                </div>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <TimetableView
                         timetable={this.props.currentTimetable}
@@ -104,17 +88,6 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         );
     }
 
-    private handleSwitchToggled = (event : object, checked : boolean) => {
-        if (checked) {
-            this
-                .props
-                .handleOpenSbcwDialog();
-        } else {
-            this
-                .props
-                .handleTurnOffSBCW();
-        }
-    }
     private checkKeys = (e) => {
         // refer
         // https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-ja

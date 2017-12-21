@@ -1,7 +1,8 @@
 import IconList from "material-ui-icons/List";
 import Button from "material-ui/Button";
+import Switch from "material-ui/Switch";
 import * as React from "react";
-import { Redirect } from "react-router";
+import {Redirect} from "react-router";
 import {RawSlot} from "../model/rawSlot";
 import { SaveTimetableDialogContainer } from "../redux/containers/saveTimetableDialogContainer";
 import { SetTimeConstraintContainer } from "../redux/containers/setTimeConstraintContainer";
@@ -9,8 +10,15 @@ import { SlotsTableContainer } from "../redux/containers/slotsTableContainer";
 import { SnackbarContainer } from "../redux/containers/snackbarContainer";
 import { SubjectListViewContainer } from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
-import { SBCWDialogContainer } from "../redux/containers/turnOnSBCWDialogContainer";
+import {SBCWDialogContainer} from "../redux/containers/turnOnSBCWDialogContainer";
+import {HENG_2017_APR} from "../tests/testData/heng_2017_apr";
+import { LeftRightPanel } from "./panels/leftRightPanel";
+import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
+
+const switchStyle : React.CSSProperties = {
+    marginRight: 0.03 * window.innerWidth
+};
 
 const selectSubjectButtonStyle : React.CSSProperties = {
     marginBottom: "10px",
@@ -18,12 +26,15 @@ const selectSubjectButtonStyle : React.CSSProperties = {
 };
 
 export interface ITimetableCreatorViewStateProps {
-    isSlotLoaded: boolean;
+    isSlotLoaded : boolean;
+    isSbcwTurnedOn : boolean;
 }
 
 export interface ITimetableCreatorViewDispatchProps {
-    handleOpenSubjectListView : () => void;
-    handleSlotLoaded : (rawSlots : RawSlot[]) => void;
+    handleOpenSbcwDialog:      ()      => void;
+    handleOpenSubjectListView: ()      => void;
+    handleSlotLoaded:          (rawSlots: RawSlot[]) => void;
+    handleTurnOffSBCW:         ()      => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -36,14 +47,24 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         }
         return (
             <div>
-                <Button
-                    style={selectSubjectButtonStyle}
-                    raised={true}
-                    color="accent"
-                    onClick={this.props.handleOpenSubjectListView}>
-                    <IconList style={iconStyle}/>
-                    Select subjects
-                </Button>
+                <LeftRightPanel>
+                    <Button
+                        style={selectSubjectButtonStyle}
+                        raised={true}
+                        color="accent"
+                        onClick={this.props.handleOpenSubjectListView}>
+                        <IconList style={iconStyle}/>
+                        Select subjects
+                    </Button>
+                    <div style={switchStyle}>
+                        <StackPanel horizontalAlignment="right" orientation="horizontal">
+                            Search by considering week number
+                            <Switch style={switchStyle}
+                                checked={this.props.isSbcwTurnedOn}
+                                onChange={this.handleSwitchToggled}/>
+                        </StackPanel>
+                    </div>
+                </LeftRightPanel>
                 <TimetableListContainer/>
                 <SaveTimetableDialogContainer/>
                 <SBCWDialogContainer/>
@@ -53,5 +74,13 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <SubjectListViewContainer/>
             </div>
         );
+    }
+
+    private handleSwitchToggled = (event : object, checked : boolean) => {
+        if (checked) {
+            this.props.handleOpenSbcwDialog();
+        } else {
+            this.props.handleTurnOffSBCW();
+        }
     }
 }
