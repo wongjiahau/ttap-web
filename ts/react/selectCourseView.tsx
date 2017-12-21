@@ -122,10 +122,11 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             }
         };
         request(options, (error, response) => {
-            // console.log("error:", error); // Print the error if one occurred
+            if (error) {
+                this.setState({error: "Unable to fetch data from server. Please try again later.", loading: false});
+                return;
+            }
             // console.log("statusCode:", response && response.statusCode); // Print the
-            // response status code if a response was received console.log('body:', body);
-            // // Print the HTML for the Google homepage.
             const result = JSON.parse(response.body.toString());
             this.setState({apiObjects: result, loading: false});
             this.allSuggestions = this
