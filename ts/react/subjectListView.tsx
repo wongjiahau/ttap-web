@@ -149,11 +149,6 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         </div>
                     </Paper>
                     <footer style={footerStyle}>
-                        {this.props.IsShowingLoadingBar
-                            ? (
-                                <Typography align="center" type="subheading">Finding possible timetables . . .</Typography>
-                            )
-                            : (
                                 <StackPanel orientation="horizontal" horizontalAlignment="right">
                                     <Tooltip title={subjectListTipsContent()} placement="top">
                                         <IconInfo/>
@@ -177,12 +172,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                         disabled={noSubjectIsSelected || this.props.IsShowingLoadingBar}
                                         key="done-button"
                                         onClick={this.props.handleClose}>
-                                        {this.props.IsShowingLoadingBar
-                                            ? "Loading . . ."
-                                            : "Done"}
+                                Done
                                     </Button>
                                 </StackPanel>
-                            )}
                     </footer>
                 </section>
             </Drawer>
