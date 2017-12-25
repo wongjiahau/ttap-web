@@ -2,6 +2,8 @@ import GridIcon from "material-ui-icons/GridOn";
 import MenuIcon from "material-ui-icons/Menu";
 import AppBar from "material-ui/AppBar";
 import Button from "material-ui/Button";
+import indigo from "material-ui/colors/indigo";
+import pink from "material-ui/colors/pink";
 import IconButton from "material-ui/IconButton";
 import createMuiTheme from "material-ui/styles/createMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -13,9 +15,13 @@ import "react-tippy/dist/tippy.css";
 import {GetFeedbackDialog} from "./getFeedbackDialog";
 import { MainRouter } from "./mainRouter";
 import { OtherStuffDrawer } from "./otherStuffDrawer";
-// import {DrawerContent} from "./DrawerContent"; import {Main} from "./Main";
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    primary: indigo,
+    secondary: pink ,
+  },
+});
 interface IAppState {
     isSecondaryDrawerOpen: boolean;
 }
