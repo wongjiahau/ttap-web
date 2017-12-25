@@ -16,18 +16,21 @@ export interface ISlotViewProps {
     color : Colors;
 }
 
+const borderThickness = "0px solid black";
+const borderRadius = "5px";
+
 export class SlotView extends React.Component < ISlotViewProps, {} > {
     public render() {
         const buttonBaseStyle : React.CSSProperties = {
             background: this.props.color,
-            borderTop: "0.5px solid black",
-            borderLeft: "0.5px solid black",
-            borderRight: "0.5px solid black",
-            borderBottom: "0.5px solid black",
-            borderTopLeftRadius: "2px",
-            borderBottomLeftRadius: "2px",
-            borderTopRightRadius: "2px",
-            borderBottomRightRadius: "2px",
+            borderTop: borderThickness,
+            borderLeft: borderThickness,
+            borderRight: borderThickness,
+            borderBottom: borderThickness,
+            borderTopLeftRadius: borderRadius,
+            borderBottomLeftRadius: borderRadius,
+            borderTopRightRadius: borderRadius,
+            borderBottomRightRadius: borderRadius,
             width: "100%"
         };
         const slot = this.props.slot;
