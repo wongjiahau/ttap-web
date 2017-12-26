@@ -50,11 +50,13 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
                     <td>
                         <div style={style}>
                             <table style={style}>
-                                <tr>
-                                    <td>
-                                        {x}
-                                    </td>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {x}
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </td>
