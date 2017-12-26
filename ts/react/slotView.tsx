@@ -16,7 +16,7 @@ export interface ISlotViewProps {
     color : Colors;
 }
 
-const borderThickness = "0px solid black";
+const borderThickness = "0.5px solid black";
 const borderRadius = "5px";
 
 export class SlotView extends React.Component < ISlotViewProps, {} > {
