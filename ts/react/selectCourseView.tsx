@@ -1,4 +1,3 @@
-import Button from "material-ui/Button";
 import CircularProgress from "material-ui/Progress/CircularProgress";
 import * as React from "react";
 import * as Autosuggest from "react-autosuggest";
@@ -17,8 +16,7 @@ export interface ISelectCourseViewDispatchProps {
 }
 
 interface ISelectCourseViewState {
-    apiObjects : IGithubApiObject[]; // modify this line for integrating UTAR API
-    currentSuggestions : string[];
+    currentSuggestions : IGithubApiObject[];
     redirect: boolean;
     value : string;
     error: string;
@@ -26,11 +24,11 @@ interface ISelectCourseViewState {
 }
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
-    private allSuggestions : string[];
+    private allSuggestions : IGithubApiObject[];
+    private selectedSuggestion: IGithubApiObject;
     public constructor(props) {
         super(props);
         this.state = {
-            apiObjects: null,
             currentSuggestions: [],
             redirect: false,
             value: "",
@@ -57,32 +55,29 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             return getLoadingElement();
         }
         return (
-            <div onKeyDown={handleKeyDown}>
-                <StackPanel orientation="vertical" horizontalAlignment="center">
-                    <StackPanel orientation="horizontal" horizontalAlignment="center">
-                        <Autosuggest
-                            suggestions={this.state.currentSuggestions}
-                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                            getSuggestionValue={(suggestion) => suggestion}
-                            renderSuggestion={this.renderSuggestion}
-                            inputProps={inputProps}/>
-                        <Button style={{ height: "50px" }}
-                            id="gobtn"
-                            raised={true}
-                            onClick={this.handleOnClick}
-                            color="accent">GO</Button>
-                    </StackPanel>
-                    {!this.state.error ? null :
-                        <p style={{color: "Red"}}>{this.state.error}</p>}
+            <StackPanel orientation="vertical" horizontalAlignment="center">
+                <StackPanel orientation="horizontal" horizontalAlignment="center">
+                    <Autosuggest
+                        suggestions={this.state.currentSuggestions}
+                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                        onSuggestionSelected={this.onSuggestionSelected}
+                        getSuggestionValue={(suggestion) => this.state.value}
+                        renderSuggestion={this.renderSuggestion}
+                        inputProps={inputProps}/>
+                        {""}
                 </StackPanel>
-            </div>
+                {!this.state.error ? null :
+                    <p style={{color: "Red"}}>{this.state.error}</p>}
+            </StackPanel>
         );
     }
 
-    public onSuggestionsFetchRequested = ({value}) => {
+    public onSuggestionsFetchRequested = (event) => {
         this.setState({
-            currentSuggestions: getSuggestions(value, this.allSuggestions)
+            currentSuggestions:
+                this.allSuggestions.filter((x) => S(x.name.toLowerCase()).contains(event.value.toLowerCase())
+                && !S(x.name).contains("_"))
         });
     }
 
@@ -90,22 +85,17 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         this.setState({currentSuggestions: []});
     }
 
-    public renderSuggestion = (suggestion) => {
-        return (<div onClick={this.handleOnClick}>
-                    <Highlighter
-                        searchWords={[this.state.value]}
-                        textToHighlight={suggestion}/>
-                </div>);
+    public onSuggestionSelected = (event, {suggestion}) => {
+        this.tryLoadData(suggestion);
     }
 
-    public handleOnClick = () => {
+    public renderSuggestion = (suggestion) => {
+        return (<Highlighter textToHighlight={suggestion.name.split(".")[0]} searchWords={[this.state.value]} />);
+    }
+
+    public tryLoadData = (apiObject: IGithubApiObject) => {
         try {
-            const download_url = this
-                .state
-                .apiObjects
-                .filter((x) => S(x.name.toLowerCase()).contains(this.state.value.toLowerCase()))[0]
-                .download_url;
-            this.LoadSelectedData(download_url, this.state.value.split(".")[1]);
+            this.LoadSelectedData(apiObject.download_url, apiObject.name.split(".")[1]);
         } catch (e) {
             this.setState({
                 error:  "'" + this.state.value + "' is not a valid course name. Please try other name."
@@ -126,13 +116,9 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                 this.setState({error: "Unable to fetch data from server. Please try again later.", loading: false});
                 return;
             }
-            // console.log("statusCode:", response && response.statusCode); // Print the
             const result = JSON.parse(response.body.toString());
-            this.setState({apiObjects: result, loading: false});
-            this.allSuggestions = this
-                .state
-                .apiObjects
-                .map((x) => x.name);
+            this.setState({loading: false});
+            this.allSuggestions = result;
         });
     }
 
@@ -164,17 +150,6 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             this.setState({redirect: true});
         });
 
-    }
-}
-
-function getSuggestions(value : string, basket : string[]) : string[] {
-    const result = basket.filter((x) => S(x.toLowerCase()).contains(value.toLowerCase()) && !S(x).contains("_"));
-    return result;
-}
-
-function handleKeyDown(e) {
-    if (e.keyCode === Key.Enter) {
-        (document.getElementById("gobtn") as HTMLButtonElement).click();
     }
 }
 
