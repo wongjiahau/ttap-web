@@ -1,53 +1,52 @@
 //set the enzyme adaptor
+import { GetTestSubjects1 } from "../core/tests/testDataGenerator";
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({adapter: new Adapter()});
 
 //core framework
 import React from 'react';
-import {MuiThemeProvider} from 'material-ui';
 import {expect} from 'chai';
 import {mount} from 'enzyme';
+import {createShallow} from 'material-ui/test-utils';
 
 //component to be tested
 import {SubjectListView} from '../core/react/subjectListView';
 
-//test data builder
-import ParseHtmlToSlots from "../core/parser/parseHtmlToRawSlot";
-import {ParseSlotToSubject} from "../core/parser/parseSlotToSubject";
-import {heng_2017_sept} from "../core/tests/testData/heng_2017_sept";
-
-const subjects = ParseSlotToSubject(ParseHtmlToSlots(heng_2017_sept()));
-function getStub() {
-    return mount(
-        <MuiThemeProvider>
-            <SubjectListView subjects={subjects}/>
-        </MuiThemeProvider>
-    );
+let stub = null;
+const getStub = () => {
+    if(stub) {
+       return stub;
+    }
+    let shallow = createShallow();
+    const wrapper = shallow(<SubjectListView Subjects={GetTestSubjects1()}/>);
+    stub = wrapper;
+    return wrapper;
 }
-
-describe.skip('<SubjectListView/>', () => {
-    it('should render 2 buttons', () => {
+describe('<SubjectListView/>', () => {
+    it('should render 18 SubjectViews when there are 18 subjects', () => {
         const wrapper = getStub();
-        expect(wrapper.find('Button').length).to.equal(2);
+        expect(GetTestSubjects1()).to.have.lengthOf(18);
+        expect(wrapper.find('SubjectView')).to.have.lengthOf(18);
     });
 
-    it('should render a DONE button', () => {
+    it('should render a toggle-view-button', () => {
         const wrapper = getStub();
-        var buttons = wrapper.find('Button').getElements();
-        expect(buttons.some((b)=> b.props.children === 'Done')).to.equal(true);
+        var buttons = wrapper.find("#toggle-view-button");
+        expect(buttons).to.have.lengthOf(1);
     });
 
-    it('should render a "Show selected subjects" button', () => {
+    it('should render a done-button', () => {
         const wrapper = getStub();
-        var buttons = wrapper.find('Button').getElements();
-        expect(buttons.some((b)=> b.props.children === 'Show selected subjects')).to.equal(true);
+        var buttons = wrapper.find("#done-button");
+        expect(buttons).to.have.lengthOf(1);
     });
 
-    it('should render 18 elements in subject-list-container', () => {
+    it('should render a search bar', () => {
         const wrapper = getStub();
-        var container = wrapper.find("#subject-list-container").getElements()[0];
-        expect(container.props.children.length).to.equal(18);
+        var buttons = wrapper.find("#searchbar");
+        expect(buttons).to.have.lengthOf(1);
     });
+
 
 });

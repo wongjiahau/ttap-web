@@ -157,7 +157,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                         color="accent"
                                         style={buttonStyle}
                                         disabled={noSubjectIsSelected}
-                                        key="toggle-view-button"
+                                        id="toggle-view-button"
                                         onClick={this.props.handleToggleView}>
                                         {this.props.IsShowingSelectedSubjectOnly
                                             ? "Show all subjects"
@@ -170,7 +170,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                         color="primary"
                                         style={buttonStyle}
                                         disabled={noSubjectIsSelected || this.props.IsShowingLoadingBar}
-                                        key="done-button"
+                                        id="done-button"
                                         onClick={this.props.handleClose}>
                                 Done
                                     </Button>
