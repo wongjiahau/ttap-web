@@ -10,6 +10,7 @@ import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
 import {StackPanel} from "./panels/stackPanel";
+import { VerticalAlign } from "./panels/verticalAlign";
 
 export interface ISelectCourseViewDispatchProps {
     handleLoadSlot : (rawSlots : RawSlot[]) => void;
@@ -55,21 +56,23 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             return getLoadingElement();
         }
         return (
-            <StackPanel orientation="vertical" horizontalAlignment="center">
-                <StackPanel orientation="horizontal" horizontalAlignment="center">
-                    <Autosuggest
-                        suggestions={this.state.currentSuggestions}
-                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                        onSuggestionSelected={this.onSuggestionSelected}
-                        getSuggestionValue={(suggestion) => this.state.value}
-                        renderSuggestion={this.renderSuggestion}
-                        inputProps={inputProps}/>
-                        {""}
+            <VerticalAlign>
+                <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <StackPanel orientation="horizontal" horizontalAlignment="center">
+                        <Autosuggest
+                            suggestions={this.state.currentSuggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            onSuggestionSelected={this.onSuggestionSelected}
+                            getSuggestionValue={(suggestion) => this.state.value}
+                            renderSuggestion={this.renderSuggestion}
+                            inputProps={inputProps}/>
+                            {""}
+                    </StackPanel>
+                    {!this.state.error ? null :
+                        <p style={{color: "Red"}}>{this.state.error}</p>}
                 </StackPanel>
-                {!this.state.error ? null :
-                    <p style={{color: "Red"}}>{this.state.error}</p>}
-            </StackPanel>
+            </VerticalAlign>
         );
     }
 
@@ -155,9 +158,11 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
 
 function getLoadingElement() {
     return (
-        <StackPanel orientation="vertical" horizontalAlignment="center">
-            <br/>
-            <CircularProgress/>
-        </StackPanel>
+        <VerticalAlign>
+            <StackPanel orientation="vertical" horizontalAlignment="center">
+                <br/>
+                <CircularProgress/>
+            </StackPanel>
+        </VerticalAlign>
     );
 }
