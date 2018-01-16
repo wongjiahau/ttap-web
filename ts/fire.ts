@@ -26,6 +26,15 @@ export default fire;
 export function updateVisits() {
     const ref = fire.database().ref("visits");
     ref.push().set({
-        date: Date.now()
+        date: Date.now(),
+        source: getSource()
     });
+}
+
+export function getSource() {
+    const x = window.navigator;
+    return {
+        os: x.platform,
+        browser: x.userAgent
+    };
 }
