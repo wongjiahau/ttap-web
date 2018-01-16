@@ -22,3 +22,10 @@ export default fire;
 //         console.log("The read failed: " + errorObject.code);
 //     });
 // }
+
+export function updateVisits() {
+    const ref = fire.database().ref("visits");
+    ref.push().set({
+        date: Date.now()
+    });
+}
