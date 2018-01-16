@@ -58,6 +58,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "API_KEY",
+            authDomain: "ttap-web.firebaseapp.com",
+            databaseURL: "https://ttap-web.firebaseio.com",
+            projectId: "ttap-web",
+            storageBucket: "ttap-web.appspot.com",
+            messagingSenderId: "4207791492"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108857327-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -97,6 +111,7 @@
 
 
     </script>
+
 </body>
 
 </html>

@@ -48,3 +48,9 @@ $ npm run start
 ## This app is brought to you by : 
 * [ Dheeno ]( https://github.com/DheenodaraRao )
 * [ wjh ]( https://github.com/wongjiahau )
+
+
+### How to visualize bundle size and dependencies in this app?
+```
+npm run analyze
+```
