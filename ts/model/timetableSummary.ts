@@ -1,71 +1,62 @@
-import {
-    Beautify
-} from "../helper";
-import {
-    PartitionizeByKey
-} from "../permutator/partitionize";
-import {
-    RawSlot
-} from "./rawSlot";
-import {
-    Timetable
-} from "./timetable";
+import {Beautify} from "../helper";
+import {PartitionizeByKey} from "../permutator/partitionize";
+import {IGeneralizedSlot} from "./generalizedSlot";
 
 export class SubjectSummary {
-    public readonly SubjectCode: string;
-    public readonly SubjectName: string;
-    public readonly Lecture: string;
-    public readonly Tutorial: string;
-    public readonly Practical: string;
-    public constructor(rawSlots: RawSlot[]) {
-        this.SubjectCode = rawSlots[0].SubjectCode;
-        this.SubjectName = Beautify(rawSlots[0].SubjectName);
-        const lectureSlot = this.GetSlotOf(rawSlots, "L");
-        this.Lecture = lectureSlot ? "L-" + lectureSlot.Group : "-";
-        const tutorialSlot = this.GetSlotOf(rawSlots, "T");
-        this.Tutorial = tutorialSlot ? "T-" + tutorialSlot.Group : "-";
-        const practicalSlot = this.GetSlotOf(rawSlots, "P");
-        this.Practical = practicalSlot ? "P-" + practicalSlot.Group : "-";
+    public readonly SubjectCode : string;
+    public readonly SubjectName : string;
+    public readonly Lecture : string;
+    public readonly Tutorial : string;
+    public readonly Practical : string;
+    public constructor(slots : IGeneralizedSlot[]) {
+        this.SubjectCode = slots[0].SubjectCode;
+        this.SubjectName = Beautify(slots[0].SubjectName);
+        const lectureSlot = this.GetSlotOf(slots, "L");
+        this.Lecture = lectureSlot
+            ? "L-" + lectureSlot.Group
+            : "-";
+        const tutorialSlot = this.GetSlotOf(slots, "T");
+        this.Tutorial = tutorialSlot
+            ? "T-" + tutorialSlot.Group
+            : "-";
+        const practicalSlot = this.GetSlotOf(slots, "P");
+        this.Practical = practicalSlot
+            ? "P-" + practicalSlot.Group
+            : "-";
     }
 
-    public ToString(): string {
-        return this.SubjectCode +
-            "\r\n" +
-            this.SubjectName +
-            "\r\n" +
-            this.Lecture +
-            " " +
-            this.Tutorial +
-            " " +
-            this.Practical +
-            "\r\n";
+    public ToString() : string {
+        return this.SubjectCode + "\r\n" + this.SubjectName + "\r\n" + this.Lecture + " " + this.Tutorial + " " + this.Practical + "\r\n";
     }
 
-    private GetSlotOf(rawSlots: RawSlot[], slotType: string) {
-        return rawSlots.filter((s) => s.Type === slotType)[0];
+    private GetSlotOf(slots : IGeneralizedSlot[], slotType : string) {
+        return slots.filter((s) => s.Type === slotType)[0];
     }
 
 }
 
 export class TimetableSummary {
-    public readonly SubjectSummaries: SubjectSummary[];
-    public constructor(timetable: Timetable) {
+    public readonly SubjectSummaries : SubjectSummary[];
+    public constructor(slots : IGeneralizedSlot[]) {
         this.SubjectSummaries = [];
-        const rawSlots = RawSlot.GetBunch(timetable.HashIds);
-        const subjects = PartitionizeByKey(rawSlots, "SubjectCode");
+        const subjects = PartitionizeByKey(slots, "SubjectCode");
         subjects.forEach((partition) => {
             if (partition.length > 0) {
-                this.SubjectSummaries.push(new SubjectSummary(partition));
+                this
+                    .SubjectSummaries
+                    .push(new SubjectSummary(partition));
             }
         });
     }
 
     public ToString() : string {
         let result = "";
-        this.SubjectSummaries.forEach((s) => {
-            result += s.ToString();
-            result += "\r\n";
-        });
+        this
+            .SubjectSummaries
+            .forEach((s) => {
+                result += s.ToString();
+                result += "\r\n";
+            });
         return result;
     }
 }

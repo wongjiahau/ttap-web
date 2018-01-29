@@ -6,6 +6,7 @@ import Button from "material-ui/Button";
 import Switch from "material-ui/Switch";
 import * as React from "react";
 import {Key} from "../enums/keyCodeEnum";
+import { IGeneralizedSlot } from "../model/generalizedSlot";
 import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
@@ -22,7 +23,7 @@ const centerDivStyle : React.CSSProperties = {
 
 export interface ITimetableListViewStateProps {
     currentIndex:     number; // non-zero based
-    currentTimetable: Timetable;
+    slots: IGeneralizedSlot[];
     isSummaryOpen:    boolean;
     maxIndex:         number; // non-zero based
 }
@@ -42,14 +43,14 @@ ITimetableListViewStateProps,
 ITimetableListViewDispatchProps {}
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
-        if (this.props.currentTimetable === undefined) {
+        if (this.props.slots === undefined) {
             return Logo();
         }
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <TimetableView
-                        timetable={this.props.currentTimetable}
+                        slots={this.props.slots}
                         states={null}
                         isSummaryOpen={this.props.isSummaryOpen}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>

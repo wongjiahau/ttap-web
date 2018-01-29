@@ -132,7 +132,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             </tbody>
                         </table>
                         <TimetableView
-                            timetable={null}
+                            slots={null}
                             states={this.props.totalState}
                             handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}
                             handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/> {this.props.numberOfRemovedTimetables > 0

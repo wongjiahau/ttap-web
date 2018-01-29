@@ -9,6 +9,7 @@ import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
+import {GeneralizeSlot} from "../permutator/generalizeSlot";
 import {StackPanel} from "./panels/stackPanel";
 import { VerticalAlign } from "./panels/verticalAlign";
 
@@ -135,21 +136,19 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             }
         };
         request(options, (error, response) => {
+            let parser : (src: string) => RawSlot[];
             if (error) {
                 alert("Please retry again.");
                 return;
             }
             if (fileType === "html") {
-                this
-                .props
-                .handleLoadSlot(ParseHtmlToRawSlot(response.body.toString()));
+                parser = ParseHtmlToRawSlot;
             } else if (fileType === "json") {
-                this
-                .props
-                .handleLoadSlot(ParseJsonToRawSlot(response.body.toString()));
+                parser = ParseJsonToRawSlot;
             } else {
                 throw new Error("Unknown file type: " + fileType);
             }
+            this.props.handleLoadSlot(GeneralizeSlot(parser(response.body.toString())));
             this.setState({redirect: true});
         });
 

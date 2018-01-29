@@ -2,6 +2,7 @@ import Button from "material-ui/Button";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
+import { IGeneralizedSlot } from "../../model/generalizedSlot";
 import {RawSlot} from "../../model/rawSlot";
 import {STCBox} from "../../model/states/stcBox";
 import {Timetable} from "../../model/timetable";
@@ -15,7 +16,7 @@ import {Skeleton} from "./skeleton";
 const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
 interface ITimetableViewProps {
-    timetable : Timetable;
+    slots : IGeneralizedSlot[];
     states : STCBox[];
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;
@@ -37,9 +38,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
     }
     public render() {
         const skeleton = new Skeleton();
-        if (this.props.timetable) {
-            const rawSlots = RawSlot.GetBunch(this.props.timetable.HashIds);
-            const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(rawSlots);
+        if (this.props.slots) {
+            const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(this.props.slots);
             skeleton.Concat(slotViewsAndDayColumn);
         }
         if (this.props.states) {
@@ -80,14 +80,14 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                             verticalCompact={false}>
                             {skeleton.Children}
                         </ReactGridLayout>
-                        {this.props.timetable ?
-                        <Button id="summary-btn" style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
+                        {this.props.slots ?
+                        <Button id="summary-btn" raised={true} style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
                             {this.props.isSummaryOpen ? "hide summary" : "show summary"}
                         </Button>
                         : null}
                     </div>
                     <div style={{display: this.props.isSummaryOpen ? "inline" : "none"}}>
-                        <TimetableSummaryView Timetable={this.props.timetable}/>
+                        <TimetableSummaryView slots={this.props.slots}/>
                     </div>
                 </StackPanel>
             </div>

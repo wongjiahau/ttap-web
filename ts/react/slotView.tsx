@@ -3,7 +3,7 @@ import Typography from "material-ui/Typography";
 import * as React from "react";
 import { Tooltip } from "react-tippy";
 import {Beautify, GetInitial} from "../helper";
-import {RawSlot} from "../model/rawSlot";
+import { IGeneralizedSlot } from "../model/generalizedSlot";
 import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {
@@ -12,7 +12,7 @@ const divStyle : React.CSSProperties = {
 };
 
 export interface ISlotViewProps {
-    slot : RawSlot;
+    slot : IGeneralizedSlot;
     color : Colors;
 }
 
@@ -54,7 +54,7 @@ export class SlotView extends React.Component < ISlotViewProps, {} > {
 
 }
 
-function tooltipTitle(s: RawSlot)  {
+function tooltipTitle(s: IGeneralizedSlot)  {
     const style : React.CSSProperties = {
         fontSize: "12px"
     };

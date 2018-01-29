@@ -1,22 +1,16 @@
 const sortBy = require("lodash.sortby");
-import {
-    ParseDay
-} from "../../att/day";
-import {
-    TimePeriod
-} from "../../att/timePeriod";
-import {
-    RawSlot
-} from "../../model/rawSlot";
+import {ParseDay} from "../../att/day";
+import {TimePeriod} from "../../att/timePeriod";
+import {IGeneralizedSlot} from "../../model/generalizedSlot";
 
 /**
  * @export
- * @param {RawSlot[]} rawSlots must be sorted according to Day
+ * @param {IGeneralizedSlot[]} slots must be sorted according to Day
  * @param {number} xOffset
  * @param {number} yOffset
  * @returns {[ReactGridLayout.Layout[], ReactGridLayout.Layout[]]} [0] is the SlotsLayout, [1] is the DayColumnLayouts
  */
-export function GenerateSlotAndDayLayouts(rawSlots: RawSlot[], xOffset: number, yOffset: number): [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
+export function GenerateSlotAndDayLayouts(rawSlots : IGeneralizedSlot[], xOffset : number, yOffset : number) : [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
     const dayRows = GetDayRows();
     const slotLayouts: ReactGridLayout.Layout[] = [];
     for (let h = 0; h < rawSlots.length; h++) {
@@ -37,8 +31,9 @@ export function GenerateSlotAndDayLayouts(rawSlots: RawSlot[], xOffset: number, 
                 break;
             }
         }
-        const [X, W] = GetXandW(timePeriod);
-        const layout: ReactGridLayout.Layout = {
+        const [X,
+            W] = GetXandW(timePeriod);
+        const layout : ReactGridLayout.Layout = {
             h: 1,
             i: "s" + h,
             w: W,
@@ -51,12 +46,12 @@ export function GenerateSlotAndDayLayouts(rawSlots: RawSlot[], xOffset: number, 
 }
 
 export interface IDayRow {
-    rowIndex: number;
-    state: number[];
+    rowIndex : number;
+    state : number[];
 }
 
-export function GetDayRows(): IDayRow[] {
-    const dayRows: IDayRow[] = [];
+export function GetDayRows() : IDayRow[] {
+    const dayRows : IDayRow[] = [];
     for (let i = 0; i < 7; i++) {
         dayRows.push({
             rowIndex: i,
@@ -66,7 +61,7 @@ export function GetDayRows(): IDayRow[] {
     return dayRows;
 }
 
-export function GetDayColumnLayouts(dayRows: IDayRow[]): ReactGridLayout.Layout[] {
+export function GetDayColumnLayouts(dayRows : IDayRow[]) : ReactGridLayout.Layout[] {
     const result : ReactGridLayout.Layout[] = [];
     result.push({x: 0, w: 2, i: "d0", y: 0, h: 1}); // for the extra box on top of day column
     for (let i = 0; i < dayRows.length - 1; i++) {
@@ -78,11 +73,17 @@ export function GetDayColumnLayouts(dayRows: IDayRow[]): ReactGridLayout.Layout[
             h: dayRows[i + 1].rowIndex - dayRows[i].rowIndex
         });
     }
-    result.push({x: 0, w: 2, i: "d7", y: dayRows[6].rowIndex + 1, h: 1});
+    result.push({
+        x: 0,
+        w: 2,
+        i: "d7",
+        y: dayRows[6].rowIndex + 1,
+        h: 1
+    });
     return result;
 }
 
-export function GetXandW(timePeriod: TimePeriod): [number, number] {
+export function GetXandW(timePeriod : TimePeriod) : [number, number] {
     let x = (timePeriod.StartTime.Hour - TimePeriod.Min.Hour) * 2;
     if (timePeriod.StartTime.Minute === 30) {
         x++;

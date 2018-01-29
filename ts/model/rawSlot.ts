@@ -13,6 +13,7 @@ export interface IRawSlot {
     Room: string;
     Remark ? : string;
 }
+
 export class RawSlot implements IRawSlot {
     public static hash = 0;
     public static allRawSlots: RawSlot[] = [];
@@ -29,6 +30,12 @@ export class RawSlot implements IRawSlot {
         slot.HashId = RawSlot.hash;
         RawSlot.allRawSlots[RawSlot.hash] = slot;
         RawSlot.hash++;
+    }
+
+    public static RegisterBunchOfSlots(slots: IRawSlot[]): void {
+        slots.forEach((x) => {
+            RawSlot.RegisterSlot(x);
+        });
     }
 
     public static GetBunch(hashIds: number[]): RawSlot[] {
