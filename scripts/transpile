@@ -11,9 +11,9 @@ if [ -d "$DIRECTORY" ]; then
 fi
 
 # Transpile TS into JS
-ts_compiler_version=$(ntsc -v)
+ts_compiler_version=$(tsc -v)
 echo "Transpling TypeScript files into JavaScript (using TSCompiler $ts_compiler_version ). . . "
-output=$(ntsc -p ./ts/tsconfig.json)
+output=$(tsc -p ./ts/tsconfig.json)
 
 # Check if output contain error
 if [[ $output == *"error"* ]]; 
