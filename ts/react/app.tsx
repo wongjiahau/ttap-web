@@ -31,7 +31,6 @@ export class App extends React.Component < {}, IAppState > {
         this.state = {
             isSecondaryDrawerOpen: false
         };
-        updateVisits();
     }
 
     public handleOpenDrawer = () => this.setState({isSecondaryDrawerOpen: true});
