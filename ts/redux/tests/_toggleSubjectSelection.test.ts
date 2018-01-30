@@ -23,7 +23,7 @@ import {
 } from "./../actions/toggleSubjectListViewingOption";
 import {
     CheckForClashesBetween,
-    FindTimetableBasedOn,
+    GetSelectedSlots,
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
 import {
@@ -204,13 +204,13 @@ describe("toggle subject selection action", () => {
 
 });
 
-describe("FindTimetableBasedOn", () => {
-    it("should return a list of timetables", () => {
+describe("GetSelectedSlots", () => {
+    it("should return a list of slots", () => {
         const subjects = mockSubjects;
         const titas = subjects[IndexOf.TITA];
         const wwt = subjects[IndexOf.WWT];
-        const timetables = FindTimetableBasedOn([wwt, titas], FindTimetableWithoutConsideringWeekNumber);
-        expect(timetables).to.have.lengthOf(5);
+        const slots = GetSelectedSlots([wwt, titas]);
+        expect(slots).to.have.lengthOf(14);
     });
 
 });

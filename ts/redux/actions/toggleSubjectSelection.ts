@@ -126,7 +126,7 @@ export function CheckForClashesBetween(s : Subject, subjects : Subject[]) : Clas
     return null;
 }
 
-function GetSelectedSlots(subjects : Subject[]) : RawSlot[] {
+export function GetSelectedSlots(subjects : Subject[]) : RawSlot[] {
     if (subjects.length === 0) {
         return [];
     }
