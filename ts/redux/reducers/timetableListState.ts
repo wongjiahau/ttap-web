@@ -11,7 +11,7 @@ export interface ITimetableListState {
     FiltrateTimetables: Timetable[];
     IsSummaryOpen:      boolean;
     ResidueTimetables:  Timetable[];
-    CurrentSlots: IGeneralizedSlot[];
+    AllGeneralizedSlots: IGeneralizedSlot[];
 }
 
 export function NewTimetableListState(timetables: Timetable[], selectedSlots?: RawSlot[]) : ITimetableListState {
@@ -23,7 +23,7 @@ export function NewTimetableListState(timetables: Timetable[], selectedSlots?: R
         FiltrateTimetables: timetables,
         IsSummaryOpen: false,
         ResidueTimetables: [],
-        CurrentSlots: currentSlot
+        AllGeneralizedSlots: currentSlot
     };
 }
 
