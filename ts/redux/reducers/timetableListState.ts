@@ -15,7 +15,7 @@ export interface ITimetableListState {
 }
 
 export function NewTimetableListState(timetables: Timetable[], selectedSlots?: RawSlot[]) : ITimetableListState {
-    const currentSlot = selectedSlots ?
+    const currentSlot = timetables.length > 0 ?
         CreateGeneralizedSlots(GeneralizeSlot(selectedSlots)) :
         null;
     return {

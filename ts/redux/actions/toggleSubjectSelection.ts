@@ -68,7 +68,7 @@ export function DeselectSubject(subjectToBeDeselected : Subject, allSubjects : S
     const selectedSubjects = allSubjects.filter((x) => x.IsSelected);
     ReleaseDisabledSubjectsIfPossible(selectedSubjects, allSubjects);
     const selectedSlots = GetSelectedSlots(selectedSubjects);
-    const timetables = CurrentTimetableFinder(selectedSlots);
+    const timetables = selectedSubjects.length > 0 ? CurrentTimetableFinder(selectedSlots) : [];
     const result: IMasterState = {
         ...state,
         SubjectListState: {
