@@ -13,15 +13,15 @@ export class SubjectSummary {
         this.SubjectName = Beautify(slots[0].SubjectName);
         const lectureSlot = this.GetSlotOf(slots, "L");
         this.Lecture = lectureSlot
-            ? "L-" + lectureSlot.Group
+            ? "L-" + lectureSlot.Group[lectureSlot.CurrentChoice]
             : "-";
         const tutorialSlot = this.GetSlotOf(slots, "T");
         this.Tutorial = tutorialSlot
-            ? "T-" + tutorialSlot.Group
+            ? "T-" + tutorialSlot.Group[lectureSlot.CurrentChoice]
             : "-";
         const practicalSlot = this.GetSlotOf(slots, "P");
         this.Practical = practicalSlot
-            ? "P-" + practicalSlot.Group
+            ? "P-" + practicalSlot.Group[lectureSlot.CurrentChoice]
             : "-";
     }
 

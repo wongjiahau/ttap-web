@@ -9,7 +9,6 @@ import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
-import {GeneralizeSlot} from "../permutator/generalizeSlot";
 import {StackPanel} from "./panels/stackPanel";
 import { VerticalAlign } from "./panels/verticalAlign";
 
@@ -148,7 +147,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             } else {
                 throw new Error("Unknown file type: " + fileType);
             }
-            this.props.handleLoadSlot(GeneralizeSlot(parser(response.body.toString())));
+            this.props.handleLoadSlot(parser(response.body.toString()));
             this.setState({redirect: true});
         });
 

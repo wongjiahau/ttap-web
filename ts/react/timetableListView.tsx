@@ -29,13 +29,14 @@ export interface ITimetableListViewStateProps {
 }
 
 export interface ITimetableListViewDispatchProps {
-    handleGoToNext:                  () => void;
-    handleGoToPrevious:              () => void;
-    handleGoToRandom:                () => void;
-    handleOpenSaveTimetableDialog:   () => void;
-    handleOpenSetTimeConstraintView: () => void;
-    handleOpenSlotsTable:            () => void;
-    handleToggleIsOpenOfSummary: () => void;
+    handleGoToNext:                  ()     => void;
+    handleGoToPrevious:              ()     => void;
+    handleGoToRandom:                ()     => void;
+    handleOpenSaveTimetableDialog:   ()     => void;
+    handleOpenSetTimeConstraintView: ()     => void;
+    handleOpenSlotsTable:            ()     => void;
+    handleToggleIsOpenOfSummary:     ()     => void;
+    handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -53,6 +54,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         slots={this.props.slots}
                         states={null}
                         isSummaryOpen={this.props.isSummaryOpen}
+                        handleSelectSlotChoice={this.props.handleSelectSlotChoice}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <StackPanel orientation="horizontal">
                         <Button

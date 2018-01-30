@@ -16,16 +16,29 @@ const divStyle : React.CSSProperties = {
 export interface ISlotViewProps {
     slot : IGeneralizedSlot;
     color : Colors;
+    handleSelectSlotChoice : (slotUid : number, newSlotChoice : number) => void;
 }
 
 interface ISlotViewState {
-    anchorEl: any;
+    anchorEl : any;
 }
 
 const borderThickness = "0.5px solid black";
 const borderRadius = "5px";
+let buttonBaseStyle : React.CSSProperties = {
+    borderBottom:            borderThickness,
+    borderBottomLeftRadius:  borderRadius,
+    borderBottomRightRadius: borderRadius,
+    borderLeft:              borderThickness,
+    borderRight:             borderThickness,
+    borderTop:               borderThickness,
+    borderTopLeftRadius:     borderRadius,
+    borderTopRightRadius:    borderRadius,
+    width:                   "100%"
+};
 
-export class SlotView extends React.Component < ISlotViewProps, ISlotViewState > {
+export class SlotView extends React.Component < ISlotViewProps,
+ISlotViewState > {
     public constructor(props) {
         super(props);
         this.state = {
@@ -34,17 +47,9 @@ export class SlotView extends React.Component < ISlotViewProps, ISlotViewState >
     }
 
     public render() {
-        const buttonBaseStyle : React.CSSProperties = {
-            background: this.props.color,
-            borderTop: borderThickness,
-            borderLeft: borderThickness,
-            borderRight: borderThickness,
-            borderBottom: borderThickness,
-            borderTopLeftRadius: borderRadius,
-            borderBottomLeftRadius: borderRadius,
-            borderTopRightRadius: borderRadius,
-            borderBottomRightRadius: borderRadius,
-            width: "100%"
+        buttonBaseStyle = {
+            ...buttonBaseStyle,
+            background: this.props.color
         };
         const slot = this.props.slot;
         return (
@@ -55,10 +60,9 @@ export class SlotView extends React.Component < ISlotViewProps, ISlotViewState >
                     onClick={() => console.log(this.props.slot)}>
                     <div style={divStyle}>
                         <b>
-                            {GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " "
-}
+                            {this.slotContent(slot)}
                             {slot.Group.length > 1
-                                ? this.arrowDownButton((event) => { this.setState({anchorEl : event.currentTarget}); })
+                                ? this.arrowDownButton()
                                 : ""}
                         </b>
                         <br/> {slot.Room[slot.CurrentChoice]}
@@ -67,39 +71,59 @@ export class SlotView extends React.Component < ISlotViewProps, ISlotViewState >
                     <Menu
                         id="long-menu"
                         anchorEl={this.state.anchorEl}
-                        open={Boolean(this.state.anchorEl)}
-                        >
-                            {slot.Group.map((option) => (
-                                <MenuItem key={option} onClick={() => {this.setState({anchorEl: null}); }}>
-                                {slot.Type + option}
-                                </MenuItem>
-                        ))}
+                        open={Boolean(this.state.anchorEl)}>
+                        {this.menuItem(slot)}
                     </Menu>
                 </ButtonBase>
             </Tooltip>
 
         );
     }
-    public arrowDownButton = (clickHandler) => {
+
+    public slotContent = (slot : IGeneralizedSlot) => {
+        return GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " ";
+    }
+
+    public menuItem = (slot : IGeneralizedSlot) => {
+        const clickHandler = (index) => {
+            this.setState({anchorEl: null});
+            this.props.handleSelectSlotChoice(slot.Uid, index);
+        };
+        return slot
+            .Group
+            .map((option, index) => (
+                <MenuItem
+                    selected={index === slot.CurrentChoice}
+                    key={option}
+                    onClick={() => clickHandler(index)}>
+                    {slot.Type + option}
+                </MenuItem>
+            ));
+    }
+    public arrowDownButton = () => {
         const triangle : React.CSSProperties = {
-            borderLeft: "3px solid transparent",
+            borderLeft:  "3px solid transparent",
             borderRight: "3px solid transparent",
-            borderTop: "3px solid black",
-            height: "0",
-            width: "0"
+            borderTop:   "3px solid black",
+            height:      "0",
+            width:       "0"
         };
         const buttonStyle : React.CSSProperties = {
             width: "10px",
             height: "10px",
             padding: "0px"
         };
+        const clickHandler = (event) => this.setState({anchorEl: event.currentTarget});
         return <button
-                    aria-label="More"
-                    aria-owns={this.state.anchorEl ? "long-menu" : null}
-                    aria-haspopup="true"
-                    style={buttonStyle} onClick={clickHandler}>
-                <div style={triangle}/>
-            </button>;
+            aria-label="More"
+            aria-owns={this.state.anchorEl
+            ? "long-menu"
+            : null}
+            aria-haspopup="true"
+            style={buttonStyle}
+            onClick={clickHandler}>
+            <div style={triangle}/>
+        </button>;
     }
 
 }

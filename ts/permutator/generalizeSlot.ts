@@ -13,6 +13,9 @@ import {RawSlot} from "../model/rawSlot";
  * @returns {RawSlot[]}
  */
 export function GeneralizeSlot(slots : RawSlot[]) : RawSlot[] {
+    if (!slots) {
+        return null;
+    }
     const results = new Array < RawSlot > ();
     results.push(slots[0]);
     let generalized : boolean;

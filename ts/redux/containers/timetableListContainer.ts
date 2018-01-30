@@ -10,6 +10,7 @@ import {UpdateSlotsTableState} from "../actions/updateSlotsTableState";
 import {ITimetableListState} from "../reducers/timetableListState";
 import {GoToNextTimetable} from "./../actions/goToNextTimetable";
 import {GoToPrevTimetable} from "./../actions/goToPrevTimetable";
+import { SelectSlotChoice } from "./../actions/selectSlotChoice";
 import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintView";
 
 const mapStateToProps = (state) : ITimetableListViewStateProps => {
@@ -35,7 +36,8 @@ const mapDispatchToProps = (dispatch) : ITimetableListViewDispatchProps => {
         handleOpenSaveTimetableDialog:   () => dispatch(new ToggleIsOpenOfSaveDialog(true)),
         handleOpenSetTimeConstraintView: () => dispatch(new ToggleSetTimeConstraintView(true)),
         handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
-        handleToggleIsOpenOfSummary:     () => dispatch(new ToggleIsOpenOfSummary())
+        handleToggleIsOpenOfSummary:     () => dispatch(new ToggleIsOpenOfSummary()),
+        handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => dispatch(new SelectSlotChoice(slotUid, newSlotChoice))
     };
 };
 

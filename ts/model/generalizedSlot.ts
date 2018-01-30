@@ -1,6 +1,7 @@
 import { IRawSlot, RawSlot } from "./rawSlot";
 
 export interface IGeneralizedSlot {
+    Uid: number; //
     CurrentChoice: number; // zero-based index
     SubjectCode: string;
     SubjectName: string;
@@ -15,6 +16,7 @@ export interface IGeneralizedSlot {
 export function CreateGeneralizedSlot(rawSlot: RawSlot): IGeneralizedSlot {
     const group = rawSlot.Group.split("/");
     return {
+        Uid:            rawSlot.HashId,
         CurrentChoice: getRandomInt(group.length), // Why random? See below.
         SubjectCode:   rawSlot.SubjectCode,
         SubjectName:   rawSlot.SubjectName,
