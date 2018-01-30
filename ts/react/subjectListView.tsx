@@ -154,7 +154,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                         <IconInfo/>
                                     </Tooltip>
                                     <Button
-                                        color="accent"
+                                        color="secondary"
                                         style={buttonStyle}
                                         disabled={noSubjectIsSelected}
                                         id="toggle-view-button"

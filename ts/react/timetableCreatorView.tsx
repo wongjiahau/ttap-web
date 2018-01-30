@@ -51,7 +51,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     <Button
                         style={selectSubjectButtonStyle}
                         raised={true}
-                        color="accent"
+                        color="secondary"
                         onClick={this.props.handleOpenSubjectListView}>
                         <IconList style={iconStyle}/>
                         Select subjects

@@ -42,7 +42,7 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
     };
     return (
         <Drawer open={props.isOpen} anchor="right">
-            <Button color="accent" raised={true} onClick={props.onItemClick}>
+            <Button color="secondary" raised={true} onClick={props.onItemClick}>
                 Hide drawer
             </Button>
             <List>
