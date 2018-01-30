@@ -176,6 +176,40 @@ describe("GeneralizeSlot", () => {
         const result = GeneralizeSlot(input);
         expect(result).to.have.lengthOf(3);
     });
+
+    it("should not mutate the input", () => {
+        const input = [
+            {
+                HashId: 161,
+                SubjectCode: "UEME2122", // Different subject code
+                SubjectName: "Fluid Mechanics I",
+                Number: "155",
+                Type: "P",
+                Group: "2",
+                Day: "Tue",
+                TimePeriod: "9:00 AM - 12:00 PM",
+                WeekNumber: "3,9",
+                Room: "KB731"
+            }, {
+                HashId: 162,
+                SubjectCode: "UEME2123",
+                SubjectName: "Fluid Mechanics I",
+                Number: "156",
+                Type: "P",
+                Group: "3",
+                Day: "Tue",
+                TimePeriod: "9:00 AM - 12:00 PM",
+                WeekNumber: "4,10",
+                Room: "KB731"
+            }
+        ];
+        const expected = input.slice();
+        GeneralizeSlot(input);
+        expect(input)
+            .to
+            .deep
+            .eq(expected);
+    });
 });
 
 describe("CanBeGeneralize", () => {

@@ -12,10 +12,11 @@ import {RawSlot} from "../model/rawSlot";
  * @param {RawSlot[]} slots
  * @returns {RawSlot[]}
  */
-export function GeneralizeSlot(slots : RawSlot[]) : RawSlot[] {
-    if (!slots) {
+export function GeneralizeSlot(originalSlots : RawSlot[]) : RawSlot[] {
+    if (!originalSlots) {
         return null;
     }
+    const slots = originalSlots.slice();
     const results = new Array < RawSlot > ();
     results.push(slots[0]);
     let generalized : boolean;
