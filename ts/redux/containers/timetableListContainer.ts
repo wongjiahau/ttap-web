@@ -15,14 +15,9 @@ import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintV
 
 const mapStateToProps = (state) : ITimetableListViewStateProps => {
     const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
-    const currentTimetable = timetableListState.FiltrateTimetables[timetableListState.CurrentIndex];
-    let slots = null;
-    if (currentTimetable) {
-        slots = CreateGeneralizedSlots(RawSlot.GetBunch(currentTimetable.HashIds));
-    }
     return {
         currentIndex: timetableListState.CurrentIndex,
-        slots,
+        slots: timetableListState.CurrentSlots,
         isSummaryOpen: timetableListState.IsSummaryOpen,
         maxIndex: timetableListState.FiltrateTimetables.length - 1
     };
