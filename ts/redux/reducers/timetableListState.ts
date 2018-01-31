@@ -11,19 +11,19 @@ export interface ITimetableListState {
     FiltrateTimetables: Timetable[];
     IsSummaryOpen:      boolean;
     ResidueTimetables:  Timetable[];
-    AllGeneralizedSlots: ISlotState[];
+    SlotStates: ISlotState[];
 }
 
 export function NewTimetableListState(timetables: Timetable[], selectedSlots?: RawSlot[]) : ITimetableListState {
-    const currentSlot = timetables.length > 0 ?
-        CreateSlotStates(GeneralizeSlot(selectedSlots)) :
+    const slotStates = timetables.length > 0 ?
+        CreateSlotStates(selectedSlots) :
         null;
     return {
         CurrentIndex: 0,
         FiltrateTimetables: timetables,
         IsSummaryOpen: false,
         ResidueTimetables: [],
-        AllGeneralizedSlots: currentSlot
+        SlotStates: slotStates
     };
 }
 

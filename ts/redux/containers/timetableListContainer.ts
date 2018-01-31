@@ -17,7 +17,7 @@ const mapStateToProps = (state) : ITimetableListViewStateProps => {
     const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
     return {
         currentIndex: timetableListState.CurrentIndex,
-        slots: timetableListState.AllGeneralizedSlots,
+        slots: timetableListState.SlotStates,
         isSummaryOpen: timetableListState.IsSummaryOpen,
         maxIndex: timetableListState.FiltrateTimetables.length - 1
     };
