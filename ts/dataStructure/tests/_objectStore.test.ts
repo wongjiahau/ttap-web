@@ -53,13 +53,18 @@ describe("ObjectStore", () => {
             );
         });
 
-        it("should throw error if one of the key match nothing", () => {
+        it("should ignore non-matching key", () => {
             const data = [
                 new MockClass(1, "bob"),
-                new MockClass(2, "ali")
+                new MockClass(2, "ali"),
+                new MockClass(3, "lili")
             ];
             const objectStore = new ObjectStore(data);
-            expect(() => objectStore.GetBunch([1, 99])).to.throw();
+            const result = objectStore.GetBunch([1, 99, 3]);
+            expect(result).to.deep.eq([
+                new MockClass(1, "bob"),
+                new MockClass(3, "lili")
+            ]);
         });
 
     });

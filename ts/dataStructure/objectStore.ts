@@ -26,10 +26,9 @@ export class ObjectStore<T extends Identifiable> {
         let data : T;
         for (let i = 0; i < keys.length; i++) {
             data = this.dict[keys[i]];
-            if (data === undefined) {
-                throw new Error("No item have the key of " + keys[i]);
+            if (data !== undefined) {
+                results.push(data);
             }
-            results.push(data);
         }
         return results;
     }
