@@ -115,7 +115,7 @@ ISlotsTableViewInternalState > {
                                             </TableHead>
                                             <TableBody>
                                                 {RawSlot
-                                                    .GetBunch(subject.SlotIds)
+                                                    .GetBunch(subject.SlotUids)
                                                     .map((slot, index) => {
                                                         const checked = this.props.slotStates[slot.Number];
                                                         const clickHandler = () => this

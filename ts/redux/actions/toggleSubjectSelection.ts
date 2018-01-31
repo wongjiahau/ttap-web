@@ -132,7 +132,7 @@ export function GetSelectedSlots(subjects : Subject[]) : RawSlot[] {
     }
     let slotIds = [];
     for (let i = 0; i < subjects.length; i++) {
-        slotIds = slotIds.concat(subjects[i].SlotIds);
+        slotIds = slotIds.concat(subjects[i].SlotUids);
     }
     const result = RawSlot.GetBunch(slotIds);
     return result;

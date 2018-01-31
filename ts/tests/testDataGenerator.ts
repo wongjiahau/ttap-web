@@ -36,7 +36,7 @@ export const GetRawSlotsOf = (subjectCode: string) : RawSlot[] => {
     if (subject.length === 0) {
         throw new Error("No subject have the code of " + subjectCode);
     }
-    return RawSlot.GetBunch(subject[0].SlotIds);
+    return RawSlot.GetBunch(subject[0].SlotUids);
 };
 
 export const GetTinySlotsOf = (subjectCode : string) : TinySlot[] => {
@@ -50,7 +50,7 @@ export const GetBigSlotsOf = (subjectCode : string) : BigSlot[] => {
     if (subject.length === 0) {
         throw new Error("No subject have the code of " + subjectCode);
     }
-    const rawSlots = RawSlot.GetBunch(subject[0].SlotIds);
+    const rawSlots = RawSlot.GetBunch(subject[0].SlotUids);
     const slots = ParseRawSlotToSlot(rawSlots);
     return ParseSlotToBigSlot(slots);
 };

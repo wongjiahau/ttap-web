@@ -52,7 +52,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         }
 
         const selectedSubjects = state.SubjectListState.Subjects.filter((s) => s.IsSelected);
-        const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(RawSlot.GetBunch(s.SlotIds)));
+        const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(RawSlot.GetBunch(s.SlotUids)));
         sortBy(correctSubjectSchemas, [(o) => o.SubjectCode]);
 
         let errorMessages: DiffReport[] = [];

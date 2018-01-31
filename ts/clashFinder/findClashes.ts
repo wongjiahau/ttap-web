@@ -63,7 +63,7 @@ export function FindClashes(subjects: Subject[]): void {
         if (subject1.ClashingCounterparts.some((code) => code === subject2.Code)) {
             continue;
         }
-        const slots = RawSlot.GetBunch(subject1.SlotIds.concat(subject2.SlotIds));
+        const slots = RawSlot.GetBunch(subject1.SlotUids.concat(subject2.SlotUids));
         const timetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(slots)));
         if (timetables.length === 0) {
             subject1.ClashingCounterparts.push(subject2.Code);

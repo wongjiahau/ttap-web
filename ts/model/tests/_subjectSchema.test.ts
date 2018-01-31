@@ -79,14 +79,14 @@ describe("GenerateSubjectSchema", () => {
         const acp = subjects[IndexOf.ACP];
         const he = subjects[IndexOf.HE];
         expect(() => {
-            GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotIds.concat(he.SlotIds)));
+            GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotUids.concat(he.SlotUids)));
         }).to.throw();
     });
 
     it("case 1", () => {
         const subjects = GetTestSubjects1();
         const acp = subjects[IndexOf.ACP];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotIds));
+        const result = GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotUids));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(false);
         expect(result.GotPractical).to.eq(false);
@@ -96,7 +96,7 @@ describe("GenerateSubjectSchema", () => {
     it("case 2", () => {
         const subjects = GetTestSubjects1();
         const beam = subjects[IndexOf.BEAM];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(beam.SlotIds));
+        const result = GenerateSubjectSchema(RawSlot.GetBunch(beam.SlotUids));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(true);
         expect(result.GotPractical).to.eq(false);
@@ -106,7 +106,7 @@ describe("GenerateSubjectSchema", () => {
     it("case 3", () => {
         const subjects = GetTestSubjects1();
         const industrialTraning = subjects[IndexOf.IT];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(industrialTraning.SlotIds));
+        const result = GenerateSubjectSchema(RawSlot.GetBunch(industrialTraning.SlotUids));
         expect(result.GotLecture).to.eq(false);
         expect(result.GotTutorial).to.eq(false);
         expect(result.GotPractical).to.eq(true);
