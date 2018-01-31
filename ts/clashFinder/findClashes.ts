@@ -25,34 +25,12 @@ import {
 } from "../permutator/state";
 
 /**
- * This function has side effects. It will modify the input
- * @export
- * @param {Subject[]} subjects
- * @returns {Array < [Subject, Subject] >}
- */
-export function GetClashingPairs(subjects: Subject[]): Array < [Subject, Subject] > {
-    FindClashes(subjects);
-    if (subjects.some((s) => !s.IsSelected)) {
-        throw new Error("All passed in subjects must be selected.");
-    }
-    const result = new Array < [Subject, Subject] > ();
-    for (let i = 0; i < subjects.length; i++) {
-        for (let j = 0; j < subjects.length; j++) {
-            if (subjects[i].ClashingCounterparts.some((x) => x === subjects[j].Code)) {
-                result.push(sortBy([subjects[i], subjects[j]], "Code") as[Subject, Subject]);
-            }
-        }
-    }
-    return uniqBy(result, (x) => JSON.stringify(x));
-}
-
-/**
  * This function is impure, it will modify the input.
  * @export
  * @param {Subject[]} subjects,
  * Each subject object will be modified after this function.
  */
-export function FindClashes(subjects: Subject[]): void {
+export function FindClashes(subjects: Subject[], correspondingSlots: RawSlot[]): void {
     if (subjects.length < 2) {
         throw new Error("How is it possible to have clashes if there are only one subject selected?");
     }
@@ -63,8 +41,7 @@ export function FindClashes(subjects: Subject[]): void {
         if (subject1.ClashingCounterparts.some((code) => code === subject2.Code)) {
             continue;
         }
-        const slots = RawSlot.GetBunch(subject1.SlotUids.concat(subject2.SlotUids));
-        const timetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(slots)));
+        const timetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(correspondingSlots)));
         if (timetables.length === 0) {
             subject1.ClashingCounterparts.push(subject2.Code);
             subject2.ClashingCounterparts.push(subject1.Code);

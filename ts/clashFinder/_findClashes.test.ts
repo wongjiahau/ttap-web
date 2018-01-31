@@ -7,7 +7,6 @@ import {
 } from "../tests/testDataGenerator";
 import {
     FindClashes,
-    GetClashingPairs
 } from "./findClashes";
 
 describe("FindClashes()", () => {
@@ -84,40 +83,4 @@ describe("FindClashes()", () => {
         expect(bmk.ClashingCounterparts.length === 0);
     });
 
-});
-
-describe("GetClashingPairs()", () => {
-    it("should throw error when some passed in subjects is not selected", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bmk = subjects.filter((x) => x.Code === "MPU3143")[0]; // BMK
-        const selectedSubjects = [acp, bmk];
-        expect(() => {
-            GetClashingPairs(selectedSubjects);
-        }).to.throw();
-    });
-
-    it("case 1", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bka = subjects.filter((x) => x.Code === "MPU32013")[0]; // BKA
-        acp.IsSelected = true;
-        bka.IsSelected = true;
-        const selectedSubjects = [acp, bka];
-        const result = GetClashingPairs(selectedSubjects);
-        expect(result).to.have.lengthOf(1);
-    });
-
-    it("case 2", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bka = subjects.filter((x) => x.Code === "MPU32013")[0]; // BKA
-        const bmk = subjects.filter((x) => x.Code === "MPU3143")[0]; // BMK
-        acp.IsSelected = true;
-        bka.IsSelected = true;
-        bmk.IsSelected = true;
-        const selectedSubjects = [acp, bka, bmk];
-        const result = GetClashingPairs(selectedSubjects);
-
-    });
 });
