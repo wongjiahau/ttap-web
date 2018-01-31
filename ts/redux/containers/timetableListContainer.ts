@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {CreateSlotStates} from "../../model/generalizedSlot";
 import {RawSlot} from "../../model/rawSlot";
+import {CreateSlotStates} from "../../model/slotState";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";

@@ -1,7 +1,7 @@
 const sortBy = require("lodash.sortby");
 import {ParseDay} from "../../att/day";
 import {TimePeriod} from "../../att/timePeriod";
-import {ISlotState} from "../../model/generalizedSlot";
+import {ISlotState} from "../../model/slotState";
 
 /**
  * @export

@@ -1,7 +1,6 @@
 import {GetSemStartDateDialog} from "./../../react/getSemStartDateDialog";
 const includes = require("lodash.includes");
 import * as S from "string";
-import {FindClashes} from "../../clashFinder/findClashes";
 import {Beautify} from "../../helper";
 import {IStringDicionary} from "../../interfaces/dictionary";
 import {RawSlot} from "../../model/rawSlot";

@@ -1,6 +1,6 @@
 import {Beautify} from "../helper";
 import {PartitionizeByKey} from "../permutator/partitionize";
-import {ISlotState} from "./generalizedSlot";
+import {ISlotState} from "./slotState";
 
 export class SubjectSummary {
     public readonly SubjectCode : string;

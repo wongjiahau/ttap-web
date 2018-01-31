@@ -1,6 +1,6 @@
 const sortBy = require("lodash.sortby");
 const uniqBy = require("lodash.uniqby");
-import {ISlotState} from "../../model/generalizedSlot";
+import {ISlotState} from "../../model/slotState";
 import {ChosenColors, Colors} from "./colors";
 
 export function GenerateColorScheme(slots : ISlotState[]) : IColorScheme[] {

@@ -6,7 +6,7 @@ import Button from "material-ui/Button";
 import Switch from "material-ui/Switch";
 import * as React from "react";
 import {Key} from "../enums/keyCodeEnum";
-import { ISlotState } from "../model/generalizedSlot";
+import { ISlotState } from "../model/slotState";
 import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";

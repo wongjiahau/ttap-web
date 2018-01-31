@@ -5,7 +5,7 @@ import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Tooltip} from "react-tippy";
 import {Beautify, GetInitial} from "../helper";
-import {ISlotState} from "../model/generalizedSlot";
+import {ISlotState} from "../model/slotState";
 import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {

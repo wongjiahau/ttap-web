@@ -1,6 +1,6 @@
 import * as typeName from "type-name";
-import { CreateSlotStates, ISlotState } from "../../model/generalizedSlot";
 import { RawSlot } from "../../model/rawSlot";
+import { CreateSlotStates, ISlotState } from "../../model/slotState";
 import { STCBox } from "../../model/states/stcBox";
 import { GeneralizeSlot } from "../../permutator/generalizeSlot";
 import {Action} from "../actions/action";

@@ -1,6 +1,6 @@
 const find = require("lodash.find");
 import * as React from "react";
-import {ISlotState} from "../model/generalizedSlot";
+import {ISlotState} from "../model/slotState";
 import {SubjectSummary, TimetableSummary} from "../model/timetableSummary";
 import {Colors} from "./colors/colors";
 import {GenerateColorScheme} from "./colors/generateColorScheme";

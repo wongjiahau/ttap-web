@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {ParseDay} from "../../att/day";
 import {TimePeriod} from "../../att/timePeriod";
-import { ISlotState } from "../../model/generalizedSlot";
+import { ISlotState } from "../../model/slotState";
 import {GenerateColorScheme} from "../colors/generateColorScheme";
 import {SlotView} from "../slotView";
 import { GenerateSlotAndDayLayouts } from "./generateSlotAndDayLayouts";
