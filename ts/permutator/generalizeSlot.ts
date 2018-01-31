@@ -1,4 +1,5 @@
-import {RawSlot} from "../model/rawSlot";
+import {IRawSlot, RawSlot} from "../model/rawSlot";
+const clone = require("lodash.clone");
 
 /**
  * This function will generalize slots that have the same Day, Group, Time, Type and SubjectCode.
@@ -16,7 +17,7 @@ export function GeneralizeSlot(originalSlots : RawSlot[]) : RawSlot[] {
     if (!originalSlots) {
         return null;
     }
-    const slots = originalSlots.slice();
+    const slots = originalSlots.map(clone) as IRawSlot[];
     const results = new Array < RawSlot > ();
     results.push(slots[0]);
     let generalized : boolean;

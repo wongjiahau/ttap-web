@@ -75,11 +75,9 @@ describe("GeneralizeSlot", () => {
                 Room: "KB731"
             }
         ];
+        const initialLength = input.length;
         const result = GeneralizeSlot(input);
-        expect(result)
-            .to
-            .deep
-            .eq(input.slice());
+        expect(result).to.have.lengthOf(initialLength);
     });
 
     it("should not generalize slots that have relatives (case 1)", () => {
@@ -120,8 +118,9 @@ describe("GeneralizeSlot", () => {
                 Room: "KB209"
             }
         ];
+        const initialLength = input.length;
         const result = GeneralizeSlot(input);
-        expect(result).to.deep.eq(input.slice());
+        expect(result).to.have.lengthOf(initialLength);
     });
 
     it("should not generalize slots that have relatives (case 2)", () => {
@@ -181,7 +180,7 @@ describe("GeneralizeSlot", () => {
         const input = [
             {
                 Uid: 161,
-                SubjectCode: "UEME2122", // Different subject code
+                SubjectCode: "UEME2123", // Different subject code
                 SubjectName: "Fluid Mechanics I",
                 Number: "155",
                 Type: "P",
@@ -203,12 +202,10 @@ describe("GeneralizeSlot", () => {
                 Room: "KB731"
             }
         ];
-        const expected = input.slice();
-        GeneralizeSlot(input);
-        expect(input)
-            .to
-            .deep
-            .eq(expected);
+        expect(input[0].Group).to.eq("2");
+        const generalized = GeneralizeSlot(input);
+        expect(input[0].Group).to.not.eq("2/3");
+        expect(input[0].Group).to.eq("2");
     });
 });
 
