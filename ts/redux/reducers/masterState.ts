@@ -1,5 +1,6 @@
 import * as typeName from "type-name";
 import {Action} from "../actions/action";
+import { IDataState, NewDataState } from "./dataState";
 import {GenerateReducer} from "./generateReducer";
 import {ISaveTimetableDialogState, NewSaveTimetableDialogState} from "./saveTimetableDialogState";
 import { ISBCWDialogState, NewSbcwDialogstate } from "./sbcwDialogState";
@@ -12,6 +13,7 @@ import {ITimetableCreatorState, NewTimetableCreatorState} from "./timetableCreat
 import {ITimetableListState, NewTimetableListState} from "./timetableListState";
 
 export interface IMasterState {
+    DataState:                IDataState;
     SaveTimetableDialogState: ISaveTimetableDialogState;
     SbcwDialogState:          ISBCWDialogState;
     SetTimeConstraintState:   ISetTimeConstraintState;
@@ -25,6 +27,7 @@ export interface IMasterState {
 
 export function NewMasterState() : IMasterState {
     return {
+        DataState:                NewDataState(),
         SaveTimetableDialogState: NewSaveTimetableDialogState(),
         SbcwDialogState:          NewSbcwDialogstate (),
         SetTimeConstraintState:   NewSetTimeConstraintState(null),
