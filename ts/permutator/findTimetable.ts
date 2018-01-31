@@ -1,59 +1,43 @@
 const concat = require("lodash.concat");
 const sortBy = require("lodash.sortby");
-import { RawSlot } from "../model/rawSlot";
-import {
-    Timetable
-} from "../model/timetable";
-import { ParseRawSlotToSlot } from "../parser/parseRawSlotToSlot";
-import { ParseSlotToBigSlot } from "../parser/parseSlotToBigSlot";
-import { ParseSlotToTinySlot } from "../parser/parseSlotToTinySlot";
-import {
-    BoundedInt
-} from "./boundedInt";
-import {
-    GenerateIndices
-} from "./generateIndices";
-import {
-    Increment
-} from "./increment";
-import {
-    Partitionize
-} from "./partitionize";
-import {
-    Append,
-    GotIntersection
-} from "./state";
-import {
-    IOptimizedSlot
-} from "./tinySlot";
+import {RawSlot} from "../model/rawSlot";
+import {Timetable} from "../model/timetable";
+import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
+import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
+import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
+import {BoundedInt} from "./boundedInt";
+import {GenerateIndices} from "./generateIndices";
+import {Increment} from "./increment";
+import {Partitionize} from "./partitionize";
+import {Append, GotIntersection} from "./state";
+import {IOptimizedSlot} from "./tinySlot";
 
 interface ISnapshot {
-    SlotIds: number[];
-    State: number[];
+    SlotIds : number[];
+    State : number[];
 }
 
-export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
+export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
     }
     if (input.length === 1) {
-        let resultState = [0, 0, 0, 0, 0, 0, 0];
+        let resultState = [ 0, 0, 0, 0, 0, 0, 0 ];
         resultState = Append(resultState, input[0].State);
         return [new Timetable(input[0].SlotIds, resultState)];
     }
     const result = new Array < Timetable > ();
     const partitioned = sortBy(Partitionize(input), ["length"]);
-    // const partitioned = Partitionize(input);
     const indices = GenerateIndices(partitioned);
     const length = indices.length;
     const last = length - 1;
-    let current: IOptimizedSlot;
+    let current : IOptimizedSlot;
     const snapshots = new Array < ISnapshot > ();
     snapshots.push({
         SlotIds: [],
-        State: [0, 0, 0, 0, 0, 0, 0]
+        State: [ 0, 0, 0, 0, 0, 0, 0 ]
     });
-    let prevSnapshot: ISnapshot;
+    let prevSnapshot : ISnapshot;
     let ptr = 0;
     while (true) {
         prevSnapshot = snapshots[ptr];
@@ -100,18 +84,10 @@ export function FindTimetable(input: IOptimizedSlot[]): Timetable[] {
     }
 }
 
-export function FindTimetableWithoutConsideringWeekNumber(rawSlots: RawSlot[]) : Timetable[] {
-    return FindTimetable(
-        ParseSlotToTinySlot(
-            ParseRawSlotToSlot(rawSlots)
-        )
-    );
+export function FindTimetableWithoutConsideringWeekNumber(rawSlots : RawSlot[]) : Timetable[] {
+    return FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
 }
 
-export function FindTimetableByConsideringWeekNumber(rawSlots: RawSlot[]) : Timetable[] {
-    return FindTimetable(
-        ParseSlotToBigSlot(
-            ParseRawSlotToSlot(rawSlots)
-        )
-    );
+export function FindTimetableByConsideringWeekNumber(rawSlots : RawSlot[]) : Timetable[] {
+    return FindTimetable(ParseSlotToBigSlot(ParseRawSlotToSlot(rawSlots)));
 }
