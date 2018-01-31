@@ -1,5 +1,6 @@
-export interface IRawSlot {
-    HashId: number; // Unique for every slot object
+import { Identifiable } from "./../interfaces/identifiable";
+export interface IRawSlot extends Identifiable {
+    Uid: number; // Unique for every slot object
     SubjectCode: string;
     SubjectName: string;
     Number: string; // Slot number, which is not necessarily unique for every slot
@@ -27,7 +28,7 @@ export class RawSlot implements IRawSlot {
     }
 
     public static RegisterSlot(slot: IRawSlot): void {
-        slot.HashId = RawSlot.hash;
+        slot.Uid = RawSlot.hash;
         RawSlot.allRawSlots[RawSlot.hash] = slot;
         RawSlot.hash++;
     }
@@ -69,7 +70,7 @@ export class RawSlot implements IRawSlot {
         for (let i = 0; i < RawSlot.allRawSlots.length; i++) {
             const slot = RawSlot.allRawSlots[i];
             if (slot.Number === matching.Number) {
-                result.push(slot.HashId);
+                result.push(slot.Uid);
             }
         }
         return result;
@@ -80,7 +81,7 @@ export class RawSlot implements IRawSlot {
         RawSlot.allRawSlots = [];
     }
 
-    public HashId: number; // Unique for every slot object
+    public Uid: number; // Unique for every slot object
     public SubjectCode: string;
     public SubjectName: string;
     public Number: string; // Slot number, which is not necessarily unique for every slot

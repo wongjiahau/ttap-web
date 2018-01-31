@@ -22,7 +22,7 @@ export function GeneralizeSlot(originalSlots : RawSlot[]) : RawSlot[] {
     let generalized : boolean;
     for (let i = 1; i < slots.length; i++) {
         const s = slots[i];
-        if (slots.some((x) => x.Number === s.Number && x.HashId !== s.HashId)) {
+        if (slots.some((x) => x.Number === s.Number && x.Uid !== s.Uid)) {
             results.push(s);
             continue;
         }
@@ -30,7 +30,7 @@ export function GeneralizeSlot(originalSlots : RawSlot[]) : RawSlot[] {
         for (let j = 0; j < results.length; j++) {
             const r = results[j];
             if (CanBeGeneralize(s, r)) {
-                if (results.some((x) => x.Number === r.Number && x.HashId !== r.HashId)) {
+                if (results.some((x) => x.Number === r.Number && x.Uid !== r.Uid)) {
                     continue;
                 }
                 r.Number += "/" + s.Number;

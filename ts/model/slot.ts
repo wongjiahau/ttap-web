@@ -59,7 +59,7 @@ export function IntersectWith(a: ISlot, b: ISlot): boolean {
 }
 export function CreateSlotFromRaw(raw : RawSlot) : Slot {
     const stringHash  = require("string-hash");
-    const hashId      = raw.HashId;
+    const hashId      = raw.Uid;
     const slotNumber = parseInt(raw.Number, 10);
     const subjectCode = stringHash(raw.SubjectCode);
     const timePeriod  = TimePeriod.Parse(raw.TimePeriod).BinaryData;

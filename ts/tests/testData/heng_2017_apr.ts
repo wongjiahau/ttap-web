@@ -90,7 +90,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         return cache;
     }
     cache = [{
-        HashId: 1,
+        Uid: 1,
         SubjectCode: "MPU3113",
         SubjectName: "Hubungan Etnik (for Local Students)",
         Number: "1",
@@ -102,7 +102,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB521"
     },
     {
-        HashId: 2,
+        Uid: 2,
         SubjectCode: "MPU3113",
         SubjectName: "Hubungan Etnik (for Local Students)",
         Number: "2",
@@ -114,7 +114,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB521"
     },
     {
-        HashId: 3,
+        Uid: 3,
         SubjectCode: "MPU3113",
         SubjectName: "Hubungan Etnik (for Local Students)",
         Number: "3",
@@ -126,7 +126,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB520"
     },
     {
-        HashId: 4,
+        Uid: 4,
         SubjectCode: "MPU3113",
         SubjectName: "Hubungan Etnik (for Local Students)",
         Number: "4",
@@ -138,7 +138,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB316"
     },
     {
-        HashId: 5,
+        Uid: 5,
         SubjectCode: "MPU3123",
         SubjectName: "Tamadun Islam Dan Tamadun Asia (titas)",
         Number: "5",
@@ -150,7 +150,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB520"
     },
     {
-        HashId: 6,
+        Uid: 6,
         SubjectCode: "MPU3123",
         SubjectName: "Tamadun Islam Dan Tamadun Asia (titas)",
         Number: "6",
@@ -162,7 +162,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB520"
     },
     {
-        HashId: 7,
+        Uid: 7,
         SubjectCode: "MPU3123",
         SubjectName: "Tamadun Islam Dan Tamadun Asia (titas)",
         Number: "7",
@@ -174,7 +174,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB521"
     },
     {
-        HashId: 8,
+        Uid: 8,
         SubjectCode: "MPU3123",
         SubjectName: "Tamadun Islam Dan Tamadun Asia (titas)",
         Number: "8",
@@ -186,7 +186,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB316"
     },
     {
-        HashId: 9,
+        Uid: 9,
         SubjectCode: "MPU3143",
         SubjectName: "Bahasa Melayu Komunikasi 2",
         Number: "9",
@@ -198,7 +198,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 10,
+        Uid: 10,
         SubjectCode: "MPU3173",
         SubjectName: "Malaysian Studies 3 (for International Students)",
         Number: "10",
@@ -210,7 +210,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 11,
+        Uid: 11,
         SubjectCode: "MPU32013",
         SubjectName: "Bahasa Kebangsaan A",
         Number: "11",
@@ -222,7 +222,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 12,
+        Uid: 12,
         SubjectCode: "MPU32043",
         SubjectName: "English For Engineering",
         Number: "12",
@@ -234,7 +234,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 13,
+        Uid: 13,
         SubjectCode: "MPU32043",
         SubjectName: "English For Engineering",
         Number: "13",
@@ -246,7 +246,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB323"
     },
     {
-        HashId: 14,
+        Uid: 14,
         SubjectCode: "MPU32043",
         SubjectName: "English For Engineering",
         Number: "14",
@@ -258,7 +258,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB300"
     },
     {
-        HashId: 15,
+        Uid: 15,
         SubjectCode: "MPU32043",
         SubjectName: "English For Engineering",
         Number: "15",
@@ -270,7 +270,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 16,
+        Uid: 16,
         SubjectCode: "MPU32043",
         SubjectName: "English For Engineering",
         Number: "16",
@@ -282,7 +282,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 17,
+        Uid: 17,
         SubjectCode: "MPU33183",
         SubjectName: "Engineer In Society",
         Number: "17",
@@ -294,7 +294,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 18,
+        Uid: 18,
         SubjectCode: "MPU33183",
         SubjectName: "Engineer In Society",
         Number: "18",
@@ -306,7 +306,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 19,
+        Uid: 19,
         SubjectCode: "MPU34012",
         SubjectName: "Social Entrepreneurship Project",
         Number: "19",
@@ -318,7 +318,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 20,
+        Uid: 20,
         SubjectCode: "MPU34022",
         SubjectName: "Arts & Cultural Performance",
         Number: "20",
@@ -330,7 +330,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 21,
+        Uid: 21,
         SubjectCode: "MPU34072",
         SubjectName: "Art, Craft, & Design",
         Number: "21",
@@ -342,7 +342,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 22,
+        Uid: 22,
         SubjectCode: "UALB1003",
         SubjectName: "Introduction To German Language",
         Number: "22",
@@ -354,7 +354,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 23,
+        Uid: 23,
         SubjectCode: "UALB1003",
         SubjectName: "Introduction To German Language",
         Number: "23",
@@ -366,7 +366,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB323"
     },
     {
-        HashId: 24,
+        Uid: 24,
         SubjectCode: "UALB1003",
         SubjectName: "Introduction To German Language",
         Number: "24",
@@ -378,7 +378,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 25,
+        Uid: 25,
         SubjectCode: "UALB1003",
         SubjectName: "Introduction To German Language",
         Number: "25",
@@ -390,7 +390,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 26,
+        Uid: 26,
         SubjectCode: "UALB1003",
         SubjectName: "Introduction To German Language",
         Number: "26",
@@ -402,7 +402,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 27,
+        Uid: 27,
         SubjectCode: "UALB1003",
         SubjectName: "Introduction To German Language",
         Number: "27",
@@ -414,7 +414,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 28,
+        Uid: 28,
         SubjectCode: "UALF1003",
         SubjectName: "Introduction To French",
         Number: "28",
@@ -426,7 +426,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 29,
+        Uid: 29,
         SubjectCode: "UALF1003",
         SubjectName: "Introduction To French",
         Number: "29",
@@ -438,7 +438,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB323"
     },
     {
-        HashId: 30,
+        Uid: 30,
         SubjectCode: "UALF1003",
         SubjectName: "Introduction To French",
         Number: "30",
@@ -450,7 +450,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 31,
+        Uid: 31,
         SubjectCode: "UALF1003",
         SubjectName: "Introduction To French",
         Number: "31",
@@ -462,7 +462,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 32,
+        Uid: 32,
         SubjectCode: "UALF1003",
         SubjectName: "Introduction To French",
         Number: "32",
@@ -474,7 +474,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB319"
     },
     {
-        HashId: 33,
+        Uid: 33,
         SubjectCode: "UALF1003",
         SubjectName: "Introduction To French",
         Number: "33",
@@ -486,7 +486,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB319"
     },
     {
-        HashId: 34,
+        Uid: 34,
         SubjectCode: "UALJ2013",
         SubjectName: "Introduction To Japanese",
         Number: "34",
@@ -498,7 +498,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 35,
+        Uid: 35,
         SubjectCode: "UALJ2013",
         SubjectName: "Introduction To Japanese",
         Number: "35",
@@ -510,7 +510,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 36,
+        Uid: 36,
         SubjectCode: "UALJ2013",
         SubjectName: "Introduction To Japanese",
         Number: "36",
@@ -522,7 +522,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 37,
+        Uid: 37,
         SubjectCode: "UECM1653",
         SubjectName: "Mathematics For Engineering I",
         Number: "37",
@@ -534,7 +534,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB520"
     },
     {
-        HashId: 38,
+        Uid: 38,
         SubjectCode: "UECM1653",
         SubjectName: "Mathematics For Engineering I",
         Number: "37",
@@ -546,7 +546,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB520"
     },
     {
-        HashId: 39,
+        Uid: 39,
         SubjectCode: "UECM1653",
         SubjectName: "Mathematics For Engineering I",
         Number: "38",
@@ -558,7 +558,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB519"
     },
     {
-        HashId: 40,
+        Uid: 40,
         SubjectCode: "UECM1653",
         SubjectName: "Mathematics For Engineering I",
         Number: "39",
@@ -570,7 +570,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB519"
     },
     {
-        HashId: 41,
+        Uid: 41,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "40",
@@ -582,7 +582,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB213"
     },
     {
-        HashId: 42,
+        Uid: 42,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "40",
@@ -594,7 +594,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB214"
     },
     {
-        HashId: 43,
+        Uid: 43,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "41",
@@ -606,7 +606,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB214"
     },
     {
-        HashId: 44,
+        Uid: 44,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "41",
@@ -618,7 +618,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 45,
+        Uid: 45,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "42",
@@ -630,7 +630,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 46,
+        Uid: 46,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "43",
@@ -642,7 +642,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 47,
+        Uid: 47,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "44",
@@ -654,7 +654,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 48,
+        Uid: 48,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "45",
@@ -666,7 +666,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 49,
+        Uid: 49,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "46",
@@ -678,7 +678,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB523"
     },
     {
-        HashId: 50,
+        Uid: 50,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "47",
@@ -690,7 +690,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 51,
+        Uid: 51,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "48",
@@ -702,7 +702,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB519"
     },
     {
-        HashId: 52,
+        Uid: 52,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "49",
@@ -714,7 +714,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB523"
     },
     {
-        HashId: 53,
+        Uid: 53,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "50",
@@ -726,7 +726,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 54,
+        Uid: 54,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "51",
@@ -738,7 +738,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 55,
+        Uid: 55,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "52",
@@ -750,7 +750,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB319"
     },
     {
-        HashId: 56,
+        Uid: 56,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "53",
@@ -762,7 +762,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB519"
     },
     {
-        HashId: 57,
+        Uid: 57,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "54",
@@ -774,7 +774,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB524"
     },
     {
-        HashId: 58,
+        Uid: 58,
         SubjectCode: "UECM1713",
         SubjectName: "Mathematics For Engineering II",
         Number: "55",
@@ -786,7 +786,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB524"
     },
     {
-        HashId: 59,
+        Uid: 59,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "56",
@@ -798,7 +798,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB213"
     },
     {
-        HashId: 60,
+        Uid: 60,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "56",
@@ -810,7 +810,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 61,
+        Uid: 61,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "57",
@@ -822,7 +822,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB213"
     },
     {
-        HashId: 62,
+        Uid: 62,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "57",
@@ -834,7 +834,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB214"
     },
     {
-        HashId: 63,
+        Uid: 63,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "58",
@@ -846,7 +846,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 64,
+        Uid: 64,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "59",
@@ -858,7 +858,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB323"
     },
     {
-        HashId: 65,
+        Uid: 65,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "60",
@@ -870,7 +870,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 66,
+        Uid: 66,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "61",
@@ -882,7 +882,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB523"
     },
     {
-        HashId: 67,
+        Uid: 67,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "62",
@@ -894,7 +894,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB519"
     },
     {
-        HashId: 68,
+        Uid: 68,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "63",
@@ -906,7 +906,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 69,
+        Uid: 69,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "64",
@@ -918,7 +918,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB321"
     },
     {
-        HashId: 70,
+        Uid: 70,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "65",
@@ -930,7 +930,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB520"
     },
     {
-        HashId: 71,
+        Uid: 71,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "66",
@@ -942,7 +942,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB518"
     },
     {
-        HashId: 72,
+        Uid: 72,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "67",
@@ -954,7 +954,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 73,
+        Uid: 73,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "68",
@@ -966,7 +966,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 74,
+        Uid: 74,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "69",
@@ -978,7 +978,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 75,
+        Uid: 75,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "70",
@@ -990,7 +990,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB519"
     },
     {
-        HashId: 76,
+        Uid: 76,
         SubjectCode: "UECM2623",
         SubjectName: "Numerical Methods & Statistics",
         Number: "71",
@@ -1002,7 +1002,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB524"
     },
     {
-        HashId: 77,
+        Uid: 77,
         SubjectCode: "UECS1643",
         SubjectName: "Fundamentals Of Programming",
         Number: "72",
@@ -1014,7 +1014,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB213"
     },
     {
-        HashId: 78,
+        Uid: 78,
         SubjectCode: "UECS1643",
         SubjectName: "Fundamentals Of Programming",
         Number: "73",
@@ -1026,7 +1026,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB605"
     },
     {
-        HashId: 79,
+        Uid: 79,
         SubjectCode: "UECS1643",
         SubjectName: "Fundamentals Of Programming",
         Number: "74",
@@ -1038,7 +1038,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB605"
     },
     {
-        HashId: 80,
+        Uid: 80,
         SubjectCode: "UECS1643",
         SubjectName: "Fundamentals Of Programming",
         Number: "75",
@@ -1050,7 +1050,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB606"
     },
     {
-        HashId: 81,
+        Uid: 81,
         SubjectCode: "UECS1643",
         SubjectName: "Fundamentals Of Programming",
         Number: "76",
@@ -1062,7 +1062,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB608"
     },
     {
-        HashId: 82,
+        Uid: 82,
         SubjectCode: "UECS1643",
         SubjectName: "Fundamentals Of Programming",
         Number: "77",
@@ -1074,7 +1074,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB606"
     },
     {
-        HashId: 83,
+        Uid: 83,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "80",
@@ -1086,7 +1086,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 84,
+        Uid: 84,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "81",
@@ -1098,7 +1098,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 85,
+        Uid: 85,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "82",
@@ -1110,7 +1110,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 86,
+        Uid: 86,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "83",
@@ -1122,7 +1122,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 87,
+        Uid: 87,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "84",
@@ -1134,7 +1134,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 88,
+        Uid: 88,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "85",
@@ -1146,7 +1146,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 89,
+        Uid: 89,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "86",
@@ -1158,7 +1158,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 90,
+        Uid: 90,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "87",
@@ -1170,7 +1170,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 91,
+        Uid: 91,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "88",
@@ -1182,7 +1182,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 92,
+        Uid: 92,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "89",
@@ -1194,7 +1194,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 93,
+        Uid: 93,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "90",
@@ -1206,7 +1206,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 94,
+        Uid: 94,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "91",
@@ -1218,7 +1218,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 95,
+        Uid: 95,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "92",
@@ -1230,7 +1230,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 96,
+        Uid: 96,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "93",
@@ -1242,7 +1242,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 97,
+        Uid: 97,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "94",
@@ -1254,7 +1254,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 98,
+        Uid: 98,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "95",
@@ -1266,7 +1266,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 99,
+        Uid: 99,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "96",
@@ -1278,7 +1278,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 100,
+        Uid: 100,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "97",
@@ -1290,7 +1290,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 101,
+        Uid: 101,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "98",
@@ -1302,7 +1302,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 102,
+        Uid: 102,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "99",
@@ -1314,7 +1314,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 103,
+        Uid: 103,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "100",
@@ -1326,7 +1326,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB521"
     },
     {
-        HashId: 104,
+        Uid: 104,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "101",
@@ -1338,7 +1338,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB521"
     },
     {
-        HashId: 105,
+        Uid: 105,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "102",
@@ -1350,7 +1350,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB521"
     },
     {
-        HashId: 106,
+        Uid: 106,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "103",
@@ -1362,7 +1362,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB524"
     },
     {
-        HashId: 107,
+        Uid: 107,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "104",
@@ -1374,7 +1374,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 108,
+        Uid: 108,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "105",
@@ -1386,7 +1386,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 109,
+        Uid: 109,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "106",
@@ -1398,7 +1398,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 110,
+        Uid: 110,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "107",
@@ -1410,7 +1410,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 111,
+        Uid: 111,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "108",
@@ -1422,7 +1422,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 112,
+        Uid: 112,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "109",
@@ -1434,7 +1434,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 113,
+        Uid: 113,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "110",
@@ -1446,7 +1446,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 114,
+        Uid: 114,
         SubjectCode: "UEME1112",
         SubjectName: "Engineering Thermodynamics I",
         Number: "111",
@@ -1458,7 +1458,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 115,
+        Uid: 115,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "112",
@@ -1470,7 +1470,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 116,
+        Uid: 116,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "113",
@@ -1482,7 +1482,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 117,
+        Uid: 117,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "114",
@@ -1494,7 +1494,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB520"
     },
     {
-        HashId: 118,
+        Uid: 118,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "115",
@@ -1506,7 +1506,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 119,
+        Uid: 119,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "116",
@@ -1518,7 +1518,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 120,
+        Uid: 120,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "117",
@@ -1530,7 +1530,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 121,
+        Uid: 121,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "118",
@@ -1542,7 +1542,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 122,
+        Uid: 122,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "119",
@@ -1554,7 +1554,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 123,
+        Uid: 123,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "120",
@@ -1566,7 +1566,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 124,
+        Uid: 124,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "121",
@@ -1578,7 +1578,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 125,
+        Uid: 125,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "122",
@@ -1590,7 +1590,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 126,
+        Uid: 126,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "123",
@@ -1602,7 +1602,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 127,
+        Uid: 127,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "124",
@@ -1614,7 +1614,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 128,
+        Uid: 128,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "125",
@@ -1626,7 +1626,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 129,
+        Uid: 129,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "126",
@@ -1638,7 +1638,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 130,
+        Uid: 130,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "127",
@@ -1650,7 +1650,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB730"
     },
     {
-        HashId: 131,
+        Uid: 131,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "128",
@@ -1662,7 +1662,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 132,
+        Uid: 132,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "129",
@@ -1674,7 +1674,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 133,
+        Uid: 133,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "130",
@@ -1686,7 +1686,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 134,
+        Uid: 134,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "131",
@@ -1698,7 +1698,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 135,
+        Uid: 135,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "132",
@@ -1710,7 +1710,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 136,
+        Uid: 136,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "133",
@@ -1722,7 +1722,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 137,
+        Uid: 137,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "134",
@@ -1734,7 +1734,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 138,
+        Uid: 138,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "135",
@@ -1746,7 +1746,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 139,
+        Uid: 139,
         SubjectCode: "UEME1132",
         SubjectName: "Statics",
         Number: "136",
@@ -1758,7 +1758,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 140,
+        Uid: 140,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "137",
@@ -1770,7 +1770,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 141,
+        Uid: 141,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "138",
@@ -1782,7 +1782,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 142,
+        Uid: 142,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "139",
@@ -1794,7 +1794,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB213"
     },
     {
-        HashId: 143,
+        Uid: 143,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "140",
@@ -1806,7 +1806,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 144,
+        Uid: 144,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "141",
@@ -1818,7 +1818,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 145,
+        Uid: 145,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "142",
@@ -1830,7 +1830,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 146,
+        Uid: 146,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "143",
@@ -1842,7 +1842,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 147,
+        Uid: 147,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "144",
@@ -1854,7 +1854,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 148,
+        Uid: 148,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "145",
@@ -1866,7 +1866,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 149,
+        Uid: 149,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "146",
@@ -1878,7 +1878,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB606"
     },
     {
-        HashId: 150,
+        Uid: 150,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "147",
@@ -1890,7 +1890,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 151,
+        Uid: 151,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "148",
@@ -1902,7 +1902,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB609"
     },
     {
-        HashId: 152,
+        Uid: 152,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "149",
@@ -1914,7 +1914,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB606"
     },
     {
-        HashId: 153,
+        Uid: 153,
         SubjectCode: "UEME1252",
         SubjectName: "Engineering Drawing & Cad",
         Number: "150",
@@ -1926,7 +1926,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB606"
     },
     {
-        HashId: 154,
+        Uid: 154,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "151",
@@ -1938,7 +1938,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 155,
+        Uid: 155,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "151",
@@ -1950,7 +1950,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 156,
+        Uid: 156,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "152",
@@ -1962,7 +1962,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 157,
+        Uid: 157,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "152",
@@ -1974,7 +1974,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 158,
+        Uid: 158,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "153",
@@ -1986,7 +1986,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 159,
+        Uid: 159,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "153",
@@ -1998,7 +1998,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 160,
+        Uid: 160,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "154",
@@ -2010,7 +2010,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 161,
+        Uid: 161,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "155",
@@ -2022,7 +2022,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 162,
+        Uid: 162,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "156",
@@ -2034,7 +2034,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 163,
+        Uid: 163,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "157",
@@ -2046,7 +2046,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 164,
+        Uid: 164,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "158",
@@ -2058,7 +2058,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 165,
+        Uid: 165,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "159",
@@ -2070,7 +2070,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 166,
+        Uid: 166,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "160",
@@ -2082,7 +2082,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 167,
+        Uid: 167,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "161",
@@ -2094,7 +2094,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 168,
+        Uid: 168,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "162",
@@ -2106,7 +2106,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 169,
+        Uid: 169,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "163",
@@ -2118,7 +2118,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 170,
+        Uid: 170,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "164",
@@ -2130,7 +2130,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 171,
+        Uid: 171,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "165",
@@ -2142,7 +2142,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 172,
+        Uid: 172,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "166",
@@ -2154,7 +2154,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 173,
+        Uid: 173,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "167",
@@ -2166,7 +2166,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 174,
+        Uid: 174,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "168",
@@ -2178,7 +2178,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 175,
+        Uid: 175,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "169",
@@ -2190,7 +2190,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 176,
+        Uid: 176,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "170",
@@ -2202,7 +2202,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 177,
+        Uid: 177,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "171",
@@ -2214,7 +2214,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 178,
+        Uid: 178,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "172",
@@ -2226,7 +2226,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 179,
+        Uid: 179,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "173",
@@ -2238,7 +2238,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 180,
+        Uid: 180,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "174",
@@ -2250,7 +2250,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 181,
+        Uid: 181,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "175",
@@ -2262,7 +2262,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 182,
+        Uid: 182,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "176",
@@ -2274,7 +2274,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 183,
+        Uid: 183,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "177",
@@ -2286,7 +2286,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 184,
+        Uid: 184,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "178",
@@ -2298,7 +2298,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB316"
     },
     {
-        HashId: 185,
+        Uid: 185,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "179",
@@ -2310,7 +2310,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB316"
     },
     {
-        HashId: 186,
+        Uid: 186,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "180",
@@ -2322,7 +2322,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB301"
     },
     {
-        HashId: 187,
+        Uid: 187,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "181",
@@ -2334,7 +2334,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB301"
     },
     {
-        HashId: 188,
+        Uid: 188,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "182",
@@ -2346,7 +2346,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB301"
     },
     {
-        HashId: 189,
+        Uid: 189,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "183",
@@ -2358,7 +2358,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB301"
     },
     {
-        HashId: 190,
+        Uid: 190,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "184",
@@ -2370,7 +2370,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 191,
+        Uid: 191,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "185",
@@ -2382,7 +2382,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 192,
+        Uid: 192,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "186",
@@ -2394,7 +2394,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 193,
+        Uid: 193,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "187",
@@ -2406,7 +2406,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 194,
+        Uid: 194,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "188",
@@ -2418,7 +2418,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 195,
+        Uid: 195,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "189",
@@ -2430,7 +2430,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 196,
+        Uid: 196,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "190",
@@ -2442,7 +2442,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 197,
+        Uid: 197,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "191",
@@ -2454,7 +2454,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 198,
+        Uid: 198,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "192",
@@ -2466,7 +2466,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB518"
     },
     {
-        HashId: 199,
+        Uid: 199,
         SubjectCode: "UEME2123",
         SubjectName: "Fluid Mechanics I",
         Number: "193",
@@ -2478,7 +2478,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB518"
     },
     {
-        HashId: 200,
+        Uid: 200,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "194",
@@ -2490,7 +2490,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 201,
+        Uid: 201,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "195",
@@ -2502,7 +2502,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 202,
+        Uid: 202,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "196",
@@ -2514,7 +2514,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 203,
+        Uid: 203,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "197",
@@ -2526,7 +2526,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 204,
+        Uid: 204,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "198",
@@ -2538,7 +2538,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 205,
+        Uid: 205,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "199",
@@ -2550,7 +2550,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 206,
+        Uid: 206,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "200",
@@ -2562,7 +2562,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 207,
+        Uid: 207,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "201",
@@ -2574,7 +2574,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 208,
+        Uid: 208,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "202",
@@ -2586,7 +2586,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 209,
+        Uid: 209,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "203",
@@ -2598,7 +2598,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 210,
+        Uid: 210,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "204",
@@ -2610,7 +2610,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 211,
+        Uid: 211,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "205",
@@ -2622,7 +2622,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 212,
+        Uid: 212,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "206",
@@ -2634,7 +2634,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 213,
+        Uid: 213,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "207",
@@ -2646,7 +2646,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 214,
+        Uid: 214,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "208",
@@ -2658,7 +2658,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 215,
+        Uid: 215,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "209",
@@ -2670,7 +2670,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 216,
+        Uid: 216,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "210",
@@ -2682,7 +2682,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB731"
     },
     {
-        HashId: 217,
+        Uid: 217,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "211",
@@ -2694,7 +2694,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 218,
+        Uid: 218,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "212",
@@ -2706,7 +2706,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 219,
+        Uid: 219,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "213",
@@ -2718,7 +2718,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 220,
+        Uid: 220,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "214",
@@ -2730,7 +2730,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 221,
+        Uid: 221,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "215",
@@ -2742,7 +2742,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 222,
+        Uid: 222,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "216",
@@ -2754,7 +2754,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 223,
+        Uid: 223,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "217",
@@ -2766,7 +2766,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 224,
+        Uid: 224,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "218",
@@ -2778,7 +2778,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 225,
+        Uid: 225,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "219",
@@ -2790,7 +2790,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 226,
+        Uid: 226,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "220",
@@ -2802,7 +2802,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 227,
+        Uid: 227,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "221",
@@ -2814,7 +2814,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 228,
+        Uid: 228,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "222",
@@ -2826,7 +2826,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 229,
+        Uid: 229,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "223",
@@ -2838,7 +2838,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 230,
+        Uid: 230,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "224",
@@ -2850,7 +2850,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 231,
+        Uid: 231,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "225",
@@ -2862,7 +2862,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB211"
     },
     {
-        HashId: 232,
+        Uid: 232,
         SubjectCode: "UEME3112",
         SubjectName: "Fluid Mechanics II",
         Number: "226",
@@ -2874,7 +2874,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB211"
     },
     {
-        HashId: 233,
+        Uid: 233,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "227",
@@ -2886,7 +2886,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 234,
+        Uid: 234,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "227",
@@ -2898,7 +2898,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 235,
+        Uid: 235,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "228",
@@ -2910,7 +2910,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 236,
+        Uid: 236,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "229",
@@ -2922,7 +2922,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 237,
+        Uid: 237,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "230",
@@ -2934,7 +2934,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 238,
+        Uid: 238,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "231",
@@ -2946,7 +2946,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 239,
+        Uid: 239,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "232",
@@ -2958,7 +2958,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB211"
     },
     {
-        HashId: 240,
+        Uid: 240,
         SubjectCode: "UEMX1133",
         SubjectName: "Introduction To Building Services",
         Number: "233",
@@ -2970,7 +2970,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB211"
     },
     {
-        HashId: 241,
+        Uid: 241,
         SubjectCode: "UEMX1843",
         SubjectName: "Survey I",
         Number: "234",
@@ -2982,7 +2982,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 242,
+        Uid: 242,
         SubjectCode: "UEMX1843",
         SubjectName: "Survey I",
         Number: "234",
@@ -2994,7 +2994,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 243,
+        Uid: 243,
         SubjectCode: "UEMX1843",
         SubjectName: "Survey I",
         Number: "235",
@@ -3006,7 +3006,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 244,
+        Uid: 244,
         SubjectCode: "UEMX1843",
         SubjectName: "Survey I",
         Number: "236",
@@ -3018,7 +3018,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 245,
+        Uid: 245,
         SubjectCode: "UEMX1843",
         SubjectName: "Survey I",
         Number: "237",
@@ -3030,7 +3030,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 246,
+        Uid: 246,
         SubjectCode: "UEMX1843",
         SubjectName: "Survey I",
         Number: "238",
@@ -3042,7 +3042,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 247,
+        Uid: 247,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "239",
@@ -3054,7 +3054,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 248,
+        Uid: 248,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "239",
@@ -3066,7 +3066,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 249,
+        Uid: 249,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "240",
@@ -3078,7 +3078,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 250,
+        Uid: 250,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "241",
@@ -3090,7 +3090,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 251,
+        Uid: 251,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "242",
@@ -3102,7 +3102,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 252,
+        Uid: 252,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "243",
@@ -3114,7 +3114,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 253,
+        Uid: 253,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "244",
@@ -3126,7 +3126,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 254,
+        Uid: 254,
         SubjectCode: "UEMX2323",
         SubjectName: "Structural Analysis II",
         Number: "245",
@@ -3138,7 +3138,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 255,
+        Uid: 255,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "246",
@@ -3150,7 +3150,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 256,
+        Uid: 256,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "246",
@@ -3162,7 +3162,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 257,
+        Uid: 257,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "247",
@@ -3174,7 +3174,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 258,
+        Uid: 258,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "248",
@@ -3186,7 +3186,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 259,
+        Uid: 259,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "249",
@@ -3198,7 +3198,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 260,
+        Uid: 260,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "250",
@@ -3210,7 +3210,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 261,
+        Uid: 261,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "251",
@@ -3222,7 +3222,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 262,
+        Uid: 262,
         SubjectCode: "UEMX2363",
         SubjectName: "Concrete Structures Design II",
         Number: "252",
@@ -3234,7 +3234,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 263,
+        Uid: 263,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "253",
@@ -3246,7 +3246,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 264,
+        Uid: 264,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "253",
@@ -3258,7 +3258,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 265,
+        Uid: 265,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "254",
@@ -3270,7 +3270,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 266,
+        Uid: 266,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "255",
@@ -3282,7 +3282,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 267,
+        Uid: 267,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "256",
@@ -3294,7 +3294,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 268,
+        Uid: 268,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "257",
@@ -3306,7 +3306,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 269,
+        Uid: 269,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "258",
@@ -3318,7 +3318,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 270,
+        Uid: 270,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "259",
@@ -3330,7 +3330,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 271,
+        Uid: 271,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "260",
@@ -3342,7 +3342,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 272,
+        Uid: 272,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "261",
@@ -3354,7 +3354,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 273,
+        Uid: 273,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "262",
@@ -3366,7 +3366,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 274,
+        Uid: 274,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "263",
@@ -3378,7 +3378,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 275,
+        Uid: 275,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "264",
@@ -3390,7 +3390,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 276,
+        Uid: 276,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "265",
@@ -3402,7 +3402,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 277,
+        Uid: 277,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "266",
@@ -3414,7 +3414,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 278,
+        Uid: 278,
         SubjectCode: "UEMX2423",
         SubjectName: "Geotechnical Engineering",
         Number: "267",
@@ -3426,7 +3426,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 279,
+        Uid: 279,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "268",
@@ -3438,7 +3438,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 280,
+        Uid: 280,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "268",
@@ -3450,7 +3450,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 281,
+        Uid: 281,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "269",
@@ -3462,7 +3462,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 282,
+        Uid: 282,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "270",
@@ -3474,7 +3474,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 283,
+        Uid: 283,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "271",
@@ -3486,7 +3486,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 284,
+        Uid: 284,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "272",
@@ -3498,7 +3498,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 285,
+        Uid: 285,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "273",
@@ -3510,7 +3510,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 286,
+        Uid: 286,
         SubjectCode: "UEMX2513",
         SubjectName: "Hydrology",
         Number: "274",
@@ -3522,7 +3522,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 287,
+        Uid: 287,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "275",
@@ -3534,7 +3534,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 288,
+        Uid: 288,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "275",
@@ -3546,7 +3546,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 289,
+        Uid: 289,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "276",
@@ -3558,7 +3558,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 290,
+        Uid: 290,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "277",
@@ -3570,7 +3570,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 291,
+        Uid: 291,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "278",
@@ -3582,7 +3582,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 292,
+        Uid: 292,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "279",
@@ -3594,7 +3594,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 293,
+        Uid: 293,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "280",
@@ -3606,7 +3606,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB518"
     },
     {
-        HashId: 294,
+        Uid: 294,
         SubjectCode: "UEMX3333",
         SubjectName: "Structural Steel Design",
         Number: "281",
@@ -3618,7 +3618,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB518"
     },
     {
-        HashId: 295,
+        Uid: 295,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "282",
@@ -3630,7 +3630,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB207"
     },
     {
-        HashId: 296,
+        Uid: 296,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "282",
@@ -3642,7 +3642,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB214"
     },
     {
-        HashId: 297,
+        Uid: 297,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "283",
@@ -3654,7 +3654,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 298,
+        Uid: 298,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "283",
@@ -3666,7 +3666,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 299,
+        Uid: 299,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "284",
@@ -3678,7 +3678,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 300,
+        Uid: 300,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "284",
@@ -3690,7 +3690,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 301,
+        Uid: 301,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "285",
@@ -3702,7 +3702,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 302,
+        Uid: 302,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "285",
@@ -3714,7 +3714,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 303,
+        Uid: 303,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "286",
@@ -3726,7 +3726,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 304,
+        Uid: 304,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "286",
@@ -3738,7 +3738,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 305,
+        Uid: 305,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "287",
@@ -3750,7 +3750,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 306,
+        Uid: 306,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "287",
@@ -3762,7 +3762,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 307,
+        Uid: 307,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "288",
@@ -3774,7 +3774,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 308,
+        Uid: 308,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "288",
@@ -3786,7 +3786,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 309,
+        Uid: 309,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "289",
@@ -3798,7 +3798,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 310,
+        Uid: 310,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "289",
@@ -3810,7 +3810,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 311,
+        Uid: 311,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "290",
@@ -3822,7 +3822,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 312,
+        Uid: 312,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "290",
@@ -3834,7 +3834,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 313,
+        Uid: 313,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "291",
@@ -3846,7 +3846,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB607"
     },
     {
-        HashId: 314,
+        Uid: 314,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "291",
@@ -3858,7 +3858,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 315,
+        Uid: 315,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "292",
@@ -3870,7 +3870,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 316,
+        Uid: 316,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "293",
@@ -3882,7 +3882,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB326"
     },
     {
-        HashId: 317,
+        Uid: 317,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "294",
@@ -3894,7 +3894,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 318,
+        Uid: 318,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "295",
@@ -3906,7 +3906,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 319,
+        Uid: 319,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "296",
@@ -3918,7 +3918,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 320,
+        Uid: 320,
         SubjectCode: "UEMX3813",
         SubjectName: "Highway & Transportation",
         Number: "297",
@@ -3930,7 +3930,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB314"
     },
     {
-        HashId: 321,
+        Uid: 321,
         SubjectCode: "UEMX4293",
         SubjectName: "Finite Element Method In Structural Engineering",
         Number: "298",
@@ -3942,7 +3942,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 322,
+        Uid: 322,
         SubjectCode: "UEMX4293",
         SubjectName: "Finite Element Method In Structural Engineering",
         Number: "298",
@@ -3954,7 +3954,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 323,
+        Uid: 323,
         SubjectCode: "UEMX4293",
         SubjectName: "Finite Element Method In Structural Engineering",
         Number: "299",
@@ -3966,7 +3966,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 324,
+        Uid: 324,
         SubjectCode: "UEMX4293",
         SubjectName: "Finite Element Method In Structural Engineering",
         Number: "300",
@@ -3978,7 +3978,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 325,
+        Uid: 325,
         SubjectCode: "UEMX4293",
         SubjectName: "Finite Element Method In Structural Engineering",
         Number: "301",
@@ -3990,7 +3990,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 326,
+        Uid: 326,
         SubjectCode: "UEMX4293",
         SubjectName: "Finite Element Method In Structural Engineering",
         Number: "302",
@@ -4002,7 +4002,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 327,
+        Uid: 327,
         SubjectCode: "UEMX4313",
         SubjectName: "Advanced Structural Steel Design",
         Number: "303",
@@ -4014,7 +4014,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 328,
+        Uid: 328,
         SubjectCode: "UEMX4313",
         SubjectName: "Advanced Structural Steel Design",
         Number: "303",
@@ -4026,7 +4026,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 329,
+        Uid: 329,
         SubjectCode: "UEMX4313",
         SubjectName: "Advanced Structural Steel Design",
         Number: "304",
@@ -4038,7 +4038,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 330,
+        Uid: 330,
         SubjectCode: "UEMX4313",
         SubjectName: "Advanced Structural Steel Design",
         Number: "305",
@@ -4050,7 +4050,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 331,
+        Uid: 331,
         SubjectCode: "UEMX4313",
         SubjectName: "Advanced Structural Steel Design",
         Number: "306",
@@ -4062,7 +4062,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 332,
+        Uid: 332,
         SubjectCode: "UEMX4313",
         SubjectName: "Advanced Structural Steel Design",
         Number: "307",
@@ -4074,7 +4074,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 333,
+        Uid: 333,
         SubjectCode: "UEMX4393",
         SubjectName: "Concrete Technology",
         Number: "308",
@@ -4086,7 +4086,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB300"
     },
     {
-        HashId: 334,
+        Uid: 334,
         SubjectCode: "UEMX4393",
         SubjectName: "Concrete Technology",
         Number: "308",
@@ -4098,7 +4098,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 335,
+        Uid: 335,
         SubjectCode: "UEMX4393",
         SubjectName: "Concrete Technology",
         Number: "309",
@@ -4110,7 +4110,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 336,
+        Uid: 336,
         SubjectCode: "UEMX4393",
         SubjectName: "Concrete Technology",
         Number: "310",
@@ -4122,7 +4122,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 337,
+        Uid: 337,
         SubjectCode: "UEMX4393",
         SubjectName: "Concrete Technology",
         Number: "311",
@@ -4134,7 +4134,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KBS01"
     },
     {
-        HashId: 338,
+        Uid: 338,
         SubjectCode: "UEMX4393",
         SubjectName: "Concrete Technology",
         Number: "312",
@@ -4146,7 +4146,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 339,
+        Uid: 339,
         SubjectCode: "UEMX4393",
         SubjectName: "Concrete Technology",
         Number: "313",
@@ -4158,7 +4158,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB322"
     },
     {
-        HashId: 340,
+        Uid: 340,
         SubjectCode: "UEMX4913",
         SubjectName: "Integrated Design Project",
         Number: "314",
@@ -4170,7 +4170,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB209"
     },
     {
-        HashId: 341,
+        Uid: 341,
         SubjectCode: "UEMX4913",
         SubjectName: "Integrated Design Project",
         Number: "314",
@@ -4182,7 +4182,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB208"
     },
     {
-        HashId: 342,
+        Uid: 342,
         SubjectCode: "UEMX4963",
         SubjectName: "Engineering Application In Environment",
         Number: "315",
@@ -4194,7 +4194,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 343,
+        Uid: 343,
         SubjectCode: "UEMX4963",
         SubjectName: "Engineering Application In Environment",
         Number: "315",
@@ -4206,7 +4206,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB301"
     },
     {
-        HashId: 344,
+        Uid: 344,
         SubjectCode: "UEMX4963",
         SubjectName: "Engineering Application In Environment",
         Number: "316",
@@ -4218,7 +4218,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 345,
+        Uid: 345,
         SubjectCode: "UEMX4963",
         SubjectName: "Engineering Application In Environment",
         Number: "317",
@@ -4230,7 +4230,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 346,
+        Uid: 346,
         SubjectCode: "UEMX4963",
         SubjectName: "Engineering Application In Environment",
         Number: "318",
@@ -4242,7 +4242,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 347,
+        Uid: 347,
         SubjectCode: "UEMX4963",
         SubjectName: "Engineering Application In Environment",
         Number: "319",
@@ -4254,7 +4254,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB517"
     },
     {
-        HashId: 348,
+        Uid: 348,
         SubjectCode: "UJLL1093",
         SubjectName: "Introduction To Korean",
         Number: "320",
@@ -4266,7 +4266,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB211"
     },
     {
-        HashId: 349,
+        Uid: 349,
         SubjectCode: "UJLL1093",
         SubjectName: "Introduction To Korean",
         Number: "321",
@@ -4278,7 +4278,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB319"
     },
     {
-        HashId: 350,
+        Uid: 350,
         SubjectCode: "UJLL1093",
         SubjectName: "Introduction To Korean",
         Number: "322",
@@ -4290,7 +4290,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB319"
     },
     {
-        HashId: 351,
+        Uid: 351,
         SubjectCode: "UKMM1011",
         SubjectName: "Sun Zi's Art Of War & Business Strategies",
         Number: "323",
@@ -4302,7 +4302,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 352,
+        Uid: 352,
         SubjectCode: "UKMM1011",
         SubjectName: "Sun Zi's Art Of War & Business Strategies",
         Number: "324",
@@ -4314,7 +4314,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 353,
+        Uid: 353,
         SubjectCode: "UKMM1011",
         SubjectName: "Sun Zi's Art Of War & Business Strategies",
         Number: "325",
@@ -4326,7 +4326,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB210"
     },
     {
-        HashId: 354,
+        Uid: 354,
         SubjectCode: "UKMM1043",
         SubjectName: "Basic Economics, Accounting & Management",
         Number: "326",
@@ -4338,7 +4338,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB324"
     },
     {
-        HashId: 355,
+        Uid: 355,
         SubjectCode: "UKMM1043",
         SubjectName: "Basic Economics, Accounting & Management",
         Number: "327",
@@ -4350,7 +4350,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB316"
     },
     {
-        HashId: 356,
+        Uid: 356,
         SubjectCode: "UKMM1043",
         SubjectName: "Basic Economics, Accounting & Management",
         Number: "328",
@@ -4362,7 +4362,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 357,
+        Uid: 357,
         SubjectCode: "UKMM1043",
         SubjectName: "Basic Economics, Accounting & Management",
         Number: "330",
@@ -4374,7 +4374,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB320"
     },
     {
-        HashId: 358,
+        Uid: 358,
         SubjectCode: "UKMM1043",
         SubjectName: "Basic Economics, Accounting & Management",
         Number: "331",
@@ -4386,7 +4386,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB516"
     },
     {
-        HashId: 359,
+        Uid: 359,
         SubjectCode: "UKMM1043",
         SubjectName: "Basic Economics, Accounting & Management",
         Number: "332",
@@ -4398,7 +4398,7 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     {
-        HashId: 360,
+        Uid: 360,
         SubjectCode: "UKMM1043",
         SubjectName: "Basic Economics, Accounting & Management",
         Number: "333",

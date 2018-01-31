@@ -27,7 +27,7 @@ export function ParseSlotToSubject(slots : RawSlot[]) : Subject[] {
         const slotIds = Array < number > ();
         const slotNumbers = Array < string > ();
         allSlotOfThisSubject.forEach((s) => {
-            slotIds.push(s.HashId);
+            slotIds.push(s.Uid);
             slotNumbers.push(s.Number);
         });
         result.push(new Subject(slot.SubjectName, slot.SubjectCode, slotIds, uniq(slotNumbers)));

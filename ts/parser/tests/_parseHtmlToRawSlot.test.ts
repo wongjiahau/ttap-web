@@ -19,7 +19,7 @@ describe("ParseHtmlToRawSlot", () => {
         const input = heng_2017_sept();
         const result = ParseHtmlToRawSlot(input);
         const expected: IRawSlot = {
-            HashId: 0,
+            Uid: 0,
             SubjectCode: "MPU3113",
             SubjectName: "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)",
             Number: "1",

@@ -13,7 +13,7 @@ describe("RawSlot", () => {
     it("every RawSlot should have a unique hashId", () => {
         const rawSlots = GetTestRawSlot1();
         for (let i = 0; i < rawSlots.length; i++) {
-            expect(rawSlots.filter((x) => x.HashId === rawSlots[i].HashId).length).to.eq(1);
+            expect(rawSlots.filter((x) => x.Uid === rawSlots[i].Uid).length).to.eq(1);
         }
     });
 
@@ -21,7 +21,7 @@ describe("RawSlot", () => {
         it("should return one RawSlot if the argument matches one of the RawSlots's HashId", () => {
             const rawSlots = GetTestRawSlot1();
             const result = RawSlot.GetOne(1);
-            expect(result.HashId).to.eq(1);
+            expect(result.Uid).to.eq(1);
         });
 
         it("should return null if the argument does not match any RawSlot's HashId", () => {

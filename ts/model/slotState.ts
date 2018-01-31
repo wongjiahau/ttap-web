@@ -16,7 +16,7 @@ export interface ISlotState {
 export function CreateSlotState(rawSlot: RawSlot): ISlotState {
     const group = rawSlot.Group.split("/");
     return {
-        Uid:            rawSlot.HashId,
+        Uid:            rawSlot.Uid,
         CurrentChoice: 0,
         SubjectCode:   rawSlot.SubjectCode,
         SubjectName:   rawSlot.SubjectName,
