@@ -45,12 +45,12 @@ describe("notifyDataLoaded action", () => {
         const newState = MasterStateReducer(NewMasterState(),
             new NotifyDataLoaded(testSlots));
         const numberOfProperty = (dict) => Object.keys(dict).length;
-        const generalizedRSS = newState.DataState.GeneralizedRawSlotStore;
-        const ungeneralizedRSS = newState.DataState.UngeneralizedRawSlotStore;
-        const currentRSS = newState.DataState.CurrentRawSlotStore;
-        expect(numberOfProperty(ungeneralizedRSS.GetDict())).to.eq(testSlots.length);
-        expect(numberOfProperty(generalizedRSS.GetDict())).to.eq(GeneralizeSlot(testSlots).length);
-        expect(currentRSS).to.deep.eq(generalizedRSS);
+        const router = newState.DataState.RawSlotDataRouter;
+        router.SetRouteTo("ungeneralized");
+        expect(numberOfProperty(router.GetCurrentData().GetDict())).to.eq(testSlots.length);
+        router.SetRouteTo("generalized");
+        router.GetCurrentData();
+        expect(numberOfProperty(router.GetCurrentData().GetDict())).to.eq(GeneralizeSlot(testSlots).length);
     });
 
 });

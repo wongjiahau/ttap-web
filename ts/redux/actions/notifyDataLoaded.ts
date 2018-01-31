@@ -1,3 +1,4 @@
+import { DataRouter } from "./../../dataStructure/dataRouter";
 const isEqual = require("lodash.isequal");
 import {FindClashes} from "../../clashFinder/findClashes";
 import {ObjectStore} from "../../dataStructure/objectStore";
@@ -13,19 +14,19 @@ export class NotifyDataLoaded extends MasterStateAction {
     }
     public TypeName() : string {return "notify data loaded"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        const ungeneralizedRawSlotStore = new ObjectStore(this.rawSlots);
-        const generalizedRawSlotStore = new ObjectStore(GeneralizeSlot(this.rawSlots));
-        const currentRawSlotStore = state.SettingsState.SearchByConsideringWeekNumber
-            ? ungeneralizedRawSlotStore
-            : generalizedRawSlotStore;
+        const route = state.SettingsState.SearchByConsideringWeekNumber
+            ? "ungeneralized"
+            : "generalized";
+        const router = new DataRouter<ObjectStore<RawSlot>>();
+        router.AddData("generalized", new ObjectStore(GeneralizeSlot(this.rawSlots)));
+        router.AddData("ungeneralized", new ObjectStore(this.rawSlots));
+        router.SetRouteTo(route);
         const subjects = ParseSlotToSubject(this.rawSlots);
-        FindClashes(subjects);
+        FindClashes(subjects, router.GetCurrentData());
         return {
             ...state,
             DataState: {
-                UngeneralizedRawSlotStore: ungeneralizedRawSlotStore,
-                GeneralizedRawSlotStore: generalizedRawSlotStore,
-                CurrentRawSlotStore: currentRawSlotStore
+                RawSlotDataRouter: router
             },
             TimetableCreatorState: {
                 ...state.TimetableCreatorState,
