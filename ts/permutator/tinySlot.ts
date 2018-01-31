@@ -20,7 +20,7 @@ export class TinySlot implements IOptimizedSlot {
         this.PartitionKey = s.SubjectCode * 10 + s.Type;
         this.SlotNumber = s.SlotNumber;
         this.SlotIds = [];
-        this.SlotIds.push(s.HashId);
+        this.SlotIds.push(s.Uid);
         this.State = this.GetState(s);
     }
     private GetState(s: ISlot): number[] {

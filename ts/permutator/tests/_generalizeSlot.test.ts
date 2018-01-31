@@ -6,7 +6,7 @@ describe("GeneralizeSlot", () => {
     it("case 1", () => {
         const input = [
             {
-                HashId: 161,
+                Uid: 161,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "155",
@@ -17,7 +17,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "3,9",
                 Room: "KB731"
             }, {
-                HashId: 162,
+                Uid: 162,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "156",
@@ -35,7 +35,7 @@ describe("GeneralizeSlot", () => {
             .deep
             .eq([
                 {
-                    HashId: 161,
+                    Uid: 161,
                     SubjectCode: "UEME2123",
                     SubjectName: "Fluid Mechanics I",
                     Number: "155/156",
@@ -52,7 +52,7 @@ describe("GeneralizeSlot", () => {
     it("should not generalize slots if they are not CanBeGeneralize()", () => {
         const input = [
             {
-                HashId: 161,
+                Uid: 161,
                 SubjectCode: "UEME2122", // Different subject code
                 SubjectName: "Fluid Mechanics I",
                 Number: "155",
@@ -63,7 +63,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "3,9",
                 Room: "KB731"
             }, {
-                HashId: 162,
+                Uid: 162,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "156",
@@ -86,7 +86,7 @@ describe("GeneralizeSlot", () => {
         // In this case, L2 have relatives, so Slot-158 should not be generalized with Slot-157 even they CanBeGeneralize()
         const input = [
             {
-                HashId: 156,
+                Uid: 156,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "152",
@@ -97,7 +97,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "1-14",
                 Room: "KB207"
             }, {
-                HashId: 157,
+                Uid: 157,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "152",
@@ -108,7 +108,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "1-14",
                 Room: "KB209"
             }, {
-                HashId: 158,
+                Uid: 158,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "153",
@@ -128,7 +128,7 @@ describe("GeneralizeSlot", () => {
         // In this case, L2 have relatives, so Slot-158 should not be generalized with Slot-157 even they CanBeGeneralize()
         const input = [
             {
-                HashId: 156,
+                Uid: 156,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "152",
@@ -139,7 +139,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "1-14",
                 Room: "KB207"
             }, {
-                HashId: 157,
+                Uid: 157,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "152",
@@ -150,7 +150,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "1-14",
                 Room: "KB209"
             }, {
-                HashId: 158,
+                Uid: 158,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "153",
@@ -161,7 +161,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "1-14",
                 Room: "KB209"
             }, {
-                HashId: 159,
+                Uid: 159,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "154",
@@ -180,7 +180,7 @@ describe("GeneralizeSlot", () => {
     it("should not mutate the input", () => {
         const input = [
             {
-                HashId: 161,
+                Uid: 161,
                 SubjectCode: "UEME2122", // Different subject code
                 SubjectName: "Fluid Mechanics I",
                 Number: "155",
@@ -191,7 +191,7 @@ describe("GeneralizeSlot", () => {
                 WeekNumber: "3,9",
                 Room: "KB731"
             }, {
-                HashId: 162,
+                Uid: 162,
                 SubjectCode: "UEME2123",
                 SubjectName: "Fluid Mechanics I",
                 Number: "156",

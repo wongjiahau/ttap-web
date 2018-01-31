@@ -18,8 +18,8 @@ export interface IRawSlot extends Identifiable {
 export class RawSlot implements IRawSlot {
     public static hash = 0;
     public static allRawSlots: RawSlot[] = [];
-    public static GetOne(hashId: number): RawSlot {
-        const matched = RawSlot.allRawSlots[hashId];
+    public static GetOne(Uid: number): RawSlot {
+        const matched = RawSlot.allRawSlots[Uid];
         if (matched) {
             return matched;
         } else {
@@ -39,14 +39,14 @@ export class RawSlot implements IRawSlot {
         });
     }
 
-    public static GetBunch(hashIds: number[]): RawSlot[] {
+    public static GetBunch(Uids: number[]): RawSlot[] {
         const result = new Array < RawSlot > ();
-        for (let i = 0; i < hashIds.length; i++) {
-            const matched = RawSlot.allRawSlots[hashIds[i]];
+        for (let i = 0; i < Uids.length; i++) {
+            const matched = RawSlot.allRawSlots[Uids[i]];
             if (matched) {
                 result.push(matched);
             } else {
-                throw new Error(hashIds[i] + "does not matches any HashId of any slot");
+                throw new Error(Uids[i] + "does not matches any Uid of any slot");
             }
         }
         return result;
@@ -64,9 +64,9 @@ export class RawSlot implements IRawSlot {
         return result;
     }
 
-    public static GetRelated(hashId: number): number[] {
+    public static GetRelated(Uid: number): number[] {
         const result = [];
-        const matching = RawSlot.GetOne(hashId);
+        const matching = RawSlot.GetOne(Uid);
         for (let i = 0; i < RawSlot.allRawSlots.length; i++) {
             const slot = RawSlot.allRawSlots[i];
             if (slot.Number === matching.Number) {

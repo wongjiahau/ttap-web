@@ -5,7 +5,7 @@ import {Week} from "./../att/week";
 import {RawSlot} from "./rawSlot";
 
 export interface ISlot {
-    HashId?:      number;
+    Uid?:      number;
     SlotNumber?:  number;
     SubjectCode?: number;
     TimePeriod?:  number;
@@ -15,7 +15,7 @@ export interface ISlot {
     Week?:        number;
 }
 export class Slot implements ISlot {
-    public readonly HashId: number;
+    public readonly Uid: number;
     public readonly SlotNumber: number;
     public readonly SubjectCode:     number;
     public readonly TimePeriod:      number;
@@ -24,7 +24,7 @@ export class Slot implements ISlot {
     public readonly Day:             number;
     public readonly Week:            number;
     public constructor(
-        hashId:      number,
+        Uid:      number,
         slotNumber:  number,
         subjectCode: number,
         timePeriod:  number,
@@ -33,7 +33,7 @@ export class Slot implements ISlot {
         day:         number,
         week:        number
     ) {
-        this.HashId      = hashId;
+        this.Uid      = Uid;
         this.SlotNumber  = slotNumber;
         this.SubjectCode = subjectCode;
         this.TimePeriod  = timePeriod;
@@ -59,7 +59,7 @@ export function IntersectWith(a: ISlot, b: ISlot): boolean {
 }
 export function CreateSlotFromRaw(raw : RawSlot) : Slot {
     const stringHash  = require("string-hash");
-    const hashId      = raw.Uid;
+    const Uid      = raw.Uid;
     const slotNumber = parseInt(raw.Number, 10);
     const subjectCode = stringHash(raw.SubjectCode);
     const timePeriod  = TimePeriod.Parse(raw.TimePeriod).BinaryData;
@@ -67,12 +67,12 @@ export function CreateSlotFromRaw(raw : RawSlot) : Slot {
     const type        = ParseType(raw.Type);
     const day         = ParseDay(raw.Day);
     const week        = Week.Parse(raw.WeekNumber).BinaryData;
-    return new Slot(hashId, slotNumber, subjectCode, timePeriod, group, type, day, week);
+    return new Slot(Uid, slotNumber, subjectCode, timePeriod, group, type, day, week);
 }
 
 export function CreateSlotFromInterface(s: ISlot) : Slot {
     return new Slot (
-         s.HashId,
+         s.Uid,
          s.SlotNumber,
          s.SubjectCode,
          s.TimePeriod,

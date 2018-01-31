@@ -15,7 +15,7 @@ describe("ParseSlotToTinySlot", () => {
         const slot1: ISlot = {
             Day: 0,
             Group: 1,
-            HashId: 1,
+            Uid: 1,
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
@@ -24,7 +24,7 @@ describe("ParseSlotToTinySlot", () => {
         const slot2: ISlot = {
             Day: 0,
             Group: 1,
-            HashId: 2,
+            Uid: 2,
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
@@ -40,7 +40,7 @@ describe("ParseSlotToTinySlot", () => {
         const slot1: ISlot = {
             Day: 0,
             Group: 1,
-            HashId: 1,
+            Uid: 1,
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
@@ -49,7 +49,7 @@ describe("ParseSlotToTinySlot", () => {
         const slot2: ISlot = {
             Day: 0,
             Group: 1,
-            HashId: 2,
+            Uid: 2,
             SlotNumber: 2,
             SubjectCode: 333,
             TimePeriod: 15,
@@ -60,11 +60,11 @@ describe("ParseSlotToTinySlot", () => {
         expect(result.length).to.eq(2);
     });
 
-    it("should collect hashId of slots from the same group", () => {
+    it("should collect Uid of slots from the same group", () => {
         const slot1: ISlot = {
             Day: 0, // Monday
             Group: 1,
-            HashId: 1,
+            Uid: 1,
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
@@ -73,7 +73,7 @@ describe("ParseSlotToTinySlot", () => {
         const slot2: ISlot = {
             Day: 1, // Tuesday
             Group: 1,
-            HashId: 2,
+            Uid: 2,
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
@@ -88,7 +88,7 @@ describe("ParseSlotToTinySlot", () => {
         const slot1: ISlot = {
             Day: 1, // Monday
             Group: 1,
-            HashId: 1,
+            Uid: 1,
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
@@ -97,7 +97,7 @@ describe("ParseSlotToTinySlot", () => {
         const slot2: ISlot = {
             Day: 2, // Tuesday
             Group: 1,
-            HashId: 2,
+            Uid: 2,
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,

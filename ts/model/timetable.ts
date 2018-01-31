@@ -3,10 +3,10 @@ import {
 } from "./rawSlot";
 
 export class Timetable {
-    public readonly HashIds : number[];
+    public readonly Uids : number[];
     public readonly State : number[];
-    public constructor(hashIds: number[], state : number[]) {
-        this.HashIds = hashIds;
+    public constructor(Uids: number[], state : number[]) {
+        this.Uids = Uids;
         this.State = CompressState(state);
     }
 }

@@ -35,8 +35,8 @@ describe("ParseHtmlToRawSlot", () => {
         };
         expect(
             isEqual(
-                omit(result[0], ["HashId", "toString"]),
-                omit(expected, ["HashId", "toString"])
+                omit(result[0], ["Uid", "toString"]),
+                omit(expected, ["Uid", "toString"])
             )).to.equal(true);
     });
 

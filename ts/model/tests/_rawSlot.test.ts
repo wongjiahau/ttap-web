@@ -10,7 +10,7 @@ import {
 } from "./../../tests/testDataGenerator";
 
 describe("RawSlot", () => {
-    it("every RawSlot should have a unique hashId", () => {
+    it("every RawSlot should have a unique Uid", () => {
         const rawSlots = GetTestRawSlot1();
         for (let i = 0; i < rawSlots.length; i++) {
             expect(rawSlots.filter((x) => x.Uid === rawSlots[i].Uid).length).to.eq(1);
@@ -18,13 +18,13 @@ describe("RawSlot", () => {
     });
 
     describe("RawSlot.GetOne()", () => {
-        it("should return one RawSlot if the argument matches one of the RawSlots's HashId", () => {
+        it("should return one RawSlot if the argument matches one of the RawSlots's Uid", () => {
             const rawSlots = GetTestRawSlot1();
             const result = RawSlot.GetOne(1);
             expect(result.Uid).to.eq(1);
         });
 
-        it("should return null if the argument does not match any RawSlot's HashId", () => {
+        it("should return null if the argument does not match any RawSlot's Uid", () => {
             const rawSlots = GetTestRawSlot1();
             const result = RawSlot.GetOne(9999);
             expect(result).to.eq(null);
@@ -40,7 +40,7 @@ describe("RawSlot", () => {
             expect(result.length).to.eq(4);
         });
 
-        it("should throw error if one of the input does not matches any RawSlot's HashId", () => {
+        it("should throw error if one of the input does not matches any RawSlot's Uid", () => {
             const input = [1, 2, 3, 9999];
             expect(() => {
                 RawSlot.GetBunch(input);

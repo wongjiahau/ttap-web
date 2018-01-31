@@ -17,7 +17,7 @@ function GetTestSlot() {
     const result: ISlot = {
         Day: 1, // 1 means Monday
         Group: 2,
-        HashId: 3,
+        Uid: 3,
         SlotNumber: 4,
         SubjectCode: 333,
         TimePeriod: 15, // 15 = 1111 in base 2
@@ -35,7 +35,7 @@ describe("tinySlot", () => {
 
         });
 
-        it("should set HashIds", () => {
+        it("should set Uids", () => {
             const result = new TinySlot(GetTestSlot());
             expect(isEqual(result.SlotIds, [3])).to.eq(true);
         });

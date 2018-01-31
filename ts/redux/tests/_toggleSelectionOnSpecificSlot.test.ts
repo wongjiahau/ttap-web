@@ -29,7 +29,7 @@ describe("toggle selection on specific slot", () => {
 
     it("should set property of SlotStates(1)", () => {
         // Given Ali selected subject HE
-        // When Ali deselected a slot of HE with hashId of 0
+        // When Ali deselected a slot of HE with Uid of 0
         // He shall see that the checkbox of slot is dechecked
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
@@ -41,7 +41,7 @@ describe("toggle selection on specific slot", () => {
 
     it("should set property of SlotStates(2)", () => {
         // Given Ali selected subject HE
-        // When Ali deselected a slot of HE with hashId of 0
+        // When Ali deselected a slot of HE with Uid of 0
         // And then Ali selected back the same slot
         // He shall see that the checkbox of slot is checked again
         const initialState = getInitialState();

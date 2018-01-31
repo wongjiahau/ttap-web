@@ -14,7 +14,7 @@ describe("Parser which is used to parse html into slots", () => {
     it("jiahau_2017_sept's last slot should have hash id of 202", () => {
         const plainHtml = jiahau2017septHtml;
         const result = ParseHtmlToSlots(plainHtml);
-        expect(last(result).HashId)
+        expect(last(result).Uid)
             .to
             .equal(202);
     });

@@ -39,7 +39,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     }
 
     protected Save(timetable: Timetable) {
-        this.rawSlots = RawSlot.GetBunch(timetable.HashIds);
+        this.rawSlots = RawSlot.GetBunch(timetable.Uids);
 
         gapi // eslint-disable-line
             .auth2
