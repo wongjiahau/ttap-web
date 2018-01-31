@@ -1,16 +1,16 @@
 const sortBy = require("lodash.sortby");
 import {ParseDay} from "../../att/day";
 import {TimePeriod} from "../../att/timePeriod";
-import {IGeneralizedSlot} from "../../model/generalizedSlot";
+import {ISlotState} from "../../model/generalizedSlot";
 
 /**
  * @export
- * @param {IGeneralizedSlot[]} slots must be sorted according to Day
+ * @param {ISlotState[]} slots must be sorted according to Day
  * @param {number} xOffset
  * @param {number} yOffset
  * @returns {[ReactGridLayout.Layout[], ReactGridLayout.Layout[]]} [0] is the SlotsLayout, [1] is the DayColumnLayouts
  */
-export function GenerateSlotAndDayLayouts(rawSlots : IGeneralizedSlot[], xOffset : number, yOffset : number) : [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
+export function GenerateSlotAndDayLayouts(rawSlots : ISlotState[], xOffset : number, yOffset : number) : [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
     const dayRows = GetDayRows();
     const slotLayouts: ReactGridLayout.Layout[] = [];
     for (let h = 0; h < rawSlots.length; h++) {

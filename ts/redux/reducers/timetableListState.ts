@@ -1,5 +1,5 @@
 import * as typeName from "type-name";
-import { CreateGeneralizedSlots, IGeneralizedSlot } from "../../model/generalizedSlot";
+import { CreateSlotStates, ISlotState } from "../../model/generalizedSlot";
 import { RawSlot } from "../../model/rawSlot";
 import { STCBox } from "../../model/states/stcBox";
 import { GeneralizeSlot } from "../../permutator/generalizeSlot";
@@ -11,12 +11,12 @@ export interface ITimetableListState {
     FiltrateTimetables: Timetable[];
     IsSummaryOpen:      boolean;
     ResidueTimetables:  Timetable[];
-    AllGeneralizedSlots: IGeneralizedSlot[];
+    AllGeneralizedSlots: ISlotState[];
 }
 
 export function NewTimetableListState(timetables: Timetable[], selectedSlots?: RawSlot[]) : ITimetableListState {
     const currentSlot = timetables.length > 0 ?
-        CreateGeneralizedSlots(GeneralizeSlot(selectedSlots)) :
+        CreateSlotStates(GeneralizeSlot(selectedSlots)) :
         null;
     return {
         CurrentIndex: 0,

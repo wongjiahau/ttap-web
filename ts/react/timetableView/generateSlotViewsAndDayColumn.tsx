@@ -3,13 +3,13 @@ import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {ParseDay} from "../../att/day";
 import {TimePeriod} from "../../att/timePeriod";
-import { IGeneralizedSlot } from "../../model/generalizedSlot";
+import { ISlotState } from "../../model/generalizedSlot";
 import {GenerateColorScheme} from "../colors/generateColorScheme";
 import {SlotView} from "../slotView";
 import { GenerateSlotAndDayLayouts } from "./generateSlotAndDayLayouts";
 import {ISkeleton, Skeleton} from "./skeleton";
 
-export function GenerateSlotViewsAndDayColumn(slots : IGeneralizedSlot[], selectSlotChoiceHandler: (x, y) => void) : ISkeleton {
+export function GenerateSlotViewsAndDayColumn(slots : ISlotState[], selectSlotChoiceHandler: (x, y) => void) : ISkeleton {
     const colorSchemes = GenerateColorScheme(slots);
     slots = sortBy(slots, [(o) => ParseDay(o.Day)]);
     const slotViews = slots.map((x, index) => {

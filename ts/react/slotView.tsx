@@ -5,7 +5,7 @@ import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Tooltip} from "react-tippy";
 import {Beautify, GetInitial} from "../helper";
-import {IGeneralizedSlot} from "../model/generalizedSlot";
+import {ISlotState} from "../model/generalizedSlot";
 import {Colors} from "./colors/colors";
 
 const divStyle : React.CSSProperties = {
@@ -14,7 +14,7 @@ const divStyle : React.CSSProperties = {
 };
 
 export interface ISlotViewProps {
-    slot : IGeneralizedSlot;
+    slot : ISlotState;
     color : Colors;
     handleSelectSlotChoice : (slotUid : number, newSlotChoice : number) => void;
 }
@@ -80,11 +80,11 @@ ISlotViewState > {
         );
     }
 
-    public slotContent = (slot : IGeneralizedSlot) => {
+    public slotContent = (slot : ISlotState) => {
         return GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " ";
     }
 
-    public menuItem = (slot : IGeneralizedSlot) => {
+    public menuItem = (slot : ISlotState) => {
         const clickHandler = (index) => {
             this.setState({anchorEl: null});
             this.props.handleSelectSlotChoice(slot.Uid, index);
@@ -128,7 +128,7 @@ ISlotViewState > {
 
 }
 
-function tooltipTitle(s : IGeneralizedSlot) {
+function tooltipTitle(s : ISlotState) {
     const style : React.CSSProperties = {
         fontSize: "12px"
     };

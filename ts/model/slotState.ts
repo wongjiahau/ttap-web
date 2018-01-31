@@ -1,6 +1,6 @@
 import { IRawSlot, RawSlot } from "./rawSlot";
 
-export interface IGeneralizedSlot {
+export interface ISlotState {
     Uid: number; //
     CurrentChoice: number; // zero-based index
     SubjectCode: string;
@@ -13,7 +13,7 @@ export interface IGeneralizedSlot {
     Room: string[];
 }
 
-export function CreateGeneralizedSlot(rawSlot: RawSlot): IGeneralizedSlot {
+export function CreateSlotState(rawSlot: RawSlot): ISlotState {
     const group = rawSlot.Group.split("/");
     return {
         Uid:            rawSlot.HashId,
@@ -29,6 +29,6 @@ export function CreateGeneralizedSlot(rawSlot: RawSlot): IGeneralizedSlot {
     };
 }
 
-export function CreateGeneralizedSlots(rawSlots: RawSlot[]): IGeneralizedSlot[] {
-    return rawSlots.map(CreateGeneralizedSlot);
+export function CreateSlotStates(rawSlots: RawSlot[]): ISlotState[] {
+    return rawSlots.map(CreateSlotState);
 }

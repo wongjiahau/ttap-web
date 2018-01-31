@@ -2,7 +2,7 @@ import Button from "material-ui/Button";
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
-import { IGeneralizedSlot } from "../../model/generalizedSlot";
+import { ISlotState } from "../../model/generalizedSlot";
 import {RawSlot} from "../../model/rawSlot";
 import {STCBox} from "../../model/states/stcBox";
 import {Timetable} from "../../model/timetable";
@@ -16,7 +16,7 @@ import {Skeleton} from "./skeleton";
 const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
 interface ITimetableViewProps {
-    slots : IGeneralizedSlot[];
+    slots : ISlotState[];
     states : STCBox[];
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;

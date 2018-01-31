@@ -6,7 +6,7 @@ import Button from "material-ui/Button";
 import Switch from "material-ui/Switch";
 import * as React from "react";
 import {Key} from "../enums/keyCodeEnum";
-import { IGeneralizedSlot } from "../model/generalizedSlot";
+import { ISlotState } from "../model/generalizedSlot";
 import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
@@ -23,7 +23,7 @@ const centerDivStyle : React.CSSProperties = {
 
 export interface ITimetableListViewStateProps {
     currentIndex:     number; // non-zero based
-    slots: IGeneralizedSlot[];
+    slots: ISlotState[];
     isSummaryOpen:    boolean;
     maxIndex:         number; // non-zero based
 }

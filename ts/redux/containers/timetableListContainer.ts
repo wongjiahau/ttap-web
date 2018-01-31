@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {CreateGeneralizedSlots} from "../../model/generalizedSlot";
+import {CreateSlotStates} from "../../model/generalizedSlot";
 import {RawSlot} from "../../model/rawSlot";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";

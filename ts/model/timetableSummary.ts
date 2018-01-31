@@ -1,6 +1,6 @@
 import {Beautify} from "../helper";
 import {PartitionizeByKey} from "../permutator/partitionize";
-import {IGeneralizedSlot} from "./generalizedSlot";
+import {ISlotState} from "./generalizedSlot";
 
 export class SubjectSummary {
     public readonly SubjectCode : string;
@@ -8,7 +8,7 @@ export class SubjectSummary {
     public readonly Lecture : string;
     public readonly Tutorial : string;
     public readonly Practical : string;
-    public constructor(slots : IGeneralizedSlot[]) {
+    public constructor(slots : ISlotState[]) {
         this.SubjectCode = slots[0].SubjectCode;
         this.SubjectName = Beautify(slots[0].SubjectName);
         const lectureSlot = this.GetSlotOf(slots, "L");
@@ -29,7 +29,7 @@ export class SubjectSummary {
         return this.SubjectCode + "\r\n" + this.SubjectName + "\r\n" + this.Lecture + " " + this.Tutorial + " " + this.Practical + "\r\n";
     }
 
-    private GetSlotOf(slots : IGeneralizedSlot[], slotType : string) {
+    private GetSlotOf(slots : ISlotState[], slotType : string) {
         return slots.filter((s) => s.Type === slotType)[0];
     }
 
@@ -37,7 +37,7 @@ export class SubjectSummary {
 
 export class TimetableSummary {
     public readonly SubjectSummaries : SubjectSummary[];
-    public constructor(slots : IGeneralizedSlot[]) {
+    public constructor(slots : ISlotState[]) {
         this.SubjectSummaries = [];
         const subjects = PartitionizeByKey(slots, "SubjectCode");
         subjects.forEach((partition) => {
