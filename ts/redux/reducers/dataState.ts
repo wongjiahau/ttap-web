@@ -5,13 +5,13 @@ import { ISlotState } from "./../../model/slotState";
 export interface IDataState {
     UngeneralizedRawSlotStore: ObjectStore<RawSlot>;
     GeneralizedRawSlotStore:   ObjectStore<RawSlot>;
-    SlotStateStore:            ObjectStore<ISlotState>;
+    CurrentRawSlotStore:       ObjectStore<RawSlot>;
 }
 
 export function NewDataState() : IDataState {
     return {
         UngeneralizedRawSlotStore: null,
         GeneralizedRawSlotStore: null,
-        SlotStateStore: null
+        CurrentRawSlotStore: null
     };
 }
