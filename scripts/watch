@@ -1,10 +1,16 @@
 #!/bin/bash
 # Clean the output directory
-rm -r src/core*
+if [ -d src/core ]; then
+    echo "Cleaning output directory"
+    rm -r src/core*
+else
+    echo "Output directory is empty. No cleaning is need to be done."
+fi
 
 # This script is to launch typescript compiler in watch mode
 # When this mode is turn on,
 # when you have changed a file and saved it,
 # it will automatically recompile the changed file only
 # so running in WATCH mode will speed up the compile process
+echo "Transpiling typescript into ./src/core . . . "
 tsc -p ./ts/tsconfig.json --watch 
