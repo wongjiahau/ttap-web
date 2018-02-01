@@ -42,7 +42,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         expect(action.TypeName()).to.eq("find timetables based on chosen slots");
     });
 
-    it.only("should set property of FiltrateTimetables and ResidueTimetables if there are no error", () => {
+    it("should set property of FiltrateTimetables and ResidueTimetables if there are no error", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
@@ -77,24 +77,25 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
 
     it("should set ErrorMessages of SlotsTableState if there are schema intolerance(3)", () => {
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BKA));
-        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.SA1));
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACD));
+        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.SA2));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
-        newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BKA));
-        // 48 is the slot number for L-1 of Structural Analysis
-        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("48", true, CodeOf.SA1));
+        newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.ACD));
+        // 239 is the slot number for L-1 of Structural Analysis
+        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("239", true, CodeOf.SA2));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq(
-            [new DiffReport(CodeOf.BKA, "L"), new DiffReport(CodeOf.SA1, "L")]
+            [new DiffReport(CodeOf.ACD, "L"), new DiffReport(CodeOf.SA2, "L")]
         );
     });
 
-    it("should set ErrorMessages SlotsTableState if no possible timetable is found even thought the schema is tolerated", () => {
+    it("should set ErrorMessages of SlotsTableState if no possible timetable is found even thought the schema is tolerated", () => {
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
-        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
+        let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACD));
+        newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
-        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("10", true, CodeOf.ACP));
+        newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
+        newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("2", false, CodeOf.HE));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq([new DiffReport("", "no possible timetables found")]);
     });
@@ -118,7 +119,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 });
 
-describe.only("GetSlotsFromSlotNumbers", () => {
+describe("GetSlotsFromSlotNumbers", () => {
     it("case 1", () => {
         const testSlots = HENG_2017_APR();
         const result = GetSlotsFromSlotNumbers(testSlots, ["1", "151"]);
