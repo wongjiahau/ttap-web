@@ -5,6 +5,7 @@ import IconViewList from "material-ui-icons/ViewList";
 import Button from "material-ui/Button";
 import Switch from "material-ui/Switch";
 import * as React from "react";
+import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";
 import { ISlotState } from "../model/slotState";
 import {STCBox} from "../model/states/stcBox";
@@ -23,9 +24,10 @@ const centerDivStyle : React.CSSProperties = {
 
 export interface ITimetableListViewStateProps {
     currentIndex:     number; // non-zero based
-    slots: ISlotState[];
+    currentTimetable: Timetable;
     isSummaryOpen:    boolean;
     maxIndex:         number; // non-zero based
+    slotStateStore:   ObjectStore<ISlotState>;
 }
 
 export interface ITimetableListViewDispatchProps {
@@ -44,14 +46,15 @@ ITimetableListViewStateProps,
 ITimetableListViewDispatchProps {}
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
-        if (this.props.slots === undefined) {
+        if (!this.props.slotStateStore) {
             return Logo();
         }
+        const slotsToBeRendered = this.props.slotStateStore.GetBunch(this.props.currentTimetable.Uids);
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <TimetableView
-                        slots={this.props.slots}
+                        slots={slotsToBeRendered}
                         states={null}
                         isSummaryOpen={this.props.isSummaryOpen}
                         handleSelectSlotChoice={this.props.handleSelectSlotChoice}

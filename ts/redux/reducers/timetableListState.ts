@@ -1,4 +1,5 @@
 import * as typeName from "type-name";
+import { ObjectStore } from "../../dataStructure/objectStore";
 import { RawSlot } from "../../model/rawSlot";
 import { CreateSlotStates, ISlotState } from "../../model/slotState";
 import { STCBox } from "../../model/states/stcBox";
@@ -11,19 +12,19 @@ export interface ITimetableListState {
     FiltrateTimetables: Timetable[];
     IsSummaryOpen:      boolean;
     ResidueTimetables:  Timetable[];
-    SlotStates: ISlotState[];
+    SlotStateStore:     ObjectStore<ISlotState>;
 }
 
 export function NewTimetableListState(timetables: Timetable[], selectedSlots?: RawSlot[]) : ITimetableListState {
-    const slotStates = timetables.length > 0 ?
-        CreateSlotStates(selectedSlots) :
+    const slotStateStore = timetables.length > 0 ?
+        new ObjectStore(CreateSlotStates(selectedSlots)) :
         null;
     return {
         CurrentIndex: 0,
         FiltrateTimetables: timetables,
         IsSummaryOpen: false,
         ResidueTimetables: [],
-        SlotStates: slotStates
+        SlotStateStore: slotStateStore
     };
 }
 

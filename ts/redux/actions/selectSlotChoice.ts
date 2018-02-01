@@ -8,7 +8,7 @@ export class SelectSlotChoice extends MasterStateAction {
     protected GenerateNewState(state : IMasterState) : IMasterState {
         const newSlots = state
             .TimetableListState
-            .SlotStates
+            .SlotStateStore
             .slice();
         for (let i = 0; i < newSlots.length; i++) {
             const x = newSlots[i];
@@ -21,7 +21,7 @@ export class SelectSlotChoice extends MasterStateAction {
             ...state,
             TimetableListState: {
                 ...state.TimetableListState,
-                SlotStates: newSlots
+                SlotStateStore: newSlots
             }
         };
     }

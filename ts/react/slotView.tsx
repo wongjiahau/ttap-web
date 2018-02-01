@@ -53,7 +53,7 @@ ISlotViewState > {
         };
         const slot = this.props.slot;
         return (
-            <Tooltip arrow={true} position="bottom" html={tooltipTitle(slot)}>
+            <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <ButtonBase
                     disableRipple={true}
                     style={buttonBaseStyle}

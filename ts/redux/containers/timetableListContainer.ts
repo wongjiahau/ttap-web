@@ -1,4 +1,5 @@
 import {connect} from "react-redux";
+import { ObjectStore } from "../../dataStructure/objectStore";
 import {RawSlot} from "../../model/rawSlot";
 import {CreateSlotStates} from "../../model/slotState";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
@@ -15,11 +16,13 @@ import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintV
 
 const mapStateToProps = (state) : ITimetableListViewStateProps => {
     const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
+    const index = timetableListState.CurrentIndex;
     return {
-        currentIndex: timetableListState.CurrentIndex,
-        slots: timetableListState.SlotStates,
-        isSummaryOpen: timetableListState.IsSummaryOpen,
-        maxIndex: timetableListState.FiltrateTimetables.length - 1
+        currentIndex:     index,
+        currentTimetable: timetableListState.FiltrateTimetables[index],
+        isSummaryOpen:    timetableListState.IsSummaryOpen,
+        maxIndex:         timetableListState.FiltrateTimetables.length - 1,
+        slotStateStore:   timetableListState.SlotStateStore
     };
 };
 
