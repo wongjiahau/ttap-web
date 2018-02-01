@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
 import {RawSlot} from "../../model/rawSlot";
-import { ISlotState } from "../../model/slotState";
+import { ISlotViewModel } from "../../model/slotViewModel";
 import {STCBox} from "../../model/states/stcBox";
 import {Timetable} from "../../model/timetable";
 import {Colors} from "../colors/colors";
@@ -16,7 +16,7 @@ import {Skeleton} from "./skeleton";
 const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
 interface ITimetableViewProps {
-    slots : ISlotState[];
+    slots : ISlotViewModel[];
     states : STCBox[];
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;

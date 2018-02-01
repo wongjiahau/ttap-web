@@ -31,7 +31,7 @@ describe("SelectSlotChoice action", () => {
         const initialState = getInitialState();
         const indexOfUEMK3233 = 4; // Bioprocess Engineering
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(indexOfUEMK3233));
-        expect(newState.TimetableListState.SlotStateStore.GetOne(229)).to.deep.eq({
+        expect(newState.TimetableListState.SlotViewModelStore.GetOne(229)).to.deep.eq({
             Uid: 229,
             CurrentChoice: 0,
             SubjectCode: "UEMK3233",
@@ -48,7 +48,7 @@ describe("SelectSlotChoice action", () => {
             Room: ["KB326", "KB326"]
         });
         newState = MasterStateReducer(newState, new SelectSlotChoice(229, 1));
-        expect(newState.TimetableListState.SlotStateStore.GetOne(229)).to.deep.eq({
+        expect(newState.TimetableListState.SlotViewModelStore.GetOne(229)).to.deep.eq({
             Uid: 229,
             CurrentChoice: 1,
             SubjectCode: "UEMK3233",

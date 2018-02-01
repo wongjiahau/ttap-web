@@ -1,6 +1,6 @@
 import { IRawSlot, RawSlot } from "./rawSlot";
 
-export interface ISlotState {
+export interface ISlotViewModel {
     Uid: number; //
     CurrentChoice: number; // zero-based index
     SubjectCode: string;
@@ -13,7 +13,7 @@ export interface ISlotState {
     Room: string[];
 }
 
-export function CreateSlotState(rawSlot: RawSlot): ISlotState {
+export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
     const group = rawSlot.Group.split("/");
     return {
         Uid:            rawSlot.Uid,
@@ -29,6 +29,6 @@ export function CreateSlotState(rawSlot: RawSlot): ISlotState {
     };
 }
 
-export function CreateSlotStates(rawSlots: RawSlot[]): ISlotState[] {
-    return rawSlots.map(CreateSlotState);
+export function CreateSlotViewModels(rawSlots: RawSlot[]): ISlotViewModel[] {
+    return rawSlots.map(CreateSlotViewModel);
 }

@@ -1,9 +1,9 @@
 const sortBy = require("lodash.sortby");
 const uniqBy = require("lodash.uniqby");
-import {ISlotState} from "../../model/slotState";
+import {ISlotViewModel} from "../../model/slotViewModel";
 import {ChosenColors, Colors} from "./colors";
 
-export function GenerateColorScheme(slots : ISlotState[]) : IColorScheme[] {
+export function GenerateColorScheme(slots : ISlotViewModel[]) : IColorScheme[] {
     const result = new Array < IColorScheme > ();
     const subjectCodes = uniqBy(slots, (s) => s.SubjectCode).map((s) => s.SubjectCode);
     sortBy(subjectCodes).forEach((s, index) => {

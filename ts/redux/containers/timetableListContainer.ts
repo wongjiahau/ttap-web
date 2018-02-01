@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import { ObjectStore } from "../../dataStructure/objectStore";
 import {RawSlot} from "../../model/rawSlot";
-import {CreateSlotStates} from "../../model/slotState";
+import {CreateSlotViewModels} from "../../model/slotViewModel";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";
@@ -22,7 +22,7 @@ const mapStateToProps = (state) : ITimetableListViewStateProps => {
         currentTimetable: timetableListState.FiltrateTimetables[index],
         isSummaryOpen:    timetableListState.IsSummaryOpen,
         maxIndex:         timetableListState.FiltrateTimetables.length - 1,
-        slotStateStore:   timetableListState.SlotStateStore
+        slotViewModelStore:   timetableListState.SlotViewModelStore
     };
 };
 

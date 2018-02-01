@@ -1,12 +1,12 @@
 const find = require("lodash.find");
 import * as React from "react";
-import {ISlotState} from "../model/slotState";
+import {ISlotViewModel} from "../model/slotViewModel";
 import {SubjectSummary, TimetableSummary} from "../model/timetableSummary";
 import {Colors} from "./colors/colors";
 import {GenerateColorScheme} from "./colors/generateColorScheme";
 
 interface ITimetableSummaryViewProps {
-    slots : ISlotState[];
+    slots : ISlotViewModel[];
 }
 
 export class TimetableSummaryView extends React.Component < ITimetableSummaryViewProps, {} > {

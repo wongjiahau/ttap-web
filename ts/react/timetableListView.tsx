@@ -7,7 +7,7 @@ import Switch from "material-ui/Switch";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";
-import { ISlotState } from "../model/slotState";
+import { ISlotViewModel } from "../model/slotViewModel";
 import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
@@ -23,11 +23,11 @@ const centerDivStyle : React.CSSProperties = {
 };
 
 export interface ITimetableListViewStateProps {
-    currentIndex:     number; // non-zero based
-    currentTimetable: Timetable;
-    isSummaryOpen:    boolean;
-    maxIndex:         number; // non-zero based
-    slotStateStore:   ObjectStore<ISlotState>;
+    currentIndex:       number; // non-zero based
+    currentTimetable:   Timetable;
+    isSummaryOpen:      boolean;
+    maxIndex:           number; // non-zero based
+    slotViewModelStore: ObjectStore<ISlotViewModel>;
 }
 
 export interface ITimetableListViewDispatchProps {
@@ -46,10 +46,10 @@ ITimetableListViewStateProps,
 ITimetableListViewDispatchProps {}
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
-        if (!this.props.slotStateStore) {
+        if (!this.props.slotViewModelStore) {
             return Logo();
         }
-        const slotsToBeRendered = this.props.slotStateStore.GetBunch(this.props.currentTimetable.Uids);
+        const slotsToBeRendered = this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids);
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
                 <StackPanel orientation="vertical" horizontalAlignment="center">

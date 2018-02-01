@@ -6,7 +6,7 @@ export class SelectSlotChoice extends MasterStateAction {
     }
     public TypeName() : string {return "select slot choice"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        const oldObjectStore = state.TimetableListState.SlotStateStore;
+        const oldObjectStore = state.TimetableListState.SlotViewModelStore;
         const newSlotStateStore = new ObjectStore(oldObjectStore.GetAll());
         const slotsToBeModified = newSlotStateStore.GetOne(this.slotUid);
         slotsToBeModified.CurrentChoice = this.newSlotChoice;
@@ -14,7 +14,7 @@ export class SelectSlotChoice extends MasterStateAction {
             ...state,
             TimetableListState: {
                 ...state.TimetableListState,
-                SlotStateStore: newSlotStateStore
+                SlotViewModelStore: newSlotStateStore
             }
         };
     }
