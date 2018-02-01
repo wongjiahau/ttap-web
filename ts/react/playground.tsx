@@ -18,20 +18,6 @@ export interface IPlaygroundProps {
 
 export class Playground extends React.Component < IPlaygroundProps, {} > {
     public render() {
-        const debugging = false;
-        const content = debugging
-            ? ""
-            : (<TimetableCreatorContainer/>);
-        return "This is a playground";
-        // const timetable = GetTestTimetables1()[0];
-        // return (
-        //     <div>
-        //         <MuiThemeProvider>
-        //             <div>
-        //                 <TimetableSummaryView Timetable={timetable}/>
-        //             </div>
-        //         </MuiThemeProvider>
-        //     </div>
-        // );
+        return <TimetableCreatorContainer/>;
     }
 }

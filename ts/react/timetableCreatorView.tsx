@@ -12,6 +12,8 @@ import { SubjectListViewContainer } from "../redux/containers/subjectListViewCon
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 import {SBCWDialogContainer} from "../redux/containers/turnOnSBCWDialogContainer";
 import {HENG_2017_APR} from "../tests/testData/heng_2017_apr";
+import { GetTestRawSlot1, GetTestSlot1 } from "../tests/testDataGenerator";
+import TestManager, { FileName } from "../tests/testManager";
 import { LeftRightPanel } from "./panels/leftRightPanel";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
@@ -38,11 +40,16 @@ export interface ITimetableCreatorViewDispatchProps {
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
-ITimetableCreatorViewDispatchProps {}
+ITimetableCreatorViewDispatchProps {
+}
 
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
-        if (!this.props.isSlotLoaded) {
+        const DEBUGGING = true; // Please change to false during production
+        if (DEBUGGING) {
+            this.props.handleSlotLoaded(HENG_2017_APR());
+            alert("WARNING! You are in a debugging session.");
+        } else if (!this.props.isSlotLoaded) {
             return <Redirect push={true} to="/select"/>;
         }
         return (
