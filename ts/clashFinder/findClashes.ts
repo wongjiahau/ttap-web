@@ -30,7 +30,7 @@ export function FindClashes(subjects : Subject[], rawSlotStore : ObjectStore < R
         if (subject1.ClashingCounterparts.some((code) => code === subject2.Code)) {
             continue;
         }
-        const slotUids = [].concat.apply([], subjects.map((x) => x.SlotUids));
+        const slotUids = [].concat.apply([], [subject1, subject2].map((x) => x.SlotUids));
         const slots = rawSlotStore.GetBunch(slotUids);
         const timetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(slots)));
         if (timetables.length === 0) {

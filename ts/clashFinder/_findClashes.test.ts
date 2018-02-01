@@ -2,29 +2,42 @@ import {
     expect
 } from "chai";
 import * as Combinatorics from "js-combinatorics";
+import { ObjectStore } from "../dataStructure/objectStore";
+import { Subject } from "../model/subject";
+import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
+import { ParseSlotToSubject } from "../parser/parseSlotToSubject";
+import { CodeOf } from "../tests/testData/heng_2017_apr";
 import {
-    GetTestSubjects1
+    GetTestRawSlot1
 } from "../tests/testDataGenerator";
 import {
     FindClashes,
 } from "./findClashes";
 
+const testSlots = GetTestRawSlot1();
+const rawSlotStore = new ObjectStore(testSlots);
+const testSubjects = () => ParseSlotToSubject(testSlots);
+
+function get(subjectCode: string, subjects: Subject[]): Subject {
+    return subjects.filter((x) => x.Code === subjectCode)[0];
+}
+
 describe("FindClashes()", () => {
     it("should throw error when input length is less than 2", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
+        const subjects = testSubjects();
+        const acp = get(CodeOf.ACP, subjects);
         expect(() => {
-            FindClashes([acp]);
+            FindClashes([acp], rawSlotStore);
         }).to.throw();
     });
 
     it("should mutate the input's ClasingCounterpart property only", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bka = subjects.filter((x) => x.Code === "MPU32013")[0]; // BKA
+        const subjects = testSubjects();
+        const acp = get(CodeOf.ACP, subjects);
+        const bka = get(CodeOf.BKA, subjects);
         const selectedSubjects = [acp, bka];
         const originalAcp = JSON.parse(JSON.stringify(acp));
-        FindClashes(selectedSubjects);
+        FindClashes(selectedSubjects, rawSlotStore);
         const mutatedAcp = JSON.parse(JSON.stringify(acp));
         expect(mutatedAcp).to.not.deep.eq(originalAcp);
         delete originalAcp.ClashingCounterparts;
@@ -33,52 +46,48 @@ describe("FindClashes()", () => {
     });
 
     it("should not duplicate clashing counterparts", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bka = subjects.filter((x) => x.Code === "MPU32013")[0]; // BKA
+        const subjects = testSubjects();
+        const acp = get(CodeOf.ACP, subjects);
+        const bka = get(CodeOf.BKA, subjects);
         const selectedSubjects = [acp, bka];
-        FindClashes(selectedSubjects);
+        FindClashes(selectedSubjects, rawSlotStore);
         expect(acp.ClashingCounterparts.length).to.eq(1);
         expect(bka.ClashingCounterparts.length).to.eq(1);
 
         // Find clashes again
-        FindClashes(selectedSubjects);
+        FindClashes(selectedSubjects, rawSlotStore);
         expect(acp.ClashingCounterparts.length).to.eq(1);
         expect(bka.ClashingCounterparts.length).to.eq(1);
     });
 
     it("case 1", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bka = subjects.filter((x) => x.Code === "MPU32013")[0]; // BKA
+        const subjects = testSubjects();
+        const acp = get(CodeOf.ACP, subjects);
+        const bka = get(CodeOf.BKA, subjects);
         const selectedSubjects = [acp, bka];
-        FindClashes(selectedSubjects);
+        FindClashes(selectedSubjects, rawSlotStore);
         expect(acp.ClashingCounterparts).to.include(bka.Code);
         expect(bka.ClashingCounterparts).to.include(acp.Code);
     });
 
     it("case 2", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bka = subjects.filter((x) => x.Code === "MPU32013")[0]; // BKA
-        const bmk = subjects.filter((x) => x.Code === "MPU3143")[0]; // BMK
+        const subjects = testSubjects();
+        const acp = get(CodeOf.ACP, subjects);
+        const bka = get(CodeOf.BKA, subjects);
+        const bmk = get(CodeOf.BMK2, subjects);
         const selectedSubjects = [acp, bka, bmk];
-        FindClashes(selectedSubjects);
-        expect(acp.ClashingCounterparts.length).to.eq(1);
-        expect(bka.ClashingCounterparts.length).to.eq(2);
-        expect(bmk.ClashingCounterparts.length).to.eq(1);
-        expect(acp.ClashingCounterparts).to.include(bka.Code);
-        expect(bka.ClashingCounterparts).to.include(acp.Code);
-        expect(bka.ClashingCounterparts).to.include(bmk.Code);
-        expect(bmk.ClashingCounterparts).to.include(bka.Code);
+        FindClashes(selectedSubjects, rawSlotStore);
+        expect(acp.ClashingCounterparts).to.deep.eq([bka.Code]);
+        expect(bka.ClashingCounterparts).to.deep.eq([acp.Code, bmk.Code]);
+        expect(bmk.ClashingCounterparts).to.deep.eq([bka.Code]);
     });
 
     it("case 3", () => {
-        const subjects = GetTestSubjects1();
-        const acp = subjects.filter((x) => x.Code === "MPU34022")[0]; // ACP
-        const bmk = subjects.filter((x) => x.Code === "MPU3143")[0]; // BMK
+        const subjects = testSubjects();
+        const acp = get(CodeOf.ACP, subjects);
+        const bmk = get(CodeOf.BMK2, subjects);
         const selectedSubjects = [acp, bmk];
-        FindClashes(selectedSubjects);
+        FindClashes(selectedSubjects, rawSlotStore);
         expect(acp.ClashingCounterparts.length === 0);
         expect(bmk.ClashingCounterparts.length === 0);
     });

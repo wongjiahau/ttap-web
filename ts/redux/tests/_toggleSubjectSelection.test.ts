@@ -1,45 +1,25 @@
-import {
-    expect
-} from "chai";
+import { expect } from "chai";
 const isEqual = require("lodash.isequal");
-import {
-    FindClashes
-} from "../../clashFinder/findClashes";
-import {
-    FindTimetableWithoutConsideringWeekNumber
-} from "../../permutator/findTimetable";
-import {
-    GetTestSubjects1,
-    IndexOf
-} from "../../tests/testDataGenerator";
-import {
-    NewSubjectListState
-} from "../reducers/subjectListState";
-import {
-    CodeOf
-} from "./../../tests/testDataGenerator";
-import {
-    ToggleSubjectListViewingOptions
-} from "./../actions/toggleSubjectListViewingOption";
-import {
-    CheckForClashesBetween,
-    GetSelectedSlots,
-    ToggleSubjectSelection
-} from "./../actions/toggleSubjectSelection";
-import {
-    IMasterState,
-    MasterStateReducer,
-    NewMasterState
-} from "./../reducers/masterState";
+import { FindClashes } from "../../clashFinder/findClashes";
+import { ObjectStore } from "../../dataStructure/objectStore";
+import { ParseSlotToSubject } from "../../parser/parseSlotToSubject";
+import { FindTimetableWithoutConsideringWeekNumber } from "../../permutator/findTimetable";
+import { GetTestRawSlot1, GetTestSubjects1, IndexOf } from "../../tests/testDataGenerator";
+import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
+import { NewSubjectListState } from "../reducers/subjectListState";
+import { CodeOf } from "./../../tests/testDataGenerator";
+import { ToggleSubjectListViewingOptions } from "./../actions/toggleSubjectListViewingOption";
+import { CheckForClashesBetween, GetSelectedSlots, ToggleSubjectSelection } from "./../actions/toggleSubjectSelection";
+import { IMasterState, MasterStateReducer, NewMasterState } from "./../reducers/masterState";
 
-const mockSubjects = GetTestSubjects1();
-FindClashes(mockSubjects); // some test will fail if this line is not run
+const testSlots = GetTestRawSlot1();
+const mockSubjects = ParseSlotToSubject(testSlots);
+FindClashes(mockSubjects, new ObjectStore(testSlots)); // some test will fail if this line is not run
 
 function getInitialState(): IMasterState {
-    return {
-        ...NewMasterState(),
-        SubjectListState: NewSubjectListState(mockSubjects)
-    };
+        const newState = MasterStateReducer(NewMasterState(),
+            new NotifyDataLoaded(testSlots));
+        return newState;
 }
 describe("toggle subject selection action", () => {
 

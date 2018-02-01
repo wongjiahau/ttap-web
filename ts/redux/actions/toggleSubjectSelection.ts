@@ -1,3 +1,4 @@
+import {ObjectStore} from "./../../dataStructure/objectStore";
 import {GetSemStartDateDialog} from "./../../react/getSemStartDateDialog";
 const includes = require("lodash.includes");
 import * as S from "string";
@@ -11,6 +12,7 @@ import {IMasterState, MasterStateAction, MasterStateReducer} from "./../reducers
 import {ToggleSubjectListViewingOptions} from "./toggleSubjectListViewingOption";
 
 let CurrentTimetableFinder : (rawSlots : RawSlot[]) => Timetable[];
+let RawSlotStore : ObjectStore<RawSlot>;
 
 export class ToggleSubjectSelection extends MasterStateAction {
     public constructor(private subjectIndex : number) {
@@ -19,6 +21,7 @@ export class ToggleSubjectSelection extends MasterStateAction {
     public TypeName() : string {return "toggle subject selection"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
         CurrentTimetableFinder = state.SettingsState.TimetableFinder;
+        RawSlotStore = state.DataState.RawSlotDataRouter.GetCurrentData();
         const newSubjects = state
             .SubjectListState
             .Subjects
@@ -67,7 +70,9 @@ export function DeselectSubject(subjectToBeDeselected : Subject, allSubjects : S
     const selectedSubjects = allSubjects.filter((x) => x.IsSelected);
     ReleaseDisabledSubjectsIfPossible(selectedSubjects, allSubjects);
     const selectedSlots = GetSelectedSlots(selectedSubjects);
-    const timetables = selectedSubjects.length > 0 ? CurrentTimetableFinder(selectedSlots) : [];
+    const timetables = selectedSubjects.length > 0
+        ? CurrentTimetableFinder(selectedSlots)
+        : [];
     const result: IMasterState = {
         ...state,
         SubjectListState: {
@@ -106,7 +111,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects : Subject[], 
                 }
                 break;
             case "group":
-                if (CurrentTimetableFinder(GetSelectedSlots(selectedSubjects.concat([s]))).length > 0) {
+                if (CurrentTimetableFinder(GetSelectedSlots(selectedSubjects.concat([s])), ).length > 0) {
                     s.ClashReport = null;
                 }
                 break;
@@ -133,6 +138,6 @@ export function GetSelectedSlots(subjects : Subject[]) : RawSlot[] {
     for (let i = 0; i < subjects.length; i++) {
         slotIds = slotIds.concat(subjects[i].SlotUids);
     }
-    const result = RawSlot.GetBunch(slotIds);
+    const result = RawSlotStore.GetBunch(slotIds);
     return result;
 }
