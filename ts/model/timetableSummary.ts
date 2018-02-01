@@ -11,18 +11,15 @@ export class SubjectSummary {
     public constructor(slots : ISlotState[]) {
         this.SubjectCode = slots[0].SubjectCode;
         this.SubjectName = Beautify(slots[0].SubjectName);
-        const lectureSlot = this.GetSlotOf(slots, "L");
-        this.Lecture = lectureSlot
-            ? "L-" + lectureSlot.Group[lectureSlot.CurrentChoice]
+        const extract = (type: string) => {
+            const slot = this.GetSlotOf(slots, type);
+            return slot
+            ? `${type}-` + slot.Group[slot.CurrentChoice]
             : "-";
-        const tutorialSlot = this.GetSlotOf(slots, "T");
-        this.Tutorial = tutorialSlot
-            ? "T-" + tutorialSlot.Group[lectureSlot.CurrentChoice]
-            : "-";
-        const practicalSlot = this.GetSlotOf(slots, "P");
-        this.Practical = practicalSlot
-            ? "P-" + practicalSlot.Group[lectureSlot.CurrentChoice]
-            : "-";
+        };
+        this.Lecture =  extract("L");
+        this.Tutorial = extract("T");
+        this.Practical = extract("P");
     }
 
     public ToString() : string {

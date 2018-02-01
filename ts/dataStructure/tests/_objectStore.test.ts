@@ -68,4 +68,16 @@ describe("ObjectStore", () => {
         });
 
     });
+
+    describe("GetAll", () => {
+        it("should return all values of the dict as a list", () => {
+            const data = [
+                new MockClass(1, "bob"),
+                new MockClass(2, "ali"),
+                new MockClass(3, "lili")
+            ];
+            const x = new ObjectStore(data);
+            expect(x.GetAll()).to.deep.eq(data.slice());
+        });
+    });
 });

@@ -32,4 +32,8 @@ export class ObjectStore<T extends Identifiable> {
         }
         return results;
     }
+
+    public GetAll(): T[] {
+        return Object.keys(this.dict).map(( key ) => this.dict[key]);
+    }
 }
