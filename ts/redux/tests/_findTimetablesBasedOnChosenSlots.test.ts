@@ -8,13 +8,7 @@ import {
 import {
     DiffReport
 } from "../../model/subjectSchema";
-import { HENG_2017_APR } from "../../tests/testData/heng_2017_apr";
-import {
-    CodeOf,
-    GetTestRawSlot1,
-    GetTestSubjects1,
-    IndexOf
-} from "../../tests/testDataGenerator";
+import { CodeOf, HENG_2017_APR, IndexOf } from "../../tests/testData/heng_2017_apr";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import {
     ToggleSelectionOnGroupOfSlots
@@ -52,12 +46,12 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
+        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(4);
         newState = MasterStateReducer(newState, new ToggleSelectionOnSpecificSlot("1", true, CodeOf.HE));
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq(null);
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(2);
-        // expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(0);
+        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
+        expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(0);
     });
 
     it("should set ErrorMessages property of SlotsTableState if there are schema intolerance(1)", () => {

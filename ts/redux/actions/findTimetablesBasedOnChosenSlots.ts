@@ -1,6 +1,8 @@
 const find = require("lodash.find");
 const sortBy = require("lodash.sortby");
+import { IStringDicionary } from "../../interfaces/dictionary";
 import {RawSlot} from "../../model/rawSlot";
+import {ISlotViewModel} from "../../model/slotViewModel";
 import {DiffReport, GenerateSubjectSchema, GetDiff, SubjectSchema} from "../../model/subjectSchema";
 import {Timetable} from "../../model/timetable";
 import {PartitionizeByKey} from "../../permutator/partitionize";
@@ -13,37 +15,20 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
     }
     public TypeName() : string {return "find timetables based on chosen slots"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        const slotStore = state
-            .DataState
-            .RawSlotDataRouter
-            .GetDataFrom("ungeneralized");
+        const slotStore = state.DataState.RawSlotDataRouter.GetDataFrom("ungeneralized");
         const slotTableState = state.SlotTableState;
         const slotNumbersOfSelectedSlots = GetSlotNumbers(slotTableState.SlotStates);
-        for (const key in slotTableState.SlotStates) {
-            if (slotTableState.SlotStates.hasOwnProperty(key)) {
-                const current = slotTableState.SlotStates[key];
-                if (current === true) {
-                    slotNumbersOfSelectedSlots.push(key);
-                }
-            }
-        }
         let currentSubjectSchemas: SubjectSchema[] = [];
         let newTimetables: Timetable[] = [];
         let selectedSlots: RawSlot[];
         if (slotNumbersOfSelectedSlots.length > 0) {
             selectedSlots = GetSlotsFromSlotNumbers(slotStore.GetAll(), slotNumbersOfSelectedSlots);
-            newTimetables = state
-                .SettingsState
-                .TimetableFinder(selectedSlots);
+            newTimetables = state.SettingsState.TimetableFinder(selectedSlots);
             const slotsOfSubjects = PartitionizeByKey(selectedSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
             sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
         }
-
-        const selectedSubjects = state
-            .SubjectListState
-            .Subjects
-            .filter((s) => s.IsSelected);
+        const selectedSubjects = state.SubjectListState.Subjects.filter((s) => s.IsSelected);
         const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(slotStore.GetBunch(s.SlotUids)));
         sortBy(correctSubjectSchemas, [(o) => o.SubjectCode]);
 
@@ -93,5 +78,17 @@ export function GetSlotsFromSlotNumbers(allSlots : RawSlot[], slotNumbers : stri
     slotNumbers.forEach((num) => {
         result = result.concat(allSlots.filter((x) => x.Number === num));
     });
+    return result;
+}
+export function GetSlotNumbers(slotState : IStringDicionary<boolean>) : string[] {
+    const result = [];
+    for (const key in slotState) {
+        if (slotState.hasOwnProperty(key)) {
+            const current = slotState[key];
+            if (current === true) {
+                result.push(key);
+            }
+        }
+    }
     return result;
 }
