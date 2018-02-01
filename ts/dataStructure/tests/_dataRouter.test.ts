@@ -50,6 +50,15 @@ describe("DataRouter", () => {
             x.AddData("apple" , 99);
             expect(x.GetDataFrom("banana")).to.eq(undefined);
         });
+    });
+
+    describe("GetCurrentRoute", () => {
+        it("should return the current route", () => {
+            const x = new DataRouter();
+            x.AddData("apple", 99);
+            x.SetRouteTo("apple");
+            expect(x.GetCurrentRoute()).to.eq("apple");
+        });
 
     });
 

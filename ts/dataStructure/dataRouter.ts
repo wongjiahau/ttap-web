@@ -1,35 +1,46 @@
-import { IStringDicionary } from "./../interfaces/dictionary";
+import {IStringDicionary} from "./../interfaces/dictionary";
 
-export class DataRouter<T> {
-    private dict: IStringDicionary<T>;
-    private currentLabel: string;
+export class DataRouter < T > {
+    private dict : IStringDicionary < T >;
+    private currentRoute : string;
     public constructor() {
         this.dict = {};
-        this.currentLabel = null;
+        this.currentRoute = null;
     }
 
-    public AddData(label: string, data: T) {
-        if (this.dict[label] !== undefined) {
-            throw new Error(label + " is an existed key in this DataRouter instance.");
+    public AddData(route : string, data : T) {
+        if (this.dict[route] !== undefined) {
+            throw new Error(route + " is an existed key in this DataRouter instance.");
         }
-        this.dict[label] = data;
+        this.dict[route] = data;
     }
 
-    public SetRouteTo(newLabel: string) {
-        if (this.dict[newLabel] === undefined) {
-            throw new Error("No data existed at " + newLabel);
+    public SetRouteTo(newRoute : string) {
+        if (this.dict[newRoute] === undefined) {
+            throw new Error("No data existed at " + newRoute);
         }
-        this.currentLabel = newLabel;
+        this.currentRoute = newRoute;
     }
 
     public GetCurrentData() : T {
-        if (this.currentLabel === null) {
+        if (this.currentRoute === null) {
             throw new Error("No route is set yet.");
         }
-        return this.dict[this.currentLabel];
+        return this.dict[this.currentRoute];
     }
 
-    public GetDataFrom(label: string) {
-        return this.dict[label];
+    public GetCurrentRoute(): string {
+        return this.currentRoute;
+    }
+
+    public GetDataFrom(route : string) {
+        return this.dict[route];
+    }
+
+    public Clone() : DataRouter < T > {
+        const clone = new DataRouter();
+        clone.dict = this.dict;
+        clone.currentRoute = this.currentRoute;
+        return clone as DataRouter<T>;
     }
 }

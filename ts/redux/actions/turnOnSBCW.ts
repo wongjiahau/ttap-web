@@ -8,9 +8,6 @@ import {
     IMasterState,
     MasterStateAction
 } from "./../reducers/masterState";
-import {
-    FindTimetableBasedOn
-} from "./toggleSubjectSelection";
 export class TurnOnSBCW extends MasterStateAction {
     public constructor() {
         super();
@@ -19,8 +16,13 @@ export class TurnOnSBCW extends MasterStateAction {
         return "turn on search by considering week number";
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
+        const newDataRouter = state.DataState.RawSlotDataRouter.Clone();
+        newDataRouter.SetRouteTo("ungeneralized");
         return {
             ...state,
+            DataState: {
+                RawSlotDataRouter: newDataRouter
+            },
             SettingsState: {
                 ...state.SettingsState,
                 SearchByConsideringWeekNumber: true,
