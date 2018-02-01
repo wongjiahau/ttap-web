@@ -4410,8 +4410,5 @@ export const HENG_2017_APR = () : IRawSlot[] =>  {
         Room: "KB318"
     },
     ];
-    cache.forEach((slot) => {
-        RawSlot.RegisterSlot(slot);
-    });
     return cache;
 };
