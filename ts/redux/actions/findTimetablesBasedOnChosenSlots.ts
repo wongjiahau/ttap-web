@@ -1,39 +1,24 @@
 const find = require("lodash.find");
 const sortBy = require("lodash.sortby");
-import {
-    RawSlot
-} from "../../model/rawSlot";
-import {
-    DiffReport,
-    GenerateSubjectSchema,
-    GetDiff,
-    SubjectSchema
-} from "../../model/subjectSchema";
-import {
-    Timetable
-} from "../../model/timetable";
-import {
-    PartitionizeByKey
-} from "../../permutator/partitionize";
-import {
-    NewTimetableListState
-} from "../reducers/timetableListState";
-import {
-    IMasterState,
-    MasterStateAction
-} from "./../reducers/masterState";
+import {RawSlot} from "../../model/rawSlot";
+import {DiffReport, GenerateSubjectSchema, GetDiff, SubjectSchema} from "../../model/subjectSchema";
+import {Timetable} from "../../model/timetable";
+import {PartitionizeByKey} from "../../permutator/partitionize";
+import {NewTimetableListState} from "../reducers/timetableListState";
+import {IMasterState, MasterStateAction} from "./../reducers/masterState";
 
 export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
     public constructor() {
         super();
     }
-    public TypeName(): string {
-        return "find timetables based on chosen slots";
-    }
-    protected GenerateNewState(state: IMasterState): IMasterState {
-        const slotStore = state.DataState.RawSlotDataRouter.GetDataFrom("ungeneralized");
+    public TypeName() : string {return "find timetables based on chosen slots"; }
+    protected GenerateNewState(state : IMasterState) : IMasterState {
+        const slotStore = state
+            .DataState
+            .RawSlotDataRouter
+            .GetDataFrom("ungeneralized");
         const slotTableState = state.SlotTableState;
-        const slotNumbersOfSelectedSlots = GetSlotNumbers()
+        const slotNumbersOfSelectedSlots = GetSlotNumbers(slotTableState.SlotStates);
         for (const key in slotTableState.SlotStates) {
             if (slotTableState.SlotStates.hasOwnProperty(key)) {
                 const current = slotTableState.SlotStates[key];
@@ -47,21 +32,24 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         let selectedSlots: RawSlot[];
         if (slotNumbersOfSelectedSlots.length > 0) {
             selectedSlots = GetSlotsFromSlotNumbers(slotStore.GetAll(), slotNumbersOfSelectedSlots);
-            newTimetables = state.SettingsState.TimetableFinder(selectedSlots);
+            newTimetables = state
+                .SettingsState
+                .TimetableFinder(selectedSlots);
             const slotsOfSubjects = PartitionizeByKey(selectedSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
             sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
         }
 
-        const selectedSubjects = state.SubjectListState.Subjects.filter((s) => s.IsSelected);
+        const selectedSubjects = state
+            .SubjectListState
+            .Subjects
+            .filter((s) => s.IsSelected);
         const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(slotStore.GetBunch(s.SlotUids)));
         sortBy(correctSubjectSchemas, [(o) => o.SubjectCode]);
 
         let errorMessages: DiffReport[] = [];
         correctSubjectSchemas.forEach((s) => {
-            let matchingSchema = find(currentSubjectSchemas, {
-                SubjectCode: s.SubjectCode
-            });
+            let matchingSchema = find(currentSubjectSchemas, {SubjectCode: s.SubjectCode});
             if (matchingSchema === undefined) {
                 matchingSchema = new SubjectSchema(false, false, false, s.SubjectCode);
             }
@@ -100,10 +88,10 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         };
     }
 }
-export function GetSlotsFromSlotNumbers(allSlots: RawSlot[], slotNumbers: string[]): RawSlot[] {
+export function GetSlotsFromSlotNumbers(allSlots : RawSlot[], slotNumbers : string[]) : RawSlot[] {
     let result = [];
     slotNumbers.forEach((num) => {
-        result =  result.concat(allSlots.filter((x) => x.Number === num));
+        result = result.concat(allSlots.filter((x) => x.Number === num));
     });
     return result;
 }
