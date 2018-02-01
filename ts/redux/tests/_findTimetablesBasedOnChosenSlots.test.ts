@@ -8,11 +8,14 @@ import {
 import {
     DiffReport
 } from "../../model/subjectSchema";
+import { HENG_2017_APR } from "../../tests/testData/heng_2017_apr";
 import {
     CodeOf,
+    GetTestRawSlot1,
     GetTestSubjects1,
     IndexOf
 } from "../../tests/testDataGenerator";
+import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import {
     ToggleSelectionOnGroupOfSlots
 } from "../actions/toggleSelectionOnGroupOfSlots";
@@ -27,7 +30,7 @@ import {
     NewSubjectListState
 } from "../reducers/subjectListState";
 import {
-    FindTimetablesBasedOnChosenSlots
+    FindTimetablesBasedOnChosenSlots, GetSlotsFromSlotNumbers
 } from "./../actions/findTimetablesBasedOnChosenSlots";
 import {
     IMasterState,
@@ -36,11 +39,7 @@ import {
 } from "./../reducers/masterState";
 
 function getInitialState(): IMasterState {
-    RawSlot.Reset();
-    return {
-        ...NewMasterState(),
-        SubjectListState: NewSubjectListState(GetTestSubjects1())
-    };
+    return MasterStateReducer(NewMasterState(), new NotifyDataLoaded(HENG_2017_APR()));
 }
 
 describe("FindTimetablesBasedOnChosenSlots action", () => {
@@ -49,7 +48,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         expect(action.TypeName()).to.eq("find timetables based on chosen slots");
     });
 
-    it("should set property of FiltrateTimetables and ResidueTimetables if there are no error", () => {
+    it.only("should set property of FiltrateTimetables and ResidueTimetables if there are no error", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
@@ -58,7 +57,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.deep.eq(null);
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(2);
-        expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(0);
+        // expect(newState.TimetableListState.ResidueTimetables).to.have.lengthOf(0);
     });
 
     it("should set ErrorMessages property of SlotsTableState if there are schema intolerance(1)", () => {
@@ -122,5 +121,50 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.eq(null);
         expect(newState.SnackbarState.IsOpen).to.eq(true);
+    });
+});
+
+describe.only("GetSlotsFromSlotNumbers", () => {
+    it("case 1", () => {
+        const testSlots = HENG_2017_APR();
+        const result = GetSlotsFromSlotNumbers(testSlots, ["1", "151"]);
+        expect(result).to.have.lengthOf(3);
+        const expected = [
+            {
+                Uid: 1,
+                SubjectCode: "MPU3113",
+                SubjectName: "Hubungan Etnik (for Local Students)",
+                Number: "1",
+                Type: "L",
+                Group: "1",
+                Day: "Mon",
+                TimePeriod: "  9:00 AM - 12:00 PM",
+                WeekNumber: "1-14",
+                Room: "KB521"
+            }, {
+                Uid: 154,
+                SubjectCode: "UEME2123",
+                SubjectName: "Fluid Mechanics I",
+                Number: "151",
+                Type: "L",
+                Group: "1",
+                Day: "Mon",
+                TimePeriod: " 10:00 AM - 12:00 PM",
+                WeekNumber: "1-14",
+                Room: "KB209"
+            }, {
+                Uid: 155,
+                SubjectCode: "UEME2123",
+                SubjectName: "Fluid Mechanics I",
+                Number: "151",
+                Type: "L",
+                Group: "1",
+                Day: "Thu",
+                TimePeriod: "  1:00 PM -  2:00 PM",
+                WeekNumber: "1-14",
+                Room: "KB207"
+            }
+        ];
+        expect(result).to.deep.eq(expected);
     });
 });

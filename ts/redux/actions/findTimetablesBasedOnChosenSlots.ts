@@ -31,8 +31,9 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         return "find timetables based on chosen slots";
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
+        const slotStore = state.DataState.RawSlotDataRouter.GetDataFrom("ungeneralized");
         const slotTableState = state.SlotTableState;
-        const slotNumbersOfSelectedSlots: string[] = [];
+        const slotNumbersOfSelectedSlots = GetSlotNumbers()
         for (const key in slotTableState.SlotStates) {
             if (slotTableState.SlotStates.hasOwnProperty(key)) {
                 const current = slotTableState.SlotStates[key];
@@ -43,16 +44,17 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         }
         let currentSubjectSchemas: SubjectSchema[] = [];
         let newTimetables: Timetable[] = [];
+        let selectedSlots: RawSlot[];
         if (slotNumbersOfSelectedSlots.length > 0) {
-            const rawSlots = RawSlot.GetBunchFromSlotNumbers(slotNumbersOfSelectedSlots);
-            newTimetables = state.SettingsState.TimetableFinder(rawSlots);
-            const slotsOfSubjects = PartitionizeByKey(rawSlots, "SubjectCode");
+            selectedSlots = GetSlotsFromSlotNumbers(slotStore.GetAll(), slotNumbersOfSelectedSlots);
+            newTimetables = state.SettingsState.TimetableFinder(selectedSlots);
+            const slotsOfSubjects = PartitionizeByKey(selectedSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
             sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
         }
 
         const selectedSubjects = state.SubjectListState.Subjects.filter((s) => s.IsSelected);
-        const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(RawSlot.GetBunch(s.SlotUids)));
+        const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(slotStore.GetBunch(s.SlotUids)));
         sortBy(correctSubjectSchemas, [(o) => o.SubjectCode]);
 
         let errorMessages: DiffReport[] = [];
@@ -94,7 +96,14 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
                 IsOpen: false,
                 ErrorMessages: null
             },
-            TimetableListState: NewTimetableListState(newTimetables)
+            TimetableListState: NewTimetableListState(newTimetables, selectedSlots)
         };
     }
+}
+export function GetSlotsFromSlotNumbers(allSlots: RawSlot[], slotNumbers: string[]): RawSlot[] {
+    let result = [];
+    slotNumbers.forEach((num) => {
+        result =  result.concat(allSlots.filter((x) => x.Number === num));
+    });
+    return result;
 }
