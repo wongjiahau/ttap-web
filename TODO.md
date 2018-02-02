@@ -1,14 +1,20 @@
 # TODO
-- Add SetSlotChoice.ts action
-- Fix `Show slots` problem, select ASSD then click on Show Slots then you'll understand
-- Got bug when trying to generalized slots of Chemical Engineering Laboratory I
-- Fix save timetable as picture problem (not rendering correctly anymore)
-- Fix timetableSummary problem
-- Implement new FindTimetable using the following algo:
+
+[x] Changing setting should set the current slot store
+[x] Fix `Show slots` problem, select ASSD then click on Show Slots then you'll understand
+[X] Got bug when trying to generalized slots of Chemical Engineering Laboratory I
+[X] Fix save timetable as picture problem (not rendering correctly anymore)
+[x] Fix timetableSummary problem
+[] Implement new FindTimetable using the following algo:
     - Partition slot into FullWeekSlot and PartialWeekSlot
     - Find timetables on list of FullWeekSlot
     - then based on the found timetables, used them to permutate new timetabes with every combination of PartialWeekSlot
+[] - release global dependencies on RawSlot static methods
 
-- Fix bug of <button> should not be embedded inside <button> for slotView
+[x] Fix bug of <button> should not be embedded inside <button> for slotView
+
+[] Fix failing unit test
+[] Build horizontal lines
+[] Speed up unit test
 
 - Complete the code for TTAP-analysis
