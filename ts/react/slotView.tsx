@@ -8,11 +8,6 @@ import {Beautify, GetInitial} from "../helper";
 import {ISlotViewModel} from "../model/slotViewModel";
 import {Colors} from "./colors/colors";
 
-const divStyle : React.CSSProperties = {
-    width: "100%",
-    fontFamily: "roboto"
-};
-
 export interface ISlotViewProps {
     slot : ISlotViewModel;
     color : Colors;
@@ -34,7 +29,10 @@ let buttonBaseStyle : React.CSSProperties = {
     borderTop:               borderThickness,
     borderTopLeftRadius:     borderRadius,
     borderTopRightRadius:    borderRadius,
-    width:                   "100%"
+    fontFamily:              "roboto",
+    fontSize:                "13.5px",
+    width:                   "100%",
+    textAlign:               "center"
 };
 
 export class SlotView extends React.Component < ISlotViewProps,
@@ -54,27 +52,24 @@ ISlotViewState > {
         const slot = this.props.slot;
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
-                <ButtonBase
-                    disableRipple={true}
+                <div
                     style={buttonBaseStyle}
                     onClick={() => console.log(this.props.slot)}>
-                    <div style={divStyle}>
-                        <b>
-                            {this.slotContent(slot)}
-                            {slot.Group.length > 1
-                                ? this.arrowDownButton()
-                                : ""}
-                        </b>
-                        <br/> {slot.Room[slot.CurrentChoice]}
-                        <br/> {slot.WeekNumber[slot.CurrentChoice]}
-                    </div>
+                    <b>
+                        {this.slotContent(slot)}
+                        {slot.Group.length > 1
+                            ? this.arrowDownButton()
+                            : ""}
+                    </b>
+                    <br/> {slot.Room[slot.CurrentChoice]}
+                    <br/> {slot.WeekNumber[slot.CurrentChoice]}
                     <Menu
                         id="long-menu"
                         anchorEl={this.state.anchorEl}
                         open={Boolean(this.state.anchorEl)}>
                         {this.menuItem(slot)}
                     </Menu>
-                </ButtonBase>
+                </div>
             </Tooltip>
 
         );
