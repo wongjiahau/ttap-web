@@ -104,9 +104,12 @@ ISlotViewState > {
             width:       "0"
         };
         const buttonStyle : React.CSSProperties = {
-            width: "10px",
-            height: "10px",
-            padding: "0px"
+            height:   "10px",
+            padding:  "0px",
+            position: "absolute",
+            right:    "2px",
+            top:      "2px",
+            width:    "10px",
         };
         const clickHandler = (event) => this.setState({anchorEl: event.currentTarget});
         return <button
