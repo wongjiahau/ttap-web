@@ -110,6 +110,7 @@ ISlotViewState > {
         };
         const clickHandler = (event) => this.setState({anchorEl: event.currentTarget});
         return <button
+            className="arrow-down-button"
             aria-label="More"
             aria-owns={this.state.anchorEl
             ? "long-menu"

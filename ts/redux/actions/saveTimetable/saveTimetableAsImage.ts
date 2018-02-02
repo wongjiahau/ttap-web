@@ -21,6 +21,11 @@ export class SaveTimetableAsImage extends SaveTimetable {
 <!-- Roboto font -->
 <html>
 <body>
+    <style>
+        .arrow-down-button {
+            display: none
+        }
+    </style>
     ${html}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <script language="javascript">
