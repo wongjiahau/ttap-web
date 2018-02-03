@@ -12,6 +12,7 @@ import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
 import {RawSlot} from "./../model/rawSlot";
 import {Subject} from "./../model/subject";
 import {Timetable} from "./../model/timetable";
+import { HENG_2017_APR } from "./testData/heng_2017_apr";
 
 export const GetTestSubjects1 = () : Subject[] => {
     const subjects = ParseSlotToSubject(ParseHtmlToSlots(heng_2017_sept()));
@@ -19,8 +20,7 @@ export const GetTestSubjects1 = () : Subject[] => {
 };
 
 export const GetTestRawSlot1 = () : RawSlot[] => {
-    RawSlot.Reset();
-    return ParseHtmlToSlots(heng_2017_sept());
+    return HENG_2017_APR();
 };
 
 export const GetTestSlot1 = () : Slot[] => {
