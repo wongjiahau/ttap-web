@@ -6,9 +6,10 @@ import Paper from "material-ui/Paper";
 import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui/Table";
 import Typography from "material-ui/Typography";
 import * as React from "react";
+import { ObjectStore } from "../dataStructure/objectStore";
 import {Beautify} from "../helper";
 import {IStringDicionary} from "../interfaces/dictionary";
-import {RawSlot} from "../model/rawSlot";
+import {IRawSlot, RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 import {DiffReport} from "../model/subjectSchema";
 import { Ternary } from "../redux/actions/updateSlotsTableState";
@@ -43,6 +44,7 @@ export interface ISlotsTableViewStateProps {
     selectedSubjects : Subject[];
     slotStates : IStringDicionary < boolean >;
     subjectStates : IStringDicionary < Ternary >;
+    rawSlotStore: ObjectStore<IRawSlot>;
 }
 
 export interface ISlotsTableViewDispatchProps {
@@ -114,7 +116,7 @@ ISlotsTableViewInternalState > {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {RawSlot
+                                                {this.props.rawSlotStore
                                                     .GetBunch(subject.SlotUids)
                                                     .map((slot, index) => {
                                                         const checked = this.props.slotStates[slot.Number];

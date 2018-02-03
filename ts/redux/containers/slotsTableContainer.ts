@@ -28,6 +28,7 @@ import {
 import {
     ToggleSelectionOnSpecificSlot
 } from "../actions/toggleSelectionOnSpecificSlot";
+import { IMasterState } from "../reducers/masterState";
 import {
     ISlotsTableState
 } from "../reducers/slotsTableState";
@@ -43,7 +44,8 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
         isOpen:           slotsTableState.IsOpen,
         selectedSubjects: subjectListState.Subjects.filter((s) => s.IsSelected),
         slotStates:       slotsTableState.SlotStates,
-        subjectStates:    slotsTableState.SubjectStates
+        subjectStates:    slotsTableState.SubjectStates,
+        rawSlotStore:     state.MasterStateReducer.DataState.RawSlotDataRouter.GetDataFrom("ungeneralized")
     };
 };
 
