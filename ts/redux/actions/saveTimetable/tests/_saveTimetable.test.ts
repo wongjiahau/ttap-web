@@ -1,6 +1,6 @@
-import {expect} from "chai";
 const isEqual = require("lodash.isequal");
-import { GetTestTimetables1 } from "../../../../tests/testDataGenerator";
+import {expect} from "chai";
+import { GetTestRawSlot1, GetTestTimetables1 } from "../../../../tests/testDataGenerator";
 import { NewTimetableListState } from "../../../reducers/timetableListState";
 import { ToggleIsOpenOfGetDateDialog } from "../../toggleIsOpenOfGetDateDialog";
 import {ToggleIsOpenOfSaveDialog} from "../../toggleIsOpenOfSaveDialog";
@@ -10,7 +10,7 @@ import {MockSaveTimetable} from "./../saveTimetable";
 function getInitialState() : IMasterState {
     return {
         ...NewMasterState(),
-        TimetableListState: NewTimetableListState(GetTestTimetables1())
+        TimetableListState: NewTimetableListState(GetTestTimetables1(), GetTestRawSlot1())
     };
 }
 

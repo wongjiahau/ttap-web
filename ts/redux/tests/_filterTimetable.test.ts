@@ -9,7 +9,7 @@ import {
     STCBox
 } from "./../../model/states/stcBox";
 import {
-    GetTestTimetables1
+    GetTestRawSlot1, GetTestTimetables1
 } from "./../../tests/testDataGenerator";
 import {
     FilterTimetable
@@ -27,7 +27,7 @@ const state = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5);
 
 function getInitialState(): IMasterState {
     const result = NewMasterState();
-    result.TimetableListState = NewTimetableListState(GetTestTimetables1());
+    result.TimetableListState = NewTimetableListState(GetTestTimetables1(), GetTestRawSlot1());
     return result;
 }
 

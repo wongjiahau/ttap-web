@@ -36,7 +36,7 @@ export function NewMasterState() : IMasterState {
         SnackbarState:            NewSnackbarState(),
         SubjectListState:         NewSubjectListState(null),
         TimetableCreatorState:    NewTimetableCreatorState(),
-        TimetableListState:       NewTimetableListState([])
+        TimetableListState:       NewTimetableListState([], null)
     };
 }
 export abstract class MasterStateAction extends Action < IMasterState > {
