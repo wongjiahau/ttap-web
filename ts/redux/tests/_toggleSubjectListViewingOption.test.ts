@@ -3,6 +3,7 @@ import {
 } from "chai";
 
 const isEqual = require("lodash.isequal");
+import { IndexOf } from "../../tests/testData/heng_2017_sept";
 import {
     GetTestSubjects1
 } from "../../tests/testDataGenerator";
@@ -14,9 +15,6 @@ import {
 import {
     NewSubjectListState
 } from "../reducers/subjectListState";
-import {
-    IndexOf
-} from "./../../tests/testDataGenerator";
 import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";

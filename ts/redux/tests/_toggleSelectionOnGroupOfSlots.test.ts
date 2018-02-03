@@ -5,10 +5,9 @@ const isEqual = require("lodash.isequal");
 import {
     RawSlot
 } from "../../model/rawSlot";
+import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
 import {
-    CodeOf,
     GetTestSubjects1,
-    IndexOf
 } from "../../tests/testDataGenerator";
 import {
     ToggleSelectionOnGroupOfSlots

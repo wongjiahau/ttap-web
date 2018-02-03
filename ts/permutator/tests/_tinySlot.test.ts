@@ -2,12 +2,13 @@ import {
     expect
 } from "chai";
 const isEqual = require("lodash.isequal");
+import { CodeOf } from "../../tests/testData/heng_2017_sept";
 import {
     CreateSlotFromInterface,
     ISlot
 } from "./../../model/slot";
 import {
-    CodeOf, GetTinySlotsOf
+    GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
 import {
     TinySlot

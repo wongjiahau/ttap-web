@@ -1,11 +1,11 @@
 import {
     expect
 } from "chai";
+import { CodeOf } from "../../tests/testData/heng_2017_sept";
 import {
     RawSlot
 } from "../rawSlot";
 import {
-    CodeOf,
     GetTestRawSlot1
 } from "./../../tests/testDataGenerator";
 

@@ -2,7 +2,8 @@ import {expect} from "chai";
 
 const isEqual = require("lodash.isequal");
 const find = require("lodash.find");
-import { CodeOf, GetTestSubjects1, IndexOf } from "../../tests/testDataGenerator";
+import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
+import { GetTestSubjects1 } from "../../tests/testDataGenerator";
 import { ToggleSubjectSelection } from "../actions/toggleSubjectSelection";
 import { NewSubjectListState} from "../reducers/subjectListState";
 import {GetSlotStates, GetSubjectStates, UpdateSlotsTableState} from "./../actions/updateSlotsTableState";

@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { RawSlot } from "../../model/rawSlot";
-import { CodeOf, GetTestSubjects1, IndexOf } from "../../tests/testDataGenerator";
+import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
+import { GetTestSubjects1 } from "../../tests/testDataGenerator";
 import { ToggleSelectionOnSpecificSlot } from "../actions/toggleSelectionOnSpecificSlot";
 import { ToggleSubjectSelection } from "../actions/toggleSubjectSelection";
 import { IMasterState, MasterStateReducer, NewMasterState } from "../reducers/masterState";

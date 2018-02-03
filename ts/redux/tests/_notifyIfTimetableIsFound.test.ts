@@ -1,5 +1,6 @@
 import { expect } from "chai";
-import { GetTestRawSlot1, GetTestSubjects1, GetTestTimetables1, IndexOf } from "../../tests/testDataGenerator";
+import { IndexOf } from "../../tests/testData/heng_2017_sept";
+import { GetTestRawSlot1, GetTestSubjects1, GetTestTimetables1 } from "../../tests/testDataGenerator";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import { NotifyIfTimetableIsFound } from "../actions/notifyIfTimetableIsFound";
 import { ToggleSubjectSelection } from "../actions/toggleSubjectSelection";

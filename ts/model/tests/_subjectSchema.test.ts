@@ -1,10 +1,9 @@
 import {
     expect
 } from "chai";
+import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
 import {
-    CodeOf,
     GetTestSubjects1,
-    IndexOf
 } from "../../tests/testDataGenerator";
 import {
     RawSlot

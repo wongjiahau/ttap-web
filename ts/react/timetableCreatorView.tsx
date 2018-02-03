@@ -45,7 +45,7 @@ ITimetableCreatorViewDispatchProps {
 
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
-        const DEBUGGING = true; // Please change to false during production
+        const DEBUGGING = false; // Please change to false during production
         if (DEBUGGING) {
             this.props.handleSlotLoaded(HENG_2017_APR());
             alert("WARNING! You are in a debugging session.");
