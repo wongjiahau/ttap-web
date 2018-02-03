@@ -3,7 +3,7 @@ import {
 } from "chai";
 import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
 import {
-    GetTestSubjects1,
+    GetTestSubjects1, RawSlotStore,
 } from "../../tests/testDataGenerator";
 import {
     RawSlot
@@ -78,14 +78,14 @@ describe("GenerateSubjectSchema", () => {
         const acp = subjects[IndexOf.ACP];
         const he = subjects[IndexOf.HE];
         expect(() => {
-            GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotUids.concat(he.SlotUids)));
+            GenerateSubjectSchema(RawSlotStore.GetBunch(acp.SlotUids.concat(he.SlotUids)));
         }).to.throw();
     });
 
     it("case 1", () => {
         const subjects = GetTestSubjects1();
         const acp = subjects[IndexOf.ACP];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotUids));
+        const result = GenerateSubjectSchema(RawSlotStore.GetBunch(acp.SlotUids));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(false);
         expect(result.GotPractical).to.eq(false);
@@ -95,7 +95,7 @@ describe("GenerateSubjectSchema", () => {
     it("case 2", () => {
         const subjects = GetTestSubjects1();
         const beam = subjects[IndexOf.BEAM];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(beam.SlotUids));
+        const result = GenerateSubjectSchema(RawSlotStore.GetBunch(beam.SlotUids));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(true);
         expect(result.GotPractical).to.eq(false);
@@ -105,7 +105,7 @@ describe("GenerateSubjectSchema", () => {
     it("case 3", () => {
         const subjects = GetTestSubjects1();
         const industrialTraning = subjects[IndexOf.IT];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(industrialTraning.SlotUids));
+        const result = GenerateSubjectSchema(RawSlotStore.GetBunch(industrialTraning.SlotUids));
         expect(result.GotLecture).to.eq(false);
         expect(result.GotTutorial).to.eq(false);
         expect(result.GotPractical).to.eq(true);

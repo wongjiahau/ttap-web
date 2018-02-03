@@ -1,13 +1,7 @@
-import {
-    expect
-} from "chai";
-import {
-    GetTestRawSlot1,
-    IndexOf
-} from "../../tests/testDataGenerator";
-import {
-    ParseSlotToSubject
-} from "../parseSlotToSubject";
+import { expect } from "chai";
+import { IndexOf } from "../../tests/testData/heng_2017_sept";
+import { GetTestRawSlot1, } from "../../tests/testDataGenerator";
+import { ParseSlotToSubject } from "../parseSlotToSubject";
 
 describe("ParseSlotToSubject", () => {
     it("should set the SlotNumber property of each subject without duplication", () => {
