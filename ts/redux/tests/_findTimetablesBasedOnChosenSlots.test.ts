@@ -9,6 +9,7 @@ import {
     DiffReport
 } from "../../model/subjectSchema";
 import { CodeOf, HENG_2017_APR, IndexOf } from "../../tests/testData/heng_2017_apr";
+import { GetMockInitialState } from "../../tests/testDataGenerator";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import {
     ToggleSelectionOnGroupOfSlots
@@ -32,10 +33,6 @@ import {
     NewMasterState
 } from "./../reducers/masterState";
 
-function getInitialState(): IMasterState {
-    return MasterStateReducer(NewMasterState(), new NotifyDataLoaded(HENG_2017_APR()));
-}
-
 describe("FindTimetablesBasedOnChosenSlots action", () => {
     it("'s typename should be 'find timetables based on chosen slots'", () => {
         const action = new FindTimetablesBasedOnChosenSlots();
@@ -43,7 +40,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 
     it("should set property of FiltrateTimetables and ResidueTimetables if there are no error", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState("heng_2017_apr");
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(4);
@@ -55,7 +52,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 
     it("should set ErrorMessages property of SlotsTableState if there are schema intolerance(1)", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState("heng_2017_apr");
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BKA));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
@@ -65,7 +62,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 
     it("should set ErrorMessages of SlotsTableState if there are schema intolerance(2)", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState("heng_2017_apr");
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.BEAM));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.BEAM));
@@ -76,7 +73,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 
     it("should set ErrorMessages of SlotsTableState if there are schema intolerance(3)", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState("heng_2017_apr");
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACD));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.SA2));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
@@ -90,7 +87,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 
     it("should set ErrorMessages of SlotsTableState if no possible timetable is found even thought the schema is tolerated", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState("heng_2017_apr");
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACD));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
@@ -101,7 +98,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 
     it("should set IsOpen property of SlotTableState to false if there are no errors", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState("heng_2017_apr");
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
@@ -110,7 +107,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
     });
 
     it("should notify user about number of timetables found if there are no errors", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState("heng_2017_apr");
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());

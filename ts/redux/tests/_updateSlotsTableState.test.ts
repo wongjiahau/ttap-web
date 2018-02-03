@@ -3,18 +3,13 @@ import {expect} from "chai";
 const isEqual = require("lodash.isequal");
 const find = require("lodash.find");
 import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
-import { GetTestSubjects1 } from "../../tests/testDataGenerator";
+import { GetMockInitialState, GetTestRawSlot1, GetTestSubjects1 } from "../../tests/testDataGenerator";
+import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import { ToggleSubjectSelection } from "../actions/toggleSubjectSelection";
 import { NewSubjectListState} from "../reducers/subjectListState";
 import {GetSlotStates, GetSubjectStates, UpdateSlotsTableState} from "./../actions/updateSlotsTableState";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 
-function getInitialState(): IMasterState {
-    return {
-        ...NewMasterState(),
-        SubjectListState: NewSubjectListState(GetTestSubjects1())
-    };
-}
 describe("UpdateSlotsTableState action", () => {
     it("'s typename should be 'update slots table state'", () => {
         const action = new UpdateSlotsTableState();
@@ -22,7 +17,7 @@ describe("UpdateSlotsTableState action", () => {
     });
 
     it("should set SlotStates property of SlotTableState", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         // Note: SlotNumbers of Hubungan Etnik is [1,2,3] as it is the first subject in the list
@@ -36,14 +31,14 @@ describe("UpdateSlotsTableState action", () => {
     });
 
     it("should set SubjectStates property of SlotTableState", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         expect(newState.SlotTableState.SubjectStates[CodeOf.HE]).to.eq("true");
     });
 
     it("should clear the error message property of SlotTableState", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         initialState.SlotTableState.ErrorMessages = [];
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());

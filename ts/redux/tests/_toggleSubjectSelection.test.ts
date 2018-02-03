@@ -5,7 +5,7 @@ import { ObjectStore } from "../../dataStructure/objectStore";
 import { ParseSlotToSubject } from "../../parser/parseSlotToSubject";
 import { FindTimetableWithoutConsideringWeekNumber } from "../../permutator/findTimetable";
 import { IndexOf } from "../../tests/testData/heng_2017_sept";
-import { GetTestRawSlot1, GetTestSubjects1 } from "../../tests/testDataGenerator";
+import { GetMockInitialState, GetTestRawSlot1, GetTestSubjects1 } from "../../tests/testDataGenerator";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import { NewSubjectListState } from "../reducers/subjectListState";
 import { ToggleSubjectListViewingOptions } from "./../actions/toggleSubjectListViewingOption";
@@ -16,11 +16,6 @@ const testSlots = GetTestRawSlot1();
 const mockSubjects = ParseSlotToSubject(testSlots);
 FindClashes(mockSubjects, new ObjectStore(testSlots)); // some test will fail if this line is not run
 
-function getInitialState(): IMasterState {
-        const newState = MasterStateReducer(NewMasterState(),
-            new NotifyDataLoaded(testSlots));
-        return newState;
-}
 describe("toggle subject selection action", () => {
 
     it("'s type name should be 'select subject'", () => {
@@ -32,20 +27,20 @@ describe("toggle subject selection action", () => {
     });
 
     it("should toggle selection on a subject based on its subject index", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.SubjectListState.Subjects[IndexOf.HE].IsSelected).to.eq(true);
     });
 
     it("should toggle selection on subject from true to false also", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.SubjectListState.Subjects[IndexOf.HE].IsSelected).to.eq(false);
     });
 
     it("should show all subjects when user deselected all subjects", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions());
         expect(newState.SubjectListState.IsShowingSelectedSubjectOnly).to.eq(true);
@@ -55,7 +50,7 @@ describe("toggle subject selection action", () => {
     });
 
     it("should set the property of timetable when selecting subject", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
 
@@ -70,7 +65,7 @@ describe("toggle subject selection action", () => {
             Then Ali shall see a clash report saying 'MPU32013' cannot be selected
             And the clash report should be Single-Clashing error, not Group-Clashing error
         `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             const clashReport = newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport;
@@ -87,7 +82,7 @@ describe("toggle subject selection action", () => {
             Then Ali shall see a clash report on [BEAM] saying that
                 it cannot be selected due to Group Clashing
         `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
@@ -104,7 +99,7 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'MPU32013' [BKA]
             And Then When Ali deselected subject 'MPU34022' [ACP]
             Then Ali shall see that the clash report on [BKA] is cleared `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP));
@@ -119,7 +114,7 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'MPU3143' [BMK2] (which is clashing with BKA)
             And Then When Ali deselected subject 'MPU34022' [ACP]
             Then Ali shall see that the clash report's on [BKA] is updated to [BMK2] `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
@@ -136,7 +131,7 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'UKMM1043' [BEAM]
             And Then When Ali deselected subject [ACP] or [BMK2]
             Then Ali shall see that the clash report on [BEAM] is cleared `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
@@ -153,7 +148,7 @@ describe("toggle subject selection action", () => {
             And Then When Ali deselected [BMK2]
             Then Ali shall that the clash report on [BEAM] is gone`;
 
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
@@ -172,7 +167,7 @@ describe("toggle subject selection action", () => {
             And Then When Ali deselected [HE]
             Then Ali shall that the clash report on [BEAM] is still there`;
 
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
