@@ -6,7 +6,7 @@ import {
     STCBox
 } from "../../model/states/stcBox";
 import {
-    GetTestTimetables1
+    GetTestRawSlot1, GetTestTimetables1
 } from "../../tests/testDataGenerator";
 import {
     NewTimetableListState
@@ -26,7 +26,7 @@ import {
 function getInitialState(): IMasterState {
     return {
         ...NewMasterState(),
-        TimetableListState: NewTimetableListState(GetTestTimetables1())
+        TimetableListState: NewTimetableListState(GetTestTimetables1(), GetTestRawSlot1())
     };
 }
 
