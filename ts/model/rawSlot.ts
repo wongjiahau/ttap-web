@@ -16,7 +16,11 @@ export interface IRawSlot extends Identifiable {
 }
 
 export class RawSlot implements IRawSlot {
-    public static nextUid = 0;
+    public static ResetUid(s: RawSlot): IRawSlot {
+        s.Uid = RawSlot.nextUid++;
+        return s;
+    }
+    private static nextUid = 0;
     public Uid: number; // Unique for every slot object
     public SubjectCode: string;
     public SubjectName: string;
@@ -33,6 +37,7 @@ export class RawSlot implements IRawSlot {
     constructor() {
         this.Uid = RawSlot.nextUid++;
     }
+
     public toString = (): string => {
         return `---
     SubjectCode : ${this.SubjectCode}

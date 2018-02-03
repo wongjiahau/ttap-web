@@ -147,7 +147,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             } else {
                 throw new Error("Unknown file type: " + fileType);
             }
-            this.props.handleLoadSlot(parser(response.body.toString()));
+            const slots = parser(response.body.toString()).map(RawSlot.ResetUid);
+            this.props.handleLoadSlot(slots);
             this.setState({redirect: true});
         });
 
