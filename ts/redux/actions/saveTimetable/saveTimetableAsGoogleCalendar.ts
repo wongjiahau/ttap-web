@@ -10,11 +10,12 @@ import {
 import {
     Time
 } from "../../../att/time";
+import { ObjectStore } from "../../../dataStructure/objectStore";
 import {
     Beautify
 } from "../../../helper";
 import {
-    RawSlot
+    IRawSlot, RawSlot
 } from "../../../model/rawSlot";
 import {
     Timetable
@@ -38,8 +39,8 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
         // the gapi client is already initialized at index.html
     }
 
-    protected Save(timetable: Timetable) {
-        this.rawSlots = RawSlot.GetBunch(timetable.Uids);
+    protected Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>) {
+        this.rawSlots = rawSlotStore.GetBunch(timetable.Uids);
 
         gapi // eslint-disable-line
             .auth2

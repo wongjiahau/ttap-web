@@ -34,13 +34,13 @@ export const GetTestTinySlot1 = () : TinySlot[] => {
     return ParseSlotToTinySlot(GetTestSlot1());
 };
 
-export const RawSlotStore = new ObjectStore(GetTestRawSlot1());
+export const MockRawSlotStore = new ObjectStore(GetTestRawSlot1());
 export const GetRawSlotsOf = (subjectCode : string) : RawSlot[] => {
     const subject = GetTestSubjects1().filter((x) => x.Code === subjectCode);
     if (subject.length === 0) {
         throw new Error("No subject have the code of " + subjectCode);
     }
-    return RawSlotStore.GetBunch(subject[0].SlotUids);
+    return MockRawSlotStore.GetBunch(subject[0].SlotUids);
 };
 
 export const GetTinySlotsOf = (subjectCode : string) : TinySlot[] => {
@@ -54,7 +54,7 @@ export const GetBigSlotsOf = (subjectCode : string) : BigSlot[] => {
     if (subject.length === 0) {
         throw new Error("No subject have the code of " + subjectCode);
     }
-    const rawSlots = RawSlotStore.GetBunch(subject[0].SlotUids);
+    const rawSlots = MockRawSlotStore.GetBunch(subject[0].SlotUids);
     const slots = ParseRawSlotToSlot(rawSlots);
     return ParseSlotToBigSlot(slots);
 };
