@@ -9,11 +9,13 @@
     - Partition slot into FullWeekSlot and PartialWeekSlot
     - Find timetables on list of FullWeekSlot
     - then based on the found timetables, used them to permutate new timetabes with every combination of PartialWeekSlot
-[] - release global dependencies on RawSlot static methods
+[x] - release global dependencies on RawSlot static methods
 
 [x] Fix bug of <button> should not be embedded inside <button> for slotView
 
-[] Fix failing unit test
+[X] Fix failing unit test
+[] Fix error thrown by Typescript Compiler
+[] merge this branch into master
 [] Build horizontal lines
 [] Speed up unit test
 
