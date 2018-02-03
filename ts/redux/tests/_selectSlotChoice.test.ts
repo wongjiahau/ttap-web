@@ -27,7 +27,6 @@ describe("SelectSlotChoice action", () => {
     });
 
     it("case 1", () => {
-        RawSlot.Reset();
         const initialState = getInitialState();
         const indexOfUEMK3233 = 4; // Bioprocess Engineering
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(indexOfUEMK3233));

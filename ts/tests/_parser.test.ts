@@ -64,9 +64,7 @@ describe("Parser which is used to parse html into slots", () => {
     it("jiahau_2017_sept's data subject Management Principles should contain 7 slots", () => {
         const plainHtml = jiahau2017septHtml;
         const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
-        expect(find(result, {Name: "MANAGEMENT PRINCIPLES"}).SlotIds.length)
-            .to
-            .equal(7);
+        expect(find(result, {Name: "MANAGEMENT PRINCIPLES"}).SlotUids).to.have.lengthOf(7);
     });
 
     it("keli_2017_sept's data : subject UKAI3013 shold have name of E-Commerce", () => {
