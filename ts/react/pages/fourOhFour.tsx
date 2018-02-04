@@ -2,8 +2,8 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 
 export class FourOhFour extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             someKey: "someValue"
         };

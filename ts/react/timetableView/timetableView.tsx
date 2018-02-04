@@ -21,7 +21,7 @@ interface ITimetableViewProps {
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;
     handleToggleIsOpenOfSummary?: () => void;
-    handleSelectSlotChoice: (slotUid: number, newSlotChoice: number) => void;
+    handleSelectSlotChoice?: (slotUid: number, newSlotChoice: number) => void;
     isSummaryOpen?: boolean;
 }
 
