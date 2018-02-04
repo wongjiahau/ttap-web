@@ -20,7 +20,7 @@ export class SnackbarView extends React.Component < ISnackbarProps, {} > {
     public render() {
         viewCount++;
         const okButton = (
-            <Button color="secondary" dense={true} onClick={this.props.handleClose}>
+            <Button color="secondary" onClick={this.props.handleClose}>
                 Got it
             </Button>
         );
