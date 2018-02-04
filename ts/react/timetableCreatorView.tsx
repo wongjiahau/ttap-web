@@ -11,7 +11,7 @@ import { SnackbarContainer } from "../redux/containers/snackbarContainer";
 import { SubjectListViewContainer } from "../redux/containers/subjectListViewContainer";
 import {TimetableListContainer} from "../redux/containers/timetableListContainer";
 import {SBCWDialogContainer} from "../redux/containers/turnOnSBCWDialogContainer";
-import {HENG_2017_APR} from "../tests/testData/heng_2017_apr";
+// import {HENG_2017_APR} from "../tests/testData/heng_2017_apr";
 import { GetTestRawSlot1, GetTestSlot1 } from "../tests/testDataGenerator";
 import TestManager, { FileName } from "../tests/testManager";
 import { LeftRightPanel } from "./panels/leftRightPanel";
@@ -45,11 +45,12 @@ ITimetableCreatorViewDispatchProps {
 
 export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
     public render() {
-        const DEBUGGING = false; // Please change to false during production
-        if (DEBUGGING) {
-            this.props.handleSlotLoaded(HENG_2017_APR());
-            alert("WARNING! You are in a debugging session.");
-        } else if (!this.props.isSlotLoaded) {
+        // const DEBUGGING = false; // Please change to false during production
+        // if (DEBUGGING) {
+        //     this.props.handleSlotLoaded(HENG_2017_APR());
+        //     alert("WARNING! You are in a debugging session.");
+        // } else
+        if (!this.props.isSlotLoaded) {
             return <Redirect push={true} to="/select"/>;
         }
         return (
