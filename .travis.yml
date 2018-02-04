@@ -34,6 +34,10 @@ script:
 after_script:
   - echo "script finished."
 
+after_success: # upload source-analysis-report
+  - source-map-explorer --html build/static/js/main.* > source_analysis/index.html
+  - surge -d ttap-source-analysis.surge.sh -p ./source_analysis/
+
 deploy:
   provider: surge
   project: ./build/

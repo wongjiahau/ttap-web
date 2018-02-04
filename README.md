@@ -54,3 +54,7 @@ $ npm run start
 ```
 npm run analyze
 ```
+It is also hosted at https://ttap-source-analysis.surge.sh
+
+### How many visits are there to ttap.surge.sh?
+To view the analytical data, go to https://goo.gl/#analytics/goo.gl/nHNNCF/all_time
