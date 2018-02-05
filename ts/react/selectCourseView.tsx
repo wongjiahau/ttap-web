@@ -81,7 +81,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         this.setState({
             currentSuggestions:
                 this.allSuggestions.filter((x) => new Str(x.name.toLowerCase()).Contains(event.value.toLowerCase())
-                && new Str(x.name).Contains("_"))
+                && !new Str(x.name).Contains("_"))
         });
     }
 

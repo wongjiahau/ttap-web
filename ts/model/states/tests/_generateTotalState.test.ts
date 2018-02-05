@@ -1,9 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    DecToBin
-} from "../../../helper";
+import { DecToBin } from "../../../util/decToBin";
 import {
     GenerateTotalState,
     GetDefinitelyOccupiedState,

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { DecToBin } from "../../helper";
+import { DecToBin } from "../decToBin";
 
 describe("DecToBin()", () => {
     it("case 1", () => {

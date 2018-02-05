@@ -1,7 +1,5 @@
 
-import {
-    DecToBin
-} from "../../helper";
+import {DecToBin} from "../../util/decToBin";
 import { Str } from "../../util/str";
 import {
     Timetable
