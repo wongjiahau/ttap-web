@@ -1,7 +1,5 @@
 
-import {
-    GetInitial
-} from "../../helper";
+import { GetInitial } from "../../util/getInitial";
 import { Str } from "../../util/str";
 import {
     IMasterState,

@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {GetInitial} from "../../helper";
+import { GetInitial } from "../getInitial";
 
 describe("GetInitial()", () => {
     it("should return the initial of every word", () => {

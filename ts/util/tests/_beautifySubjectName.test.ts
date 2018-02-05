@@ -1,9 +1,11 @@
 import {
     expect
 } from "chai";
-import { BeautifySubjectName } from "../../util/beautifySubjectName";
+import {
+    BeautifySubjectName
+} from "../beautifySubjectName";
 
-describe("Beautify()", () => {
+describe("BeautifySubjectName()", () => {
     it("should convert AND to &", () => {
         const result = BeautifySubjectName("ARTS AND CULTURAL PERFORMANCE");
         expect(result).to.equal("Arts & Cultural Performance");

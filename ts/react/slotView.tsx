@@ -4,9 +4,9 @@ import Menu, {MenuItem} from "material-ui/Menu";
 import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Tooltip} from "react-tippy";
-import { GetInitial } from "../helper";
 import {ISlotViewModel} from "../model/slotViewModel";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
+import {GetInitial} from "../util/getInitial";
 import {Colors} from "./colors/colors";
 
 export interface ISlotViewProps {
