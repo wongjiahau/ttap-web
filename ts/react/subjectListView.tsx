@@ -8,10 +8,11 @@ import Tooltip from "material-ui/Tooltip";
 import Typography from "material-ui/Typography";
 import * as React from "react";
 
-import {BeautifySubjectName} from "../../util/beautifySubjectName";
 import {Key} from "../enums/keyCodeEnum";
+import { GetInitial } from "../helper";
 import {Subject} from "../model/subject";
 import { ISubjectListState } from "../redux/reducers/subjectListState";
+import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";

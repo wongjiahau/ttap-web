@@ -1,5 +1,5 @@
-import {BeautifySubjectName} from "../../util/beautifySubjectName";
 import {PartitionizeByKey} from "../permutator/partitionize";
+import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {ISlotViewModel} from "./slotViewModel";
 
 export class SubjectSummary {

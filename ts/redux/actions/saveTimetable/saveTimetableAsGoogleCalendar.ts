@@ -12,14 +12,12 @@ import {
 } from "../../../att/time";
 import { ObjectStore } from "../../../dataStructure/objectStore";
 import {
-    BeautifySubjectName
-} from "../../../helper";
-import {
     IRawSlot, RawSlot
 } from "../../../model/rawSlot";
 import {
     Timetable
 } from "../../../model/timetable";
+import { BeautifySubjectName } from "../../../util/beautifySubjectName";
 import {
     TimePeriod
 } from "./../../../att/timePeriod";

@@ -1,9 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    BeautifySubjectName
-} from "../../helper";
+import { BeautifySubjectName } from "../../util/beautifySubjectName";
 
 describe("Beautify()", () => {
     it("should convert AND to &", () => {
