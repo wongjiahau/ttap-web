@@ -6,8 +6,8 @@ import Paper from "material-ui/Paper";
 import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui/Table";
 import Typography from "material-ui/Typography";
 import * as React from "react";
+import {BeautifySubjectName} from "../../util/beautifySubjectName";
 import { ObjectStore } from "../dataStructure/objectStore";
-import {Beautify} from "../helper";
 import {IStringDicionary} from "../interfaces/dictionary";
 import {IRawSlot, RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
@@ -95,7 +95,7 @@ ISlotsTableViewInternalState > {
                                 return (
                                     <div key={subject.Code}>
                                         <Typography style={titleStyle} type="subheading">
-                                            {subject.Code + " - " + Beautify(subject.Name)}
+                                            {subject.Code + " - " + BeautifySubjectName(subject.Name)}
                                         </Typography>
                                         <Table>
                                             <TableHead>

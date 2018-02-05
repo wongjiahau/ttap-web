@@ -1,7 +1,8 @@
 import {expect} from "chai";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as S from "string";
+
+import { Str } from "../../../util/str";
 import {LeftRightPanel} from "../leftRightPanel";
 
 describe("<LeftRightPanel/>", () => {
@@ -29,9 +30,9 @@ describe("<LeftRightPanel/>", () => {
         );
         ReactDOM.render(toBeRender, div);
         const html = div.innerHTML;
-        const tableCount = S(html).count("</table>");
-        const tableRowCount = S(html).count("</tr>");
-        const tableDataCount = S(html).count("</td>");
+        const tableCount = new Str(html).Count("</table>");
+        const tableRowCount = new Str(html).Count("</tr>");
+        const tableDataCount = new Str(html).Count("</td>");
         expect(tableCount).to.eq(1);
         expect(tableRowCount).to.eq(1);
         expect(tableDataCount).to.eq(2);

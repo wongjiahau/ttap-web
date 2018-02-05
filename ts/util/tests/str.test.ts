@@ -36,4 +36,35 @@ describe("Str", () => {
             expect(new Str(s).Capitalize().Value()).to.eq("Single");
         });
     });
+
+    describe("IsAlphaNumeric", () => {
+        it("case 1", () => {
+            expect(new Str("lka82").IsAlphaNumeric()).to.eq(true);
+        });
+
+        it("case 2", () => {
+            expect(new Str("lk-a82").IsAlphaNumeric()).to.eq(false);
+        });
+    });
+
+    describe("ReplaceAll", () => {
+        it("case 1", () => {
+            expect(new Str("a b c d").ReplaceAll(" ", "-").Value()).to.eq("a-b-c-d");
+        });
+
+        it("case 2", () => {
+            expect(new Str("a--b-c--d").ReplaceAll("--", "X").Value()).to.eq("aXb-cXd");
+        });
+    });
+
+    describe("Count", () => {
+        it("case 1", () => {
+            expect(new Str("hello lol lala").Count("l")).to.eq(6);
+        });
+
+        it("case 2", () => {
+            expect(new Str("hello lol lala bello").Count("ll")).to.eq(2);
+        });
+
+    });
 });

@@ -1,20 +1,10 @@
-import * as S from "string";
-export function Beautify(input: string): string {
-    return input
-        .toLowerCase()
-        .replace("dan", "&")
-        .replace("and", "&")
-        .split(" ")
-        .map((word) => S(word).capitalize().s)
-        .join(" ")
-        .replace("Ii", "II")
-        .replace("IIi", "III")
-        ;
-}
+import { Str } from "./util/str";
+
+import { BeautifySubjectName } from "./util/beautifySubjectName";
 
 export function GetInitial(input: string): string {
-    let result = Beautify(input).trim();
-    if (S(result).contains("(")) {
+    let result = BeautifySubjectName(input).trim();
+    if (new Str(result).Contains("(")) {
         result = result
             .substring(0, result.indexOf("("))
             .trim();
@@ -38,7 +28,7 @@ export function GetInitial(input: string): string {
         .join("");
 
     function IsNonWhiteSpaceSymbols(char: string): boolean {
-        return char !== " " && S(char).isAlphaNumeric();
+        return char !== " " && new Str(char).IsAlphaNumeric();
     }
 }
 

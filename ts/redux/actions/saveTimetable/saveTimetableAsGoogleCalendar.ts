@@ -12,7 +12,7 @@ import {
 } from "../../../att/time";
 import { ObjectStore } from "../../../dataStructure/objectStore";
 import {
-    Beautify
+    BeautifySubjectName
 } from "../../../helper";
 import {
     IRawSlot, RawSlot
@@ -154,7 +154,7 @@ export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
     const startDate = format(dates[0], "YYYY-MM-DD");
     const recurrence = GetRecurrence(dates.slice(1));
     const event = {
-        summary: `${Beautify(slot.SubjectName)} (${slot.Type}-${slot.Group})`,
+        summary: `${BeautifySubjectName(slot.SubjectName)} (${slot.Type}-${slot.Group})`,
         location: slot.Room,
         description: `Subject code : ${slot.SubjectCode}, Week : ${slot.WeekNumber}`,
         start: {

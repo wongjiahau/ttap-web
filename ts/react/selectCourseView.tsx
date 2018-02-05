@@ -3,12 +3,13 @@ import * as React from "react";
 import * as Autosuggest from "react-autosuggest";
 import Highlighter = require("react-highlight-words");
 import {Redirect} from "react-router";
-import * as S from "string";
+
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {RawSlot} from "../model/rawSlot";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
+import { Str } from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
 import { VerticalAlign } from "./panels/verticalAlign";
 
@@ -79,8 +80,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     public onSuggestionsFetchRequested = (event) => {
         this.setState({
             currentSuggestions:
-                this.allSuggestions.filter((x) => S(x.name.toLowerCase()).contains(event.value.toLowerCase())
-                && !S(x.name).contains("_"))
+                this.allSuggestions.filter((x) => new Str(x.name.toLowerCase()).Contains(event.value.toLowerCase())
+                && new Str(x.name).Contains("_"))
         });
     }
 

@@ -7,9 +7,9 @@ import TextField from "material-ui/TextField";
 import Tooltip from "material-ui/Tooltip";
 import Typography from "material-ui/Typography";
 import * as React from "react";
-import * as S from "string";
+
+import {BeautifySubjectName} from "../../util/beautifySubjectName";
 import {Key} from "../enums/keyCodeEnum";
-import {Beautify, GetInitial} from "../helper";
 import {Subject} from "../model/subject";
 import { ISubjectListState } from "../redux/reducers/subjectListState";
 import {StackPanel} from "./panels/stackPanel";
@@ -98,7 +98,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                 isLoading={this.props.IsShowingLoadingBar}
                                 clashReport={s.ClashReport}
                                 searchWord={this.props.SearchedText}
-                                subjectName={Beautify(s.Name)}
+                                subjectName={BeautifySubjectName(s.Name)}
                                 subjectCode={s.Code + " [" + GetInitial(s.Name) + "]"}
                                 handleSelection={() => this.props.handleSelection(index)}
                                 isSelected={s.IsSelected}/>

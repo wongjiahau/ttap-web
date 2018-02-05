@@ -4,7 +4,7 @@ import Menu, {MenuItem} from "material-ui/Menu";
 import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Tooltip} from "react-tippy";
-import {Beautify, GetInitial} from "../helper";
+import {BeautifySubjectName} from "../../util/beautifySubjectName";
 import {ISlotViewModel} from "../model/slotViewModel";
 import {Colors} from "./colors/colors";
 
@@ -133,7 +133,7 @@ function tooltipTitle(s : ISlotViewModel) {
     };
     return (
         <div style={style}>
-            {Beautify(s.SubjectName)}
+            {BeautifySubjectName(s.SubjectName)}
             <br/>
             [{s.SubjectCode}]
         </div>

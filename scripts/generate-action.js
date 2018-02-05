@@ -13,7 +13,7 @@ files.forEach(function(file) {
     const contents = fs.readFileSync(__dirname + folder + file, 'utf8');
     const words = contents.split(" ");
     words.forEach((w) => {
-        if (S(w).contains("Action")) {
+        if(new Str(w).contains("Action")) {
             result.push(w);
         }
     })

@@ -1,7 +1,8 @@
-import * as S from "string";
+
 import {
     DecToBin
 } from "../../helper";
+import { Str } from "../../util/str";
 import {
     Timetable
 } from "./../timetable";
@@ -102,16 +103,16 @@ export function StringifyTotalState(totalState: STCBox[]): string {
         data[state.Day][state.X] = state.Kind.toString();
     });
     const result =
-        S(
+       new Str(
             data.map((row) => {
                 return row.join("");
             })
             .join("\n")
         )
-        .replaceAll("0", "*") // * = definitely occupied
-        .replaceAll("1", "-") // - = definitely unoccupied
-        .replaceAll("2", "O") // O = maybe occupied
-        .replaceAll("3", "X") // X = clicked
-        .s;
+        .ReplaceAll("0", "*") // * = definitely occupied
+        .ReplaceAll("1", "-") // - = definitely unoccupied
+        .ReplaceAll("2", "O") // O = maybe occupied
+        .ReplaceAll("3", "X") // X = clicked
+        .Value();
     return "\n" + result;
 }

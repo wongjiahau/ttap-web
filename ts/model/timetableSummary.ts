@@ -1,4 +1,4 @@
-import {Beautify} from "../helper";
+import {BeautifySubjectName} from "../../util/beautifySubjectName";
 import {PartitionizeByKey} from "../permutator/partitionize";
 import {ISlotViewModel} from "./slotViewModel";
 
@@ -10,7 +10,7 @@ export class SubjectSummary {
     public readonly Practical : string;
     public constructor(slots : ISlotViewModel[]) {
         this.SubjectCode = slots[0].SubjectCode;
-        this.SubjectName = Beautify(slots[0].SubjectName);
+        this.SubjectName = BeautifySubjectName(slots[0].SubjectName);
         const extract = (type: string) => {
             const slot = this.GetSlotOf(slots, type);
             return slot

@@ -1,9 +1,9 @@
-import { Beautify } from "../helper";
+import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {RawSlot} from "./rawSlot";
 
 export class Subject {
     public static GetSubjectNameOf(subjectCode: string) : string {
-        return Beautify(Subject.subjectCodeAndName[subjectCode]);
+        return BeautifySubjectName(Subject.subjectCodeAndName[subjectCode]);
     }
     private static subjectCodeAndName = {};
     public readonly Name: string;

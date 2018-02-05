@@ -2,9 +2,10 @@ import {expect} from "chai";
 
 const find = require("lodash.find");
 const last = require("lodash.last");
-import * as S from "string";
+
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
+import { Str } from "../util/str";
 import testManager from "./testManager";
 import {FileName} from "./testManager";
 
@@ -56,7 +57,7 @@ describe("Parser which is used to parse html into slots", () => {
     it("jiahau_2017_sept's data first subject (sorted by name) should be TITAS", () => {
         const plainHtml = jiahau2017septHtml;
         const result = ParseSlotToSubject(ParseHtmlToSlots(plainHtml));
-        expect(S(last(result).Name.toLowerCase()).contains("titas"))
+        expect(new Str(last(result).Name.toLowerCase()).Contains("titas"))
             .to
             .equal(true);
     });
@@ -70,7 +71,7 @@ describe("Parser which is used to parse html into slots", () => {
     it("keli_2017_sept's data : subject UKAI3013 shold have name of E-Commerce", () => {
         const plainHtml = new testManager().GetDataFrom(FileName.keli_2017_sept);
         const result = ParseHtmlToSlots(plainHtml);
-        expect(result.filter((s) => S(s.SubjectCode).contains("UKAI3013"))[0].SubjectName)
+        expect(result.filter((s) => new Str(s.SubjectCode).Contains("UKAI3013"))[0].SubjectName)
         .to
         .equal("E-COMMERCE");
     });

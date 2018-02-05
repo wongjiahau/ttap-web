@@ -1,12 +1,12 @@
 import {ObjectStore} from "./../../dataStructure/objectStore";
 import {GetSemStartDateDialog} from "./../../react/getSemStartDateDialog";
 const includes = require("lodash.includes");
-import * as S from "string";
-import {Beautify} from "../../helper";
+
 import {IStringDicionary} from "../../interfaces/dictionary";
 import {RawSlot} from "../../model/rawSlot";
 import {ClashReport, Subject} from "../../model/subject";
 import {Timetable} from "../../model/timetable";
+import { BeautifySubjectName } from "../../util/beautifySubjectName";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction, MasterStateReducer} from "./../reducers/masterState";
 import {ToggleSubjectListViewingOptions} from "./toggleSubjectListViewingOption";
@@ -101,7 +101,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects : Subject[], 
                 let stillGotClashes = false;
                 for (let j = 0; j < selectedSubjects.length; j++) {
                     if (includes(selectedSubjects[j].ClashingCounterparts, s.Code)) {
-                        s.ClashReport = new ClashReport("single", Beautify(selectedSubjects[j].Name));
+                        s.ClashReport = new ClashReport("single", BeautifySubjectName(selectedSubjects[j].Name));
                         stillGotClashes = true;
                         break;
                     }
@@ -123,7 +123,7 @@ export function CheckForClashesBetween(s : Subject, subjects : Subject[]) : Clas
     for (let i = 0; i < subjects.length; i++) {
         for (let j = 0; j < subjects[i].ClashingCounterparts.length; j++) {
             if (s.Code === subjects[i].ClashingCounterparts[j]) {
-                return new ClashReport("single", Beautify(subjects[i].Name));
+                return new ClashReport("single", BeautifySubjectName(subjects[i].Name));
             }
         }
     }

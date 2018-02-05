@@ -1,6 +1,7 @@
 const last = require("lodash.last");
-import * as S from "string";
+
 import {RawSlot} from "../model/rawSlot";
+import { Str } from "../util/str";
 export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");
@@ -36,7 +37,7 @@ export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
         newSlot.SubjectCode = currentSubjectCode;
         newSlot.SubjectName = currentSubjectName;
         let offset = 0;
-        if (S(currentRow.id).contains("subRow")) {
+        if (new Str(currentRow.id).Contains("subRow")) {
             offset = 4;
             newSlot.Number = last(result).Number;
             newSlot.Type = last(result).Type;
