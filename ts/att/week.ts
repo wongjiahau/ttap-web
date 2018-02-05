@@ -1,4 +1,3 @@
-const intersection = require("lodash.intersection");
 const isEqual = require("lodash.isequal");
 import * as isInt from "validator/lib/isInt";
 export class Week {
