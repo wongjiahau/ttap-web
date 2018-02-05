@@ -14,9 +14,11 @@
 [x] Fix bug of <button> should not be embedded inside <button> for slotView
 
 [X] Fix failing unit test
-[] Fix error thrown by Typescript Compiler
-[] merge this branch into master
+[X] Fix error thrown by Typescript Compiler
+[X] merge this branch into master
 [] Build horizontal lines
 [] Speed up unit test
+[] Datepicker will close when click on any thing (flatpickr)
+    - consider going for react-datetime
 
 - Complete the code for TTAP-analysis
