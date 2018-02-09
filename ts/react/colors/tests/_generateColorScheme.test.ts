@@ -8,6 +8,7 @@ import {
     CodeOf,
     HENG_2017_APR
 } from "../../../tests/testData/heng_2017_apr";
+import { ChosenColors } from "../colors";
 import {
     GenerateColorScheme
 } from "../generateColorScheme";
@@ -37,6 +38,22 @@ describe("GenerateColorScheme()", () => {
         const input = rawSlots.filter((x) => x.SubjectCode === CodeOf.ACD);
         const colorSchemes = GenerateColorScheme(CreateSlotViewModels(input));
         expect(colorSchemes.length).to.eq(1);
+    });
+
+    it("should not throw errors even when the number of selected subject exceeds the number of chosen colors", () => {
+        const rawSlots = HENG_2017_APR();
+        const subjectCodes = [
+            CodeOf.ACD, CodeOf.ACP, CodeOf.ASSD, CodeOf.BEAM, CodeOf.BKA,
+            CodeOf.BMK2, CodeOf.CSD2, CodeOf.CT, CodeOf.EAIE, CodeOf.EDC,
+            CodeOf.EFE
+        ].map((x) => x.toString());
+        expect(subjectCodes.length).to.be.greaterThan(ChosenColors.length);
+        const input = rawSlots.filter((x) => subjectCodes.indexOf(x.SubjectCode) !== -1);
+        const colorSchemes = GenerateColorScheme(CreateSlotViewModels(input));
+        colorSchemes.forEach((x) => {
+            expect(x.Color).to.not.eq(undefined);
+        });
+
     });
 
 });

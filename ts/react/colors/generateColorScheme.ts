@@ -7,7 +7,7 @@ export function GenerateColorScheme(slots : ISlotViewModel[]) : IColorScheme[] {
     const result = new Array < IColorScheme > ();
     const subjectCodes = uniqBy(slots, (s) => s.SubjectCode).map((s) => s.SubjectCode);
     sortBy(subjectCodes).forEach((s, index) => {
-        result.push({Color: ChosenColors[index], SubjectCode: s});
+        result.push({Color: ChosenColors[index % ChosenColors.length], SubjectCode: s});
     });
     return result;
 }
