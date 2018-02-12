@@ -45,12 +45,13 @@ describe("UpdateTotalState action", () => {
     });
 
     it("should clear UidsOfClickedState", () => {
-        const action = new UpdateTotalState();
         const initialState = getInitialState();
-        let newState = MasterStateReducer(initialState, action);
+        let newState = MasterStateReducer(initialState, new UpdateTotalState());
         const stcBox = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
         newState = MasterStateReducer(newState, new FilterTimetable(stcBox));
         expect(newState.SetTimeConstraintState.UidsOfClickedState).to.deep.eq(["05"]);
+        newState = MasterStateReducer(newState, new UpdateTotalState());
+        expect(newState.SetTimeConstraintState.UidsOfClickedState).to.have.lengthOf(0);
     });
 
 });
