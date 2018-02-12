@@ -16,6 +16,14 @@
 [X] Fix failing unit test
 [X] Fix error thrown by Typescript Compiler
 [X] merge this branch into master
+[] Bug:
+    - Step to reproduce
+        1. Select FM1
+        2. Deselect some specific slots
+        3. Open SetTimeConstraintView
+        4. Click on some greenbox
+        5. Click on the same greenbox again
+        6. Expected the box to appear back but in actual it disappear magically
 [] Build horizontal lines
 [] Speed up unit test
 [] Datepicker will close when click on any thing (flatpickr)
