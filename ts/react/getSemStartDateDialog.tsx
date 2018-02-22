@@ -48,6 +48,7 @@ IGetSemStartDateDialogState > {
                     <br/>
                     Monday of Week One of next semester.</DialogTitle>
                 <div>
+                    {/* Flat-pickr css */} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
                     <StackPanel orientation="vertical" horizontalAlignment="center">
                         <Flatpickr
                             placeholder="Pick date . . ."

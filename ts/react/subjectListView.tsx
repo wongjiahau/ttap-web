@@ -129,7 +129,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
         return (
+
             <Drawer open={this.props.IsOpen}>
+                {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/4b65000a/components/sidebar.min.css"/>
                 <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                     <header style={headerStyle}>
                         <Typography gutterBottom={true} type="display1" color="primary">

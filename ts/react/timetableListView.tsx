@@ -52,6 +52,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         const slotsToBeRendered = this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids);
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
+                {/* Balloon css */} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.2.4/balloon.min.css"/>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <TimetableView
                         slots={slotsToBeRendered}

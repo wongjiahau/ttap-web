@@ -66,6 +66,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
         };
         return (
             <div id="timetable-view">
+                {/* Tippy css */} <link rel="stylesheet" href="https://cdn.rawgit.com/tvkhoa/react-tippy/master/dist/tippy.css"/>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <div style={divStyle}>
                         <ReactGridLayout
