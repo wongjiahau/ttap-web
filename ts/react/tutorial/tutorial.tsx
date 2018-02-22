@@ -9,6 +9,7 @@ import {MarkdownPage} from "./markdownPage";
 const WIDTH = window.innerWidth;
 const HEIGHT = 0.83 * window.innerHeight;
 const skipButtonStyle : React.CSSProperties = {
+    fontSize: "12px",
     position: "fixed",
     right: "10px",
     bottom: "10px"
@@ -48,7 +49,7 @@ ITutorialState > {
                     <Button
                         onClick={this.handleClickLeft}
                         style={leftRightButtonStyle}><IconLeft/></Button>
-                    <MarkdownPage id="mdtut" src={this.state.currentUrl} width={0.6 * WIDTH} height={HEIGHT}/>
+                    <MarkdownPage id="mdtut" src={this.state.currentUrl} width={0.65 * WIDTH} height={HEIGHT}/>
                     <Button
                         onClick={this.handleClickRight}
                         style={leftRightButtonStyle}><IconRight/></Button>
