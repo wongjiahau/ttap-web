@@ -1,10 +1,10 @@
 import * as React from "react";
 
 const containerStyle : React.CSSProperties = {
-    top: 0,
+    top: 64, // Padding to allow Appbar to function
     left: 0,
     width: "100%",
-    height: "100%",
+    height: "85%",
     position: "absolute",
     display: "table"
 };

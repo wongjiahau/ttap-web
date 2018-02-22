@@ -27,8 +27,9 @@
         6. Expected the box to appear back but in actual it disappear magically
 [] Build horizontal lines
 [] Speed up unit test
-[] Datepicker will close when click on any thing (flatpickr)
+[X] Datepicker will close when click on any thing (flatpickr)
     - consider going for react-datetime
 
 [x] Feedback or bug report should open in new tab
 - Complete the code for TTAP-analysis
+[X] Bug: VerticalAlign causes otherStuffDrawer cannot be opened
