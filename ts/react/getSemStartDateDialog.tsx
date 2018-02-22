@@ -26,15 +26,15 @@ IGetSemStartDateDialogState > {
     }
 
     public handleDateChanged = (dates : Date[]) => {
-        this.setState({date: dates[0], dateIsSelected: true});
+        this.setState({date: dates[0], dateIsSelected: dates[0] !== undefined});
     }
 
     public render() {
         const flatpickerOptions = {
+            inline: true,
             altInput: true,
             disable: [(date) => {
-                    // disable date that are not Monday
-                    return (date.getDay() !== 1);
+                    return (date.getDay() !== 1); // disable date that are not Monday
                 }
             ]
         };
