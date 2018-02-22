@@ -24,12 +24,19 @@ const theme = createMuiTheme({
 interface IAppState {
     isSecondaryDrawerOpen: boolean;
 }
+function RemoveLoadingCube() {
+    const x = document.getElementById("initialLoadingCube");
+    if (x) {
+        x.parentNode.removeChild(x);
+    }
+}
 export class App extends React.Component < {}, IAppState > {
     public constructor(props) {
         super(props);
         this.state = {
             isSecondaryDrawerOpen: false
         };
+        RemoveLoadingCube();
     }
 
     public handleOpenDrawer = () => this.setState({isSecondaryDrawerOpen: true});
