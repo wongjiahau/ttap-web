@@ -1,4 +1,4 @@
-import StarIcon from "material-ui-icons/Star";
+import ThumbUpIcon from "material-ui-icons/ThumbUp";
 import Button from "material-ui/Button";
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
 import Typography from "material-ui/Typography";
@@ -19,7 +19,7 @@ IGetFeedbackDialogState > {
         };
         try {
             const feedbackPrompted = Cookies.get("feedbackPrompted") === "true"; // eslint-disable-line no-undef
-            const HOW_MANY_MINUTE = 4.5;
+            const HOW_MANY_MINUTE = 4.25; // This is just a guess
             if (!feedbackPrompted) {
                 window.setTimeout(() => {
                     this.setState({isOpen: true});
@@ -50,7 +50,7 @@ IGetFeedbackDialogState > {
                     </Button>
                     <Button raised={true} onClick={this.handleYes} color="primary">
                         Rate ttap
-                        <StarIcon
+                        <ThumbUpIcon
                             style={{
                             color: "white",
                             marginLeft: "10px"
