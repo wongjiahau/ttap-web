@@ -1,5 +1,6 @@
 # TODO
 
+
 [x] Changing setting should set the current slot store
 [x] Fix `Show slots` problem, select ASSD then click on Show Slots then you'll understand
 [X] Got bug when trying to generalized slots of Chemical Engineering Laboratory I
@@ -29,4 +30,5 @@
 [] Datepicker will close when click on any thing (flatpickr)
     - consider going for react-datetime
 
+[x] Feedback or bug report should open in new tab
 - Complete the code for TTAP-analysis

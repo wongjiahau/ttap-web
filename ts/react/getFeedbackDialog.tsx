@@ -3,13 +3,12 @@ import Button from "material-ui/Button";
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
 import Typography from "material-ui/Typography";
 import * as React from "react";
-import {Redirect} from "react-router";
+import { FeedbackFormUrl } from "../constants";
 import {StackPanel} from "./panels/stackPanel";
 declare var Cookies : any;
 
 interface IGetFeedbackDialogState {
     isOpen : boolean;
-    redirect : boolean;
 }
 export class GetFeedbackDialog extends React.Component < {},
 IGetFeedbackDialogState > {
@@ -17,14 +16,14 @@ IGetFeedbackDialogState > {
         super(props);
         this.state = {
             isOpen: false,
-            redirect: false
         };
         try {
             const feedbackPrompted = Cookies.get("feedbackPrompted") === "true"; // eslint-disable-line no-undef
+            const HOW_MANY_MINUTE = 4.5;
             if (!feedbackPrompted) {
                 window.setTimeout(() => {
                     this.setState({isOpen: true});
-                }, 60000 * 4.5); // Note: 60,000ms = 1 minute
+                }, 60000 * HOW_MANY_MINUTE); // Note: 60,000ms = 1 minute
             }
         } catch (e) {
             // surpess Cookies is not defined error
@@ -32,13 +31,11 @@ IGetFeedbackDialogState > {
         }
     }
     public render() {
-        if (this.state.redirect) {
-            return <Redirect push={true} to="/feedbackForm"/>;
-        }
         return (
             <Dialog open={this.state.isOpen}>
+                <img style={{height: "350px"}} src="https://image.ibb.co/gaKihc/thank_3148710_640.png"/>
                 <DialogTitle>
-                    <Typography type="display1">
+                    <Typography type="title">
                         Thank you for using TTAP!
                     </Typography>
                 </DialogTitle>
@@ -67,12 +64,12 @@ IGetFeedbackDialogState > {
 
     public handleNo = () => {
         this.setState({isOpen: false});
-        this.setCookies();
     }
 
     public handleYes = () => {
-        this.setState({isOpen: false, redirect: true});
+        this.setState({isOpen: false});
         this.setCookies();
+        window.open(FeedbackFormUrl, "_blank");
     }
 
     public setCookies = () => {

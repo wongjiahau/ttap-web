@@ -9,6 +9,7 @@ import Drawer from "material-ui/Drawer";
 import List, {ListItem, ListItemIcon, ListItemText} from "material-ui/List";
 import * as React from "react";
 import {Link} from "react-router-dom";
+import { BugFormUrl, FeedbackFormUrl } from "../constants";
 
 const linkStyle = {
     textDecoration: "none"
@@ -19,16 +20,13 @@ const MenuItemStyle = {
     fontWeight: "bold"
 };
 
-const ReadMeUrl = "https://github.com/wongjiahau/TTAP-UTAR/blob/master/README.md";
-
 interface IOtherStuffDrawerProps {
     onItemClick : () => void;
     isOpen: boolean;
 }
 
 export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
-    const getLink = (icon, text, to) => {
-        return (
+    const routerLink = (icon, text, to) =>
             <Link style={linkStyle} to={to}>
                 <ListItem button={true} onClick={props.onItemClick}>
                     <ListItemIcon>
@@ -37,20 +35,30 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
                     <ListItemText primary={text}/>
 
                 </ListItem>
-            </Link>
+            </Link>;
+
+    const newTabLink = (icon, text, url) => {
+        return (
+            <ListItem button={true} onClick={() => {window.open(url, "_blank"); props.onItemClick(); }}>
+                    <ListItemIcon>
+                        {icon}
+                    </ListItemIcon>
+                    <ListItemText primary={text}/>
+            </ListItem>
         );
     };
+
     return (
         <Drawer open={props.isOpen} anchor="right">
             <Button color="secondary" raised={true} onClick={props.onItemClick}>
                 Hide drawer
             </Button>
             <List>
-                {getLink( <HelpIcon/>, "Help", "/")}
-                {getLink( <FeedbackIcon/>, "Feedback", "feedbackForm")}
-                {getLink( <BugIcon/>, "Report a bug", "reportBugForm")}
-                {getLink( <InfoIcon/>, "About TTAP", "about")}
-                {getLink( <SchoolIcon/>, "Terms of Service", "tospp")}
+                {routerLink( <HelpIcon/>, "Help", "/")}
+                {newTabLink( <FeedbackIcon/>, "Feedback", FeedbackFormUrl)}
+                {newTabLink( <BugIcon/>, "Report a bug", BugFormUrl)}
+                {routerLink( <InfoIcon/>, "About TTAP", "about")}
+                {routerLink( <SchoolIcon/>, "Terms of Service", "tospp")}
             </List>
         </Drawer>
     );

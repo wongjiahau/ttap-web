@@ -1,9 +1,9 @@
 import * as React from "react";
 import {Redirect} from "react-router";
 import {Route, Switch} from "react-router-dom";
+import { RawReadmeUrl, RawTosppUrl } from "../constants";
 import {SelectCourseViewContainer} from "../redux/containers/selectCourseContainer";
 import {MasterView} from "./masterView";
-import {FeedbackForm, ReportBugForm} from "./pages/embeddedPage";
 import {FourOhFour} from "./pages/fourOhFour";
 import {StackPanel} from "./panels/stackPanel";
 import {Playground} from "./playground";
@@ -16,8 +16,6 @@ export const MainRouter = () => (
         <Route exact={true} path="/learn" component={Tutorial}/>
         <Route exact={true} path="/select" component={SelectCourseViewContainer}/>
         <Route exact={true} path="/play" component={MasterView}/>
-        <Route exact={true} path="/feedbackForm" component={FeedbackForm}/>
-        <Route exact={true} path="/reportBugForm" component={ReportBugForm}/>
         <Route exact={true} path="/404" component={FourOhFour}/>
         <Route exact={true} path="/playground" component={Playground}/>
         <Route exact={true} path="/tospp" component={Tospp}/>
@@ -39,5 +37,5 @@ const Page = (src) => {
         </StackPanel>
     );
 };
-const About = () => Page("https://raw.githubusercontent.com/wongjiahau/ttap-web/master/README.md");
-const Tospp = () => Page("https://raw.githubusercontent.com/wongjiahau/ttap-web/master/TOSPP.md");
+const About = () => Page(RawReadmeUrl);
+const Tospp = () => Page(RawTosppUrl);

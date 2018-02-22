@@ -35,7 +35,7 @@ export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownP
             return <CircularProgress size={50}/>;
         }
         const paperStyle : React.CSSProperties = {
-            // overflowY: "scroll",
+            overflowY: "auto",
             textAlign : "left",
             paddingTop: "15px",
             paddingRight: "40px",
