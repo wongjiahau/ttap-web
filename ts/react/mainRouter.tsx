@@ -3,6 +3,7 @@ import {Redirect} from "react-router";
 import {Route, Switch} from "react-router-dom";
 import { RawReadmeUrl, RawTosppUrl } from "../constants";
 import {SelectCourseViewContainer} from "../redux/containers/selectCourseContainer";
+import { GetStarted } from "./getStarted";
 import {MasterView} from "./masterView";
 import {FourOhFour} from "./pages/fourOhFour";
 import {StackPanel} from "./panels/stackPanel";
@@ -12,30 +13,29 @@ import {Tutorial} from "./tutorial/tutorial";
 
 export const MainRouter = () => (
     <Switch>
-        <Route exact={true} path="/" component={RedirectToLearn}/>
+        <Route exact={true} path="/" component={RedirectTo}/>
+        <Route exact={true} path="/getStarted" component={GetStarted}/>
         <Route exact={true} path="/learn" component={Tutorial}/>
         <Route exact={true} path="/select" component={SelectCourseViewContainer}/>
         <Route exact={true} path="/play" component={MasterView}/>
         <Route exact={true} path="/404" component={FourOhFour}/>
         <Route exact={true} path="/playground" component={Playground}/>
-        <Route exact={true} path="/tospp" component={Tospp}/>
-        <Route exact={true} path="/about" component={About}/>
+        <Route exact={true} path="/tospp" component={Page(RawTosppUrl)}/>
+        <Route exact={true} path="/about" component={Page(RawReadmeUrl)}/>
     </Switch>
 );
 
-const RedirectToLearn = () => {
-    return <Redirect push={true} to="/learn"/>;
+const RedirectTo = () => {
+    return <Redirect push={true} to="/getStarted"/>;
 };
 
 const width = 0.9 * window.innerWidth;
 const height = 0.825 * window.innerHeight;
 
 const Page = (src) => {
-    return (
+    return () => (
         <StackPanel orientation="vertical" horizontalAlignment="center">
             <MarkdownPage width={width} height={height} src={src}/> {""}
         </StackPanel>
     );
 };
-const About = () => Page(RawReadmeUrl);
-const Tospp = () => Page(RawTosppUrl);
