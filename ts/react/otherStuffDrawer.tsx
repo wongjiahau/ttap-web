@@ -54,7 +54,7 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
                 Hide drawer
             </Button>
             <List>
-                {routerLink( <HelpIcon/>, "Help", "/")}
+                {routerLink( <HelpIcon/>, "Help", "learn")}
                 {newTabLink( <FeedbackIcon/>, "Feedback", FeedbackFormUrl)}
                 {newTabLink( <BugIcon/>, "Report a bug", BugFormUrl)}
                 {routerLink( <InfoIcon/>, "About TTAP", "about")}
