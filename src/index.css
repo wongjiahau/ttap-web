@@ -76,9 +76,24 @@ code {
   background-color: #ddd;
 }
 
+.sk-cube-div {
+  top: 0px;
+  left: 0px;
+  height: 100%; 
+  width: 100%;
+  position: absolute;
+  display: table;
+}
+
+.sk-cube-child-div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
 .sk-cube-grid {
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
   margin: 100px auto;
 }
 
