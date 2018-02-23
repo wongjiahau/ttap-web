@@ -43,7 +43,7 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
             );
         };
         return (
-            <Dialog open={this.props.isMainDialogOpen}>
+            <Dialog open={this.props.isMainDialogOpen} onBackdropClick={this.props.handleClose}>
                 <DialogTitle>Save this timetable as . . .</DialogTitle>
                 <div>
                     <List>
