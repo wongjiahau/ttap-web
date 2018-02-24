@@ -4,6 +4,10 @@ body {
   font-family: roboto;
 }
 
+div:focus {
+    outline: 0;
+}
+
 .flatpickr-input {
   padding: 10px;
 }
