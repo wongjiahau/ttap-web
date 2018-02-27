@@ -4,7 +4,9 @@ import * as Autosuggest from "react-autosuggest";
 import Highlighter = require("react-highlight-words");
 import {Redirect} from "react-router";
 
+import Button from "material-ui/Button";
 import Typography from "material-ui/Typography";
+import { GetIdFormUrl } from "../constants";
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {RawSlot} from "../model/rawSlot";
@@ -24,6 +26,7 @@ interface ISelectCourseViewState {
     value : string;
     error: string;
     loading: boolean;
+    suggestionIsFound: boolean;
 }
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
@@ -36,7 +39,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             redirect: false,
             value: "",
             error: null,
-            loading: true
+            loading: true,
+            suggestionIsFound: true
         };
         this.RequestTestFiles();
     }
@@ -69,9 +73,14 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                             onSuggestionSelected={this.onSuggestionSelected}
                             getSuggestionValue={(suggestion) => this.state.value}
                             renderSuggestion={this.renderSuggestion}
+                            highlightFirstSuggestion={true}
+                            alwaysRenderSuggestions={true}
                             inputProps={inputProps}/>
                             {""}
                     </StackPanel>
+                    <Button style={{visibility: this.state.suggestionIsFound ? "hidden" : "visible" }}
+                        onClick={openGetIdForm}
+                        color="secondary" raised={true}>I can't find my course</Button>
                     {!this.state.error ? null :
                         <p style={{color: "Red"}}>{this.state.error}</p>}
                 </StackPanel>
@@ -80,14 +89,16 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     }
 
     public onSuggestionsFetchRequested = (event) => {
-        this.setState({
-            currentSuggestions:
+        const newSuggestions =
                 this.allSuggestions.filter((x) =>
-                    new Str(x.name.toLowerCase()).Contains(event.value.toLowerCase()) &&
-                    !new Str(x.name).Contains("_") &&
-                    !new Str(x.name).Contains(".md") &&
-                    x.download_url !== null
-            )
+                new Str(x.name.toLowerCase().split(".")[0]).Contains(event.value.toLowerCase()) &&
+                !new Str(x.name).Contains("_") &&
+                !new Str(x.name).Contains(".md") &&
+                x.download_url !== null
+            );
+        this.setState({
+            currentSuggestions: newSuggestions,
+            suggestionIsFound: newSuggestions.length > 0
         });
     }
 
@@ -171,4 +182,8 @@ function getLoadingElement() {
             </StackPanel>
         </VerticalAlign>
     );
+}
+
+function openGetIdForm() {
+    window.open(GetIdFormUrl, "_blank");
 }
