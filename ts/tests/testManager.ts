@@ -4,7 +4,7 @@ export default class TestManager {
     }
 
     private GetDownloadLinkOf(file: FileName) {
-        return "https://raw.githubusercontent.com/wongjiahau/ttap-sample-data/master/" + file.toString();
+        return "https://raw.githubusercontent.com/wongjiahau/ttap-sample-data/master/Archive/" + file.toString();
     }
 }
 
