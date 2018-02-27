@@ -80,8 +80,12 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     public onSuggestionsFetchRequested = (event) => {
         this.setState({
             currentSuggestions:
-                this.allSuggestions.filter((x) => new Str(x.name.toLowerCase()).Contains(event.value.toLowerCase())
-                && !new Str(x.name).Contains("_"))
+                this.allSuggestions.filter((x) =>
+                    new Str(x.name.toLowerCase()).Contains(event.value.toLowerCase()) &&
+                    !new Str(x.name).Contains("_") &&
+                    !new Str(x.name).Contains(".md") &&
+                    x.download_url !== null
+            )
         });
     }
 
