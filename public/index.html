@@ -109,7 +109,7 @@
             httpGetAsync("https://raw.githubusercontent.com/wongjiahau/ttap-web/code-cov/lastcommithash.txt", (response) => {
                 const currentGitCommitHash = response.trim();
                 if(lastGitCommitHash !== currentGitCommitHash) {
-                    location.reload();
+                    WhatToDoIfNewerVersionOfTTAPdetected();
                 }
             });
         }
@@ -117,6 +117,16 @@
             relativeDate=function(e){var a=6e4,o=36e5,t=24*o,n=7*t,r=365*t,g=r/12,u=[[42e3,"just now"],[9e4,"a minute ago"],[36e5,"minutes ago",a],[54e5,"an hour ago"],[t,"hours ago",o],[2*t,"yesterday"],[7*t,"days ago",t],[1.5*n,"a week ago"],[g,"weeks ago",n],[1.5*g,"a month ago"],[r,"months ago",g],[1.5*r,"a year ago"],[Number.MAX_VALUE,"years ago",r]];return function(a,o){!o&&(o=(new Date).getTime()),o instanceof Date&&(o=o.getTime()),a instanceof Date&&(a=a.getTime());var t,n,r,g=o-a;for(n=-1,r=u.length;++n<r;)if(g<(t=u[n])[0])return t[2]==e?t[1]:Math.round(g/t[2])+" "+t[1]}}();"undefined"!=typeof module&&module.exports&&(module.exports=relativeDate);
             const relative = relativeDate(new Date("TIMESTAMP"));
             document.getElementById("header").innerText = "Last update : " + relative; 
+        }
+
+        function WhatToDoIfNewerVersionOfTTAPdetected() {
+            window.stop();
+            const message = 
+            `
+            <h2>A newer version of TTAP is detected.</h2>
+            <h1>Press <em>F5</em> to get the latest version of TTAP.</h1>
+            `
+            document.getElementById("initialLoadingCube").innerHTML = message;
         }
     </script>
 </body>
