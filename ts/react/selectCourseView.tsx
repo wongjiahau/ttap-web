@@ -65,7 +65,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             <VerticalAlign>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
-                        <Typography type="headline">Type in your course name ⇨</Typography>
+                        <Typography type="headline">Type in your course name ⇨ </Typography>
                         <Autosuggest
                             suggestions={this.state.currentSuggestions}
                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
