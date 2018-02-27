@@ -25,6 +25,7 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <div id="errorMessage"></div>
     <div id="root"> </div>
     <div id="initialLoadingCube" class="sk-cube-div">
         <div class="sk-cube-child-div">
@@ -126,7 +127,8 @@
             <h2>A newer version of TTAP is detected.</h2>
             <h1>Press <em>F5</em> to get the latest version of TTAP.</h1>
             `
-            document.getElementById("initialLoadingCube").innerHTML = message;
+            document.getElementById("errorMessage").innerHTML = message;
+            document.getElementById("initialLoadingCube").innerHTML = "";
         }
     </script>
 </body>
