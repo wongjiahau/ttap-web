@@ -4,6 +4,7 @@ import * as Autosuggest from "react-autosuggest";
 import Highlighter = require("react-highlight-words");
 import {Redirect} from "react-router";
 
+import Typography from "material-ui/Typography";
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {RawSlot} from "../model/rawSlot";
@@ -49,7 +50,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             return <Redirect push={true} to="/play"/>;
         }
         const inputProps = {
-            placeholder: "Type your course name here",
+            placeholder: "Example: Software Engineering",
             value: this.state.value,
             onChange: this.onChange
         };
@@ -60,6 +61,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             <VerticalAlign>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
+                        <Typography type="headline">Type in your course name ⇨</Typography>
                         <Autosuggest
                             suggestions={this.state.currentSuggestions}
                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
