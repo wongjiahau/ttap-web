@@ -23,12 +23,14 @@ before_script:
   - sed -i "s/TIMESTAMP/$x/g" ./public/index.html
   - HASH=$(git rev-parse HEAD)
   - sed -i "s/LGCH/$HASH/g" ./public/index.html
+  - git branch
 
 script:
   - echo "Running script:"
   - ./scripts/transpile
   - npm test
-  - ./scripts/upload-coverage-report
+  # Only upload coverage report if is on master branch
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ./scripts/upload-coverage-report; fi
   - rm -rf  ./src/core/tests/ # remove test data which is not needed in production build
   - cp modifiedNodeModules/phin.js node_modules/phin/lib/phin.js # use ES5 phin.js because the original one cannot be minified properly
   - npm run build
