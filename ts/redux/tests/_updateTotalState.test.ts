@@ -54,4 +54,14 @@ describe("UpdateTotalState action", () => {
         expect(newState.SetTimeConstraintState.UidsOfClickedState).to.have.lengthOf(0);
     });
 
+    it("should reset ClickedTimeConstraint", () => {
+        const initialState = getInitialState();
+        let newState = MasterStateReducer(initialState, new UpdateTotalState());
+        const stcBox = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
+        newState = MasterStateReducer(newState, new FilterTimetable(stcBox));
+        expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([64, 0, 0, 0, 0, 0, 0]);
+        newState = MasterStateReducer(newState, new UpdateTotalState());
+        expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
+    });
+
 });

@@ -32,7 +32,7 @@
 - Complete the code for TTAP-analysis
 17-[X] Bug: VerticalAlign causes otherStuffDrawer cannot be opened
 18-[]-Suggesion-人性化的選擇：排Practical before Lecture, because practical usually ends early
-19-[] Serious Bug:
+19-[X] Serious Bug:
     - Step to reproduce
     1. Select a subject
     2. Go click some green box

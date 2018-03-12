@@ -40,12 +40,14 @@ describe("Integration test", () => {
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(4);
         newState = MasterStateReducer(newState, new UpdateTotalState());
         expect(newState.SetTimeConstraintState.TotalState.filter((x) => x.Kind === StateKind.MaybeOccupied)).to.have.lengthOf(12);
+        expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
 
         // Step 4
         const stcBox3 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "34")[0];
         newState = MasterStateReducer(newState, new FilterTimetable(stcBox3));
         expect(newState.SetTimeConstraintState.TotalState.filter((x) => x.Kind === StateKind.MaybeOccupied)).to.have.lengthOf(8);
         const stcBox4 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "34")[0];
+        expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 16, 0, 0, 0]);
         expect(stcBox4.Kind).to.eq(StateKind.Clicked);
 
         // Step 5

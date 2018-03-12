@@ -18,6 +18,7 @@ export class UpdateTotalState extends MasterStateAction {
             ...state,
             SetTimeConstraintState: {
                 ...state.SetTimeConstraintState,
+                ClickedTimeConstraint: [0, 0, 0, 0, 0, 0, 0],
                 UidsOfClickedState: [],
                 TotalState: GenerateTotalState(state.TimetableListState.FiltrateTimetables, [])
             }
