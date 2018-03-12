@@ -121,9 +121,10 @@
         }
 
         function WhatToDoIfNewerVersionOfTTAPdetected() {
+            window.location.reload(true);
             const message = 
             `
-            <button style='position:fixed;top:5px;right:5px;cursor:pointer;'
+            <button style='position:fixed;top:20px;right:5px;cursor:pointer;'
             onclick='document.getElementById("errorMessage").innerHTML = "";'>
                 CLOSE THIS MESSAGE</button>
             <h2>A newer version of TTAP is detected.</h2>
