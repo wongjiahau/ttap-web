@@ -15,7 +15,7 @@
 9-[X] Fix failing unit test
 10-[X] Fix error thrown by Typescript Compiler
 11-[X] merge this branch into master
-12-[] Bug:
+12-[X] Bug:
     - Step to reproduce
         1. Select FM1
         2. Deselect some specific slots
