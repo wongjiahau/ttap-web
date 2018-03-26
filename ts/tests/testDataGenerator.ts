@@ -44,9 +44,12 @@ export const GetRawSlotsOf = (subjectCode : string) : RawSlot[] => {
 };
 
 export const GetTinySlotsOf = (subjectCode : string) : TinySlot[] => {
-    const rawSlots = GetRawSlotsOf(subjectCode);
-    const slots = ParseRawSlotToSlot(rawSlots);
-    return ParseSlotToTinySlot(slots);
+    const subjects = GetTestSubjects1();
+    const uids = subjects.filter((x) => x.Code === subjectCode)[0].SlotUids;
+    const slots = GetTestSlot1();
+    const matchingSlots : Slot[] = [];
+    uids.forEach((uid) => matchingSlots.push(slots.filter((s) => s.Uid === uid)[0]));
+    return ParseSlotToTinySlot(matchingSlots);
 };
 
 export const GetBigSlotsOf = (subjectCode : string) : BigSlot[] => {
