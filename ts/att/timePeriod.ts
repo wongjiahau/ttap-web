@@ -2,8 +2,8 @@ import {
     Time
 } from "./time";
 export class TimePeriod {
-    public static readonly Max = Time.CreateTime12Hour(8, 0, true);
-    public static readonly Min = Time.CreateTime12Hour(7, 0, false);
+    public static Max = Time.CreateTime12Hour(1, 0, true);
+    public static Min = Time.CreateTime12Hour(11, 0, true);
 
     public static Parse(data: string): TimePeriod {
         const tokens = data.split("-");
@@ -40,16 +40,10 @@ export class TimePeriod {
 
     public constructor(startTime: Time, endTime: Time) {
         if (startTime.LessThan(TimePeriod.Min)) {
-            throw new Error("startTime of " +
-                startTime.To12HourFormat() +
-                "is less than TimePeriod.Min : " +
-                TimePeriod.Min.To12HourFormat());
+            TimePeriod.Min = startTime;
         }
         if (endTime.MoreThan(TimePeriod.Max)) {
-            throw new Error("startTime of " +
-                startTime.To12HourFormat() +
-                "is more than TimePeriod.Min : " +
-                TimePeriod.Max.To12HourFormat());
+            TimePeriod.Max = endTime;
         }
         this.StartTime = startTime;
         this.EndTime = endTime;

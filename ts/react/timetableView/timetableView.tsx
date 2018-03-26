@@ -103,7 +103,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
 
 export const GetStandardDayColumnLayout = () : ReactGridLayout.Layout[] => {
     const result = Array < ReactGridLayout.Layout > ();
-    for (let j = 0; j < 8; j++) {
+    const NUMBER_OF_DAY_PER_WEEK = 7;
+    for (let j = 0; j <= NUMBER_OF_DAY_PER_WEEK; j++) {
         result.push({
             h: 1,
             i: ("d" + j),

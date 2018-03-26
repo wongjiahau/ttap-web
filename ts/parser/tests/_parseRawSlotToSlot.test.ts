@@ -23,8 +23,15 @@ describe("parseRawSlotToSlot", () => {
         expect(() => {
             const result = ParseRawSlotToSlot(ParseHtmlToRawSlot(input));
         }).to.not.throw();
-
     });
+
+    it("case 3", () => {
+        const input = new TestManager().GetDataFrom(FileName.keli_2017_sept);
+        expect(() => {
+            const result = ParseRawSlotToSlot(ParseHtmlToRawSlot(input));
+        }).to.not.throw();
+    });
+
 
 });
 

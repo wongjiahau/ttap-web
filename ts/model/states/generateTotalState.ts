@@ -1,4 +1,5 @@
 
+import { TimePeriod } from "../../att/timePeriod";
 import {DecToBin} from "../../util/decToBin";
 import { Str } from "../../util/str";
 import {
@@ -27,7 +28,7 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
     }
     for (let day = 0; day < 7; day++) {
         // dus = definitelyUnoccupiedState in binary
-        const totalNumberOfHalfHourPerDay = 26;
+        const totalNumberOfHalfHourPerDay = TimePeriod.Max.Minus(TimePeriod.Min).TotalHours() * 2;
         const dus = DecToBin(definitelyUnoccupiedState[day], totalNumberOfHalfHourPerDay).split("").reverse().join("");
         for (let j = 0; j < dus.length; j++) {
             if (dus[j] === "0") {
