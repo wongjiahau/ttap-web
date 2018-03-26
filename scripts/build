@@ -1,0 +1,4 @@
+#!/bin/bash
+npm run build
+pwd
+sed -i 's|/static|./static|g' ./build/index.html 
