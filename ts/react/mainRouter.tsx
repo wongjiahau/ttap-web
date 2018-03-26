@@ -1,9 +1,10 @@
 import * as React from "react";
 import {Redirect} from "react-router";
 import {Route, Switch} from "react-router-dom";
-import { RawReadmeUrl, RawTosppUrl } from "../constants";
+import {RawReadmeUrl, RawTosppUrl} from "../constants";
+import {LoginContainer} from "../redux/containers/loginContainer";
 import {SelectCourseViewContainer} from "../redux/containers/selectCourseContainer";
-import { GetStarted } from "./getStarted";
+import {GetStarted} from "./getStarted";
 import {MasterView} from "./masterView";
 import {FourOhFour} from "./pages/fourOhFour";
 import {StackPanel} from "./panels/stackPanel";
@@ -16,6 +17,7 @@ export const MainRouter = () => (
         <Route exact={true} path="/" component={RedirectTo}/>
         <Route exact={true} path="/getStarted" component={GetStarted}/>
         <Route exact={true} path="/learn" component={Tutorial}/>
+        <Route exact={true} path="/login" component={LoginContainer}/>
         <Route exact={true} path="/select" component={SelectCourseViewContainer}/>
         <Route exact={true} path="/play" component={MasterView}/>
         <Route exact={true} path="/404" component={FourOhFour}/>

@@ -1,4 +1,3 @@
-import {expect} from "chai";
 import {connect} from "react-redux";
 import {ISaveTimetableDialogDispatchProps, ISaveTimetableDialogStateProps, SaveTimetableDialog} from "../../react/saveTimetableDialog";
 import {SaveTimetableAsGoogleCalendar} from "../actions/saveTimetable/saveTimetableAsGoogleCalendar";
