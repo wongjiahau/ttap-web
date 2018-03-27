@@ -2,7 +2,7 @@ import { expect } from "chai";
 const isEqual = require("lodash.isequal");
 import { FindClashes } from "../../clashFinder/findClashes";
 import { ObjectStore } from "../../dataStructure/objectStore";
-import { ParseSlotToSubject } from "../../parser/parseSlotToSubject";
+import { ParseRawSlotToSubject } from "../../parser/parseRawSlotToSubject";
 import { FindTimetableWithoutConsideringWeekNumber } from "../../permutator/findTimetable";
 import { IndexOf } from "../../tests/testData/heng_2017_sept";
 import { GetMockInitialState, GetTestRawSlot1, GetTestSubjects1 } from "../../tests/testDataGenerator";
@@ -13,7 +13,7 @@ import { CheckForClashesBetween, GetSelectedSlots, ToggleSubjectSelection } from
 import { IMasterState, MasterStateReducer, NewMasterState } from "./../reducers/masterState";
 
 const testSlots = GetTestRawSlot1();
-const mockSubjects = ParseSlotToSubject(testSlots);
+const mockSubjects = ParseRawSlotToSubject(testSlots);
 FindClashes(mockSubjects, new ObjectStore(testSlots)); // some test will fail if this line is not run
 
 describe("toggle subject selection action", () => {

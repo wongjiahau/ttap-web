@@ -3,7 +3,7 @@ const isEqual = require("lodash.isequal");
 import {FindClashes} from "../../clashFinder/findClashes";
 import {ObjectStore} from "../../dataStructure/objectStore";
 import {RawSlot} from "../../model/rawSlot";
-import {ParseSlotToSubject} from "../../parser/parseSlotToSubject";
+import {ParseRawSlotToSubject} from "../../parser/parseRawSlotToSubject";
 import {GeneralizeSlot} from "../../permutator/generalizeSlot";
 import {IMasterState, MasterStateAction} from "../reducers/masterState";
 import {NewSubjectListState} from "../reducers/subjectListState";
@@ -21,7 +21,7 @@ export class NotifyDataLoaded extends MasterStateAction {
         router.AddData("generalized", new ObjectStore(GeneralizeSlot(this.rawSlots)));
         router.AddData("ungeneralized", new ObjectStore(this.rawSlots));
         router.SetRouteTo(route);
-        const subjects = ParseSlotToSubject(this.rawSlots);
+        const subjects = ParseRawSlotToSubject(this.rawSlots);
         FindClashes(subjects, router.GetCurrentData());
         return {
             ...state,

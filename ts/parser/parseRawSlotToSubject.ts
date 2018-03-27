@@ -4,12 +4,13 @@ const sortBy = require("lodash.sortby");
 const uniq = require("lodash.uniq");
 import {RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
+import { IsParsable, IsReasonable } from "./parseRawSlotToSlot";
 
 interface IKeyValue < T1, T2 > { key: T1; value: T2; }
-export function ParseSlotToSubject(slots : RawSlot[]) : Subject[] {
+export function ParseRawSlotToSubject(slots : RawSlot[]) : Subject[] {
     const result = Array < Subject > ();
     const dic = new Array < IKeyValue < string, RawSlot[] >> ();
-    slots.forEach((s) => {
+    slots.filter((x) => IsReasonable(x) && IsParsable(x)).forEach((s) => {
         if (!some(dic, {key: s.SubjectCode})) {
             dic.push({
                 key: s.SubjectCode,

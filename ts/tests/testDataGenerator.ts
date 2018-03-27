@@ -3,8 +3,8 @@ import {ObjectStore} from "../dataStructure/objectStore";
 import {Slot} from "../model/slot";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
+import {ParseRawSlotToSubject} from "../parser/parseRawSlotToSubject";
 import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
-import {ParseSlotToSubject} from "../parser/parseSlotToSubject";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
 import {BigSlot} from "../permutator/bigSlot";
 import {FindTimetable} from "../permutator/findTimetable";
@@ -18,7 +18,7 @@ import {Timetable} from "./../model/timetable";
 import {HENG_2017_APR} from "./testData/heng_2017_apr";
 
 export const GetTestSubjects1 = () : Subject[] => {
-    const subjects = ParseSlotToSubject(heng_2017_sept());
+    const subjects = ParseRawSlotToSubject(heng_2017_sept());
     return subjects;
 };
 

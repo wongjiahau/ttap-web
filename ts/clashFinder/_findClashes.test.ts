@@ -5,7 +5,7 @@ import * as Combinatorics from "js-combinatorics";
 import { ObjectStore } from "../dataStructure/objectStore";
 import { Subject } from "../model/subject";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
-import { ParseSlotToSubject } from "../parser/parseSlotToSubject";
+import { ParseRawSlotToSubject } from "../parser/parseRawSlotToSubject";
 import { CodeOf } from "../tests/testData/heng_2017_apr";
 import {
     GetTestRawSlot1
@@ -16,7 +16,7 @@ import {
 
 const testSlots = GetTestRawSlot1();
 const rawSlotStore = new ObjectStore(testSlots);
-const testSubjects = () => ParseSlotToSubject(testSlots);
+const testSubjects = () => ParseRawSlotToSubject(testSlots);
 
 function get(subjectCode: string, subjects: Subject[]): Subject {
     return subjects.filter((x) => x.Code === subjectCode)[0];

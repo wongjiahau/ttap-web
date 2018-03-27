@@ -4,7 +4,7 @@ import {GetTestTimetables1} from "./../../tests/testDataGenerator";
 import {ToggleSubjectSelection} from "./../actions/toggleSubjectSelection";
 const isEqual = require("lodash.isequal");
 import ParseHtmlToRawSlot from "../../parser/parseHtmlToRawSlot";
-import {ParseSlotToSubject} from "../../parser/parseSlotToSubject";
+import {ParseRawSlotToSubject} from "../../parser/parseRawSlotToSubject";
 import TestManager, {FileName} from "../../tests/testManager";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import {NewSubjectListState} from "../reducers/subjectListState";
