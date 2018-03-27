@@ -28,6 +28,8 @@ import {
     SaveTimetable
 } from "./saveTimetable";
 
+const NUMBER_OF_DAYS_PER_WEEK = 7;
+
 export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     private loginAlready = false;
     private rawSlots: RawSlot[];
@@ -170,9 +172,8 @@ export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
 }
 
 export function AddByWeek(date: Date, numberOfWeeks: number): Date {
-    const numberOfDaysPerWeek = 7;
     const clone = new Date(date.getTime());
-    clone.setDate(clone.getDate() + numberOfWeeks * 7);
+    clone.setDate(clone.getDate() + numberOfWeeks * NUMBER_OF_DAYS_PER_WEEK);
     return clone;
 }
 
@@ -212,7 +213,6 @@ export function GetMaxWeek(slots: RawSlot[]) {
 }
 
 export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): any[] {
-    const numberOfDaysPerWeek = 7;
     const result = [];
     if (semStartDate.getDay() !== 1) {
         throw new Error("Semester start date must be a Monday");
