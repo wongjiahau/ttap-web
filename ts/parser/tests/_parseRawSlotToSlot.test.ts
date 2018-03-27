@@ -1,6 +1,8 @@
 import {
     expect
 } from "chai";
+import { Time } from "../../att/time";
+import { TimePeriod } from "../../att/timePeriod";
 import { IRawSlot } from "../../model/rawSlot";
 import TestManager, { FileName } from "../../tests/testManager";
 import ParseHtmlToRawSlot from "../parseHtmlToRawSlot";
@@ -12,6 +14,14 @@ import {
 } from "./../parseRawSlotToSlot";
 
 describe("parseRawSlotToSlot", () => {
+    it("will manipulate TimePeriod.Min and TimePeriod.Max", () => {
+        expect(TimePeriod.Min.Equal(Time.CreateTime12Hour(11, 0, true))).to.eq(true);
+        expect(TimePeriod.Max.Equal(Time.CreateTime12Hour(1, 0, true))).to.eq(true);
+        ParseRawSlotToSlot(GetTestRawSlot1());
+        expect(TimePeriod.Min.Equal(Time.CreateTime12Hour(8, 0, false))).to.eq(true);
+        expect(TimePeriod.Max.Equal(Time.CreateTime12Hour(6, 0, true))).to.eq(true);
+    });
+
     it("case 1", () => {
         expect(() => {
             ParseRawSlotToSlot(GetTestRawSlot1());
