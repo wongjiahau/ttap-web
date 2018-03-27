@@ -37,22 +37,4 @@ export class RawSlot implements IRawSlot {
     constructor() {
         this.Uid = RawSlot.nextUid++;
     }
-
-    public toString = (): string => {
-        return `---
-    SubjectCode : ${this.SubjectCode}
-    SubjectName : ${this.SubjectName}
-    Number      : ${this.Number}
-    Type        : ${this.Type}
-    Group       : ${this.Group}
-    ClassSize   : ${this.ClassSize}
-    Day         : ${this.Day}
-    TimePeriod  : ${this.TimePeriod}
-    CreditHour  : ${this.CreditHour}
-    WeekNumber  : ${this.WeekNumber}
-    Room        : ${this.Room}
-    Remark      : ${this.Remark}
-`;
-    }
-
 }
