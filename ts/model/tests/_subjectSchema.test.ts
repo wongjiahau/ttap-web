@@ -1,6 +1,8 @@
 import {
     expect
 } from "chai";
+import { ParseRawSlotToSubject } from "../../parser/parseRawSlotToSubject";
+import { HENG_2017_APR } from "../../tests/testData/heng_2017_apr";
 import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
 import {
     GetTestSubjects1, MockRawSlotStore,
@@ -103,13 +105,14 @@ describe("GenerateSubjectSchema", () => {
     });
 
     it("case 3", () => {
-        const subjects = GetTestSubjects1();
-        const industrialTraning = subjects[IndexOf.IT];
-        const result = GenerateSubjectSchema(MockRawSlotStore.GetBunch(industrialTraning.SlotUids));
-        expect(result.GotLecture).to.eq(false);
-        expect(result.GotTutorial).to.eq(false);
+        const rawSlots = HENG_2017_APR();
+        const subjects = ParseRawSlotToSubject(rawSlots);
+        const concreteTechnology = subjects[7]; // 7 is Index of Concrete Technology
+        const result = GenerateSubjectSchema((concreteTechnology.SlotUids.map((uid) => rawSlots.filter((s) => s.Uid === uid)[0])));
+        expect(result.GotLecture).to.eq(true);
+        expect(result.GotTutorial).to.eq(true);
         expect(result.GotPractical).to.eq(true);
-        expect(result.SubjectCode).to.eq(CodeOf.IT);
+        expect(result.SubjectCode).to.eq("UEMX4393");
     });
 });
 
