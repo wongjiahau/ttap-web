@@ -3,6 +3,7 @@ import {
 } from "chai";
 const concat = require("lodash.concat");
 const isEqual = require("lodash.isequal");
+import { TimePeriod } from "../../att/timePeriod";
 import {
     ParseRawSlotToSlot
 } from "../../parser/parseRawSlotToSlot";
@@ -27,6 +28,10 @@ import {
 } from "./../boundedInt";
 
 describe("FindTimetable() with BigSlot", () => {
+    beforeEach(() => {
+        TimePeriod.SetMinTo8am();
+    });
+
     it("case 1", () => {
         const slots = GetBigSlotsOf("MPU3113");
         const result = FindTimetable(slots);
@@ -106,8 +111,8 @@ describe("FindTimetable() with BigSlot", () => {
         const result = FindTimetable(bkaSlots);
         expect(result[0].State).to.deep.eq([
             0,
-            parseInt("11111100", 2),
-            parseInt("11111100", 2),
+            parseInt("111111", 2),
+            parseInt("111111", 2),
             0,
             0,
             0,

@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { TimePeriod } from "../att/timePeriod";
 import { StateKind } from "../model/states/stcBox";
 import { DefilterTimetable } from "../redux/actions/defilterTimetable";
 import { FilterTimetable } from "../redux/actions/filterTimetable";
@@ -9,6 +10,10 @@ import { IndexOf } from "../tests/testData/heng_2017_apr";
 import { GetMockInitialState } from "../tests/testDataGenerator";
 
 describe("Integration test", () => {
+    beforeEach(() => {
+        TimePeriod.SetMinTo8am();
+    });
+
     it("case 1", () => {
         const behaviour = `
         Step 0. Given Ali just loaded slots data (by logging in)
@@ -29,9 +34,9 @@ describe("Integration test", () => {
         expect(newState.SetTimeConstraintState.TotalState.filter((x) => x.Kind === StateKind.MaybeOccupied)).to.have.lengthOf(6);
 
         // Step 2
-        const stcBox1 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "34")[0];
+        const stcBox1 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "32")[0]; // 32 means Wednesday, 2nd box (2nd box means 8.30am->9.00am, since we set the min to be 8am)
         newState = MasterStateReducer(newState, new FilterTimetable(stcBox1));
-        const stcBox2 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "36")[0];
+        const stcBox2 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "34")[0]; // 34 means Wednesday, 4th box (4th box means 9.30am->10.00am, since we set the min to be 8am)
         newState = MasterStateReducer(newState, new FilterTimetable(stcBox2));
         expect(newState.SetTimeConstraintState.TotalState.filter((x) => x.Kind === StateKind.MaybeOccupied)).to.have.lengthOf(0);
 
@@ -43,16 +48,16 @@ describe("Integration test", () => {
         expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
 
         // Step 4
-        const stcBox3 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "34")[0];
+        const stcBox3 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "32")[0];
         newState = MasterStateReducer(newState, new FilterTimetable(stcBox3));
         expect(newState.SetTimeConstraintState.TotalState.filter((x) => x.Kind === StateKind.MaybeOccupied)).to.have.lengthOf(8);
-        const stcBox4 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "34")[0];
-        expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 16, 0, 0, 0]);
+        const stcBox4 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "32")[0];
+        expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 4, 0, 0, 0]);
         expect(stcBox4.Kind).to.eq(StateKind.Clicked);
 
         // Step 5
         newState = MasterStateReducer(newState, new DefilterTimetable(stcBox4));
-        const stcBox5 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "34")[0];
+        const stcBox5 = newState.SetTimeConstraintState.TotalState.filter((x) => x.Uid === "32")[0];
 
         // Step 6
         expect(stcBox5.Kind).to.eq(StateKind.MaybeOccupied);

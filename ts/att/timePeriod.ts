@@ -4,6 +4,14 @@ import {
 export class TimePeriod {
     public static Max = Time.CreateTime12Hour(1, 0, true);
     public static Min = Time.CreateTime12Hour(11, 0, true);
+    public static GetNumberOfHalfHours(): number {
+        const NUMBER_OF_HALF_HOURS_PER_HOUR = 2;
+        return this.Max.Minus(this.Min).TotalHours() * NUMBER_OF_HALF_HOURS_PER_HOUR;
+    }
+
+    public static SetMinTo8am(): void {
+        this.Min = Time.CreateTime12Hour(8, 0, false);
+    }
 
     public static Parse(data: string): TimePeriod {
         const tokens = data.split("-");
@@ -15,7 +23,7 @@ export class TimePeriod {
     public static GenerateBinaryForm(t: TimePeriod): number {
         const MinutesInHalfHour = 30;
         const HowManyHalfHourPerHour = 2;
-        const maxWidth = (TimePeriod.Max.Minus(TimePeriod.Min).TotalHours()) * HowManyHalfHourPerHour;
+        const maxWidth = TimePeriod.GetNumberOfHalfHours();
         const width = t
             .EndTime
             .Minus(t.StartTime)
@@ -31,7 +39,8 @@ export class TimePeriod {
         for (let i = startIndex; i < startIndex + width; i++) {
             stringForm[i] = "1";
         }
-        return parseInt(stringForm.reverse().join(""), 2);
+        const result = parseInt(stringForm.reverse().join(""), 2);
+        return result;
     }
 
     public StartTime: Time;

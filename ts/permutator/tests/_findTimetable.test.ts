@@ -25,6 +25,7 @@ import {
 import {
     BoundedInt
 } from "./../boundedInt";
+import { TimePeriod } from "../../att/timePeriod";
 
 describe("FindTimetable()", () => {
     it("case 1", () => {
@@ -102,12 +103,13 @@ describe("FindTimetable()", () => {
     });
 
     it("case 1 on Timetable.State", () => {
+        TimePeriod.SetMinTo8am();
         const bkaSlots = GetTinySlotsOf(CodeOf.BKA);
         const result = FindTimetable(bkaSlots);
         expect(result[0].State).to.deep.eq([
             0,
-            parseInt("11111100", 2),
-            parseInt("11111100", 2),
+            parseInt("111111", 2),
+            parseInt("111111", 2),
             0,
             0,
             0,

@@ -1,13 +1,18 @@
 import { expect } from "chai";
+import { TimePeriod } from "../../../att/timePeriod";
 import { Filter } from "../filter";
 import { GetTestTimetables1 } from "./../../../tests/testDataGenerator";
 import { StateKind, STCBox } from "./../stcBox";
 
-const state1 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), null); // Monday 10.00 am to 10.30 am
-const state2 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("1000000", 2), null); // Wednesday 10.00 am to 10.30 am
+const state1 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("10000", 2), null); // Monday 10.00 am to 10.30 am
+const state2 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("10000", 2), null); // Wednesday 10.00 am to 10.30 am
 const timetables = GetTestTimetables1();
 
 describe("Filter()", () => {
+    beforeEach(() => {
+        TimePeriod.SetMinTo8am();
+    });
+
     it("should throw error if state kind is not MaybeOccupied", () => {
         expect(() => {Filter(timetables, new STCBox(StateKind.DefinitelyUnoccupied, null, null, null)); }).to.throw();
         expect(() => {Filter(timetables, new STCBox(StateKind.DefinitelyOccupied, null, null, null)); }).to.throw();

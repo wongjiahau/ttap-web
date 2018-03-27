@@ -9,16 +9,20 @@ import {
 } from "../att/timePeriod";
 
 describe("constructor of TimePeriod", () => {
-    it("should throw error if startTime is less than TimePeriod.Min", () => {
-        expect(() => {
-            const input = new TimePeriod(Time.CreateTime24Hour(0, 0), Time.CreateTime24Hour(10, 0));
-        }).to.throw();
+    it("should set TimePeriod.Min if startTime is less than TimePeriod.Min", () => {
+        TimePeriod.Min  = Time.CreateTime12Hour(11, 0, true);
+        const startTime = Time.CreateTime24Hour(0, 0);
+        const endTime   = Time.CreateTime24Hour(10, 0);
+        const input     = new TimePeriod(startTime, endTime);
+        expect(TimePeriod.Min.Equal(startTime)).to.eq(true);
     });
 
-    it("should throw error if endTime is less than TimePeriod.Max", () => {
-        expect(() => {
-            const input = new TimePeriod(Time.CreateTime24Hour(9, 0), Time.CreateTime24Hour(23, 0));
-        }).to.throw();
+    it("should set TimePeriod.Max if endTime is more than TimePeriod.Max", () => {
+        TimePeriod.Max  = Time.CreateTime12Hour(1, 0, false);
+        const startTime = Time.CreateTime24Hour(9, 0);
+        const endTime   = Time.CreateTime24Hour(23, 0);
+        const input     = new TimePeriod(startTime, endTime);
+        expect(TimePeriod.Max.Equal(endTime)).to.eq(true);
     });
 
     it("should throw error when endTime is less than startTime", () => {
@@ -178,6 +182,7 @@ describe("time period", () => {
     });
 
     it("Test BinaryData 1", () => {
+        TimePeriod.Min = Time.CreateTime12Hour(7, 0, false);
         const time = "8:00 AM - 11:00 AM";
         const input = TimePeriod.Parse(time);
         expect(input.BinaryData.toString(2)).to.eq("11111100");
