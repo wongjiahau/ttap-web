@@ -45,18 +45,6 @@ export class Slot implements ISlot {
 
 }
 
-export function IntersectWith(a: ISlot, b: ISlot): boolean {
-    if (a.SubjectCode === b.SubjectCode && a.Type === b.Type && a.Group !== b.Group) {
-        return true;
-    }
-    if ( a.Day !== b.Day) {
-        return false;
-    }
-    if ((a.TimePeriod & b.TimePeriod) === 0 ) {
-        return false;
-    }
-    return (a.Week & b.Week) > 0;
-}
 export function CreateSlotFromRaw(raw : RawSlot) : Slot {
     const stringHash  = require("string-hash");
     const Uid         = raw.Uid;
