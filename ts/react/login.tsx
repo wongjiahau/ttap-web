@@ -1,4 +1,5 @@
 import Button from "material-ui/Button";
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {Str} from "../util/str";
@@ -23,7 +24,8 @@ export interface ILoginDispatchProps {
 }
 
 interface ILoginStateProps {
-    redirect : boolean;
+    redirect:        boolean;
+    openErrorDialog: boolean;
 }
 export class Login extends React.Component < ILoginDispatchProps,
 ILoginStateProps > {
@@ -32,7 +34,8 @@ ILoginStateProps > {
     public constructor(props) {
         super(props);
         this.state = {
-            redirect: false
+            redirect: false,
+            openErrorDialog: false
         };
     }
 
@@ -51,6 +54,26 @@ ILoginStateProps > {
                         src={`${URL}login.jsp`}/>
                     <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
                 </StackPanel>
+                <Dialog open={this.state.openErrorDialog}>
+                    <DialogTitle>
+                            We can't load the data :(
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            It may be due to the following reasons:
+                        </DialogContentText>
+                        <ul>
+                            <li>You have not met your Academic Advisor(AA).</li>
+                            <li>Your time to view the data have not reach yet.</li>
+                            <li>Internal error of TTAP.</li>
+                        </ul>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button raised={true} onClick={this.handleClose} color="primary">
+                            OK
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }
@@ -64,8 +87,13 @@ ILoginStateProps > {
                 this.currentPage++;
                 iframe.contentWindow.changePage(this.currentPage);
             } else {
-                this.props.handleParseHtmlToSlot(this.html);
-                this.setState({redirect: true});
+                try {
+                    this.props.handleParseHtmlToSlot(this.html);
+                    this.setState({redirect: true});
+                } catch (error) {
+                    this.setState({openErrorDialog: true});
+                    console.log(error);
+                }
             }
         }
     }
@@ -73,6 +101,10 @@ ILoginStateProps > {
     public handleRefresh = () => {
         const iframe = (document.getElementById("unitregiframe")as HTMLIFrameElement);
         iframe.src = iframe.src;
+    }
+
+    public handleClose = () => {
+        this.setState({openErrorDialog: false});
     }
 
 }
