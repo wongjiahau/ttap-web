@@ -36,12 +36,12 @@ describe("Parser which is used to parse html into slots", () => {
             .equal("129");
     });
 
-    it("jiahau_2017_sept's data should have 21 subjects", () => {
+    it("jiahau_2017_sept's data should have 20 subjects", () => {
         const plainHtml = jiahau2017septHtml;
         const result = ParseRawSlotToSubject(ParseHtmlToSlots(plainHtml));
         expect(result.length)
             .to
-            .equal(21);
+            .equal(20);
     });
 
     it("jiahau_2017_sept's data first subject (sorted by name) should be Artificial Inte" +

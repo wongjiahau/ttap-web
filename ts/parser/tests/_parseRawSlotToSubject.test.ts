@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import uniq = require("lodash.uniq");
 import { IRawSlot } from "../../model/rawSlot";
 import { IndexOf } from "../../tests/testData/heng_2017_sept";
 import { GetTestRawSlot1, } from "../../tests/testDataGenerator";
@@ -13,9 +14,14 @@ describe("parseRawSlotToSubject", () => {
 
     it("should exclude slots that are not reasonable", () => {
         const rawSlots = GetTestRawSlot1();
+        const namesOfAllSubjects = uniq(rawSlots.map((x) => x.SubjectName.toLowerCase()));
+        expect(namesOfAllSubjects).to.have.lengthOf(18);
         const NAME_OF_UNREASONABLE_SUBJECT = "industrial training";
+        expect(namesOfAllSubjects).to.contain(NAME_OF_UNREASONABLE_SUBJECT);
         const subjects = ParseRawSlotToSubject(GetTestRawSlot1());
-        expect(subjects.map((x) => x.Name.toLowerCase())).to.not.contain(NAME_OF_UNREASONABLE_SUBJECT);
+        const nameOfFilteredSubjects = uniq(subjects.map((x) => x.Name.toLowerCase()));
+        expect(nameOfFilteredSubjects).to.not.contain(NAME_OF_UNREASONABLE_SUBJECT);
+        expect(nameOfFilteredSubjects).to.have.lengthOf(17);
     });
 
     it("should exclude slots that are not parsable", () => {

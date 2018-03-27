@@ -1,6 +1,6 @@
 import { expect } from "chai";
 const uniq = require("lodash.uniq");
-import { GetTestRawSlot1, GetTestTimetables1, GetTinySlotsOf } from "./testDataGenerator";
+import { GetTestRawSlot1, GetTestSlot1, GetTestSubjects1, GetTestTimetables1, GetTestTinySlot1, GetTinySlotsOf } from "./testDataGenerator";
 
 describe("testDataGenerator", () => {
     describe("GetTestRawSlots", () => {
@@ -25,6 +25,40 @@ describe("testDataGenerator", () => {
             "INTRODUCTION TO KOREAN",
             "SUN ZI'S ART OF WAR AND BUSINESS STRATEGIES",
             "BASIC ECONOMICS, ACCOUNTING AND MANAGEMENT"
+        ]);
+    });
+
+    describe("GetTestSlot1", () => {
+        const slots = GetTestSlot1();
+        expect(slots).to.have.lengthOf(141);
+    });
+
+    describe("GetTestTinySlot1", () => {
+        const tinySlots = GetTestTinySlot1();
+        expect(tinySlots).to.have.lengthOf(89);
+    });
+
+    describe("GetTestSubjects1", () => {
+        const subjects = GetTestSubjects1();
+        expect(subjects).to.have.lengthOf(17);
+        expect(subjects.map((x) => x.Name)).to.deep.eq([
+            "ARTS AND CULTURAL PERFORMANCE",
+            "BAHASA KEBANGSAAN A",
+            "BAHASA MELAYU KOMUNIKASI 2",
+            "BASIC ECONOMICS, ACCOUNTING AND MANAGEMENT",
+            "COMMUNITY PROJECT",
+            "ENGINEERING ECONOMICS",
+            "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)",
+            "INTRODUCTION TO FRENCH",
+            "INTRODUCTION TO GERMAN LANGUAGE",
+            "INTRODUCTION TO JAPANESE",
+            "INTRODUCTION TO KOREAN",
+            "LEADERSHIP AND TEAMBUILDING",
+            "MALAYSIAN STUDIES 3 (FOR INTERNATIONAL STUDENTS)",
+            "STRUCTURAL ANALYSIS I",
+            "SUN ZI'S ART OF WAR AND BUSINESS STRATEGIES",
+            "TAMADUN ISLAM DAN TAMADUN ASIA (TITAS)",
+            "WATER AND WASTEWATER TREATMENT"
         ]);
     });
 

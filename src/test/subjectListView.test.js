@@ -24,10 +24,10 @@ const getStub = () => {
     return wrapper;
 }
 describe('<SubjectListView/>', () => {
-    it('should render 18 SubjectViews when there are 18 subjects', () => {
+    it('should render 17 SubjectViews when there are 17 subjects', () => {
         const wrapper = getStub();
-        expect(GetTestSubjects1()).to.have.lengthOf(18);
-        expect(wrapper.find('SubjectView')).to.have.lengthOf(18);
+        expect(GetTestSubjects1()).to.have.lengthOf(17);
+        expect(wrapper.find('SubjectView')).to.have.lengthOf(17);
     });
 
     it('should render a toggle-view-button', () => {

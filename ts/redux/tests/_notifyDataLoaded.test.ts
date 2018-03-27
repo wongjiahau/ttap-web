@@ -31,7 +31,7 @@ describe("notifyDataLoaded action", () => {
     it("should set Subject property of SubjectListState", () => {
         const newState = MasterStateReducer(NewMasterState(),
             new NotifyDataLoaded(GetTestRawSlot1()));
-        expect(newState.SubjectListState.Subjects.length).to.eq(18);
+        expect(newState.SubjectListState.Subjects.length).to.eq(17);
     });
 
     it("should set IsOpen of SubjectListView to true", () => {

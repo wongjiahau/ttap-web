@@ -29,17 +29,16 @@ export enum IndexOf {
     CP      = 4,
     EE      = 5,
     HE      = 6,
-    IT      = 7,
-    ITF     = 8,
-    ITGL    = 9,
-    ITJ     = 10,
-    ITK     = 11,
-    LT      = 12,
-    MS3     = 13,
-    SA1     = 14,
-    SZAOWBS = 15,
-    TITA    = 16,
-    WWT     = 17
+    ITF     = 7,
+    ITGL    = 8,
+    ITJ     = 9,
+    ITK     = 10,
+    LT      = 11,
+    MS3     = 12,
+    SA1     = 13,
+    SZAOWBS = 14,
+    TITA    = 15,
+    WWT     = 16
 }
 
 export function heng_2017_sept(): IRawSlot[] {
