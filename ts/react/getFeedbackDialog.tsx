@@ -1,7 +1,6 @@
 import ThumbUpIcon from "material-ui-icons/ThumbUp";
 import Button from "material-ui/Button";
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
-import Typography from "material-ui/Typography";
 import * as React from "react";
 import { FeedbackFormUrl } from "../constants";
 import {StackPanel} from "./panels/stackPanel";
@@ -35,9 +34,7 @@ IGetFeedbackDialogState > {
             <Dialog open={this.state.isOpen}>
                 <img style={{height: "350px"}} src="https://image.ibb.co/gaKihc/thank_3148710_640.png"/>
                 <DialogTitle>
-                    <Typography type="title">
                         Thank you for using TTAP!
-                    </Typography>
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
