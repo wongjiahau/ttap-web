@@ -52,7 +52,8 @@ export interface IDayRow {
 
 export function GetDayRows() : IDayRow[] {
     const dayRows : IDayRow[] = [];
-    for (let i = 0; i < 7; i++) {
+    const NUMBER_OF_DAY_PER_WEEK = 7;
+    for (let i = 0; i < NUMBER_OF_DAY_PER_WEEK; i++) {
         dayRows.push({
             rowIndex: i,
             state: [0, 0, 0, 0, 0] // Assume to have maximum of 5 overlapping slot in one day
