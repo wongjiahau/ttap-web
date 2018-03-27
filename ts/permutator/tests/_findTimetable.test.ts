@@ -3,6 +3,7 @@ import {
 } from "chai";
 const concat = require("lodash.concat");
 const isEqual = require("lodash.isequal");
+import { TimePeriod } from "../../att/timePeriod";
 import {
     ParseRawSlotToSlot
 } from "../../parser/parseRawSlotToSlot";
@@ -14,7 +15,7 @@ import {
     HENG_2017_APR
 } from "../../tests/testData/heng_2017_apr";
 import {
-    FindTimetable,
+    FindTimetable, FindTimetableByConsideringWeekNumber,
 } from "../findTimetable";
 import {
     RawSlot
@@ -25,9 +26,14 @@ import {
 import {
     BoundedInt
 } from "./../boundedInt";
-import { TimePeriod } from "../../att/timePeriod";
 
 describe("FindTimetable()", () => {
+    it("should throw error if passed in empty array", () => {
+        expect(() => {
+            FindTimetable([]);
+        }).to.throw();
+    });
+
     it("case 1", () => {
         const slots = GetTinySlotsOf("MPU3113");
         const result = FindTimetable(slots);
@@ -117,4 +123,18 @@ describe("FindTimetable()", () => {
         ]);
     });
 
+});
+
+describe("FindTimetableByConsideringWeekNumber ", () => {
+    it("case 1", () => {
+        const slots = HENG_2017_APR().filter((x) =>
+            x.SubjectCode === CodeOf.FM2 ||  // Fluid Mechanics 2
+            x.SubjectCode === CodeOf.H   ||  // Hydrology
+            x.SubjectCode === CodeOf.SA2 ||  // Structural Analysis 2
+            x.SubjectCode === CodeOf.HT  ||  // Highway Transportation
+            x.SubjectCode === CodeOf.ITBS    // Introduction To Building Services
+        );
+        const timetables = FindTimetableByConsideringWeekNumber(slots);
+        expect(timetables.length).to.eq(616872);
+    });
 });

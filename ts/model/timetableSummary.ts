@@ -38,11 +38,7 @@ export class TimetableSummary {
         this.SubjectSummaries = [];
         const subjects = PartitionizeByKey(slots, "SubjectCode");
         subjects.forEach((partition) => {
-            if (partition.length > 0) {
-                this
-                    .SubjectSummaries
-                    .push(new SubjectSummary(partition));
-            }
+                this.SubjectSummaries.push(new SubjectSummary(partition));
         });
     }
 
