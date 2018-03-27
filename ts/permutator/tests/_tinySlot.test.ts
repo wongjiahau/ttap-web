@@ -2,13 +2,16 @@ import {
     expect
 } from "chai";
 const isEqual = require("lodash.isequal");
+import { TimePeriod } from "../../att/timePeriod";
+import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
+import { ParseSlotToTinySlot } from "../../parser/parseSlotToTinySlot";
 import { CodeOf } from "../../tests/testData/heng_2017_sept";
 import {
     CreateSlotFromInterface,
     ISlot
 } from "./../../model/slot";
 import {
-    GetTinySlotsOf
+    GetRawSlotsOf, GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
 import {
     TinySlot
@@ -29,6 +32,10 @@ function GetTestSlot() {
     return CreateSlotFromInterface(result);
 }
 describe("tinySlot", () => {
+    beforeEach(() => {
+        TimePeriod.SetMinTo8am();
+    });
+
     describe("constructor", () => {
         it("should set SlotNumber", () => {
             const result = new TinySlot(GetTestSlot());
@@ -61,11 +68,39 @@ describe("tinySlot", () => {
         });
 
         it("should set State 2", () => {
-            const result = GetTinySlotsOf(CodeOf.BKA);
+            const bkaSlots = GetRawSlotsOf(CodeOf.BKA);
+            expect(bkaSlots).to.deep.eq([{
+                Uid: 16,
+                SubjectCode: "MPU32013",
+                SubjectName: "BAHASA KEBANGSAAN A",
+                Number: "9",
+                Type: "L",
+                Group: "1",
+                ClassSize: "30",
+                Day: "Tue",
+                TimePeriod: "08:00 AM - 11:00 AM",
+                CreditHour: "3.0",
+                WeekNumber: "1-7",
+                Room: "KB204",
+                Remark: ""
+            }, {
+                Uid: 17,
+                SubjectCode: "MPU32013",
+                SubjectName: "BAHASA KEBANGSAAN A",
+                Number: "9",
+                Type: "L",
+                Group: "1",
+                Day: "Wed",
+                TimePeriod: "08:00 AM - 11:00 AM",
+                CreditHour: "3.0",
+                WeekNumber: "1-7",
+                Room: "KB201"
+            }]);
+            const result = ParseSlotToTinySlot(ParseRawSlotToSlot(bkaSlots));
             const expected = [
                 0,
-                parseInt("11111100", 2),
-                parseInt("11111100", 2),
+                parseInt("111111", 2),
+                parseInt("111111", 2),
                 0,
                 0,
                 0,

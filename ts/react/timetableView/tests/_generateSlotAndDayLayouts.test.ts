@@ -17,7 +17,7 @@ import {
 
 describe("GenerateSlotLayouts", () => {
     beforeEach(() => {
-        TimePeriod.Min = Time.CreateTime12Hour(8, 0, false);
+        TimePeriod.SetMinTo8am();
     });
 
     it("case 1", () => {
