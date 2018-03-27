@@ -28,7 +28,7 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
     }
     for (let day = 0; day < 7; day++) {
         // dus = definitelyUnoccupiedState in binary
-        const totalNumberOfHalfHourPerDay = TimePeriod.Max.Minus(TimePeriod.Min).TotalHours() * 2;
+        const totalNumberOfHalfHourPerDay = TimePeriod.GetNumberOfHalfHours();
         const dus = DecToBin(definitelyUnoccupiedState[day], totalNumberOfHalfHourPerDay).split("").reverse().join("");
         for (let j = 0; j < dus.length; j++) {
             if (dus[j] === "0") {
@@ -89,14 +89,15 @@ export function GetMaybeOccupiedState(definitelyOccupiedState: number[], definit
 }
 
 export function StringifyTotalState(totalState: STCBox[]): string {
+    const getRow = () => Array(TimePeriod.GetNumberOfHalfHours());
     const data = [
-        "..........................".split(""),
-        "..........................".split(""),
-        "..........................".split(""),
-        "..........................".split(""),
-        "..........................".split(""),
-        "..........................".split(""),
-        "..........................".split(""),
+        getRow(),
+        getRow(),
+        getRow(),
+        getRow(),
+        getRow(),
+        getRow(),
+        getRow()
     ];
     totalState.forEach((state) => {
         data[state.Day][state.X] = state.Kind.toString();
