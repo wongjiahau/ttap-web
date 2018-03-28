@@ -3,7 +3,7 @@ import {
 } from "chai";
 import {
     Week
-} from "../att/week";
+} from "../week";
 
 describe("week", () => {
 

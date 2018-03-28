@@ -3,10 +3,10 @@ import {
 } from "chai";
 import {
     Time
-} from "../att/time";
+} from "../time";
 import {
     TimePeriod
-} from "../att/timePeriod";
+} from "../timePeriod";
 
 describe("constructor of TimePeriod", () => {
     it("should set TimePeriod.Min if startTime is less than TimePeriod.Min", () => {

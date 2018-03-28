@@ -3,7 +3,7 @@ import {
 } from "chai";
 import {
     TimeSpan,
-} from "../att/timeSpan";
+} from "../timeSpan";
 
 describe("timespan", () => {
     describe("constructor", () => {

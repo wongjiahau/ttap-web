@@ -3,10 +3,10 @@ import {
 } from "chai";
 import {
     Time,
-} from "../att/time";
+} from "../time";
 import {
     TimeSpan,
-} from "../att/timeSpan";
+} from "../timeSpan";
 
 describe("time", () => {
     describe("CreateTime24Hour", () => {

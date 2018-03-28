@@ -3,7 +3,7 @@ import {
 } from "chai";
 import {
     ParseDay
-} from "../att/day";
+} from "../day";
 
 describe("day parser", () => {
     it("test 1", () => {
