@@ -84,15 +84,6 @@ export class TimePeriod {
         // return true;
     }
 
-    public ToConstructionString(): string {
-        return `TimePeriod.CreateTimePeriod(${this
-            .StartTime
-            .ToConstructionString()},
-        ${this
-            .EndTime
-            .ToConstructionString()})`;
-    }
-
     public GetStartTimeInIsoFormat(): string {
         return this.pad(this.StartTime.Hour) + ":" + this.pad(this.StartTime.Minute);
     }

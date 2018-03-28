@@ -57,10 +57,28 @@ describe("timespan", () => {
     });
 
     describe("Equal()", () => {
-        it("case 1", () => {
+        it("should return true if hours and minutes and seconds are same", () => {
             const input1 = new TimeSpan(2, 30, 40);
             const input2 = new TimeSpan(2, 30, 40);
             expect(input1.Equal(input2)).to.equal(true);
+        });
+
+        it("should return false if seconds are different", () => {
+            const input1 = new TimeSpan(2, 30, 40);
+            const input2 = new TimeSpan(2, 30, 39);
+            expect(input1.Equal(input2)).to.equal(false);
+        });
+
+        it("should return false if minutes are different", () => {
+            const input1 = new TimeSpan(2, 30, 40);
+            const input2 = new TimeSpan(2, 29, 40);
+            expect(input1.Equal(input2)).to.equal(false);
+        });
+
+        it("should return false if hours are different", () => {
+            const input1 = new TimeSpan(2, 30, 40);
+            const input2 = new TimeSpan(3, 30, 40);
+            expect(input1.Equal(input2)).to.equal(false);
         });
     });
 

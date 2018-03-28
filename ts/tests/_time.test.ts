@@ -9,6 +9,14 @@ import {
 } from "../att/timeSpan";
 
 describe("time", () => {
+    describe("CreateTime24Hour", () => {
+        it("case 1", () => {
+            const time = Time.CreateTime24Hour(13, 55);
+            expect(time.Hour).to.eq(13);
+            expect(time.Minute).to.eq(55);
+        });
+    });
+
     it("Test Equal() 1", () => {
         const input1 = Time.CreateTime24Hour(10, 10);
         const input2 = Time.CreateTime24Hour(10, 10);
