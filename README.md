@@ -1,4 +1,12 @@
 # [Timetable Arranging Program - Web (TTAP)](https://github.com/wongjiahau/ttap-web)
+## Special thanks to
+- Keli
+- Dr. Madhavan
+- Dr. Victor
+- Sean Ho
+- Heng
+- All those who tested TTAP
+
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/wongjiahau/ttap-web.svg)](https://greenkeeper.io/)
 [![travis-ci](https://travis-ci.org/wongjiahau/ttap-web.svg?branch=master)](https://travis-ci.org/wongjiahau/ttap-web)
