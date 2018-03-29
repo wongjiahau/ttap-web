@@ -78,9 +78,9 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                             inputProps={inputProps}/>
                             {""}
                     </StackPanel>
-                    <Button style={{visibility: this.state.suggestionIsFound ? "hidden" : "visible" }}
+                    {/* <Button style={{visibility: this.state.suggestionIsFound ? "hidden" : "visible" }}
                         onClick={openGetIdForm}
-                        color="secondary" raised={true}>I can't find my course</Button>
+                        color="secondary" raised={true}>I can't find my course</Button> */}
                     {!this.state.error ? null :
                         <p style={{color: "Red"}}>{this.state.error}</p>}
                 </StackPanel>
