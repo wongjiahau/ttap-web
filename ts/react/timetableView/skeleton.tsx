@@ -68,6 +68,7 @@ export class Skeleton implements ISkeleton {
     }
     private GetTimeRowLayout() : ReactGridLayout.Layout[] {
         const result = Array < ReactGridLayout.Layout > ();
+        // TODO: Give answer to what is the magic number 32.
         for (let i = 0; i < 32; i++) {
             result.push({
                 h: 1,

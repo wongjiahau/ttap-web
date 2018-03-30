@@ -41,3 +41,5 @@
     5. Declick green box, expected green box to appear, but it was gone
 
 20-[X]-Snackbar should close when opening slot table view
+21-[X]-Flatpickr date picker bug
+22-[]-Write test for react components
