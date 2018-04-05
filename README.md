@@ -33,30 +33,37 @@ This software is used to helps student's of UTAR to arrange their timetable with
 
 ### Steps
 #### 1. Clone the project
-`$ git clone https://github.com/wongjiahau/ttap-web.git`
-
-#### 2. Install required Node packages
 ```
-$ cd ttap-web
-$ npm install
+git clone https://github.com/wongjiahau/ttap-web.git
+```
+
+#### 2. Install all the required Node packages
+```
+cd ttap-web
+npm install
 ```
 
 #### 3. Compile TypeScript files into JavaScripts
-Make sure you are in the `ttap-web` directory.
+Make sure you are in the `ttap-web` directory.  
+This will start the `Typescript compiler` in --watch mode
 ```
-$ ./scripts/transpile
+./scripts/transpile
 ```
 
-#### 4. Run the app
+#### 4. Run the server
+You need to run this in another terminal.
 ```
-$ npm run start
+npm run start
 ```
 #### 5. Enjoy!
 
-## This app is brought to you by : 
-* [ Dheeno ]( https://github.com/DheenodaraRao )
-* [ wjh ]( https://github.com/wongjiahau )
 
+## Extra
+### How to run test?
+```
+./transpile
+npm run test
+```
 
 ### How to visualize bundle size and dependencies in this app?
 ```
