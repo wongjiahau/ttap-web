@@ -7,7 +7,7 @@ import {Redirect} from "react-router";
 
 import Button from "material-ui/Button";
 import Typography from "material-ui/Typography";
-import { GetIdFormUrl } from "../constants";
+import { CantFindMyCourseFormUrl, ReportLoadDataErrorFormUrl } from "../constants";
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {RawSlot} from "../model/rawSlot";
@@ -98,9 +98,9 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                             inputProps={inputProps}/>
                             {""}
                     </StackPanel>
-                    {/* <Button style={{visibility: this.state.suggestionIsFound ? "hidden" : "visible" }}
+                    <Button style={{visibility: this.state.suggestionIsFound ? "hidden" : "visible" }}
                         onClick={openGetIdForm}
-                        color="secondary" raised={true}>I can't find my course</Button> */}
+                        color="secondary" raised={true}>I can't find my course</Button>
                     {!this.state.serverError ? null : <p style={{color: "Red"}}>{this.state.serverError}</p>}
 
                 </StackPanel>
@@ -198,7 +198,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
 
     private handleReportBug = () => {
         this.setState({openErrorDialog: false});
-        window.open("https://goo.gl/forms/BAVjsktjirdxVvH72", "_blank");
+        window.open(ReportLoadDataErrorFormUrl, "_blank");
     }
 }
 
@@ -214,5 +214,5 @@ function getLoadingElement() {
 }
 
 function openGetIdForm() {
-    window.open(GetIdFormUrl, "_blank");
+    window.open(CantFindMyCourseFormUrl, "_blank");
 }
