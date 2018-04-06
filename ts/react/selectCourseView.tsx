@@ -1,3 +1,4 @@
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
 import CircularProgress from "material-ui/Progress/CircularProgress";
 import * as React from "react";
 import * as Autosuggest from "react-autosuggest";
@@ -24,9 +25,10 @@ interface ISelectCourseViewState {
     currentSuggestions : IGithubApiObject[];
     redirect: boolean;
     value : string;
-    error: string;
+    serverError: string;
     loading: boolean;
     suggestionIsFound: boolean;
+    openErrorDialog: boolean;
 }
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
@@ -38,9 +40,10 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             currentSuggestions: [],
             redirect: false,
             value: "",
-            error: null,
+            serverError: null,
             loading: true,
-            suggestionIsFound: true
+            suggestionIsFound: true,
+            openErrorDialog: false
         };
         this.RequestTestFiles();
     }
@@ -58,12 +61,29 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             value: this.state.value,
             onChange: this.onChange
         };
-        if (this.state.loading) {
+        if (!this.state.openErrorDialog && this.state.loading) {
             return getLoadingElement();
         }
         return (
             <VerticalAlign>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <Dialog open={this.state.openErrorDialog}>
+                        <DialogTitle> Sorry :( </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                We faced some problem while trying to load the data for you. <br/>
+                                Do you want to report this problem so that we might try to fix it?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => this.setState({openErrorDialog: false})}>
+                                No, thanks
+                            </Button>
+                            <Button raised={true} onClick={this.handleReportBug} color="primary">
+                                Report problem
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
                         <Typography type="headline">Type in your course name ⇨ </Typography>
                         <Autosuggest
@@ -81,8 +101,8 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                     {/* <Button style={{visibility: this.state.suggestionIsFound ? "hidden" : "visible" }}
                         onClick={openGetIdForm}
                         color="secondary" raised={true}>I can't find my course</Button> */}
-                    {!this.state.error ? null :
-                        <p style={{color: "Red"}}>{this.state.error}</p>}
+                    {!this.state.serverError ? null : <p style={{color: "Red"}}>{this.state.serverError}</p>}
+
                 </StackPanel>
             </VerticalAlign>
         );
@@ -119,7 +139,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             this.LoadSelectedData(apiObject.download_url, apiObject.name.split(".")[1]);
         } catch (e) {
             this.setState({
-                error:  "'" + this.state.value + "' is not a valid course name. Please try other name."
+                serverError:  "'" + this.state.value + "' is not a valid course name. Please try other name."
             });
         }
     }
@@ -134,7 +154,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         };
         request(options, (error, response) => {
             if (error) {
-                this.setState({error: "Unable to fetch data from server. Please try again later.", loading: false});
+                this.setState({serverError: "Unable to fetch data from server. Please try again later.", loading: false});
                 return;
             }
             const result = JSON.parse(response.body.toString());
@@ -165,11 +185,20 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             } else {
                 throw new Error("Unknown file type: " + fileType);
             }
-            const slots = parser(response.body.toString()).map(RawSlot.ResetUid);
-            this.props.handleLoadSlot(slots);
-            this.setState({redirect: true});
+            try {
+                const slots = parser(response.body.toString()).map(RawSlot.ResetUid);
+                this.props.handleLoadSlot(slots);
+                this.setState({redirect: true});
+            } catch (error) {
+                this.setState({openErrorDialog: true, loading: false});
+            }
         });
 
+    }
+
+    private handleReportBug = () => {
+        this.setState({openErrorDialog: false});
+        window.open("https://goo.gl/forms/BAVjsktjirdxVvH72", "_blank");
     }
 }
 
