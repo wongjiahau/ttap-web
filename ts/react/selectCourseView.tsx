@@ -127,7 +127,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     private RequestTestFiles() : void {
         const request = require("phin");
         const options = {
-            url: "https://api.github.com/repos/wongjiahau/ttap-sample-data/contents/",
+            url: "https://api.github.com/repos/wongjiahau/ttap-datahub/contents/",
             headers: {
                 "User-Agent": "hou32hou"
             }
