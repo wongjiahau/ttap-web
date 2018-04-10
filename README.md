@@ -1,8 +1,10 @@
 # [Timetable Arranging Program - Web (TTAP)](https://github.com/wongjiahau/ttap-web)
 ## Special thanks to
+- My parents
 - Keli
 - Dr. Madhavan
 - Dr. Victor
+- Mr. James
 - Sean Ho
 - Heng
 - All those who tested TTAP
