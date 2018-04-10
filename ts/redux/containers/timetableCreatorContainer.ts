@@ -5,6 +5,7 @@ import { ITimetableCreatorViewDispatchProps, ITimetableCreatorViewStateProps, Ti
 import { FindTimetablesBasedOnChosenSlots } from "../actions/findTimetablesBasedOnChosenSlots";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 import { NotifyIfTimetableIsFound } from "../actions/notifyIfTimetableIsFound";
+import { SearchSubjectList } from "../actions/searchSubjectList";
 import { ToggleIsOpenOfSBCWDialog } from "../actions/toggleIsOpenOfSBCWDialog";
 import { ToggleIsOpenOfSubjectListView } from "../actions/toggleIsOpenOfSubjectListView";
 import { TurnOffSBCW } from "../actions/turnOffSBCW";
@@ -24,7 +25,10 @@ const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
 const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
     return {
         handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots)),
-        handleOpenSubjectListView: () => dispatch(new ToggleIsOpenOfSubjectListView(true)),
+        handleOpenSubjectListView: () => {
+            dispatch(new ToggleIsOpenOfSubjectListView(true));
+            dispatch(new SearchSubjectList(""));
+        },
         handleOpenSbcwDialog:            () => dispatch(new ToggleIsOpenOfSBCWDialog(true)),
         handleTurnOffSBCW:               () => {
             dispatch(new TurnOffSBCW());
