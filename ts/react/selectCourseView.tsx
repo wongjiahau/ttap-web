@@ -31,6 +31,8 @@ interface ISelectCourseViewState {
     openErrorDialog: boolean;
 }
 
+const GET_ALL_SLOTS = true;
+
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
     private allSuggestions : IGithubApiObject[];
     private selectedSuggestion: IGithubApiObject;
@@ -45,6 +47,14 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
             suggestionIsFound: true,
             openErrorDialog: false
         };
+
+        if (GET_ALL_SLOTS) {
+            setTimeout(() => {
+                this.LoadSelectedData("https://raw.githubusercontent.com/wongjiahau/ttap-datahub/master/fes-all-slots.json", "json");
+            }, 500);
+            return;
+        }
+
         this.RequestTestFiles();
     }
 
