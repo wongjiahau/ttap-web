@@ -1,14 +1,20 @@
 import { expect } from "chai";
 const last = require("lodash.last");
 const omit = require("lodash.omit");
+const uniqWith = require("lodash.uniqwith");
 import TestManager, { FileName } from "../../tests/testManager";
-import { ParseLargeHtmlToRawSlot } from "../parseLargeHtmlToRawSlot";
+import { IsRawSlotEquals, ParseLargeHtmlToRawSlot } from "../parseLargeHtmlToRawSlot";
 import { IRawSlot } from "./../../model/rawSlot";
 
 const html = new TestManager().GetDataFrom(FileName.all_fes_slots);
 const rawSlots = ParseLargeHtmlToRawSlot(html);
 
 describe("ParseHtmlToRawSlot", () => {
+    it("should not contain duplicates", () => {
+        const uniques = uniqWith(rawSlots, IsRawSlotEquals);
+        expect(uniques.length).to.eq(rawSlots.length);
+    });
+
     it("case 1", () => {
         expect(rawSlots[0]).to.deep.eq({
             Uid:         0,
@@ -66,6 +72,27 @@ describe("ParseHtmlToRawSlot", () => {
     it("case 4", () => {
         const maxSlotNumber = 1311; // The slot number of the last slot
         const numberOfSubSlots = 378; // By counting occurence of subRows in the raw HTML
-        expect(rawSlots).to.have.lengthOf(maxSlotNumber + numberOfSubSlots);
+        const numberOfDuplicatedSlots = 37;
+        expect(rawSlots).to.have.lengthOf(maxSlotNumber + numberOfSubSlots - numberOfDuplicatedSlots);
     });
 });
+
+const PARSE_NEW_FILE = false;
+if (PARSE_NEW_FILE) {
+    const fs = require("fs");
+    fs.readFile("../ttap-sample-data/Archive/fes-2018-05-slots.html", (err, contents) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        const rawSlots2 = ParseLargeHtmlToRawSlot(contents);
+        console.log(JSON.stringify(rawSlots2));
+        fs.writeFile("./output.json", JSON.stringify(rawSlots2),  (err2) => {
+            if (!err2) {
+                console.log("The file was saved as output.json");
+            }
+            throw new Error("STOP");
+        });
+
+    });
+}

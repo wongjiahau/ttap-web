@@ -1,6 +1,8 @@
 const last = require("lodash.last");
+const uniqWith = require("lodash.uniqwith");
+const omit = require("lodash.omit");
 
-import {RawSlot} from "../model/rawSlot";
+import {IRawSlot, RawSlot} from "../model/rawSlot";
 import { Str } from "../util/str";
 export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
@@ -79,5 +81,10 @@ export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
         }
         result.push(newSlot);
     }
-    return result;
+    return uniqWith(result, IsRawSlotEquals);
+}
+
+export function IsRawSlotEquals(a: IRawSlot, b: IRawSlot): boolean {
+    return JSON.stringify(omit(a, ["Uid", "ClassSize", "Remark"])) ===
+           JSON.stringify(omit(b, ["Uid", "ClassSize", "Remark"]));
 }

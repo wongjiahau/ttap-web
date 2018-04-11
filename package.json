@@ -26,6 +26,7 @@
     "lodash.sum": "4.0.2",
     "lodash.uniq": "4.5.0",
     "lodash.uniqby": "4.7.0",
+    "lodash.uniqwith": "^4.5.0",
     "material-ui": "1.0.0-beta.30",
     "material-ui-icons": "1.0.0-beta.15",
     "phin": "2.5.4",
