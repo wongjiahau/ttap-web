@@ -90,23 +90,3 @@ export function IsRawSlotEquals(a: IRawSlot, b: IRawSlot): boolean {
     return JSON.stringify(omit(a, ["Uid", "ClassSize", "Remark"])) ===
            JSON.stringify(omit(b, ["Uid", "ClassSize", "Remark"]));
 }
-
-const PARSE_NEW_FILE = false;
-if (PARSE_NEW_FILE) {
-    const fs = require("fs");
-    fs.readFile("./new.html", (err, contents) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        const rawSlots2 = ParseLargeHtmlToRawSlot(contents);
-        console.log(JSON.stringify(rawSlots2));
-        fs.writeFile("./output.json", JSON.stringify(rawSlots2),  (err2) => {
-            if (!err2) {
-                console.log("The file was saved as output.json");
-            }
-        });
-        console.log("File saved succesfully.");
-
-    });
-}
