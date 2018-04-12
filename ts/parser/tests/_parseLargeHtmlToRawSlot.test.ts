@@ -76,23 +76,3 @@ describe("ParseHtmlToRawSlot", () => {
         expect(rawSlots).to.have.lengthOf(maxSlotNumber + numberOfSubSlots - numberOfDuplicatedSlots);
     });
 });
-
-const PARSE_NEW_FILE = false;
-if (PARSE_NEW_FILE) {
-    const fs = require("fs");
-    fs.readFile("../ttap-sample-data/Archive/fes-2018-05-slots.html", (err, contents) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        const rawSlots2 = ParseLargeHtmlToRawSlot(contents);
-        console.log(JSON.stringify(rawSlots2));
-        fs.writeFile("./output.json", JSON.stringify(rawSlots2),  (err2) => {
-            if (!err2) {
-                console.log("The file was saved as output.json");
-            }
-            throw new Error("STOP");
-        });
-
-    });
-}

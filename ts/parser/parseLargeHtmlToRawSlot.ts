@@ -1,12 +1,14 @@
+import { JSDOM } from "jsdom";
 const last = require("lodash.last");
 const uniqWith = require("lodash.uniqwith");
 const omit = require("lodash.omit");
 
 import {IRawSlot, RawSlot} from "../model/rawSlot";
 import { Str } from "../util/str";
+
 export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
-    const htmlDoc = new DOMParser().parseFromString(html, "text/html");
+    const htmlDoc = new JSDOM(html).window.document;
 
     const tableRows = htmlDoc.getElementsByTagName("table")[10].getElementsByTagName("tr");
     // i = 1 because we need to skip the first <tr> which is the header of the table
@@ -87,4 +89,24 @@ export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
 export function IsRawSlotEquals(a: IRawSlot, b: IRawSlot): boolean {
     return JSON.stringify(omit(a, ["Uid", "ClassSize", "Remark"])) ===
            JSON.stringify(omit(b, ["Uid", "ClassSize", "Remark"]));
+}
+
+const PARSE_NEW_FILE = false;
+if (PARSE_NEW_FILE) {
+    const fs = require("fs");
+    fs.readFile("./new.html", (err, contents) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        const rawSlots2 = ParseLargeHtmlToRawSlot(contents);
+        console.log(JSON.stringify(rawSlots2));
+        fs.writeFile("./output.json", JSON.stringify(rawSlots2),  (err2) => {
+            if (!err2) {
+                console.log("The file was saved as output.json");
+            }
+        });
+        console.log("File saved succesfully.");
+
+    });
 }
