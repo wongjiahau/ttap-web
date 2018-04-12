@@ -31,7 +31,7 @@ interface ISelectCourseViewState {
     openErrorDialog: boolean;
 }
 
-const GET_ALL_SLOTS = true;
+const GET_ALL_SLOTS = false;
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
     private allSuggestions : IGithubApiObject[];
