@@ -2,6 +2,8 @@ import { ParseLargeHtmlToRawSlot } from "./parser/parseLargeHtmlToRawSlot";
 
 /**
  * This file is suppose to be run as script
+ * Type the following command in bash:
+ *     node ./src/core/parseFile.js
  */
 
 function log(message: string): void {
@@ -9,7 +11,7 @@ function log(message: string): void {
 }
 const fs = require("fs");
 log("Loading file");
-fs.readFile("./new1.html", (err, contents) => {
+fs.readFile("./new2.html", (err, contents) => {
     if (err) {
         log("Load file error");
         log(err);
