@@ -130,7 +130,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
 
         return (
 
-            <Drawer open={this.props.IsOpen}>
+            <Drawer open={this.props.IsOpen} onClose={this.handleClose}>
                 {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/4b65000a/components/sidebar.min.css"/>
                 <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                     <header style={headerStyle}>
@@ -182,6 +182,12 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                 </section>
             </Drawer>
         );
+    }
+
+    public handleClose = () => {
+        if (this.props.Subjects.some((x) => x.IsSelected)) {
+            this.props.handleClose();
+        }
     }
 
     public componentDidMount() {

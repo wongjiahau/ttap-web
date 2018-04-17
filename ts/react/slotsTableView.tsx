@@ -80,7 +80,7 @@ ISlotsTableViewInternalState > {
 
     public render() {
         return (
-            <Drawer anchor="right" open={this.props.isOpen}>
+            <Drawer anchor="right" open={this.props.isOpen} onClose={this.props.handleDone}>
                 <section style={this.state.sectionStyle}>
                     <header style={headerStyle}>
                         <StackPanel orientation="vertical">

@@ -67,6 +67,10 @@ ISlotViewState > {
                     <Menu
                         id="long-menu"
                         anchorEl={this.state.anchorEl}
+                        onClose={() => {
+                            this.setState({anchorEl: null});
+                            this.props.handleSelectSlotChoice(slot.Uid, slot.CurrentChoice);
+                        }}
                         open={Boolean(this.state.anchorEl)}>
                         {this.menuItem(slot)}
                     </Menu>

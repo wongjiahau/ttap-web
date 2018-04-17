@@ -49,10 +49,7 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
     };
 
     return (
-        <Drawer open={props.isOpen} anchor="right">
-            <Button color="secondary" raised={true} onClick={props.onItemClick}>
-                Hide drawer
-            </Button>
+        <Drawer open={props.isOpen} anchor="right" onClose={props.onItemClick}>
             <List>
                 {routerLink( <HelpIcon/>, "Help", "learn")}
                 {newTabLink( <FeedbackIcon/>, "Feedback", FeedbackFormUrl)}
@@ -60,6 +57,6 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
                 {routerLink( <InfoIcon/>, "About TTAP", "about")}
                 {routerLink( <SchoolIcon/>, "Terms of Service", "tospp")}
             </List>
-        </Drawer>
+        </Drawer >
     );
 };
