@@ -4,7 +4,7 @@
   "author": "Wong Jia Hau <hou32hou@gmail.com>",
   "private": true,
   "dependencies": {
-    "@types/react": "16.0.33",
+    "@types/react": "16.3.12",
     "@types/react-dom": "16.0.1",
     "chai": "4.1.2",
     "date-fns": "1.29.0",
