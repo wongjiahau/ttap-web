@@ -5,13 +5,17 @@ var parseLargeHtmlToRawSlot_1 = require("./src/core/parser/parseLargeHtmlToRawSl
  * This file is suppose to be run as script
  * Type the following command in bash:
  *     node parseFile.js
+ * 
+ * Remember to change the INPUT_FILENAME
  */
+
+const INPUT_FILENAME = "./new.html";
 function log(message) {
     console.log(new Date() + " : " + message);
 }
 var fs = require("fs");
 log("Loading file");
-fs.readFile("./TTAP data October 2018.html", function (err, contents) {
+fs.readFile(INPUT_FILENAME, function (err, contents) {
     if (err) {
         log("Load file error");
         log(err);

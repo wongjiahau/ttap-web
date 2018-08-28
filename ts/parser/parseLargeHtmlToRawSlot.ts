@@ -6,6 +6,9 @@ const omit = require("lodash.omit");
 import {IRawSlot, RawSlot} from "../model/rawSlot";
 import { Str } from "../util/str";
 
+/**
+ * This function is only needed for parse file manually
+ */
 export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new JSDOM(html).window.document;
