@@ -3,24 +3,15 @@ import IconGrid from "material-ui-icons/GridOn";
 import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
 import Button from "material-ui/Button";
-import Switch from "material-ui/Switch";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";
 import { ISlotViewModel } from "../model/slotViewModel";
-import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
 import {StackPanel} from "./panels/stackPanel";
-import {SaveTimetableDialog} from "./saveTimetableDialog";
-import {SetTimeConstraintView} from "./setTimeConstraintView";
 import {iconStyle} from "./styles";
 import {TimetableView} from "./timetableView/timetableView";
-
-const centerDivStyle : React.CSSProperties = {
-    margin: "auto",
-    textAlign: "center"
-};
 
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
@@ -42,8 +33,9 @@ export interface ITimetableListViewDispatchProps {
 }
 
 export interface ITimetableListViewProps extends
-ITimetableListViewStateProps,
-ITimetableListViewDispatchProps {}
+    ITimetableListViewStateProps,
+    ITimetableListViewDispatchProps {}
+
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
         if (!this.props.slotViewModelStore) {

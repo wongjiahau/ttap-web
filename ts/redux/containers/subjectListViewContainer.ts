@@ -7,6 +7,7 @@ import {
 import {
     ToggleIsOpenOfSubjectListView
 } from "../actions/toggleIsOpenOfSubjectListView";
+import { ToggleSetTimeConstraintView } from "../actions/toggleSetTimeConstraintView";
 import {
     UpdateSlotsTableState
 } from "../actions/updateSlotsTableState";
@@ -14,12 +15,7 @@ import {
     UpdateTotalState
 } from "../actions/updateTotalState";
 import {
-    ISubjectListState,
-    SubjectListStateAction
-} from "../reducers/subjectListState";
-import {
-    TimetableCreatorStateAction
-} from "../reducers/timetableCreatorState";
+    ISubjectListState} from "../reducers/subjectListState";
 import {
     ISubjectListViewDispatchProps,
     SubjectListView
@@ -59,6 +55,7 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
             dispatch(new HideSnackbar());
             dispatch(new UpdateTotalState());
             dispatch(new UpdateSlotsTableState());
+            dispatch(new ToggleSetTimeConstraintView(true));
         },
         handleSearch: (searchedText: string) => {
             dispatch(new SearchSubjectList(searchedText));
