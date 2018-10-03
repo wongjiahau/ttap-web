@@ -66,7 +66,7 @@
     "@types/mocha": "^2.2.43",
     "@types/node": "^9.3.0",
     "@types/react-grid-layout": "^0.16.0",
-    "@types/react-highlight-words": "^0.6.3",
+    "@types/react-highlight-words": "^0.12.0",
     "@types/react-redux": "^5.0.10",
     "@types/react-router-dom": "^4.0.8",
     "@types/redux": "^3.6.0",
