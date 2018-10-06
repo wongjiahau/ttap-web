@@ -3,12 +3,13 @@ import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
 import {RawSlot} from "../../model/rawSlot";
-import { ISlotViewModel } from "../../model/slotViewModel";
+import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
 import {STCBox} from "../../model/states/stcBox";
 import {Timetable} from "../../model/timetable";
 import {Colors} from "../colors/colors";
 import {StackPanel} from "../panels/stackPanel";
 import {TimetableSummaryView} from "../timetableSummaryView";
+import { GenerateAlternateSlotViewsAndDayColumn } from "./generateAlternateSlotViewsAndDayColumn";
 import {GenerateSlotViewsAndDayColumn} from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
 import {Skeleton} from "./skeleton";
@@ -18,10 +19,12 @@ const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 interface ITimetableViewProps {
     slots : ISlotViewModel[];
     states : STCBox[];
+    alternateSlots: RawSlot[];
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;
     handleToggleIsOpenOfSummary?: () => void;
     handleSelectSlotChoice?: (slotUid: number, newSlotChoice: number) => void;
+    handleShowAlternateSlot: (s: ISlotViewModel) => void;
     isSummaryOpen?: boolean;
 }
 
@@ -40,8 +43,19 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
     public render() {
         const skeleton = new Skeleton();
         if (this.props.slots) {
-            const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(this.props.slots, this.props.handleSelectSlotChoice);
+            const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(
+                this.props.slots,
+                this.props.handleSelectSlotChoice,
+                this.props.handleShowAlternateSlot
+                );
             skeleton.Concat(slotViewsAndDayColumn);
+
+            const alternateSlotViewsAndDayColumn = GenerateAlternateSlotViewsAndDayColumn(
+                CreateSlotViewModels(this.props.alternateSlots),
+                this.props.handleSelectSlotChoice,
+                this.props.handleShowAlternateSlot
+            );
+            skeleton.Concat(alternateSlotViewsAndDayColumn);
         }
         if (this.props.states) {
             const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);

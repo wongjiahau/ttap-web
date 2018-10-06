@@ -1,28 +1,27 @@
 import {connect} from "react-redux";
-import { ObjectStore } from "../../dataStructure/objectStore";
-import {RawSlot} from "../../model/rawSlot";
-import {CreateSlotViewModels} from "../../model/slotViewModel";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";
 import {ToggleIsOpenOfSlotsTable} from "../actions/toggleIsOpenOfSlotsTable";
 import {ToggleIsOpenOfSummary} from "../actions/toggleIsOpenOfSummary";
-import {UpdateSlotsTableState} from "../actions/updateSlotsTableState";
 import {ITimetableListState} from "../reducers/timetableListState";
+import { ISlotViewModel } from "./../../model/slotViewModel";
 import {GoToNextTimetable} from "./../actions/goToNextTimetable";
 import {GoToPrevTimetable} from "./../actions/goToPrevTimetable";
-import { SelectSlotChoice } from "./../actions/selectSlotChoice";
+import {SelectSlotChoice} from "./../actions/selectSlotChoice";
+import {ShowAlternateSlot} from "./../actions/showAlternateSlot";
 import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintView";
 
 const mapStateToProps = (state) : ITimetableListViewStateProps => {
     const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
     const index = timetableListState.CurrentIndex;
     return {
-        currentIndex:     index,
-        currentTimetable: timetableListState.FiltrateTimetables[index],
-        isSummaryOpen:    timetableListState.IsSummaryOpen,
-        maxIndex:         timetableListState.FiltrateTimetables.length - 1,
-        slotViewModelStore:   timetableListState.SlotViewModelStore
+        currentIndex:       index,
+        currentTimetable:   timetableListState.FiltrateTimetables[index],
+        isSummaryOpen:      timetableListState.IsSummaryOpen,
+        maxIndex:           timetableListState.FiltrateTimetables.length - 1,
+        slotViewModelStore: timetableListState.SlotViewModelStore,
+        alternateSlots:     timetableListState.AlternateSlots
     };
 };
 
@@ -35,7 +34,8 @@ const mapDispatchToProps = (dispatch) : ITimetableListViewDispatchProps => {
         handleOpenSetTimeConstraintView: () => dispatch(new ToggleSetTimeConstraintView(true)),
         handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
         handleToggleIsOpenOfSummary:     () => dispatch(new ToggleIsOpenOfSummary()),
-        handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => dispatch(new SelectSlotChoice(slotUid, newSlotChoice))
+        handleShowAlternateSlot:         (s: ISlotViewModel) => dispatch(new ShowAlternateSlot(s)),
+        handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => dispatch(new SelectSlotChoice(slotUid, newSlotChoice)),
     };
 };
 

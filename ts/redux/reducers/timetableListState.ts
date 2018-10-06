@@ -12,7 +12,8 @@ export interface ITimetableListState {
     FiltrateTimetables: Timetable[];
     IsSummaryOpen:      boolean;
     ResidueTimetables:  Timetable[];
-    SlotViewModelStore:     ObjectStore<ISlotViewModel>;
+    SlotViewModelStore: ObjectStore<ISlotViewModel>;
+    AlternateSlots:     RawSlot[];
 }
 
 export function NewTimetableListState(timetables: Timetable[], selectedSlots: RawSlot[]) : ITimetableListState {
@@ -24,7 +25,8 @@ export function NewTimetableListState(timetables: Timetable[], selectedSlots: Ra
         FiltrateTimetables: timetables,
         IsSummaryOpen: false,
         ResidueTimetables: [],
-        SlotViewModelStore: slotStateStore
+        SlotViewModelStore: slotStateStore,
+        AlternateSlots: []
     };
 }
 

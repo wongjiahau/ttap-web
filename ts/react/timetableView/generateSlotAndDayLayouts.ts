@@ -10,7 +10,12 @@ import {ISlotViewModel} from "../../model/slotViewModel";
  * @param {number} yOffset
  * @returns {[ReactGridLayout.Layout[], ReactGridLayout.Layout[]]} [0] is the SlotsLayout, [1] is the DayColumnLayouts
  */
-export function GenerateSlotAndDayLayouts(rawSlots : ISlotViewModel[], xOffset : number, yOffset : number) : [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
+export function GenerateSlotAndDayLayouts(
+    rawSlots : ISlotViewModel[], 
+    xOffset : number, 
+    yOffset : number,
+    key     : "s" | "as" // "s" means "Main Slots" , "as" means "Alternate Slots"
+) : [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
     const dayRows = GetDayRows();
     const slotLayouts: ReactGridLayout.Layout[] = [];
     for (let h = 0; h < rawSlots.length; h++) {
@@ -35,7 +40,7 @@ export function GenerateSlotAndDayLayouts(rawSlots : ISlotViewModel[], xOffset :
             W] = GetXandW(timePeriod);
         const layout : ReactGridLayout.Layout = {
             h: 1,
-            i: "s" + h,
+            i: key + h,
             w: W,
             x: X + xOffset,
             y: dayRows[Y].rowIndex + yOffset + extraYOffset

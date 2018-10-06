@@ -1,3 +1,6 @@
+/**
+ * heng_2017_apr is the slots with more subjects such as Fluid Mechanics etc.
+ */
 import {IRawSlot, RawSlot} from "../../model/rawSlot";
 
 export enum CodeOf {

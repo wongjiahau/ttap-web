@@ -13,6 +13,7 @@ export interface ISlotViewProps {
     slot : ISlotViewModel;
     color : Colors;
     handleSelectSlotChoice : (slotUid : number, newSlotChoice : number) => void;
+    handleShowAlternateSlot : (s: ISlotViewModel) => void;
 }
 
 interface ISlotViewState {
@@ -33,7 +34,8 @@ let buttonBaseStyle : React.CSSProperties = {
     fontFamily:              "roboto",
     fontSize:                "13.5px",
     width:                   "100%",
-    textAlign:               "center"
+    textAlign:               "center",
+    cursor:                  "hand"
 };
 
 export class SlotView extends React.Component < ISlotViewProps,
@@ -55,7 +57,10 @@ ISlotViewState > {
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div
                     style={buttonBaseStyle}
-                    onClick={() => console.log(this.props.slot)}>
+                    onClick={() => {
+                        this.props.handleShowAlternateSlot(this.props.slot);
+                        console.log(this.props.slot);
+                    }}>
                     <b>
                         {this.slotContent(slot)}
                         {slot.Group.length > 1

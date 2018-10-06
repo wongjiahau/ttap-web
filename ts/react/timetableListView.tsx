@@ -6,6 +6,7 @@ import Button from "material-ui/Button";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";
+import { RawSlot } from "../model/rawSlot";
 import { ISlotViewModel } from "../model/slotViewModel";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
@@ -16,6 +17,7 @@ import {TimetableView} from "./timetableView/timetableView";
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
     currentTimetable:   Timetable;
+    alternateSlots:     RawSlot[];
     isSummaryOpen:      boolean;
     maxIndex:           number; // non-zero based
     slotViewModelStore: ObjectStore<ISlotViewModel>;
@@ -30,6 +32,7 @@ export interface ITimetableListViewDispatchProps {
     handleOpenSlotsTable:            ()     => void;
     handleToggleIsOpenOfSummary:     ()     => void;
     handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => void;
+    handleShowAlternateSlot:         (s: ISlotViewModel) => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -48,9 +51,11 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <TimetableView
                         slots={slotsToBeRendered}
+                        alternateSlots={this.props.alternateSlots}
                         states={null}
                         isSummaryOpen={this.props.isSummaryOpen}
                         handleSelectSlotChoice={this.props.handleSelectSlotChoice}
+                        handleShowAlternateSlot={this.props.handleShowAlternateSlot}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <StackPanel orientation="horizontal">
                         <Button
