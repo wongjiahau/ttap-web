@@ -56,7 +56,10 @@ export class ShowAlternateSlot extends MasterStateAction {
             ...state,
             SnackbarState: {
                 ...state.SnackbarState,
-                Message: `Showing alternate slots for ${getSlotContent(this.slot)}`,
+                Message: alternateSlots.length > 0 ?
+                     `Showing alternative slots for ${getSlotContent(this.slot)}` :
+                     `No alternative slots are available for ${getSlotContent(this.slot)}`
+                     ,
                 IsOpen: true
             },
             TimetableListState: {
