@@ -8,12 +8,13 @@ import {Action} from "../actions/action";
 import {Timetable} from "./../../model/timetable";
 
 export interface ITimetableListState {
-    CurrentIndex:       number;
-    FiltrateTimetables: Timetable[];
-    IsSummaryOpen:      boolean;
-    ResidueTimetables:  Timetable[];
-    SlotViewModelStore: ObjectStore<ISlotViewModel>;
-    AlternateSlots:     RawSlot[];
+    CurrentIndex:           number;
+    FiltrateTimetables:     Timetable[];
+    IsSummaryOpen:          boolean;
+    ResidueTimetables:      Timetable[];
+    SlotViewModelStore:     ObjectStore<ISlotViewModel>;
+    AlternateSlots:         RawSlot[];
+    ShowingAlternateSlotOf: ISlotViewModel | null;
 }
 
 export function NewTimetableListState(timetables: Timetable[], selectedSlots: RawSlot[]) : ITimetableListState {
@@ -26,7 +27,8 @@ export function NewTimetableListState(timetables: Timetable[], selectedSlots: Ra
         IsSummaryOpen: false,
         ResidueTimetables: [],
         SlotViewModelStore: slotStateStore,
-        AlternateSlots: []
+        AlternateSlots: [],
+        ShowingAlternateSlotOf: null
     };
 }
 

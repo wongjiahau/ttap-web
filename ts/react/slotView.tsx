@@ -12,8 +12,9 @@ import {Colors} from "./colors/colors";
 export interface ISlotViewProps {
     slot : ISlotViewModel;
     color : Colors;
-    handleSelectSlotChoice : (slotUid : number, newSlotChoice : number) => void;
-    handleShowAlternateSlot : (s: ISlotViewModel) => void;
+    handleSelectSlotChoice       : (slotUid : number, newSlotChoice : number) => void;
+    handleShowAlternateSlot     ?: (s: ISlotViewModel) => void;
+    handleGoToThisAlternateSlot ?: (slotUid: number) => void;
 }
 
 interface ISlotViewState {
@@ -58,8 +59,12 @@ ISlotViewState > {
                 <div
                     style={buttonBaseStyle}
                     onClick={() => {
-                        this.props.handleShowAlternateSlot(this.props.slot);
-                        console.log(this.props.slot);
+                        if (this.props.handleShowAlternateSlot !== undefined) {
+                            this.props.handleShowAlternateSlot(this.props.slot);
+                        }
+                        if (this.props.handleGoToThisAlternateSlot !== undefined) {
+                            this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
+                        }
                     }}>
                     <b>
                         {this.slotContent(slot)}

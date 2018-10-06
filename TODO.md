@@ -43,3 +43,4 @@
 20-[X]-Snackbar should close when opening slot table view
 21-[X]-Flatpickr date picker bug
 22-[]-Write test for react components
+23-[]-Solve "possibly null" problem

@@ -33,6 +33,7 @@ export interface ITimetableListViewDispatchProps {
     handleToggleIsOpenOfSummary:     ()     => void;
     handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => void;
     handleShowAlternateSlot:         (s: ISlotViewModel) => void;
+    handleGoToThisAlternateSlot:     (slotUid: number) => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -56,6 +57,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         isSummaryOpen={this.props.isSummaryOpen}
                         handleSelectSlotChoice={this.props.handleSelectSlotChoice}
                         handleShowAlternateSlot={this.props.handleShowAlternateSlot}
+                        handleGoToThisAlternateSlot={this.props.handleGoToThisAlternateSlot}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <StackPanel orientation="horizontal">
                         <Button

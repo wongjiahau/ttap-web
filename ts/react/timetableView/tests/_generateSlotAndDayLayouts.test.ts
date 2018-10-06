@@ -25,7 +25,7 @@ describe("GenerateSlotLayouts", () => {
         slot1.TimePeriod = "8:00 AM - 9:00 AM";
         slot1.Day = "Mon";
         const slot2 = clone(slot1);
-        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0, "s")[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 0, y: 0 },
             { h: 1, i: "s1", w: 2, x: 0, y: 1 }
@@ -41,7 +41,7 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Mon";
         slot3.TimePeriod = "9:00 AM - 10:00 AM";
-        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0, "s")[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 0, y: 0 },
             { h: 1, i: "s1", w: 2, x: 0, y: 1 },
@@ -58,7 +58,7 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Tue";
         slot3.TimePeriod = "8:00 AM - 9:00 AM";
-        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0, "s")[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 0, y: 0 },
             { h: 1, i: "s1", w: 2, x: 0, y: 1 },
@@ -119,7 +119,7 @@ describe("GetDayColumnLayouts", () => {
         slot1.TimePeriod = "8:00 AM - 9:00 AM";
         slot1.Day = "Mon";
         const slot2 = clone(slot1);
-        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0)[1];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0, "s")[1];
         expect(result).to.deep.eq([
             { h: 1, i: "d0", w: 2, x: 0, y: 0 },
             { h: 2, i: "d1", w: 2, x: 0, y: 1 },

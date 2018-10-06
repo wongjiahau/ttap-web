@@ -12,10 +12,9 @@ import {ISkeleton, Skeleton} from "./skeleton";
 
 export function GenerateAlternateSlotViewsAndDayColumn(
     slots : ISlotViewModel[],
-    selectSlotChoiceHandler: (slotUid : number, newSlotChoice : number) => void,
-    showAlternateSlotHandler: (s: ISlotViewModel) => void
+    handleSelectSlotChoice: (slotUid : number, newSlotChoice : number) => void,
+    handleGoToThisAlternateSlot: (slotUid : number) => void,
 ) : ISkeleton {
-    const colorSchemes = GenerateColorScheme(slots);
     slots = sortBy(slots, [(o) => ParseDay(o.Day)]);
     const slotViews = slots.map((x, index) => {
         return (
@@ -24,8 +23,8 @@ export function GenerateAlternateSlotViewsAndDayColumn(
                 <SlotView
                     slot={x}
                     color={Colors.White}
-                    handleSelectSlotChoice={selectSlotChoiceHandler}
-                    handleShowAlternateSlot={showAlternateSlotHandler}
+                    handleSelectSlotChoice={handleSelectSlotChoice}
+                    handleGoToThisAlternateSlot={handleGoToThisAlternateSlot}
                     />
             </div>
         );

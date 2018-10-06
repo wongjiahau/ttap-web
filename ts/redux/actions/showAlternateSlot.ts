@@ -2,6 +2,7 @@ import { CreateSlotFromRaw } from "../../model/slot";
 import { ISlotViewModel } from "../../model/slotViewModel";
 import { GotIntersection } from "../../permutator/state";
 import { TinySlot } from "../../permutator/tinySlot";
+import { RawSlot } from "./../../model/rawSlot";
 import {IMasterState, MasterStateAction} from "./../reducers/masterState";
 
 export class ShowAlternateSlot extends MasterStateAction {
@@ -10,12 +11,33 @@ export class ShowAlternateSlot extends MasterStateAction {
     }
     public TypeName() : string {return "show alternate slot"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        const slots = state.DataState.RawSlotDataRouter.GetCurrentData().GetAll();
+        if (state.TimetableListState.ShowingAlternateSlotOf &&
+            this.slot.Uid === state.TimetableListState.ShowingAlternateSlotOf.Uid) {
+            return {
+                ...state,
+                TimetableListState: {
+                    ...state.TimetableListState,
+                    AlternateSlots: [],
+                    ShowingAlternateSlotOf: null
+                }
+            };
+        }
+        const allSlots = state.DataState.RawSlotDataRouter.GetCurrentData().GetAll();
+        const uidsOfFiltratedSlots = new Set<number>(); // filtrated means not being filtered away
+        for (let i = 0; i < state.TimetableListState.FiltrateTimetables.length; i++) {
+            const t = state.TimetableListState.FiltrateTimetables[i];
+            for (let j = 0; j < t.Uids.length; j++) {
+                uidsOfFiltratedSlots.add(t.Uids[j]);
+            }
+        }
+
         const currentTimetable = state.TimetableListState.FiltrateTimetables[state.TimetableListState.CurrentIndex];
-        const alternateSlots = slots
+        const alternateSlots = allSlots
             .filter((x) => {
                 return x.SubjectCode === this.slot.SubjectCode
-                    && x.Type === this.slot.Type;
+                    && x.Type === this.slot.Type
+                    && uidsOfFiltratedSlots.has(x.Uid)
+                    ;
             })
             .filter((x) => {
                 return !GotIntersection(
@@ -24,12 +46,12 @@ export class ShowAlternateSlot extends MasterStateAction {
                 );
             });
 
-        const result = [...state.TimetableListState.FiltrateTimetables];
         return {
             ...state,
             TimetableListState: {
                 ...state.TimetableListState,
-                AlternateSlots: alternateSlots
+                AlternateSlots: alternateSlots,
+                ShowingAlternateSlotOf: this.slot
             }
         };
     }

@@ -8,6 +8,7 @@ import {ITimetableListState} from "../reducers/timetableListState";
 import { ISlotViewModel } from "./../../model/slotViewModel";
 import {GoToNextTimetable} from "./../actions/goToNextTimetable";
 import {GoToPrevTimetable} from "./../actions/goToPrevTimetable";
+import { GoToThisAlternateSlot } from "./../actions/goToThisAlternateSlot";
 import {SelectSlotChoice} from "./../actions/selectSlotChoice";
 import {ShowAlternateSlot} from "./../actions/showAlternateSlot";
 import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintView";
@@ -35,6 +36,7 @@ const mapDispatchToProps = (dispatch) : ITimetableListViewDispatchProps => {
         handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
         handleToggleIsOpenOfSummary:     () => dispatch(new ToggleIsOpenOfSummary()),
         handleShowAlternateSlot:         (s: ISlotViewModel) => dispatch(new ShowAlternateSlot(s)),
+        handleGoToThisAlternateSlot:     (slotUid: number) => dispatch(new GoToThisAlternateSlot(slotUid)),
         handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => dispatch(new SelectSlotChoice(slotUid, newSlotChoice)),
     };
 };
