@@ -2,6 +2,8 @@ import { CreateSlotFromRaw } from "../../model/slot";
 import { ISlotViewModel } from "../../model/slotViewModel";
 import { GotIntersection } from "../../permutator/state";
 import { TinySlot } from "../../permutator/tinySlot";
+import { getSlotContent } from "../../react/slotView";
+import { GetInitial } from "../../util/getInitial";
 import { RawSlot } from "./../../model/rawSlot";
 import {IMasterState, MasterStateAction} from "./../reducers/masterState";
 
@@ -15,6 +17,10 @@ export class ShowAlternateSlot extends MasterStateAction {
             this.slot.Uid === state.TimetableListState.ShowingAlternateSlotOf.Uid) {
             return {
                 ...state,
+                SnackbarState: {
+                    ...state.SnackbarState,
+                    IsOpen: false
+                },
                 TimetableListState: {
                     ...state.TimetableListState,
                     AlternateSlots: [],
@@ -48,6 +54,11 @@ export class ShowAlternateSlot extends MasterStateAction {
 
         return {
             ...state,
+            SnackbarState: {
+                ...state.SnackbarState,
+                Message: `Showing alternate slots for ${getSlotContent(this.slot)}`,
+                IsOpen: true
+            },
             TimetableListState: {
                 ...state.TimetableListState,
                 AlternateSlots: alternateSlots,

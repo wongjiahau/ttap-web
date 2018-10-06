@@ -24,6 +24,7 @@ describe("showAlternateSlot action", () => {
         const newState1 = MasterStateReducer(newState0, new ShowAlternateSlot(CreateSlotViewModel(slotsToBeClicked)));
         const newState2 = MasterStateReducer(newState1, new GoToThisAlternateSlot(newState1.TimetableListState.AlternateSlots[0].Uid));
         expect(newState2.TimetableListState.CurrentIndex).to.eq(1);
+        expect(newState2.SnackbarState.IsOpen).to.eq(false);
     });
 
 });

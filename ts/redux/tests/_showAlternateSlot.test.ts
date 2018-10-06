@@ -35,6 +35,9 @@ describe("showAlternateSlot action", () => {
             // "5/6" is not here, as it will clash with the current time table
             // so it should not be shown as alternate slots
 
+        // snackbar should also be shown
+        expect(newState3.SnackbarState.IsOpen).to.eq(true);
+
         // Going to other timetabes will reset the alternate slots
         const newState4 = MasterStateReducer(newState3, new GoToNextTimetable());
         expect(newState4.TimetableListState.AlternateSlots).to.deep.eq([]);
@@ -48,6 +51,9 @@ describe("showAlternateSlot action", () => {
         // Clicking again will hide the alternate slots
         const newState7 = MasterStateReducer(newState3, new ShowAlternateSlot(CreateSlotViewModel(slotsToBeClicked)));
         expect(newState7.TimetableListState.AlternateSlots).to.have.lengthOf(0);
+
+        // also hiding snackbar
+        expect(newState7.SnackbarState.IsOpen).to.eq(false);
 
     });
 

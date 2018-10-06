@@ -36,7 +36,7 @@ let buttonBaseStyle : React.CSSProperties = {
     fontSize:                "13.5px",
     width:                   "100%",
     textAlign:               "center",
-    cursor:                  "hand"
+    cursor:                  "pointer"
 };
 
 export class SlotView extends React.Component < ISlotViewProps,
@@ -51,11 +51,12 @@ ISlotViewState > {
     public render() {
         buttonBaseStyle = {
             ...buttonBaseStyle,
-            background: this.props.color
+            background: this.props.color,
         };
         const slot = this.props.slot;
+        const isAlternateSlot = this.props.handleGoToThisAlternateSlot !== undefined;
         return (
-            <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
+            <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isAlternateSlot)}>
                 <div
                     style={buttonBaseStyle}
                     onClick={() => {
@@ -67,7 +68,7 @@ ISlotViewState > {
                         }
                     }}>
                     <b>
-                        {this.slotContent(slot)}
+                        {getSlotContent(slot)}
                         {slot.Group.length > 1
                             ? this.arrowDownButton()
                             : ""}
@@ -88,10 +89,6 @@ ISlotViewState > {
             </Tooltip>
 
         );
-    }
-
-    public slotContent = (slot : ISlotViewModel) => {
-        return GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " ";
     }
 
     public menuItem = (slot : ISlotViewModel) => {
@@ -142,7 +139,7 @@ ISlotViewState > {
 
 }
 
-function tooltipTitle(s : ISlotViewModel) {
+function tooltipTitle(s : ISlotViewModel, isAlternateSlot: boolean) {
     const style : React.CSSProperties = {
         fontSize: "12px"
     };
@@ -151,6 +148,14 @@ function tooltipTitle(s : ISlotViewModel) {
             {BeautifySubjectName(s.SubjectName)}
             <br/>
             [{s.SubjectCode}]
+            <br/>
+            {isAlternateSlot ?
+            "(Click to pick this slot)" :
+            "(Click to show alternative slots)"}
         </div>
     );
+}
+
+export function getSlotContent (slot : ISlotViewModel) {
+    return GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " ";
 }
