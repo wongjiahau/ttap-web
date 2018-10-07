@@ -1,6 +1,7 @@
 import {
     connect
 } from "react-redux";
+import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {
     HideSnackbar
 } from "../actions/hideSnackbar";
@@ -35,7 +36,6 @@ import {
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
-import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
 
 const mapStateToProps = (state): ISubjectListState => {
     const target = state.MasterStateReducer.SubjectListState as ISubjectListState;
@@ -54,7 +54,6 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleClose: () => {
             dispatch(new ToggleIsOpenOfSubjectListView(false));
             dispatch(new HideSnackbar());
-            dispatch(new UpdateTotalState());
             dispatch(new UpdateSlotsTableState());
             dispatch(new ToggleSetTimeConstraintView(true));
         },
@@ -68,6 +67,7 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new ToggleLoadingBar(false));
                 dispatch(new NotifyIfTimetableIsFound());
+                dispatch(new UpdateTotalState());
             }, 0);
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions())
