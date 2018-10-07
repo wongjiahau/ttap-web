@@ -20,7 +20,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         const slotNumbersOfSelectedSlots = GetSlotNumbers(slotTableState.SlotStates);
         let currentSubjectSchemas: SubjectSchema[] = [];
         let newTimetables: Timetable[] = [];
-        let selectedSlots: RawSlot[];
+        let selectedSlots: RawSlot[] = [];
         if (slotNumbersOfSelectedSlots.length > 0) {
             selectedSlots = GetSlotsFromSlotNumbers(slotStore.GetAll(), slotNumbersOfSelectedSlots);
             newTimetables = state.SettingsState.TimetableFinder(selectedSlots);
@@ -74,14 +74,14 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
     }
 }
 export function GetSlotsFromSlotNumbers(allSlots : RawSlot[], slotNumbers : string[]) : RawSlot[] {
-    let result = [];
+    let result : RawSlot[]  = [];
     slotNumbers.forEach((num) => {
         result = result.concat(allSlots.filter((x) => x.Number === num));
     });
     return result;
 }
 export function GetSlotNumbers(slotState : IStringDicionary<boolean>) : string[] {
-    const result = [];
+    const result: string[] = [];
     for (const key in slotState) {
         if (slotState.hasOwnProperty(key)) {
             const current = slotState[key];

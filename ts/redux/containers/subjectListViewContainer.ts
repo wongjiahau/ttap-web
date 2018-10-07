@@ -35,6 +35,7 @@ import {
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
+import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
 
 const mapStateToProps = (state): ISubjectListState => {
     const target = state.MasterStateReducer.SubjectListState as ISubjectListState;

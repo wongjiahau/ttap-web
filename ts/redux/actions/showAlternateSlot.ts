@@ -1,6 +1,4 @@
-import { CreateSlotFromRaw } from "../../model/slot";
 import { ISlotViewModel } from "../../model/slotViewModel";
-import { GotIntersection } from "../../permutator/state";
 import { TinySlot } from "../../permutator/tinySlot";
 import { getSlotContent } from "../../react/slotView";
 import { GetInitial } from "../../util/getInitial";
@@ -28,35 +26,14 @@ export class ShowAlternateSlot extends MasterStateAction {
                 }
             };
         }
-        const allSlots = state.DataState.RawSlotDataRouter.GetCurrentData().GetAll();
-        const uidsOfFiltratedSlots = new Set<number>(); // filtrated means not being filtered away
-        for (let i = 0; i < state.TimetableListState.FiltrateTimetables.length; i++) {
-            const t = state.TimetableListState.FiltrateTimetables[i];
-            for (let j = 0; j < t.Uids.length; j++) {
-                uidsOfFiltratedSlots.add(t.Uids[j]);
-            }
-        }
 
-        const currentTimetable = state.TimetableListState.FiltrateTimetables[state.TimetableListState.CurrentIndex];
-        const alternateSlots = allSlots
-            .filter((x) => {
-                return x.SubjectCode === this.slot.SubjectCode
-                    && x.Type === this.slot.Type
-                    && uidsOfFiltratedSlots.has(x.Uid)
-                    ;
-            })
-            .filter((x) => {
-                return !GotIntersection(
-                    currentTimetable.State,
-                    new TinySlot(CreateSlotFromRaw(x)).State
-                );
-            });
+        const alternativeSlots = this.slot.AlternativeSlots;
 
         return {
             ...state,
             SnackbarState: {
                 ...state.SnackbarState,
-                Message: alternateSlots.length > 0 ?
+                Message: alternativeSlots.length > 0 ?
                      `Showing alternative slots for ${getSlotContent(this.slot)}` :
                      `No alternative slots are available for ${getSlotContent(this.slot)}`
                      ,
@@ -64,7 +41,7 @@ export class ShowAlternateSlot extends MasterStateAction {
             },
             TimetableListState: {
                 ...state.TimetableListState,
-                AlternateSlots: alternateSlots,
+                AlternateSlots: alternativeSlots,
                 ShowingAlternateSlotOf: this.slot
             }
         };

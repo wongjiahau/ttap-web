@@ -2,9 +2,6 @@ import {
     FindTimetableWithoutConsideringWeekNumber
 } from "../../permutator/findTimetable";
 import {
-    NewTimetableListState
-} from "../reducers/timetableListState";
-import {
     IMasterState,
     MasterStateAction
 } from "./../reducers/masterState";

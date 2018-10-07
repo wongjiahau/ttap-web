@@ -11,21 +11,23 @@ export interface ISlotViewModel {
     TimePeriod: string;
     WeekNumber: string[];
     Room: string[];
+    AlternativeSlots: RawSlot[]; // This property is to be populated by FindAlternativeSlotsOfCurrentSlots action
 }
 
 export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
     const group = rawSlot.Group.split("/");
     return {
-        Uid:            rawSlot.Uid,
-        CurrentChoice: 0,
-        SubjectCode:   rawSlot.SubjectCode,
-        SubjectName:   rawSlot.SubjectName,
-        Type:          rawSlot.Type,
-        Group:         group,
-        Day:           rawSlot.Day,
-        TimePeriod:    rawSlot.TimePeriod,
-        WeekNumber:    rawSlot.WeekNumber.split("/"),
-        Room:          rawSlot.Room.split("/")
+        Uid:              rawSlot.Uid,
+        CurrentChoice:    0,
+        SubjectCode:      rawSlot.SubjectCode,
+        SubjectName:      rawSlot.SubjectName,
+        Type:             rawSlot.Type,
+        Group:            group,
+        Day:              rawSlot.Day,
+        TimePeriod:       rawSlot.TimePeriod,
+        WeekNumber:       rawSlot.WeekNumber.split("/"),
+        Room:             rawSlot.Room.split("/"),
+        AlternativeSlots: []
     };
 }
 

@@ -1,9 +1,11 @@
 import {connect} from "react-redux";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
+import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";
 import {ToggleIsOpenOfSlotsTable} from "../actions/toggleIsOpenOfSlotsTable";
 import {ToggleIsOpenOfSummary} from "../actions/toggleIsOpenOfSummary";
+import { MasterStateAction } from "../reducers/masterState";
 import {ITimetableListState} from "../reducers/timetableListState";
 import { ISlotViewModel } from "./../../model/slotViewModel";
 import {GoToNextTimetable} from "./../actions/goToNextTimetable";
@@ -16,9 +18,12 @@ import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintV
 const mapStateToProps = (state) : ITimetableListViewStateProps => {
     const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
     const index = timetableListState.CurrentIndex;
+    const timetable = timetableListState.FiltrateTimetables.length > 0 ?
+                             timetableListState.FiltrateTimetables[index] :
+                             null;
     return {
         currentIndex:       index,
-        currentTimetable:   timetableListState.FiltrateTimetables[index],
+        currentTimetable:   timetable,
         isSummaryOpen:      timetableListState.IsSummaryOpen,
         maxIndex:           timetableListState.FiltrateTimetables.length - 1,
         slotViewModelStore: timetableListState.SlotViewModelStore,
@@ -26,7 +31,11 @@ const mapStateToProps = (state) : ITimetableListViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch) : ITimetableListViewDispatchProps => {
+const mapDispatchToProps = (primitiveDispatch) : ITimetableListViewDispatchProps => {
+    const dispatch = (action: MasterStateAction) => {
+        primitiveDispatch(action);
+        primitiveDispatch(new FindAlternativeSlotsOfCurrentSlot());
+    };
     return {
         handleGoToNext:                  () => dispatch(new GoToNextTimetable()),
         handleGoToPrevious:              () => dispatch(new GoToPrevTimetable()),

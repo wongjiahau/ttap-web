@@ -16,7 +16,7 @@ import {TimetableView} from "./timetableView/timetableView";
 
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
-    currentTimetable:   Timetable;
+    currentTimetable:   Timetable | null;
     alternateSlots:     RawSlot[];
     isSummaryOpen:      boolean;
     maxIndex:           number; // non-zero based
@@ -45,7 +45,11 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         if (!this.props.slotViewModelStore) {
             return Logo();
         }
-        const slotsToBeRendered = this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids);
+        const slotsToBeRendered =
+            this.props.currentTimetable !== null ?
+            this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids) :
+            [];
+
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
                 {/* Balloon css */} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.2.4/balloon.min.css"/>

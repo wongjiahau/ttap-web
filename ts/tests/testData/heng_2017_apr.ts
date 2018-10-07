@@ -85,7 +85,7 @@ export enum IndexOf {
     TITA    = 37
 }
 
-let cache : IRawSlot[] = null;
+let cache : IRawSlot[] | null = null;
 export const HENG_2017_APR = () : IRawSlot[] => {
     if (cache !== null) {
         return cache;

@@ -1,7 +1,6 @@
 const isEqual = require("lodash.isequal");
 import {expect} from "chai";
 import { GetMockInitialState } from "../../../../tests/testDataGenerator";
-import { NewTimetableListState } from "../../../reducers/timetableListState";
 import { ToggleIsOpenOfGetDateDialog } from "../../toggleIsOpenOfGetDateDialog";
 import {ToggleIsOpenOfSaveDialog} from "../../toggleIsOpenOfSaveDialog";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../../../reducers/masterState";

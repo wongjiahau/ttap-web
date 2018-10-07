@@ -30,13 +30,13 @@ export function NewMasterState() : IMasterState {
         DataState:                NewDataState(),
         SaveTimetableDialogState: NewSaveTimetableDialogState(),
         SbcwDialogState:          NewSbcwDialogstate (),
-        SetTimeConstraintState:   NewSetTimeConstraintState(null),
+        SetTimeConstraintState:   NewSetTimeConstraintState([]),
         SettingsState:            NewSettingsState(),
         SlotTableState:           NewSlotsTableState(),
         SnackbarState:            NewSnackbarState(),
-        SubjectListState:         NewSubjectListState(null),
+        SubjectListState:         NewSubjectListState([]),
         TimetableCreatorState:    NewTimetableCreatorState(),
-        TimetableListState:       NewTimetableListState([], null)
+        TimetableListState:       NewTimetableListState([], [])
     };
 }
 export abstract class MasterStateAction extends Action < IMasterState > {

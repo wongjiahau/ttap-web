@@ -61,7 +61,7 @@ export function SelectSubject(subjectToBeSelected : Subject, allSubjects : Subje
     subjectToBeSelected.IsSelected = true;
     return {
         ...result,
-        TimetableListState: NewTimetableListState(timetables, selectedSlots)
+        TimetableListState: NewTimetableListState(timetables, selectedSlots, {...result})
     };
 }
 
@@ -79,7 +79,7 @@ export function DeselectSubject(subjectToBeDeselected : Subject, allSubjects : S
             ...state.SubjectListState,
             Subjects: allSubjects
         },
-        TimetableListState: NewTimetableListState(timetables, selectedSlots)
+        TimetableListState: NewTimetableListState(timetables, selectedSlots, {...state})
     };
 
     const allSubjectIsDeselected = allSubjects.every((x) => !x.IsSelected);
@@ -134,7 +134,7 @@ export function GetSelectedSlots(subjects : Subject[]) : RawSlot[] {
     if (subjects.length === 0) {
         return [];
     }
-    let slotIds = [];
+    let slotIds: number[] = [];
     for (let i = 0; i < subjects.length; i++) {
         slotIds = slotIds.concat(subjects[i].SlotUids);
     }

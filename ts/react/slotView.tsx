@@ -36,7 +36,6 @@ const buttonBaseStyle : React.CSSProperties = {
     fontSize:                "13.5px",
     width:                   "100%",
     textAlign:               "center",
-    cursor:                  "pointer"
 };
 
 export class SlotView extends React.Component < ISlotViewProps,
@@ -55,27 +54,37 @@ ISlotViewState > {
             ...buttonBaseStyle,
             background: this.props.color,
         };
-        if (isAlternateSlot) { // add border glow
+        if (this.props.slot.AlternativeSlots.length > 0) {
+            buttonStyle = {
+                ...buttonStyle,
+                cursor: "pointer"
+            };
+        }
+        if (isAlternateSlot) {// add border glow
             buttonStyle = {
                 ...buttonStyle,
                 border: "1px solid rgb(86, 180, 239)",
-                boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6)"
+                boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6)",
+                cursor: "pointer"
             };
         }
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isAlternateSlot)}>
                 <div
+                    className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow" : ""}
                     style={buttonStyle}
                     onClick={() => {
                         if (this.props.handleShowAlternateSlot !== undefined) {
-                            this.props.handleShowAlternateSlot(this.props.slot);
+                            if (this.props.slot.AlternativeSlots.length > 0) {
+                                this.props.handleShowAlternateSlot(this.props.slot);
+                            }
                         }
                         if (this.props.handleGoToThisAlternateSlot !== undefined) {
                             this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
                         }
                     }}>
                     <b>
-                        {getSlotContent(slot)}
+                        {getSlotContent(slot)} {slot.AlternativeSlots.length > 0 ? "*" : ""}
                         {slot.Group.length > 1
                             ? this.arrowDownButton()
                             : ""}
@@ -156,9 +165,8 @@ function tooltipTitle(s : ISlotViewModel, isAlternateSlot: boolean) {
             <br/>
             [{s.SubjectCode}]
             <br/>
-            {isAlternateSlot ?
-            "(Click to pick this slot)" :
-            "(Click to show alternative slots)"}
+            {isAlternateSlot ? "(Click to pick this slot)" : ""}
+            {s.AlternativeSlots.length > 0 ? "(Click to show alternative slots)" : ""}
         </div>
     );
 }
