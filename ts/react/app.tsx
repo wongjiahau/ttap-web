@@ -26,7 +26,7 @@ interface IAppState {
 }
 function RemoveLoadingCube() {
     const x = document.getElementById("initialLoadingCube");
-    if (x) {
+    if (x && x.parentNode) {
         x.parentNode.removeChild(x);
     }
 }

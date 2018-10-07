@@ -15,7 +15,7 @@ export class Skeleton implements ISkeleton {
     public Layouts : ReactGridLayout.Layout[];
     public Children : any[];
     public constructor() {
-        const child = [];
+        const child: JSX.Element[] = [];
         child.push(this.GetTimeRow());
         child.push(this.GetDayColumn());
         let layouts : ReactGridLayout.Layout[] = [];
@@ -33,7 +33,7 @@ export class Skeleton implements ISkeleton {
             .concat(other.Layouts);
     }
 
-    private GetTimeRow() {
+    private GetTimeRow(): JSX.Element[] {
         const divStyle : React.CSSProperties = {
             borderBottom: "1px solid",
             borderRight: "1px solid",
@@ -47,7 +47,7 @@ export class Skeleton implements ISkeleton {
             padding: "2px",
             textAlign: "center"
         };
-        const result = [];
+        const result: JSX.Element[] = [];
         for (let i = 0;; i++) {
             let time = i + TimePeriod.Min.Hour;
             const isAtLast = time === TimePeriod.Max.Hour - 1;
@@ -81,7 +81,7 @@ export class Skeleton implements ISkeleton {
         return result;
     }
 
-    private GetDayColumn() {
+    private GetDayColumn(): JSX.Element[] {
         const days = [
             " ",
             "MON",
@@ -109,7 +109,7 @@ export class Skeleton implements ISkeleton {
             display: "table-cell",
             verticalAlign: "middle"
         };
-        const result = [];
+        const result: JSX.Element[] = [];
         for (let i = 0; i < days.length; i++) {
             result.push(
                 <div

@@ -212,15 +212,26 @@ export function GetMaxWeek(slots: RawSlot[]) {
     return max(slots.map((s) => max(Week.Parse(s.WeekNumber).WeekNumberList)));
 }
 
-export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): any[] {
-    const result = [];
+export interface IGoogleCalendarEvent {
+    summary: string;
+    start: IGoogleCalendarDate;
+    end: IGoogleCalendarDate;
+}
+
+export interface IGoogleCalendarDate {
+    date: string;
+    timeZone: string;
+}
+
+export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): IGoogleCalendarEvent[] {
+    const result: IGoogleCalendarEvent[] = [];
     if (semStartDate.getDay() !== 1) {
         throw new Error("Semester start date must be a Monday");
     }
     let startDate = semStartDate;
     let endDate = addDays(semStartDate, 5);
     for (let i = 0; i < maxWeek; i++) {
-        const event = {
+        const event: IGoogleCalendarEvent = {
             summary: "Week " + (i + 1),
             start: {
                 date: format(startDate, "YYYY-MM-DD"),
