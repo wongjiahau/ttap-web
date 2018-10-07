@@ -19,11 +19,11 @@ const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 interface ITimetableViewProps {
     slots : ISlotViewModel[];
     states : STCBox[];
-    alternateSlots: RawSlot[];
+    alternateSlots: ISlotViewModel[];
     handleSetTimeContraintAt?: (state : STCBox) => void;
     handleDesetTimeContraintAt?: (state : STCBox) => void;
     handleToggleIsOpenOfSummary?: () => void;
-    handleSelectSlotChoice?:      (slotUid: number, newSlotChoice: number) => void;
+    handleSelectSlotChoice:      (slotUid: number, newSlotChoice: number) => void;
     handleShowAlternateSlot:      (s: ISlotViewModel) => void;
     handleGoToThisAlternateSlot:  (slotUid: number) => void;
     isSummaryOpen?: boolean;
@@ -45,18 +45,12 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
         const skeleton = new Skeleton();
         if (this.props.slots) {
             const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(
-                this.props.slots,
+                this.props.slots.concat(this.props.alternateSlots),
                 this.props.handleSelectSlotChoice,
+                this.props.handleGoToThisAlternateSlot,
                 this.props.handleShowAlternateSlot
                 );
             skeleton.Concat(slotViewsAndDayColumn);
-
-            const alternateSlotViewsAndDayColumn = GenerateAlternateSlotViewsAndDayColumn(
-                CreateSlotViewModels(this.props.alternateSlots),
-                this.props.handleSelectSlotChoice,
-                this.props.handleGoToThisAlternateSlot,
-            );
-            skeleton.Concat(alternateSlotViewsAndDayColumn);
         }
         if (this.props.states) {
             const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
@@ -79,6 +73,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             position: "absolute",
             right:    "0",
         };
+        console.log(skeleton.Layouts);
         return (
             <div id="timetable-view">
                 {/* Tippy css */} <link rel="stylesheet" href="https://cdn.rawgit.com/tvkhoa/react-tippy/master/dist/tippy.css"/>
@@ -86,7 +81,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                     <div style={divStyle}>
                         <ReactGridLayout
                             cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour)) * 2 + 2}
-                            maxRows={16}
+                            maxRows={50}
                             rowHeight={50}
                             width={this.state.width}
                             layout={skeleton.Layouts}

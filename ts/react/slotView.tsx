@@ -49,7 +49,6 @@ ISlotViewState > {
 
     public render() {
         const slot = this.props.slot;
-        const isAlternateSlot = this.props.handleGoToThisAlternateSlot !== undefined;
         let buttonStyle = {
             ...buttonBaseStyle,
             background: this.props.color,
@@ -60,7 +59,7 @@ ISlotViewState > {
                 cursor: "pointer"
             };
         }
-        if (isAlternateSlot) {// add border glow
+        if (slot.IsAlternativeSlot) {// add border glow
             buttonStyle = {
                 ...buttonStyle,
                 border: "1px solid rgb(86, 180, 239)",
@@ -69,7 +68,7 @@ ISlotViewState > {
             };
         }
         return (
-            <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isAlternateSlot)}>
+            <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div
                     className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow" : ""}
                     style={buttonStyle}
@@ -155,7 +154,7 @@ ISlotViewState > {
 
 }
 
-function tooltipTitle(s : ISlotViewModel, isAlternateSlot: boolean) {
+function tooltipTitle(s : ISlotViewModel) {
     const style : React.CSSProperties = {
         fontSize: "12px"
     };
@@ -165,7 +164,7 @@ function tooltipTitle(s : ISlotViewModel, isAlternateSlot: boolean) {
             <br/>
             [{s.SubjectCode}]
             <br/>
-            {isAlternateSlot ? "(Click to pick this slot)" : ""}
+            {s.IsAlternativeSlot ? "(Click to pick this slot)" : ""}
             {s.AlternativeSlots.length > 0 ? "(Click to show alternative slots)" : ""}
         </div>
     );

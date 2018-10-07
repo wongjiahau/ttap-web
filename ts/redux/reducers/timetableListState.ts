@@ -12,7 +12,7 @@ export interface ITimetableListState {
     IsSummaryOpen:          boolean;
     ResidueTimetables:      Timetable[];
     SlotViewModelStore:     ObjectStore<ISlotViewModel>;
-    AlternateSlots:         RawSlot[];
+    AlternateSlots:         ISlotViewModel[];
     ShowingAlternateSlotOf: ISlotViewModel | null;
 }
 

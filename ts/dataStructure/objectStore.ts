@@ -22,7 +22,7 @@ export class ObjectStore<T extends Identifiable> {
     }
 
     public GetBunch(keys: number[]) : T[] {
-        const results = [];
+        const results: T[] = [];
         let data : T;
         for (let i = 0; i < keys.length; i++) {
             data = this.dict[keys[i]];

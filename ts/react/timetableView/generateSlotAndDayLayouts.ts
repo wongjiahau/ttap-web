@@ -11,10 +11,9 @@ import {ISlotViewModel} from "../../model/slotViewModel";
  * @returns {[ReactGridLayout.Layout[], ReactGridLayout.Layout[]]} [0] is the SlotsLayout, [1] is the DayColumnLayouts
  */
 export function GenerateSlotAndDayLayouts(
-    rawSlots : ISlotViewModel[], 
-    xOffset : number, 
+    rawSlots : ISlotViewModel[],
+    xOffset : number,
     yOffset : number,
-    key     : "s" | "as" // "s" means "Main Slots" , "as" means "Alternate Slots"
 ) : [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
     const dayRows = GetDayRows();
     const slotLayouts: ReactGridLayout.Layout[] = [];
@@ -40,7 +39,7 @@ export function GenerateSlotAndDayLayouts(
             W] = GetXandW(timePeriod);
         const layout : ReactGridLayout.Layout = {
             h: 1,
-            i: key + h,
+            i: "s" + h,
             w: W,
             x: X + xOffset,
             y: dayRows[Y].rowIndex + yOffset + extraYOffset
@@ -58,10 +57,11 @@ export interface IDayRow {
 export function GetDayRows() : IDayRow[] {
     const dayRows : IDayRow[] = [];
     const NUMBER_OF_DAY_PER_WEEK = 7;
+    const MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW = 20;
     for (let i = 0; i < NUMBER_OF_DAY_PER_WEEK; i++) {
         dayRows.push({
             rowIndex: i,
-            state: [0, 0, 0, 0, 0] // Assume to have maximum of 5 overlapping slot in one day
+            state: new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0)
         });
     }
     return dayRows;

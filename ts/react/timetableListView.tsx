@@ -17,7 +17,7 @@ import {TimetableView} from "./timetableView/timetableView";
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
     currentTimetable:   Timetable | null;
-    alternateSlots:     RawSlot[];
+    alternateSlots:     ISlotViewModel[];
     isSummaryOpen:      boolean;
     maxIndex:           number; // non-zero based
     slotViewModelStore: ObjectStore<ISlotViewModel>;

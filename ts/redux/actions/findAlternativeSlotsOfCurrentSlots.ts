@@ -1,5 +1,6 @@
 import { ObjectStore } from "../../dataStructure/objectStore";
 import { CreateSlotFromRaw } from "../../model/slot";
+import { CreateSlotViewModel } from "../../model/slotViewModel";
 import { GotIntersection } from "../../permutator/state";
 import {MasterStateAction} from "../reducers/masterState";
 import { TinySlot } from "./../../permutator/tinySlot";
@@ -38,7 +39,10 @@ export class FindAlternativeSlotsOfCurrentSlot extends MasterStateAction {
                         currentTimetable.State,
                         new TinySlot(CreateSlotFromRaw(x)).State
                     );
-                });
+                })
+                .map(CreateSlotViewModel)
+                .map((x) => ({...x, IsAlternativeSlot: true}))
+                ;
         }
 
         return {
