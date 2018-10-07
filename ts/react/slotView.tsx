@@ -23,7 +23,7 @@ interface ISlotViewState {
 
 const borderThickness = "0.5px solid black";
 const borderRadius = "5px";
-let buttonBaseStyle : React.CSSProperties = {
+const buttonBaseStyle : React.CSSProperties = {
     borderBottom:            borderThickness,
     borderBottomLeftRadius:  borderRadius,
     borderBottomRightRadius: borderRadius,
@@ -49,16 +49,23 @@ ISlotViewState > {
     }
 
     public render() {
-        buttonBaseStyle = {
+        const slot = this.props.slot;
+        const isAlternateSlot = this.props.handleGoToThisAlternateSlot !== undefined;
+        let buttonStyle = {
             ...buttonBaseStyle,
             background: this.props.color,
         };
-        const slot = this.props.slot;
-        const isAlternateSlot = this.props.handleGoToThisAlternateSlot !== undefined;
+        if (isAlternateSlot) { // add border glow
+            buttonStyle = {
+                ...buttonStyle,
+                border: "1px solid rgb(86, 180, 239)",
+                boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6)"
+            };
+        }
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isAlternateSlot)}>
                 <div
-                    style={buttonBaseStyle}
+                    style={buttonStyle}
                     onClick={() => {
                         if (this.props.handleShowAlternateSlot !== undefined) {
                             this.props.handleShowAlternateSlot(this.props.slot);
