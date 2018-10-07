@@ -54,10 +54,10 @@ export interface IDayRow {
     state : number[];
 }
 
+export const MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW = 20;
 export function GetDayRows() : IDayRow[] {
     const dayRows : IDayRow[] = [];
     const NUMBER_OF_DAY_PER_WEEK = 7;
-    const MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW = 20;
     for (let i = 0; i < NUMBER_OF_DAY_PER_WEEK; i++) {
         dayRows.push({
             rowIndex: i,

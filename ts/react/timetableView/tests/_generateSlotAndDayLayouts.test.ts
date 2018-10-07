@@ -12,7 +12,8 @@ import {
     GenerateSlotAndDayLayouts,
     GetDayColumnLayouts,
     GetDayRows,
-    GetXandW
+    GetXandW,
+    MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW
 } from "../generateSlotAndDayLayouts";
 
 describe("GenerateSlotLayouts", () => {
@@ -72,27 +73,28 @@ describe("GenerateSlotLayouts", () => {
 describe("GetDayRows", () => {
     it("case 1", () => {
         const result = GetDayRows();
+        const zeroes = new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0);
         expect(result).to.deep.eq([{
             rowIndex: 0,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 1,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 2,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 3,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 4,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 5,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 6,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, ]);
     });
 
@@ -119,7 +121,7 @@ describe("GetDayColumnLayouts", () => {
         slot1.TimePeriod = "8:00 AM - 9:00 AM";
         slot1.Day = "Mon";
         const slot2 = clone(slot1);
-        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0, "s")[1];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0)[1];
         expect(result).to.deep.eq([
             { h: 1, i: "d0", w: 2, x: 0, y: 0 },
             { h: 2, i: "d1", w: 2, x: 0, y: 1 },
