@@ -24,9 +24,6 @@ export class GoToThisAlternateSlot extends MasterStateAction {
         destinationTimetableUids[destinationTimetableUids.indexOf(state.TimetableListState.ShowingAlternateSlotOf.Uid)] = this.slotUid;
         destinationTimetableUids = destinationTimetableUids.sort();
 
-        console.log(currentTimetable.Uids.sort());
-        console.log(destinationTimetableUids);
-
         for (let i = 0; i < indexOfPossibleDestinations.length; i++) {
             const index = indexOfPossibleDestinations[i];
             const t = timetables[index];

@@ -39,7 +39,7 @@ describe("UpdateTotalState action", () => {
     it("should set the TotalState property", () => {
         const action = new UpdateTotalState();
         const initialState = getInitialState();
-        expect(initialState.SetTimeConstraintState.TotalState).to.eq(null);
+        expect(initialState.SetTimeConstraintState.TotalState).to.deep.eq([]);
         const newState = MasterStateReducer(initialState, action);
         expect(newState.SetTimeConstraintState.TotalState).to.not.eq(null);
     });

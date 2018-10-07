@@ -44,7 +44,8 @@ describe("SelectSlotChoice action", () => {
             WeekNumber: [
                 "3,5,7,9,11,13", "2,4,6,8,10,12"
             ],
-            Room: ["KB326", "KB326"]
+            Room: ["KB326", "KB326"],
+            AlternativeSlots: []
         });
         newState = MasterStateReducer(newState, new SelectSlotChoice(229, 1));
         expect(newState.TimetableListState.SlotViewModelStore.GetOne(229)).to.deep.eq({
@@ -61,7 +62,8 @@ describe("SelectSlotChoice action", () => {
             WeekNumber: [
                 "3,5,7,9,11,13", "2,4,6,8,10,12"
             ],
-            Room: ["KB326", "KB326"]
+            Room: ["KB326", "KB326"],
+            AlternativeSlots: []
         });
     });
 });

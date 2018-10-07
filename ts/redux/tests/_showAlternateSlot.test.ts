@@ -2,6 +2,7 @@ import { expect } from "chai";
 import { CreateSlotViewModel } from "../../model/slotViewModel";
 import { GetMockInitialState } from "../../tests/testDataGenerator";
 import { FilterTimetable } from "../actions/filterTimetable";
+import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import { GoToNextTimetable } from "../actions/goToNextTimetable";
 import { GoToPrevTimetable } from "../actions/goToPrevTimetable";
 import { GoToRandomTimetable } from "../actions/goToRandomTimetable";
@@ -16,15 +17,16 @@ describe("showAlternateSlot action", () => {
         const initialState = GetMockInitialState("heng_2017_apr");
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.FM2));
         const newState1 = MasterStateReducer(newState0, new ToggleSubjectSelection(IndexOf.FM1));
-        const newState2 = MasterStateReducer(newState1, new ToggleSubjectSelection(IndexOf.ASSD));
-        const slotsToBeClicked = HENG_2017_APR()
+        let newState2 = MasterStateReducer(newState1, new ToggleSubjectSelection(IndexOf.ASSD));
+        newState2 = MasterStateReducer(newState2, new FindAlternativeSlotsOfCurrentSlot());
+        const slotsToBeClicked = newState2.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.Type === "T" &&
                 x.SubjectCode === "UEME2123" &&
-                x.Group === "3"
+                x.Group[0] === "3"
             )[0]; // Fluid Mechanic I, Tutorial 3
 
-        const newState3 = MasterStateReducer(newState2, new ShowAlternateSlot(CreateSlotViewModel(slotsToBeClicked)));
+        const newState3 = MasterStateReducer(newState2, new ShowAlternateSlot(slotsToBeClicked));
         if (!newState3.TimetableListState.ShowingAlternateSlotOf) {
             throw new Error();
         }
@@ -49,7 +51,7 @@ describe("showAlternateSlot action", () => {
         expect(newState6.TimetableListState.AlternateSlots).to.deep.eq([]);
 
         // Clicking again will hide the alternate slots
-        const newState7 = MasterStateReducer(newState3, new ShowAlternateSlot(CreateSlotViewModel(slotsToBeClicked)));
+        const newState7 = MasterStateReducer(newState3, new ShowAlternateSlot(slotsToBeClicked));
         expect(newState7.TimetableListState.AlternateSlots).to.have.lengthOf(0);
 
         // also hiding snackbar
@@ -61,15 +63,16 @@ describe("showAlternateSlot action", () => {
         const initialState = GetMockInitialState("heng_2017_apr");
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ASSD));
         const greenBoxToBeClicked = new STCBox(StateKind.MaybeOccupied, 1, parseInt("10000", 2), 4);
-        const newState1 = MasterStateReducer(newState0, new FilterTimetable(greenBoxToBeClicked));
-        const slotsToBeClicked = HENG_2017_APR()
+        let newState1 = MasterStateReducer(newState0, new FilterTimetable(greenBoxToBeClicked));
+        newState1 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlot());
+        const slotsToBeClicked = newState1.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.SubjectCode === "UEMX4313" &&
                 x.Type === "T" &&
-                x.Group === "1"
+                x.Group[0] === "1"
             )[0]; // ASSD I, Tutorial 1
 
-        const newState2 = MasterStateReducer(newState1, new ShowAlternateSlot(CreateSlotViewModel(slotsToBeClicked)));
+        const newState2 = MasterStateReducer(newState1, new ShowAlternateSlot(slotsToBeClicked));
         expect(newState2.TimetableListState.AlternateSlots).to.have.lengthOf(0);
     });
 
