@@ -16,8 +16,8 @@ const iframeStyle : React.CSSProperties = {
 
 const debugging = true;
 const URL = debugging
-    ? "http://localhost/mockunitreg/"
-    : "https://unitreg.utar.edu.my/portal/courseRegStu/";
+    ? "https://wongjiahau.github.io/mock-utar-unitreg/"
+    : "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp";
 
 export interface ILoginDispatchProps {
     handleParseHtmlToSlot : (html : string) => void;
@@ -27,8 +27,7 @@ interface ILoginStateProps {
     redirect:        boolean;
     openErrorDialog: boolean;
 }
-export class Login extends React.Component < ILoginDispatchProps,
-ILoginStateProps > {
+export class Login extends React.Component < ILoginDispatchProps, ILoginStateProps > {
     private currentPage : number = 1;
     private html = "";
     public constructor(props) {
@@ -51,7 +50,7 @@ ILoginStateProps > {
                         scrolling="no"
                         style={iframeStyle}
                         onLoad={this.handleIFrameOnLoad}
-                        src={`${URL}login.jsp`}/>
+                        src={URL}/>
                     <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
                 </StackPanel>
                 <Dialog open={this.state.openErrorDialog}>
@@ -80,12 +79,15 @@ ILoginStateProps > {
 
     public handleIFrameOnLoad = () => {
         const iframe = (document.getElementById("unitregiframe")as HTMLIFrameElement);
+        if (iframe === null) { throw new Error(); }
+        if (iframe.contentWindow === null) { throw new Error(); }
         const newLocation = iframe.contentWindow.location.href;
+        console.log(newLocation);
         if ((new Str(newLocation)).Contains("masterSchedule")) {
             this.html += iframe.contentWindow.document.body.innerHTML;
             if ((new Str(this.html)).Contains(`changePage('${this.currentPage + 1}')`)) {
                 this.currentPage++;
-                iframe.contentWindow.changePage(this.currentPage);
+                iframe.contentWindow.changePage(this.currentPage); // changePage is a function defined in <script></script>
             } else {
                 try {
                     this.props.handleParseHtmlToSlot(this.html);

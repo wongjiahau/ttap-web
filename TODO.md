@@ -44,3 +44,4 @@
 21-[X]-Flatpickr date picker bug
 22-[]-Write test for react components
 23-[]-Solve "possibly null" problem
+24-[]-Allow user to logout
