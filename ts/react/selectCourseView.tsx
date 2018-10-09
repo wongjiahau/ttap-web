@@ -10,7 +10,7 @@ import Typography from "material-ui/Typography";
 import { CantFindMyCourseFormUrl, ReportLoadDataErrorFormUrl } from "../constants";
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
-import {RawSlot} from "../model/rawSlot";
+import {IRawSlot, RawSlot} from "../model/rawSlot";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
 import { Str } from "../util/str";
@@ -50,7 +50,16 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
 
         if (GET_ALL_SLOTS) {
             setTimeout(() => {
-                this.LoadSelectedData("https://raw.githubusercontent.com/wongjiahau/ttap-datahub/master/fes-all-slots.json", "json");
+                LoadSlotsFromUrl(
+                    "https://raw.githubusercontent.com/wongjiahau/ttap-datahub/master/fes-all-slots.json",
+                    "json",
+                    ()      =>  this.setState({loading: true}),
+                    (slots) => {
+                        this.props.handleLoadSlot(slots);
+                        this.setState({redirect: true});
+                    },
+                    ()      => this.setState({openErrorDialog: true, loading: false}),
+                );
             }, 500);
             return;
         }
@@ -146,7 +155,16 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
 
     public tryLoadData = (apiObject: IGithubApiObject) => {
         try {
-            this.LoadSelectedData(apiObject.download_url, apiObject.name.split(".")[1]);
+            LoadSlotsFromUrl(
+                apiObject.download_url,
+                apiObject.name.split(".")[1],
+                ()      =>  this.setState({loading: true}),
+                (slots) => {
+                    this.props.handleLoadSlot(slots);
+                    this.setState({redirect: true});
+                },
+                ()      => this.setState({openErrorDialog: true, loading: false}),
+            );
         } catch (e) {
             this.setState({
                 serverError:  "'" + this.state.value + "' is not a valid course name. Please try other name."
@@ -173,46 +191,13 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         });
     }
 
-    private LoadSelectedData = (downloadUrl : string, fileType : string) : void => {
-        this.setState({loading: true});
-        const request = require("phin");
-        const options = {
-            url: downloadUrl,
-            headers: {
-                "User-Agent": "hou32hou"
-            }
-        };
-        request(options, (error, response) => {
-            let parser : (src: string) => RawSlot[];
-            if (error) {
-                alert("Please retry again.");
-                return;
-            }
-            if (fileType === "html") {
-                parser = ParseHtmlToRawSlot;
-            } else if (fileType === "json") {
-                parser = ParseJsonToRawSlot;
-            } else {
-                throw new Error("Unknown file type: " + fileType);
-            }
-            try {
-                const slots = parser(response.body.toString()).map(RawSlot.ResetUid);
-                this.props.handleLoadSlot(slots);
-                this.setState({redirect: true});
-            } catch (error) {
-                this.setState({openErrorDialog: true, loading: false});
-            }
-        });
-
-    }
-
     private handleReportBug = () => {
         this.setState({openErrorDialog: false});
         window.open(ReportLoadDataErrorFormUrl, "_blank");
     }
 }
 
-function getLoadingElement() {
+export function getLoadingElement() {
     return (
         <VerticalAlign>
             <StackPanel orientation="vertical" horizontalAlignment="center">
@@ -226,3 +211,41 @@ function getLoadingElement() {
 function openGetIdForm() {
     window.open(CantFindMyCourseFormUrl, "_blank");
 }
+
+export const LoadSlotsFromUrl = (
+    downloadUrl : string,
+    fileType : string,
+    started : () => void,
+    successed : (loadedSlots: IRawSlot[]) => void,
+    failed : (error: any) => void
+) : void => {
+    started();
+    const request = require("phin");
+    const options = {
+        url: downloadUrl,
+        headers: {
+            "User-Agent": "hou32hou"
+        }
+    };
+    request(options, (error, response) => {
+        let parser : (src: string) => RawSlot[];
+        if (error) {
+            alert("Please retry again.");
+            return;
+        }
+        if (fileType === "html") {
+            parser = ParseHtmlToRawSlot;
+        } else if (fileType === "json") {
+            parser = ParseJsonToRawSlot;
+        } else {
+            throw new Error("Unknown file type: " + fileType);
+        }
+        try {
+            const slots = parser(response.body.toString()).map(RawSlot.ResetUid);
+            successed(slots);
+        } catch (error) {
+            failed(error);
+        }
+    });
+
+};
