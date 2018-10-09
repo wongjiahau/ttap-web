@@ -55,7 +55,7 @@ export class App extends React.Component < {}, IAppState > {
                         <AppBar position="static" style={{ width: "100%" }}>
                             <Toolbar>
                                 <Button onClick={() => window.history.back()}>
-                                    <ArrowBack color="default" style={{color: "white"}}/>
+                                    <ArrowBack style={{color: "white"}}/>
                                 </Button>
                                 {/* <GridIcon style={{ marginRight: "12px", color: "white" }}/> */}
                                 <Typography style={{ flex: 1 }} type="title" color="inherit">
