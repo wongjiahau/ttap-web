@@ -13,4 +13,4 @@ fi
 # it will automatically recompile the changed file only
 # so running in WATCH mode will speed up the compile process
 echo "Transpiling typescript into ./src/core . . . "
-tsc -p ./ts/tsconfig.json --watch 
+'./node_modules/typescript/bin/tsc' -p ./ts/tsconfig.json --watch 
