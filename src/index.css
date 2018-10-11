@@ -202,3 +202,29 @@ code {
 .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 }
+
+.shake-it-baby {
+    -webkit-animation: shake 2s infinite;
+    -moz-animation:    shake 2s infinite;
+    -o-animation:      shake 2s infinite;
+    animation:         shake 2s infinite;
+    animation-delay: 1s;
+}
+
+@keyframes shake {
+  5%, 45% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  10%, 40% {
+    transform: translate3d(1px, 0, 0);
+  }
+
+  15%, 25%, 35% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 30% {
+    transform: translate3d(1px, 0, 0);
+  }
+}

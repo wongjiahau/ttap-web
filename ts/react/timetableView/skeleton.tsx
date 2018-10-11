@@ -13,11 +13,9 @@ export class Skeleton implements ISkeleton {
     public static readonly Y_OFFSET = 1;
     public static readonly X_OFFSET = 2;
     public Layouts : ReactGridLayout.Layout[];
-    public Children : any[];
+    public Children : JSX.Element[];
     public constructor() {
-        const child: JSX.Element[] = [];
-        child.push(this.GetTimeRow());
-        child.push(this.GetDayColumn());
+        let child: JSX.Element[] = this.GetTimeRow().concat(this.GetDayColumn());
         let layouts : ReactGridLayout.Layout[] = [];
         layouts = layouts.concat(this.GetTimeRowLayout());
         this.Layouts = layouts;

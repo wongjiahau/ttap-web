@@ -24,14 +24,15 @@ interface ISlotViewState {
 const borderThickness = "0.5px solid black";
 const borderRadius = "5px";
 const buttonBaseStyle : React.CSSProperties = {
-    borderBottom:            borderThickness,
-    borderBottomLeftRadius:  borderRadius,
-    borderBottomRightRadius: borderRadius,
-    borderLeft:              borderThickness,
-    borderRight:             borderThickness,
-    borderTop:               borderThickness,
-    borderTopLeftRadius:     borderRadius,
-    borderTopRightRadius:    borderRadius,
+    borderRadius: borderRadius,
+    // borderBottom:            borderThickness,
+    // borderBottomLeftRadius:  borderRadius,
+    // borderBottomRightRadius: borderRadius,
+    // borderLeft:              borderThickness,
+    // borderRight:             borderThickness,
+    // borderTop:               borderThickness,
+    // borderTopLeftRadius:     borderRadius,
+    // borderTopRightRadius:    borderRadius,
     fontFamily:              "roboto",
     fontSize:                "13.5px",
     width:                   "100%",
@@ -56,7 +57,12 @@ ISlotViewState > {
         if (this.props.slot.AlternativeSlots.length > 0) {
             buttonStyle = {
                 ...buttonStyle,
-                cursor: "pointer"
+                cursor: "pointer" // a.k.a. the hand, so it looks like its clickable
+            };
+        } else { // if dont have alternative slots
+            buttonStyle = {
+                ...buttonStyle,
+                border: borderThickness, // add border to it so it looks like it is unmovable
             };
         }
         if (slot.IsAlternativeSlot) {// add border glow
@@ -67,21 +73,24 @@ ISlotViewState > {
                 cursor: "pointer"
             };
         }
+        const clickHandler = () => {
+            if (this.props.handleShowAlternateSlot !== undefined) {
+                if (this.props.slot.AlternativeSlots.length > 0) {
+                    this.props.handleShowAlternateSlot(this.props.slot);
+                }
+            }
+            if (this.props.handleGoToThisAlternateSlot !== undefined) {
+                this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
+            }
+        };
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div
-                    className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow" : ""}
+                    className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow shake-it-baby" : ""}
                     style={buttonStyle}
-                    onClick={() => {
-                        if (this.props.handleShowAlternateSlot !== undefined) {
-                            if (this.props.slot.AlternativeSlots.length > 0) {
-                                this.props.handleShowAlternateSlot(this.props.slot);
-                            }
-                        }
-                        if (this.props.handleGoToThisAlternateSlot !== undefined) {
-                            this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
-                        }
-                    }}>
+                    onClick={clickHandler}
+                    // onMouseUp={clickHandler}
+                    >
                     <b>
                         {getSlotContent(slot)} {slot.AlternativeSlots.length > 0 ? "*" : ""}
                         {slot.Group.length > 1
