@@ -9,10 +9,10 @@ import {Timetable} from "../../model/timetable";
 import {Colors} from "../colors/colors";
 import {StackPanel} from "../panels/stackPanel";
 import {TimetableSummaryView} from "../timetableSummaryView";
-import { GenerateAlternateSlotViewsAndDayColumn } from "./generateAlternateSlotViewsAndDayColumn";
 import {GenerateSlotViewsAndDayColumn} from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
 import {Skeleton} from "./skeleton";
+import { ConnectDropTarget, DropTarget } from "react-dnd";
 
 const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
@@ -20,11 +20,11 @@ interface ITimetableViewProps {
     slots : ISlotViewModel[];
     states : STCBox[];
     alternateSlots: ISlotViewModel[];
-    handleSetTimeContraintAt?: (state : STCBox) => void;
-    handleDesetTimeContraintAt?: (state : STCBox) => void;
+    handleSetTimeContraintAt?:    (state : STCBox) => void;
+    handleDesetTimeContraintAt?:  (state : STCBox) => void;
     handleToggleIsOpenOfSummary?: () => void;
-    handleSelectSlotChoice:      (slotUid: number, newSlotChoice: number) => void;
-    handleShowAlternateSlot:      (s: ISlotViewModel) => void;
+    handleSelectSlotChoice:       (slotUid: number, newSlotChoice: number) => void;
+    handleToggleAlternativeSlots: (s: ISlotViewModel, show: boolean) => void;
     handleGoToThisAlternateSlot:  (slotUid: number) => void;
     isSummaryOpen?: boolean;
 }
@@ -48,8 +48,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                 this.props.slots.concat(this.props.alternateSlots),
                 this.props.handleSelectSlotChoice,
                 this.props.handleGoToThisAlternateSlot,
-                this.props.handleShowAlternateSlot
-                );
+                this.props.handleToggleAlternativeSlots,
+            );
             skeleton.Concat(slotViewsAndDayColumn);
         }
         if (this.props.states) {
@@ -73,7 +73,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             position: "absolute",
             right:    "0",
         };
-        console.log(skeleton.Layouts);
+
         return (
             <div id="timetable-view">
                 {/* Tippy css */} <link rel="stylesheet" href="https://cdn.rawgit.com/tvkhoa/react-tippy/master/dist/tippy.css"/>

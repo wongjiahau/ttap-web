@@ -6,13 +6,13 @@ import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlo
 import { GoToNextTimetable } from "../actions/goToNextTimetable";
 import { GoToPrevTimetable } from "../actions/goToPrevTimetable";
 import { GoToRandomTimetable } from "../actions/goToRandomTimetable";
-import { ShowAlternateSlot } from "../actions/showAlternateSlot";
+import { ToggleAlternativeSlots } from "../actions/toggleAlternativeSlots";
 import { MasterStateReducer } from "../reducers/masterState";
 import { StateKind, STCBox } from "./../../model/states/stcBox";
 import { HENG_2017_APR, IndexOf } from "./../../tests/testData/heng_2017_apr";
 import { ToggleSubjectSelection } from "./../actions/toggleSubjectSelection";
 
-describe("showAlternateSlot action", () => {
+describe("toggle alternative slots action", () => {
     it("should set alternate slots based on clicked slot", () => {
         const initialState = GetMockInitialState("heng_2017_apr");
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.FM2));
@@ -26,7 +26,7 @@ describe("showAlternateSlot action", () => {
                 x.Group[0] === "3"
             )[0]; // Fluid Mechanic I, Tutorial 3
 
-        const newState3 = MasterStateReducer(newState2, new ShowAlternateSlot(slotsToBeClicked));
+        const newState3 = MasterStateReducer(newState2, new ToggleAlternativeSlots(slotsToBeClicked, true));
         if (!newState3.TimetableListState.ShowingAlternateSlotOf) {
             throw new Error();
         }
@@ -58,8 +58,8 @@ describe("showAlternateSlot action", () => {
         const newState6 = MasterStateReducer(newState3, new GoToRandomTimetable());
         expect(newState6.TimetableListState.AlternateSlots).to.deep.eq([]);
 
-        // Clicking again will hide the alternate slots
-        const newState7 = MasterStateReducer(newState3, new ShowAlternateSlot(slotsToBeClicked));
+        // hiding the alternate slots
+        const newState7 = MasterStateReducer(newState3, new ToggleAlternativeSlots(slotsToBeClicked, false));
         expect(newState7.TimetableListState.AlternateSlots).to.have.lengthOf(0);
 
         // also hiding snackbar
@@ -80,7 +80,7 @@ describe("showAlternateSlot action", () => {
                 x.Group[0] === "1"
             )[0]; // ASSD I, Tutorial 1
 
-        const newState2 = MasterStateReducer(newState1, new ShowAlternateSlot(slotsToBeClicked));
+        const newState2 = MasterStateReducer(newState1, new ToggleAlternativeSlots(slotsToBeClicked, true));
         expect(newState2.TimetableListState.AlternateSlots).to.have.lengthOf(0);
     });
 

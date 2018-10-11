@@ -6,7 +6,7 @@ import { GoToNextTimetable } from "../actions/goToNextTimetable";
 import { GoToPrevTimetable } from "../actions/goToPrevTimetable";
 import { GoToRandomTimetable } from "../actions/goToRandomTimetable";
 import { GoToThisAlternateSlot } from "../actions/goToThisAlternateSlot";
-import { ShowAlternateSlot } from "../actions/showAlternateSlot";
+import { ToggleAlternativeSlots } from "../actions/toggleAlternativeSlots";
 import { MasterStateReducer } from "../reducers/masterState";
 import { IndexOf } from "./../../tests/testData/heng_2017_apr";
 import { ToggleSubjectSelection } from "./../actions/toggleSubjectSelection";
@@ -23,7 +23,7 @@ describe("showAlternateSlot action", () => {
                 x.Group[0] === "1"
             )[0]; // ASSD T1
 
-        const newState2 = MasterStateReducer(newState1, new ShowAlternateSlot(slotsToBeClicked));
+        const newState2 = MasterStateReducer(newState1, new ToggleAlternativeSlots(slotsToBeClicked, true));
         const newState3 = MasterStateReducer(newState2, new GoToThisAlternateSlot(newState2.TimetableListState.AlternateSlots[0].Uid));
         expect(newState3.TimetableListState.CurrentIndex).to.eq(1);
         expect(newState3.SnackbarState.IsOpen).to.eq(false);

@@ -14,6 +14,7 @@ import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {TimetableView} from "./timetableView/timetableView";
 
+
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
     currentTimetable:   Timetable | null;
@@ -32,7 +33,7 @@ export interface ITimetableListViewDispatchProps {
     handleOpenSlotsTable:            ()     => void;
     handleToggleIsOpenOfSummary:     ()     => void;
     handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => void;
-    handleShowAlternateSlot:         (s: ISlotViewModel) => void;
+    handleToggleAlternativeSlots:    (s: ISlotViewModel, show: boolean) => void;
     handleGoToThisAlternateSlot:     (slotUid: number) => void;
 }
 
@@ -49,6 +50,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
             this.props.currentTimetable !== null ?
             this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids) :
             [];
+        
 
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
@@ -60,7 +62,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         states={null}
                         isSummaryOpen={this.props.isSummaryOpen}
                         handleSelectSlotChoice={this.props.handleSelectSlotChoice}
-                        handleShowAlternateSlot={this.props.handleShowAlternateSlot}
+                        handleToggleAlternativeSlots={this.props.handleToggleAlternativeSlots}
                         handleGoToThisAlternateSlot={this.props.handleGoToThisAlternateSlot}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <StackPanel orientation="horizontal">

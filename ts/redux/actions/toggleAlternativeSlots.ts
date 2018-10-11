@@ -2,17 +2,16 @@ import { ISlotViewModel } from "../../model/slotViewModel";
 import { TinySlot } from "../../permutator/tinySlot";
 import { getSlotContent } from "../../react/slotView";
 import { GetInitial } from "../../util/getInitial";
-import { RawSlot } from "./../../model/rawSlot";
-import {IMasterState, MasterStateAction} from "./../reducers/masterState";
+import { RawSlot } from "../../model/rawSlot";
+import {IMasterState, MasterStateAction} from "../reducers/masterState";
 
-export class ShowAlternateSlot extends MasterStateAction {
-    public constructor(private slot : ISlotViewModel) {
+export class ToggleAlternativeSlots extends MasterStateAction {
+    public constructor(private slot : ISlotViewModel, private show: boolean) {
         super();
     }
     public TypeName() : string {return "show alternate slot"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        if (state.TimetableListState.ShowingAlternateSlotOf &&
-            this.slot.Uid === state.TimetableListState.ShowingAlternateSlotOf.Uid) {
+        if (!this.show) {
             return {
                 ...state,
                 SnackbarState: {

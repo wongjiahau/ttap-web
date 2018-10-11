@@ -16,6 +16,7 @@ import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
 import { Str } from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
 import { VerticalAlign } from "./panels/verticalAlign";
+import { HENG_2017_APR } from "../tests/testData/heng_2017_apr";
 
 export interface ISelectCourseViewDispatchProps {
     handleLoadSlot : (rawSlots : RawSlot[]) => void;
@@ -31,7 +32,7 @@ interface ISelectCourseViewState {
     openErrorDialog: boolean;
 }
 
-const GET_ALL_SLOTS = false;
+const GET_ALL_SLOTS = true;
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
     private allSuggestions : IGithubApiObject[];
@@ -50,6 +51,9 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
 
         if (GET_ALL_SLOTS) {
             setTimeout(() => {
+                this.props.handleLoadSlot(HENG_2017_APR());
+                this.setState({redirect: true});
+                return;
                 LoadSlotsFromUrl(
                     "https://raw.githubusercontent.com/wongjiahau/ttap-datahub/master/fes-all-slots.json",
                     "json",

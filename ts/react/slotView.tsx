@@ -8,13 +8,15 @@ import {ISlotViewModel} from "../model/slotViewModel";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {GetInitial} from "../util/getInitial";
 import {Colors} from "./colors/colors";
+import { DragSource, ConnectDragSource } from "react-dnd";
 
 export interface ISlotViewProps {
     slot : ISlotViewModel;
     color : Colors;
-    handleSelectSlotChoice       : (slotUid : number, newSlotChoice : number) => void;
-    handleShowAlternateSlot     ?: (s: ISlotViewModel) => void;
-    handleGoToThisAlternateSlot ?: (slotUid: number) => void;
+    handleSelectSlotChoice  : (slotUid : number, newSlotChoice : number) => void;
+    handleShowAlternativeSlots : () => void;
+    handleHideAlternativeSlots : () => void;
+    
 }
 
 interface ISlotViewState {
@@ -25,19 +27,12 @@ const borderThickness = "0.5px solid black";
 const borderRadius = "5px";
 const buttonBaseStyle : React.CSSProperties = {
     borderRadius: borderRadius,
-    // borderBottom:            borderThickness,
-    // borderBottomLeftRadius:  borderRadius,
-    // borderBottomRightRadius: borderRadius,
-    // borderLeft:              borderThickness,
-    // borderRight:             borderThickness,
-    // borderTop:               borderThickness,
-    // borderTopLeftRadius:     borderRadius,
-    // borderTopRightRadius:    borderRadius,
-    fontFamily:              "roboto",
-    fontSize:                "13.5px",
-    width:                   "100%",
-    textAlign:               "center",
+    fontFamily:   "roboto",
+    fontSize:     "13.5px",
+    width:        "100%",
+    textAlign:    "center",
 };
+
 
 export class SlotView extends React.Component < ISlotViewProps,
 ISlotViewState > {
@@ -73,23 +68,15 @@ ISlotViewState > {
                 cursor: "pointer"
             };
         }
-        const clickHandler = () => {
-            if (this.props.handleShowAlternateSlot !== undefined) {
-                if (this.props.slot.AlternativeSlots.length > 0) {
-                    this.props.handleShowAlternateSlot(this.props.slot);
-                }
-            }
-            if (this.props.handleGoToThisAlternateSlot !== undefined) {
-                this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
-            }
-        };
+
         return (
+        <div>
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div
                     className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow shake-it-baby" : ""}
                     style={buttonStyle}
-                    onClick={clickHandler}
-                    // onMouseUp={clickHandler}
+                    onMouseEnter={this.props.handleShowAlternativeSlots}
+                    onMouseLeave={this.props.handleHideAlternativeSlots}
                     >
                     <b>
                         {getSlotContent(slot)} {slot.AlternativeSlots.length > 0 ? "*" : ""}
@@ -111,7 +98,7 @@ ISlotViewState > {
                     </Menu>
                 </div>
             </Tooltip>
-
+        </div>
         );
     }
 
@@ -173,8 +160,8 @@ function tooltipTitle(s : ISlotViewModel) {
             <br/>
             [{s.SubjectCode}]
             <br/>
-            {s.IsAlternativeSlot ? "(Click to pick this slot)" : ""}
-            {s.AlternativeSlots.length > 0 ? "(Click to show alternative slots)" : ""}
+            {s.IsAlternativeSlot ? "(Drop here to pick this slot)" : ""}
+            {s.AlternativeSlots.length > 0 ? "(Drag to alternative slots)" : ""}
         </div>
     );
 }

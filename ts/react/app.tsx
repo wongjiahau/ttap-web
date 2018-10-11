@@ -1,4 +1,6 @@
 import ArrowBack from "material-ui-icons/ArrowBack";
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import GridIcon from "material-ui-icons/GridOn";
 import MenuIcon from "material-ui-icons/Menu";
 import AppBar from "material-ui/AppBar";
@@ -31,7 +33,8 @@ function RemoveLoadingCube() {
         x.parentNode.removeChild(x);
     }
 }
-export class App extends React.Component < {}, IAppState > {
+
+class PrimitiveApp extends React.Component < {}, IAppState > {
     public constructor(props) {
         super(props);
         this.state = {
@@ -81,3 +84,5 @@ export class App extends React.Component < {}, IAppState > {
         // </Drawer> <GetFeedbackDialog/> {/* <Main/> */}
     }
 }
+
+export const App = DragDropContext(HTML5Backend)(PrimitiveApp);
