@@ -22,17 +22,9 @@ interface ISlotViewState {
 }
 
 const borderThickness = "0.5px solid black";
-const borderRadius = "5px";
 const buttonBaseStyle : React.CSSProperties = {
-    borderRadius: borderRadius,
-    // borderBottom:            borderThickness,
-    // borderBottomLeftRadius:  borderRadius,
-    // borderBottomRightRadius: borderRadius,
-    // borderLeft:              borderThickness,
-    // borderRight:             borderThickness,
-    // borderTop:               borderThickness,
-    // borderTopLeftRadius:     borderRadius,
-    // borderTopRightRadius:    borderRadius,
+    borderRadius: "5px",
+    border: borderThickness, // add border to it so it looks like it is unmovable
     fontFamily:              "roboto",
     fontSize:                "13.5px",
     width:                   "100%",
@@ -58,11 +50,6 @@ ISlotViewState > {
             buttonStyle = {
                 ...buttonStyle,
                 cursor: "pointer" // a.k.a. the hand, so it looks like its clickable
-            };
-        } else { // if dont have alternative slots
-            buttonStyle = {
-                ...buttonStyle,
-                border: borderThickness, // add border to it so it looks like it is unmovable
             };
         }
         if (slot.IsAlternativeSlot) {// add border glow
