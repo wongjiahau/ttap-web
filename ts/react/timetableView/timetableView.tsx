@@ -73,7 +73,6 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             position: "absolute",
             right:    "0",
         };
-        console.log(skeleton.Layouts);
         return (
             <div id="timetable-view">
                 {/* Tippy css */} <link rel="stylesheet" href="https://cdn.rawgit.com/tvkhoa/react-tippy/master/dist/tippy.css"/>

@@ -6,6 +6,7 @@ import {IStringDicionary} from "../../interfaces/dictionary";
 import {RawSlot} from "../../model/rawSlot";
 import {ClashReport, Subject} from "../../model/subject";
 import {Timetable} from "../../model/timetable";
+import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "../../permutator/findTimetableVisualizer";
 import { BeautifySubjectName } from "../../util/beautifySubjectName";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction, MasterStateReducer} from "./../reducers/masterState";
@@ -20,7 +21,11 @@ export class ToggleSubjectSelection extends MasterStateAction {
     }
     public TypeName() : string {return "toggle subject selection"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        CurrentTimetableFinder = state.SettingsState.TimetableFinder;
+        CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x,
+            state.SubjectListState.ShowAnimation ?
+            new FindTimetableVisualizer() :
+            new NullFindTimetableVisualizer()
+        );
         RawSlotStore = state.DataState.RawSlotDataRouter.GetCurrentData();
         const newSubjects = state
             .SubjectListState
@@ -61,7 +66,7 @@ export function SelectSubject(subjectToBeSelected : Subject, allSubjects : Subje
     subjectToBeSelected.IsSelected = true;
     return {
         ...result,
-        TimetableListState: NewTimetableListState(timetables, selectedSlots, {...result})
+        TimetableListState: NewTimetableListState(timetables, selectedSlots)
     };
 }
 
@@ -79,7 +84,7 @@ export function DeselectSubject(subjectToBeDeselected : Subject, allSubjects : S
             ...state.SubjectListState,
             Subjects: allSubjects
         },
-        TimetableListState: NewTimetableListState(timetables, selectedSlots, {...state})
+        TimetableListState: NewTimetableListState(timetables, selectedSlots)
     };
 
     const allSubjectIsDeselected = allSubjects.every((x) => !x.IsSelected);

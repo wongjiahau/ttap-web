@@ -20,10 +20,12 @@ export class BigSlot implements IOptimizedSlot {
     public State: number[ /*7 multiply numberOfWeeks*/ ];
     public readonly SlotNumber: number;
     public SlotIds: number[];
+    public Uid: number;
 
     public constructor(s: ISlot) {
         this.PartitionKey = s.SubjectCode * 10 + s.Type;
         this.SlotNumber = s.SlotNumber;
+        this.Uid = s.SlotNumber;
         this.SlotIds = [];
         this.SlotIds.push(s.Uid);
         this.State = GetStateOfBigSlot(s);

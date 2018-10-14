@@ -6,6 +6,7 @@ import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
 import {BoundedInt} from "./boundedInt";
+import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "./findTimetableVisualizer";
 import {GenerateIndices} from "./generateIndices";
 import {Increment} from "./increment";
 import {Partitionize} from "./partitionize";
@@ -18,7 +19,13 @@ interface ISnapshot {
 }
 
 const LIMIT = 1000000;
-export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
+export function FindTimetable(
+    input : IOptimizedSlot[],
+    visualizer?: FindTimetableVisualizer<IOptimizedSlot>
+) : Timetable[] {
+    if (!visualizer) {
+        visualizer = new NullFindTimetableVisualizer();
+    }
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
     }
@@ -28,7 +35,8 @@ export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
         return [new Timetable(input[0].SlotIds, resultState)];
     }
     const result = new Array < Timetable > ();
-    const partitioned = sortBy(Partitionize(input), ["length"]);
+    const partitioned = sortBy(Partitionize(input), ["length"]) as IOptimizedSlot[][];
+    visualizer.plotPartition(partitioned);
     const indices = GenerateIndices(partitioned);
     const length = indices.length;
     const last = length - 1;
@@ -36,13 +44,18 @@ export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
     const snapshots = new Array < ISnapshot > ();
     snapshots.push({
         SlotIds: [],
-        State: [ 0, 0, 0, 0, 0, 0, 0 ]
+        State: [ 0, 0, 0, 0, 0, 0, 0 ] // 7 because there are 7 days in a week
     });
     let prevSnapshot : ISnapshot;
     let ptr = 0;
     while (true) {
         prevSnapshot = snapshots[ptr];
         current = partitioned[ptr][indices[ptr].Value];
+        if (ptr > 0) { // this block is for plotting edge
+            const prevPtr = ptr - 1;
+            const previousSlot = partitioned[prevPtr][indices[prevPtr].Value];
+            visualizer.connect(previousSlot, current);
+        }
         if (!GotIntersection(current.State, prevSnapshot.State)) {
             snapshots.push({
                 SlotIds: concat(current.SlotIds, prevSnapshot.SlotIds),
@@ -50,7 +63,7 @@ export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
             });
             if (ptr === last) {
                 result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].State));
-                if (result.length >= LIMIT) {
+                if (result.length >= LIMIT) { // if too much timetable just return the result
                     return result;
                 }
                 snapshots.pop();
@@ -62,6 +75,7 @@ export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
                         indices[ptr].Value = 0;
                         snapshots.pop();
                         if (ptr === 0) {
+                            visualizer.animate();
                             return result;
                         }
                         ptr--;
@@ -79,6 +93,7 @@ export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
                     indices[ptr].Value = 0;
                     snapshots.pop();
                     if (ptr === 0) {
+                        visualizer.animate();
                         return result;
                     }
                     ptr--;
@@ -88,10 +103,16 @@ export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
     }
 }
 
-export function FindTimetableWithoutConsideringWeekNumber(rawSlots : RawSlot[]) : Timetable[] {
-    return FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)));
+export function FindTimetableWithoutConsideringWeekNumber(
+    rawSlots : RawSlot[],
+    visualizer?: FindTimetableVisualizer<IOptimizedSlot>
+) : Timetable[] {
+    return FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)), visualizer);
 }
 
-export function FindTimetableByConsideringWeekNumber(rawSlots : RawSlot[]) : Timetable[] {
-    return FindTimetable(ParseSlotToBigSlot(ParseRawSlotToSlot(rawSlots)));
+export function FindTimetableByConsideringWeekNumber(
+    rawSlots : RawSlot[],
+    visualizer?: FindTimetableVisualizer<IOptimizedSlot>
+) : Timetable[] {
+    return FindTimetable(ParseSlotToBigSlot(ParseRawSlotToSlot(rawSlots)), visualizer);
 }

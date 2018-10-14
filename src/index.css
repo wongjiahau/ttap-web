@@ -224,10 +224,14 @@ code {
 }
 
 #for-algo-visualization {
-  width: 100%;
-  margin: 50px;
-  height: 500px;
-  left: 0;
-  top: 0;
-  z-index: 999;
+    background: white;
+    position: absolute;
+    width: 75%;
+    left: 500px;
+    margin: 50px;
+    height: 100%;
+    opacity: 1;
+    z-index: 1;
+    top: 0;
+    overflow: scroll;
 }

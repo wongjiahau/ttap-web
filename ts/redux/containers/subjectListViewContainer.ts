@@ -30,6 +30,7 @@ import {
 import {
     ToggleLoadingBar
 } from "./../actions/toggleLoadingBar";
+import { ToggleShowFindTimetableAnimation } from "./../actions/toggleShowFindTimetableAnimation";
 import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
@@ -46,6 +47,7 @@ const mapStateToProps = (state): ISubjectListState => {
         IsShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
         SearchedText: target.SearchedText,
         Subjects: target.Subjects,
+        ShowAnimation: target.ShowAnimation
     };
 };
 
@@ -70,7 +72,8 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
                 dispatch(new UpdateTotalState());
             }, 0);
         },
-        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions())
+        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
+        handleToggleShowFindTimetableAnimation: () => dispatch(new ToggleShowFindTimetableAnimation())
     };
 };
 

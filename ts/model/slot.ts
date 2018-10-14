@@ -5,17 +5,17 @@ import {Week} from "./../att/week";
 import {RawSlot} from "./rawSlot";
 
 export interface ISlot {
-    Uid?:      number;
-    SlotNumber?:  number;
-    SubjectCode?: number;
-    TimePeriod?:  number;
-    Group?:       number;
-    Type?:        number;
-    Day?:         number;
-    Week?:        number;
+    Uid:      number;
+    SlotNumber:  number;
+    SubjectCode: number;
+    TimePeriod:  number;
+    Group:       number;
+    Type:        number;
+    Day:         number;
+    Week:        number;
 }
 export class Slot implements ISlot {
-    public readonly Uid:            number;
+    public readonly Uid:            number; // Auto-Generated
     public readonly SlotNumber:     number;
     public readonly SubjectCode:    number;
     public readonly TimePeriod:     number;

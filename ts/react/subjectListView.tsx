@@ -1,5 +1,7 @@
 import IconInfo from "material-ui-icons/Info";
+import IconSlideShow from "material-ui-icons/Slideshow";
 import Button from "material-ui/Button";
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
 import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import Paper from "material-ui/Paper";
@@ -8,6 +10,7 @@ import Tooltip from "material-ui/Tooltip";
 import Typography from "material-ui/Typography";
 import * as React from "react";
 
+import { IconButton } from "material-ui";
 import {Key} from "../enums/keyCodeEnum";
 import {Subject} from "../model/subject";
 import { ISubjectListState } from "../redux/reducers/subjectListState";
@@ -58,18 +61,19 @@ export interface ISubjectListViewDispatchProps {
     handleSearch : (searchedText : string) => void;
     handleSelection : (subjectIndex : number) => void;
     handleToggleView : () => void;
+    handleToggleShowFindTimetableAnimation: () => void;
 }
 
 export interface ISubjectListViewProps extends ISubjectListState,
 ISubjectListViewDispatchProps {}
 
 export class SubjectListView extends React.Component < ISubjectListViewProps, {
-    sectionStyle : React.CSSProperties
+    sectionStyle : React.CSSProperties,
 } > {
     constructor(props : ISubjectListViewProps) {
         super(props);
         this.state = {
-            sectionStyle: this.getSectionStyle()
+            sectionStyle: this.getSectionStyle(),
         };
     }
 
@@ -129,58 +133,71 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
         return (
-
-            <Drawer open={this.props.IsOpen} onClose={this.handleClose}>
-                {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/4b65000a/components/sidebar.min.css"/>
-                <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
-                    <header style={headerStyle}>
-                        <Typography gutterBottom={true} type="display1" color="primary">
-                            Select your desired subjects.
-                        </Typography>
-                        <TextField
-                            id="searchbar"
-                            style={searchBoxStyle}
-                            onChange={this.handleSearchBoxOnChange}
-                            placeholder="example: he/hubungan etnik/mpu3113"
-                            label=" Search . . ."/>
-                    </header>
-                    <Paper style={divStyle}>
-                        <div id="subject-list-container">
-                            {!showErrorMessage
-                                ? subjectViews
-                                : errorMessage}
-                        </div>
-                    </Paper>
-                    <footer style={footerStyle}>
-                                <StackPanel orientation="horizontal" horizontalAlignment="right">
-                                    <Tooltip title={subjectListTipsContent()} placement="top">
-                                        <IconInfo/>
-                                    </Tooltip>
-                                    <Button
-                                        color="secondary"
-                                        style={buttonStyle}
-                                        disabled={noSubjectIsSelected}
-                                        id="toggle-view-button"
-                                        onClick={this.props.handleToggleView}>
-                                        {this.props.IsShowingSelectedSubjectOnly
-                                            ? "Show all subjects"
-                                            : (noSubjectIsSelected
-                                                ? "Show selected subjects"
-                                                : `Show selected subjects (${numberOfSelectedSubjects})`)}
-                                    </Button>
-                                    <Button
-                                        raised={true}
+            <div>
+                <div id="for-algo-visualization" style={{display: this.props.ShowAnimation ? "block" : "none"}}/>
+                <Drawer elevation={16} open={this.props.IsOpen} onClose={this.handleClose}>
+                    {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/4b65000a/components/sidebar.min.css"/>
+                    <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
+                        <header style={headerStyle}>
+                            <Typography gutterBottom={true} type="display1" color="primary">
+                                Select your desired subjects.
+                            </Typography>
+                            <TextField
+                                id="searchbar"
+                                style={searchBoxStyle}
+                                onChange={this.handleSearchBoxOnChange}
+                                placeholder="example: he/hubungan etnik/mpu3113"
+                                label=" Search . . ."/>
+                        </header>
+                        <Paper style={divStyle}>
+                            <div id="subject-list-container">
+                                {!showErrorMessage
+                                    ? subjectViews
+                                    : errorMessage}
+                            </div>
+                        </Paper>
+                        <footer style={footerStyle}>
+                            <StackPanel orientation="horizontal" horizontalAlignment="right">
+                                <Tooltip title="Toggle animation" placement="top">
+                                    <IconButton
+                                        onClick={this.props.handleToggleShowFindTimetableAnimation}
                                         color="primary"
-                                        style={buttonStyle}
-                                        disabled={noSubjectIsSelected || this.props.IsShowingLoadingBar}
-                                        id="done-button"
-                                        onClick={this.props.handleClose}>
-                                Done
-                                    </Button>
-                                </StackPanel>
-                    </footer>
-                </section>
-            </Drawer>
+                                        style={{marginRight: 25}}>
+                                        <IconSlideShow/>
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title={subjectListTipsContent()} placement="top">
+                                    <IconInfo/>
+                                </Tooltip>
+                                <Button
+                                    color="secondary"
+                                    style={buttonStyle}
+                                    disabled={noSubjectIsSelected}
+                                    id="toggle-view-button"
+                                    onClick={this.props.handleToggleView}>
+                                    {this.props.IsShowingSelectedSubjectOnly
+                                        ? "Show all subjects"
+                                        : (noSubjectIsSelected
+                                            ? "Show selected subjects"
+                                            : `Show selected subjects (${numberOfSelectedSubjects})`)}
+                                </Button>
+                                <Button
+                                    raised={true}
+                                    color="primary"
+                                    style={buttonStyle}
+                                    disabled={noSubjectIsSelected || this.props.IsShowingLoadingBar}
+                                    id="done-button"
+                                    onClick={() => {
+                                        this.props.handleClose();
+                                        this.setState({showAnimation: false});
+                                    }}>
+                                    Done
+                                </Button>
+                            </StackPanel>
+                        </footer>
+                    </section>
+                </Drawer>
+            </div >
         );
     }
 
@@ -226,7 +243,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         const idOfFocusedSubjectView = document.activeElement.id;
         const subjectViews = document.getElementsByClassName("subjectview")as HTMLCollectionOf < HTMLDivElement >;
         const length = subjectViews.length;
-        let next = null;
+        let next = 0;
         for (let i = 0; i < length; i++) {
             if (subjectViews[i].id === idOfFocusedSubjectView) {
                 if (where === "previous") {
