@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import ParseHtmlToRawSlot from "../../parser/parseHtmlToRawSlot";
+import { IRawSlot } from "../../model/rawSlot";
 import { ILoginDispatchProps, Login } from "./../../react/login";
 import { NotifyDataLoaded } from "./../actions/notifyDataLoaded";
 
@@ -9,8 +9,7 @@ const mapStateToProps = (state): {} => {
 
 const mapDispatchToProps = (dispatch): ILoginDispatchProps => {
     return {
-        handleParseHtmlToSlot: (html: string) => {
-            const rawSlots = ParseHtmlToRawSlot(html);
+        handleLoadSlots: (rawSlots: IRawSlot[]) => {
             dispatch(new NotifyDataLoaded(rawSlots));
         }
     };

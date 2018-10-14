@@ -17,6 +17,7 @@ interface ISnapshot {
     State : number[];
 }
 
+const LIMIT = 1000000;
 export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
     if (input.length === 0) {
         throw new Error("Input slots should not be an empty array");
@@ -49,6 +50,9 @@ export function FindTimetable(input : IOptimizedSlot[]) : Timetable[] {
             });
             if (ptr === last) {
                 result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].State));
+                if (result.length >= LIMIT) {
+                    return result;
+                }
                 snapshots.pop();
                 while (true) {
                     indices[ptr].Value++;

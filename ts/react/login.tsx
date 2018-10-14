@@ -1,9 +1,13 @@
 import Button from "material-ui/Button";
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Redirect} from "react-router";
+import { IRawSlot } from "../model/rawSlot";
+import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {Str} from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
+import { getLoadingElement, LoadSlotsFromUrl } from "./selectCourseView";
 
 const divStyle : React.CSSProperties = {
     textAlign: "center",
@@ -14,32 +18,36 @@ const iframeStyle : React.CSSProperties = {
     width: "500px"
 };
 
-const debugging = true;
+const debugging = false;
 const URL = debugging
-    ? "http://localhost/mockunitreg/"
-    : "https://unitreg.utar.edu.my/portal/courseRegStu/";
+    ? "https://wongjiahau.github.io/mock-utar-unitreg/"
+    : "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp";
 
 export interface ILoginDispatchProps {
-    handleParseHtmlToSlot : (html : string) => void;
+    handleLoadSlots : (rawSlots: IRawSlot[]) => void;
 }
 
 interface ILoginStateProps {
     redirect:        boolean;
     openErrorDialog: boolean;
+    loading:         boolean;
 }
-export class Login extends React.Component < ILoginDispatchProps,
-ILoginStateProps > {
+export class Login extends React.Component < ILoginDispatchProps, ILoginStateProps > {
     private currentPage : number = 1;
     private html = "";
     public constructor(props) {
         super(props);
         this.state = {
             redirect: false,
-            openErrorDialog: false
+            openErrorDialog: false,
+            loading: false,
         };
     }
 
     public render() {
+        if (this.state.loading) {
+            return getLoadingElement();
+        }
         if (this.state.redirect) {
             return <Redirect push={true} to="/play"/>;
         }
@@ -51,7 +59,7 @@ ILoginStateProps > {
                         scrolling="no"
                         style={iframeStyle}
                         onLoad={this.handleIFrameOnLoad}
-                        src={`${URL}login.jsp`}/>
+                        src={URL}/>
                     <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
                 </StackPanel>
                 <Dialog open={this.state.openErrorDialog}>
@@ -67,10 +75,16 @@ ILoginStateProps > {
                             <li>Your time to view the data have not reach yet.</li>
                             <li>Internal error of TTAP.</li>
                         </ul>
+                        <Typography gutterBottom={true}>
+                            Do you want to try the demo instead?
+                        </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <Button raised={true} onClick={this.handleClose} color="primary">
-                            OK
+                        <Button onClick={this.handleClose}>
+                            No thanks
+                        </Button>
+                        <Button raised={true} onClick={this.handleLoadDemo} color="primary">
+                            TRY DEMO
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -78,17 +92,34 @@ ILoginStateProps > {
         );
     }
 
+    public handleLoadDemo = () => {
+        this.handleClose();
+        LoadSlotsFromUrl(
+            "https://raw.githubusercontent.com/wongjiahau/ttap-datahub/master/Demo.json",
+            "json",
+            () => this.setState({loading: true}),
+            (slots) => {
+                this.props.handleLoadSlots(slots);
+                this.setState({loading: false, redirect: true});
+            },
+            (error) => alert(error)
+        );
+
+    }
+
     public handleIFrameOnLoad = () => {
         const iframe = (document.getElementById("unitregiframe")as HTMLIFrameElement);
+        if (iframe === null) { throw new Error(); }
+        if (iframe.contentWindow === null) { throw new Error(); }
         const newLocation = iframe.contentWindow.location.href;
         if ((new Str(newLocation)).Contains("masterSchedule")) {
             this.html += iframe.contentWindow.document.body.innerHTML;
             if ((new Str(this.html)).Contains(`changePage('${this.currentPage + 1}')`)) {
                 this.currentPage++;
-                iframe.contentWindow.changePage(this.currentPage);
+                iframe.contentWindow.changePage(this.currentPage); // changePage is a function defined in <script></script>
             } else {
                 try {
-                    this.props.handleParseHtmlToSlot(this.html);
+                    this.props.handleLoadSlots(ParseHtmlToRawSlot(this.html));
                     this.setState({redirect: true});
                 } catch (error) {
                     this.setState({openErrorDialog: true});

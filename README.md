@@ -49,7 +49,7 @@ npm install
 Make sure you are in the `ttap-web` directory.  
 This will start the `Typescript compiler` in --watch mode
 ```
-./scripts/transpile
+./scripts/watch
 ```
 
 #### 4. Run the server

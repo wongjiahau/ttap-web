@@ -57,9 +57,9 @@ describe("FilterTimetable action", () => {
     it("should set property of SetTimeConstraintState.TotalState based on the filtered timetables", () => {
         const action = new FilterTimetable(state);
         const initialState = getInitialState();
-        expect(initialState.SetTimeConstraintState.TotalState).to.eq(null);
+        expect(initialState.SetTimeConstraintState.TotalState).to.deep.eq([]);
         const newState = MasterStateReducer(initialState, action);
-        expect(newState.SetTimeConstraintState.TotalState).to.not.eq(null);
+        expect(newState.SetTimeConstraintState.TotalState).to.not.deep.eq([]);
     });
 
     it("should set property of SetTimeConstraintState.UidsOfClickedState", () => {

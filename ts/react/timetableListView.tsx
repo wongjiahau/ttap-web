@@ -3,28 +3,21 @@ import IconGrid from "material-ui-icons/GridOn";
 import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
 import Button from "material-ui/Button";
-import Switch from "material-ui/Switch";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";
+import { RawSlot } from "../model/rawSlot";
 import { ISlotViewModel } from "../model/slotViewModel";
-import {STCBox} from "../model/states/stcBox";
 import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
 import {StackPanel} from "./panels/stackPanel";
-import {SaveTimetableDialog} from "./saveTimetableDialog";
-import {SetTimeConstraintView} from "./setTimeConstraintView";
 import {iconStyle} from "./styles";
 import {TimetableView} from "./timetableView/timetableView";
 
-const centerDivStyle : React.CSSProperties = {
-    margin: "auto",
-    textAlign: "center"
-};
-
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
-    currentTimetable:   Timetable;
+    currentTimetable:   Timetable | null;
+    alternateSlots:     ISlotViewModel[];
     isSummaryOpen:      boolean;
     maxIndex:           number; // non-zero based
     slotViewModelStore: ObjectStore<ISlotViewModel>;
@@ -39,26 +32,36 @@ export interface ITimetableListViewDispatchProps {
     handleOpenSlotsTable:            ()     => void;
     handleToggleIsOpenOfSummary:     ()     => void;
     handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => void;
+    handleShowAlternateSlot:         (s: ISlotViewModel) => void;
+    handleGoToThisAlternateSlot:     (slotUid: number) => void;
 }
 
 export interface ITimetableListViewProps extends
-ITimetableListViewStateProps,
-ITimetableListViewDispatchProps {}
+    ITimetableListViewStateProps,
+    ITimetableListViewDispatchProps {}
+
 export class TimetableListView extends React.Component < ITimetableListViewProps, {} > {
     public render() {
         if (!this.props.slotViewModelStore) {
             return Logo();
         }
-        const slotsToBeRendered = this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids);
+        const slotsToBeRendered =
+            this.props.currentTimetable !== null ?
+            this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids) :
+            [];
+
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
                 {/* Balloon css */} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.2.4/balloon.min.css"/>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <TimetableView
                         slots={slotsToBeRendered}
+                        alternateSlots={this.props.alternateSlots}
                         states={null}
                         isSummaryOpen={this.props.isSummaryOpen}
                         handleSelectSlotChoice={this.props.handleSelectSlotChoice}
+                        handleShowAlternateSlot={this.props.handleShowAlternateSlot}
+                        handleGoToThisAlternateSlot={this.props.handleGoToThisAlternateSlot}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <StackPanel orientation="horizontal">
                         <Button

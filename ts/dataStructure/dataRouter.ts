@@ -2,7 +2,7 @@ import {IStringDicionary} from "./../interfaces/dictionary";
 
 export class DataRouter < T > {
     private dict : IStringDicionary < T >;
-    private currentRoute : string;
+    private currentRoute : string | null;
     public constructor() {
         this.dict = {};
         this.currentRoute = null;

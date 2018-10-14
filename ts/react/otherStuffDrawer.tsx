@@ -1,4 +1,5 @@
 import BugIcon from "material-ui-icons/BugReport";
+import LogoutIcon from "material-ui-icons/ExitToApp";
 import FeedbackIcon from "material-ui-icons/Feedback";
 import HelpIcon from "material-ui-icons/Help";
 import HomeIcon from "material-ui-icons/Home";
@@ -56,6 +57,7 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
                 {newTabLink( <BugIcon/>, "Report a bug", BugFormUrl)}
                 {routerLink( <InfoIcon/>, "About TTAP", "about")}
                 {routerLink( <SchoolIcon/>, "Terms of Service", "tospp")}
+                {routerLink( <LogoutIcon/>, "Logout", "login")}
             </List>
         </Drawer >
     );

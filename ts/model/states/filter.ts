@@ -10,8 +10,8 @@ export function Filter(timetables: Timetable[], state: STCBox): [Timetable[], Ti
     if (state.Kind !== StateKind.MaybeOccupied) {
         throw new Error("Only state that is MaybeOccupied can call the Filter function");
     }
-    const filtrate = [];
-    const residue = [];
+    const filtrate: Timetable[] = [];
+    const residue: Timetable[] = [];
     for (let i = 0; i < timetables.length; i++) {
         const t = timetables[i];
         if ((t.State[state.Day] & state.TimePeriod) === 0) {

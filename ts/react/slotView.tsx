@@ -12,7 +12,9 @@ import {Colors} from "./colors/colors";
 export interface ISlotViewProps {
     slot : ISlotViewModel;
     color : Colors;
-    handleSelectSlotChoice : (slotUid : number, newSlotChoice : number) => void;
+    handleSelectSlotChoice       : (slotUid : number, newSlotChoice : number) => void;
+    handleShowAlternateSlot     ?: (s: ISlotViewModel) => void;
+    handleGoToThisAlternateSlot ?: (slotUid: number) => void;
 }
 
 interface ISlotViewState {
@@ -21,19 +23,20 @@ interface ISlotViewState {
 
 const borderThickness = "0.5px solid black";
 const borderRadius = "5px";
-let buttonBaseStyle : React.CSSProperties = {
-    borderBottom:            borderThickness,
-    borderBottomLeftRadius:  borderRadius,
-    borderBottomRightRadius: borderRadius,
-    borderLeft:              borderThickness,
-    borderRight:             borderThickness,
-    borderTop:               borderThickness,
-    borderTopLeftRadius:     borderRadius,
-    borderTopRightRadius:    borderRadius,
+const buttonBaseStyle : React.CSSProperties = {
+    borderRadius: borderRadius,
+    // borderBottom:            borderThickness,
+    // borderBottomLeftRadius:  borderRadius,
+    // borderBottomRightRadius: borderRadius,
+    // borderLeft:              borderThickness,
+    // borderRight:             borderThickness,
+    // borderTop:               borderThickness,
+    // borderTopLeftRadius:     borderRadius,
+    // borderTopRightRadius:    borderRadius,
     fontFamily:              "roboto",
     fontSize:                "13.5px",
     width:                   "100%",
-    textAlign:               "center"
+    textAlign:               "center",
 };
 
 export class SlotView extends React.Component < ISlotViewProps,
@@ -46,18 +49,50 @@ ISlotViewState > {
     }
 
     public render() {
-        buttonBaseStyle = {
-            ...buttonBaseStyle,
-            background: this.props.color
-        };
         const slot = this.props.slot;
+        let buttonStyle = {
+            ...buttonBaseStyle,
+            background: this.props.color,
+        };
+        if (this.props.slot.AlternativeSlots.length > 0) {
+            buttonStyle = {
+                ...buttonStyle,
+                cursor: "pointer" // a.k.a. the hand, so it looks like its clickable
+            };
+        } else { // if dont have alternative slots
+            buttonStyle = {
+                ...buttonStyle,
+                border: borderThickness, // add border to it so it looks like it is unmovable
+            };
+        }
+        if (slot.IsAlternativeSlot) {// add border glow
+            buttonStyle = {
+                ...buttonStyle,
+                border: "1px solid rgb(86, 180, 239)",
+                boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6)",
+                cursor: "pointer"
+            };
+        }
+        const clickHandler = () => {
+            if (this.props.handleShowAlternateSlot !== undefined) {
+                if (this.props.slot.AlternativeSlots.length > 0) {
+                    this.props.handleShowAlternateSlot(this.props.slot);
+                }
+            }
+            if (this.props.handleGoToThisAlternateSlot !== undefined) {
+                this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
+            }
+        };
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div
-                    style={buttonBaseStyle}
-                    onClick={() => console.log(this.props.slot)}>
+                    className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow shake-it-baby" : ""}
+                    style={buttonStyle}
+                    onClick={clickHandler}
+                    // onMouseUp={clickHandler}
+                    >
                     <b>
-                        {this.slotContent(slot)}
+                        {getSlotContent(slot)} {slot.AlternativeSlots.length > 0 ? "*" : ""}
                         {slot.Group.length > 1
                             ? this.arrowDownButton()
                             : ""}
@@ -78,10 +113,6 @@ ISlotViewState > {
             </Tooltip>
 
         );
-    }
-
-    public slotContent = (slot : ISlotViewModel) => {
-        return GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " ";
     }
 
     public menuItem = (slot : ISlotViewModel) => {
@@ -141,6 +172,13 @@ function tooltipTitle(s : ISlotViewModel) {
             {BeautifySubjectName(s.SubjectName)}
             <br/>
             [{s.SubjectCode}]
+            <br/>
+            {s.IsAlternativeSlot ? "(Click to pick this slot)" : ""}
+            {s.AlternativeSlots.length > 0 ? "(Click to show alternative slots)" : ""}
         </div>
     );
+}
+
+export function getSlotContent (slot : ISlotViewModel) {
+    return GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " ";
 }

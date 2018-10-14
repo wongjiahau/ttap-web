@@ -12,7 +12,8 @@ import {
     GenerateSlotAndDayLayouts,
     GetDayColumnLayouts,
     GetDayRows,
-    GetXandW
+    GetXandW,
+    MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW
 } from "../generateSlotAndDayLayouts";
 
 describe("GenerateSlotLayouts", () => {
@@ -25,7 +26,7 @@ describe("GenerateSlotLayouts", () => {
         slot1.TimePeriod = "8:00 AM - 9:00 AM";
         slot1.Day = "Mon";
         const slot2 = clone(slot1);
-        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0, "s")[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 0, y: 0 },
             { h: 1, i: "s1", w: 2, x: 0, y: 1 }
@@ -41,7 +42,7 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Mon";
         slot3.TimePeriod = "9:00 AM - 10:00 AM";
-        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0, "s")[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 0, y: 0 },
             { h: 1, i: "s1", w: 2, x: 0, y: 1 },
@@ -58,7 +59,7 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Tue";
         slot3.TimePeriod = "8:00 AM - 9:00 AM";
-        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0, "s")[0];
         const expected = [
             { h: 1, i: "s0", w: 2, x: 0, y: 0 },
             { h: 1, i: "s1", w: 2, x: 0, y: 1 },
@@ -72,27 +73,28 @@ describe("GenerateSlotLayouts", () => {
 describe("GetDayRows", () => {
     it("case 1", () => {
         const result = GetDayRows();
+        const zeroes = new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0);
         expect(result).to.deep.eq([{
             rowIndex: 0,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 1,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 2,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 3,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 4,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 5,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 6,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, ]);
     });
 

@@ -14,6 +14,7 @@ export class GoToPrevTimetable extends MasterStateAction {
             TimetableListState: {
                 ...state.TimetableListState,
                 CurrentIndex: newIndex,
+                AlternateSlots: []
             }
         };
     }

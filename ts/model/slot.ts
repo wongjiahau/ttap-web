@@ -15,16 +15,16 @@ export interface ISlot {
     Week?:        number;
 }
 export class Slot implements ISlot {
-    public readonly Uid: number;
-    public readonly SlotNumber: number;
-    public readonly SubjectCode:     number;
-    public readonly TimePeriod:      number;
-    public readonly Group:           number;
-    public readonly Type:            number;
-    public readonly Day:             number;
-    public readonly Week:            number;
+    public readonly Uid:            number;
+    public readonly SlotNumber:     number;
+    public readonly SubjectCode:    number;
+    public readonly TimePeriod:     number;
+    public readonly Group:          number;
+    public readonly Type:           number;
+    public readonly Day:            number;
+    public readonly Week:           number;
     public constructor(
-        Uid:      number,
+        Uid:         number,
         slotNumber:  number,
         subjectCode: number,
         timePeriod:  number,
@@ -33,7 +33,7 @@ export class Slot implements ISlot {
         day:         number,
         week:        number
     ) {
-        this.Uid      = Uid;
+        this.Uid         = Uid;
         this.SlotNumber  = slotNumber;
         this.SubjectCode = subjectCode;
         this.TimePeriod  = timePeriod;

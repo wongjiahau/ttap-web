@@ -13,7 +13,7 @@ export class Subject {
     public IsSelected: boolean;
     public IsVisible : boolean;
     public ClashingCounterparts: string[]; // subject codes of clashing counterparts
-    public ClashReport: ClashReport;
+    public ClashReport: ClashReport | null;
     constructor(name: string, code: string, slotIds: number[], slotNumbers: string[]) {
         this.Name = name;
         this.Code = code;
@@ -29,9 +29,9 @@ export class Subject {
 
 export type ClashingType = "single" | "group";
 export class ClashReport {
-    public readonly TargetName: string;
+    public readonly TargetName: string | null;
     public readonly Type: ClashingType;
-    public constructor(type: ClashingType, targetName: string = null) {
+    public constructor(type: ClashingType, targetName: string | null = null) {
         this.Type = type;
         this.TargetName = targetName;
     }

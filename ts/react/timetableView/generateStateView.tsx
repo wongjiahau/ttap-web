@@ -29,7 +29,7 @@ export function GenerateStateViews(states : STCBox[], handleSetTimeContraintAt :
                 throw Error();
         }
     };
-    const child = [];
+    const child: JSX.Element[] = [];
     const layouts = new Array < ReactGridLayout.Layout > ();
     states.forEach((s) => {
         const content = GetStateView(s);

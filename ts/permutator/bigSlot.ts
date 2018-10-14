@@ -31,7 +31,7 @@ export class BigSlot implements IOptimizedSlot {
 
 }
 export function GetStateOfBigSlot(s: ISlot): number[] {
-    let result = [];
+    let result: number[] = [];
     const weekBinary = s.Week.toString(2);
     const state = [0, 0, 0, 0, 0, 0, 0];
     state[s.Day - 1] = s.TimePeriod;

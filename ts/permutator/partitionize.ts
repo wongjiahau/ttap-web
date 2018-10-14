@@ -8,6 +8,9 @@ export function Partitionize < T extends IPartitionable > (input: T[]): T[][] {
 }
 
 export function PartitionizeByKey<T>(input : T[], keyName: string) : T[][] {
+    if (input.length === 0) {
+        return [];
+    }
     const result = new Array < T[] > ();
     let column = new Array < T > ();
     const copy = sortBy(input, [keyName]);

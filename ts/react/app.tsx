@@ -1,3 +1,4 @@
+import ArrowBack from "material-ui-icons/ArrowBack";
 import GridIcon from "material-ui-icons/GridOn";
 import MenuIcon from "material-ui-icons/Menu";
 import AppBar from "material-ui/AppBar";
@@ -26,7 +27,7 @@ interface IAppState {
 }
 function RemoveLoadingCube() {
     const x = document.getElementById("initialLoadingCube");
-    if (x) {
+    if (x && x.parentNode) {
         x.parentNode.removeChild(x);
     }
 }
@@ -53,7 +54,10 @@ export class App extends React.Component < {}, IAppState > {
                     <div>
                         <AppBar position="static" style={{ width: "100%" }}>
                             <Toolbar>
-                                <GridIcon style={{ marginRight: "12px", color: "white" }}/>
+                                <Button onClick={() => window.history.back()}>
+                                    <ArrowBack style={{color: "white"}}/>
+                                </Button>
+                                {/* <GridIcon style={{ marginRight: "12px", color: "white" }}/> */}
                                 <Typography style={{ flex: 1 }} type="title" color="inherit">
                                     Timetable Arranging Program (UTAR)
                                 </Typography>

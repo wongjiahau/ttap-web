@@ -1,3 +1,6 @@
+/**
+ * heng_2017_apr is the slots with more subjects such as Fluid Mechanics etc.
+ */
 import {IRawSlot, RawSlot} from "../../model/rawSlot";
 
 export enum CodeOf {
@@ -82,7 +85,7 @@ export enum IndexOf {
     TITA    = 37
 }
 
-let cache : IRawSlot[] = null;
+let cache : IRawSlot[] | null = null;
 export const HENG_2017_APR = () : IRawSlot[] => {
     if (cache !== null) {
         return cache;

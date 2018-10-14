@@ -6,10 +6,9 @@ import TestManager, { FileName } from "../../tests/testManager";
 import { IsRawSlotEquals, ParseLargeHtmlToRawSlot } from "../parseLargeHtmlToRawSlot";
 import { IRawSlot } from "./../../model/rawSlot";
 
-const html = new TestManager().GetDataFrom(FileName.all_fes_slots);
-const rawSlots = ParseLargeHtmlToRawSlot(html);
-
-describe("ParseHtmlToRawSlot", () => {
+describe.skip("ParseHtmlToRawSlot", () => {
+    const html = new TestManager().GetDataFrom(FileName.all_fes_slots);
+    const rawSlots = ParseLargeHtmlToRawSlot(html);
     it("should not contain duplicates", () => {
         const uniques = uniqWith(rawSlots, IsRawSlotEquals);
         expect(uniques.length).to.eq(rawSlots.length);

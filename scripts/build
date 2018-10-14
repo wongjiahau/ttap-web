@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# use ES5 phin.js because the original one cannot be minified properly
+cp modifiedNodeModules/phin.js node_modules/phin/lib/phin.js 
+
 pwd
 sed -i "s/isProductionBuild = false/isProductionBuild = true/g" ./src/index.js # toggle production build to disable redux middleware
 x=$(git log -1 --format=%aI)
