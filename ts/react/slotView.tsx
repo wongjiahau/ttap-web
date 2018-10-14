@@ -21,14 +21,15 @@ interface ISlotViewState {
     anchorEl : any;
 }
 
-const borderThickness = "0.5px solid black";
+const borderThickness = "0.5px";
 const buttonBaseStyle : React.CSSProperties = {
+    border:        borderThickness,
     borderRadius: "5px",
-    border: borderThickness, // add border to it so it looks like it is unmovable
-    fontFamily:              "roboto",
-    fontSize:                "13.5px",
-    width:                   "100%",
-    textAlign:               "center",
+    borderStyle: "solid",
+    fontFamily:   "roboto",
+    fontSize:     "13.5px",
+    width:        "100%",
+    textAlign:    "center",
 };
 
 export class SlotView extends React.Component < ISlotViewProps,
@@ -49,7 +50,8 @@ ISlotViewState > {
         if (this.props.slot.AlternativeSlots.length > 0) {
             buttonStyle = {
                 ...buttonStyle,
-                cursor: "pointer" // a.k.a. the hand, so it looks like its clickable
+                cursor: "pointer", // a.k.a. the hand, so it looks like its clickable
+                borderStyle: "dashed"
             };
         }
         if (slot.IsAlternativeSlot) {// add border glow
@@ -73,7 +75,7 @@ ISlotViewState > {
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div
-                    className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow shake-it-baby" : ""}
+                    className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow get-user-attention" : ""}
                     style={buttonStyle}
                     onClick={clickHandler}
                     // onMouseUp={clickHandler}

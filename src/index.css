@@ -203,28 +203,31 @@ code {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
-.shake-it-baby {
-    -webkit-animation: shake 2s infinite;
-    -moz-animation:    shake 2s infinite;
-    -o-animation:      shake 2s infinite;
-    animation:         shake 2s infinite;
+.get-user-attention {
+    -webkit-animation: shake 3s ease-in 1s infinite;
+    -moz-animation:    shake 3s ease-in 1s infinite;
+    -o-animation:      shake 3s ease-in 1s infinite;
+    animation:         shake 3s ease-in 1s infinite;
     animation-delay: 1s;
 }
 
 @keyframes shake {
-  5%, 45% {
-    transform: translate3d(-1px, 0, 0);
+  0% {
+    opacity: 1
   }
-  
-  10%, 40% {
-    transform: translate3d(1px, 0, 0);
+  12.5% {
+      opacity: 0.75
   }
+  25% {
+      opacity: 1
+  }
+}
 
-  15%, 25%, 35% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%, 30% {
-    transform: translate3d(1px, 0, 0);
-  }
+#for-algo-visualization {
+  width: 100%;
+  margin: 50px;
+  height: 500px;
+  left: 0;
+  top: 0;
+  z-index: 999;
 }
