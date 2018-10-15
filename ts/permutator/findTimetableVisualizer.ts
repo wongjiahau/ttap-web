@@ -31,7 +31,8 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                         style: {
                             "height": 10,
                             "width": 10,
-                            "background-color": "#18e018"
+                            "background-color": "#18e018",
+                            "label": "data(label)"
                         }
                     }, {
                         selector: "edge",
@@ -52,17 +53,37 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                             "curve-style": "haystack",
                             "haystack-radius": 0.5,
                         },
-                    },
+                    }, {
+                        selector: ".top-center",
+                        style: {
+                            "text-valign": "top",
+                            "text-halign": "center"
+                        },
+                    }
                 ],
                 container: document.getElementById("for-algo-visualization")
             });
         });
     }
-
-    public plotPartition (partition : T[][]) : void {
+    public plotPartition (partition : T[][], partitionHeadings: string[]) : void {
         const X_WIDTH = (window.innerWidth - OUTER_LEFT_PADDING - INNER_LEFT_PADDING) / (partition.length + 1);
         const lastPartition = partition[partition.length - 1]; // because lastPartition has the most number of elements
         const Y_WIDTH = (window.innerHeight - OUTER_TOP_PADDING) / (lastPartition.length);
+        for (let i = 0; i < partitionHeadings.length; i++) {
+            const h = partitionHeadings[i];
+            this.renderings.push(() => {
+                this.cy.add({
+                    data: {
+                        label: h
+                    },
+                    classes: "top-center",
+                    position: {
+                        x: X_WIDTH * i + INNER_LEFT_PADDING,
+                        y: TOP_PADDING
+                    }
+                });
+            });
+        }
         for (let i = 0; i < partition.length; i++) {
             for (let j = 0; j < partition[i].length; j++) {
                 this.renderings.push(() => {
@@ -113,11 +134,11 @@ export class NullFindTimetableVisualizer<T extends Identifiable> extends FindTim
         return;
     }
 
-    public connect(): void {
+    public connect(x: T, y: T): void {
         return;
     }
 
-    public plotPartition(): void {
+    public plotPartition(partition : T[][], partitionHeadings: string[]): void {
         return;
     }
 }

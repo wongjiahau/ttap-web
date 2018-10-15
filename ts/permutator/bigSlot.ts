@@ -1,12 +1,7 @@
-import {
-    ISlot
-} from "../model/slot";
-import {
-    IPartitionable
-} from "./partitionize";
-import {
-    IOptimizedSlot
-} from "./tinySlot";
+import { ParseType } from "../att/type";
+import { ISlot } from "../model/slot";
+import { GetInitial } from "../util/getInitial";
+import { IOptimizedSlot } from "./tinySlot";
 
 /**
  * BigSlot's difference with TinySlot is that BigSlot will include week number,
@@ -19,16 +14,18 @@ export class BigSlot implements IOptimizedSlot {
     public readonly PartitionKey: number;
     public State: number[ /*7 multiply numberOfWeeks*/ ];
     public readonly SlotNumber: number;
+    public readonly PartitionGroup: string;
     public SlotIds: number[];
     public Uid: number;
 
     public constructor(s: ISlot) {
-        this.PartitionKey = s.SubjectCode * 10 + s.Type;
+        this.PartitionKey = s.SubjectCode * 10 + ParseType(s.Type);
         this.SlotNumber = s.SlotNumber;
         this.Uid = s.SlotNumber;
         this.SlotIds = [];
         this.SlotIds.push(s.Uid);
         this.State = GetStateOfBigSlot(s);
+        this.PartitionGroup = `${GetInitial(s.SubjectName)}(${s.Type})`;
     }
 
 }

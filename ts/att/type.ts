@@ -1,4 +1,4 @@
-export function ParseType(group: string): number {
+export function ParseType(group: string): 0 | 1 | 2 {
     switch (group.toUpperCase()) {
         case "L":
             return 0;

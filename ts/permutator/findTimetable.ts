@@ -36,7 +36,7 @@ export function FindTimetable(
     }
     const result = new Array < Timetable > ();
     const partitioned = sortBy(Partitionize(input), ["length"]) as IOptimizedSlot[][];
-    visualizer.plotPartition(partitioned);
+    visualizer.plotPartition(partitioned, partitioned.map((x) => x[0].PartitionGroup));
     const indices = GenerateIndices(partitioned);
     const length = indices.length;
     const last = length - 1;
