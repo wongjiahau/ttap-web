@@ -2,6 +2,9 @@ import { MasterStateAction } from "../reducers/masterState";
 import { IMasterState } from "./../reducers/masterState";
 
 export class ToggleShowFindTimetableAnimation extends MasterStateAction {
+    public constructor(private toggle ?: boolean) {
+        super();
+    }
     public TypeName(): string {
         return "toggle show find timetable animation";
     }
@@ -11,7 +14,7 @@ export class ToggleShowFindTimetableAnimation extends MasterStateAction {
             ...state,
             SubjectListState: {
                 ...state.SubjectListState,
-                ShowAnimation: !state.SubjectListState.ShowAnimation
+                ShowAnimation: this.toggle || !state.SubjectListState.ShowAnimation
             }
         };
     }

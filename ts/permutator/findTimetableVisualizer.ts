@@ -11,6 +11,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;
     private nextPointOfTime = 0; // ms
     private renderings: Array<() => void> = [];
+    private connectCount = 0;
 
     public constructor() {
         this.renderings.push(() => {
@@ -60,8 +61,6 @@ export class FindTimetableVisualizer<T extends Identifiable> {
 
     public plotPartition (partition : T[][]) : void {
         const X_WIDTH = (window.innerWidth - OUTER_LEFT_PADDING - INNER_LEFT_PADDING) / (partition.length + 1);
-        console.log(window.innerWidth - OUTER_LEFT_PADDING);
-        console.log(X_WIDTH);
         const lastPartition = partition[partition.length - 1]; // because lastPartition has the most number of elements
         const Y_WIDTH = (window.innerHeight - OUTER_TOP_PADDING) / (lastPartition.length);
         for (let i = 0; i < partition.length; i++) {
@@ -82,6 +81,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     }
 
     public connect(x: T, y: T): void {
+        this.connectCount ++;
         this.renderings.push(() => {
             // setTimeout is used to delay the rendering
             // so that that the effect of animation can be seen
@@ -101,6 +101,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     }
 
     public animate(): void {
+        console.log(this.connectCount);
         for (let i = 0; i < this.renderings.length; i++) {
             this.renderings[i]();
         }

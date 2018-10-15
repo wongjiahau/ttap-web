@@ -73,7 +73,8 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
             }, 0);
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
-        handleToggleShowFindTimetableAnimation: () => dispatch(new ToggleShowFindTimetableAnimation())
+        handleToggleShowFindTimetableAnimation: () => dispatch(new ToggleShowFindTimetableAnimation()),
+        handleHideFindTimetableAnimation: () => dispatch(new ToggleShowFindTimetableAnimation(false)),
     };
 };
 

@@ -62,6 +62,7 @@ export interface ISubjectListViewDispatchProps {
     handleSelection : (subjectIndex : number) => void;
     handleToggleView : () => void;
     handleToggleShowFindTimetableAnimation: () => void;
+    handleHideFindTimetableAnimation: () => void;
 }
 
 export interface ISubjectListViewProps extends ISubjectListState,
@@ -189,7 +190,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                     id="done-button"
                                     onClick={() => {
                                         this.props.handleClose();
-                                        this.setState({showAnimation: false});
+                                        this.props.handleHideFindTimetableAnimation();
                                     }}>
                                     Done
                                 </Button>
