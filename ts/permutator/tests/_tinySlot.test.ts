@@ -24,8 +24,9 @@ function GetTestSlot() {
         Uid: 3,
         SlotNumber: 4,
         SubjectCode: 333,
+        SubjectName: "XXX",
         TimePeriod: 15, // 15 = 1111 in base 2
-        Type: 1,
+        Type: "L",
         Week: 15, // 15 = 1111 in base 2
 
     };
@@ -50,7 +51,7 @@ describe("tinySlot", () => {
 
         it("should set PartitionKey", () => {
             const result = new TinySlot(GetTestSlot());
-            expect(result.PartitionKey).to.eq(3331);
+            expect(result.PartitionKey).to.eq(3330);
         });
 
         it("should set State 1", () => {

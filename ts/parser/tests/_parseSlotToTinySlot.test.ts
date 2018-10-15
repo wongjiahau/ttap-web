@@ -16,10 +16,12 @@ describe("ParseSlotToTinySlot", () => {
             Day: 0,
             Group: 1,
             Uid: 1,
+            Week: 999,
             SlotNumber: 1,
             SubjectCode: 333,
+            SubjectName: "xxx",
             TimePeriod: 15,
-            Type: 0
+            Type: "L"
         };
         const slot2: ISlot = {
             Day: 0,
@@ -27,12 +29,13 @@ describe("ParseSlotToTinySlot", () => {
             Uid: 2,
             SlotNumber: 1,
             SubjectCode: 333,
+            SubjectName: "xxx",
+            Week: 999,
             TimePeriod: 15,
-            Type: 0
+            Type: "L"
         };
         const input = [slot1, slot2];
         const result = ParseSlotToTinySlot(input);
-        const expectedState = [15, 15, 0, 0, 0, 0, 0];
         expect(result.length).to.eq(1);
     });
 
@@ -44,7 +47,9 @@ describe("ParseSlotToTinySlot", () => {
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
-            Type: 0
+            Type: "L",
+            SubjectName: "xxx",
+            Week: 999,
         };
         const slot2: ISlot = {
             Day: 0,
@@ -53,7 +58,9 @@ describe("ParseSlotToTinySlot", () => {
             SlotNumber: 2,
             SubjectCode: 333,
             TimePeriod: 15,
-            Type: 0
+            Type: "L",
+            SubjectName: "xxx",
+            Week: 999,
         };
         const input = [slot1, slot2];
         const result = ParseSlotToTinySlot(input);
@@ -68,7 +75,9 @@ describe("ParseSlotToTinySlot", () => {
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
-            Type: 0
+            Type: "L",
+            SubjectName: "xxx",
+            Week: 999,
         };
         const slot2: ISlot = {
             Day: 1, // Tuesday
@@ -77,7 +86,9 @@ describe("ParseSlotToTinySlot", () => {
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
-            Type: 0
+            Type: "L",
+            SubjectName: "xxx",
+            Week: 999,
         };
         const input = [slot1, slot2];
         const result = ParseSlotToTinySlot(input);
@@ -92,7 +103,9 @@ describe("ParseSlotToTinySlot", () => {
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
-            Type: 0
+            Type: "L",
+            SubjectName: "xxx",
+            Week: 999,
         };
         const slot2: ISlot = {
             Day: 2, // Tuesday
@@ -101,7 +114,9 @@ describe("ParseSlotToTinySlot", () => {
             SlotNumber: 1,
             SubjectCode: 333,
             TimePeriod: 15,
-            Type: 0
+            Type: "L",
+            SubjectName: "xxx",
+            Week: 999,
         };
         const input = [slot1, slot2];
         const result = ParseSlotToTinySlot(input);
