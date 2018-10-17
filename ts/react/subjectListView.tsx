@@ -160,12 +160,12 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         <footer style={footerStyle}>
                             <StackPanel orientation="horizontal" horizontalAlignment="right">
                                 <Tooltip title="Toggle animation" placement="top">
-                                    <IconButton
-                                        onClick={this.props.handleToggleShowFindTimetableAnimation}
+                                    <Button 
                                         color="primary"
+                                        onClick={this.props.handleToggleShowFindTimetableAnimation}
                                         style={{marginRight: 25}}>
-                                        <IconSlideShow/>
-                                    </IconButton>
+                                        <IconSlideShow style= {{marginRight: 5}}/>Animation
+                                    </Button>
                                 </Tooltip>
                                 <Tooltip title={subjectListTipsContent()} placement="top">
                                     <IconInfo/>
