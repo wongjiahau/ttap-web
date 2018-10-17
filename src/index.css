@@ -222,16 +222,3 @@ code {
       opacity: 1
   }
 }
-
-#for-algo-visualization {
-    background: white;
-    position: absolute;
-    width: 75%;
-    left: 500px;
-    margin: 50px;
-    height: 100%;
-    opacity: 1;
-    z-index: 1;
-    top: 0;
-    overflow: scroll;
-}

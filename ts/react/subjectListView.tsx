@@ -19,6 +19,7 @@ import { GetInitial } from "../util/getInitial";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";
+import { AlgorithmVisualizationView } from "./algorithmVisualizationView";
 
 // region styles
 const errorMessageStyle : React.CSSProperties = {
@@ -135,7 +136,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
 
         return (
             <div>
-                <div id="for-algo-visualization" style={{display: this.props.ShowAnimation ? "block" : "none"}}/>
+                <AlgorithmVisualizationView open={this.props.ShowAnimation}/>
                 <Drawer elevation={16} open={this.props.IsOpen} onClose={this.handleClose}>
                     {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/4b65000a/components/sidebar.min.css"/>
                     <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>

@@ -33,6 +33,8 @@ This software is used to helps student's of UTAR to arrange their timetable with
 1. Make sure you have installed [Git](https://git-scm.com/downloads) and 
 [Node.js](https://nodejs.org/en/).
 
+2. It is highly recommended to use [Visual Studio Code](https://code.visualstudio.com/) for this project.
+
 ### Steps
 #### 1. Clone the project
 ```
