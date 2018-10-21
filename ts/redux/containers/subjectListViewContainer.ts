@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
             dispatch(new ToggleIsOpenOfSubjectListView(false));
             dispatch(new HideSnackbar());
             dispatch(new UpdateSlotsTableState());
-            dispatch(new ToggleSetTimeConstraintView(true));
+            // dispatch(new ToggleSetTimeConstraintView(true));
         },
         handleSearch: (searchedText: string) => {
             dispatch(new SearchSubjectList(searchedText));

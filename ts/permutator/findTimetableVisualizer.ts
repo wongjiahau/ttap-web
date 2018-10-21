@@ -1,11 +1,12 @@
 // @ts-ignore
 const Cytoscape = window.cytoscape; // Imported at index.html via CDN
 import {Identifiable} from "../interfaces/identifiable";
+import { ChosenColors } from "../react/colors/colors";
 const OUTER_LEFT_PADDING = 500; // Refer index.css, #for-algo-visualization
 const OUTER_TOP_PADDING = 100;
 const INNER_LEFT_PADDING = 50;
 const TOP_PADDING = 50;
-let DELAY_MS = 250.00;
+let DELAY_MS = 300.00;
 
 export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;
@@ -29,9 +30,9 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                     {
                         selector: "node",
                         style: {
-                            "height": 10,
-                            "width": 10,
-                            "background-color": "#18e018",
+                            "height": 20,
+                            "width": 20,
+                            "background-color": "data(color)",
                             "label": "data(label)"
                         }
                     }, {
@@ -74,7 +75,8 @@ export class FindTimetableVisualizer<T extends Identifiable> {
             this.renderings.push(() => {
                 this.cy.add({
                     data: {
-                        label: h
+                        label: h,
+                        color: ChosenColors[i % ChosenColors.length]
                     },
                     classes: "top-center",
                     position: {
@@ -90,6 +92,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                     this.cy.add({
                         data: {
                             id: partition[i][j].Uid.toString(),
+                            color: ChosenColors[i % ChosenColors.length]
                         },
                         position: {
                             x: X_WIDTH * i + INNER_LEFT_PADDING,
@@ -113,7 +116,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                         source: x.Uid.toString(),
                         target: y.Uid.toString(),
                     },
-                    classes: "haystack",
+                    classes: "bezier" // "haystack",
                 });
             }, this.nextPointOfTime);
             this.nextPointOfTime += DELAY_MS; // ms
