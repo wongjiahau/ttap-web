@@ -6,7 +6,7 @@ const OUTER_LEFT_PADDING = 500; // Refer index.css, #for-algo-visualization
 const OUTER_TOP_PADDING = 100;
 const INNER_LEFT_PADDING = 50;
 const TOP_PADDING = 50;
-let DELAY_MS = 300.00;
+let DELAY_MS = parseInt(prompt("Please enter amount of delay (ms)", "200") || "250", 10);
 
 export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;

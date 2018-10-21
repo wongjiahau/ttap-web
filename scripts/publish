@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # this is the script to publish this TTAP app to Surge.sh
+./scripts/transpile
 
 # First, we build the app
 ./scripts/build
