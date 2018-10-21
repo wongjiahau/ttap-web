@@ -5,7 +5,7 @@ const OUTER_LEFT_PADDING = 500; // Refer index.css, #for-algo-visualization
 const OUTER_TOP_PADDING = 100;
 const INNER_LEFT_PADDING = 50;
 const TOP_PADDING = 50;
-let DELAY_MS = 100.00;
+let DELAY_MS = 250.00;
 
 export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;

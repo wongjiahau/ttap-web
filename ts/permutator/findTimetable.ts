@@ -64,6 +64,7 @@ export function FindTimetable(
             if (ptr === last) {
                 result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].State));
                 if (result.length >= LIMIT) { // if too much timetable just return the result
+                    visualizer.animate();
                     return result;
                 }
                 snapshots.pop();
