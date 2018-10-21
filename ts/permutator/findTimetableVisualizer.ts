@@ -125,10 +125,14 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     }
 
     public animate(): void {
+        const ANIMATION_START_DELAY = 5000; // ms
+        alert(`The animation will start in ${ANIMATION_START_DELAY / 1000} seconds`);
         console.log(this.connectCount);
-        for (let i = 0; i < this.renderings.length; i++) {
-            this.renderings[i]();
-        }
+        setTimeout(() => {
+            for (let i = 0; i < this.renderings.length; i++) {
+                this.renderings[i]();
+            }
+        }, ANIMATION_START_DELAY);
     }
 }
 

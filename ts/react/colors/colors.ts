@@ -156,7 +156,7 @@ export const ChosenColors = [
     Colors.LightGreen,
     Colors.LightBlue,
     Colors.MediumPurple,
-    Colors.LightGray,
+    // Colors.LightGray,
     Colors.MediumVioletRed,
     Colors.DeepSkyBlue,
     Colors.LightCoral
