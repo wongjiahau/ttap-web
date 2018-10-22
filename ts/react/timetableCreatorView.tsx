@@ -17,6 +17,8 @@ import TestManager, { FileName } from "../tests/testManager";
 import { LeftRightPanel } from "./panels/leftRightPanel";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
+import { AlgorithmVisualizerView } from "./algorithmVisualizerView";
+import { AlgorithmVisualizerViewContainer } from "../redux/containers/algorithmVisualizerContainer";
 
 const switchStyle : React.CSSProperties = {
     marginRight: 0.03 * window.innerWidth
@@ -80,6 +82,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <SlotsTableContainer/>
                 <SnackbarContainer/>
                 <SubjectListViewContainer/>
+                <AlgorithmVisualizerViewContainer/>
             </div>
         );
     }

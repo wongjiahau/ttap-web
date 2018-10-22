@@ -11,6 +11,7 @@ import {ISnackbarState, NewSnackbarState} from "./snackbarState";
 import {ISubjectListState, NewSubjectListState} from "./subjectListState";
 import {ITimetableCreatorState, NewTimetableCreatorState} from "./timetableCreatorState";
 import {ITimetableListState, NewTimetableListState} from "./timetableListState";
+import { NewAlgorithmVisualizerState, IAlgorithmVisualizerState } from "./algorithmVisualizerState";
 
 export interface IMasterState {
     DataState:                IDataState;
@@ -23,6 +24,7 @@ export interface IMasterState {
     SubjectListState:         ISubjectListState;
     TimetableCreatorState:    ITimetableCreatorState;
     TimetableListState:       ITimetableListState;
+    AlgorithmVisualizerState: IAlgorithmVisualizerState;
 }
 
 export function NewMasterState() : IMasterState {
@@ -36,7 +38,8 @@ export function NewMasterState() : IMasterState {
         SnackbarState:            NewSnackbarState(),
         SubjectListState:         NewSubjectListState([]),
         TimetableCreatorState:    NewTimetableCreatorState(),
-        TimetableListState:       NewTimetableListState([], [])
+        TimetableListState:       NewTimetableListState([], []),
+        AlgorithmVisualizerState: NewAlgorithmVisualizerState()
     };
 }
 export abstract class MasterStateAction extends Action < IMasterState > {

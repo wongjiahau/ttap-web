@@ -2,11 +2,11 @@
 const Cytoscape = window.cytoscape; // Imported at index.html via CDN
 import {Identifiable} from "../interfaces/identifiable";
 import { ChosenColors } from "../react/colors/colors";
-const OUTER_LEFT_PADDING = 500; // Refer index.css, #for-algo-visualization
-const OUTER_TOP_PADDING = 100;
+const OUTER_LEFT_PADDING = 50; 
+const OUTER_TOP_PADDING = 200;
 const INNER_LEFT_PADDING = 50;
-const TOP_PADDING = 50;
-let DELAY_MS = parseInt(prompt("Please enter amount of delay (ms)", "200") || "250", 10);
+const TOP_PADDING = 70;
+let DELAY_MS = 100;
 
 export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;
@@ -67,9 +67,9 @@ export class FindTimetableVisualizer<T extends Identifiable> {
         });
     }
     public plotPartition (partition : T[][], partitionHeadings: string[]) : void {
-        const X_WIDTH = (window.innerWidth - OUTER_LEFT_PADDING - INNER_LEFT_PADDING) / (partition.length + 1);
+        const X_WIDTH = (window.innerWidth - OUTER_LEFT_PADDING - INNER_LEFT_PADDING) / (partition.length - 1);
         const lastPartition = partition[partition.length - 1]; // because lastPartition has the most number of elements
-        const Y_WIDTH = (window.innerHeight - OUTER_TOP_PADDING) / (lastPartition.length);
+        const Y_HEIGHT = (window.innerHeight - OUTER_TOP_PADDING) / (lastPartition.length);
         for (let i = 0; i < partitionHeadings.length; i++) {
             const h = partitionHeadings[i];
             this.renderings.push(() => {
@@ -96,7 +96,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                         },
                         position: {
                             x: X_WIDTH * i + INNER_LEFT_PADDING,
-                            y: Y_WIDTH * j + TOP_PADDING
+                            y: Y_HEIGHT * j + TOP_PADDING
                         },
                     });
                 });
@@ -125,8 +125,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     }
 
     public animate(): void {
-        const ANIMATION_START_DELAY = 5000; // ms
-        alert(`The animation will start in ${ANIMATION_START_DELAY / 1000} seconds`);
+        const ANIMATION_START_DELAY = 50; // ms
         console.log(this.connectCount);
         setTimeout(() => {
             for (let i = 0; i < this.renderings.length; i++) {

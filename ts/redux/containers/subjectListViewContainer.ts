@@ -30,13 +30,14 @@ import {
 import {
     ToggleLoadingBar
 } from "./../actions/toggleLoadingBar";
-import { ToggleShowFindTimetableAnimation } from "./../actions/toggleShowFindTimetableAnimation";
+import { ToggleIsEnabledOfAlgorithmVisualizer } from "../actions/toggleIsEnabledOfAlgorithmVisualizer";
 import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
+import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
 
 const mapStateToProps = (state): ISubjectListState => {
     const target = state.MasterStateReducer.SubjectListState as ISubjectListState;
@@ -47,7 +48,6 @@ const mapStateToProps = (state): ISubjectListState => {
         IsShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
         SearchedText: target.SearchedText,
         Subjects: target.Subjects,
-        ShowAnimation: target.ShowAnimation
     };
 };
 
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
             dispatch(new ToggleIsOpenOfSubjectListView(false));
             dispatch(new HideSnackbar());
             dispatch(new UpdateSlotsTableState());
-            // dispatch(new ToggleSetTimeConstraintView(true));
+            dispatch(new ToggleSetTimeConstraintView(true));
         },
         handleSearch: (searchedText: string) => {
             dispatch(new SearchSubjectList(searchedText));
@@ -65,6 +65,7 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         },
         handleSelection: (subjectIndex: number) => {
             dispatch(new ToggleLoadingBar(true));
+            dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
             setTimeout(() => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new ToggleLoadingBar(false));
@@ -73,8 +74,8 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
             }, 0);
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
-        handleToggleShowFindTimetableAnimation: () => dispatch(new ToggleShowFindTimetableAnimation()),
-        handleHideFindTimetableAnimation: () => dispatch(new ToggleShowFindTimetableAnimation(false)),
+        handleToggleIsEnabledOfFindTimetableAnimation: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),
+        handleHideFindTimetableAnimation: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer(false)),
     };
 };
 

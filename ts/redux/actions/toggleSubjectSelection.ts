@@ -22,7 +22,7 @@ export class ToggleSubjectSelection extends MasterStateAction {
     public TypeName() : string {return "toggle subject selection"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
         CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x,
-            state.SubjectListState.ShowAnimation ?
+            state.AlgorithmVisualizerState.isEnabled ?
             new FindTimetableVisualizer() :
             new NullFindTimetableVisualizer()
         );

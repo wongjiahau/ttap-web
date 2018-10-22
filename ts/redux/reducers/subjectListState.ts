@@ -13,7 +13,6 @@ export interface ISubjectListState {
     IsShowingSelectedSubjectOnly: boolean;
     SearchedText:                 string;
     Subjects:                     Subject[];
-    ShowAnimation:                boolean;
 }
 
 export function NewSubjectListState(subjects: Subject[]) : ISubjectListState {
@@ -24,7 +23,6 @@ export function NewSubjectListState(subjects: Subject[]) : ISubjectListState {
         IsShowingSelectedSubjectOnly: false,
         SearchedText:                 "",
         Subjects:                     subjects,
-        ShowAnimation:                false,
     };
 }
 

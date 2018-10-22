@@ -16,7 +16,7 @@ import {Subject} from "../model/subject";
 import { ISubjectListState } from "../redux/reducers/subjectListState";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
 import { GetInitial } from "../util/getInitial";
-import { AlgorithmVisualizationView } from "./algorithmVisualizationView";
+import { AlgorithmVisualizerView } from "./algorithmVisualizerView";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";
@@ -62,7 +62,7 @@ export interface ISubjectListViewDispatchProps {
     handleSearch : (searchedText : string) => void;
     handleSelection : (subjectIndex : number) => void;
     handleToggleView : () => void;
-    handleToggleShowFindTimetableAnimation: () => void;
+    handleToggleIsEnabledOfFindTimetableAnimation: () => void;
     handleHideFindTimetableAnimation: () => void;
 }
 
@@ -136,7 +136,6 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
 
         return (
             <div>
-                <AlgorithmVisualizationView open={this.props.ShowAnimation} handleClose={this.props.handleHideFindTimetableAnimation}/>
                 <Drawer elevation={16} open={this.props.IsOpen} onClose={this.handleClose}>
                     {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/4b65000a/components/sidebar.min.css"/>
                     <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
@@ -163,7 +162,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                 <Tooltip title="Toggle animation" placement="top">
                                     <Button
                                         color="primary"
-                                        onClick={this.props.handleToggleShowFindTimetableAnimation}
+                                        onClick={this.props.handleToggleIsEnabledOfFindTimetableAnimation}
                                         style={{marginRight: 25}}>
                                         <IconSlideShow style={{marginRight: 5}}/>Animation
                                     </Button>
