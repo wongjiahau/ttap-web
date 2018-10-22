@@ -10,11 +10,17 @@ export class ToggleIsEnabledOfAlgorithmVisualizer extends MasterStateAction {
     }
 
     protected GenerateNewState(state: IMasterState): IMasterState {
+        const isEnabled = this.enable !== undefined ? this.enable : !state.AlgorithmVisualizerState.isEnabled;
         return {
             ...state,
             AlgorithmVisualizerState: {
                 ...state.AlgorithmVisualizerState,
-                isEnabled: this.enable !== undefined ? this.enable : !state.AlgorithmVisualizerState.isEnabled,
+                isEnabled: isEnabled
+            },
+            SnackbarState: {
+                ...state.SnackbarState,
+                Message: `Animation is ${isEnabled ? "enabled" : "disabled"}.`,
+                IsOpen: true
             }
         };
     }

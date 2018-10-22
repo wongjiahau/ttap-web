@@ -19,7 +19,8 @@ import {
     ISubjectListState} from "../reducers/subjectListState";
 import {
     ISubjectListViewDispatchProps,
-    SubjectListView
+    SubjectListView,
+    ISubjectListViewStateProps
 } from "./../../react/subjectListView";
 import {
     NotifyIfTimetableIsFound
@@ -38,9 +39,11 @@ import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
 import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
+import { IMasterState } from "../reducers/masterState";
 
-const mapStateToProps = (state): ISubjectListState => {
-    const target = state.MasterStateReducer.SubjectListState as ISubjectListState;
+const mapStateToProps = (state): ISubjectListViewStateProps => {
+    const masterState = state.MasterStateReducer as IMasterState;
+    const target = masterState.SubjectListState as ISubjectListState;
     return {
         ClashingSubjectPairs: target.ClashingSubjectPairs,
         IsOpen: target.IsOpen,
@@ -48,6 +51,7 @@ const mapStateToProps = (state): ISubjectListState => {
         IsShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
         SearchedText: target.SearchedText,
         Subjects: target.Subjects,
+        IsAlgorithmVisualizerEnabled: masterState.AlgorithmVisualizerState.isEnabled
     };
 };
 

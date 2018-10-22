@@ -1,8 +1,5 @@
 import IconInfo from "material-ui-icons/Info";
-import IconSlideShow from "material-ui-icons/Slideshow";
 import Button from "material-ui/Button";
-import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
-import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
@@ -10,15 +7,12 @@ import Tooltip from "material-ui/Tooltip";
 import Typography from "material-ui/Typography";
 import * as React from "react";
 
-import { IconButton } from "material-ui";
+import { FormControlLabel, Switch } from "material-ui";
 import {Key} from "../enums/keyCodeEnum";
-import {Subject} from "../model/subject";
 import { ISubjectListState } from "../redux/reducers/subjectListState";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
 import { GetInitial } from "../util/getInitial";
-import { AlgorithmVisualizerView } from "./algorithmVisualizerView";
 import {StackPanel} from "./panels/stackPanel";
-import {iconStyle} from "./styles";
 import {SubjectView} from "./subjectView";
 
 // region styles
@@ -66,8 +60,11 @@ export interface ISubjectListViewDispatchProps {
     handleHideFindTimetableAnimation: () => void;
 }
 
-export interface ISubjectListViewProps extends ISubjectListState,
-ISubjectListViewDispatchProps {}
+export interface ISubjectListViewStateProps extends ISubjectListState {
+    IsAlgorithmVisualizerEnabled: boolean;
+}
+
+export interface ISubjectListViewProps extends ISubjectListViewStateProps, ISubjectListViewDispatchProps {}
 
 export class SubjectListView extends React.Component < ISubjectListViewProps, {
     sectionStyle : React.CSSProperties,
@@ -87,7 +84,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         };
     }
 
-    public handleSearchBoxOnChange = (event : object) => {
+    public handleSearchBoxOnChange = () => {
         const searchedText = (document.getElementById("searchbar") as HTMLInputElement).value;
         this.props.handleSearch(searchedText);
     }
@@ -159,14 +156,14 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         </Paper>
                         <footer style={footerStyle}>
                             <StackPanel orientation="horizontal" horizontalAlignment="right">
-                                <Tooltip title="Toggle animation" placement="top">
-                                    <Button
-                                        color="primary"
-                                        onClick={this.props.handleToggleIsEnabledOfFindTimetableAnimation}
-                                        style={{marginRight: 25}}>
-                                        <IconSlideShow style={{marginRight: 5}}/>Animation
-                                    </Button>
-                                </Tooltip>
+                                <FormControlLabel control={
+                                    <Switch
+                                        color="secondary"
+                                        checked={this.props.IsAlgorithmVisualizerEnabled}
+                                        onChange={this.props.handleToggleIsEnabledOfFindTimetableAnimation}
+                                    />
+                                } label="Enable animation" />
+
                                 <Tooltip title={subjectListTipsContent()} placement="top">
                                     <IconInfo/>
                                 </Tooltip>
