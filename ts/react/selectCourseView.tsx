@@ -173,21 +173,18 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     }
 
     private RequestTestFiles() : void {
-        const request = require("phin");
-        const options = {
-            url: "https://api.github.com/repos/wongjiahau/ttap-datahub/contents/",
-            headers: {
-                "User-Agent": "hou32hou"
-            }
-        };
-        request(options, (error, response) => {
-            if (error) {
-                this.setState({serverError: "Unable to fetch data from server. Please try again later.", loading: false});
-                return;
-            }
-            const result = JSON.parse(response.body.toString());
+        const url = "https://api.github.com/repos/wongjiahau/ttap-datahub/contents/";
+        fetch(url)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
             this.setState({loading: false});
-            this.allSuggestions = result;
+            this.allSuggestions = data;
+        })
+        .catch((error) => {
+            console.log(error);
+            this.setState({serverError: "Unable to fetch data from server. Please try again later.", loading: false});
         });
     }
 
@@ -220,32 +217,33 @@ export const LoadSlotsFromUrl = (
     failed : (error: any) => void
 ) : void => {
     started();
-    const request = require("phin");
-    const options = {
-        url: downloadUrl,
-        headers: {
+    fetch(downloadUrl, {
+        headers: new Headers({
             "User-Agent": "hou32hou"
-        }
-    };
-    request(options, (error, response) => {
-        let parser : (src: string) => RawSlot[];
-        if (error) {
-            alert("Please retry again.");
-            return;
-        }
+        })
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data: string | RawSlot[]) => {
+        let parser ; // : ((src: string | RawSlot[]) => RawSlot[]);
         if (fileType === "html") {
             parser = ParseHtmlToRawSlot;
         } else if (fileType === "json") {
-            parser = ParseJsonToRawSlot;
+            parser = (x) => x;
         } else {
             throw new Error("Unknown file type: " + fileType);
         }
         try {
-            const slots = parser(response.body.toString()).map(RawSlot.ResetUid);
+            const slots = parser(data).map(RawSlot.ResetUid);
             successed(slots);
         } catch (error) {
+            console.log(error);
             failed(error);
         }
+    })
+    .catch((error) => {
+        console.log(error);
+        alert("Please retry again.");
     });
-
 };
