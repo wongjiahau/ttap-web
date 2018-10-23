@@ -222,3 +222,13 @@ code {
       opacity: 1
   }
 }
+
+.slot-view {
+    border:        0.5px;
+    border-radius: 5px;
+    border-style: solid;
+    font-family: "roboto";
+    font-size: 13.5px;
+    width: 100%;
+    text-align: center;
+}

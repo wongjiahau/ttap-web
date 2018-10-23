@@ -21,16 +21,7 @@ interface ISlotViewState {
     anchorEl : any;
 }
 
-const borderThickness = "0.5px";
-const buttonBaseStyle : React.CSSProperties = {
-    border:        borderThickness,
-    borderRadius: "5px",
-    borderStyle: "solid",
-    fontFamily:   "roboto",
-    fontSize:     "13.5px",
-    width:        "100%",
-    textAlign:    "center",
-};
+const buttonBaseStyle : React.CSSProperties = { };
 
 export class SlotView extends React.Component < ISlotViewProps,
 ISlotViewState > {
@@ -72,14 +63,13 @@ ISlotViewState > {
                 this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
             }
         };
+        const className /* Refer index.css */
+            = "slot-view"
+            + (this.props.slot.AlternativeSlots.length > 0 ? " hvr-glow get-user-attention" : "");
+
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
-                <div
-                    className={this.props.slot.AlternativeSlots.length > 0 ? "hvr-glow get-user-attention" : ""}
-                    style={buttonStyle}
-                    onClick={clickHandler}
-                    // onMouseUp={clickHandler}
-                    >
+                <div className={className} style={buttonStyle} onClick={clickHandler}>
                     <b>
                         {getSlotContent(slot)} {slot.AlternativeSlots.length > 0 ? "*" : ""}
                         {slot.Group.length > 1
