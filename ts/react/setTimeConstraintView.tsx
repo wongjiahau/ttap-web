@@ -118,8 +118,6 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                                             align="center">
                                             Set time constraint
                                         </Typography>
-                                        <Report numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
-                                                numberOfRemainingTimetables={this.props.numberOfRemainingTimetables} />
                                     </td>
                                     <td>
                                         <table style={legendFrameStyle}>
@@ -138,7 +136,16 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             states={this.props.totalState}
                             handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}
                             handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/>
-                        <p><i><b>Click as many green box as you can!</b></i></p>
+
+                        <div>This feature is to help you to reduce the number of possible timetables, so that it will be easier for you to pick your favourite timetables.</div>
+                        <p><i><b>Therefore, click as many green boxes as possible!</b></i></p>
+
+                        <Report
+                            numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
+                            numberOfRemainingTimetables={this.props.numberOfRemainingTimetables} />
+
+                        <br/>
+
                         <Button
                             style={cancelButtonStyle}
                             color="default"
@@ -151,27 +158,23 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
     }
 }
 
-const Report = (props) => {
-    if (props.numberOfRemovedTimetables <= 0) {
-        return <div style={{margin: "21px"}}>{""}</div>;
-    }
+const Report = (props: {
+    numberOfRemovedTimetables: number,
+    numberOfRemainingTimetables: number,
+}) => {
     const style: React.CSSProperties = {
         fontSize: "14px"
     };
     return (
     <span style={style}>
-        <StackPanel
-        orientation="horizontal"
-        horizontalAlignment="center"
-        >
-            <span>Removed</span>
+        <StackPanel orientation="horizontal" horizontalAlignment="center">
             <CountUp start={0} end={props.numberOfRemovedTimetables} duration={0.65}/>
-            <span>unsatisfactory timetables.</span>
+            <span>timetables are removed.</span>
             <CountUp
                 start={0}
                 end={props.numberOfRemainingTimetables}
                 duration={0.65}/>
-            <span>timetables remaining</span>
+            <span>timetables remaining.</span>
         </StackPanel>
     </span>
 ); };
