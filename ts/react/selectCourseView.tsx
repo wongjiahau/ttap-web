@@ -217,33 +217,36 @@ export const LoadSlotsFromUrl = (
     failed : (error: any) => void
 ) : void => {
     started();
-    fetch(downloadUrl, {
-        headers: new Headers({
-            "User-Agent": "hou32hou"
-        })
-    })
-    .then((response) => {
-        return response.json();
-    })
-    .then((data: string | RawSlot[]) => {
-        let parser ; // : ((src: string | RawSlot[]) => RawSlot[]);
-        if (fileType === "html") {
-            parser = ParseHtmlToRawSlot;
-        } else if (fileType === "json") {
-            parser = (x) => x;
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+
+        // Only run if the request is complete
+        if (xhr.readyState !== 4) { return; }
+
+        // Process our return data
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // What do when the request is successful
+            let parser : (src: string) => RawSlot[];
+            if (fileType === "html") {
+                parser = ParseHtmlToRawSlot;
+            } else if (fileType === "json") {
+                parser = ParseJsonToRawSlot;
+            } else {
+                throw new Error("Unknown file type: " + fileType);
+            }
+            try {
+                const slots = parser(xhr.responseText).map(RawSlot.ResetUid);
+                successed(slots);
+            } catch (error) {
+                console.log(error);
+                failed(error);
+            }
         } else {
-            throw new Error("Unknown file type: " + fileType);
+            alert("Data loading is failed: STATUS " + xhr.status);
         }
-        try {
-            const slots = parser(data).map(RawSlot.ResetUid);
-            successed(slots);
-        } catch (error) {
-            console.log(error);
-            failed(error);
-        }
-    })
-    .catch((error) => {
-        console.log(error);
-        alert("Please retry again.");
-    });
+
+    };
+    xhr.open("GET", downloadUrl);
+    xhr.send();
 };
