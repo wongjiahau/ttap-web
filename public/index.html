@@ -102,7 +102,7 @@
     </script>
     <script>
         window.PUBLIC_URL = "%PUBLIC_URL%"; // This is required by getStarted.tsx
-        // CheckIfThisIsTheLatestVersion();
+        CheckIfThisIsTheLatestVersion();
 
         function CheckIfThisIsTheLatestVersion() {
             const lastGitCommitHash = "LGCH"; 
@@ -116,11 +116,14 @@
         function WhatToDoIfNewerVersionOfTTAPdetected() {
             const message = 
             `
-            <button style='position:fixed;top:20px;right:5px;cursor:pointer;'
-            onclick='document.getElementById("errorMessage").innerHTML = "";'>
-                CLOSE THIS MESSAGE</button>
-            <h2>A newer version of TTAP is detected.</h2>
-            <h1>Press <em>F5</em> to get the latest version of TTAP.</h1>
+            <br/>
+            <span>A newer version of TTAP is detected. Do you want to reload to get the latest version of TTAP?</span>
+            <button class="MuiButtonBase-root-51 MuiButton-root-37 MuiButton-raised-43 MuiButton-raisedSecondary-46" 
+                onclick='location.reload(true)'> Reload </button>
+            <button class="MuiButtonBase-root-51 MuiButton-root-37 MuiButton-raised-43" 
+                onclick='document.getElementById("errorMessage").innerHTML = "";'>
+                Nevermind </button>
+            <br/><br/>
             `;
             document.getElementById("errorMessage").innerHTML = message;
             document.getElementById("initialLoadingCube").innerHTML = "";
