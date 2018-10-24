@@ -102,7 +102,7 @@
     </script>
     <script>
         window.PUBLIC_URL = "%PUBLIC_URL%"; // This is required by getStarted.tsx
-        CheckIfThisIsTheLatestVersion();
+        // CheckIfThisIsTheLatestVersion();
 
         function CheckIfThisIsTheLatestVersion() {
             const lastGitCommitHash = "LGCH"; 
@@ -126,7 +126,6 @@
             <br/><br/>
             `;
             document.getElementById("errorMessage").innerHTML = message;
-            document.getElementById("initialLoadingCube").innerHTML = "";
         }
     </script>
 
