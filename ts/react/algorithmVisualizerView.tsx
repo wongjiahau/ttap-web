@@ -17,6 +17,8 @@ export interface IAlgorithmVisualizerViewStateProps {
     open: boolean;
     expectedHitCount: number;
     actualHitCount: number;
+    fullSearchPathCount: number;
+    timeTaken: number;
 }
 
 export class AlgorithmVisualizerView extends React.Component<
@@ -38,8 +40,17 @@ export class AlgorithmVisualizerView extends React.Component<
                 {/* Don't modify the for-algo-visualization div below
                     as it is required by findTimetableVisualizer.ts */}
                 <div id="for-algo-visualization" style={innerDivStyle}/>
-                <p style={{marginLeft: 15}}>
-                    Hit rate: {this.props.expectedHitCount} / {this.props.actualHitCount} = {percentage}%
+                <p style={{marginLeft: 15, position: "absolute", left: 0, bottom: 0}}>
+                    Hit rate = {this.props.expectedHitCount} / {this.props.actualHitCount} = <b>{percentage}%</b>
+                    <br/>
+                    Brute force search paths = <b>{this.props.fullSearchPathCount}</b>
+                    <br/>
+                    Reduced search paths = {this.props.fullSearchPathCount} - {this.props.actualHitCount}{" = "}
+                    {this.props.fullSearchPathCount - this.props.actualHitCount}{" = "}
+                    <b>{((this.props.fullSearchPathCount - this.props.actualHitCount) /
+                        this.props.fullSearchPathCount * 100).toFixed(2)}%</b>
+                    <br/>
+                    Time taken: <b>{(this.props.timeTaken / 1000).toFixed(2)} seconds</b>
                 </p>
             </Dialog>
         );

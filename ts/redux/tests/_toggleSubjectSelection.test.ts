@@ -177,12 +177,15 @@ describe("toggle subject selection action", () => {
             expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group");
         });
 
-        it("should set searchedPathCount of algorithmVisualizerState if algorithm visualizer is enabled", () => {
+        it("should set statistics of algorithmVisualizerState if algorithm visualizer is enabled", () => {
             const initialState = GetMockInitialState();
             expect(initialState.AlgorithmVisualizerState.searchedPathCount).to.eq(0);
             let newState = MasterStateReducer(initialState, new ToggleIsEnabledOfAlgorithmVisualizer(true));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP));
             expect(newState.AlgorithmVisualizerState.searchedPathCount).to.eq(2);
+            expect(newState.AlgorithmVisualizerState.fullSearchPathCount).to.eq(2);
+            expect(newState.AlgorithmVisualizerState.searchedPathCount).to.eq(2);
+            expect(newState.AlgorithmVisualizerState.timeTaken >= 0).to.eq(true);
         });
     });
 

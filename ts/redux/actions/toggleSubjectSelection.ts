@@ -47,7 +47,9 @@ export class ToggleSubjectSelection extends MasterStateAction {
                     ...result,
                     AlgorithmVisualizerState: {
                         ...state.AlgorithmVisualizerState,
-                        searchedPathCount: visualizer.getSearchedPathCount()
+                        searchedPathCount: visualizer.getSearchedPathCount(),
+                        fullSearchPathCount: visualizer.getFullSearchPathCount(),
+                        timeTaken: visualizer.getTimeTakenInMillisecond()
                     }
                 };
             } else {

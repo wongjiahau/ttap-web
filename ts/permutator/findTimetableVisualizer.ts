@@ -6,13 +6,15 @@ const OUTER_LEFT_PADDING = 50;
 const OUTER_TOP_PADDING = 200;
 const INNER_LEFT_PADDING = 50;
 const TOP_PADDING = 70;
-let DELAY_MS = 100;
+let DELAY_MS = 50;
 
 export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;
     private nextPointOfTime = 0; // ms
     private renderings: Array<() => void> = [];
     private searchedPathCount = 0; // This is for keeping track of how many search path the algorithm has gone through
+    private fullSearchPathCount = 0;
+    private startTime = 0;
 
     public constructor() {
         this.renderings.push(() => {
@@ -67,6 +69,12 @@ export class FindTimetableVisualizer<T extends Identifiable> {
         });
     }
     public plotPartition (partition : T[][], partitionHeadings: string[]) : void {
+        // calculate full search path count
+        this.fullSearchPathCount = this.setPartitionCount(partition.map((x) => x.length));
+
+        // initialize start time
+        this.startTime = new Date().getTime();
+
         const X_WIDTH = (window.innerWidth - OUTER_LEFT_PADDING - INNER_LEFT_PADDING) / (partition.length - 1);
         const lastPartition = partition[partition.length - 1]; // because lastPartition has the most number of elements
         const Y_HEIGHT = (window.innerHeight - OUTER_TOP_PADDING) / (lastPartition.length);
@@ -127,6 +135,19 @@ export class FindTimetableVisualizer<T extends Identifiable> {
         this.searchedPathCount ++;
     }
 
+    public getSearchedPathCount(): number {
+        return this.searchedPathCount;
+    }
+
+    public getFullSearchPathCount(): number {
+        return this.fullSearchPathCount;
+    }
+
+    public getTimeTakenInMillisecond(): number {
+        const now = new Date().getTime();
+        return now - this.startTime;
+    }
+
     public animate(): void {
         const ANIMATION_START_DELAY = 50; // ms
         setTimeout(() => {
@@ -136,8 +157,13 @@ export class FindTimetableVisualizer<T extends Identifiable> {
         }, ANIMATION_START_DELAY);
     }
 
-    public getSearchedPathCount() {
-        return this.searchedPathCount;
+    private setPartitionCount(partitionsLength: number[]) {
+        // this is to calculate what is the number of full search path
+        let result = 1;
+        for (let i = 0; i < partitionsLength.length; i++) {
+            result *= partitionsLength[i];
+        }
+        return result;
     }
 }
 

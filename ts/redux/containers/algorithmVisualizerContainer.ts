@@ -8,7 +8,9 @@ const mapStateToProps = (state): IAlgorithmVisualizerViewStateProps => {
     return {
         open: masterState.AlgorithmVisualizerState.isOpen,
         expectedHitCount: masterState.TimetableListState.FiltrateTimetables.length,
-        actualHitCount: masterState.AlgorithmVisualizerState.searchedPathCount
+        actualHitCount: masterState.AlgorithmVisualizerState.searchedPathCount,
+        fullSearchPathCount: masterState.AlgorithmVisualizerState.fullSearchPathCount,
+        timeTaken: masterState.AlgorithmVisualizerState.timeTaken
     };
 };
 

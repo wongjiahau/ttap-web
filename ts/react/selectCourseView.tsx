@@ -13,7 +13,7 @@ import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {IRawSlot, RawSlot} from "../model/rawSlot";
 import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
-import { HENG_2017_APR } from "../tests/testData/heng_2017_apr";
+// import { HENG_2017_APR } from "../tests/testData/heng_2017_apr";
 import { Str } from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
 import { VerticalAlign } from "./panels/verticalAlign";
@@ -128,12 +128,12 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         );
     }
 
-    public componentDidMount() {
-        this.props.handleLoadSlot(HENG_2017_APR());
-        this.setState({
-            redirect: true
-        });
-    }
+    // public componentDidMount() {
+    //     this.props.handleLoadSlot(HENG_2017_APR());
+    //     this.setState({
+    //         redirect: true
+    //     });
+    // }
 
     public onSuggestionsFetchRequested = (event) => {
         const newSuggestions =
