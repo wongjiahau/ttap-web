@@ -2,7 +2,7 @@
 const Cytoscape = window.cytoscape; // Imported at index.html via CDN
 import {Identifiable} from "../interfaces/identifiable";
 import { ChosenColors } from "../react/colors/colors";
-const OUTER_LEFT_PADDING = 50; 
+const OUTER_LEFT_PADDING = 50;
 const OUTER_TOP_PADDING = 200;
 const INNER_LEFT_PADDING = 50;
 const TOP_PADDING = 70;
@@ -12,7 +12,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;
     private nextPointOfTime = 0; // ms
     private renderings: Array<() => void> = [];
-    private connectCount = 0;
+    private searchedPathCount = 0; // This is for keeping track of how many search path the algorithm has gone through
 
     public constructor() {
         this.renderings.push(() => {
@@ -105,7 +105,6 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     }
 
     public connect(x: T, y: T): void {
-        this.connectCount ++;
         this.renderings.push(() => {
             // setTimeout is used to delay the rendering
             // so that that the effect of animation can be seen
@@ -124,14 +123,21 @@ export class FindTimetableVisualizer<T extends Identifiable> {
         });
     }
 
+    public increaseSearchedPathCount() {
+        this.searchedPathCount ++;
+    }
+
     public animate(): void {
         const ANIMATION_START_DELAY = 50; // ms
-        console.log(this.connectCount);
         setTimeout(() => {
             for (let i = 0; i < this.renderings.length; i++) {
                 this.renderings[i]();
             }
         }, ANIMATION_START_DELAY);
+    }
+
+    public getSearchedPathCount() {
+        return this.searchedPathCount;
     }
 }
 

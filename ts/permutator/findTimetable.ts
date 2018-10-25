@@ -63,8 +63,8 @@ export function FindTimetable(
             });
             if (ptr === last) {
                 result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].State));
+                visualizer.increaseSearchedPathCount();
                 if (result.length >= LIMIT) { // if too much timetable just return the result
-                    visualizer.animate();
                     return result;
                 }
                 snapshots.pop();
@@ -76,7 +76,6 @@ export function FindTimetable(
                         indices[ptr].Value = 0;
                         snapshots.pop();
                         if (ptr === 0) {
-                            visualizer.animate();
                             return result;
                         }
                         ptr--;
@@ -86,6 +85,7 @@ export function FindTimetable(
                 ptr++;
             }
         } else {
+            visualizer.increaseSearchedPathCount();
             while (true) {
                 indices[ptr].Value++;
                 if (indices[ptr].Value <= indices[ptr].UpperLimit) {
@@ -94,7 +94,6 @@ export function FindTimetable(
                     indices[ptr].Value = 0;
                     snapshots.pop();
                     if (ptr === 0) {
-                        visualizer.animate();
                         return result;
                     }
                     ptr--;

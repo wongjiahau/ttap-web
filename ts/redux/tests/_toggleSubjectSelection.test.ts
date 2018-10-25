@@ -7,6 +7,7 @@ import { FindTimetableWithoutConsideringWeekNumber } from "../../permutator/find
 import { IndexOf } from "../../tests/testData/heng_2017_sept";
 import { GetMockInitialState, GetTestRawSlot1, GetTestSubjects1 } from "../../tests/testDataGenerator";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
+import { ToggleIsEnabledOfAlgorithmVisualizer } from "../actions/toggleIsEnabledOfAlgorithmVisualizer";
 import { NewSubjectListState } from "../reducers/subjectListState";
 import { ToggleSubjectListViewingOptions } from "./../actions/toggleSubjectListViewingOption";
 import { CheckForClashesBetween, GetSelectedSlots, ToggleSubjectSelection } from "./../actions/toggleSubjectSelection";
@@ -174,6 +175,14 @@ describe("toggle subject selection action", () => {
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
             expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group");
+        });
+
+        it("should set searchedPathCount of algorithmVisualizerState if algorithm visualizer is enabled", () => {
+            const initialState = GetMockInitialState();
+            expect(initialState.AlgorithmVisualizerState.searchedPathCount).to.eq(0);
+            let newState = MasterStateReducer(initialState, new ToggleIsEnabledOfAlgorithmVisualizer(true));
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP));
+            expect(newState.AlgorithmVisualizerState.searchedPathCount).to.eq(2);
         });
     });
 

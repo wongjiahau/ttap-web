@@ -1,5 +1,6 @@
 import * as typeName from "type-name";
 import {Action} from "../actions/action";
+import { IAlgorithmVisualizerState, NewAlgorithmVisualizerState } from "./algorithmVisualizerState";
 import { IDataState, NewDataState } from "./dataState";
 import {GenerateReducer} from "./generateReducer";
 import {ISaveTimetableDialogState, NewSaveTimetableDialogState} from "./saveTimetableDialogState";
@@ -11,7 +12,6 @@ import {ISnackbarState, NewSnackbarState} from "./snackbarState";
 import {ISubjectListState, NewSubjectListState} from "./subjectListState";
 import {ITimetableCreatorState, NewTimetableCreatorState} from "./timetableCreatorState";
 import {ITimetableListState, NewTimetableListState} from "./timetableListState";
-import { NewAlgorithmVisualizerState, IAlgorithmVisualizerState } from "./algorithmVisualizerState";
 
 export interface IMasterState {
     DataState:                IDataState;

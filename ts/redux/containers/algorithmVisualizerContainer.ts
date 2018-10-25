@@ -1,12 +1,14 @@
 import {connect} from "react-redux";
-import { IAlgorithmVisualizerViewDispatchProps, AlgorithmVisualizerView, IAlgorithmVisualizerViewStateProps } from "../../react/algorithmVisualizerView";
+import { AlgorithmVisualizerView, IAlgorithmVisualizerViewDispatchProps, IAlgorithmVisualizerViewStateProps } from "../../react/algorithmVisualizerView";
 import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
-import { IAlgorithmVisualizerState } from "../reducers/algorithmVisualizerState";
+import { IMasterState } from "../reducers/masterState";
 
 const mapStateToProps = (state): IAlgorithmVisualizerViewStateProps => {
-    const target = state.MasterStateReducer.AlgorithmVisualizerState as IAlgorithmVisualizerState;
+    const masterState = state.MasterStateReducer as IMasterState;
     return {
-        open: target.isOpen
+        open: masterState.AlgorithmVisualizerState.isOpen,
+        expectedHitCount: masterState.TimetableListState.FiltrateTimetables.length,
+        actualHitCount: masterState.AlgorithmVisualizerState.searchedPathCount
     };
 };
 

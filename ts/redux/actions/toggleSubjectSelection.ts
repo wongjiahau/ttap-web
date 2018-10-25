@@ -21,11 +21,12 @@ export class ToggleSubjectSelection extends MasterStateAction {
     }
     public TypeName() : string {return "toggle subject selection"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x,
-            state.AlgorithmVisualizerState.isEnabled ?
+        const visualizer = state.AlgorithmVisualizerState.isEnabled ?
             new FindTimetableVisualizer() :
-            new NullFindTimetableVisualizer()
-        );
+            new NullFindTimetableVisualizer();
+
+        CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x, visualizer);
+
         RawSlotStore = state.DataState.RawSlotDataRouter.GetCurrentData();
         const newSubjects = state
             .SubjectListState
@@ -36,10 +37,23 @@ export class ToggleSubjectSelection extends MasterStateAction {
         const targetSubject = newSubjects[this.subjectIndex];
         if (targetSubject.ClashReport !== null) {
             return state;
+        } else {
+            const result = targetSubject.IsSelected
+                ? DeselectSubject(targetSubject, newSubjects, state)
+                : SelectSubject(targetSubject, newSubjects, state);
+            if (state.AlgorithmVisualizerState.isEnabled) {
+                visualizer.animate();
+                return {
+                    ...result,
+                    AlgorithmVisualizerState: {
+                        ...state.AlgorithmVisualizerState,
+                        searchedPathCount: visualizer.getSearchedPathCount()
+                    }
+                };
+            } else {
+                return result;
+            }
         }
-        return targetSubject.IsSelected
-            ? DeselectSubject(targetSubject, newSubjects, state)
-            : SelectSubject(targetSubject, newSubjects, state);
     }
 }
 
