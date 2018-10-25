@@ -50,7 +50,7 @@ export class AlgorithmVisualizerView extends React.Component<
                     <b>{((this.props.fullSearchPathCount - this.props.actualHitCount) /
                         this.props.fullSearchPathCount * 100).toFixed(2)}%</b>
                     <br/>
-                    Time taken: <b>{(this.props.timeTaken / 1000).toFixed(2)} seconds</b>
+                    Time taken = <b>{(this.props.timeTaken / 1000).toFixed(2)} seconds</b>
                 </p>
             </Dialog>
         );

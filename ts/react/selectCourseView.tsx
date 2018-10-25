@@ -128,6 +128,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         );
     }
 
+    // The code below should be uncommented during development phase
     // public componentDidMount() {
     //     this.props.handleLoadSlot(HENG_2017_APR());
     //     this.setState({

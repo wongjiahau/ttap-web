@@ -1,9 +1,11 @@
+import { FormControlLabel } from "material-ui";
 import IconList from "material-ui-icons/List";
 import Button from "material-ui/Button";
 import Switch from "material-ui/Switch";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {RawSlot} from "../model/rawSlot";
+import { AlgorithmVisualizerViewContainer } from "../redux/containers/algorithmVisualizerContainer";
 import { SaveTimetableDialogContainer } from "../redux/containers/saveTimetableDialogContainer";
 import { SetTimeConstraintContainer } from "../redux/containers/setTimeConstraintContainer";
 import { SlotsTableContainer } from "../redux/containers/slotsTableContainer";
@@ -14,11 +16,10 @@ import {SBCWDialogContainer} from "../redux/containers/turnOnSBCWDialogContainer
 // import {HENG_2017_APR} from "../tests/testData/heng_2017_apr";
 import { GetTestRawSlot1, GetTestSlot1 } from "../tests/testDataGenerator";
 import TestManager, { FileName } from "../tests/testManager";
+import { AlgorithmVisualizerView } from "./algorithmVisualizerView";
 import { LeftRightPanel } from "./panels/leftRightPanel";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
-import { AlgorithmVisualizerView } from "./algorithmVisualizerView";
-import { AlgorithmVisualizerViewContainer } from "../redux/containers/algorithmVisualizerContainer";
 
 const switchStyle : React.CSSProperties = {
     marginRight: 0.03 * window.innerWidth
@@ -68,10 +69,13 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                     </Button>
                     <div style={switchStyle}>
                         <StackPanel horizontalAlignment="right" orientation="horizontal">
-                            Search by considering week number
-                            <Switch style={switchStyle}
-                                checked={this.props.isSbcwTurnedOn}
-                                onChange={this.handleSwitchToggled}/>
+                            <FormControlLabel
+                                label="Search by considering week number"
+                                control={<Switch style={switchStyle}
+                                            color="primary"
+                                            checked={this.props.isSbcwTurnedOn}
+                                            onChange={this.handleSwitchToggled}/>}/>
+                            {""/*This is for overcoming a bug of StackPanel */}
                         </StackPanel>
                     </div>
                 </LeftRightPanel>
