@@ -24,6 +24,7 @@ IGetStartedState > {
             return (
                 <VerticalAlign>
                     <StackPanel orientation="vertical" horizontalAlignment="center">
+                        <img src={window.PUBLIC_URL + "/big_calendar.png"}></img>
                         <Typography type="display3">Welcome to TTAP!</Typography>
                         <Button raised={true} color="secondary" onClick={this.handleClick}>
                             <IconList style={iconStyle}/>

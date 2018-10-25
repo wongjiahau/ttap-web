@@ -16,6 +16,12 @@ node_js: # specify version of node js
 cache: # cache node modules so that every build don't have to reinstall those node package again
   directories:
     - "node_modules"
+    
+before_script:
+  # This is needed so that the command $(git rev-list --count --all) can work properly 
+  # That command will be run by ./scripts/build
+  # For more info, refer https://github.com/travis-ci/travis-ci/issues/3412
+  - git fetch --unshallow 
 
 script:
   - echo "Running script:"

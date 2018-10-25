@@ -87,7 +87,7 @@
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
 
-    <header id="header" style="position:absolute; top:2px; right:5px;font-size:10px"></header>
+    <header id="header" style="position:absolute; top:2px; right:5px;font-size:10px">Revision: LAST_REVISION</header>
     <script>
         function httpGetAsync(theUrl, callback)
         {
@@ -101,8 +101,8 @@
         }
     </script>
     <script>
+        window.PUBLIC_URL = "%PUBLIC_URL%"; // This is required by getStarted.tsx
         // CheckIfThisIsTheLatestVersion();
-        GetLastUpdateDate();
 
         function CheckIfThisIsTheLatestVersion() {
             const lastGitCommitHash = "LGCH"; 
@@ -113,23 +113,19 @@
                 }
             });
         }
-        function GetLastUpdateDate(){
-            relativeDate=function(e){var a=6e4,o=36e5,t=24*o,n=7*t,r=365*t,g=r/12,u=[[42e3,"just now"],[9e4,"a minute ago"],[36e5,"minutes ago",a],[54e5,"an hour ago"],[t,"hours ago",o],[2*t,"yesterday"],[7*t,"days ago",t],[1.5*n,"a week ago"],[g,"weeks ago",n],[1.5*g,"a month ago"],[r,"months ago",g],[1.5*r,"a year ago"],[Number.MAX_VALUE,"years ago",r]];return function(a,o){!o&&(o=(new Date).getTime()),o instanceof Date&&(o=o.getTime()),a instanceof Date&&(a=a.getTime());var t,n,r,g=o-a;for(n=-1,r=u.length;++n<r;)if(g<(t=u[n])[0])return t[2]==e?t[1]:Math.round(g/t[2])+" "+t[1]}}();"undefined"!=typeof module&&module.exports&&(module.exports=relativeDate);
-            const relative = relativeDate(new Date("TIMESTAMP"));
-            document.getElementById("header").innerText = "Last update : " + relative; 
-        }
-
         function WhatToDoIfNewerVersionOfTTAPdetected() {
             const message = 
             `
-            <button style='position:fixed;top:20px;right:5px;cursor:pointer;'
-            onclick='document.getElementById("errorMessage").innerHTML = "";'>
-                CLOSE THIS MESSAGE</button>
-            <h2>A newer version of TTAP is detected.</h2>
-            <h1>Press <em>F5</em> to get the latest version of TTAP.</h1>
+            <br/>
+            <span>A newer version of TTAP is detected. Do you want to reload to get the latest version of TTAP?</span>
+            <button class="MuiButtonBase-root-51 MuiButton-root-37 MuiButton-raised-43 MuiButton-raisedSecondary-46" 
+                onclick='location.reload(true)'> Reload </button>
+            <button class="MuiButtonBase-root-51 MuiButton-root-37 MuiButton-raised-43" 
+                onclick='document.getElementById("errorMessage").innerHTML = "";'>
+                Nevermind </button>
+            <br/><br/>
             `;
             document.getElementById("errorMessage").innerHTML = message;
-            document.getElementById("initialLoadingCube").innerHTML = "";
         }
     </script>
 
