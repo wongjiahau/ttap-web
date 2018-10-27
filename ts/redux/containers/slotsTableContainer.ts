@@ -38,7 +38,7 @@ import {
 import {
     ISubjectListState
 } from "../reducers/subjectListState";
-import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 
 const mapStateToProps = (state): ISlotsTableViewStateProps => {
     const slotsTableState = state.MasterStateReducer.SlotTableState as ISlotsTableState;
@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
         handleDone: () => {
             dispatch(new FindTimetablesBasedOnChosenSlots());
             dispatch(new UpdateTotalState());
-            dispatch(new FindAlternativeSlotsOfCurrentSlot());
+            dispatch(new FindAlternativeSlotsOfCurrentSlots());
         },
         handleCancel: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
         handleSlotCheckChanged: (slotNumber: string, checked: boolean, subjectCode: string) =>

@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
-import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";
 import {ToggleIsOpenOfSlotsTable} from "../actions/toggleIsOpenOfSlotsTable";
@@ -34,7 +34,7 @@ const mapStateToProps = (state) : ITimetableListViewStateProps => {
 const mapDispatchToProps = (primitiveDispatch) : ITimetableListViewDispatchProps => {
     const dispatch = (action: MasterStateAction) => {
         primitiveDispatch(action);
-        primitiveDispatch(new FindAlternativeSlotsOfCurrentSlot());
+        primitiveDispatch(new FindAlternativeSlotsOfCurrentSlots());
     };
     return {
         handleGoToNext:                  () => dispatch(new GoToNextTimetable()),

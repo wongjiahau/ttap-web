@@ -1,7 +1,8 @@
 import { IRawSlot, RawSlot } from "./rawSlot";
 
 export interface ISlotViewModel {
-    Uid: number; //
+    Uid: number; // unique for every slots
+    SlotNumber: number; // not unique for every slots
     CurrentChoice: number; // zero-based index
     SubjectCode: string;
     SubjectName: string;
@@ -19,6 +20,7 @@ export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
     const group = rawSlot.Group.split("/");
     return {
         Uid:              rawSlot.Uid,
+        SlotNumber:       parseInt(rawSlot.Number, 10),
         CurrentChoice:    0,
         SubjectCode:      rawSlot.SubjectCode,
         SubjectName:      rawSlot.SubjectName,

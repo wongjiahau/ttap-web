@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { CreateSlotViewModel } from "../../model/slotViewModel";
 import { GetMockInitialState } from "../../tests/testDataGenerator";
 import { FilterTimetable } from "../actions/filterTimetable";
-import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import { GoToNextTimetable } from "../actions/goToNextTimetable";
 import { GoToPrevTimetable } from "../actions/goToPrevTimetable";
 import { GoToRandomTimetable } from "../actions/goToRandomTimetable";
@@ -18,7 +18,7 @@ describe("showAlternateSlot action", () => {
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.FM2));
         const newState1 = MasterStateReducer(newState0, new ToggleSubjectSelection(IndexOf.FM1));
         let newState2 = MasterStateReducer(newState1, new ToggleSubjectSelection(IndexOf.ASSD));
-        newState2 = MasterStateReducer(newState2, new FindAlternativeSlotsOfCurrentSlot());
+        newState2 = MasterStateReducer(newState2, new FindAlternativeSlotsOfCurrentSlots());
         const slotsToBeClicked = newState2.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.Type === "T" &&
@@ -72,7 +72,7 @@ describe("showAlternateSlot action", () => {
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ASSD));
         const greenBoxToBeClicked = new STCBox(StateKind.MaybeOccupied, 1, parseInt("10000", 2), 4);
         let newState1 = MasterStateReducer(newState0, new FilterTimetable(greenBoxToBeClicked));
-        newState1 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlot());
+        newState1 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlots());
         const slotsToBeClicked = newState1.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.SubjectCode === "UEMX4313" &&

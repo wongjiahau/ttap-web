@@ -1,7 +1,7 @@
 import {
     connect
 } from "react-redux";
-import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {
     HideSnackbar
 } from "../actions/hideSnackbar";

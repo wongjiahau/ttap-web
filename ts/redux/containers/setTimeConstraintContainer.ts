@@ -1,4 +1,4 @@
-import { FindAlternativeSlotsOfCurrentSlot } from "./../actions/findAlternativeSlotsOfCurrentSlots";
+import { FindAlternativeSlotsOfCurrentSlots } from "./../actions/findAlternativeSlotsOfCurrentSlots";
 
 import {
     connect
@@ -25,7 +25,7 @@ const mapStateToProps = (state): ISetTimeConstraintViewStateProps => {
 const mapDispatchToProps = (dispatch): ISetTimeConstraintViewDispatchProps => {
     return {
         handleCancel: () => {
-            dispatch(new FindAlternativeSlotsOfCurrentSlot());
+            dispatch(new FindAlternativeSlotsOfCurrentSlots());
             dispatch(new ToggleSetTimeConstraintView(false));
         },
         handleDesetTimeConstraintAt: (stcBox: STCBox) => dispatch(new DefilterTimetable(stcBox)),

@@ -6,7 +6,7 @@ import {
     ITurnOnSBCWDialogStateProps,
     TurnOnSBCWDialog
 } from "../../react/turnOnSBCWConfirmationDialog";
-import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {
     FindTimetablesBasedOnChosenSlots
 } from "../actions/findTimetablesBasedOnChosenSlots";
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch): ITurnOnSBCWDialogDispatchProps => {
             dispatch(new FindTimetablesBasedOnChosenSlots());
             dispatch(new UpdateTotalState());
             dispatch(new NotifyIfTimetableIsFound());
-            dispatch(new FindAlternativeSlotsOfCurrentSlot());
+            dispatch(new FindAlternativeSlotsOfCurrentSlots());
         },
     };
 };

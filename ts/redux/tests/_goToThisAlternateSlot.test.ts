@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { CreateSlotViewModel } from "../../model/slotViewModel";
 import { GetMockInitialState } from "../../tests/testDataGenerator";
-import { FindAlternativeSlotsOfCurrentSlot } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import { GoToNextTimetable } from "../actions/goToNextTimetable";
 import { GoToPrevTimetable } from "../actions/goToPrevTimetable";
 import { GoToRandomTimetable } from "../actions/goToRandomTimetable";
@@ -15,7 +15,7 @@ describe("showAlternateSlot action", () => {
     it("should set alternate slots based on clicked slot", () => {
         const initialState = GetMockInitialState("heng_2017_apr");
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ASSD));
-        const newState1 = MasterStateReducer(newState0, new FindAlternativeSlotsOfCurrentSlot());
+        const newState1 = MasterStateReducer(newState0, new FindAlternativeSlotsOfCurrentSlots());
         const slotsToBeClicked = newState1.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.SubjectCode === "UEMX4313" &&

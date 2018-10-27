@@ -54,13 +54,14 @@ export function FindTimetable(
         if (ptr > 0) { // this block is for plotting edge
             const prevPtr = ptr - 1;
             const previousSlot = partitioned[prevPtr][indices[prevPtr].Value];
-            visualizer.connect(previousSlot, current);
+            visualizer.connect(previousSlot, current); // this is for animation purpose
         }
         if (!GotIntersection(current.State, prevSnapshot.State)) {
             snapshots.push({
                 SlotIds: concat(current.SlotIds, prevSnapshot.SlotIds),
-                State: Append(current.State, prevSnapshot.State) // concat(current.State, prevSnapshot.State)
+                State: Append(current.State, prevSnapshot.State)
             });
+            // console.log(current.State[0].toString(2).replace(/0+$/, ""));
             if (ptr === last) {
                 result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].State));
                 visualizer.increaseSearchedPathCount();
