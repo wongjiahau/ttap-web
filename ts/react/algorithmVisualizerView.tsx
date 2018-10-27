@@ -19,6 +19,7 @@ export interface IAlgorithmVisualizerViewStateProps {
     actualHitCount: number;
     fullSearchPathCount: number;
     timeTaken: number;
+    handleClearAnimation: () => void;
 }
 
 export class AlgorithmVisualizerView extends React.Component<
@@ -32,7 +33,10 @@ export class AlgorithmVisualizerView extends React.Component<
                         <Typography type="title" color="inherit" style={{flex: 1}}>
                             Algorithm Visualizer
                         </Typography>
-                        <IconButton color="inherit" onClick={this.props.handleClose} aria-label="Close">
+                        <IconButton color="inherit" onClick={() => {
+                            this.props.handleClearAnimation();
+                            this.props.handleClose();
+                        } } aria-label="Close">
                             <CloseIcon />
                         </IconButton>
                     </Toolbar>

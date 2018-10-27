@@ -5,8 +5,8 @@ import { ChosenColors } from "../react/colors/colors";
 const OUTER_LEFT_PADDING = 50;
 const OUTER_TOP_PADDING = 200;
 const INNER_LEFT_PADDING = 50;
-const TOP_PADDING = 70;
-let DELAY_MS = 50;
+const TOP_PADDING = 100;
+let DELAY_MS = 100;
 
 export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;
@@ -15,6 +15,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
     private searchedPathCount = 0; // This is for keeping track of how many search path the algorithm has gone through
     private fullSearchPathCount = 0;
     private startTime = 0;
+    private previousTimerIds: NodeJS.Timer[] = [];
 
     public constructor() {
         this.renderings.push(() => {
@@ -116,7 +117,7 @@ export class FindTimetableVisualizer<T extends Identifiable> {
         this.renderings.push(() => {
             // setTimeout is used to delay the rendering
             // so that that the effect of animation can be seen
-            setTimeout(() => {
+            this.previousTimerIds.push(setTimeout(() => {
                 this.cy.add({
                     data: {
                         id: x.Uid + "->" + y.Uid + Math.random(),
@@ -125,10 +126,16 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                     },
                     classes: "bezier" // "haystack",
                 });
-            }, this.nextPointOfTime);
+            }, this.nextPointOfTime));
             this.nextPointOfTime += DELAY_MS; // ms
             DELAY_MS -= 0.0001; // this is needed to create an accelerating animation
         });
+    }
+
+    public clearPreviousAnimation = () => {
+        // clear previous timers that are scheduled for the animation
+        this.previousTimerIds.forEach((x) => clearTimeout(x));
+        this.previousTimerIds = [];
     }
 
     public increaseSearchedPathCount() {

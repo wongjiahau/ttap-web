@@ -4,6 +4,7 @@ export interface IAlgorithmVisualizerState {
     searchedPathCount: number;
     fullSearchPathCount: number;
     timeTaken: number;
+    clearAnimation: () => void;
 }
 
 export function NewAlgorithmVisualizerState(): IAlgorithmVisualizerState {
@@ -12,6 +13,7 @@ export function NewAlgorithmVisualizerState(): IAlgorithmVisualizerState {
         isEnabled: false,
         searchedPathCount: 0,
         fullSearchPathCount: 0,
-        timeTaken: 0
+        timeTaken: 0,
+        clearAnimation: () => {/* do nothing */}
     };
 }
