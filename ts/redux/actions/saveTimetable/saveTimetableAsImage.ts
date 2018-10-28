@@ -25,6 +25,15 @@ export class SaveTimetableAsImage extends SaveTimetable {
         .arrow-down-button {
             display: none
         }
+        .slot-view {
+            border:        0.5px;
+            border-radius: 5px;
+            border-style: solid;
+            font-family: "roboto";
+            font-size: 13.5px;
+            width: 100%;
+            text-align: center;
+        }
     </style>
     ${html}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
