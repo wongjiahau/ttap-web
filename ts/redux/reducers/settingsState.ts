@@ -1,6 +1,6 @@
 import { RawSlot } from "../../model/rawSlot";
 import { Timetable } from "../../model/timetable";
-import { FindTimetableWithoutConsideringWeekNumber } from "../../permutator/findTimetable";
+import { FindTimetableByConsideringWeekNumber, FindTimetableWithoutConsideringWeekNumber } from "../../permutator/findTimetable";
 import { FindTimetableVisualizer } from "../../permutator/findTimetableVisualizer";
 import { IOptimizedSlot } from "../../permutator/tinySlot";
 
@@ -13,7 +13,7 @@ export interface ISettingsState {
 
 export function NewSettingsState() : ISettingsState {
     return {
-        SearchByConsideringWeekNumber: false,
-        TimetableFinder: FindTimetableWithoutConsideringWeekNumber
+        SearchByConsideringWeekNumber: true,
+        TimetableFinder: FindTimetableByConsideringWeekNumber
     };
 }
