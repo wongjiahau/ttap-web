@@ -11,6 +11,7 @@ import { BeautifySubjectName } from "../../util/beautifySubjectName";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction, MasterStateReducer} from "./../reducers/masterState";
 import {ToggleSubjectListViewingOptions} from "./toggleSubjectListViewingOption";
+import { GroupSimilarTimetablesTogether } from "../../permutator/findTimetable";
 
 let CurrentTimetableFinder : (rawSlots : RawSlot[]) => Timetable[];
 let RawSlotStore : ObjectStore<RawSlot>;
@@ -25,7 +26,8 @@ export class ToggleSubjectSelection extends MasterStateAction {
             new FindTimetableVisualizer() :
             new NullFindTimetableVisualizer();
 
-        CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x, visualizer);
+        CurrentTimetableFinder = (x) => (state.SettingsState.TimetableFinder(x, visualizer));
+        //    GroupSimilarTimetablesTogether(state.SettingsState.TimetableFinder(x, visualizer));
 
         RawSlotStore = state.DataState.RawSlotDataRouter.GetCurrentData();
         const newSubjects = state

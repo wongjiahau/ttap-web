@@ -34,10 +34,10 @@ export function GeneralizeSlot(originalSlots : RawSlot[]) : RawSlot[] {
                 if (results.some((x) => x.Number === r.Number && x.Uid !== r.Uid)) {
                     continue;
                 }
-                r.Number += "/" + s.Number;
-                r.Group += "/" + s.Group;
+                r.Number     += "/" + s.Number;
+                r.Group      += "/" + s.Group;
                 r.WeekNumber += "/" + s.WeekNumber;
-                r.Room += "/" + s.Room;
+                r.Room       += "/" + s.Room;
                 generalized = true;
                 break;
             }

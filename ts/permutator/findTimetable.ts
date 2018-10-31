@@ -117,3 +117,23 @@ export function FindTimetableByConsideringWeekNumber(
 ) : Timetable[] {
     return FindTimetable(ParseSlotToBigSlot(ParseRawSlotToSlot(rawSlots)), visualizer);
 }
+
+
+/**
+ * Group similar timetables together.
+ * Similar means timetables with the same State
+ *
+ * @param {Timetable[]} timetables
+ * @returns {Timetable[]}
+ */
+export function GroupSimilarTimetablesTogether(timetables: Timetable[]): Timetable[] {
+    const result: {[state: string]: Timetable} = {};
+    for (let i = 0; i < timetables.length; i++) {
+        const t = timetables[i];
+        const state = t.State.toString(); // Refer https://stackoverflow.com/questions/4025893/how-to-check-identical-array-in-most-efficient-way
+        if(!result[state]) {
+            result[state] = t;
+        } else continue;
+    }
+    return Object.keys(result).map((x) => result[x]);
+}
