@@ -1,6 +1,6 @@
 import Button from "material-ui/Button";
 import * as React from "react";
-import * as ReactGridLayout from "react-grid-layout";
+import * as ReactGridLayout from "../../modified_node_modules/react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
 import {RawSlot} from "../../model/rawSlot";
 import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
@@ -137,7 +137,7 @@ export const GenerateHorizontalDividers = (skeleton: ISkeleton) : ISkeleton => {
             <div key={layoutId} style={dividerStyle}/>
         );
     };
-    const dividers = [];
+    const dividers: JSX.Element[] = [];
     for (let i = 1; i <= 6; i++) {
         dividers.push(getDivider("divider" + i));
     }
@@ -148,7 +148,6 @@ export const GenerateHorizontalDividers = (skeleton: ISkeleton) : ISkeleton => {
             i: ( "divider" + i ),
             w: ( TimePeriod.Max.Hour - TimePeriod.Min.Hour ) * 2,
             x: 2,
-            static: true
         });
     }
     return {

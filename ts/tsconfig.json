@@ -8,6 +8,7 @@
         "jsx": "react",
         "strictNullChecks": true,
         "strict": false,
-        "lib": ["es5", "es6", "dom"]
+        "lib": ["es5", "es6", "dom"],
+        "allowJs": true
     }
 }
