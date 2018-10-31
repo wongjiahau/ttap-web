@@ -1,42 +1,14 @@
-import {
-    expect
-} from "chai";
-import {
-    isEqual
-} from "lodash";
-import {
-    RawSlot
-} from "../../model/rawSlot";
-import {
-    CodeOf,
-    GetTestSubjects1,
-    IndexOf
-} from "../../tests/testDataGenerator";
-import {
-    ToggleSelectionOnGroupOfSlots
-} from "../actions/toggleSelectionOnGroupOfSlots";
-import {
-    ToggleSubjectSelection
-} from "../actions/toggleSubjectSelection";
-import {
-    UpdateSlotsTableState
-} from "../actions/updateSlotsTableState";
-import {
-    NewSubjectListState
-} from "../reducers/subjectListState";
-import {
-    IMasterState,
-    MasterStateReducer,
-    NewMasterState
-} from "./../reducers/masterState";
-
-function getInitialState(): IMasterState {
-    RawSlot.Reset();
-    return {
-        ...NewMasterState(),
-        SubjectListState: NewSubjectListState(GetTestSubjects1())
-    };
-}
+import { expect } from "chai";
+const isEqual = require("lodash.isequal");
+import { RawSlot } from "../../model/rawSlot";
+import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
+import { GetMockInitialState, GetTestRawSlot1, GetTestSubjects1, } from "../../tests/testDataGenerator";
+import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
+import { ToggleSelectionOnGroupOfSlots } from "../actions/toggleSelectionOnGroupOfSlots";
+import { ToggleSubjectSelection } from "../actions/toggleSubjectSelection";
+import { UpdateSlotsTableState } from "../actions/updateSlotsTableState";
+import { NewSubjectListState } from "../reducers/subjectListState";
+import { IMasterState, MasterStateReducer, NewMasterState } from "./../reducers/masterState";
 
 describe("ToggleSelectionOnGroupOfSlots action", () => {
     it("'s typename should be 'toggle selection on group of slots of ... '", () => {
@@ -48,7 +20,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // Given Ali selected subject Hubungan Etnik
         // When Ali toggle group slot selection on HE
         // Then Ali shall see that all slots of HE is deselected
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         expect(newState.SlotTableState.SlotStates).to.deep.eq({
@@ -70,7 +42,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // When Ali toggle group slot selection on HE
         // And Ali toggle group slot selection on HE again
         // Then Ali shall see that all slots of HE is selected
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
@@ -91,7 +63,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // Given Ali selected subject Hubungan Etnik
         // When Ali toggle group slot selection on HE
         // Then Ali shall see that the checkbox of HE is unchecked
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));
@@ -103,7 +75,7 @@ describe("ToggleSelectionOnGroupOfSlots action", () => {
         // When Ali toggle group slot selection on HE
         // And Ali toggle group slot selection on HE again
         // Then Ali shall see that the checkbox of HE is checked
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new UpdateSlotsTableState());
         newState = MasterStateReducer(newState, new ToggleSelectionOnGroupOfSlots(CodeOf.HE));

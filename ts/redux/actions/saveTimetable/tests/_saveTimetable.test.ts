@@ -1,22 +1,14 @@
+const isEqual = require("lodash.isequal");
 import {expect} from "chai";
-import {isEqual} from "lodash";
-import { GetTestTimetables1 } from "../../../../tests/testDataGenerator";
-import { NewTimetableListState } from "../../../reducers/timetableListState";
+import { GetMockInitialState } from "../../../../tests/testDataGenerator";
 import { ToggleIsOpenOfGetDateDialog } from "../../toggleIsOpenOfGetDateDialog";
 import {ToggleIsOpenOfSaveDialog} from "../../toggleIsOpenOfSaveDialog";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../../../reducers/masterState";
 import {MockSaveTimetable} from "./../saveTimetable";
 
-function getInitialState() : IMasterState {
-    return {
-        ...NewMasterState(),
-        TimetableListState: NewTimetableListState(GetTestTimetables1())
-    };
-}
-
 describe("SaveTimetable action", () => {
     it("should set IsMainDialogOpen property to false", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleIsOpenOfSaveDialog(true));
         expect(newState.SaveTimetableDialogState.IsMainDialogOpen).to.eq(true);
         newState = MasterStateReducer(newState, new MockSaveTimetable());
@@ -24,7 +16,7 @@ describe("SaveTimetable action", () => {
     });
 
     it("should set IsGetDateDialogOpen property to false", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleIsOpenOfGetDateDialog(true));
         expect(newState.SaveTimetableDialogState.IsGetDateDialogOpen).to.eq(true);
         newState = MasterStateReducer(newState, new MockSaveTimetable());

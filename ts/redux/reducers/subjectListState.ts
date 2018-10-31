@@ -5,9 +5,6 @@ import {
 import {
     Action
 } from "../actions/action";
-import {
-    GetTestSubjects1
-} from "./../../tests/testDataGenerator";
 
 export interface ISubjectListState {
     ClashingSubjectPairs:         Array < [Subject, Subject] > ;
@@ -25,7 +22,7 @@ export function NewSubjectListState(subjects: Subject[]) : ISubjectListState {
         IsShowingLoadingBar:          false,
         IsShowingSelectedSubjectOnly: false,
         SearchedText:                 "",
-        Subjects:                     subjects
+        Subjects:                     subjects,
     };
 }
 

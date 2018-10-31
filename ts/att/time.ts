@@ -83,16 +83,13 @@ export class Time {
     }
 
     public LessThan(other: Time): boolean {
-        if (this.Hour < other.Hour) {
-            return true;
-        }
-        if (this.Hour > other.Hour) {
+        if (this.MoreThan(other)) {
             return false;
         }
-        if (this.Minute < other.Minute) {
-            return true;
+        if (this.Equal(other)) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public MoreThan(other: Time): boolean {

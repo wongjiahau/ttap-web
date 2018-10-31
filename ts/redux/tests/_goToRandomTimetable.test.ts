@@ -1,27 +1,14 @@
-import {
-    expect
-} from "chai";
-import {
-    isEqual
-} from "lodash";
-import {
-    Timetable
-} from "../../model/timetable";
-import {
-    NewTimetableListState
-} from "../reducers/timetableListState";
-import {
-    GoToRandomTimetable
-} from "./../actions/goToRandomTimetable";
-import {
-    IMasterState,
-    MasterStateReducer,
-    NewMasterState
-} from "./../reducers/masterState";
+import { expect } from "chai";
+const isEqual = require("lodash.isequal");
+import { Timetable } from "../../model/timetable";
+import { GetTestRawSlot1 } from "../../tests/testDataGenerator";
+import { NewTimetableListState } from "../reducers/timetableListState";
+import { GoToRandomTimetable } from "./../actions/goToRandomTimetable";
+import { IMasterState, MasterStateReducer, NewMasterState } from "./../reducers/masterState";
 
 function getInitialState(timetables: Timetable[]): IMasterState {
     const result = NewMasterState();
-    result.TimetableListState = NewTimetableListState(timetables);
+    result.TimetableListState = NewTimetableListState(timetables, GetTestRawSlot1());
     return result;
 }
 

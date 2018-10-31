@@ -15,6 +15,8 @@ upload_files() {
   git push --set-upstream origin-pages code-cov -f
 }
 
+HASH=$(git rev-parse HEAD)
+echo $HASH > lastcommithash.txt
 rm ./.travis.yml #remove this file so that travis won't run build on the code-cov branch
 mv codecov.travis.yml .travis.yml #let travis upload code coverage report
 

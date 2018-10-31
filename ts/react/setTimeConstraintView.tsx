@@ -1,7 +1,7 @@
-import Button from "material-ui-next/Button";
-import Dialog from "material-ui-next/Dialog";
-import Slide from "material-ui-next/transitions/Slide";
-import Typography from "material-ui-next/Typography";
+import Button from "material-ui/Button";
+import Dialog from "material-ui/Dialog";
+// import Slide from "material-ui/transitions/Slide";
+import Typography from "material-ui/Typography";
 import * as React from "react";
 import CountUp from "react-countup";
 import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/states/stcBox";
@@ -39,9 +39,9 @@ const cancelButtonStyle : React.CSSProperties = {
 
 // endregion style
 
-function Transition(props) {
-    return <Slide direction="up" {...props}/>;
-}
+// function Transition(props) {
+//     return <Slide direction="up" {...props}/>;
+// }
 
 type LegendType = "red" | "grey" | "green";
 interface ILegendProps {
@@ -104,7 +104,8 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
     public render() {
         return (
             <div>
-                <Dialog open={this.props.isOpen} fullScreen={true} transition={Transition}>
+                <Dialog open={this.props.isOpen} fullScreen={true}>
+                {/* transition={Transition}> */}
                     <div style={divStyle}>
                         <table style={tableStyle}>
                             <tbody>
@@ -113,7 +114,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                                         <Typography
                                             type="display3"
                                             style={typo1Style}
-                                            gutterBottom={true}
+                                            gutterBottom={false}
                                             align="center">
                                             Set time constraint
                                         </Typography>
@@ -131,27 +132,20 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             </tbody>
                         </table>
                         <TimetableView
-                            timetable={null}
+                            slots={null}
                             states={this.props.totalState}
                             handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}
-                            handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/> {this.props.numberOfRemovedTimetables > 0
-                            ? (
-                                <StackPanel
-                                    orientation="horizontal"
-                                    horizontalAlignment="center"
-                                    >
-                                    <p>Removed</p>
-                                    <CountUp start={0} end={this.props.numberOfRemovedTimetables} duration={0.65}/>
-                                    <p>unsatisfactory timetables.</p>
-                                    <CountUp
-                                        start={0}
-                                        end={this.props.numberOfRemainingTimetables}
-                                        duration={0.65}/>
-                                    <p>timetables remaining</p>
-                                </StackPanel>
-                            )
-                            : <p>{""}</p>
-                            }
+                            handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/>
+
+                        <div>This feature is to help you to reduce the number of possible timetables, so that it will be easier for you to pick your favourite timetables.</div>
+                        <p><i><b>Therefore, click as many green boxes as possible!</b></i></p>
+
+                        <Report
+                            numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
+                            numberOfRemainingTimetables={this.props.numberOfRemainingTimetables} />
+
+                        <br/>
+
                         <Button
                             style={cancelButtonStyle}
                             color="default"
@@ -163,3 +157,24 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
         );
     }
 }
+
+const Report = (props: {
+    numberOfRemovedTimetables: number,
+    numberOfRemainingTimetables: number,
+}) => {
+    const style: React.CSSProperties = {
+        fontSize: "14px"
+    };
+    return (
+    <span style={style}>
+        <StackPanel orientation="horizontal" horizontalAlignment="center">
+            <CountUp start={0} end={props.numberOfRemovedTimetables} duration={0.65}/>
+            <span>timetables are removed.</span>
+            <CountUp
+                start={0}
+                end={props.numberOfRemainingTimetables}
+                duration={0.65}/>
+            <span>timetables remaining.</span>
+        </StackPanel>
+    </span>
+); };

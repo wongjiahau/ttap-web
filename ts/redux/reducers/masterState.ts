@@ -1,8 +1,12 @@
 import * as typeName from "type-name";
 import {Action} from "../actions/action";
+import { IAlgorithmVisualizerState, NewAlgorithmVisualizerState } from "./algorithmVisualizerState";
+import { IDataState, NewDataState } from "./dataState";
 import {GenerateReducer} from "./generateReducer";
 import {ISaveTimetableDialogState, NewSaveTimetableDialogState} from "./saveTimetableDialogState";
+import { ISBCWDialogState, NewSbcwDialogstate } from "./sbcwDialogState";
 import {ISetTimeConstraintState, NewSetTimeConstraintState} from "./setTimeConstraintState";
+import { ISettingsState, NewSettingsState } from "./settingsState";
 import {ISlotsTableState, NewSlotsTableState} from "./slotsTableState";
 import {ISnackbarState, NewSnackbarState} from "./snackbarState";
 import {ISubjectListState, NewSubjectListState} from "./subjectListState";
@@ -10,24 +14,32 @@ import {ITimetableCreatorState, NewTimetableCreatorState} from "./timetableCreat
 import {ITimetableListState, NewTimetableListState} from "./timetableListState";
 
 export interface IMasterState {
+    DataState:                IDataState;
     SaveTimetableDialogState: ISaveTimetableDialogState;
+    SbcwDialogState:          ISBCWDialogState;
     SetTimeConstraintState:   ISetTimeConstraintState;
+    SettingsState:            ISettingsState;
     SlotTableState:           ISlotsTableState;
     SnackbarState:            ISnackbarState;
     SubjectListState:         ISubjectListState;
     TimetableCreatorState:    ITimetableCreatorState;
     TimetableListState:       ITimetableListState;
+    AlgorithmVisualizerState: IAlgorithmVisualizerState;
 }
 
 export function NewMasterState() : IMasterState {
     return {
+        DataState:                NewDataState(),
         SaveTimetableDialogState: NewSaveTimetableDialogState(),
-        SetTimeConstraintState:   NewSetTimeConstraintState(null),
+        SbcwDialogState:          NewSbcwDialogstate (),
+        SetTimeConstraintState:   NewSetTimeConstraintState([]),
+        SettingsState:            NewSettingsState(),
         SlotTableState:           NewSlotsTableState(),
         SnackbarState:            NewSnackbarState(),
-        SubjectListState:         NewSubjectListState(null),
+        SubjectListState:         NewSubjectListState([]),
         TimetableCreatorState:    NewTimetableCreatorState(),
-        TimetableListState:       NewTimetableListState([])
+        TimetableListState:       NewTimetableListState([], []),
+        AlgorithmVisualizerState: NewAlgorithmVisualizerState()
     };
 }
 export abstract class MasterStateAction extends Action < IMasterState > {

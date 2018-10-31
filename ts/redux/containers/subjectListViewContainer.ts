@@ -1,12 +1,14 @@
 import {
     connect
 } from "react-redux";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {
     HideSnackbar
 } from "../actions/hideSnackbar";
 import {
     ToggleIsOpenOfSubjectListView
 } from "../actions/toggleIsOpenOfSubjectListView";
+import { ToggleSetTimeConstraintView } from "../actions/toggleSetTimeConstraintView";
 import {
     UpdateSlotsTableState
 } from "../actions/updateSlotsTableState";
@@ -14,16 +16,11 @@ import {
     UpdateTotalState
 } from "../actions/updateTotalState";
 import {
-    ISubjectListState,
-    SubjectListStateAction
-} from "../reducers/subjectListState";
-import {
-    TimetableCreatorStateAction
-} from "../reducers/timetableCreatorState";
+    ISubjectListState} from "../reducers/subjectListState";
 import {
     ISubjectListViewDispatchProps,
-    ISubjectListViewStateProps,
-    SubjectListView
+    SubjectListView,
+    ISubjectListViewStateProps
 } from "./../../react/subjectListView";
 import {
     NotifyIfTimetableIsFound
@@ -34,22 +31,27 @@ import {
 import {
     ToggleLoadingBar
 } from "./../actions/toggleLoadingBar";
+import { ToggleIsEnabledOfAlgorithmVisualizer } from "../actions/toggleIsEnabledOfAlgorithmVisualizer";
 import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
+import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
+import { IMasterState } from "../reducers/masterState";
 
 const mapStateToProps = (state): ISubjectListViewStateProps => {
-    const target = state.MasterStateReducer.SubjectListState as ISubjectListState;
+    const masterState = state.MasterStateReducer as IMasterState;
+    const target = masterState.SubjectListState as ISubjectListState;
     return {
-        clashingSubjectPairs: target.ClashingSubjectPairs,
-        isOpen: target.IsOpen,
-        isShowingLoadingBar: target.IsShowingLoadingBar,
-        isShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
-        searchWord: target.SearchedText,
-        subjects: target.Subjects,
+        ClashingSubjectPairs: target.ClashingSubjectPairs,
+        IsOpen: target.IsOpen,
+        IsShowingLoadingBar: target.IsShowingLoadingBar,
+        IsShowingSelectedSubjectOnly: target.IsShowingSelectedSubjectOnly,
+        SearchedText: target.SearchedText,
+        Subjects: target.Subjects,
+        IsAlgorithmVisualizerEnabled: masterState.AlgorithmVisualizerState.isEnabled
     };
 };
 
@@ -58,8 +60,8 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         handleClose: () => {
             dispatch(new ToggleIsOpenOfSubjectListView(false));
             dispatch(new HideSnackbar());
-            dispatch(new UpdateTotalState());
             dispatch(new UpdateSlotsTableState());
+            dispatch(new ToggleSetTimeConstraintView(true));
         },
         handleSearch: (searchedText: string) => {
             dispatch(new SearchSubjectList(searchedText));
@@ -67,13 +69,17 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
         },
         handleSelection: (subjectIndex: number) => {
             dispatch(new ToggleLoadingBar(true));
+            dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
             setTimeout(() => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new ToggleLoadingBar(false));
                 dispatch(new NotifyIfTimetableIsFound());
+                dispatch(new UpdateTotalState());
             }, 0);
         },
-        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions())
+        handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
+        handleToggleIsEnabledOfFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),
+        handleHideFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer(false)),
     };
 };
 

@@ -1,9 +1,9 @@
 import {
     expect
 } from "chai";
-import {
-    DecToBin
-} from "../../../helper";
+import { Time } from "../../../att/time";
+import { TimePeriod } from "../../../att/timePeriod";
+import { DecToBin } from "../../../util/decToBin";
 import {
     GenerateTotalState,
     GetDefinitelyOccupiedState,
@@ -27,17 +27,17 @@ describe("GenerateTotalState", () => {
             const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables);
             let actual = "";
             definitelyOccupiedState.forEach((day) => {
-                actual += (DecToBin(day, 32) + "\n").split("").reverse().join("");
+                actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
             });
             // 1 means definitely occupied
             const expected = `
-00000000000000000000000000000000
-00111111000000001111110000000000
-00000000000000000000000000000000
-00000000111111111111000000000000
-00000000000000000000000000000000
-00000000000000000000000000000000
-00000000000000000000000000000000`;
+00000000000000000000
+11111100000000111111
+00000000000000000000
+00000011111111111100
+00000000000000000000
+00000000000000000000
+00000000000000000000`;
             expect(actual).to.eq(expected);
         });
 
@@ -49,17 +49,17 @@ describe("GenerateTotalState", () => {
             const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables);
             let actual = "";
             definitelyUnoccupiedState.forEach((day) => {
-                actual += (DecToBin(day, 32) + "\n").split("").reverse().join("");
+                actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
             });
             // 0 means definitely unoccupied
             const expected = `
-00000011110000000011110000000000
-00111111110011111111110000000000
-00000011111111000011110000000000
-00111111111111111111000000000000
-00000000000000000000000000000000
-00000000000000000000000000000000
-00000000000000000000000000000000`;
+00001111000000001111
+11111111001111111111
+00001111111100001111
+11111111111111111100
+00000000000000000000
+00000000000000000000
+00000000000000000000`;
             expect(actual).to.eq(expected);
         });
 
@@ -73,17 +73,17 @@ describe("GenerateTotalState", () => {
             const maybeOccupiedState = GetMaybeOccupiedState(definitelyOccupiedState, definitelyUnoccupiedState);
             let actual = "";
             maybeOccupiedState.forEach((day) => {
-                actual += (DecToBin(day, 32) + "\n").split("").reverse().join("");
+                actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
             });
             // 1 means maybe occupied or unoccupied
             const expected = `
-00000011110000000011110000000000
-00000000110011110000000000000000
-00000011111111000011110000000000
-00111111000000000000000000000000
-00000000000000000000000000000000
-00000000000000000000000000000000
-00000000000000000000000000000000`;
+00001111000000001111
+00000011001111000000
+00001111111100001111
+11111100000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000`;
             expect(actual).to.eq(expected);
         });
     });
@@ -94,13 +94,13 @@ describe("GenerateTotalState", () => {
             const totalStates = GenerateTotalState(timetables);
             const result = StringifyTotalState(totalStates);
             const expected = `
-------OOOO--------OOOO----
---******OO--OOOO******----
-------OOOOOOOO----OOOO----
---OOOOOO************------
---------------------------
---------------------------
---------------------------`;
+----OOOO--------OOOO
+******OO--OOOO******
+----OOOOOOOO----OOOO
+OOOOOO************--
+--------------------
+--------------------
+--------------------`;
             expect(result).to.eq(expected);
 
         });
@@ -111,13 +111,13 @@ describe("GenerateTotalState", () => {
             const totalStates = GenerateTotalState(timetables, uidsOfClickedState);
             const result = StringifyTotalState(totalStates);
             const expected = `
--X----OOOO--------OOOO----
--X******OO--OOOO******----
--X----OOOOOOOO----OOOO----
--XOOOOOO************------
--X------------------------
--X------------------------
--X------------------------`;
+-X--OOOO--------OOOO
+*X****OO--OOOO******
+-X--OOOOOOOO----OOOO
+OXOOOO************--
+-X------------------
+-X------------------
+-X------------------`;
             expect(result).to.eq(expected);
 
         });

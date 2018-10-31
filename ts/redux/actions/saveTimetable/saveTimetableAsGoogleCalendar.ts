@@ -1,8 +1,8 @@
 declare let gapi: any;
-import {
-    max
-} from "lodash";
-import * as moment from "moment";
+const addWeeks = require("date-fns/add_weeks");
+const format = require("date-fns/format");
+const addDays = require("date-fns/add_days");
+const max = require("lodash.max");
 /* global gapi */
 import {
     ParseDay
@@ -10,15 +10,14 @@ import {
 import {
     Time
 } from "../../../att/time";
+import { ObjectStore } from "../../../dataStructure/objectStore";
 import {
-    Beautify
-} from "../../../helper";
-import {
-    RawSlot
+    IRawSlot, RawSlot
 } from "../../../model/rawSlot";
 import {
     Timetable
 } from "../../../model/timetable";
+import { BeautifySubjectName } from "../../../util/beautifySubjectName";
 import {
     TimePeriod
 } from "./../../../att/timePeriod";
@@ -29,6 +28,8 @@ import {
     SaveTimetable
 } from "./saveTimetable";
 
+const NUMBER_OF_DAYS_PER_WEEK = 7;
+
 export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     private loginAlready = false;
     private rawSlots: RawSlot[];
@@ -38,8 +39,8 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
         // the gapi client is already initialized at index.html
     }
 
-    protected Save(timetable: Timetable) {
-        this.rawSlots = RawSlot.GetBunch(timetable.HashIds);
+    protected Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>) {
+        this.rawSlots = rawSlotStore.GetBunch(timetable.Uids);
 
         gapi // eslint-disable-line
             .auth2
@@ -140,7 +141,7 @@ function sampleAddEvent() {
 }
 
 export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
-    const semStartDate = moment(semesterStartDate).toDate(); // this is to clone semesterStartDate, so that it wont mutate it
+    const semStartDate = new Date(semesterStartDate.getTime());
     if (semStartDate.getDay() !== 1) {
         throw new Error("Expected semesterStartDay to be Monday but was " + semStartDate.toString());
     }
@@ -150,10 +151,10 @@ export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
     semStartDate.setMinutes(t.StartTime.Minute);
     semStartDate.setDate(semStartDate.getDate() + ParseDay(slot.Day) - 1);
     const dates = GetListOfDates(semStartDate, w.WeekNumberList);
-    const startDate = moment(dates[0]).format("YYYY-MM-DD");
+    const startDate = format(dates[0], "YYYY-MM-DD");
     const recurrence = GetRecurrence(dates.slice(1));
     const event = {
-        summary: `${Beautify(slot.SubjectName)} (${slot.Type}-${slot.Group})`,
+        summary: `${BeautifySubjectName(slot.SubjectName)} (${slot.Type}-${slot.Group})`,
         location: slot.Room,
         description: `Subject code : ${slot.SubjectCode}, Week : ${slot.WeekNumber}`,
         start: {
@@ -171,9 +172,8 @@ export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
 }
 
 export function AddByWeek(date: Date, numberOfWeeks: number): Date {
-    const numberOfDaysPerWeek = 7;
     const clone = new Date(date.getTime());
-    clone.setDate(clone.getDate() + numberOfWeeks * 7);
+    clone.setDate(clone.getDate() + numberOfWeeks * NUMBER_OF_DAYS_PER_WEEK);
     return clone;
 }
 
@@ -212,29 +212,39 @@ export function GetMaxWeek(slots: RawSlot[]) {
     return max(slots.map((s) => max(Week.Parse(s.WeekNumber).WeekNumberList)));
 }
 
-export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): any[] {
-    const numberOfDaysPerWeek = 7;
-    const result = [];
+export interface IGoogleCalendarEvent {
+    summary: string;
+    start: IGoogleCalendarDate;
+    end: IGoogleCalendarDate;
+}
+
+export interface IGoogleCalendarDate {
+    date: string;
+    timeZone: string;
+}
+
+export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): IGoogleCalendarEvent[] {
+    const result: IGoogleCalendarEvent[] = [];
     if (semStartDate.getDay() !== 1) {
         throw new Error("Semester start date must be a Monday");
     }
-    const startDate = moment(semStartDate);
-    const endDate = moment(semStartDate).add(5, "days");
+    let startDate = semStartDate;
+    let endDate = addDays(semStartDate, 5);
     for (let i = 0; i < maxWeek; i++) {
-        const event = {
+        const event: IGoogleCalendarEvent = {
             summary: "Week " + (i + 1),
             start: {
-                date: moment(startDate).format("YYYY-MM-DD"),
+                date: format(startDate, "YYYY-MM-DD"),
                 timeZone: "UTC+08:00"
             },
             end: {
-                date: moment(endDate).format("YYYY-MM-DD"),
+                date: format(endDate, "YYYY-MM-DD"),
                 timeZone: "UTC+08:00"
             }
         };
         result.push(event);
-        startDate.add(1, "week");
-        endDate.add(1, "week");
+        startDate = addWeeks(startDate, 1);
+        endDate = addWeeks(endDate, 1);
     }
     return result;
 }

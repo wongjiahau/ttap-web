@@ -1,227 +1,141 @@
-import Paper from "material-ui/Paper";
-import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
+import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
+import Typography from "material-ui/Typography";
 import * as React from "react";
-import {Link} from "react-router-dom";
-import * as S from "string";
-import {RawSlot} from "../model/rawSlot";
-import parseHtmlToSlot from "../parser/parseHtmlToRawSlot";
+import {Redirect} from "react-router";
+import { IRawSlot } from "../model/rawSlot";
+import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
+import {Str} from "../util/str";
+import {StackPanel} from "./panels/stackPanel";
+import { getLoadingElement, LoadSlotsFromUrl } from "./selectCourseView";
 
-const buttonStyle = {
-    disabled: "true",
-    fontSize: "20px",
-    fontWeight: "bold",
-    marginBottom: "10px",
-    marginLeft: "10px",
-    marginRight: "10px",
-    marginTop: "10px",
-    width: "250px"
-};
-const cardStyle = {
-    color: "white",
-    left: "50px",
-    position: "absolute",
+const divStyle : React.CSSProperties = {
     textAlign: "center",
-    top: "120px",
-    verticalAlign: "center"
 };
-const coverStyle : React.CSSProperties = {
-    backgroundImage: `url(https://raw.githubusercontent.com/wongjiahau/ttap-web/master/src/images/background.jpg)`,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    bckgroundAttachment: "fixed",
-    marginTop: "-20px",
-    minHeight: "600px"
-};
-const fieldStyle : React.CSSProperties = {
-    fontSize: "20px",
-    fontWeight: "bold",
-    marginBottom: "5px",
-    marginLeft: "20px",
-    marginRight: "20px"
-};
-const header1Style : React.CSSProperties = {
-    fontSize: "72px"
-};
-const headerDivStyle : React.CSSProperties = {
-    left: "400px",
-    position: "absolute",
-    top: "120px"
-};
+
 const iframeStyle : React.CSSProperties = {
-    border: 0,
-    height: 1,
-    width: 1
-};
-const kapchaStyle : React.CSSProperties = {
-    width: "250px"
-};
-const subHeaderDivStyle : React.CSSProperties = {
-    marginTop: "-30px"
+    height: "490px",
+    width: "500px"
 };
 
-const urls = {
-    CourseTimetablePreview: "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp",
-    End: "http://0.0.0.0/",
-    InvalidCaptcha: "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurit" +
-            "y",
-    InvalidIdOrPassword: "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=loginError",
-    Kaptcha: "https://unitreg.utar.edu.my/portal/Kaptcha.jpg",
-    LoginPage: "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp",
-    TestServer: "http://localhost/ttap_testdata/"
-};
+const debugging = false;
+const URL = debugging
+    ? "https://wongjiahau.github.io/mock-utar-unitreg/"
+    : "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp";
 
-let tryCount = 0;
-// TODO: Add the link for TOS and PP
-
-export interface ILoginProps {
-    notifyDataLoaded : (loadedSlots : RawSlot[]) => void;
+export interface ILoginDispatchProps {
+    handleLoadSlots : (rawSlots: IRawSlot[]) => void;
 }
-export class Login extends React.Component < ILoginProps, {} > {
-    public handleClick = () => {
-        const iframeDoc = (document.getElementById("iframe")as HTMLIFrameElement).contentDocument;
-        const studentIdField = iframeDoc.getElementsByName("reqFregkey")[0]as HTMLInputElement;
-        const passwordField = iframeDoc.getElementsByName("reqPassword")[0]as HTMLInputElement;
-        const kaptchaField = iframeDoc.getElementsByName("kaptchafield")[0]as HTMLInputElement;
-        studentIdField.value = (document.getElementById("student-id-field")as HTMLInputElement).value;
-        passwordField.value = (document.getElementById("password-field")as HTMLInputElement).value;
-        kaptchaField.value = (document.getElementById("kapcha-field")as HTMLInputElement).value;
-        iframeDoc
-            .getElementsByName("_submit")[0]
-            .click();
-    }
 
-    public ExtractData = () => {
-        const html = (document.getElementById("iframe")as HTMLIFrameElement).contentWindow.document.body.innerHTML;
-        console.log(html);
-        const result = parseHtmlToSlot(html);
-        console.log(result);
-        this
-            .props
-            .notifyDataLoaded(result);
-
-    }
-    public handleIFrameOnLoad = () => {
-        // TODO: Re-enable this thing
-        return;
-        const currentUrl = (document.getElementById("iframe")as HTMLIFrameElement).contentWindow.location.href;
-        if (currentUrl === urls.End) {
-            return;
-        }
-        if (currentUrl === urls.TestServer) {
-            this.ExtractData();
-        } else if (currentUrl === urls.InvalidIdOrPassword) {
-            DisplayLoginFailedMessage();
-        } else if (currentUrl === urls.InvalidCaptcha) {
-            DisplayLoginFailedMessage();
-        } else if (currentUrl === urls.LoginPage) {
-            AssertLoginPageIsLoadedProperly();
-        } else if (currentUrl !== urls.CourseTimetablePreview) {
-            NavigateToCourseTimeTablePreview();
-        } else if (currentUrl === urls.CourseTimetablePreview) {
-            this.ExtractData();
-        }
-        function DisplayLoginFailedMessage() {
-            alert("Login failed. You have entered invalid id, password or kapcha");
-            GoToLoginPageAgain();
-        }
-        function AssertLoginPageIsLoadedProperly() {
-            const html = (document.getElementById("iframe")as HTMLIFrameElement).contentWindow.document.body.innerHTML;
-            if (!S(html).contains("Course Registration System")) {
-                GoToLoginPageAgain();
-            } else {
-                loadKapchaImage();
-            }
-
-            function loadKapchaImage() {
-                const img = document.getElementById("kapcha-img")as HTMLImageElement;
-                img.src = "https://unitreg.utar.edu.my/portal/Kaptcha.jpg";
-            }
-        }
-        function GoToLoginPageAgain() {
-            const iframee = document.getElementById("iframe")as HTMLIFrameElement;
-            iframee.src = urls.LoginPage;
-        }
-        function NavigateToCourseTimeTablePreview() {
-            if (tryCount > 2) {
-                alert("No record found!");
-                navigateToLoginPage();
-                tryCount = 0;
-                return;
-            }
-            const iframee = (document.getElementById("iframe")as HTMLIFrameElement);
-            iframee.src = urls.CourseTimetablePreview;
-            tryCount++;
-            function navigateToLoginPage() {
-                const iframeee = (document.getElementById("iframe")as HTMLIFrameElement);
-                iframeee.src = urls.LoginPage;
-            }
-        }
-    }
-
-    public handleKeyPress = (event) => {
-        if (event.key === "Enter") {
-            this.handleClick();
-        }
+interface ILoginStateProps {
+    redirect:        boolean;
+    openErrorDialog: boolean;
+    loading:         boolean;
+}
+export class Login extends React.Component < ILoginDispatchProps, ILoginStateProps > {
+    private currentPage : number = 1;
+    private html = "";
+    public constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false,
+            openErrorDialog: false,
+            loading: false,
+        };
     }
 
     public render() {
+        if (this.state.loading) {
+            return getLoadingElement();
+        }
+        if (this.state.redirect) {
+            return <Redirect push={true} to="/play"/>;
+        }
         return (
-            <div id="parentDiv">
-                <div style={coverStyle}/>
-                <div style={headerDivStyle}>
-                    <h1 style={header1Style}>Login to your
-                        <br/>UTAR account</h1>
-                    <div style={subHeaderDivStyle}>
-                        By clicking "Login", you agree to our &nbsp;
-                        <Link to="tospp">Terms of Service and Privacy Policy</Link>
-                    </div>
-                </div>
-                <div className="login-div">
-                    <Paper style={cardStyle} zDepth={4}>
-                        <TextField
-                            id="student-id-field"
-                            className="login-student-id-field"
-                            floatingLabelText="Student ID"
-                            style={fieldStyle}
-                            hintText="e.g. 1500181"/>
-                        <br/>
-                        <TextField
-                            id="password-field"
-                            className="login-password-field"
-                            floatingLabelText="Password"
-                            hintText="e.g. 960707-43-1234"
-                            style={fieldStyle}
-                            type="password"/>
-                        <br/>
-                        <TextField
-                            id="kapcha-field"
-                            hintText="e.g. QXtresZ"
-                            onKeyPress={this.handleKeyPress}
-                            style={fieldStyle}
-                            floatingLabelText="Kaptcha"/>
-                        <br/>
-                        <img id="kapcha-img" alt="" style={kapchaStyle} className="login-kapcha-image"/>
-                        <br/>
-                        <RaisedButton
-                            id="login-button"
-                            label="Login"
-                            primary={true}
-                            disabled={false}
-                            onClick={this.handleClick}
-                            style={buttonStyle}/>
-                        <iframe
-                            id="iframe"
-                            title="unitregwebsite"
-                            onLoad={this.handleIFrameOnLoad}
-                            style={iframeStyle}
-                            src="https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp">
-                            <p>Your browser does not support iframes.</p>
-                        </iframe>
-                    </Paper>
-                </div>
+            <div style={divStyle}>
+                <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <iframe
+                        id="unitregiframe"
+                        scrolling="no"
+                        style={iframeStyle}
+                        onLoad={this.handleIFrameOnLoad}
+                        src={URL}/>
+                    <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
+                </StackPanel>
+                <Dialog open={this.state.openErrorDialog}>
+                    <DialogTitle>
+                            We can't load the data :(
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            It may be due to the following reasons:
+                        </DialogContentText>
+                        <ul>
+                            <li>You have not met your Academic Advisor(AA).</li>
+                            <li>Your time to view the data have not reach yet.</li>
+                            <li>Internal error of TTAP.</li>
+                        </ul>
+                        <Typography gutterBottom={true}>
+                            Do you want to try the demo instead?
+                        </Typography>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose}>
+                            No thanks
+                        </Button>
+                        <Button raised={true} onClick={this.handleLoadDemo} color="primary">
+                            TRY DEMO
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }
+
+    public handleLoadDemo = () => {
+        this.handleClose();
+        LoadSlotsFromUrl(
+            "https://raw.githubusercontent.com/wongjiahau/ttap-datahub/master/Demo.json",
+            "json",
+            () => this.setState({loading: true}),
+            (slots) => {
+                this.props.handleLoadSlots(slots);
+                this.setState({loading: false, redirect: true});
+            },
+            (error) => alert(error)
+        );
+
+    }
+
+    public handleIFrameOnLoad = () => {
+        const iframe = (document.getElementById("unitregiframe")as HTMLIFrameElement);
+        if (iframe === null) { throw new Error(); }
+        if (iframe.contentWindow === null) { throw new Error(); }
+        const newLocation = iframe.contentWindow.location.href;
+        if ((new Str(newLocation)).Contains("masterSchedule")) {
+            this.html += iframe.contentWindow.document.body.innerHTML;
+            if ((new Str(this.html)).Contains(`changePage('${this.currentPage + 1}')`)) {
+                this.currentPage++;
+                iframe.contentWindow.changePage(this.currentPage); // changePage is a function defined in <script></script>
+            } else {
+                try {
+                    this.props.handleLoadSlots(ParseHtmlToRawSlot(this.html));
+                    this.setState({redirect: true});
+                } catch (error) {
+                    this.setState({openErrorDialog: true});
+                    console.log(error);
+                }
+            }
+        }
+    }
+
+    public handleRefresh = () => {
+        const iframe = (document.getElementById("unitregiframe")as HTMLIFrameElement);
+        iframe.src = iframe.src;
+    }
+
+    public handleClose = () => {
+        this.setState({openErrorDialog: false});
+    }
+
 }

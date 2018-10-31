@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
+import {Tooltip} from "react-tippy";
 import {
     ColorOfClicked,
     ColorOfDefinitelyOccupied,
@@ -28,7 +29,7 @@ export function GenerateStateViews(states : STCBox[], handleSetTimeContraintAt :
                 throw Error();
         }
     };
-    const child = [];
+    const child: JSX.Element[] = [];
     const layouts = new Array < ReactGridLayout.Layout > ();
     states.forEach((s) => {
         const content = GetStateView(s);
@@ -67,11 +68,19 @@ const Box = (props : {
 const MaybeOccupiedBox = (props : {
     handleClick: () => void
 }) => {
-    const style = {
+    const style : React.CSSProperties = {
         ...boxFrameStyle,
-        background: ColorOfMaybeOccupied
+        background: ColorOfMaybeOccupied,
+        cursor: "pointer",
     };
-    return (<button onClick={props.handleClick} style={style}/>);
+    const html = <span style={{fontSize: "14px"}}>Click me if you don't want to have class here</span>;
+    return (
+        <Tooltip arrow={true} position="bottom" html={html}>
+            <span className="maybeOccupiedBox">
+                <button onClick={props.handleClick} style={style}/>
+            </span>
+        </Tooltip>
+    );
 };
 const ClickedBox = (props : {
     handleClick: () => void
@@ -80,7 +89,8 @@ const ClickedBox = (props : {
         ...boxFrameStyle,
         background: ColorOfClicked,
         fontWeight: "bold",
-        fontSize: "20px"
+        fontSize: "20px",
+        cursor: "pointer"
     };
     return (
         <button onClick={props.handleClick} style={style}>X</button>

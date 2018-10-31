@@ -1,8 +1,4 @@
-import {
-    has
-} from "lodash";
 
-import * as S from "string";
 import * as typeName from "type-name";
 
 export function GenerateReducer < T > (initialState: T): (state: any, action) => T {

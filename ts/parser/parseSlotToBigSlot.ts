@@ -1,7 +1,5 @@
-import {
-    last,
-    sortBy
-} from "lodash";
+const last = require("lodash.last");
+const sortBy = require("lodash.sortby");
 import {
     ISlot
 } from "../model/slot";
@@ -16,7 +14,7 @@ export function ParseSlotToBigSlot(slots: ISlot[]): BigSlot[] {
         const s = sorted[i];
         const prevSlot = last(result);
         if (s.SlotNumber === prevSlot.SlotNumber) {
-            prevSlot.SlotIds.push(s.HashId);
+            prevSlot.SlotIds.push(s.Uid);
             prevSlot.State = Append(prevSlot.State, GetStateOfBigSlot(s));
         } else {
             result.push(new BigSlot(s));

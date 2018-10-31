@@ -1,9 +1,8 @@
 import {
     expect
 } from "chai";
-import {
-    isEqual
-} from "lodash";
+const isEqual = require("lodash.isequal");
+import { CodeOf, HENG_2017_APR } from "../../tests/testData/heng_2017_apr";
 import {
     Partitionize
 } from "../partitionize";
@@ -166,5 +165,12 @@ describe("PartitionizeByKey", () => {
         expect(result[0].length).to.eq(1);
         expect(result[1].length).to.eq(2);
     });
-    
+
+    it("case 2", () => {
+        const rawSlots = HENG_2017_APR().filter((x) => x.SubjectCode ===  CodeOf.ACD);
+        expect(rawSlots).to.have.lengthOf(1);
+        const result = PartitionizeByKey(rawSlots, "SubjectCode");
+        expect(result).to.have.lengthOf(1);
+    });
+
 });

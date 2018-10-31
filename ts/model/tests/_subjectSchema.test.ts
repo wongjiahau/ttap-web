@@ -1,10 +1,11 @@
 import {
     expect
 } from "chai";
+import { ParseRawSlotToSubject } from "../../parser/parseRawSlotToSubject";
+import { HENG_2017_APR } from "../../tests/testData/heng_2017_apr";
+import { CodeOf, IndexOf } from "../../tests/testData/heng_2017_sept";
 import {
-    CodeOf,
-    GetTestSubjects1,
-    IndexOf
+    GetTestSubjects1, MockRawSlotStore,
 } from "../../tests/testDataGenerator";
 import {
     RawSlot
@@ -79,14 +80,14 @@ describe("GenerateSubjectSchema", () => {
         const acp = subjects[IndexOf.ACP];
         const he = subjects[IndexOf.HE];
         expect(() => {
-            GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotIds.concat(he.SlotIds)));
+            GenerateSubjectSchema(MockRawSlotStore.GetBunch(acp.SlotUids.concat(he.SlotUids)));
         }).to.throw();
     });
 
     it("case 1", () => {
         const subjects = GetTestSubjects1();
         const acp = subjects[IndexOf.ACP];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(acp.SlotIds));
+        const result = GenerateSubjectSchema(MockRawSlotStore.GetBunch(acp.SlotUids));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(false);
         expect(result.GotPractical).to.eq(false);
@@ -96,7 +97,7 @@ describe("GenerateSubjectSchema", () => {
     it("case 2", () => {
         const subjects = GetTestSubjects1();
         const beam = subjects[IndexOf.BEAM];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(beam.SlotIds));
+        const result = GenerateSubjectSchema(MockRawSlotStore.GetBunch(beam.SlotUids));
         expect(result.GotLecture).to.eq(true);
         expect(result.GotTutorial).to.eq(true);
         expect(result.GotPractical).to.eq(false);
@@ -104,13 +105,14 @@ describe("GenerateSubjectSchema", () => {
     });
 
     it("case 3", () => {
-        const subjects = GetTestSubjects1();
-        const industrialTraning = subjects[IndexOf.IT];
-        const result = GenerateSubjectSchema(RawSlot.GetBunch(industrialTraning.SlotIds));
-        expect(result.GotLecture).to.eq(false);
-        expect(result.GotTutorial).to.eq(false);
+        const rawSlots = HENG_2017_APR();
+        const subjects = ParseRawSlotToSubject(rawSlots);
+        const concreteTechnology = subjects[7]; // 7 is Index of Concrete Technology
+        const result = GenerateSubjectSchema((concreteTechnology.SlotUids.map((uid) => rawSlots.filter((s) => s.Uid === uid)[0])));
+        expect(result.GotLecture).to.eq(true);
+        expect(result.GotTutorial).to.eq(true);
         expect(result.GotPractical).to.eq(true);
-        expect(result.SubjectCode).to.eq(CodeOf.IT);
+        expect(result.SubjectCode).to.eq("UEMX4393");
     });
 });
 

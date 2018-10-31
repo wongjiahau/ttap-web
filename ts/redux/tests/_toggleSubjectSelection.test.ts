@@ -1,47 +1,22 @@
-import {
-    expect
-} from "chai";
-import {
-    fill,
-    find,
-    isEqual
-} from "lodash";
-import {
-    FindClashes
-} from "../../clashFinder/findClashes";
-import {
-    GetTestSubjects1,
-    IndexOf
-} from "../../tests/testDataGenerator";
-import {
-    NewSubjectListState
-} from "../reducers/subjectListState";
-import {
-    CodeOf
-} from "./../../tests/testDataGenerator";
-import {
-    ToggleSubjectListViewingOptions
-} from "./../actions/toggleSubjectListViewingOption";
-import {
-    CheckForClashesBetween,
-    FindTimetableBasedOn,
-    ToggleSubjectSelection
-} from "./../actions/toggleSubjectSelection";
-import {
-    IMasterState,
-    MasterStateReducer,
-    NewMasterState
-} from "./../reducers/masterState";
+import { expect } from "chai";
+const isEqual = require("lodash.isequal");
+import { FindClashes } from "../../clashFinder/findClashes";
+import { ObjectStore } from "../../dataStructure/objectStore";
+import { ParseRawSlotToSubject } from "../../parser/parseRawSlotToSubject";
+import { FindTimetableWithoutConsideringWeekNumber } from "../../permutator/findTimetable";
+import { IndexOf } from "../../tests/testData/heng_2017_sept";
+import { GetMockInitialState, GetTestRawSlot1, GetTestSubjects1 } from "../../tests/testDataGenerator";
+import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
+import { ToggleIsEnabledOfAlgorithmVisualizer } from "../actions/toggleIsEnabledOfAlgorithmVisualizer";
+import { NewSubjectListState } from "../reducers/subjectListState";
+import { ToggleSubjectListViewingOptions } from "./../actions/toggleSubjectListViewingOption";
+import { CheckForClashesBetween, GetSelectedSlots, ToggleSubjectSelection } from "./../actions/toggleSubjectSelection";
+import { IMasterState, MasterStateReducer, NewMasterState } from "./../reducers/masterState";
 
-const mockSubjects = GetTestSubjects1();
-FindClashes(mockSubjects); // some test will fail if this line is not run
+const testSlots = GetTestRawSlot1();
+const mockSubjects = ParseRawSlotToSubject(testSlots);
+FindClashes(mockSubjects, new ObjectStore(testSlots)); // some test will fail if this line is not run
 
-function getInitialState(): IMasterState {
-    return {
-        ...NewMasterState(),
-        SubjectListState: NewSubjectListState(mockSubjects)
-    };
-}
 describe("toggle subject selection action", () => {
 
     it("'s type name should be 'select subject'", () => {
@@ -53,20 +28,20 @@ describe("toggle subject selection action", () => {
     });
 
     it("should toggle selection on a subject based on its subject index", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.SubjectListState.Subjects[IndexOf.HE].IsSelected).to.eq(true);
     });
 
     it("should toggle selection on subject from true to false also", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.SubjectListState.Subjects[IndexOf.HE].IsSelected).to.eq(false);
     });
 
     it("should show all subjects when user deselected all subjects", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         newState = MasterStateReducer(newState, new ToggleSubjectListViewingOptions());
         expect(newState.SubjectListState.IsShowingSelectedSubjectOnly).to.eq(true);
@@ -76,7 +51,7 @@ describe("toggle subject selection action", () => {
     });
 
     it("should set the property of timetable when selecting subject", () => {
-        const initialState = getInitialState();
+        const initialState = GetMockInitialState();
         const newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.HE));
         expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
 
@@ -91,7 +66,7 @@ describe("toggle subject selection action", () => {
             Then Ali shall see a clash report saying 'MPU32013' cannot be selected
             And the clash report should be Single-Clashing error, not Group-Clashing error
         `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             const clashReport = newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport;
@@ -108,7 +83,7 @@ describe("toggle subject selection action", () => {
             Then Ali shall see a clash report on [BEAM] saying that
                 it cannot be selected due to Group Clashing
         `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
@@ -125,7 +100,7 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'MPU32013' [BKA]
             And Then When Ali deselected subject 'MPU34022' [ACP]
             Then Ali shall see that the clash report on [BKA] is cleared `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP));
@@ -140,7 +115,7 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'MPU3143' [BMK2] (which is clashing with BKA)
             And Then When Ali deselected subject 'MPU34022' [ACP]
             Then Ali shall see that the clash report's on [BKA] is updated to [BMK2] `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
@@ -157,7 +132,7 @@ describe("toggle subject selection action", () => {
             And Then Ali selected subject 'UKMM1043' [BEAM]
             And Then When Ali deselected subject [ACP] or [BMK2]
             Then Ali shall see that the clash report on [BEAM] is cleared `;
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
@@ -174,7 +149,7 @@ describe("toggle subject selection action", () => {
             And Then When Ali deselected [BMK2]
             Then Ali shall that the clash report on [BEAM] is gone`;
 
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
@@ -193,7 +168,7 @@ describe("toggle subject selection action", () => {
             And Then When Ali deselected [HE]
             Then Ali shall that the clash report on [BEAM] is still there`;
 
-            const initialState = getInitialState();
+            const initialState = GetMockInitialState();
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
@@ -201,17 +176,28 @@ describe("toggle subject selection action", () => {
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
             expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group");
         });
+
+        it("should set statistics of algorithmVisualizerState if algorithm visualizer is enabled", () => {
+            const initialState = GetMockInitialState();
+            expect(initialState.AlgorithmVisualizerState.searchedPathCount).to.eq(0);
+            let newState = MasterStateReducer(initialState, new ToggleIsEnabledOfAlgorithmVisualizer(true));
+            newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP));
+            expect(newState.AlgorithmVisualizerState.searchedPathCount).to.eq(2);
+            expect(newState.AlgorithmVisualizerState.fullSearchPathCount).to.eq(2);
+            expect(newState.AlgorithmVisualizerState.searchedPathCount).to.eq(2);
+            expect(newState.AlgorithmVisualizerState.timeTaken >= 0).to.eq(true);
+        });
     });
 
 });
 
-describe("FindTimetableBasedOn", () => {
-    it("should return a list of timetables", () => {
+describe("GetSelectedSlots", () => {
+    it("should return a list of slots", () => {
         const subjects = mockSubjects;
         const titas = subjects[IndexOf.TITA];
         const wwt = subjects[IndexOf.WWT];
-        const timetables = FindTimetableBasedOn([wwt, titas]);
-        expect(timetables).to.have.lengthOf(5);
+        const slots = GetSelectedSlots([wwt, titas]);
+        expect(slots).to.have.lengthOf(14);
     });
 
 });

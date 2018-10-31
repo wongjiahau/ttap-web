@@ -1,28 +1,18 @@
-import {
-    sortBy,
-    uniqBy
-} from "lodash";
-import {
-    RawSlot
-} from "../../model/rawSlot";
-import {
-    ChosenColors,
-    Colors
-} from "./colors";
+const sortBy = require("lodash.sortby");
+const uniqBy = require("lodash.uniqby");
+import {ISlotViewModel} from "../../model/slotViewModel";
+import {ChosenColors, Colors} from "./colors";
 
-export function GenerateColorScheme(rawSlots: RawSlot[]): IColorScheme[] {
+export function GenerateColorScheme(slots : ISlotViewModel[]) : IColorScheme[] {
     const result = new Array < IColorScheme > ();
-    const subjectCodes = uniqBy(rawSlots, (s) => s.SubjectCode).map((s) => s.SubjectCode);
-    subjectCodes.forEach((s, index) => {
-        result.push({
-            Color: ChosenColors[index],
-            SubjectCode: s
-        });
+    const subjectCodes = uniqBy(slots, (s) => s.SubjectCode).map((s) => s.SubjectCode);
+    sortBy(subjectCodes).forEach((s, index) => {
+        result.push({Color: ChosenColors[index % ChosenColors.length], SubjectCode: s});
     });
     return result;
 }
 
 export interface IColorScheme {
-    Color: Colors;
-    SubjectCode: string;
+    Color : Colors;
+    SubjectCode : string;
 }

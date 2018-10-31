@@ -1,6 +1,9 @@
 import {
     saveAs
 } from "file-saver";
+import { ObjectStore } from "../../../dataStructure/objectStore";
+import { IRawSlot } from "../../../model/rawSlot";
+import { CreateSlotViewModels } from "../../../model/slotViewModel";
 import {
     Timetable
 } from "./../../../model/timetable";
@@ -12,8 +15,9 @@ import {
 } from "./saveTimetable";
 
 export class SaveTimetableAsTextFile extends SaveTimetable {
-    protected Save(timetable: Timetable) {
-        const data = new TimetableSummary(timetable).ToString();
+    protected Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>) {
+        const rawSlots = rawSlotStore.GetBunch(timetable.Uids);
+        const data = new TimetableSummary(CreateSlotViewModels(rawSlots)).ToString();
         const file = new File([data], "MyTimetable.txt", {
             type: "text/plain;charset=utf-8"
         });

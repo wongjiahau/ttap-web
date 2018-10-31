@@ -1,7 +1,6 @@
-import * as S from "string";
-import {
-    GetInitial
-} from "../../helper";
+
+import { GetInitial } from "../../util/getInitial";
+import { Str } from "../../util/str";
 import {
     IMasterState,
     MasterStateAction
@@ -19,10 +18,10 @@ export class SearchSubjectList extends MasterStateAction {
             .SubjectListState
             .Subjects
             .map((s) => {
-                const stringToBeMatched = S((s.Code + s.Name + GetInitial(s.Name)).toLowerCase());
+                const stringToBeMatched = new Str((s.Code + s.Name + GetInitial(s.Name)).toLowerCase());
                 return {
                     ...s,
-                    IsVisible: (stringToBeMatched.contains(this.searchedText.toLowerCase()) ?
+                    IsVisible: (stringToBeMatched.Contains(this.searchedText.toLowerCase()) ?
                         true :
                         false)
                 };

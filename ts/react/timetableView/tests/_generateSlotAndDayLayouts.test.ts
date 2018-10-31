@@ -1,10 +1,9 @@
 import {
     expect
 } from "chai";
-import {
-    clone,
-    find
-} from "lodash";
+import { Time } from "./../../../att/time";
+const clone = require("lodash.clone");
+const find = require("lodash.find");
 import { TimePeriod } from "../../../att/timePeriod";
 import {
     RawSlot
@@ -13,19 +12,24 @@ import {
     GenerateSlotAndDayLayouts,
     GetDayColumnLayouts,
     GetDayRows,
-    GetXandW
+    GetXandW,
+    MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW
 } from "../generateSlotAndDayLayouts";
 
 describe("GenerateSlotLayouts", () => {
+    beforeEach(() => {
+        TimePeriod.SetMinTo8am();
+    });
+
     it("case 1", () => {
         const slot1 = new RawSlot();
         slot1.TimePeriod = "8:00 AM - 9:00 AM";
         slot1.Day = "Mon";
         const slot2 = clone(slot1);
-        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2], 0, 0, "s")[0];
         const expected = [
-            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
-            { h: 1, i: "s1", w: 2, x: 2, y: 1 }
+            { h: 1, i: "s0", w: 2, x: 0, y: 0 },
+            { h: 1, i: "s1", w: 2, x: 0, y: 1 }
         ];
         expect(result).to.deep.eq(expected);
     });
@@ -38,11 +42,11 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Mon";
         slot3.TimePeriod = "9:00 AM - 10:00 AM";
-        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0, "s")[0];
         const expected = [
-            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
-            { h: 1, i: "s1", w: 2, x: 2, y: 1 },
-            { h: 1, i: "s2", w: 2, x: 4, y: 0 }
+            { h: 1, i: "s0", w: 2, x: 0, y: 0 },
+            { h: 1, i: "s1", w: 2, x: 0, y: 1 },
+            { h: 1, i: "s2", w: 2, x: 2, y: 0 }
         ];
         expect(result).to.deep.eq(expected);
     });
@@ -55,11 +59,11 @@ describe("GenerateSlotLayouts", () => {
         const slot3 = new RawSlot();
         slot3.Day = "Tue";
         slot3.TimePeriod = "8:00 AM - 9:00 AM";
-        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0)[0];
+        const result = GenerateSlotAndDayLayouts([slot1, slot2, slot3], 0, 0, "s")[0];
         const expected = [
-            { h: 1, i: "s0", w: 2, x: 2, y: 0 },
-            { h: 1, i: "s1", w: 2, x: 2, y: 1 },
-            { h: 1, i: "s2", w: 2, x: 2, y: 2 }
+            { h: 1, i: "s0", w: 2, x: 0, y: 0 },
+            { h: 1, i: "s1", w: 2, x: 0, y: 1 },
+            { h: 1, i: "s2", w: 2, x: 0, y: 2 }
         ];
         expect(result).to.deep.eq(expected);
     });
@@ -69,27 +73,28 @@ describe("GenerateSlotLayouts", () => {
 describe("GetDayRows", () => {
     it("case 1", () => {
         const result = GetDayRows();
+        const zeroes = new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0);
         expect(result).to.deep.eq([{
             rowIndex: 0,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 1,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 2,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 3,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 4,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 5,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, {
             rowIndex: 6,
-            state: [0, 0, 0, 0, 0]
+            state: zeroes
         }, ]);
     });
 
@@ -136,24 +141,21 @@ describe("GetXandW()", () => {
     it("case 1", () => {
         const input = TimePeriod.Parse("08:00 AM - 10:00 AM");
         const [x, w] = GetXandW(input);
-        expect(TimePeriod.Min.Hour).to.eq(7);
-        expect(x).to.eq(2);
+        expect(x).to.eq(0);
         expect(w).to.eq(4);
     });
 
     it("case 2", () => {
         const input = TimePeriod.Parse("08:30 AM - 10:00 AM");
         const [x, w] = GetXandW(input);
-        expect(TimePeriod.Min.Hour).to.eq(7);
-        expect(x).to.eq(3);
+        expect(x).to.eq(1);
         expect(w).to.eq(3);
     });
 
     it("case 3", () => {
         const input = TimePeriod.Parse("01:00 PM - 4:00 PM");
         const [x, w] = GetXandW(input);
-        expect(TimePeriod.Min.Hour).to.eq(7);
-        expect(x).to.eq(12);
+        expect(x).to.eq(10);
         expect(w).to.eq(6);
     });
 

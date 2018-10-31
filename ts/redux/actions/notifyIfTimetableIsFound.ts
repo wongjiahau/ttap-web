@@ -3,7 +3,6 @@ import {
     MasterStateAction
 } from "./../reducers/masterState";
 
-let previousSelectedSubjectCount = 0;
 export class NotifyIfTimetableIsFound extends MasterStateAction {
     public constructor() {
         super();
@@ -14,11 +13,7 @@ export class NotifyIfTimetableIsFound extends MasterStateAction {
     protected GenerateNewState(state: IMasterState): IMasterState {
         const currentSelectedSubjectCount = state.SubjectListState.Subjects.filter((x) => x.IsSelected).length;
         const numberOfTimetablesFound = state.TimetableListState.FiltrateTimetables.length;
-        const shouldShowSnackbar =
-            state.SubjectListState.Subjects.some(
-                (s) => s.IsSelected) &&
-                previousSelectedSubjectCount !== currentSelectedSubjectCount;
-        previousSelectedSubjectCount = currentSelectedSubjectCount;
+        const shouldShowSnackbar = state.SubjectListState.Subjects.some((s) => s.IsSelected);
         const message = `${numberOfTimetablesFound} possible timetables found.`;
         return {
             ...state,

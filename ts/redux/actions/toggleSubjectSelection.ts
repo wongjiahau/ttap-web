@@ -1,123 +1,112 @@
-import {
-    includes
-} from "lodash";
-import * as S from "string";
-import {
-    FindClashes
-} from "../../clashFinder/findClashes";
-import {
-    Beautify
-} from "../../helper";
-import {
-    IStringDicionary
-} from "../../interfaces/dictionary";
-import {
-    RawSlot
-} from "../../model/rawSlot";
-import {
-    ClashReport,
-    Subject
-} from "../../model/subject";
-import {
-    Timetable
-} from "../../model/timetable";
-import {
-    ParseRawSlotToSlot
-} from "../../parser/parseRawSlotToSlot";
-import {
-    ParseSlotToTinySlot
-} from "../../parser/parseSlotToTinySlot";
-import {
-    FindTimetable
-} from "../../permutator/findTimetable";
-import { FindTimetableV2 } from "../../permutator/findTimetableV2";
-import {
-    NewTimetableListState
-} from "../reducers/timetableListState";
-import {
-    IMasterState,
-    MasterStateAction,
-    MasterStateReducer
-} from "./../reducers/masterState";
-import {
-    ToggleSubjectListViewingOptions
-} from "./toggleSubjectListViewingOption";
+import {ObjectStore} from "./../../dataStructure/objectStore";
+import {GetSemStartDateDialog} from "./../../react/getSemStartDateDialog";
+const includes = require("lodash.includes");
+
+import {IStringDicionary} from "../../interfaces/dictionary";
+import {RawSlot} from "../../model/rawSlot";
+import {ClashReport, Subject} from "../../model/subject";
+import {Timetable} from "../../model/timetable";
+import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "../../permutator/findTimetableVisualizer";
+import { BeautifySubjectName } from "../../util/beautifySubjectName";
+import {NewTimetableListState} from "../reducers/timetableListState";
+import {IMasterState, MasterStateAction, MasterStateReducer} from "./../reducers/masterState";
+import {ToggleSubjectListViewingOptions} from "./toggleSubjectListViewingOption";
+
+let CurrentTimetableFinder : (rawSlots : RawSlot[]) => Timetable[];
+let RawSlotStore : ObjectStore<RawSlot>;
 
 export class ToggleSubjectSelection extends MasterStateAction {
-    public constructor(private subjectIndex: number) {
+    public constructor(private subjectIndex : number) {
         super();
     }
-    public TypeName(): string {
-        return "toggle subject selection";
-    }
-    protected GenerateNewState(state: IMasterState): IMasterState {
-        const newSubjects = state.SubjectListState.Subjects.map((x) => ({ ...x
-        }));
+    public TypeName() : string {return "toggle subject selection"; }
+    protected GenerateNewState(state : IMasterState) : IMasterState {
+        const visualizer = state.AlgorithmVisualizerState.isEnabled ?
+            new FindTimetableVisualizer() :
+            new NullFindTimetableVisualizer();
+
+        CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x, visualizer);
+
+        RawSlotStore = state.DataState.RawSlotDataRouter.GetCurrentData();
+        const newSubjects = state
+            .SubjectListState
+            .Subjects
+            .map((x) => ({
+                ...x
+            }));
         const targetSubject = newSubjects[this.subjectIndex];
         if (targetSubject.ClashReport !== null) {
             return state;
+        } else {
+            const result = targetSubject.IsSelected
+                ? DeselectSubject(targetSubject, newSubjects, state)
+                : SelectSubject(targetSubject, newSubjects, state);
+            if (state.AlgorithmVisualizerState.isEnabled) {
+                visualizer.animate();
+                return {
+                    ...result,
+                    AlgorithmVisualizerState: {
+                        ...state.AlgorithmVisualizerState,
+                        searchedPathCount: visualizer.getSearchedPathCount(),
+                        fullSearchPathCount: visualizer.getFullSearchPathCount(),
+                        timeTaken: visualizer.getTimeTakenInMillisecond(),
+                        clearAnimation: visualizer.clearPreviousAnimation
+                    }
+                };
+            } else {
+                return result;
+            }
         }
-        return targetSubject.IsSelected ?
-            DeselectSubject(targetSubject, newSubjects, state) :
-            SelectSubject(targetSubject, newSubjects, state);
     }
 }
 
-export function SelectSubject(subjectToBeSelected: Subject, allSubjects: Subject[], state: IMasterState): IMasterState {
+export function SelectSubject(subjectToBeSelected : Subject, allSubjects : Subject[], state : IMasterState) : IMasterState {
     const selectedSubjects = allSubjects.filter((x) => x.IsSelected);
     const clashReport = CheckForClashesBetween(subjectToBeSelected, selectedSubjects);
-    if (clashReport) {
-        subjectToBeSelected.ClashReport = clashReport;
-        return {
-            ...state,
-            SubjectListState: {
-                ...state.SubjectListState,
-                Subjects: allSubjects
-            }
-        };
-    }
-    const timetables = FindTimetableBasedOn(selectedSubjects.concat([subjectToBeSelected]));
-    if (timetables.length === 0) {
-        subjectToBeSelected.ClashReport = new ClashReport("group");
-        return {
-            ...state,
-            SubjectListState: {
-                ...state.SubjectListState,
-                Subjects: allSubjects
-            }
-        };
-    }
-    subjectToBeSelected.IsSelected = true;
-    return {
+    const result = {
         ...state,
         SubjectListState: {
             ...state.SubjectListState,
-            Subjects: allSubjects,
-        },
-        TimetableListState: NewTimetableListState(timetables)
+            Subjects: allSubjects
+        }
+    };
+    if (clashReport) {
+        subjectToBeSelected.ClashReport = clashReport;
+        return result;
+    }
+    const selectedSlots = GetSelectedSlots(selectedSubjects.concat([subjectToBeSelected]));
+    const timetables = CurrentTimetableFinder(selectedSlots);
+    if (timetables.length === 0) {
+        subjectToBeSelected.ClashReport = new ClashReport("group");
+        return result;
+    }
+    subjectToBeSelected.IsSelected = true;
+    return {
+        ...result,
+        TimetableListState: NewTimetableListState(timetables, selectedSlots)
     };
 }
 
-export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Subject[], state: IMasterState): IMasterState {
+export function DeselectSubject(subjectToBeDeselected : Subject, allSubjects : Subject[], state : IMasterState) : IMasterState {
     subjectToBeDeselected.IsSelected = false;
     const selectedSubjects = allSubjects.filter((x) => x.IsSelected);
     ReleaseDisabledSubjectsIfPossible(selectedSubjects, allSubjects);
-    const timetables = FindTimetableBasedOn(selectedSubjects);
+    const selectedSlots = GetSelectedSlots(selectedSubjects);
+    const timetables = selectedSubjects.length > 0
+        ? CurrentTimetableFinder(selectedSlots)
+        : [];
     const result: IMasterState = {
         ...state,
         SubjectListState: {
             ...state.SubjectListState,
-            Subjects: allSubjects,
-
+            Subjects: allSubjects
         },
-        TimetableListState: NewTimetableListState(timetables)
+        TimetableListState: NewTimetableListState(timetables, selectedSlots)
     };
 
     const allSubjectIsDeselected = allSubjects.every((x) => !x.IsSelected);
-    const newIsShowSelectedSubjectOnly =
-        state.SubjectListState.IsShowingSelectedSubjectOnly && !allSubjectIsDeselected;
-    const shouldToggleToShowAllSubject =
-        state.SubjectListState.IsShowingSelectedSubjectOnly && newIsShowSelectedSubjectOnly === false;
+    const newIsShowSelectedSubjectOnly = state.SubjectListState.IsShowingSelectedSubjectOnly && !allSubjectIsDeselected;
+    const shouldToggleToShowAllSubject = state.SubjectListState.IsShowingSelectedSubjectOnly && newIsShowSelectedSubjectOnly === false;
     if (shouldToggleToShowAllSubject) {
         return MasterStateReducer(result, new ToggleSubjectListViewingOptions());
     } else {
@@ -125,7 +114,7 @@ export function DeselectSubject(subjectToBeDeselected: Subject, allSubjects: Sub
     }
 }
 
-export function ReleaseDisabledSubjectsIfPossible(selectedSubjects: Subject[], allSubjects: Subject[]): void {
+export function ReleaseDisabledSubjectsIfPossible(selectedSubjects : Subject[], allSubjects : Subject[]) : void {
     const disabledSubjects = allSubjects.filter((s) => s.ClashReport !== null);
     for (let i = 0; i < disabledSubjects.length; i++) {
         const s = disabledSubjects[i];
@@ -134,7 +123,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects: Subject[], a
                 let stillGotClashes = false;
                 for (let j = 0; j < selectedSubjects.length; j++) {
                     if (includes(selectedSubjects[j].ClashingCounterparts, s.Code)) {
-                        s.ClashReport = new ClashReport("single", Beautify(selectedSubjects[j].Name));
+                        s.ClashReport = new ClashReport("single", BeautifySubjectName(selectedSubjects[j].Name));
                         stillGotClashes = true;
                         break;
                     }
@@ -144,7 +133,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects: Subject[], a
                 }
                 break;
             case "group":
-                if (FindTimetableBasedOn(selectedSubjects.concat([s])).length > 0) {
+                if (CurrentTimetableFinder(GetSelectedSlots(selectedSubjects.concat([s])), ).length > 0) {
                     s.ClashReport = null;
                 }
                 break;
@@ -152,30 +141,25 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects: Subject[], a
     }
 }
 
-export function CheckForClashesBetween(s: Subject, subjects: Subject[]): ClashReport {
+export function CheckForClashesBetween(s : Subject, subjects : Subject[]) : ClashReport {
     for (let i = 0; i < subjects.length; i++) {
         for (let j = 0; j < subjects[i].ClashingCounterparts.length; j++) {
             if (s.Code === subjects[i].ClashingCounterparts[j]) {
-                return new ClashReport("single", Beautify(subjects[i].Name));
+                return new ClashReport("single", BeautifySubjectName(subjects[i].Name));
             }
         }
     }
     return null;
 }
 
-export function FindTimetableBasedOn(subjects: Subject[]): Timetable[] {
+export function GetSelectedSlots(subjects : Subject[]) : RawSlot[] {
     if (subjects.length === 0) {
         return [];
     }
-    let slotIds = [];
+    let slotIds: number[] = [];
     for (let i = 0; i < subjects.length; i++) {
-        slotIds = slotIds.concat(subjects[i].SlotIds);
+        slotIds = slotIds.concat(subjects[i].SlotUids);
     }
-    return FindTimetable(
-        ParseSlotToTinySlot(
-            ParseRawSlotToSlot(
-                RawSlot.GetBunch(slotIds)
-            )
-        )
-    );
+    const result = RawSlotStore.GetBunch(slotIds);
+    return result;
 }

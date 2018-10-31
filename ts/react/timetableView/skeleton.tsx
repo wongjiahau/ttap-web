@@ -13,11 +13,9 @@ export class Skeleton implements ISkeleton {
     public static readonly Y_OFFSET = 1;
     public static readonly X_OFFSET = 2;
     public Layouts : ReactGridLayout.Layout[];
-    public Children : any[];
+    public Children : JSX.Element[];
     public constructor() {
-        const child = [];
-        child.push(this.GetTimeRow());
-        child.push(this.GetDayColumn());
+        let child: JSX.Element[] = this.GetTimeRow().concat(this.GetDayColumn());
         let layouts : ReactGridLayout.Layout[] = [];
         layouts = layouts.concat(this.GetTimeRowLayout());
         this.Layouts = layouts;
@@ -33,7 +31,7 @@ export class Skeleton implements ISkeleton {
             .concat(other.Layouts);
     }
 
-    private GetTimeRow() {
+    private GetTimeRow(): JSX.Element[] {
         const divStyle : React.CSSProperties = {
             borderBottom: "1px solid",
             borderRight: "1px solid",
@@ -47,7 +45,7 @@ export class Skeleton implements ISkeleton {
             padding: "2px",
             textAlign: "center"
         };
-        const result = [];
+        const result: JSX.Element[] = [];
         for (let i = 0;; i++) {
             let time = i + TimePeriod.Min.Hour;
             const isAtLast = time === TimePeriod.Max.Hour - 1;
@@ -68,6 +66,7 @@ export class Skeleton implements ISkeleton {
     }
     private GetTimeRowLayout() : ReactGridLayout.Layout[] {
         const result = Array < ReactGridLayout.Layout > ();
+        // TODO: Give answer to what is the magic number 32.
         for (let i = 0; i < 32; i++) {
             result.push({
                 h: 1,
@@ -80,7 +79,7 @@ export class Skeleton implements ISkeleton {
         return result;
     }
 
-    private GetDayColumn() {
+    private GetDayColumn(): JSX.Element[] {
         const days = [
             " ",
             "MON",
@@ -108,7 +107,7 @@ export class Skeleton implements ISkeleton {
             display: "table-cell",
             verticalAlign: "middle"
         };
-        const result = [];
+        const result: JSX.Element[] = [];
         for (let i = 0; i < days.length; i++) {
             result.push(
                 <div

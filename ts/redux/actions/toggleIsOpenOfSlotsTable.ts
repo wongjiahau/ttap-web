@@ -17,6 +17,10 @@ export class ToggleIsOpenOfSlotsTable extends MasterStateAction {
             SlotTableState: {
                 ...state.SlotTableState,
                 IsOpen: this.isOpen
+            },
+            SnackbarState: {
+                ...state.SnackbarState,
+                IsOpen: false
             }
         };
     }

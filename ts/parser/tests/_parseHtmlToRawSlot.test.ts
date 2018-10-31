@@ -1,16 +1,8 @@
-import {
-    expect
-} from "chai";
-import {
-    isEqual,
-    omit
-} from "lodash";
-import {
-    RawSlot
-} from "../../model/rawSlot";
-import {
-    heng_2017_sept
-} from "../../tests/testData/heng_2017_sept";
+import { expect } from "chai";
+const isEqual = require("lodash.isequal");
+const omit = require("lodash.omit");
+import { RawSlot } from "../../model/rawSlot";
+import TestManager, { FileName } from "../../tests/testManager";
 import ParseHtmlToRawSlot from "../parseHtmlToRawSlot";
 import {
     IRawSlot
@@ -18,10 +10,10 @@ import {
 
 describe("ParseHtmlToRawSlot", () => {
     it("case 1", () => {
-        const input = heng_2017_sept();
+        const input = new TestManager().GetDataFrom(FileName.heng_2017_sept);
         const result = ParseHtmlToRawSlot(input);
         const expected: IRawSlot = {
-            HashId: 0,
+            Uid: 0,
             SubjectCode: "MPU3113",
             SubjectName: "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)",
             Number: "1",
@@ -37,8 +29,8 @@ describe("ParseHtmlToRawSlot", () => {
         };
         expect(
             isEqual(
-                omit(result[0], ["HashId", "toString"]),
-                omit(expected, ["HashId", "toString"])
+                omit(result[0], ["Uid", "toString"]),
+                omit(expected, ["Uid", "toString"])
             )).to.equal(true);
     });
 

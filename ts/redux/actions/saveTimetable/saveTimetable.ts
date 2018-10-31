@@ -1,6 +1,8 @@
 import {
     saveAs
 } from "file-saver";
+import { ObjectStore } from "../../../dataStructure/objectStore";
+import { IRawSlot } from "../../../model/rawSlot";
 import { ISaveTimetableDialogState, NewSaveTimetableDialogState } from "../../reducers/saveTimetableDialogState";
 import {
     Timetable
@@ -24,7 +26,7 @@ export abstract class SaveTimetable extends MasterStateAction {
         const x = state.TimetableListState;
         const currentTimetable = x.FiltrateTimetables[x.CurrentIndex];
         if (currentTimetable) {
-            this.Save(currentTimetable);
+            this.Save(currentTimetable, state.DataState.RawSlotDataRouter.GetCurrentData());
         }
         return {
             ...state,
@@ -32,7 +34,7 @@ export abstract class SaveTimetable extends MasterStateAction {
         };
     }
 
-    protected abstract Save(timetable: Timetable);
+    protected abstract Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>);
     protected abstract SaveType() : string;
 }
 

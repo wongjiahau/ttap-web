@@ -1,6 +1,6 @@
 import {expect} from "chai";
-import {isEqual} from "lodash";
-import { GetTestTimetables1 } from "../../tests/testDataGenerator";
+const isEqual = require("lodash.isequal");
+import { GetTestRawSlot1, GetTestTimetables1 } from "../../tests/testDataGenerator";
 import { NewTimetableListState } from "../reducers/timetableListState";
 import {NotifyNumberOfRemainingTimetables} from "./../actions/notifyNumberOfRemainingTimetables";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
@@ -8,7 +8,7 @@ import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/ma
 function getInitialState() : IMasterState {
     return {
         ...NewMasterState(),
-        TimetableListState: NewTimetableListState(GetTestTimetables1())
+        TimetableListState: NewTimetableListState(GetTestTimetables1(), GetTestRawSlot1())
     };
 }
 

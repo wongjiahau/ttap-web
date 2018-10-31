@@ -1,21 +1,25 @@
-import * as $ from "jquery";
-import Button from "material-ui-next/Button";
-import Checkbox from "material-ui-next/Checkbox";
-import Divider from "material-ui-next/Divider";
-import Drawer from "material-ui-next/Drawer";
-import Paper from "material-ui-next/Paper";
-import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui-next/Table";
-import Typography from "material-ui-next/Typography";
+import Button from "material-ui/Button";
+import Checkbox from "material-ui/Checkbox";
+import Divider from "material-ui/Divider";
+import Drawer from "material-ui/Drawer";
+import Paper from "material-ui/Paper";
+import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui/Table";
+import Typography from "material-ui/Typography";
 import * as React from "react";
-import {Beautify} from "../helper";
+import { ObjectStore } from "../dataStructure/objectStore";
 import {IStringDicionary} from "../interfaces/dictionary";
-import {RawSlot} from "../model/rawSlot";
+import {IRawSlot, RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
 import {DiffReport} from "../model/subjectSchema";
 import { Ternary } from "../redux/actions/updateSlotsTableState";
+import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {Colors} from "./colors/colors";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
+
+const headerStyle : React.CSSProperties = {
+    marginLeft: "10px"
+};
 
 const titleStyle : React.CSSProperties = {
     fontWeight: "bold",
@@ -40,6 +44,7 @@ export interface ISlotsTableViewStateProps {
     selectedSubjects : Subject[];
     slotStates : IStringDicionary < boolean >;
     subjectStates : IStringDicionary < Ternary >;
+    rawSlotStore: ObjectStore<IRawSlot>;
 }
 
 export interface ISlotsTableViewDispatchProps {
@@ -60,36 +65,25 @@ export class SlotsTable extends React.Component < ISlotsTableViewProps,
 ISlotsTableViewInternalState > {
     public constructor(props : ISlotsTableViewProps) {
         super(props);
-        $(window).on("resize", this.handleWindowResizing);
         this.state = {
             sectionStyle: this.getSectionStyle()
         };
-    }
-
-    public handleWindowResizing = () => {
-        this.setState({
-            sectionStyle: this.getSectionStyle()
-        });
     }
 
     public getSectionStyle() : React.CSSProperties {
         return {
             display: "flex",
             flexFlow: "column",
-            height: $(window).height()
+            height: window.innerHeight
         };
     }
 
     public render() {
         return (
-            <Drawer anchor="right" open={this.props.isOpen}>
+            <Drawer anchor="right" open={this.props.isOpen} onClose={this.props.handleDone}>
                 <section style={this.state.sectionStyle}>
-                    <header>
-                        <StackPanel
-                            orientation="vertical"
-                            style={{
-                            marginLeft: "5px"
-                        }}>
+                    <header style={headerStyle}>
+                        <StackPanel orientation="vertical">
                             <Typography type="display1" color="primary">Below are the time slots of selected subjects.</Typography>
                             <Typography type="subheading" gutterBottom={true}>You can select or deselect some specific time slots.</Typography>
                         </StackPanel>
@@ -101,7 +95,7 @@ ISlotsTableViewInternalState > {
                                 return (
                                     <div key={subject.Code}>
                                         <Typography style={titleStyle} type="subheading">
-                                            {subject.Code + " - " + Beautify(subject.Name)}
+                                            {subject.Code + " - " + BeautifySubjectName(subject.Name)}
                                         </Typography>
                                         <Table>
                                             <TableHead>
@@ -122,8 +116,8 @@ ISlotsTableViewInternalState > {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {RawSlot
-                                                    .GetBunch(subject.SlotIds)
+                                                {this.props.rawSlotStore
+                                                    .GetBunch(subject.SlotUids)
                                                     .map((slot, index) => {
                                                         const checked = this.props.slotStates[slot.Number];
                                                         const clickHandler = () => this

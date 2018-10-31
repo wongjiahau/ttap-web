@@ -1,9 +1,7 @@
 import {
     expect
 } from "chai";
-import {
-    concat
-} from "lodash";
+const concat = require("lodash.concat");
 import {
     CodeOf,
     HENG_2017_APR
@@ -16,11 +14,11 @@ import {
 } from "../findTimetableV2";
 
 const seriousInput = concat(
-    HENG_2017_APR.filter((x) => x.SubjectCode === CodeOf.H), // Hydrology
-    HENG_2017_APR.filter((x) => x.SubjectCode === CodeOf.SA2), // Structural Analysis II
-    HENG_2017_APR.filter((x) => x.SubjectCode === CodeOf.HT), // Highway Transportation
-    HENG_2017_APR.filter((x) => x.SubjectCode === CodeOf.FM2), // Fluid Mechanic II
-    HENG_2017_APR.filter((x) => x.SubjectCode === CodeOf.ITBS), // Introduction To Building Services
+    HENG_2017_APR().filter((x) => x.SubjectCode === CodeOf.H), // Hydrology
+    HENG_2017_APR().filter((x) => x.SubjectCode === CodeOf.SA2), // Structural Analysis II
+    HENG_2017_APR().filter((x) => x.SubjectCode === CodeOf.HT), // Highway Transportation
+    HENG_2017_APR().filter((x) => x.SubjectCode === CodeOf.FM2), // Fluid Mechanic II
+    HENG_2017_APR().filter((x) => x.SubjectCode === CodeOf.ITBS), // Introduction To Building Services
 );
 
 describe.skip("FindTimetableV2", () => {
@@ -35,9 +33,9 @@ describe.skip("FindTimetableV2", () => {
         const slots = GetRawSlotsOf("MPU3113");
         const result = FindTimetableV2(slots);
         expect(result.length).to.eq(3);
-        expect(result[0].HashIds.length).to.eq(2);
-        expect(result[1].HashIds.length).to.eq(2);
-        expect(result[2].HashIds.length).to.eq(2);
+        expect(result[0].Uids.length).to.eq(2);
+        expect(result[1].Uids.length).to.eq(2);
+        expect(result[2].Uids.length).to.eq(2);
     });
 
     it("case 2", () => {

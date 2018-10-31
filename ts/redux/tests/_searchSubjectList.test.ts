@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {isEqual} from "lodash";
+const isEqual = require("lodash.isequal");
 import {GetTestSubjects1} from "../../tests/testDataGenerator";
 import { NewSubjectListState } from "../reducers/subjectListState";
 import {SearchSubjectList} from "./../actions/searchSubjectList";

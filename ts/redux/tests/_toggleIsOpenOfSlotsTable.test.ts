@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {isEqual} from "lodash";
+const isEqual = require("lodash.isequal");
 import {ToggleIsOpenOfSlotsTable} from "./../actions/toggleIsOpenOfSlotsTable";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 describe("ToggleIsOpenOfSlotsTable action", () => {
@@ -19,5 +19,14 @@ describe("ToggleIsOpenOfSlotsTable action", () => {
         expect(initialState.SlotTableState.IsOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, action);
         expect(newState.SlotTableState.IsOpen).to.eq(true);
+    });
+
+    it("should close the snackbar", () => {
+        const action = new ToggleIsOpenOfSlotsTable(true);
+        const initialState = NewMasterState();
+        initialState.SnackbarState.IsOpen = true;
+        expect(initialState.SnackbarState.IsOpen).to.eq(true);
+        const newState = MasterStateReducer(initialState, action);
+        expect(newState.SnackbarState.IsOpen).to.eq(false);
     });
 });

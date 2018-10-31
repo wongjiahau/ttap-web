@@ -1,6 +1,4 @@
-import {
-    sortBy
-} from "lodash";
+const sortBy = require("lodash.sortby");
 import {
     RawSlot
 } from "../model/rawSlot";
@@ -55,8 +53,8 @@ export function FindTimetableV2(input: RawSlot[]): Timetable[] {
     return timetables;
 }
 
-export function FilterOut(slots: TinySlot[], state: number[]) {
-    const result = [];
+export function FilterOut(slots: TinySlot[], state: number[]): TinySlot[] {
+    const result: TinySlot[] = [];
     for (let i = 0; i < slots.length; i++) {
         if (!GotIntersection(slots[i].State, state)) {
             result.push(slots[i]);

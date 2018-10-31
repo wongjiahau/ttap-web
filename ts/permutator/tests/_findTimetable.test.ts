@@ -1,31 +1,46 @@
 import {
     expect
 } from "chai";
+const concat = require("lodash.concat");
+const isEqual = require("lodash.isequal");
+import { TimePeriod } from "../../att/timePeriod";
 import {
-    concat,
-    isEqual
-} from "lodash";
+    ParseRawSlotToSlot
+} from "../../parser/parseRawSlotToSlot";
 import {
-    FindTimetable,
+    ParseSlotToTinySlot
+} from "../../parser/parseSlotToTinySlot";
+import {
+    CodeOf,
+    HENG_2017_APR
+} from "../../tests/testData/heng_2017_apr";
+import {
+    FindTimetable, FindTimetableByConsideringWeekNumber,
 } from "../findTimetable";
 import {
     RawSlot
 } from "./../../model/rawSlot";
 import {
-    CodeOf, GetTinySlotsOf
+    GetTinySlotsOf
 } from "./../../tests/testDataGenerator";
 import {
     BoundedInt
 } from "./../boundedInt";
 
 describe("FindTimetable()", () => {
+    it("should throw error if passed in empty array", () => {
+        expect(() => {
+            FindTimetable([]);
+        }).to.throw();
+    });
+
     it("case 1", () => {
         const slots = GetTinySlotsOf("MPU3113");
         const result = FindTimetable(slots);
         expect(result.length).to.eq(3);
-        expect(result[0].HashIds.length).to.eq(2);
-        expect(result[1].HashIds.length).to.eq(2);
-        expect(result[2].HashIds.length).to.eq(2);
+        expect(result[0].Uids.length).to.eq(2);
+        expect(result[1].Uids.length).to.eq(2);
+        expect(result[2].Uids.length).to.eq(2);
     });
 
     it("case 2", () => {
@@ -78,6 +93,13 @@ describe("FindTimetable()", () => {
         expect(result.length).to.eq(1);
     });
 
+    it("case 8", () => {
+        const fm2Slots = HENG_2017_APR().filter((s) => s.SubjectCode === CodeOf.FM2);
+        const bigSlots = ParseSlotToTinySlot(ParseRawSlotToSlot(fm2Slots));
+        const result = FindTimetable(bigSlots);
+        expect(result.length).to.eq(392);
+    });
+
     it("should return empty array when there is no possible timetable", () => {
         const acpSlots = GetTinySlotsOf(CodeOf.ACP);
         const bkaSlots = GetTinySlotsOf(CodeOf.BKA);
@@ -87,12 +109,13 @@ describe("FindTimetable()", () => {
     });
 
     it("case 1 on Timetable.State", () => {
+        TimePeriod.SetMinTo8am();
         const bkaSlots = GetTinySlotsOf(CodeOf.BKA);
         const result = FindTimetable(bkaSlots);
         expect(result[0].State).to.deep.eq([
             0,
-            parseInt("11111100", 2),
-            parseInt("11111100", 2),
+            parseInt("111111", 2),
+            parseInt("111111", 2),
             0,
             0,
             0,
@@ -100,4 +123,18 @@ describe("FindTimetable()", () => {
         ]);
     });
 
+});
+
+describe("FindTimetableByConsideringWeekNumber ", () => {
+    it("case 1", () => {
+        const slots = HENG_2017_APR().filter((x) =>
+            x.SubjectCode === CodeOf.FM2 ||  // Fluid Mechanics 2
+            x.SubjectCode === CodeOf.H   ||  // Hydrology
+            x.SubjectCode === CodeOf.SA2 ||  // Structural Analysis 2
+            x.SubjectCode === CodeOf.HT  ||  // Highway Transportation
+            x.SubjectCode === CodeOf.ITBS    // Introduction To Building Services
+        );
+        const timetables = FindTimetableByConsideringWeekNumber(slots);
+        expect(timetables.length).to.eq(616872);
+    });
 });

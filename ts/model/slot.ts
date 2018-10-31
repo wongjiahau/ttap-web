@@ -5,37 +5,41 @@ import {Week} from "./../att/week";
 import {RawSlot} from "./rawSlot";
 
 export interface ISlot {
-    HashId?:      number;
-    SlotNumber?:  number;
-    SubjectCode?: number;
-    TimePeriod?:  number;
-    Group?:       number;
-    Type?:        number;
-    Day?:         number;
-    Week?:        number;
+    Uid:         number;
+    SlotNumber:  number;
+    SubjectCode: number;
+    SubjectName: string;
+    TimePeriod:  number;
+    Group:       number;
+    Type:        string;
+    Day:         number;
+    Week:        number;
 }
 export class Slot implements ISlot {
-    public readonly HashId: number;
-    public readonly SlotNumber: number;
-    public readonly SubjectCode:     number;
-    public readonly TimePeriod:      number;
-    public readonly Group:           number;
-    public readonly Type:            number;
-    public readonly Day:             number;
-    public readonly Week:            number;
+    public readonly Uid:            number; // Auto-Generated
+    public readonly SlotNumber:     number;
+    public readonly SubjectCode:    number;
+    public readonly SubjectName:    string;
+    public readonly TimePeriod:     number;
+    public readonly Group:          number;
+    public readonly Type:           string;
+    public readonly Day:            number;
+    public readonly Week:           number;
     public constructor(
-        hashId:      number,
+        Uid:         number,
         slotNumber:  number,
         subjectCode: number,
+        subjectName: string,
         timePeriod:  number,
         group:       number,
-        type:        number,
+        type:        string,
         day:         number,
         week:        number
     ) {
-        this.HashId      = hashId;
+        this.Uid         = Uid;
         this.SlotNumber  = slotNumber;
         this.SubjectCode = subjectCode;
+        this.SubjectName = subjectName;
         this.TimePeriod  = timePeriod;
         this.Group       = group;
         this.Type        = type;
@@ -45,36 +49,24 @@ export class Slot implements ISlot {
 
 }
 
-export function IntersectWith(a: ISlot, b: ISlot): boolean {
-    if (a.SubjectCode === b.SubjectCode && a.Type === b.Type && a.Group !== b.Group) {
-        return true;
-    }
-    if ( a.Day !== b.Day) {
-        return false;
-    }
-    if ((a.TimePeriod & b.TimePeriod) === 0 ) {
-        return false;
-    }
-    return (a.Week & b.Week) > 0;
-}
 export function CreateSlotFromRaw(raw : RawSlot) : Slot {
     const stringHash  = require("string-hash");
-    const hashId      = raw.HashId;
-    const slotNumber = parseInt(raw.Number, 10);
+    const Uid         = raw.Uid;
+    const slotNumber  = parseInt(raw.Number, 10);
     const subjectCode = stringHash(raw.SubjectCode);
     const timePeriod  = TimePeriod.Parse(raw.TimePeriod).BinaryData;
     const group       = parseInt(raw.Group, 10);
-    const type        = ParseType(raw.Type);
     const day         = ParseDay(raw.Day);
     const week        = Week.Parse(raw.WeekNumber).BinaryData;
-    return new Slot(hashId, slotNumber, subjectCode, timePeriod, group, type, day, week);
+    return new Slot(Uid, slotNumber, subjectCode, raw.SubjectName, timePeriod, group, raw.Type, day, week);
 }
 
 export function CreateSlotFromInterface(s: ISlot) : Slot {
     return new Slot (
-         s.HashId,
+         s.Uid,
          s.SlotNumber,
          s.SubjectCode,
+         s.SubjectName,
          s.TimePeriod,
          s.Group,
          s.Type,

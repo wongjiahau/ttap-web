@@ -10,7 +10,12 @@ import {
     ISlotsTableViewStateProps,
     SlotsTable
 } from "../../react/slotsTableView";
-import { FindTimetablesBasedOnChosenSlots } from "../actions/findTimetablesBasedOnChosenSlots";
+import {
+    FindTimetablesBasedOnChosenSlots
+} from "../actions/findTimetablesBasedOnChosenSlots";
+import {
+    NotifyIfTimetableIsFound
+} from "../actions/notifyIfTimetableIsFound";
 import {
     NotifyNumberOfRemainingTimetables
 } from "../actions/notifyNumberOfRemainingTimetables";
@@ -24,11 +29,16 @@ import {
     ToggleSelectionOnSpecificSlot
 } from "../actions/toggleSelectionOnSpecificSlot";
 import {
+    UpdateTotalState
+} from "../actions/updateTotalState";
+import { IMasterState } from "../reducers/masterState";
+import {
     ISlotsTableState
 } from "../reducers/slotsTableState";
 import {
     ISubjectListState
 } from "../reducers/subjectListState";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 
 const mapStateToProps = (state): ISlotsTableViewStateProps => {
     const slotsTableState = state.MasterStateReducer.SlotTableState as ISlotsTableState;
@@ -38,18 +48,23 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
         isOpen:           slotsTableState.IsOpen,
         selectedSubjects: subjectListState.Subjects.filter((s) => s.IsSelected),
         slotStates:       slotsTableState.SlotStates,
-        subjectStates:    slotsTableState.SubjectStates
+        subjectStates:    slotsTableState.SubjectStates,
+        rawSlotStore:     state.MasterStateReducer.DataState.RawSlotDataRouter.GetDataFrom("ungeneralized")
     };
 };
 
 const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
     return {
-        handleDone: () => dispatch(new FindTimetablesBasedOnChosenSlots()),
+        handleDone: () => {
+            dispatch(new FindTimetablesBasedOnChosenSlots());
+            dispatch(new UpdateTotalState());
+            dispatch(new FindAlternativeSlotsOfCurrentSlots());
+        },
         handleCancel: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
         handleSlotCheckChanged: (slotNumber: string, checked: boolean, subjectCode: string) =>
-            dispatch(new ToggleSelectionOnSpecificSlot(slotNumber, checked, subjectCode)),
+        dispatch(new ToggleSelectionOnSpecificSlot(slotNumber, checked, subjectCode)),
         handleSlotsGroupCheckChanged: (subjectCode: string) =>
-            dispatch(new ToggleSelectionOnGroupOfSlots(subjectCode))
+        dispatch(new ToggleSelectionOnGroupOfSlots(subjectCode))
     };
 };
 

@@ -16,23 +16,28 @@ node_js: # specify version of node js
 cache: # cache node modules so that every build don't have to reinstall those node package again
   directories:
     - "node_modules"
-
+    
 before_script:
-  - sed -i "s/API_KEY/$firebase/g" ./ts/fire.ts # inject firebase API
-  - sed -i "s/isProductionBuild = false/isProductionBuild = true/g" ./src/index.js # toggle production build to disable redux middleware
+  # This is needed so that the command $(git rev-list --count --all) can work properly 
+  # That command will be run by ./scripts/build
+  # For more info, refer https://github.com/travis-ci/travis-ci/issues/3412
+  - git fetch --unshallow 
 
 script:
   - echo "Running script:"
   - ./scripts/transpile
-  - npm run build
   - npm test
+  # Only upload coverage report if is on master branch and not on a PR
+  - if [ $(git branch | grep master | wc -l) = 1 -a "$TRAVIS_PULL_REQUEST" = "false" ]; then ./scripts/upload-coverage-report; fi
+  - rm -rf  ./src/core/tests/ # remove test data which is not needed in production build
+  - ./scripts/build
 
 after_script:
   - echo "script finished."
 
-after_success:
-  - ./scripts/upload-coverage-report
-
+after_success: # upload source-analysis-report
+  - source-map-explorer --html build/static/js/main.* > source_analysis/index.html
+  - surge -d ttap-source-analysis.surge.sh -p ./source_analysis/
 
 deploy:
   provider: surge

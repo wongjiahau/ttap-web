@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {AllReducers} from '../core/redux/reducers/allReducers';
-import {App} from '../App';
+import {App} from '../core/react/app';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 

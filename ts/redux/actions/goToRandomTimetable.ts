@@ -1,6 +1,4 @@
-import {
-    random
-} from "lodash";
+const random = require("lodash.random");
 import {
     IMasterState,
     MasterStateAction
@@ -27,7 +25,8 @@ export class GoToRandomTimetable extends MasterStateAction {
             ...state,
             TimetableListState: {
                 ...state.TimetableListState,
-                CurrentIndex: x
+                CurrentIndex: x,
+                AlternateSlots: []
             }
         };
     }

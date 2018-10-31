@@ -1,12 +1,13 @@
 import {
     expect
 } from "chai";
+import { TimePeriod } from "../../att/timePeriod";
 import {
     StateKind,
     STCBox
 } from "../../model/states/stcBox";
 import {
-    GetTestTimetables1
+    GetTestRawSlot1, GetTestTimetables1
 } from "../../tests/testDataGenerator";
 import {
     DefilterTimetable
@@ -29,18 +30,22 @@ import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 
-const state0 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
-const state1 = new STCBox(StateKind.Clicked, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
-const state2 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("1000000", 2), 5); // Wednesday 10-10.30 am
-const state3 = new STCBox(StateKind.Clicked, 2, parseInt("1000000", 2), 5); // Wednesday 10-10.30 am
+const state0 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("10000", 2), 5); // Monday 10-10.30 am
+const state1 = new STCBox(StateKind.Clicked,       0, parseInt("10000", 2), 5); // Monday 10-10.30 am
+const state2 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
+const state3 = new STCBox(StateKind.Clicked,       2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
 
 function getInitialState(): IMasterState {
     const result = NewMasterState();
-    result.TimetableListState = NewTimetableListState(GetTestTimetables1());
+    result.TimetableListState = NewTimetableListState(GetTestTimetables1(), GetTestRawSlot1());
     return result;
 }
 
 describe("DefilterTimetable action", () => {
+    beforeEach(() => {
+        TimePeriod.SetMinTo8am();
+    });
+
     it("'s typename should be 'defilter timetable at [YX]'", () => {
         const action = new DefilterTimetable(state0);
         expect(action.TypeName()).to.eq(`defilter timetable at [${state0.Uid}]`);
@@ -75,7 +80,7 @@ describe("DefilterTimetable action", () => {
     it("should set property of ClickedTimeConstraint", () => {
         const initialState = getInitialState();
         const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0));
-        expect(newState1.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([parseInt("1000000", 2), 0, 0, 0, 0, 0, 0]);
+        expect(newState1.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([parseInt("10000", 2), 0, 0, 0, 0, 0, 0]);
         const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1));
         expect(newState2.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
     });

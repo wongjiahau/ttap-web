@@ -15,25 +15,6 @@ export interface IStackPanelProps {
 }
 export class StackPanel extends React.Component < IStackPanelProps, {} > {
     public render() {
-        const children = this.props.children as ReactNode[];
-        let childToBeRendered;
-        if (this.props.orientation === "horizontal") {
-            childToBeRendered = (
-                <tr>
-                    {children.map((x, index) => (
-                        <td key={index}>{x}</td>
-                    ))}
-                </tr>
-            );
-        } else if (this.props.orientation === "vertical") {
-            childToBeRendered = children.map((x, index) => (
-                <tr key={index}>
-                    <td>
-                        {x}
-                    </td>
-                </tr>
-            ));
-        }
         let style = {
             ...tableStyle
         };
@@ -52,6 +33,35 @@ export class StackPanel extends React.Component < IStackPanelProps, {} > {
                 style.marginRight = "auto";
                 style.marginLeft = "0";
                 break;
+        }
+        const children = this.props.children as ReactNode[];
+        let childToBeRendered;
+        if (this.props.orientation === "horizontal") {
+            childToBeRendered = (
+                <tr>
+                    {children.map((x, index) => (
+                        <td key={index}>{x}</td>
+                    ))}
+                </tr>
+            );
+        } else if (this.props.orientation === "vertical") {
+            childToBeRendered = children.map((x, index) => (
+                <tr key={index}>
+                    <td>
+                        <div style={style}>
+                            <table style={style}>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {x}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            ));
         }
         return (
             <div style={style}>

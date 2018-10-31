@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { isEqual } from "lodash";
+const isEqual = require("lodash.isequal");
 import { Append, GotIntersection } from "../state";
 
 describe("GotIntersection()", () => {
@@ -39,6 +39,17 @@ describe("Append()", () => {
         const b = [parseInt("11110000", 2), 0, 0, 0, 0, 0, 0];
         const result = Append(a, b);
         expect(isEqual(result, [parseInt("11111111", 2), 0, 0, 0, 0, 0, 0])).to.eq(true);
+    });
+
+    it("shold return results which have the length of the first input", () => {
+        const a = [0, 0, 0, 0, 0, 0, 0];
+        const b = [0, 0, 0];
+        const result = Append(a, b);
+        expect(result).to.have.lengthOf(a.length);
+        expect(result).to.deep.eq(a);
+        // Why is this happenning ?
+        // Tips : Because any number bitwise-and with undefined equals = 0
+        // E.g. (8 & undefined) will return 0
     });
 
 });

@@ -1,11 +1,14 @@
-import Button from "material-ui-next/Button";
-import Dialog, {DialogTitle} from "material-ui-next/Dialog";
+import { TextField } from "material-ui";
+import Button from "material-ui/Button";
+import Dialog, {DialogTitle} from "material-ui/Dialog";
 import * as React from "react";
-import Flatpickr from "react-flatpickr";
 import {StackPanel} from "./panels/stackPanel";
+const format = require("date-fns/format");
 
 export interface IGetSemStartDateDialogState {
     date : Date;
+    error : boolean;
+    helperText: string;
     dateIsSelected : boolean;
 }
 
@@ -21,24 +24,31 @@ IGetSemStartDateDialogState > {
         super(props);
         this.state = {
             date: null,
+            error: false,
+            helperText: "",
             dateIsSelected: false
         };
     }
 
-    public handleDateChanged = (dates : Date[]) => {
-        this.setState({date: dates[0], dateIsSelected: true});
+    public handleDateChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const chosenDate = new Date(Date.parse(event.target.value));
+        if (chosenDate.getDay() !== 1) {
+            this.setState({
+                helperText: "Error: the date you chose is not a Monday.",
+                error: true,
+                dateIsSelected: false
+            });
+            return;
+        }
+        this.setState({
+            helperText: `The date you picked is ${format(chosenDate, "DD-MMMM-YYYY (dddd)")}.`,
+            error: false,
+            dateIsSelected: true,
+            date: chosenDate
+        });
     }
 
     public render() {
-        const flatpickerOptions = {
-            altInput: true,
-            disable: [(date) => {
-                    // disable date that are not Monday
-                    return (date.getDay() !== 1);
-                }
-            ]
-        };
-
         const buttonStyle : React.CSSProperties = {
             marginRight: "10px"
         };
@@ -49,15 +59,20 @@ IGetSemStartDateDialogState > {
                     Monday of Week One of next semester.</DialogTitle>
                 <div>
                     <StackPanel orientation="vertical" horizontalAlignment="center">
-                        <Flatpickr
-                            placeholder="Pick date . . ."
-                            options={flatpickerOptions}
-                            onChange={this.handleDateChanged}/> {""}
+                        <TextField
+                                id="date"
+                                label="Date"
+                                type="date"
+                                error={this.state.error}
+                                helperText={this.state.helperText}
+                                onChange={this.handleDateChanged}
+                                InputLabelProps={{
+                                shrink: true,
+                                }}
+                            />
+                            {""}
                     </StackPanel>
-                    <StackPanel
-                        style={{
-                        margin: "10px"
-                    }}
+                    <StackPanel style={{ margin: "10px" }}
                         orientation="horizontal"
                         horizontalAlignment="right">
                         <Button style={buttonStyle} onClick={this.props.handleClose}>Cancel</Button>

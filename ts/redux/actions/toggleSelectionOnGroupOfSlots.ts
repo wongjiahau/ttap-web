@@ -1,8 +1,5 @@
-import {
-    clone,
-    find,
-    remove
-} from "lodash";
+const clone = require("lodash.clone");
+const find = require("lodash.find");
 import {
     Subject
 } from "../../model/subject";

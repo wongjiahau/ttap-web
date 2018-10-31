@@ -1,12 +1,13 @@
 import {expect} from "chai";
 import { Timetable } from "../../model/timetable";
+import { GetTestRawSlot1 } from "../../tests/testDataGenerator";
 import { NewTimetableListState } from "../reducers/timetableListState";
 import { GoToNextTimetable } from "./../actions/goToNextTimetable";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 
 function getInitialState(timetables: Timetable[]): IMasterState {
     const result = NewMasterState();
-    result.TimetableListState = NewTimetableListState(timetables);
+    result.TimetableListState = NewTimetableListState(timetables, GetTestRawSlot1());
     return result;
 }
 

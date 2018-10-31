@@ -1,6 +1,6 @@
-import Button from "material-ui-next/Button";
-import {Origin} from "material-ui-next/Snackbar";
-import Snackbar from "material-ui-next/Snackbar";
+import Button from "material-ui/Button";
+import {SnackBarOrigin} from "material-ui/Snackbar";
+import Snackbar from "material-ui/Snackbar";
 import * as React from "react";
 
 export interface ISnackbarViewStateProps {
@@ -20,33 +20,26 @@ export class SnackbarView extends React.Component < ISnackbarProps, {} > {
     public render() {
         viewCount++;
         const okButton = (
-            <Button color="accent" dense={true} onClick={this.props.handleClose}>
+            <Button color="secondary" onClick={this.props.handleClose}>
                 Got it
             </Button>
         );
         const snackbarMessage = <span>{this.props.message}</span>;
-        const anchorOrigin : Origin = {
-            horizontal: "center",
-            vertical: "bottom"
+        const anchorOrigin : SnackBarOrigin = {
+            horizontal: "right",
+            vertical: "top"
         };
+        const getSnackbar = (open: boolean) =>
+                <Snackbar
+                    action={okButton}
+                    open={open}
+                    anchorOrigin={anchorOrigin}
+                    SnackbarContentProps={{ "aria-describedby": "message-id" }}
+                    message={snackbarMessage}/>;
         return (
             <div>
-                <Snackbar
-                    action={okButton}
-                    open={this.props.isOpen && (viewCount % 2 === 0)}
-                    anchorOrigin={anchorOrigin}
-                    SnackbarContentProps={{
-                    "aria-describedby": "message-id"
-                }}
-                    message={snackbarMessage}/>
-                <Snackbar
-                    action={okButton}
-                    open={this.props.isOpen && (viewCount % 2 === 1)}
-                    anchorOrigin={anchorOrigin}
-                    SnackbarContentProps={{
-                    "aria-describedby": "message-id"
-                }}
-                    message={snackbarMessage}/>
+                {getSnackbar(this.props.isOpen && (viewCount % 2 === 0))}
+                {getSnackbar(this.props.isOpen && (viewCount % 2 === 1))}
             </div>
         );
     }

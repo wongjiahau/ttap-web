@@ -1,6 +1,4 @@
-import {
-    sortBy
-} from "lodash";
+const sortBy = require("lodash.sortby");
 export interface IPartitionable {
     PartitionKey: number;
 }
@@ -10,6 +8,9 @@ export function Partitionize < T extends IPartitionable > (input: T[]): T[][] {
 }
 
 export function PartitionizeByKey<T>(input : T[], keyName: string) : T[][] {
+    if (input.length === 0) {
+        return [];
+    }
     const result = new Array < T[] > ();
     let column = new Array < T > ();
     const copy = sortBy(input, [keyName]);
@@ -27,6 +28,9 @@ export function PartitionizeByKey<T>(input : T[], keyName: string) : T[][] {
         if (i === copy.length - 1) {
             result.push(column);
         }
+    }
+    if (result.length === 0) {
+        result.push(column);
     }
     return result;
 

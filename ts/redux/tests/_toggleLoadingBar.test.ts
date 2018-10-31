@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {isEqual} from "lodash";
+const isEqual = require("lodash.isequal");
 import {ToggleLoadingBar} from "./../actions/toggleLoadingBar";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 describe("ToggleLoadingBar action", () => {

@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {isEqual} from "lodash";
+const isEqual = require("lodash.isequal");
 import {ToggleIsOpenOfSubjectListView} from "../actions/toggleIsOpenOfSubjectListView";
 import { MasterStateReducer, NewMasterState } from "../reducers/masterState";
 

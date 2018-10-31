@@ -1,6 +1,7 @@
 import {
     expect
 } from "chai";
+import { TimePeriod } from "../../../att/timePeriod";
 import {
     Defilter
 } from "../defilter";
@@ -15,13 +16,17 @@ import {
     STCBox
 } from "./../stcBox";
 
-const state1 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), null); // Monday 10.00 am to 10.30 am
-const state2 = new STCBox(StateKind.Clicked, 0, parseInt("1000000", 2), null); // Monday 10.00 am to 10.30 am
-const state3 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("1000000", 2), null); // Wednesday 10.00 am to 10.30 am
-const state4 = new STCBox(StateKind.Clicked, 2, parseInt("1000000", 2), null); // Wednesday 10.00 am to 10.30 am
+const state1 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("10000", 2), null); // Monday 10.00 am to 10.30 am
+const state2 = new STCBox(StateKind.Clicked,       0, parseInt("10000", 2), null); // Monday 10.00 am to 10.30 am
+const state3 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("10000", 2), null); // Wednesday 10.00 am to 10.30 am
+const state4 = new STCBox(StateKind.Clicked,       2, parseInt("10000", 2), null); // Wednesday 10.00 am to 10.30 am
 const timetables = GetTestTimetables1();
 
 describe("Defilter()", () => {
+    beforeEach(() => {
+        TimePeriod.SetMinTo8am();
+    });
+
     it("should throw error if clickedTimeConstraint.length is not 7", () => {
         const clickedTimeConstraint = new Array < number > (8);
         expect(() => {
