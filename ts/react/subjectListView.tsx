@@ -56,8 +56,8 @@ export interface ISubjectListViewDispatchProps {
     handleSearch : (searchedText : string) => void;
     handleSelection : (subjectIndex : number) => void;
     handleToggleView : () => void;
-    handleToggleIsEnabledOfFindTimetableAnimation: () => void;
-    handleHideFindTimetableAnimation: () => void;
+    handleToggleIsEnabledOfFindTimetableVisualization: () => void;
+    handleHideFindTimetableVisualization: () => void;
 }
 
 export interface ISubjectListViewStateProps extends ISubjectListState {
@@ -160,9 +160,9 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                     <Switch
                                         color="secondary"
                                         checked={this.props.IsAlgorithmVisualizerEnabled}
-                                        onChange={this.props.handleToggleIsEnabledOfFindTimetableAnimation}
+                                        onChange={this.props.handleToggleIsEnabledOfFindTimetableVisualization}
                                     />
-                                } label="Enable animation" />
+                                } label="Visualization" />
 
                                 <Tooltip title={subjectListTipsContent()} placement="top">
                                     <IconInfo/>
