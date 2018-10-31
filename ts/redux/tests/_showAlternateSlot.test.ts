@@ -31,14 +31,14 @@ describe("showAlternateSlot action", () => {
             throw new Error();
         }
         expect(newState3.TimetableListState.ShowingAlternateSlotOf.Uid).to.deep.eq(slotsToBeClicked.Uid);
-        expect(newState3.TimetableListState.AlternateSlots).to.have.lengthOf(6);
+        expect(newState3.TimetableListState.AlternateSlots).to.have.lengthOf(12);
         expect(newState3.TimetableListState.AlternateSlots.map((x) => x.Group))
-            .to.deep.eq(  [ [ "9" , "10" ],
-                            [ "11", "12" ],
-                            [ "13", "14" ],
-                            [ "15", "16" ],
-                            [ "17", "18" ],
-                            [ "19", "20" ] ]
+            .to.deep.eq(  [ [ "9" ],[ "10" ],
+                            [ "11"],[ "12" ],
+                            [ "13"],[ "14" ],
+                            [ "15"],[ "16" ],
+                            [ "17"],[ "18" ],
+                            [ "19"],[ "20" ] ]
 );
             // "5/6" is not here, as it will clash with the current time table
             // so it should not be shown as alternate slots

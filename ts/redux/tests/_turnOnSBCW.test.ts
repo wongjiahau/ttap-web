@@ -21,6 +21,7 @@ import {
     MasterStateReducer,
     NewMasterState
 } from "./../reducers/masterState";
+import { TurnOffSBCW } from "../actions/turnOffSBCW";
 
 describe("Turn on SBCW", () => {
 
@@ -31,14 +32,15 @@ describe("Turn on SBCW", () => {
 
     it("should set SearchByConsideringWeekNumber to true ", () => {
         const initialState = GetMockInitialState();
-        expect(initialState.SettingsState.SearchByConsideringWeekNumber).to.eq(false);
-        const newState = MasterStateReducer(initialState, new TurnOnSBCW());
-        expect(newState.SettingsState.SearchByConsideringWeekNumber).to.eq(true);
+        expect(initialState.SettingsState.SearchByConsideringWeekNumber).to.eq(true);
+        const newState = MasterStateReducer(initialState, new TurnOffSBCW());
+        expect(newState.SettingsState.SearchByConsideringWeekNumber).to.eq(false);
+        const newState2 = MasterStateReducer(newState, new TurnOnSBCW());
+        expect(newState2.SettingsState.SearchByConsideringWeekNumber).to.eq(true);
     });
 
     it("should set TimetableFinder to FindTimetableByConsideringWeekNumber", () => {
-        const initialState = GetMockInitialState();
-        expect(initialState.SettingsState.SearchByConsideringWeekNumber).to.eq(false);
+        const initialState = MasterStateReducer(GetMockInitialState(), new TurnOffSBCW());
         const newState = MasterStateReducer(initialState, new TurnOnSBCW());
         expect(newState.SettingsState.TimetableFinder.toString())
             .to.eq(FindTimetableByConsideringWeekNumber.toString());
@@ -53,7 +55,7 @@ describe("Turn on SBCW", () => {
     });
 
     it("should set RawSlotDataRouter to route from 'ungeneralized' slot", () => {
-        const initialState = GetMockInitialState();
+        const initialState = MasterStateReducer(GetMockInitialState(), new TurnOffSBCW());
         expect(initialState.DataState.RawSlotDataRouter.GetCurrentRoute()).to.eq("generalized");
         const newState = MasterStateReducer(initialState, new TurnOnSBCW());
         expect(newState.DataState.RawSlotDataRouter.GetCurrentRoute()).to.eq("ungeneralized");

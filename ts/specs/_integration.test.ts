@@ -29,7 +29,7 @@ describe("Integration test", () => {
 
         // Step 1
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.CSD2));
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(3);
+        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(6);
         newState = MasterStateReducer(newState, new UpdateTotalState());
         expect(newState.SetTimeConstraintState.TotalState.filter((x) => x.Kind === StateKind.MaybeOccupied)).to.have.lengthOf(6);
 
@@ -42,7 +42,7 @@ describe("Integration test", () => {
 
         // Step 3
         newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.CT));
-        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(4);
+        expect(newState.TimetableListState.FiltrateTimetables).to.have.lengthOf(24);
         newState = MasterStateReducer(newState, new UpdateTotalState());
         expect(newState.SetTimeConstraintState.TotalState.filter((x) => x.Kind === StateKind.MaybeOccupied)).to.have.lengthOf(12);
         expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([0, 0, 0, 0, 0, 0, 0]);
