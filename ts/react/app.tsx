@@ -3,6 +3,7 @@ import GridIcon from "material-ui-icons/GridOn";
 import MenuIcon from "material-ui-icons/Menu";
 import AppBar from "material-ui/AppBar";
 import Button from "material-ui/Button";
+import TouchRipple from "material-ui/ButtonBase/TouchRipple";
 import indigo from "material-ui/colors/indigo";
 import pink from "material-ui/colors/pink";
 import IconButton from "material-ui/IconButton";
@@ -15,6 +16,11 @@ import {HashRouter as Router} from "react-router-dom";
 import {GetFeedbackDialog} from "./getFeedbackDialog";
 import { MainRouter } from "./mainRouter";
 import { OtherStuffDrawer } from "./otherStuffDrawer";
+
+// The following line is to disable the TouchTipple effect of Material UI
+// This is to increase ui responsiveness (e.g. from 2.25 seconds to 2.13 seconds)
+// For more info, refer https://github.com/mui-org/material-ui/issues/240
+TouchRipple.prototype.render = () => null;
 
 const theme = createMuiTheme({
   palette: {
