@@ -154,10 +154,12 @@ export const ChosenColors = [
     Colors.Orange,
     Colors.Yellow,
     Colors.LightGreen,
+    Colors.LightSeaGreen,
     Colors.LightBlue,
-    Colors.MediumPurple,
-    // Colors.LightGray,
-    Colors.MediumVioletRed,
-    Colors.DeepSkyBlue,
-    Colors.LightCoral
+    Colors.Plum,
+    Colors.LightCyan,
+    Colors.LightGray,
+    Colors.LightCoral,
+    // Colors.MediumVioletRed,
+    // Colors.DeepSkyBlue,
 ];
