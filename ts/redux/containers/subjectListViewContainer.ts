@@ -5,6 +5,8 @@ import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSl
 import {
     HideSnackbar
 } from "../actions/hideSnackbar";
+import { ToggleIsEnabledOfAlgorithmVisualizer } from "../actions/toggleIsEnabledOfAlgorithmVisualizer";
+import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
 import {
     ToggleIsOpenOfSubjectListView
 } from "../actions/toggleIsOpenOfSubjectListView";
@@ -15,12 +17,13 @@ import {
 import {
     UpdateTotalState
 } from "../actions/updateTotalState";
+import { IMasterState } from "../reducers/masterState";
 import {
     ISubjectListState} from "../reducers/subjectListState";
 import {
     ISubjectListViewDispatchProps,
-    SubjectListView,
-    ISubjectListViewStateProps
+    ISubjectListViewStateProps,
+    SubjectListView
 } from "./../../react/subjectListView";
 import {
     NotifyIfTimetableIsFound
@@ -31,15 +34,12 @@ import {
 import {
     ToggleLoadingBar
 } from "./../actions/toggleLoadingBar";
-import { ToggleIsEnabledOfAlgorithmVisualizer } from "../actions/toggleIsEnabledOfAlgorithmVisualizer";
 import {
     ToggleSubjectListViewingOptions
 } from "./../actions/toggleSubjectListViewingOption";
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
-import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
-import { IMasterState } from "../reducers/masterState";
 
 const mapStateToProps = (state: any): ISubjectListViewStateProps => {
     const masterState = state.MasterStateReducer as IMasterState;
@@ -62,20 +62,20 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
             dispatch(new HideSnackbar());
             dispatch(new UpdateSlotsTableState());
             dispatch(new ToggleSetTimeConstraintView(true));
+            dispatch(new UpdateTotalState());
         },
         handleSearch: (searchedText: string) => {
             dispatch(new SearchSubjectList(searchedText));
             dispatch(new HideSnackbar());
         },
         handleSelection: (subjectIndex: number) => {
-            dispatch(new ToggleLoadingBar(true));
+            // dispatch(new ToggleLoadingBar(true));
             dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
-            setTimeout(() => {
-                dispatch(new ToggleSubjectSelection(subjectIndex));
-                dispatch(new ToggleLoadingBar(false));
-                dispatch(new NotifyIfTimetableIsFound());
-                dispatch(new UpdateTotalState());
-            }, 0);
+            dispatch(new ToggleSubjectSelection(subjectIndex));
+            dispatch(new NotifyIfTimetableIsFound());
+            // setTimeout(() => {
+            //     dispatch(new ToggleLoadingBar(false));
+            // }, 0);
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
         handleToggleIsEnabledOfFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),
