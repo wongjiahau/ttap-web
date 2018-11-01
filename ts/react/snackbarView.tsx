@@ -26,8 +26,8 @@ export class SnackbarView extends React.Component < ISnackbarProps, {} > {
         );
         const snackbarMessage = <span>{this.props.message}</span>;
         const anchorOrigin : SnackBarOrigin = {
-            horizontal: "right",
-            vertical: "top"
+            horizontal: "left",
+            vertical: "bottom"
         };
         const getSnackbar = (open: boolean) =>
                 <Snackbar
