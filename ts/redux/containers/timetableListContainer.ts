@@ -15,7 +15,7 @@ import {SelectSlotChoice} from "./../actions/selectSlotChoice";
 import {ShowAlternateSlot} from "./../actions/showAlternateSlot";
 import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintView";
 
-const mapStateToProps = (state) : ITimetableListViewStateProps => {
+const mapStateToProps = (state: any) : ITimetableListViewStateProps => {
     const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
     const index = timetableListState.CurrentIndex;
     const timetable = timetableListState.FiltrateTimetables.length > 0 ?
@@ -31,7 +31,7 @@ const mapStateToProps = (state) : ITimetableListViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (primitiveDispatch) : ITimetableListViewDispatchProps => {
+const mapDispatchToProps = (primitiveDispatch: any) : ITimetableListViewDispatchProps => {
     const dispatch = (action: MasterStateAction) => {
         primitiveDispatch(action);
         primitiveDispatch(new FindAlternativeSlotsOfCurrentSlots());
