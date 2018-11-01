@@ -3,6 +3,7 @@ import ButtonBase from "material-ui/ButtonBase";
 import Menu, {MenuItem} from "material-ui/Menu";
 import Typography from "material-ui/Typography";
 import * as React from "react";
+//@ts-ignore
 import {Tooltip} from "react-tippy";
 import {ISlotViewModel} from "../model/slotViewModel";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
@@ -21,11 +22,9 @@ interface ISlotViewState {
     anchorEl : any;
 }
 
-const buttonBaseStyle : React.CSSProperties = { };
-
 export class SlotView extends React.Component < ISlotViewProps,
 ISlotViewState > {
-    public constructor(props) {
+    public constructor(props: ISlotViewProps) {
         super(props);
         this.state = {
             anchorEl: null
@@ -34,20 +33,19 @@ ISlotViewState > {
 
     public render() {
         const slot = this.props.slot;
-        let buttonStyle = {
-            ...buttonBaseStyle,
-            background: this.props.color,
-        };
+        let slotStyle: React.CSSProperties = { background: this.props.color, };
         if (this.props.slot.AlternativeSlots.length > 0) {
-            buttonStyle = {
-                ...buttonStyle,
+            slotStyle = {
+                ...slotStyle,
                 cursor: "pointer", // a.k.a. the hand, so it looks like its clickable
                 borderStyle: "dashed"
             };
         }
         if (slot.IsAlternativeSlot) {// add border glow
-            buttonStyle = {
-                ...buttonStyle,
+            slotStyle = {
+                ...slotStyle,
+                color: "white",
+                backgroundColor: "black",
                 border: "1px solid rgb(86, 180, 239)",
                 boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6)",
                 cursor: "pointer"
@@ -69,7 +67,7 @@ ISlotViewState > {
 
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
-                <div className={className} style={buttonStyle} onClick={clickHandler}>
+                <div className={className} style={slotStyle} onClick={clickHandler}>
                     <b>
                         {getSlotContent(slot)} {slot.AlternativeSlots.length > 0 ? "*" : ""}
                         {slot.Group.length > 1
@@ -95,7 +93,7 @@ ISlotViewState > {
     }
 
     public menuItem = (slot : ISlotViewModel) => {
-        const clickHandler = (index) => {
+        const clickHandler = (index: number) => {
             this.setState({anchorEl: null});
             this.props.handleSelectSlotChoice(slot.Uid, index);
         };
@@ -126,7 +124,7 @@ ISlotViewState > {
             top:      "2px",
             width:    "10px",
         };
-        const clickHandler = (event) => this.setState({anchorEl: event.currentTarget});
+        const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => this.setState({anchorEl: event.currentTarget});
         return <button
             className="arrow-down-button"
             aria-label="More"
