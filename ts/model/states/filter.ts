@@ -1,5 +1,5 @@
 import {
-    Timetable
+    Timetable, CompressState
 } from "../timetable";
 import {
     StateKind,
@@ -14,7 +14,7 @@ export function Filter(timetables: Timetable[], state: STCBox): [Timetable[], Ti
     const residue: Timetable[] = [];
     for (let i = 0; i < timetables.length; i++) {
         const t = timetables[i];
-        if ((t.State[state.Day] & state.TimePeriod) === 0) {
+        if ((CompressState(t.State)[state.Day] & state.TimePeriod) === 0) {
             filtrate.push(t);
         } else {
             residue.push(t);

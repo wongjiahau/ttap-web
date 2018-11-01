@@ -45,3 +45,4 @@
 22-[]-Write test for react components
 23-[]-Solve "possibly null" problem
 24-[]-Allow user to logout
+25-[]-Need to write test for filter and defilter using BigSlots, because we are migrating to use BigSlot as default there yo

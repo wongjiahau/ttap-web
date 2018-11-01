@@ -70,12 +70,13 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
         handleSelection: (subjectIndex: number) => {
             dispatch(new ToggleLoadingBar(true));
             dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
+            document.getElementById("loading").style.visibility = "visible";
             setTimeout(() => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new ToggleLoadingBar(false));
                 dispatch(new NotifyIfTimetableIsFound());
                 dispatch(new UpdateTotalState());
-            }, 0);
+            }, 1);
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
         handleToggleIsEnabledOfFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),

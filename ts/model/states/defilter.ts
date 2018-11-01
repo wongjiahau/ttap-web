@@ -1,6 +1,6 @@
 const sum = require("lodash.sum");
 import {
-    Timetable
+    Timetable, CompressState
 } from "../timetable";
 import {
     StateKind,
@@ -17,7 +17,7 @@ export function Defilter(residueTimetables: Timetable[], clickedTimeConstraint: 
         const t = residueTimetables[i];
         let canBeRescued = true;
         for (let day = 0; day < 7; day++) {
-            if ((t.State[day] & clickedTimeConstraint[day]) > 0) {
+            if ((CompressState(t.State)[day] & clickedTimeConstraint[day]) > 0) {
                 canBeRescued = false;
                 break;
             }
