@@ -15,12 +15,22 @@ import {
     StateKind,
     STCBox
 } from "./../stcBox";
+import { Timetable } from "../../timetable";
+import { heng_2017_sept } from "../../../tests/testData/heng_2017_sept";
+import { FindTimetableByConsideringWeekNumber } from "../../../permutator/findTimetable";
 
 const state1 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
 const state2 = new STCBox(StateKind.Clicked,       0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
 const state3 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
 const state4 = new STCBox(StateKind.Clicked,       2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
-const timetables = GetTestTimetables1();
+const timetables: Timetable[] = (() => {
+    const slots = heng_2017_sept().filter((x) => 
+        x.SubjectCode === "UEMX3653" || // WWT
+        x.SubjectCode === "MPU3123"  || // Titas
+        x.SubjectCode === "UKMM1011"    // Sun Zi
+    );
+    return FindTimetableByConsideringWeekNumber(slots);
+})();
 
 describe("Defilter()", () => {
     beforeEach(() => {

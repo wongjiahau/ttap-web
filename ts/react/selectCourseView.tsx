@@ -18,6 +18,7 @@ import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
 import { Str } from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
 import { VerticalAlign } from "./panels/verticalAlign";
+import { heng_2017_sept } from "../tests/testData/heng_2017_sept";
 
 export interface ISelectCourseViewDispatchProps {
     handleLoadSlot : (rawSlots : RawSlot[]) => void;
@@ -129,12 +130,12 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     }
 
     // The code below should be uncommented during development phase
-    // public componentDidMount() {
-    //     this.props.handleLoadSlot(HENG_2017_APR());
-    //     this.setState({
-    //         redirect: true
-    //     });
-    // }
+    public componentDidMount() {
+        this.props.handleLoadSlot(heng_2017_sept());
+        this.setState({
+            redirect: true
+        });
+    }
 
     public onSuggestionsFetchRequested = (event: any) => {
         const newSuggestions =

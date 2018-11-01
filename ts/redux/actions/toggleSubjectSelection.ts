@@ -41,7 +41,6 @@ export class ToggleSubjectSelection extends MasterStateAction {
             const result = targetSubject.IsSelected
                 ? DeselectSubject(targetSubject, newSubjects, state)
                 : SelectSubject(targetSubject, newSubjects, state);
-            document.getElementById("loading").style.visibility = "hidden";
             if (state.AlgorithmVisualizerState.isEnabled) {
                 visualizer.animate();
                 return {

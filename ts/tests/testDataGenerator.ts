@@ -8,7 +8,7 @@ import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
 import {BigSlot} from "../permutator/bigSlot";
 import {FindTimetable} from "../permutator/findTimetable";
-import {TinySlot} from "../permutator/tinySlot";
+import {TinySlot, IOptimizedSlot} from "../permutator/tinySlot";
 import {NotifyDataLoaded} from "../redux/actions/notifyDataLoaded";
 import {MasterStateReducer, NewMasterState} from "../redux/reducers/masterState";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
@@ -62,13 +62,17 @@ export const GetBigSlotsOf = (subjectCode : string) : BigSlot[] => {
     return ParseSlotToBigSlot(slots);
 };
 
-export const GetTestTimetables1 = () : Timetable[] => {
-    const input1 = GetTinySlotsOf("UEMX3653"); // WWT
-    const input2 = GetTinySlotsOf("MPU3123"); // Titas
-    const input3 = GetTinySlotsOf("UKMM1011"); // Sun Zi
-    const allSlots = input1
-        .concat(input2)
-        .concat(input3);
+export const GetTestTimetables1 = (options: "tiny-slots" | "big-slots" = "tiny-slots") : Timetable[] => {
+    const getSlots: (subjectCode: string) => IOptimizedSlot[] = (() => {
+        switch(options) {
+            case "tiny-slots": return GetTinySlotsOf;
+            case "big-slots":  return GetBigSlotsOf;
+        }
+    })();
+    const input1 = getSlots("UEMX3653"); // WWT
+    const input2 = getSlots("MPU3123"); // Titas
+    const input3 = getSlots("UKMM1011"); // Sun Zi
+    const allSlots = input1.concat(input2).concat(input3);
     return FindTimetable(allSlots);
 };
 

@@ -70,7 +70,6 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
         handleSelection: (subjectIndex: number) => {
             dispatch(new ToggleLoadingBar(true));
             dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
-            document.getElementById("loading").style.visibility = "visible";
             setTimeout(() => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new ToggleLoadingBar(false));

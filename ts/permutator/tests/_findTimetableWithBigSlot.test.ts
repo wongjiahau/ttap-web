@@ -109,15 +109,21 @@ describe("FindTimetable() with BigSlot", () => {
     it("case 1 on Timetable.State", () => {
         const bkaSlots = GetBigSlotsOf(CodeOf.BKA);
         const result = FindTimetable(bkaSlots);
-        expect(result[0].State).to.deep.eq([
-            0,
-            parseInt("111111", 2),
-            parseInt("111111", 2),
-            0,
-            0,
-            0,
-            0
-        ]);
+        expect(result[0].State).to.deep.eq(
+             [  0, 63, 63, 0, 0, 0, 0,
+                0, 63, 63, 0, 0, 0, 0,
+                0, 63, 63, 0, 0, 0, 0,
+                0, 63, 63, 0, 0, 0, 0,
+                0, 63, 63, 0, 0, 0, 0,
+                0, 63, 63, 0, 0, 0, 0,
+                0, 63, 63, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0 ]);
     });
 
 });
