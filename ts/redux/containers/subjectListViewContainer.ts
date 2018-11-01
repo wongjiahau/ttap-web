@@ -41,7 +41,7 @@ import {
 import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
 import { IMasterState } from "../reducers/masterState";
 
-const mapStateToProps = (state): ISubjectListViewStateProps => {
+const mapStateToProps = (state: any): ISubjectListViewStateProps => {
     const masterState = state.MasterStateReducer as IMasterState;
     const target = masterState.SubjectListState as ISubjectListState;
     return {
@@ -55,7 +55,7 @@ const mapStateToProps = (state): ISubjectListViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
     return {
         handleClose: () => {
             dispatch(new ToggleIsOpenOfSubjectListView(false));
@@ -78,8 +78,8 @@ const mapDispatchToProps = (dispatch): ISubjectListViewDispatchProps => {
             }, 0);
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
-        handleToggleIsEnabledOfFindTimetableAnimation: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),
-        handleHideFindTimetableAnimation: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer(false)),
+        handleToggleIsEnabledOfFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),
+        handleHideFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer(false)),
     };
 };
 

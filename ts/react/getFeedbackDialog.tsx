@@ -11,7 +11,7 @@ interface IGetFeedbackDialogState {
 }
 export class GetFeedbackDialog extends React.Component < {},
 IGetFeedbackDialogState > {
-    public constructor(props) {
+    public constructor(props: {}) {
         super(props);
         this.state = {
             isOpen: false,

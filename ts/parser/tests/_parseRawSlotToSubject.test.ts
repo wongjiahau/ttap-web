@@ -1,4 +1,5 @@
 import { expect } from "chai";
+//@ts-ignore
 import uniq = require("lodash.uniq");
 import { IRawSlot } from "../../model/rawSlot";
 import { IndexOf } from "../../tests/testData/heng_2017_sept";
@@ -30,12 +31,12 @@ describe("parseRawSlotToSubject", () => {
             SubjectCode: "No record found!!!",
             SubjectName: "ENGINEER IN SOCIETY",
             Number: "No record found!!!",
-            Type: undefined,
-            Group: undefined,
-            Day: undefined,
-            TimePeriod: undefined,
-            WeekNumber: undefined,
-            Room: undefined
+            Type:       "",
+            Group:      "",
+            Day:        "",
+            TimePeriod: "",
+            WeekNumber: "",
+            Room:       ""
         };
         const subjects = ParseRawSlotToSubject([rawSlot]);
         expect(subjects).to.have.lengthOf(0);

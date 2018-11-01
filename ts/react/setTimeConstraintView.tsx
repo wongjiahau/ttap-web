@@ -3,11 +3,14 @@ import Dialog from "material-ui/Dialog";
 // import Slide from "material-ui/transitions/Slide";
 import Typography from "material-ui/Typography";
 import * as React from "react";
+//@ts-ignore
 import CountUp from "react-countup";
 import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/states/stcBox";
 import {Colors} from "./colors/colors";
 import {StackPanel} from "./panels/stackPanel";
 import {TimetableView} from "./timetableView/timetableView";
+
+export const NO_OPERATION = () => {};
 
 // region style
 const typo1Style : React.CSSProperties = {
@@ -132,8 +135,13 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             </tbody>
                         </table>
                         <TimetableView
-                            slots={null}
+                            slots={[]}
+                            alternateSlots={null}
                             states={this.props.totalState}
+                            handleSelectSlotChoice={NO_OPERATION}
+                            handleGoToThisAlternateSlot={NO_OPERATION}
+                            handleShowAlternateSlot={NO_OPERATION}
+                            handleToggleIsOpenOfSummary={NO_OPERATION}
                             handleSetTimeContraintAt={this.props.handleSetTimeConstraintAt}
                             handleDesetTimeContraintAt={this.props.handleDesetTimeConstraintAt}/>
 

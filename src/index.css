@@ -204,14 +204,14 @@ code {
 }
 
 .get-user-attention {
-    -webkit-animation: shake 3s ease-in 1s infinite;
-    -moz-animation:    shake 3s ease-in 1s infinite;
-    -o-animation:      shake 3s ease-in 1s infinite;
-    animation:         shake 3s ease-in 1s infinite;
+    -webkit-animation: fade 2s ease-in 1s infinite;
+    -moz-animation:    fade 2s ease-in 1s infinite;
+    -o-animation:      fade 2s ease-in 1s infinite;
+    animation:         fade 2s ease-in 1s infinite;
     animation-delay: 1s;
 }
 
-@keyframes shake {
+@keyframes fade {
   0% {
     opacity: 1
   }
@@ -231,4 +231,5 @@ code {
     font-size: 13.5px;
     width: 100%;
     text-align: center;
+    margin-top: 0.5px;
 }

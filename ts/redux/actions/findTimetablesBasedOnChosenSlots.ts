@@ -8,6 +8,7 @@ import {Timetable} from "../../model/timetable";
 import {PartitionizeByKey} from "../../permutator/partitionize";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction} from "./../reducers/masterState";
+import { NullFindTimetableVisualizer } from "../../permutator/findTimetableVisualizer";
 
 export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
     public constructor() {
@@ -23,14 +24,14 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         let selectedSlots: RawSlot[] = [];
         if (slotNumbersOfSelectedSlots.length > 0) {
             selectedSlots = GetSlotsFromSlotNumbers(slotStore.GetAll(), slotNumbersOfSelectedSlots);
-            newTimetables = state.SettingsState.TimetableFinder(selectedSlots);
+            newTimetables = state.SettingsState.TimetableFinder(selectedSlots, new NullFindTimetableVisualizer());
             const slotsOfSubjects = PartitionizeByKey(selectedSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
-            sortBy(currentSubjectSchemas, [(o) => o.SubjectCode]);
+            sortBy(currentSubjectSchemas, [(o: SubjectSchema) => o.SubjectCode]);
         }
         const selectedSubjects = state.SubjectListState.Subjects.filter((s) => s.IsSelected);
         const correctSubjectSchemas = selectedSubjects.map((s) => GenerateSubjectSchema(slotStore.GetBunch(s.SlotUids)));
-        sortBy(correctSubjectSchemas, [(o) => o.SubjectCode]);
+        sortBy(correctSubjectSchemas, [(o: SubjectSchema) => o.SubjectCode]);
 
         let errorMessages: DiffReport[] = [];
         correctSubjectSchemas.forEach((s) => {
@@ -39,7 +40,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
                 matchingSchema = new SubjectSchema(false, false, false, s.SubjectCode);
             }
             const diff = GetDiff(s, matchingSchema);
-            if (diff) {
+            if (diff.length > 0) {
                 errorMessages = errorMessages.concat(diff);
             }
         });

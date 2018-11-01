@@ -22,14 +22,14 @@ const leftRightButtonStyle : React.CSSProperties = {
 
 interface ITutorialState {
     currentIndex : number; // zero-based
-    currentUrl : string;
+    currentUrl : string | null;
     redirect : boolean;
 }
 
 export class Tutorial extends React.Component < {},
 ITutorialState > {
     private downloadUrls: string[];
-    public constructor(props) {
+    public constructor(props: {}) {
         super(props);
         this.state = {
             currentIndex: 0,
@@ -92,7 +92,7 @@ ITutorialState > {
                 "User-Agent": "hou32hou"
             }
         };
-        request(options, (error, response) => {
+        request(options, (error: any, response: any) => {
             const result = JSON.parse(response.body.toString())as IGithubApiObject[];
             const urls = result.map((x) => x.download_url);
             this.downloadUrls = urls;

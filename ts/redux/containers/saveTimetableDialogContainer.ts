@@ -7,7 +7,7 @@ import {ToggleIsOpenOfGetDateDialog} from "../actions/toggleIsOpenOfGetDateDialo
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";
 import { ISaveTimetableDialogState } from "../reducers/saveTimetableDialogState";
 
-const mapStateToProps = (state) : ISaveTimetableDialogStateProps => {
+const mapStateToProps = (state: any) : ISaveTimetableDialogStateProps => {
     const target = state.MasterStateReducer.SaveTimetableDialogState as ISaveTimetableDialogState;
     return {
         isGetDateDialogOpen: target.IsGetDateDialogOpen,
@@ -16,7 +16,7 @@ const mapStateToProps = (state) : ISaveTimetableDialogStateProps => {
 
 };
 
-const mapDispatchToProps = (dispatch) : ISaveTimetableDialogDispatchProps => {
+const mapDispatchToProps = (dispatch: any) : ISaveTimetableDialogDispatchProps => {
     return {
         handleSaveAsTextFile:       ()          => dispatch(new SaveTimetableAsTextFile()),
         handleSaveAsPicture:        ()          => dispatch(new SaveTimetableAsImage()),

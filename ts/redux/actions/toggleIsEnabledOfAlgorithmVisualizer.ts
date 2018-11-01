@@ -19,7 +19,7 @@ export class ToggleIsEnabledOfAlgorithmVisualizer extends MasterStateAction {
             },
             SnackbarState: {
                 ...state.SnackbarState,
-                Message: `Animation is ${isEnabled ? "enabled" : "disabled"}.`,
+                Message: `Visualization is ${isEnabled ? "enabled" : "disabled"}.`,
                 IsOpen: true
             }
         };

@@ -19,6 +19,7 @@ export class STCBox {
     public readonly TimePeriod: number; // in binary
     public readonly X: number; // X coordinate
     public constructor(kind: StateKind, day: number, timeperiod: number, x: number) {
+        this.Uid = "";
         this.Kind = kind;
         this.Day = day;
         this.TimePeriod = timeperiod;

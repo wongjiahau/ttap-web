@@ -6,7 +6,7 @@ const OUTER_LEFT_PADDING = 50;
 const OUTER_TOP_PADDING = 200;
 const INNER_LEFT_PADDING = 50;
 const TOP_PADDING = 100;
-let DELAY_MS = 100;
+const DELAY_MS = 100;
 
 export class FindTimetableVisualizer<T extends Identifiable> {
     private cy : any; // Cytoscape.Core;
@@ -128,7 +128,6 @@ export class FindTimetableVisualizer<T extends Identifiable> {
                 });
             }, this.nextPointOfTime));
             this.nextPointOfTime += DELAY_MS; // ms
-            DELAY_MS -= 0.0001; // this is needed to create an accelerating animation
         });
     }
 

@@ -4,6 +4,7 @@ import { GetTestRawSlot1 } from "../../tests/testDataGenerator";
 import { NewTimetableListState } from "../reducers/timetableListState";
 import { GoToPrevTimetable } from "./../actions/goToPrevTimetable";
 import { IMasterState, MasterStateReducer, NewMasterState } from "./../reducers/masterState";
+import { NullTimetable } from "./_goToNextTimetable.test";
 
 function getInitialState(timetables: Timetable[]): IMasterState {
     const result = NewMasterState();
@@ -18,14 +19,14 @@ describe("goToPrevTimetable action", () => {
     });
 
     it("should decrement the current index", () => {
-        const initialState = getInitialState([null, null]);
+        const initialState = getInitialState([NullTimetable, NullTimetable]);
         initialState.TimetableListState.CurrentIndex = 1;
         const newState = MasterStateReducer(initialState, new GoToPrevTimetable());
         expect(newState.TimetableListState.CurrentIndex).to.eq(0);
     });
 
     it("decrement the current index cyclically", () => {
-        const initialState = getInitialState([null, null, null]);
+        const initialState = getInitialState([NullTimetable,NullTimetable,NullTimetable]);
         const newState = MasterStateReducer(initialState, new GoToPrevTimetable());
         expect(newState.TimetableListState.CurrentIndex).to.eq(2);
     });

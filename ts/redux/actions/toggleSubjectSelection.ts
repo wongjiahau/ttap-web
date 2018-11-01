@@ -118,6 +118,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects : Subject[], 
     const disabledSubjects = allSubjects.filter((s) => s.ClashReport !== null);
     for (let i = 0; i < disabledSubjects.length; i++) {
         const s = disabledSubjects[i];
+        if(s.ClashReport === null) continue;
         switch (s.ClashReport.Type) {
             case "single":
                 let stillGotClashes = false;
@@ -141,7 +142,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects : Subject[], 
     }
 }
 
-export function CheckForClashesBetween(s : Subject, subjects : Subject[]) : ClashReport {
+export function CheckForClashesBetween(s : Subject, subjects : Subject[]) : ClashReport | null{
     for (let i = 0; i < subjects.length; i++) {
         for (let j = 0; j < subjects[i].ClashingCounterparts.length; j++) {
             if (s.Code === subjects[i].ClashingCounterparts[j]) {

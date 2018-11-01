@@ -1,6 +1,6 @@
 import Button from "material-ui/Button";
 import * as React from "react";
-import * as ReactGridLayout from "react-grid-layout";
+import * as ReactGridLayout from "../../modified_node_modules/react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
 import {RawSlot} from "../../model/rawSlot";
 import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
@@ -12,17 +12,17 @@ import {TimetableSummaryView} from "../timetableSummaryView";
 import { GenerateAlternateSlotViewsAndDayColumn } from "./generateAlternateSlotViewsAndDayColumn";
 import {GenerateSlotViewsAndDayColumn} from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
-import {Skeleton} from "./skeleton";
+import {ISkeleton, Skeleton} from "./skeleton";
 
 const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
 interface ITimetableViewProps {
     slots : ISlotViewModel[];
-    states : STCBox[];
-    alternateSlots: ISlotViewModel[];
-    handleSetTimeContraintAt?: (state : STCBox) => void;
-    handleDesetTimeContraintAt?: (state : STCBox) => void;
-    handleToggleIsOpenOfSummary?: () => void;
+    states : STCBox[] | null;
+    alternateSlots: ISlotViewModel[] | null;
+    handleSetTimeContraintAt: (state : STCBox) => void;
+    handleDesetTimeContraintAt: (state : STCBox) => void;
+    handleToggleIsOpenOfSummary: () => void;
     handleSelectSlotChoice:      (slotUid: number, newSlotChoice: number) => void;
     handleShowAlternateSlot:      (s: ISlotViewModel) => void;
     handleGoToThisAlternateSlot:  (slotUid: number) => void;
@@ -43,7 +43,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
     }
     public render() {
         const skeleton = new Skeleton();
-        if (this.props.slots) {
+        if (this.props.slots && this.props.alternateSlots) {
             const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(
                 this.props.slots.concat(this.props.alternateSlots),
                 this.props.handleSelectSlotChoice,
@@ -51,6 +51,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                 this.props.handleShowAlternateSlot
                 );
             skeleton.Concat(slotViewsAndDayColumn);
+            const horizontalDividers = GenerateHorizontalDividers(skeleton);
+            skeleton.Concat(horizontalDividers);
         }
         if (this.props.states) {
             const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
@@ -91,7 +93,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                             verticalCompact={false}>
                             {skeleton.Children}
                         </ReactGridLayout>
-                        {this.props.slots ?
+                        {this.props.slots.length > 0 ?
                         <Button id="summary-btn" raised={true} style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
                             {this.props.isSummaryOpen ? "hide summary" : "show summary"}
                         </Button>
@@ -124,3 +126,38 @@ export const GetStandardDayColumnLayout = () : ReactGridLayout.Layout[] => {
     }
     return result;
 };
+
+export const GenerateHorizontalDividers = (skeleton: ISkeleton) : ISkeleton => {
+    const getDivider = (layoutId: string) => {
+        const dividerStyle : React.CSSProperties = {
+            borderBottom: "1px dotted #666",
+            width: "100%"
+        };
+        return (
+            <div key={layoutId} style={dividerStyle}/>
+        );
+    };
+    const dividers: JSX.Element[] = [];
+    for (let i = 1; i <= 6; i++) {
+        dividers.push(getDivider("divider" + i));
+    }
+    const dividersLayouts : ReactGridLayout.Layout[] = [];
+    for (let i = 1; i <= 6; i++) {
+        dividersLayouts.push({
+            ...skeleton.Layouts.filter((x) => x.i === "d" + i)[0],
+            i: ( "divider" + i ),
+            w: ( TimePeriod.Max.Hour - TimePeriod.Min.Hour ) * 2,
+            x: 2,
+        });
+    }
+    return {
+        Children: dividers,
+        Layouts: dividersLayouts
+    };
+};
+
+/*
+Note: For the horizontal borders to work, the synchronizeLayoutWithChildren function of ReactGirdLayout must be disabled,
+It can be disabled by returning the initialLayout directly
+in utils.js of ReactGridLayout folder
+*/

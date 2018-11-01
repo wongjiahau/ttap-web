@@ -117,11 +117,11 @@ describe("GenerateSubjectSchema", () => {
 });
 
 describe("GetDiff", () => {
-    it("should return null if schema X and schema Y are equal", () => {
+    it("should return empty array if schema X and schema Y are equal", () => {
         const x = new SubjectSchema(true, true, true);
         const y = new SubjectSchema(true, true, true);
         expect(x.IsEqual(y)).to.eq(true);
-        expect(GetDiff(x, y)).to.eq(null);
+        expect(GetDiff(x, y)).to.deep.eq([]);
     });
 
     it("should return error messages if schema X and schema Y are not equal (1)", () => {

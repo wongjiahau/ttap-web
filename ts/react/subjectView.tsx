@@ -16,7 +16,7 @@ const clashReportStyle : React.CSSProperties = {
 
 export interface ISubjectViewProps {
     id:              string;
-    clashReport:     ClashReport;
+    clashReport:     ClashReport | null;
     isLoading:       boolean;
     isSelected:      boolean;
     searchWord:      string;
@@ -69,7 +69,7 @@ export class SubjectView extends React.Component < ISubjectViewProps, {} > {
     }
 }
 
-const getClashReport = (x : ClashReport) => {
+const getClashReport = (x : ClashReport | null) => {
     if (x) {
         if (x.Type === "single") {
             return (

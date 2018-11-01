@@ -32,7 +32,7 @@ ISaveTimetableDialogDispatchProps {}
 
 export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogProps, {} > {
     public render() {
-        const getListItem = (text, icon, handler) => {
+        const getListItem = (text: string, icon: any, handler: any) => {
             return (
                 <ListItem button={true} onClick={handler}>
                     <ListItemIcon>

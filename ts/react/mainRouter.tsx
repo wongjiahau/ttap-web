@@ -34,7 +34,7 @@ const RedirectTo = () => {
 const width = 0.9 * window.innerWidth;
 const height = 0.825 * window.innerHeight;
 
-const Page = (src) => {
+const Page = (src: string) => {
     return () => (
         <StackPanel orientation="vertical" horizontalAlignment="center">
             <MarkdownPage width={width} height={height} src={src}/> {""}

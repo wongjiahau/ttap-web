@@ -5,6 +5,7 @@ import { GetTestRawSlot1 } from "../../tests/testDataGenerator";
 import { NewTimetableListState } from "../reducers/timetableListState";
 import { GoToRandomTimetable } from "./../actions/goToRandomTimetable";
 import { IMasterState, MasterStateReducer, NewMasterState } from "./../reducers/masterState";
+import { NullTimetable } from "./_goToNextTimetable.test";
 
 function getInitialState(timetables: Timetable[]): IMasterState {
     const result = NewMasterState();
@@ -20,7 +21,7 @@ describe("GoToRandomTimetable action", () => {
 
     it("should set the TimetableListState.CurrentIndex property to a random value", () => {
         const action = new GoToRandomTimetable();
-        const initialState = getInitialState([null, null, null]);
+        const initialState = getInitialState([NullTimetable, NullTimetable, NullTimetable]);
         const newState = MasterStateReducer(initialState, action);
         expect(newState.TimetableListState.CurrentIndex)
             .to.most(newState.TimetableListState.FiltrateTimetables.length - 1);
@@ -29,14 +30,14 @@ describe("GoToRandomTimetable action", () => {
 
     it("should set the TimetableListState.CurrentIndex to a value that is different from previous TimetableListState.CurrentIndex", () => {
         const action = new GoToRandomTimetable();
-        const initialState = getInitialState([null, null, null]);
+        const initialState = getInitialState([NullTimetable, NullTimetable, NullTimetable]);
         const newState = MasterStateReducer(initialState, action);
         expect(newState.TimetableListState.CurrentIndex).to.not.eq(initialState.TimetableListState.CurrentIndex);
     });
 
     it("should not loop infinitely when there is only one timetable", () => {
         const action = new GoToRandomTimetable();
-        const initialState = getInitialState([null]);
+        const initialState = getInitialState([NullTimetable]);
         expect(() => {
             const newState = MasterStateReducer(initialState, action);
         }).to.not.throw();

@@ -15,7 +15,7 @@ export function GenerateAlternateSlotViewsAndDayColumn(
     handleSelectSlotChoice: (slotUid : number, newSlotChoice : number) => void,
     handleGoToThisAlternateSlot: (slotUid : number) => void,
 ) : ISkeleton {
-    slots = sortBy(slots, [(o) => ParseDay(o.Day)]);
+    slots = sortBy(slots, [(o: ISlotViewModel) => ParseDay(o.Day)]);
     const slotViews = slots.map((x, index) => {
         return (
             // "as" means "Alternate Slots"
@@ -29,7 +29,7 @@ export function GenerateAlternateSlotViewsAndDayColumn(
             </div>
         );
     });
-    const layouts = GenerateSlotAndDayLayouts(slots, Skeleton.X_OFFSET, Skeleton.Y_OFFSET, "as");
+    const layouts = GenerateSlotAndDayLayouts(slots, Skeleton.X_OFFSET, Skeleton.Y_OFFSET);
     const slotAndDayLayouts = layouts[0].concat(layouts[1]);
     return {Children: slotViews, Layouts: slotAndDayLayouts};
 }

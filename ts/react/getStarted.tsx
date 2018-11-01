@@ -11,7 +11,7 @@ interface IGetStartedState {
 }
 export class GetStarted extends React.Component < {},
 IGetStartedState > {
-    constructor(props) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             redirect: false
@@ -24,7 +24,7 @@ IGetStartedState > {
             return (
                 <VerticalAlign>
                     <StackPanel orientation="vertical" horizontalAlignment="center">
-                        <img src={window.PUBLIC_URL + "/big_calendar.png"}></img>
+                        <img src={(window as any)["PUBLIC_URL"] + "/big_calendar.png"}></img>
                         <Typography type="display3">Welcome to TTAP!</Typography>
                         <Button raised={true} color="secondary" onClick={this.handleClick}>
                             <IconList style={iconStyle}/>

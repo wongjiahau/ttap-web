@@ -11,10 +11,11 @@ export function Increment(indices: BoundedInt[]): BoundedInt[] {
             x[pointer].Value = 0;
             pointer--;
             if (pointer < 0) {
-                return null;
+                return [];
             }
         } else {
             return x;
         }
     }
 }
+

@@ -34,7 +34,7 @@ export abstract class SaveTimetable extends MasterStateAction {
         };
     }
 
-    protected abstract Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>);
+    protected abstract Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>): void;
     protected abstract SaveType() : string;
 }
 

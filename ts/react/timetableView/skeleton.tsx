@@ -23,12 +23,8 @@ export class Skeleton implements ISkeleton {
     }
 
     public Concat(other : ISkeleton) : void {
-        this.Children = this
-            .Children
-            .concat(other.Children);
-        this.Layouts = this
-            .Layouts
-            .concat(other.Layouts);
+        this.Children = other.Children.concat(this.Children);
+        this.Layouts  = other.Layouts.concat(this.Layouts);
     }
 
     private GetTimeRow(): JSX.Element[] {

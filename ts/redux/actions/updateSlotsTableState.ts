@@ -42,7 +42,7 @@ export function GetSlotStates(selectedSubjects: Subject[]): IStringDicionary < b
 export type Ternary = "true" | "false" | "intermediate";
 
 export function GetSubjectStates(selectedSubjects: Subject[]): IStringDicionary < Ternary > {
-    const result = {};
+    const result: IStringDicionary < Ternary > = {};
     selectedSubjects.forEach((s) => {
         result[s.Code] = "true";
     });

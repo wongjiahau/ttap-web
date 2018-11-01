@@ -2,11 +2,11 @@ import { connect } from "react-redux";
 import { ISelectCourseViewDispatchProps, SelectCourseView } from "../../react/selectCourseView";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
 
-const mapStateToProps = (state): {} => {
+const mapStateToProps = (state: any): {} => {
     return {};
 };
 
-const mapDispatchToProps = (dispatch): ISelectCourseViewDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ISelectCourseViewDispatchProps => {
     return {
         handleLoadSlot: (rawSlots) => dispatch(new NotifyDataLoaded(rawSlots))
     };

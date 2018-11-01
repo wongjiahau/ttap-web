@@ -11,13 +11,13 @@ import { NewSubjectListState } from "../reducers/subjectListState";
 describe("toggle selection on specific slot", () => {
     it("'s typename should be 'seleting slot [ 1 ]' when passed in true", () => {
         GetMockInitialState();
-        const action = new ToggleSelectionOnSpecificSlot("1", true, null);
+        const action = new ToggleSelectionOnSpecificSlot("1", true, "");
         expect(action.TypeName()).to.eq("selecting slot [ 1 ]");
     });
 
     it("'s typename should be 'deseleting slot [ 1 ]' when passed in false", () => {
         GetMockInitialState();
-        const action = new ToggleSelectionOnSpecificSlot("1", false, null);
+        const action = new ToggleSelectionOnSpecificSlot("1", false, "");
         expect(action.TypeName()).to.eq("deselecting slot [ 1 ]");
     });
 

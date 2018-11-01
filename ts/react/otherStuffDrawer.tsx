@@ -27,7 +27,7 @@ interface IOtherStuffDrawerProps {
 }
 
 export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
-    const routerLink = (icon, text, to) =>
+    const routerLink = (icon: any, text: string, to: string) =>
             <Link style={linkStyle} to={to}>
                 <ListItem button={true} onClick={props.onItemClick}>
                     <ListItemIcon>
@@ -38,7 +38,7 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
                 </ListItem>
             </Link>;
 
-    const newTabLink = (icon, text, url) => {
+    const newTabLink = (icon: any, text: string, url: string) => {
         return (
             <ListItem button={true} onClick={() => {window.open(url, "_blank"); props.onItemClick(); }}>
                     <ListItemIcon>

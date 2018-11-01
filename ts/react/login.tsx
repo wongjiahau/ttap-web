@@ -35,7 +35,7 @@ interface ILoginStateProps {
 export class Login extends React.Component < ILoginDispatchProps, ILoginStateProps > {
     private currentPage : number = 1;
     private html = "";
-    public constructor(props) {
+    public constructor(props: ILoginDispatchProps) {
         super(props);
         this.state = {
             redirect: false,
@@ -116,7 +116,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
             this.html += iframe.contentWindow.document.body.innerHTML;
             if ((new Str(this.html)).Contains(`changePage('${this.currentPage + 1}')`)) {
                 this.currentPage++;
-                iframe.contentWindow.changePage(this.currentPage); // changePage is a function defined in <script></script>
+                (iframe.contentWindow as any)["changePage"](this.currentPage); // changePage is a function defined in <script></script>
             } else {
                 try {
                     this.props.handleLoadSlots(ParseHtmlToRawSlot(this.html));

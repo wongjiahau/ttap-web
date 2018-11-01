@@ -1,4 +1,5 @@
-import { JSDOM } from "jsdom";
+//@ts-ignore
+import { JSDOM } from "jsdom"; 
 const last = require("lodash.last");
 const uniqWith = require("lodash.uniqwith");
 const omit = require("lodash.omit");
@@ -15,8 +16,8 @@ export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
 
     const tableRows = htmlDoc.getElementsByTagName("table")[10].getElementsByTagName("tr");
     // i = 1 because we need to skip the first <tr> which is the header of the table
-    let currentSubjectName: string;
-    let currentSubjectCode: string;
+    let currentSubjectName: string = "";
+    let currentSubjectCode: string = "";
     for (let i = 1; i < tableRows.length; i++) {
         const currentRow = tableRows[i];
         const cells = currentRow.getElementsByTagName("td");

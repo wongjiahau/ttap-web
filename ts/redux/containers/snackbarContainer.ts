@@ -13,7 +13,7 @@ import {
     ISnackbarState
 } from "../reducers/snackbarState";
 
-const mapStateToProps = (state): ISnackbarViewStateProps => {
+const mapStateToProps = (state: any): ISnackbarViewStateProps => {
     const target = state.MasterStateReducer.SnackbarState as ISnackbarState;
     return {
         isOpen: target.IsOpen,
@@ -21,7 +21,7 @@ const mapStateToProps = (state): ISnackbarViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch): ISnackbarViewDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ISnackbarViewDispatchProps => {
     return {
         handleClose: () => dispatch(new HideSnackbar())
     };

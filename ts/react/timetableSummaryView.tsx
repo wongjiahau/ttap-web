@@ -21,6 +21,7 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
             borderCollapse: "collapse"
         };
         return (
+            //@ts-ignore
             <table cellPadding="0" cellSpacing="0" style={tableStyle} border="1">
                 <tbody>
                     <tr>
@@ -55,7 +56,7 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
 
 }
 
-function getTd(content) {
+function getTd(content: any) {
     const style : React.CSSProperties = {
         textAlign: "center",
         padding: "5px",

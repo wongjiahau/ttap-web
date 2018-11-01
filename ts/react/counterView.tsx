@@ -5,9 +5,9 @@ import * as React from "react";
 import {StackPanel} from "./panels/stackPanel";
 
 export interface ICounterProps {
-    leftTooltip ?:       string;
-    middleTooltip ?:     string;
-    rightTooltip ?:      string;
+    leftTooltip :        string;
+    middleTooltip :      string;
+    rightTooltip :       string;
     maxInclusive:        number;
     current:             number;
     handleClickLeft:     () => void;
@@ -21,7 +21,7 @@ export class CounterView extends React.Component < ICounterProps, {} > {
     }
 
     public render() {
-        const getButton = (handler, icon, tooltip) => {
+        const getButton = (handler: any, icon: any, tooltip: string) => {
             return (
                 <div data-balloon={tooltip} data-balloon-pos="up">
                     <Button onClick={handler} raised={true}>

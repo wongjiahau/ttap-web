@@ -6,7 +6,7 @@ const divStyle = {
     textAlign: "center"
 };
 
-const EmbeddedPage = (props) => {
+const EmbeddedPage = (props: {src: string}) => {
     return (
         <Backable>
             <div style={divStyle}>

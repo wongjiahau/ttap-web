@@ -20,6 +20,7 @@ if [[ $output == *"error"* ]];
 then
     echo -e "\e[31mBuild failed due to the following errors: "
     echo "$output"
+    exit 1
 else # Signify success
     echo -e "\e[32m "
     echo "███████╗ ██╗   ██╗  ██████╗  ██████╗ ███████╗ ███████╗ ███████╗ ██╗"

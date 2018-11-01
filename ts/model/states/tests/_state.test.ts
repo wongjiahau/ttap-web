@@ -6,7 +6,7 @@ describe("State", () => {
         it("should set Uid based on X and Day arguments", () => {
             const x = 1;
             const day = 0;
-            const state = new STCBox(null, day, null, x);
+            const state = new STCBox(0, day, 0, x);
             expect(state.Uid).to.eq("01");
 
         });

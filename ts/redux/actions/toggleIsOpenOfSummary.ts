@@ -3,7 +3,7 @@ import {
     MasterStateAction
 } from "./../reducers/masterState";
 export class ToggleIsOpenOfSummary extends MasterStateAction {
-    public constructor(private open: boolean = null) {
+    public constructor(private open: boolean | null = null) {
         super();
     }
     public TypeName(): string {

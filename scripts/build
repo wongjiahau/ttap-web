@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Transpile the TypeScript source code to Javascript
-./scripts/transpile
+./scripts/transpile || exit 1
 
 pwd
 sed -i "s/isProductionBuild = false/isProductionBuild = true/g" ./src/index.js # toggle production build to disable redux middleware

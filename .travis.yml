@@ -25,12 +25,11 @@ before_script:
 
 script:
   - echo "Running script:"
-  - ./scripts/transpile
+  - ./scripts/build
   - npm test
   # Only upload coverage report if is on master branch and not on a PR
   - if [ $(git branch | grep master | wc -l) = 1 -a "$TRAVIS_PULL_REQUEST" = "false" ]; then ./scripts/upload-coverage-report; fi
   - rm -rf  ./src/core/tests/ # remove test data which is not needed in production build
-  - ./scripts/build
 
 after_script:
   - echo "script finished."

@@ -3,7 +3,7 @@ import { AlgorithmVisualizerView, IAlgorithmVisualizerViewDispatchProps, IAlgori
 import { ToggleIsOpenOfAlgorithmVisualizerView } from "../actions/toggleIsOpenOfAlgorithmVisualizerView";
 import { IMasterState } from "../reducers/masterState";
 
-const mapStateToProps = (state): IAlgorithmVisualizerViewStateProps => {
+const mapStateToProps = (state: any): IAlgorithmVisualizerViewStateProps => {
     const masterState = state.MasterStateReducer as IMasterState;
     return {
         open: masterState.AlgorithmVisualizerState.isOpen,
@@ -15,7 +15,7 @@ const mapStateToProps = (state): IAlgorithmVisualizerViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch): IAlgorithmVisualizerViewDispatchProps => {
+const mapDispatchToProps = (dispatch: any): IAlgorithmVisualizerViewDispatchProps => {
     return {
         handleClose: () => dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(false))
     };

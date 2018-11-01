@@ -33,5 +33,5 @@ export function ParseRawSlotToSubject(slots : RawSlot[]) : Subject[] {
         });
         result.push(new Subject(slot.SubjectName, slot.SubjectCode, slotIds, uniq(slotNumbers)));
     });
-    return sortBy(result, [(o) => o.Name]);
+    return sortBy(result, [(o: Subject) => o.Name]);
 }

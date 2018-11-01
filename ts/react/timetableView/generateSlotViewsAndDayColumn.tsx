@@ -17,7 +17,7 @@ export function GenerateSlotViewsAndDayColumn(
     showAlternateSlotHandler: (s: ISlotViewModel) => void
 ) : ISkeleton {
     const colorSchemes = GenerateColorScheme(slots);
-    slots = sortBy(slots, [(o) => ParseDay(o.Day)]);
+    slots = sortBy(slots, [(o: ISlotViewModel) => ParseDay(o.Day)]);
     const slotViews = slots.map((x, index) => {
         const color =
             x.IsAlternativeSlot ?

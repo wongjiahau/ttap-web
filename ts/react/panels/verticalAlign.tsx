@@ -14,7 +14,7 @@ const childStyle : React.CSSProperties = {
     verticalAlign: "middle"
 };
 
-export function VerticalAlign(props) {
+export function VerticalAlign(props: React.Props<any>) {
     return (
         <div style={containerStyle}>
             <div style={childStyle}>
