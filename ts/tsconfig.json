@@ -7,8 +7,9 @@
         "pretty": true,
         "jsx": "react",
         "strictNullChecks": true,
-        "strict": false,
+        "allowJs": true,
+        "strict": true,
         "lib": ["es5", "es6", "dom"],
-        "allowJs": true
+        "checkJs": true
     }
 }
