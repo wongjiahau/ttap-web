@@ -128,9 +128,7 @@ ISlotViewState > {
         return <button
             className="arrow-down-button"
             aria-label="More"
-            aria-owns={this.state.anchorEl
-            ? "long-menu"
-            : null}
+            aria-owns={this.state.anchorEl ? "long-menu" : undefined}
             aria-haspopup="true"
             style={buttonStyle}
             onClick={clickHandler}>
