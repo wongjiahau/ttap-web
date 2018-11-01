@@ -24,9 +24,11 @@ describe("showAlternateSlot action", () => {
             )[0]; // ASSD T1
 
         const newState2 = MasterStateReducer(newState1, new ShowAlternateSlot(slotsToBeClicked));
+        expect(newState2.TimetableListState.CurrentIndex).to.eq(0);
         const newState3 = MasterStateReducer(newState2, new GoToThisAlternateSlot(newState2.TimetableListState.AlternateSlots[0].Uid));
-        expect(newState3.TimetableListState.CurrentIndex).to.eq(2);
+        expect(newState3.TimetableListState.CurrentIndex).to.eq(1);
         expect(newState3.SnackbarState.IsOpen).to.eq(false);
+        expect(newState3.TimetableListState.FiltrateTimetables[newState3.TimetableListState.CurrentIndex].Uids).to.have.lengthOf(3);
     });
 
 });

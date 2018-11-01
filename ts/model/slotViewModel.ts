@@ -17,7 +17,6 @@ export interface ISlotViewModel {
 }
 
 export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
-    const group = rawSlot.Group.split("/");
     return {
         Uid:              rawSlot.Uid,
         SlotNumber:       parseInt(rawSlot.Number, 10),
@@ -25,7 +24,7 @@ export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
         SubjectCode:      rawSlot.SubjectCode,
         SubjectName:      rawSlot.SubjectName,
         Type:             rawSlot.Type,
-        Group:            group,
+        Group:            rawSlot.Group.split("/"),
         Day:              rawSlot.Day,
         TimePeriod:       rawSlot.TimePeriod,
         WeekNumber:       rawSlot.WeekNumber.split("/"),
@@ -37,4 +36,19 @@ export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
 
 export function CreateSlotViewModels(rawSlots: RawSlot[]): ISlotViewModel[] {
     return rawSlots.map(CreateSlotViewModel);
+}
+
+export function FromSlotViewModelToRawSlot(s: ISlotViewModel): RawSlot {
+    return {
+        Uid:              s.Uid,
+        Number:           s.SlotNumber.toString(),
+        SubjectCode:      s.SubjectCode,
+        SubjectName:      s.SubjectName,
+        Type:             s.Type,
+        Group:            s.Group.join("/"),
+        Day:              s.Day,
+        TimePeriod:       s.TimePeriod,
+        WeekNumber:       s.WeekNumber.join("/"),
+        Room:             s.Room.join("/"),
+    };
 }

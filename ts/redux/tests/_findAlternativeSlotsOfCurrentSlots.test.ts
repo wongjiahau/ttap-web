@@ -12,6 +12,7 @@ describe("find alternative slots of current slot", () => {
         const intialState = GetMockInitialState("heng_2017_apr");
         let state = MasterStateReducer(intialState, new ToggleSubjectSelection(IndexOf.FM1));
         state = MasterStateReducer(state, new ToggleSubjectSelection(IndexOf.FM2));
+        expect(state.TimetableListState.SlotViewModelStore.GetAll()).to.have.lengthOf(79);
         state = MasterStateReducer(state, new FindAlternativeSlotsOfCurrentSlots());
 
         const slotsToBeClicked = state.TimetableListState.SlotViewModelStore.GetAll()
@@ -23,6 +24,7 @@ describe("find alternative slots of current slot", () => {
 
         state = MasterStateReducer(state, new ShowAlternateSlot(slotsToBeClicked));
         expect(state.TimetableListState.AlternateSlots.some((x) => x.Group[0] === "2")).to.eq(false);
+        expect(state.TimetableListState.SlotViewModelStore.GetAll()).to.have.lengthOf(79);
 
     });
 

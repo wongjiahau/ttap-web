@@ -1,11 +1,11 @@
 import Button from "material-ui/Button";
 import * as React from "react";
-import * as ReactGridLayout from "../../modified_node_modules/react-grid-layout";
 import {TimePeriod} from "../../att/timePeriod";
 import {RawSlot} from "../../model/rawSlot";
 import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
 import {STCBox} from "../../model/states/stcBox";
 import {Timetable} from "../../model/timetable";
+import * as ReactGridLayout from "../../modified_node_modules/react-grid-layout";
 import {Colors} from "../colors/colors";
 import {StackPanel} from "../panels/stackPanel";
 import {TimetableSummaryView} from "../timetableSummaryView";
@@ -33,6 +33,10 @@ interface ITimetableViewState {
     width: number;
 }
 
+/* This component have two purpose
+ *  1. To render TimetableView
+ *  2. To render SetTimeConstraintView
+ */
 export class TimetableView extends React.Component < ITimetableViewProps, ITimetableViewState> {
     public constructor(props : ITimetableViewProps) {
         super(props);
@@ -43,7 +47,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
     }
     public render() {
         const skeleton = new Skeleton();
-        if (this.props.slots && this.props.alternateSlots) {
+        if (this.props.slots && this.props.alternateSlots) { // render timetable view
             const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(
                 this.props.slots.concat(this.props.alternateSlots),
                 this.props.handleSelectSlotChoice,
@@ -54,7 +58,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             const horizontalDividers = GenerateHorizontalDividers(skeleton);
             skeleton.Concat(horizontalDividers);
         }
-        if (this.props.states) {
+        if (this.props.states) { // render set time constraint view
             const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
             skeleton.Concat(stateViews);
             skeleton.Layouts = skeleton

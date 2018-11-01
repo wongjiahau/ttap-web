@@ -8,7 +8,7 @@ export class GoToThisAlternateSlot extends MasterStateAction {
     public TypeName() : string {return `go to this alternate slot (uid=${this.slotUid}) `; }
 
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        if(state.TimetableListState.ShowingAlternateSlotOf === null) {
+        if (state.TimetableListState.ShowingAlternateSlotOf === null) {
             return state;
         }
         const timetables = state.TimetableListState.FiltrateTimetables;

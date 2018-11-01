@@ -1,7 +1,10 @@
 import { ObjectStore } from "../../dataStructure/objectStore";
 import { CreateSlotFromRaw } from "../../model/slot";
-import { CreateSlotViewModel } from "../../model/slotViewModel";
-import { GotIntersection } from "../../permutator/state";
+import { CreateSlotViewModel, FromSlotViewModelToRawSlot } from "../../model/slotViewModel";
+import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
+import { ParseSlotToBigSlot } from "../../parser/parseSlotToBigSlot";
+import { BigSlot } from "../../permutator/bigSlot";
+import { Append, GotIntersection } from "../../permutator/state";
 import {MasterStateAction} from "../reducers/masterState";
 import { TinySlot } from "./../../permutator/tinySlot";
 import {IMasterState} from "./../reducers/masterState";
@@ -27,9 +30,16 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
         const currentTimetable = state.TimetableListState.FiltrateTimetables[state.TimetableListState.CurrentIndex];
 
         const currentSlots = state.TimetableListState.SlotViewModelStore.GetAll();
+        const currentTimetableState = ParseSlotToBigSlot(
+             ParseRawSlotToSlot(currentSlots.filter((x) => currentTimetable.Uids.indexOf(x.Uid) > -1)
+                .map(FromSlotViewModelToRawSlot))
+             ).map((x) => x.State).reduce((x, y) => Append(x, y));
+
         for (let i = 0; i < currentSlots.length; i++) {
             const s = currentSlots[i];
-            const numberOfSiblingSlots = currentSlots.filter((x) => x.SlotNumber === s.SlotNumber && /*but*/ x.Uid !== s.Uid).length;
+            const numberOfSiblingSlots = currentSlots
+                .filter((x) => x.SlotNumber === s.SlotNumber && /*but*/ x.Uid !== s.Uid).length;
+
             let alternativeSlots = allSlots
                 .filter((x) => {
                     return x.SubjectCode === s.SubjectCode
@@ -39,8 +49,8 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
                 })
                 .filter((x) => {
                     return !GotIntersection(
-                        currentTimetable.State,
-                        new TinySlot(CreateSlotFromRaw(x)).State
+                        currentTimetableState,
+                        new BigSlot(CreateSlotFromRaw(x)).State
                     );
                 })
                 .map(CreateSlotViewModel)

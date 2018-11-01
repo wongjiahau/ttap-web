@@ -31,20 +31,20 @@ const mapStateToProps = (state: any) : ITimetableListViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (primitiveDispatch: any) : ITimetableListViewDispatchProps => {
+const mapDispatchToProps = (triggerlessDispatch: any) : ITimetableListViewDispatchProps => {
     const dispatch = (action: MasterStateAction) => {
-        primitiveDispatch(action);
-        primitiveDispatch(new FindAlternativeSlotsOfCurrentSlots());
+        triggerlessDispatch(action);
+        triggerlessDispatch(new FindAlternativeSlotsOfCurrentSlots());
     };
     return {
         handleGoToNext:                  () => dispatch(new GoToNextTimetable()),
         handleGoToPrevious:              () => dispatch(new GoToPrevTimetable()),
         handleGoToRandom:                () => dispatch(new GoToRandomTimetable()),
-        handleOpenSaveTimetableDialog:   () => dispatch(new ToggleIsOpenOfSaveDialog(true)),
-        handleOpenSetTimeConstraintView: () => dispatch(new ToggleSetTimeConstraintView(true)),
-        handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
-        handleToggleIsOpenOfSummary:     () => dispatch(new ToggleIsOpenOfSummary()),
-        handleShowAlternateSlot:         (s: ISlotViewModel) => dispatch(new ShowAlternateSlot(s)),
+        handleOpenSaveTimetableDialog:   () => triggerlessDispatch(new ToggleIsOpenOfSaveDialog(true)),
+        handleOpenSetTimeConstraintView: () => triggerlessDispatch(new ToggleSetTimeConstraintView(true)),
+        handleOpenSlotsTable:            () => triggerlessDispatch(new ToggleIsOpenOfSlotsTable(true)),
+        handleToggleIsOpenOfSummary:     () => triggerlessDispatch(new ToggleIsOpenOfSummary()),
+        handleShowAlternateSlot:         (s: ISlotViewModel) => triggerlessDispatch(new ShowAlternateSlot(s)),
         handleGoToThisAlternateSlot:     (slotUid: number) => dispatch(new GoToThisAlternateSlot(slotUid)),
         handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => dispatch(new SelectSlotChoice(slotUid, newSlotChoice)),
     };
