@@ -21,6 +21,8 @@ import {
 
 const testSlots = ParseHtmlToRawSlot(new TestManager().GetDataFrom(FileName.cf_2017_nov));
 describe("BigSlot", () => {
+    // 7 means 7 days
+    // 14 means 14 week
     it("State should have length of 7 * 14 (case 1)", () => {
         const rawSlot = find(testSlots, {
             Number: "129"
@@ -50,21 +52,22 @@ describe("BigSlot", () => {
         const result = new BigSlot(slot);
         expect(result.State).to.have.lengthOf(7 * 14);
         expect(result.State).to.deep.eq(
+        // Day:  0  1  2  3  4  5  6 (0 means Monday, 6 means Sunday)
             [
-                0, 0, 0, 0, 0, 0, 0, // week 1
-                63, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, // week 14
+                 0, 0, 0, 0, 0, 0, 0,  // week 1
+                63, 0, 0, 0, 0, 0, 0,  // week 2
+                 0, 0, 0, 0, 0, 0, 0,  // week 3
+                 0, 0, 0, 0, 0, 0, 0,  // week 4
+                 0, 0, 0, 0, 0, 0, 0,  // week 5
+                 0, 0, 0, 0, 0, 0, 0,  // week 6
+                 0, 0, 0, 0, 0, 0, 0,  // week 7
+                 0, 0, 0, 0, 0, 0, 0,  // week 8
+                 0, 0, 0, 0, 0, 0, 0,  // week 9
+                 0, 0, 0, 0, 0, 0, 0,  // week 10
+                 0, 0, 0, 0, 0, 0, 0,  // week 11
+                 0, 0, 0, 0, 0, 0, 0,  // week 12
+                 0, 0, 0, 0, 0, 0, 0,  // week 13
+                 0, 0, 0, 0, 0, 0, 0,  // week 14
             ]);
     });
 

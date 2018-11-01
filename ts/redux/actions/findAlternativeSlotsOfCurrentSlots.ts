@@ -5,6 +5,7 @@ import { GotIntersection } from "../../permutator/state";
 import {MasterStateAction} from "../reducers/masterState";
 import { TinySlot } from "./../../permutator/tinySlot";
 import {IMasterState} from "./../reducers/masterState";
+import { BigSlot } from "../../permutator/bigSlot";
 
 /**
  * CurrentSlots means the slots that are being displayed at the moment
@@ -35,12 +36,13 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
                     return x.SubjectCode === s.SubjectCode
                         && x.Type === s.Type
                         && uidsOfFiltratedSlots.has(x.Uid)
+                        && x.Uid !== s.Uid // This is to make sure the same slot is not displayed
                         ;
                 })
                 .filter((x) => {
                     return !GotIntersection(
                         currentTimetable.State,
-                        new TinySlot(CreateSlotFromRaw(x)).State
+                        new BigSlot(CreateSlotFromRaw(x)).State
                     );
                 })
                 .map(CreateSlotViewModel)

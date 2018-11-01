@@ -3,7 +3,7 @@ import { TimePeriod } from "../../att/timePeriod";
 import {DecToBin} from "../../util/decToBin";
 import { Str } from "../../util/str";
 import {
-    Timetable
+    Timetable, CompressState
 } from "./../timetable";
 import {
     StateKind,
@@ -12,8 +12,9 @@ import {
 
 export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: string[] = []): STCBox[] {
     const result = new Array < STCBox > ();
-    const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables); // dos
-    const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables); // dus
+    const states = timetables.map((x) => CompressState(x.State));
+    const definitelyOccupiedState = GetDefinitelyOccupiedState(states); // dos
+    const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(states); // dus
     const maybeOccupiedState = GetMaybeOccupiedState(definitelyOccupiedState, definitelyUnoccupiedState); // mos
     for (let day = 0; day < 7; day++) {
         // dos = definitelyOccupiedState in binary
@@ -60,21 +61,21 @@ export function GenerateTotalState(timetables: Timetable[], uidsOfClickedState: 
     return result;
 }
 
-export function GetDefinitelyOccupiedState(timetables: Timetable[]): number[ /*7*/ ] {
+export function GetDefinitelyOccupiedState(states: number[][]): number[ /*7*/ ] {
     const result = [-1, -1, -1, -1, -1, -1, -1];
-    for (let i = 0; i < timetables.length; i++) {
+    for (let i = 0; i < states.length; i++) {
         for (let j = 0; j < 7; j++) {
-            result[j] &= timetables[i].State[j];
+            result[j] &= states[i][j];
         }
     }
     return result;
 }
 
-export function GetDefinitelyUnoccupiedState(timetables: Timetable[]): number[ /*7*/ ] {
+export function GetDefinitelyUnoccupiedState(states: number[][]): number[ /*7*/ ] {
     const result = [0, 0, 0, 0, 0, 0, 0];
-    for (let i = 0; i < timetables.length; i++) {
+    for (let i = 0; i < states.length; i++) {
         for (let j = 0; j < 7; j++) {
-            result[j] |= timetables[i].State[j];
+            result[j] |= states[i][j];
         }
     }
     return result;

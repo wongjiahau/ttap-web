@@ -6,7 +6,7 @@ import {
     GetDefinitelyOccupiedState
 } from "../model/states/generateTotalState";
 import {
-    Timetable
+    Timetable, CompressState
 } from "../model/timetable";
 import {
     ParseRawSlotToSlot
@@ -36,7 +36,7 @@ export function FindTimetableV2(input: RawSlot[]): Timetable[] {
     });
     let currentSlots = subjects[0];
     let timetables = FindTimetable(currentSlots);
-    let state = GetDefinitelyOccupiedState(timetables);
+    let state = GetDefinitelyOccupiedState(timetables.map((x) => CompressState(x.State)));
     const last = subjects.length - 1;
     for (let i = 1; i < subjects.length; i++) {
         const filtrate = FilterOut(subjects[i], state);
@@ -47,7 +47,7 @@ export function FindTimetableV2(input: RawSlot[]): Timetable[] {
         currentSlots = currentSlots.concat(filtrate);
         timetables = FindTimetable(currentSlots);
         if (i !== last) {
-            state = GetDefinitelyOccupiedState(timetables);
+            state = GetDefinitelyOccupiedState(timetables.map((x) => CompressState(x.State)));
         }
     }
     return timetables;

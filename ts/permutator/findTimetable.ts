@@ -29,7 +29,7 @@ export function FindTimetable(
         throw new Error("Input slots should not be an empty array");
     }
     if (input.length === 1) {
-        let resultState = [ 0, 0, 0, 0, 0, 0, 0 ];
+        let resultState = new Array(input[0].State.length).fill(0); // zeroes
         resultState = Append(resultState, input[0].State);
         return [new Timetable(input[0].SlotIds, resultState)];
     }
@@ -43,7 +43,7 @@ export function FindTimetable(
     const snapshots = new Array < ISnapshot > ();
     snapshots.push({
         SlotIds: [],
-        State: [ 0, 0, 0, 0, 0, 0, 0 ] // 7 because there are 7 days in a week
+        State: new Array(partitioned[0][0].State.length).fill(0) // zeroes
     });
     let prevSnapshot : ISnapshot;
     let ptr = 0;
@@ -60,7 +60,6 @@ export function FindTimetable(
                 SlotIds: concat(current.SlotIds, prevSnapshot.SlotIds),
                 State: Append(current.State, prevSnapshot.State)
             });
-            // console.log(current.State[0].toString(2).replace(/0+$/, ""));
             if (ptr === last) {
                 result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].State));
                 visualizer.increaseSearchedPathCount();

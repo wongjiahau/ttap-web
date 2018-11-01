@@ -14,6 +14,8 @@ import {
 import {
     GetTestTimetables1
 } from "./../../../tests/testDataGenerator";
+import { CompressState } from "../../timetable";
+import { stat } from "fs";
 
 describe("GenerateTotalState", () => {
     it("case 1", () => {
@@ -24,7 +26,7 @@ describe("GenerateTotalState", () => {
     describe("GetDefinitelyOccupiedState()", () => {
         it("case 1", () => {
             const timetables = GetTestTimetables1();
-            const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables);
+            const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables.map((x) => CompressState(x.State)));
             let actual = "";
             definitelyOccupiedState.forEach((day) => {
                 actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
@@ -46,7 +48,7 @@ describe("GenerateTotalState", () => {
     describe("GetDefinitelyUnoccupiedState()", () => {
         it("case 1", () => {
             const timetables = GetTestTimetables1();
-            const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables);
+            const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables.map((x) => CompressState(x.State)));
             let actual = "";
             definitelyUnoccupiedState.forEach((day) => {
                 actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
@@ -67,9 +69,9 @@ describe("GenerateTotalState", () => {
 
     describe("GetMaybeOccupiedState()", () => {
         it("case 1", () => {
-            const timetables = GetTestTimetables1();
-            const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables);
-            const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables);
+            const states = GetTestTimetables1().map((x) => CompressState(x.State));
+            const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(states);
+            const definitelyOccupiedState = GetDefinitelyOccupiedState(states);
             const maybeOccupiedState = GetMaybeOccupiedState(definitelyOccupiedState, definitelyUnoccupiedState);
             let actual = "";
             maybeOccupiedState.forEach((day) => {

@@ -7,7 +7,8 @@ export class Timetable {
     public readonly State : number[];
     public constructor(Uids: number[], state : number[]) {
         this.Uids = Uids;
-        this.State = CompressState(state);
+        this.State = state;
+        // this.State = CompressState(state);
     }
 }
 
