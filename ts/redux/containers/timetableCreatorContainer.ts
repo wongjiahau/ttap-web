@@ -13,7 +13,7 @@ import { ISettingsState } from "../reducers/settingsState";
 import { ITimetableCreatorState } from "../reducers/timetableCreatorState";
 import { UpdateTotalState } from "./../actions/updateTotalState";
 
-const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
+const mapStateToProps = (state: any): ITimetableCreatorViewStateProps => {
     const target = state.MasterStateReducer.TimetableCreatorState as ITimetableCreatorState;
     const settingsState = state.MasterStateReducer.SettingsState as ISettingsState;
     return {
@@ -22,7 +22,7 @@ const mapStateToProps = (state): ITimetableCreatorViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch): ITimetableCreatorViewDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ITimetableCreatorViewDispatchProps => {
     return {
         handleSlotLoaded: (rawSlots: RawSlot[]) => dispatch(new NotifyDataLoaded(rawSlots)),
         handleOpenSubjectListView: () => {

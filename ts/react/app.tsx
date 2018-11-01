@@ -32,7 +32,7 @@ function RemoveLoadingCube() {
     }
 }
 export class App extends React.Component < {}, IAppState > {
-    public constructor(props) {
+    public constructor(props: {}) {
         super(props);
         this.state = {
             isSecondaryDrawerOpen: false

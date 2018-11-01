@@ -211,7 +211,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         }
     }
 
-    private checkKeys = (e) => {
+    private checkKeys = (e: any) => {
         // refer
         // https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-ja
         // v ascript
@@ -225,7 +225,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                 break;
             case Key.Tab:
             case Key.Backspace:
-                if (document.activeElement.id === "searchbar") {
+                if (document.activeElement && document.activeElement.id === "searchbar") {
                     break;
                 }
                 const searchbar = document.getElementById("searchbar")as HTMLInputElement;
@@ -237,7 +237,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
     }
 
     private Focus = (where : "previous" | "next"): void => {
-        const idOfFocusedSubjectView = document.activeElement.id;
+        const idOfFocusedSubjectView = document.activeElement ? document.activeElement.id : "";
         const subjectViews = document.getElementsByClassName("subjectview")as HTMLCollectionOf < HTMLDivElement >;
         const length = subjectViews.length;
         let next = 0;

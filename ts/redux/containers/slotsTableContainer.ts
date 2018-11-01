@@ -40,7 +40,7 @@ import {
 } from "../reducers/subjectListState";
 import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 
-const mapStateToProps = (state): ISlotsTableViewStateProps => {
+const mapStateToProps = (state: any): ISlotsTableViewStateProps => {
     const slotsTableState = state.MasterStateReducer.SlotTableState as ISlotsTableState;
     const subjectListState = state.MasterStateReducer.SubjectListState as ISubjectListState;
     return {
@@ -53,7 +53,7 @@ const mapStateToProps = (state): ISlotsTableViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch): ISlotsTableViewDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ISlotsTableViewDispatchProps => {
     return {
         handleDone: () => {
             dispatch(new FindTimetablesBasedOnChosenSlots());

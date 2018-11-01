@@ -10,7 +10,7 @@ import { ObjectStore } from "../dataStructure/objectStore";
 import {IStringDicionary} from "../interfaces/dictionary";
 import {IRawSlot, RawSlot} from "../model/rawSlot";
 import {Subject} from "../model/subject";
-import {DiffReport} from "../model/subjectSchema";
+import {DiffReport, MissingSlotType} from "../model/subjectSchema";
 import { Ternary } from "../redux/actions/updateSlotsTableState";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {Colors} from "./colors/colors";
@@ -39,7 +39,7 @@ const footerStyle : React.CSSProperties = {
 };
 
 export interface ISlotsTableViewStateProps {
-    errorMessages : DiffReport[];
+    errorMessages : DiffReport[] | null;
     isOpen : boolean;
     selectedSubjects : Subject[];
     slotStates : IStringDicionary < boolean >;
@@ -165,7 +165,7 @@ ISlotsTableViewInternalState > {
     }
 }
 
-function GenerateErrorLabels(diffReports : DiffReport[]) {
+function GenerateErrorLabels(diffReports : DiffReport[] | null) {
     const errorStyle : React.CSSProperties = {
         color: Colors.Red
     };
@@ -183,7 +183,7 @@ function GenerateErrorLabels(diffReports : DiffReport[]) {
             </div>
         );
     }
-    const getType = (type : string) : string => {
+    const getType = (type : MissingSlotType) : string => {
         switch (type) {
             case "L":
                 return "LECTURE";
@@ -191,6 +191,8 @@ function GenerateErrorLabels(diffReports : DiffReport[]) {
                 return "TUTORIAL";
             case "P":
                 return "PRACTICAL";
+            case "no possible timetables found":
+                return "";
         }
     };
     return (

@@ -70,6 +70,9 @@ describe("toggle subject selection action", () => {
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             const clashReport = newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport;
+            if(!clashReport) {
+                throw new Error();
+            }
             expect(clashReport.Type).to.eq("single");
             expect(clashReport.TargetName).to.eq("Arts & Cultural Performance");
         });
@@ -87,7 +90,11 @@ describe("toggle subject selection action", () => {
             let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ACP));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
-            expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport.Type)
+            const clashReport = newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport;
+            if(!clashReport) {
+                throw new Error();
+            }
+            expect(clashReport.Type)
                 .to.eq("group");
         });
     });
@@ -120,7 +127,11 @@ describe("toggle subject selection action", () => {
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BKA));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BMK2));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.ACP));
-            expect(newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport.TargetName)
+            const clashReport = newState.SubjectListState.Subjects[IndexOf.BKA].ClashReport;
+            if(!clashReport) {
+                throw new Error();
+            }
+            expect(clashReport.TargetName)
                 .to.eq("Bahasa Melayu Komunikasi 2");
         });
 
@@ -174,7 +185,9 @@ describe("toggle subject selection action", () => {
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.BEAM));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
             newState = MasterStateReducer(newState, new ToggleSubjectSelection(IndexOf.HE));
-            expect(newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport.Type).to.eq("group");
+            const clashReport = newState.SubjectListState.Subjects[IndexOf.BEAM].ClashReport;
+            if(!clashReport) throw new Error();
+            expect(clashReport.Type).to.eq("group");
         });
 
         it("should set statistics of algorithmVisualizerState if algorithm visualizer is enabled", () => {
@@ -210,6 +223,7 @@ describe("CheckForClashesBetween", () => {
         const bmk2 = subjects[IndexOf.BMK2];
         wwt.ClashingCounterparts.push(titas.Code);
         const result = CheckForClashesBetween(titas, [bmk2, wwt]);
+        if(!result) throw new Error();
         expect(result.Type).to.eq("single");
         expect(result.TargetName).to.eq("Water & Wastewater Treatment");
     });

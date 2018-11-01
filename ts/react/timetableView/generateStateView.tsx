@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
+//@ts-ignore
 import {Tooltip} from "react-tippy";
 import {
     ColorOfClicked,

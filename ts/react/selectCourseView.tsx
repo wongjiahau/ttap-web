@@ -1,6 +1,7 @@
 import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
 import CircularProgress from "material-ui/Progress/CircularProgress";
 import * as React from "react";
+//@ts-ignore
 import * as Autosuggest from "react-autosuggest";
 import Highlighter = require("react-highlight-words");
 import {Redirect} from "react-router";
@@ -26,7 +27,7 @@ interface ISelectCourseViewState {
     currentSuggestions : IGithubApiObject[];
     redirect: boolean;
     value : string;
-    serverError: string;
+    serverError: string | null;
     loading: boolean;
     suggestionIsFound: boolean;
     openErrorDialog: boolean;
@@ -35,9 +36,8 @@ interface ISelectCourseViewState {
 const GET_ALL_SLOTS = false;
 
 export class SelectCourseView extends React.Component < ISelectCourseViewDispatchProps, ISelectCourseViewState > {
-    private allSuggestions : IGithubApiObject[];
-    private selectedSuggestion: IGithubApiObject;
-    public constructor(props) {
+    private allSuggestions : IGithubApiObject[] = [];
+    public constructor(props: ISelectCourseViewDispatchProps) {
         super(props);
         this.state = {
             currentSuggestions: [],
@@ -68,7 +68,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         this.RequestTestFiles();
     }
 
-    public onChange = (event, {newValue}) => {
+    public onChange = (event: any, {newValue}: {newValue: string}) => {
         this.setState({value: newValue});
     }
 
@@ -111,7 +111,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
                             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                             onSuggestionSelected={this.onSuggestionSelected}
-                            getSuggestionValue={(suggestion) => this.state.value}
+                            getSuggestionValue={(suggestion: any) => this.state.value}
                             renderSuggestion={this.renderSuggestion}
                             highlightFirstSuggestion={true}
                             alwaysRenderSuggestions={true}
@@ -136,7 +136,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
     //     });
     // }
 
-    public onSuggestionsFetchRequested = (event) => {
+    public onSuggestionsFetchRequested = (event: any) => {
         const newSuggestions =
                 this.allSuggestions.filter((x) =>
                 new Str(x.name.toLowerCase().split(".")[0]).Contains(event.value.toLowerCase()) &&
@@ -154,11 +154,11 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
         this.setState({currentSuggestions: []});
     }
 
-    public onSuggestionSelected = (event, {suggestion}) => {
+    public onSuggestionSelected = (event: any, {suggestion}: any) => {
         this.tryLoadData(suggestion);
     }
 
-    public renderSuggestion = (suggestion) => {
+    public renderSuggestion = (suggestion: any) => {
         return (<Highlighter textToHighlight={suggestion.name.split(".")[0]} searchWords={[this.state.value]} />);
     }
 
@@ -247,6 +247,7 @@ export const LoadSlotsFromUrl = (
             }
             try {
                 const slots = parser(xhr.responseText).map(RawSlot.ResetUid);
+                console.log(slots);
                 successed(slots);
             } catch (error) {
                 console.log(error);

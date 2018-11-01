@@ -29,7 +29,7 @@ export class DataRouter < T > {
         return this.dict[this.currentRoute];
     }
 
-    public GetCurrentRoute(): string {
+    public GetCurrentRoute(): string | null {
         return this.currentRoute;
     }
 

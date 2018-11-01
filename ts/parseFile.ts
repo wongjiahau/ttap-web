@@ -11,7 +11,7 @@ function log(message: string): void {
 }
 const fs = require("fs");
 log("Loading file");
-fs.readFile("./new2.html", (err, contents) => {
+fs.readFile("./new2.html", (err: any, contents: any) => {
     if (err) {
         log("Load file error");
         log(err);
@@ -20,7 +20,7 @@ fs.readFile("./new2.html", (err, contents) => {
     log("Parsing");
     const rawSlots2 = ParseLargeHtmlToRawSlot(contents.toString());
     log("Finish parsing");
-    fs.writeFile("./output.json", JSON.stringify(rawSlots2), (err2) => {
+    fs.writeFile("./output.json", JSON.stringify(rawSlots2), (err2: any) => {
         if (!err2) {
             log("The file was saved as output.json");
         }

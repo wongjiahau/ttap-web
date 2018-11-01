@@ -11,7 +11,7 @@ import { ToggleSetTimeConstraintView } from "../actions/toggleSetTimeConstraintV
 import { ISetTimeConstraintState } from "../reducers/setTimeConstraintState";
 import { ITimetableListState } from "../reducers/timetableListState";
 
-const mapStateToProps = (state): ISetTimeConstraintViewStateProps => {
+const mapStateToProps = (state: any): ISetTimeConstraintViewStateProps => {
     const stcState = state.MasterStateReducer.SetTimeConstraintState as ISetTimeConstraintState;
     const timetableListState = state.MasterStateReducer.TimetableListState as ITimetableListState;
     return {
@@ -22,7 +22,7 @@ const mapStateToProps = (state): ISetTimeConstraintViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch): ISetTimeConstraintViewDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ISetTimeConstraintViewDispatchProps => {
     return {
         handleCancel: () => {
             dispatch(new FindAlternativeSlotsOfCurrentSlots());

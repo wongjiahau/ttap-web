@@ -6,7 +6,7 @@ import {StackPanel} from "./panels/stackPanel";
 const format = require("date-fns/format");
 
 export interface IGetSemStartDateDialogState {
-    date : Date;
+    date : Date | null;
     error : boolean;
     helperText: string;
     dateIsSelected : boolean;
@@ -20,7 +20,7 @@ export interface IGetSemStartDateDialogProps {
 
 export class GetSemStartDateDialog extends React.Component < IGetSemStartDateDialogProps,
 IGetSemStartDateDialogState > {
-    public constructor(props) {
+    public constructor(props: IGetSemStartDateDialogProps) {
         super(props);
         this.state = {
             date: null,
@@ -77,7 +77,11 @@ IGetSemStartDateDialogState > {
                         horizontalAlignment="right">
                         <Button style={buttonStyle} onClick={this.props.handleClose}>Cancel</Button>
                         <Button
-                            onClick={() => this.props.handleSaveToGoogleCalendar(this.state.date)}
+                            onClick={() => {
+                                if(this.state.date) {
+                                    this.props.handleSaveToGoogleCalendar(this.state.date)
+                                }
+                            }}
                             style={buttonStyle}
                             disabled={!this.state.dateIsSelected}
                             raised={true}

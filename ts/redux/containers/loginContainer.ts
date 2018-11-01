@@ -3,11 +3,11 @@ import { IRawSlot } from "../../model/rawSlot";
 import { ILoginDispatchProps, Login } from "./../../react/login";
 import { NotifyDataLoaded } from "./../actions/notifyDataLoaded";
 
-const mapStateToProps = (state): {} => {
+const mapStateToProps = (state: any): {} => {
     return {};
 };
 
-const mapDispatchToProps = (dispatch): ILoginDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ILoginDispatchProps => {
     return {
         handleLoadSlots: (rawSlots: IRawSlot[]) => {
             dispatch(new NotifyDataLoaded(rawSlots));

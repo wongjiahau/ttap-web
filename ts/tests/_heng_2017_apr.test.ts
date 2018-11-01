@@ -9,7 +9,7 @@ describe("heng_2017_apr", () => {
             const rawSlots = HENG_2017_APR();
             const subjects = ParseRawSlotToSubject(rawSlots);
             const subjectNameInitials = subjects.map((x) => GetInitial(x.Name));
-            const indexDic = {};
+            const indexDic: {[key: string]: string|number} = {};
             subjectNameInitials.forEach((name, index) => {
                 indexDic[name] = index;
                 indexDic[index] = name;

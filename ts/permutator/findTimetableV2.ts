@@ -29,7 +29,7 @@ import {
 
 export function FindTimetableV2(input: RawSlot[]): Timetable[] {
     const result: Timetable[] = [];
-    const partitioned = sortBy(PartitionizeByKey(input, "SubjectCode"), ["length"]);
+    const partitioned: RawSlot[][] = sortBy(PartitionizeByKey(input, "SubjectCode"), ["length"]);
     const subjects = new Array < TinySlot[] > ();
     partitioned.forEach((p) => {
         subjects.push(ParseSlotToTinySlot(ParseRawSlotToSlot(p)));

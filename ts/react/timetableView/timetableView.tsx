@@ -18,11 +18,11 @@ const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
 interface ITimetableViewProps {
     slots : ISlotViewModel[];
-    states : STCBox[];
-    alternateSlots: ISlotViewModel[];
-    handleSetTimeContraintAt?: (state : STCBox) => void;
-    handleDesetTimeContraintAt?: (state : STCBox) => void;
-    handleToggleIsOpenOfSummary?: () => void;
+    states : STCBox[] | null;
+    alternateSlots: ISlotViewModel[] | null;
+    handleSetTimeContraintAt: (state : STCBox) => void;
+    handleDesetTimeContraintAt: (state : STCBox) => void;
+    handleToggleIsOpenOfSummary: () => void;
     handleSelectSlotChoice:      (slotUid: number, newSlotChoice: number) => void;
     handleShowAlternateSlot:      (s: ISlotViewModel) => void;
     handleGoToThisAlternateSlot:  (slotUid: number) => void;
@@ -43,7 +43,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
     }
     public render() {
         const skeleton = new Skeleton();
-        if (this.props.slots) {
+        if (this.props.slots && this.props.alternateSlots) {
             const slotViewsAndDayColumn = GenerateSlotViewsAndDayColumn(
                 this.props.slots.concat(this.props.alternateSlots),
                 this.props.handleSelectSlotChoice,
@@ -93,7 +93,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                             verticalCompact={false}>
                             {skeleton.Children}
                         </ReactGridLayout>
-                        {this.props.slots ?
+                        {this.props.slots.length > 0 ?
                         <Button id="summary-btn" raised={true} style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
                             {this.props.isSummaryOpen ? "hide summary" : "show summary"}
                         </Button>

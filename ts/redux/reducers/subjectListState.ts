@@ -7,7 +7,7 @@ import {
 } from "../actions/action";
 
 export interface ISubjectListState {
-    ClashingSubjectPairs:         Array < [Subject, Subject] > ;
+    ClashingSubjectPairs:         Array < [Subject, Subject] > | null;
     IsOpen:                       boolean;
     IsShowingLoadingBar:          boolean;
     IsShowingSelectedSubjectOnly: boolean;
@@ -28,6 +28,6 @@ export function NewSubjectListState(subjects: Subject[]) : ISubjectListState {
 
 export abstract class SubjectListStateAction extends Action < ISubjectListState > {
     public StateName() {
-        return typeName(NewSubjectListState(null));
+        return typeName(NewSubjectListState([]));
     }
 }

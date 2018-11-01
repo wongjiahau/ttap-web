@@ -61,7 +61,7 @@ export class DiffReport {
 export function GetDiff(x: SubjectSchema, y: SubjectSchema): DiffReport[] {
     const result: DiffReport[] = [];
     if (x.IsEqual(y)) {
-        return null;
+        return [];
     }
     if (x.GotLecture !== y.GotLecture) {
         result.push(new DiffReport(x.SubjectCode, "L"));

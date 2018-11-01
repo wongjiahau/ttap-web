@@ -14,9 +14,6 @@ const clone = require("lodash.clone");
  * @returns {RawSlot[]}
  */
 export function GeneralizeSlot(originalSlots : RawSlot[]) : RawSlot[] {
-    if (!originalSlots) {
-        return null;
-    }
     const slots = originalSlots.map(clone) as IRawSlot[];
     const results = new Array < RawSlot > ();
     results.push(slots[0]);

@@ -5,14 +5,15 @@ import { Str } from "../util/str";
 export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");
+    //@ts-ignore
     const tableRows = htmlDoc
         .getElementById("overviewSector")
         .getElementsByTagName("table")[0]
         .getElementsByTagName("tbody")[0]
         .getElementsByTagName("tr");
     // i = 1 because we need to skip the first <tr> which is the header of the table
-    let currentSubjectName: string;
-    let currentSubjectCode: string;
+    let currentSubjectName: string = "";
+    let currentSubjectCode: string = "";
     for (let i = 1; i < tableRows.length; i++) {
         const currentRow = tableRows[i];
         const cells = currentRow.getElementsByTagName("td");

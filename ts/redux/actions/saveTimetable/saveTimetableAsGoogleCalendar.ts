@@ -32,7 +32,7 @@ const NUMBER_OF_DAYS_PER_WEEK = 7;
 
 export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     private loginAlready = false;
-    private rawSlots: RawSlot[];
+    private rawSlots: RawSlot[] = [];
 
     public constructor(private semStartDate: Date) {
         super();
@@ -56,7 +56,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
         return "google calendar";
     }
 
-    private updateSigninStatus = (isSignedIn) => {
+    private updateSigninStatus = (isSignedIn: boolean) => {
         if (!this.loginAlready && isSignedIn) {
             this.loginAlready = true;
             this.addTimetable();
@@ -80,7 +80,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
         window.open("https://calendar.google.com/");
     }
 
-    private addEvents(calenderEvent) {
+    private addEvents(calenderEvent: any) {
         gapi // eslint-disable-line
             .client
             .calendar
@@ -89,7 +89,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
                 calendarId: "primary",
                 resource: calenderEvent
             })
-            .execute((event) => {
+            .execute((event: any) => {
                 // TODO: Implement snackbar confirmation.
             });
     }
@@ -134,7 +134,7 @@ function sampleAddEvent() {
                 recurrence: [`RDATE;TZID=Asia/Kuala_Lumpur:20171122T033000,20171129T033000`]
             }
         })
-        .execute((event) => {
+        .execute((event: any) => {
             // TODO: Implement snackbar confirmation.
         });
 

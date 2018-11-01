@@ -35,14 +35,14 @@ import {
     ISnackbarState
 } from "../reducers/snackbarState";
 
-const mapStateToProps = (state): ITurnOnSBCWDialogStateProps => {
+const mapStateToProps = (state: any): ITurnOnSBCWDialogStateProps => {
     const target = state.MasterStateReducer.SbcwDialogState as ISBCWDialogState;
     return {
         isOpen: target.IsOpen,
     };
 };
 
-const mapDispatchToProps = (dispatch): ITurnOnSBCWDialogDispatchProps => {
+const mapDispatchToProps = (dispatch: any): ITurnOnSBCWDialogDispatchProps => {
     return {
         handleClose: () => {
             dispatch(new ToggleIsOpenOfSBCWDialog(false));

@@ -3,11 +3,6 @@ import {RawSlot} from "../../model/rawSlot";
 import {CanBeGeneralize, GeneralizeSlot} from "../generalizeSlot";
 
 describe("GeneralizeSlot", () => {
-    it("should return null if passed in undefined or null", () => {
-        expect(GeneralizeSlot(undefined)).to.eq(null);
-        expect(GeneralizeSlot(null)).to.eq(null);
-    });
-
     it("case 1", () => {
         const input = [
             {

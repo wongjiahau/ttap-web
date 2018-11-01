@@ -34,7 +34,6 @@ export class SnackbarView extends React.Component < ISnackbarProps, {} > {
                     action={okButton}
                     open={open}
                     anchorOrigin={anchorOrigin}
-                    SnackbarContentProps={{ "aria-describedby": "message-id" }}
                     message={snackbarMessage}/>;
         return (
             <div>

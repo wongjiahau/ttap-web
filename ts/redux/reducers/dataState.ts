@@ -9,6 +9,6 @@ export interface IDataState {
 
 export function NewDataState() : IDataState {
     return {
-        RawSlotDataRouter: null
+        RawSlotDataRouter: new DataRouter<ObjectStore<RawSlot>>()
     };
 }

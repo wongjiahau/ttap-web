@@ -8,7 +8,6 @@ import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
 import {BoundedInt} from "./boundedInt";
 import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "./findTimetableVisualizer";
 import {GenerateIndices} from "./generateIndices";
-import {Increment} from "./increment";
 import {Partitionize} from "./partitionize";
 import {Append, GotIntersection} from "./state";
 import {IOptimizedSlot} from "./tinySlot";

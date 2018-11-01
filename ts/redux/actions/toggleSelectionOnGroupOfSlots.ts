@@ -18,7 +18,7 @@ export class ToggleSelectionOnGroupOfSlots extends MasterStateAction {
     protected GenerateNewState(state: IMasterState): IMasterState {
         const targetSubject = find(state.SubjectListState.Subjects, {
             Code: this.subjectCode
-        });
+        }) as Subject;
         let selectedSlotsCount = 0;
         let deselectedSlotsCount = 0;
         targetSubject.SlotNumbers.forEach((slotNumber) => {

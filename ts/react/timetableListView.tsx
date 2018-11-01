@@ -13,6 +13,8 @@ import {CounterView} from "./counterView";
 import {StackPanel} from "./panels/stackPanel";
 import {iconStyle} from "./styles";
 import {TimetableView} from "./timetableView/timetableView";
+import { Z_NO_COMPRESSION } from "zlib";
+import { NO_OPERATION } from "./setTimeConstraintView";
 
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
@@ -58,6 +60,8 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         slots={slotsToBeRendered}
                         alternateSlots={this.props.alternateSlots}
                         states={null}
+                        handleDesetTimeContraintAt={NO_OPERATION}
+                        handleSetTimeContraintAt={NO_OPERATION}
                         isSummaryOpen={this.props.isSummaryOpen}
                         handleSelectSlotChoice={this.props.handleSelectSlotChoice}
                         handleShowAlternateSlot={this.props.handleShowAlternateSlot}
@@ -98,7 +102,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         );
     }
 
-    private checkKeys = (e) => {
+    private checkKeys = (e: any) => {
         // refer
         // https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-ja
         // v ascript

@@ -79,12 +79,12 @@ describe("increment", () => {
         }
     });
 
-    it("should return null when max value has reached", () => {
+    it("should return empty array when max value has reached", () => {
         const input = [
             new BoundedInt(1, 1)
         ];
         const result = Increment(input);
-        expect(result).to.eq(null);
+        expect(result).to.deep.eq([]);
     });
 
 });

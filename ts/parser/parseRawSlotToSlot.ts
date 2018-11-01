@@ -10,10 +10,7 @@ export function ParseRawSlotToSlot(rawSlots: RawSlot[]): Slot[] {
 }
 
 export function IsParsable(rawSlot: RawSlot): boolean {
-    if (rawSlot.TimePeriod === undefined) {
-        return false;
-    }
-    return true;
+    return rawSlot.TimePeriod !== "";
 }
 
 export function IsReasonable(rawSlot: RawSlot): boolean {

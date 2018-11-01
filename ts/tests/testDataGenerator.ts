@@ -12,7 +12,7 @@ import {TinySlot} from "../permutator/tinySlot";
 import {NotifyDataLoaded} from "../redux/actions/notifyDataLoaded";
 import {MasterStateReducer, NewMasterState} from "../redux/reducers/masterState";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
-import {RawSlot} from "./../model/rawSlot";
+import {RawSlot, IRawSlot} from "./../model/rawSlot";
 import {Subject} from "./../model/subject";
 import {Timetable} from "./../model/timetable";
 import {HENG_2017_APR} from "./testData/heng_2017_apr";
@@ -73,7 +73,7 @@ export const GetTestTimetables1 = () : Timetable[] => {
 };
 
 export const GetMockInitialState = (source : "heng_2017_sept" | "heng_2017_apr" = "heng_2017_sept") => {
-    let data;
+    let data: IRawSlot[] = [];
     switch (source) {
         case "heng_2017_apr": data = HENG_2017_APR(); break;
         case "heng_2017_sept": data = GetTestRawSlot1(); break;

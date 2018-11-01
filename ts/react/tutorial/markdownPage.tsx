@@ -9,18 +9,18 @@ const divStyle : React.CSSProperties = {
 };
 
 interface IMarkdownPageState {
-    markdownSource: string;
+    markdownSource: string | null;
 }
 
 interface IMarkdownPageProp {
     id?: string;
-    src: string;
+    src: string | null;
     width: number;
     height: number;
 }
 
 export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownPageState> {
-    constructor(props) {
+    constructor(props: IMarkdownPageProp) {
         super(props);
         this.state = {
             markdownSource: null,
@@ -57,10 +57,10 @@ export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownP
         this.requestMarkdownSource(nextProps.src);
     }
 
-    private requestMarkdownSource(src: string) {
+    private requestMarkdownSource(src: string | null) {
         const http = require("http");
-        const request = http.get(src, (response) => {
-            response.on("data", (loadedData) => {
+        const request = http.get(src, (response: any) => {
+            response.on("data", (loadedData: any) => {
                     this.setState({markdownSource: loadedData.toString()});
                 });
         });

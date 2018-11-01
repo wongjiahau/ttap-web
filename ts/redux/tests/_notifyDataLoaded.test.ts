@@ -16,7 +16,7 @@ import {
 
 describe("notifyDataLoaded action", () => {
     it("'s name should be notify data loaded", () => {
-        const action = new NotifyDataLoaded(null);
+        const action = new NotifyDataLoaded([]);
         expect(action.TypeName())
             .to
             .eq("notify data loaded");
@@ -44,7 +44,7 @@ describe("notifyDataLoaded action", () => {
         const testSlots = GetTestRawSlot1();
         const newState = MasterStateReducer(NewMasterState(),
             new NotifyDataLoaded(testSlots));
-        const numberOfProperty = (dict) => Object.keys(dict).length;
+        const numberOfProperty = (dict: Object) => Object.keys(dict).length;
         const router = newState.DataState.RawSlotDataRouter;
         router.SetRouteTo("ungeneralized");
         expect(numberOfProperty(router.GetCurrentData().GetDict())).to.eq(testSlots.length);

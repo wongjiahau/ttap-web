@@ -36,5 +36,14 @@ export class RawSlot implements IRawSlot {
     public Remark ? : string;
     constructor() {
         this.Uid = RawSlot.nextUid++;
+        this.SubjectCode = "";
+        this.SubjectName = "";
+        this.Number = "";
+        this.Type = "";
+        this.Group = "";
+        this.TimePeriod = "";
+        this.Day = "";
+        this.WeekNumber = "";
+        this.Room = "";
     }
 }
