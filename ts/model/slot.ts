@@ -55,9 +55,9 @@ export function CreateSlotFromRaw(raw : RawSlot) : Slot {
     const slotNumber  = parseInt(raw.Number, 10);
     const subjectCode = stringHash(raw.SubjectCode);
     const timePeriod  = TimePeriod.Parse(raw.TimePeriod).BinaryData;
-    const group       = parseInt(raw.Group, 10);
-    const day         = ParseDay(raw.Day);
     const week        = Week.Parse(raw.WeekNumber).BinaryData;
+    const day         = ParseDay(raw.Day);
+    const group       = parseInt(raw.Group, 10);
     return new Slot(Uid, slotNumber, subjectCode, raw.SubjectName, timePeriod, group, raw.Type, day, week);
 }
 

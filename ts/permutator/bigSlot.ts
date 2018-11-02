@@ -24,16 +24,16 @@ export class BigSlot implements IOptimizedSlot {
         this.Uid = s.SlotNumber;
         this.SlotIds = [];
         this.SlotIds.push(s.Uid);
-        this.State = GetStateOfBigSlot(s);
+        this.State = GetStateOfBigSlot(s.Day, s.Week, s.TimePeriod);
         this.PartitionGroup = `${GetInitial(s.SubjectName)}(${s.Type})`;
     }
 
 }
-export function GetStateOfBigSlot(s: ISlot): number[] {
+export function GetStateOfBigSlot(Day:number, Week:number, TimePeriod:number): number[] {
     let result: number[] = [];
-    const weekBinary = s.Week.toString(2);
+    const weekBinary = Week.toString(2);
     const state = [0, 0, 0, 0, 0, 0, 0];
-    state[s.Day - 1] = s.TimePeriod;
+    state[Day - 1] = TimePeriod;
     const maxNumberOfWeek = 14;
     for (let i = weekBinary.length - 1; i >= 0; i--) {
         if (weekBinary[i] === "1") {

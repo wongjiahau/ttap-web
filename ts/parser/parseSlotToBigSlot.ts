@@ -7,7 +7,7 @@ import { BigSlot, GetStateOfBigSlot } from "../permutator/bigSlot";
 import { Append } from "../permutator/state";
 
 export function ParseSlotToBigSlot(slots: ISlot[]): BigSlot[] {
-    const sorted = sortBy(slots, ["SlotNumber"]);
+    const sorted: ISlot[] = sortBy(slots, ["SlotNumber"]);
     const result = new Array < BigSlot > ();
     result.push(new BigSlot(sorted[0]));
     for (let i = 1; i < sorted.length; i++) {
@@ -15,7 +15,7 @@ export function ParseSlotToBigSlot(slots: ISlot[]): BigSlot[] {
         const prevSlot = last(result);
         if (s.SlotNumber === prevSlot.SlotNumber) {
             prevSlot.SlotIds.push(s.Uid);
-            prevSlot.State = Append(prevSlot.State, GetStateOfBigSlot(s));
+            prevSlot.State = Append(prevSlot.State, GetStateOfBigSlot(s.Day, s.Week, s.TimePeriod));
         } else {
             result.push(new BigSlot(s));
         }

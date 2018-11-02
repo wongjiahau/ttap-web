@@ -3,11 +3,14 @@ import { CreateSlotFromRaw } from "../../model/slot";
 import { CreateSlotViewModel, FromSlotViewModelToRawSlot } from "../../model/slotViewModel";
 import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
 import { ParseSlotToBigSlot } from "../../parser/parseSlotToBigSlot";
-import { BigSlot } from "../../permutator/bigSlot";
+import { BigSlot, GetStateOfBigSlot } from "../../permutator/bigSlot";
 import { Append, GotIntersection } from "../../permutator/state";
 import {MasterStateAction} from "../reducers/masterState";
 import { TinySlot } from "./../../permutator/tinySlot";
 import {IMasterState} from "./../reducers/masterState";
+import { TimePeriod } from "../../att/timePeriod";
+import { Week } from "../../att/week";
+import { ParseDay } from "../../att/day";
 
 /**
  * CurrentSlots means the slots that are being displayed at the moment
@@ -30,10 +33,14 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
         const currentTimetable = state.TimetableListState.FiltrateTimetables[state.TimetableListState.CurrentIndex];
 
         const currentSlots = state.TimetableListState.SlotViewModelStore.GetAll();
-        const currentTimetableState = ParseSlotToBigSlot(
-             ParseRawSlotToSlot(currentSlots.filter((x) => currentTimetable.Uids.indexOf(x.Uid) > -1)
-                .map(FromSlotViewModelToRawSlot))
-             ).map((x) => x.State).reduce((x, y) => Append(x, y));
+        const currentTimetableState = currentSlots
+                .filter((x) => currentTimetable.Uids.indexOf(x.Uid) > -1)
+                .map((raw) => GetStateOfBigSlot(
+                    ParseDay(raw.Day),
+                    Week.Parse(raw.WeekNumber[0]).BinaryData,
+                    TimePeriod.Parse(raw.TimePeriod).BinaryData
+                ))
+                .reduce((x, y) => Append(x, y));
 
         for (let i = 0; i < currentSlots.length; i++) {
             const s = currentSlots[i];
