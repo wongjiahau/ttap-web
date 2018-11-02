@@ -52,7 +52,7 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
     return (
         <Drawer open={props.isOpen} anchor="right" onClose={props.onItemClick}>
             <List>
-                {routerLink( <HelpIcon/>, "Help", "learn")}
+                {routerLink( <HelpIcon/>, "Tutorial", "learn")}
                 {newTabLink( <FeedbackIcon/>, "Feedback", FeedbackFormUrl)}
                 {newTabLink( <BugIcon/>, "Report a bug", BugFormUrl)}
                 {routerLink( <InfoIcon/>, "About TTAP", "about")}

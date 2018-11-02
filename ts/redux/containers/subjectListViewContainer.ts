@@ -72,9 +72,9 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
         handleSelection: (subjectIndex: number) => {
             ToggleLoadingCircle(true);
             setTimeout(() => {
-                dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new NotifyIfTimetableIsFound());
+                dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
                 ToggleLoadingCircle(false);
             }, 1);
         },
