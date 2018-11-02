@@ -31,19 +31,21 @@ const theme = createMuiTheme({
 interface IAppState {
     isSecondaryDrawerOpen: boolean;
 }
-function RemoveLoadingCube() {
-    const x = document.getElementById("initialLoadingCube");
-    if (x && x.parentNode) {
-        x.parentNode.removeChild(x);
+
+export function ToggleLoadingCircle(show: boolean) {
+    const x = document.getElementById("loading-circle");
+    if (x) {
+        x.style.display = show ? "" : "none";
     }
 }
+
 export class App extends React.Component < {}, IAppState > {
     public constructor(props: {}) {
         super(props);
         this.state = {
             isSecondaryDrawerOpen: false
         };
-        RemoveLoadingCube();
+        ToggleLoadingCircle(false);
     }
 
     public handleOpenDrawer = () => this.setState({isSecondaryDrawerOpen: true});

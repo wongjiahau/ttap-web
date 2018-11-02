@@ -40,6 +40,7 @@ import {
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
+import { ToggleLoadingCircle } from "../../react/app";
 
 const mapStateToProps = (state: any): ISubjectListViewStateProps => {
     const masterState = state.MasterStateReducer as IMasterState;
@@ -69,13 +70,13 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
             dispatch(new HideSnackbar());
         },
         handleSelection: (subjectIndex: number) => {
-            // dispatch(new ToggleLoadingBar(true));
-            dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
-            dispatch(new ToggleSubjectSelection(subjectIndex));
-            dispatch(new NotifyIfTimetableIsFound());
-            // setTimeout(() => {
-            //     dispatch(new ToggleLoadingBar(false));
-            // }, 0);
+            ToggleLoadingCircle(true);
+            setTimeout(() => {
+                dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
+                dispatch(new ToggleSubjectSelection(subjectIndex));
+                dispatch(new NotifyIfTimetableIsFound());
+                ToggleLoadingCircle(false);
+            }, 1);
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
         handleToggleIsEnabledOfFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),
