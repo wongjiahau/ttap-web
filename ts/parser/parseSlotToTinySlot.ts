@@ -13,10 +13,10 @@ export function ParseSlotToTinySlot(slots: ISlot[]): TinySlot[] {
     result.push(new TinySlot(sorted[0]));
     for (let i = 1; i < sorted.length; i++) {
         const s = sorted[i];
-        const prevSlot = last(result);
+        const prevSlot: TinySlot = last(result);
         if (s.SlotNumber === prevSlot.SlotNumber) {
             prevSlot.SlotIds.push(s.Uid);
-            prevSlot.State[s.Day - 1] |= s.TimePeriod;
+            prevSlot.DayTimeMatrix[s.Day - 1] |= s.TimePeriod;
         } else {
             result.push(new TinySlot(s));
         }

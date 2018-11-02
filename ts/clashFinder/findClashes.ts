@@ -1,15 +1,10 @@
 import * as Combinatorics from "js-combinatorics";
-const sortBy = require("lodash.sortby");
-const uniqBy = require("lodash.uniqby");
-import {request} from "https";
 import {ObjectStore} from "../dataStructure/objectStore";
 import {RawSlot} from "../model/rawSlot";
-import {GetDefinitelyOccupiedState} from "../model/states/generateTotalState";
 import {Subject} from "../model/subject";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
 import {FindTimetable} from "../permutator/findTimetable";
-import {GotIntersection} from "../permutator/state";
 
 /**
  * This function is impure, it will modify the input.

@@ -76,25 +76,25 @@ describe("GetDayRows", () => {
         const zeroes = new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0);
         expect(result).to.deep.eq([{
             rowIndex: 0,
-            state: zeroes
+            timeMatrix: zeroes
         }, {
             rowIndex: 1,
-            state: zeroes
+            timeMatrix: zeroes
         }, {
             rowIndex: 2,
-            state: zeroes
+            timeMatrix: zeroes
         }, {
             rowIndex: 3,
-            state: zeroes
+            timeMatrix: zeroes
         }, {
             rowIndex: 4,
-            state: zeroes
+            timeMatrix: zeroes
         }, {
             rowIndex: 5,
-            state: zeroes
+            timeMatrix: zeroes
         }, {
             rowIndex: 6,
-            state: zeroes
+            timeMatrix: zeroes
         }, ]);
     });
 

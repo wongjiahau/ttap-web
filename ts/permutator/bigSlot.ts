@@ -12,7 +12,7 @@ import { IOptimizedSlot } from "./tinySlot";
  */
 export class BigSlot implements IOptimizedSlot {
     public readonly PartitionKey: number;
-    public State: number[ /*7 multiply numberOfWeeks*/ ];
+    public DayTimeMatrix: number[ /*7 multiply numberOfWeeks*/ ];
     public readonly SlotNumber: number;
     public readonly PartitionGroup: string;
     public SlotIds: number[];
@@ -24,20 +24,20 @@ export class BigSlot implements IOptimizedSlot {
         this.Uid = s.SlotNumber;
         this.SlotIds = [];
         this.SlotIds.push(s.Uid);
-        this.State = GetStateOfBigSlot(s.Day, s.Week, s.TimePeriod);
+        this.DayTimeMatrix = GetDayTimeMatrixOfBigSlot(s.Day, s.Week, s.TimePeriod);
         this.PartitionGroup = `${GetInitial(s.SubjectName)}(${s.Type})`;
     }
 
 }
-export function GetStateOfBigSlot(Day:number, Week:number, TimePeriod:number): number[] {
+export function GetDayTimeMatrixOfBigSlot(Day:number, Week:number, TimePeriod:number): number[] {
     let result: number[] = [];
     const weekBinary = Week.toString(2);
-    const state = [0, 0, 0, 0, 0, 0, 0];
-    state[Day - 1] = TimePeriod;
+    const matrix = [0, 0, 0, 0, 0, 0, 0];
+    matrix[Day - 1] = TimePeriod;
     const maxNumberOfWeek = 14;
     for (let i = weekBinary.length - 1; i >= 0; i--) {
         if (weekBinary[i] === "1") {
-            result = result.concat(state.slice());
+            result = result.concat(matrix.slice());
         } else {
             result = result.concat([0, 0, 0, 0, 0, 0, 0]);
         }

@@ -31,6 +31,6 @@ describe("goToNextTimetable action", () => {
 });
 
 export const NullTimetable: Timetable = {
-    State: [],
+    DayTimeMatrix: [],
     Uids: [0]
 }

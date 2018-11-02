@@ -3,8 +3,8 @@ import { CreateSlotFromRaw } from "../../model/slot";
 import { CreateSlotViewModel, FromSlotViewModelToRawSlot, ISlotViewModel } from "../../model/slotViewModel";
 import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
 import { ParseSlotToBigSlot } from "../../parser/parseSlotToBigSlot";
-import { BigSlot, GetStateOfBigSlot } from "../../permutator/bigSlot";
-import { Append, GotIntersection } from "../../permutator/state";
+import { BigSlot, GetDayTimeMatrixOfBigSlot } from "../../permutator/bigSlot";
+import { AppendMatrix, GotIntersection } from "../../permutator/matrix";
 import {MasterStateAction} from "../reducers/masterState";
 import { TinySlot } from "./../../permutator/tinySlot";
 import {IMasterState} from "./../reducers/masterState";
@@ -43,8 +43,8 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
             for (let i = 0; i < currentSlots.length; i++) {
                 const x = currentSlots[i];
                 if(currentTimetable.Uids.indexOf(x.Uid) > -1) {
-                    result = Append( 
-                        GetStateOfBigSlot(
+                    result = AppendMatrix( 
+                        GetDayTimeMatrixOfBigSlot(
                             ParseDay(x.Day),
                             Week.Parse(x.WeekNumber[0]).BinaryData,
                             TimePeriod.Parse(x.TimePeriod).BinaryData
@@ -67,7 +67,7 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
                         && uidsOfFiltratedSlots.has(x.Uid)
                         && x.SubjectCode === targetSlot.SubjectCode
                         && x.Type === targetSlot.Type
-                        && !GotIntersection(currentTimetableState, new BigSlot(CreateSlotFromRaw(x)).State)) {
+                        && !GotIntersection(currentTimetableState, new BigSlot(CreateSlotFromRaw(x)).DayTimeMatrix)) {
                             const temp = CreateSlotViewModel(x);
                             temp.IsAlternativeSlot = true;
                             result.push(temp);

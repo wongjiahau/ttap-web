@@ -7,23 +7,23 @@ import {
     ColorOfDefinitelyOccupied,
     ColorOfDefinitelyUnoccupied,
     ColorOfMaybeOccupied,
-    StateKind,
+    MatrixKind,
     STCBox
-} from "../../model/states/stcBox";
+} from "../../model/matrix/stcBox";
 import {Colors} from "../colors/colors";
 import {ISkeleton, Skeleton} from "./skeleton";
 
 export function GenerateStateViews(states : STCBox[], handleSetTimeContraintAt : (state : STCBox) => void, handleDesetTimeConstraintAt : (state : STCBox) => void) : ISkeleton {
     const GetStateView = (state : STCBox) => {
         switch (state.Kind) {
-            case StateKind.DefinitelyOccupied:
+            case MatrixKind.DefinitelyOccupied:
                 return (<Box color={ColorOfDefinitelyOccupied}/>);
-            case StateKind.DefinitelyUnoccupied:
+            case MatrixKind.DefinitelyUnoccupied:
                 return (<Box color={ColorOfDefinitelyUnoccupied}/>);
-            case StateKind.MaybeOccupied:
+            case MatrixKind.MaybeOccupied:
                 return (<MaybeOccupiedBox
                     handleClick={() => { handleSetTimeContraintAt(state); }}/>);
-            case StateKind.Clicked:
+            case MatrixKind.Clicked:
                 return (<ClickedBox
                     handleClick={() => { handleDesetTimeConstraintAt(state); }}/>);
             default:

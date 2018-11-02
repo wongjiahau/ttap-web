@@ -54,7 +54,7 @@ describe("tinySlot", () => {
             expect(result.PartitionKey).to.eq(3330);
         });
 
-        it("should set State 1", () => {
+        it("should set DayTimeMatrix 1", () => {
             const result = new TinySlot(GetTestSlot());
             const expected = [
                 15,
@@ -65,10 +65,10 @@ describe("tinySlot", () => {
                 0,
                 0,
             ];
-            expect(isEqual(result.State, expected)).to.eq(true);
+            expect(isEqual(result.DayTimeMatrix, expected)).to.eq(true);
         });
 
-        it("should set State 2", () => {
+        it("should set DayTimeMatrix 2", () => {
             const bkaSlots = GetRawSlotsOf(CodeOf.BKA);
             expect(bkaSlots).to.deep.eq([{
                 Uid: 16,
@@ -107,7 +107,7 @@ describe("tinySlot", () => {
                 0,
                 0
             ];
-            expect(result[0].State).to.deep.eq(expected);
+            expect(result[0].DayTimeMatrix).to.deep.eq(expected);
         });
     });
 

@@ -3,9 +3,6 @@ import {
     RawSlot
 } from "../model/rawSlot";
 import {
-    GetDefinitelyOccupiedState
-} from "../model/states/generateTotalState";
-import {
     Timetable
 } from "../model/timetable";
 import {
@@ -22,13 +19,13 @@ import {
 } from "./partitionize";
 import {
     GotIntersection
-} from "./state";
+} from "./matrix";
 import {
     TinySlot
 } from "./tinySlot";
+import { GetDefinitelyOccupiedMatrix } from "../model/matrix/generateTotalMatrix";
 
 export function FindTimetableV2(input: RawSlot[]): Timetable[] {
-    const result: Timetable[] = [];
     const partitioned: RawSlot[][] = sortBy(PartitionizeByKey(input, "SubjectCode"), ["length"]);
     const subjects = new Array < TinySlot[] > ();
     partitioned.forEach((p) => {
@@ -36,10 +33,10 @@ export function FindTimetableV2(input: RawSlot[]): Timetable[] {
     });
     let currentSlots = subjects[0];
     let timetables = FindTimetable(currentSlots);
-    let state = GetDefinitelyOccupiedState(timetables);
+    let matrix = GetDefinitelyOccupiedMatrix(timetables);
     const last = subjects.length - 1;
     for (let i = 1; i < subjects.length; i++) {
-        const filtrate = FilterOut(subjects[i], state);
+        const filtrate = FilterOut(subjects[i], matrix);
         if (filtrate.length === 0) {
             return [];
         }
@@ -47,16 +44,16 @@ export function FindTimetableV2(input: RawSlot[]): Timetable[] {
         currentSlots = currentSlots.concat(filtrate);
         timetables = FindTimetable(currentSlots);
         if (i !== last) {
-            state = GetDefinitelyOccupiedState(timetables);
+            matrix = GetDefinitelyOccupiedMatrix(timetables);
         }
     }
     return timetables;
 }
 
-export function FilterOut(slots: TinySlot[], state: number[]): TinySlot[] {
+export function FilterOut(slots: TinySlot[], dayTimeMatrix: number[]): TinySlot[] {
     const result: TinySlot[] = [];
     for (let i = 0; i < slots.length; i++) {
-        if (!GotIntersection(slots[i].State, state)) {
+        if (!GotIntersection(slots[i].DayTimeMatrix, dayTimeMatrix)) {
             result.push(slots[i]);
         }
     }

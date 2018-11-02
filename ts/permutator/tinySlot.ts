@@ -5,14 +5,14 @@ import { GetInitial } from "../util/getInitial";
 import { IPartitionable } from "./partitionize";
 
 export interface IOptimizedSlot extends IPartitionable, Identifiable {
-    State: number[];
+    DayTimeMatrix: number[];
     SlotNumber: number;
     SlotIds: number[];
     PartitionGroup: string; // This is required by findTimetableVisualizer
 }
 export class TinySlot implements IOptimizedSlot {
     public readonly PartitionKey: number;
-    public readonly State: number[ /*7*/ ];
+    public readonly DayTimeMatrix: number[ /*7*/ ];
     public readonly SlotNumber: number;
     public readonly Uid: number;
     public readonly PartitionGroup: string;
@@ -24,11 +24,11 @@ export class TinySlot implements IOptimizedSlot {
         this.Uid = s.SlotNumber;
         this.SlotIds = [];
         this.SlotIds.push(s.Uid);
-        this.State = this.GetState(s);
+        this.DayTimeMatrix = this.GetDayTimeMatrixForTinySlot(s);
         this.PartitionGroup = `${GetInitial(s.SubjectName)}(${s.Type})`;
     }
 
-    private GetState(s: ISlot): number[] {
+    private GetDayTimeMatrixForTinySlot(s: ISlot): number[] {
         const result = [0, 0, 0, 0, 0, 0, 0];
         result[s.Day - 1] = s.TimePeriod;
         return result;

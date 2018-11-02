@@ -9,12 +9,12 @@ import {BoundedInt} from "./boundedInt";
 import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "./findTimetableVisualizer";
 import {GenerateIndices} from "./generateIndices";
 import {Partitionize} from "./partitionize";
-import {Append, GotIntersection} from "./state";
+import {AppendMatrix, GotIntersection} from "./matrix";
 import {IOptimizedSlot} from "./tinySlot";
 
 interface ISnapshot {
     SlotIds : number[];
-    State : number[];
+    DayTimeMatrix : number[];
 }
 
 const LIMIT = 1000000;
@@ -29,9 +29,9 @@ export function FindTimetable(
         throw new Error("Input slots should not be an empty array");
     }
     if (input.length === 1) {
-        let resultState = [ 0, 0, 0, 0, 0, 0, 0 ];
-        resultState = Append(resultState, input[0].State);
-        return [new Timetable(input[0].SlotIds, resultState)];
+        let resultMatrix = [ 0, 0, 0, 0, 0, 0, 0 ];
+        resultMatrix = AppendMatrix(resultMatrix, input[0].DayTimeMatrix);
+        return [new Timetable(input[0].SlotIds, resultMatrix)];
     }
     const result = new Array < Timetable > ();
     const partitioned = sortBy(Partitionize(input), ["length"]) as IOptimizedSlot[][];
@@ -43,7 +43,7 @@ export function FindTimetable(
     const snapshots = new Array < ISnapshot > ();
     snapshots.push({
         SlotIds: [],
-        State: [ 0, 0, 0, 0, 0, 0, 0 ] // 7 because there are 7 days in a week
+        DayTimeMatrix: [ 0, 0, 0, 0, 0, 0, 0 ] // 7 because there are 7 days in a week
     });
     let prevSnapshot : ISnapshot;
     let ptr = 0;
@@ -55,14 +55,13 @@ export function FindTimetable(
             const previousSlot = partitioned[prevPtr][indices[prevPtr].Value];
             visualizer.connect(previousSlot, current); // this is for animation purpose
         }
-        if (!GotIntersection(current.State, prevSnapshot.State)) {
+        if (!GotIntersection(current.DayTimeMatrix, prevSnapshot.DayTimeMatrix)) {
             snapshots.push({
                 SlotIds: concat(current.SlotIds, prevSnapshot.SlotIds),
-                State: Append(current.State, prevSnapshot.State)
+                DayTimeMatrix: AppendMatrix(current.DayTimeMatrix, prevSnapshot.DayTimeMatrix)
             });
-            // console.log(current.State[0].toString(2).replace(/0+$/, ""));
             if (ptr === last) {
-                result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].State));
+                result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].DayTimeMatrix));
                 visualizer.increaseSearchedPathCount();
                 if (result.length >= LIMIT) { // if too much timetable just return the result
                     return result;

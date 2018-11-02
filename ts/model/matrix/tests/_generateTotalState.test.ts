@@ -5,28 +5,28 @@ import { Time } from "../../../att/time";
 import { TimePeriod } from "../../../att/timePeriod";
 import { DecToBin } from "../../../util/decToBin";
 import {
-    GenerateTotalState,
-    GetDefinitelyOccupiedState,
-    GetDefinitelyUnoccupiedState,
-    GetMaybeOccupiedState,
-    StringifyTotalState
-} from "../generateTotalState";
+    GenerateTotalMatrix,
+    GetDefinitelyOccupiedMatrix,
+    GetDefinitelyUnoccupiedMatrix,
+    GetMaybeOccupiedMatrix,
+    StringifyTotalMatrix
+} from "../generateTotalMatrix";
 import {
     GetTestTimetables1
 } from "./../../../tests/testDataGenerator";
 
-describe("GenerateTotalState", () => {
+describe("GenerateTotalMatrix", () => {
     it("case 1", () => {
         const timetables = GetTestTimetables1();
-        const totalStates = GenerateTotalState(timetables);
+        const totalMatrixs = GenerateTotalMatrix(timetables);
     });
 
-    describe("GetDefinitelyOccupiedState()", () => {
+    describe("GetDefinitelyOccupiedMatrix()", () => {
         it("case 1", () => {
             const timetables = GetTestTimetables1();
-            const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables);
+            const definitelyOccupiedMatrix = GetDefinitelyOccupiedMatrix(timetables);
             let actual = "";
-            definitelyOccupiedState.forEach((day) => {
+            definitelyOccupiedMatrix.forEach((day) => {
                 actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
             });
             // 1 means definitely occupied
@@ -43,12 +43,12 @@ describe("GenerateTotalState", () => {
 
     });
 
-    describe("GetDefinitelyUnoccupiedState()", () => {
+    describe("GetDefinitelyUnoccupiedMatrix()", () => {
         it("case 1", () => {
             const timetables = GetTestTimetables1();
-            const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables);
+            const definitelyUnoccupiedMatrix = GetDefinitelyUnoccupiedMatrix(timetables);
             let actual = "";
-            definitelyUnoccupiedState.forEach((day) => {
+            definitelyUnoccupiedMatrix.forEach((day) => {
                 actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
             });
             // 0 means definitely unoccupied
@@ -65,14 +65,14 @@ describe("GenerateTotalState", () => {
 
     });
 
-    describe("GetMaybeOccupiedState()", () => {
+    describe("GetMaybeOccupiedMatrix()", () => {
         it("case 1", () => {
             const timetables = GetTestTimetables1();
-            const definitelyUnoccupiedState = GetDefinitelyUnoccupiedState(timetables);
-            const definitelyOccupiedState = GetDefinitelyOccupiedState(timetables);
-            const maybeOccupiedState = GetMaybeOccupiedState(definitelyOccupiedState, definitelyUnoccupiedState);
+            const definitelyUnoccupiedMatrix = GetDefinitelyUnoccupiedMatrix(timetables);
+            const definitelyOccupiedMatrix = GetDefinitelyOccupiedMatrix(timetables);
+            const maybeOccupiedMatrix = GetMaybeOccupiedMatrix(definitelyOccupiedMatrix, definitelyUnoccupiedMatrix);
             let actual = "";
-            maybeOccupiedState.forEach((day) => {
+            maybeOccupiedMatrix.forEach((day) => {
                 actual += (DecToBin(day, TimePeriod.GetNumberOfHalfHours()) + "\n").split("").reverse().join("");
             });
             // 1 means maybe occupied or unoccupied
@@ -88,11 +88,11 @@ describe("GenerateTotalState", () => {
         });
     });
 
-    describe("StringifyTotalState", () => {
+    describe("StringifyTotalMatrix", () => {
         it("case 1", () => {
             const timetables = GetTestTimetables1();
-            const totalStates = GenerateTotalState(timetables);
-            const result = StringifyTotalState(totalStates);
+            const totalMatrixs = GenerateTotalMatrix(timetables);
+            const result = StringifyTotalMatrix(totalMatrixs);
             const expected = `
 ----OOOO--------OOOO
 ******OO--OOOO******
@@ -105,11 +105,11 @@ OOOOOO************--
 
         });
 
-        it("case when some uidsOfClickedState is passed in", () => {
-            const uidsOfClickedState = ["01", "11", "21", "31", "41", "51", "61"];
+        it("case when some uidsOfClickedMatrix is passed in", () => {
+            const uidsOfClickedMatrix = ["01", "11", "21", "31", "41", "51", "61"];
             const timetables = GetTestTimetables1();
-            const totalStates = GenerateTotalState(timetables, uidsOfClickedState);
-            const result = StringifyTotalState(totalStates);
+            const totalMatrixs = GenerateTotalMatrix(timetables, uidsOfClickedMatrix);
+            const result = StringifyTotalMatrix(totalMatrixs);
             const expected = `
 -X--OOOO--------OOOO
 *X****OO--OOOO******

@@ -1,12 +1,12 @@
 import {
-    GenerateTotalState
-} from "../../model/states/generateTotalState";
+    GenerateTotalMatrix
+} from "../../model/matrix/generateTotalMatrix";
 import {
     IMasterState,
     MasterStateAction
-} from "./../reducers/masterState";
+} from "../reducers/masterState";
 
-export class UpdateTotalState extends MasterStateAction {
+export class UpdateTotalMatrix extends MasterStateAction {
     public constructor() {
         super();
     }
@@ -19,8 +19,8 @@ export class UpdateTotalState extends MasterStateAction {
             SetTimeConstraintState: {
                 ...state.SetTimeConstraintState,
                 ClickedTimeConstraint: [0, 0, 0, 0, 0, 0, 0],
-                UidsOfClickedState: [],
-                TotalState: GenerateTotalState(state.TimetableListState.FiltrateTimetables, [])
+                UidsOfClickedBoxes: [],
+                TotalMatrix: GenerateTotalMatrix(state.TimetableListState.FiltrateTimetables, [])
             }
         };
     }

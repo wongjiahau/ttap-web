@@ -1,6 +1,6 @@
 import { expect } from "chai";
 const isEqual = require("lodash.isequal");
-import { Append, GotIntersection } from "../state";
+import { AppendMatrix, GotIntersection } from "../matrix";
 
 describe("GotIntersection()", () => {
     it("should return true if got intersection", () => {
@@ -23,28 +23,28 @@ describe("Append()", () => {
     it("should return number array of length 7", () => {
         const a = [0, 0, 0, 0, 0, 0, 0];
         const b = [0, 0, 0, 0, 0, 0, 0];
-        expect(Append(a, b).length).to.eq(7);
+        expect(AppendMatrix(a, b).length).to.eq(7);
 
     });
 
     it("should combine two array into one array", () => {
         const a = [15, 0, 0, 0, 0, 0, 0];
         const b = [0, 15, 0, 0, 0, 0, 0];
-        const result = Append(a, b);
+        const result = AppendMatrix(a, b);
         expect(isEqual(result, [15, 15, 0, 0, 0, 0, 0])).to.eq(true);
     });
 
     it("should combine two array using bitwise-OR", () => {
         const a = [parseInt("1111", 2), 0, 0, 0, 0, 0, 0];
         const b = [parseInt("11110000", 2), 0, 0, 0, 0, 0, 0];
-        const result = Append(a, b);
+        const result = AppendMatrix(a, b);
         expect(isEqual(result, [parseInt("11111111", 2), 0, 0, 0, 0, 0, 0])).to.eq(true);
     });
 
     it("shold return results which have the length of the first input", () => {
         const a = [0, 0, 0, 0, 0, 0, 0];
         const b = [0, 0, 0];
-        const result = Append(a, b);
+        const result = AppendMatrix(a, b);
         expect(result).to.have.lengthOf(a.length);
         expect(result).to.deep.eq(a);
         // Why is this happenning ?

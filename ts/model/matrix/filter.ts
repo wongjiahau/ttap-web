@@ -2,19 +2,19 @@ import {
     Timetable
 } from "../timetable";
 import {
-    StateKind,
+    MatrixKind,
     STCBox
 } from "./stcBox";
 
-export function Filter(timetables: Timetable[], state: STCBox): [Timetable[], Timetable[]] {
-    if (state.Kind !== StateKind.MaybeOccupied) {
-        throw new Error("Only state that is MaybeOccupied can call the Filter function");
+export function Filter(timetables: Timetable[], box: STCBox): [Timetable[], Timetable[]] {
+    if (box.Kind !== MatrixKind.MaybeOccupied) {
+        throw new Error("Only box that is MaybeOccupied can call the Filter function");
     }
     const filtrate: Timetable[] = [];
     const residue: Timetable[] = [];
     for (let i = 0; i < timetables.length; i++) {
         const t = timetables[i];
-        if ((t.State[state.Day] & state.TimePeriod) === 0) {
+        if ((t.DayTimeMatrix[box.Day] & box.TimePeriod) === 0) {
             filtrate.push(t);
         } else {
             residue.push(t);

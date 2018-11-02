@@ -29,8 +29,8 @@ import {
     ToggleSelectionOnSpecificSlot
 } from "../actions/toggleSelectionOnSpecificSlot";
 import {
-    UpdateTotalState
-} from "../actions/updateTotalState";
+    UpdateTotalMatrix
+} from "../actions/updateTotalMatrix";
 import { IMasterState } from "../reducers/masterState";
 import {
     ISlotsTableState
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch: any): ISlotsTableViewDispatchProps => {
     return {
         handleDone: () => {
             dispatch(new FindTimetablesBasedOnChosenSlots());
-            dispatch(new UpdateTotalState());
+            dispatch(new UpdateTotalMatrix());
             dispatch(new FindAlternativeSlotsOfCurrentSlots());
         },
         handleCancel: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),

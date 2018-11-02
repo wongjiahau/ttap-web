@@ -1,18 +1,12 @@
 import {
     Filter
-} from "../../model/states/filter";
+} from "../../model/matrix/filter";
 import {
-    GenerateTotalState
-} from "../../model/states/generateTotalState";
+    GenerateTotalMatrix
+} from "../../model/matrix/generateTotalMatrix";
 import {
     STCBox
-} from "../../model/states/stcBox";
-import {
-    Timetable
-} from "../../model/timetable";
-import {
-    StateKind
-} from "./../../model/states/stcBox";
+} from "../../model/matrix/stcBox";
 import {
     IMasterState,
     MasterStateAction
@@ -28,7 +22,7 @@ export class FilterTimetable extends MasterStateAction {
     protected GenerateNewState(state: IMasterState): IMasterState {
         const [filtrate, residue] =
             Filter(state.TimetableListState.FiltrateTimetables, this.clickedState);
-        const newUidsOfClickedState = state.SetTimeConstraintState.UidsOfClickedState.concat(this.clickedState.Uid);
+        const newUidsOfClickedState = state.SetTimeConstraintState.UidsOfClickedBoxes.concat(this.clickedState.Uid);
         const newClickedTimeConstraint = state.SetTimeConstraintState.ClickedTimeConstraint.slice();
         newClickedTimeConstraint[this.clickedState.Day] |= this.clickedState.TimePeriod;
         return {
@@ -41,8 +35,8 @@ export class FilterTimetable extends MasterStateAction {
             },
             SetTimeConstraintState: {
                 ...state.SetTimeConstraintState,
-                TotalState: GenerateTotalState(filtrate, newUidsOfClickedState),
-                UidsOfClickedState: newUidsOfClickedState,
+                TotalMatrix: GenerateTotalMatrix(filtrate, newUidsOfClickedState),
+                UidsOfClickedBoxes: newUidsOfClickedState,
                 ClickedTimeConstraint: newClickedTimeConstraint
             }
         };

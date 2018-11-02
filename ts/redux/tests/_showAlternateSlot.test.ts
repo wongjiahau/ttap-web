@@ -8,7 +8,7 @@ import { GoToPrevTimetable } from "../actions/goToPrevTimetable";
 import { GoToRandomTimetable } from "../actions/goToRandomTimetable";
 import { ShowAlternateSlot } from "../actions/showAlternateSlot";
 import { MasterStateReducer } from "../reducers/masterState";
-import { StateKind, STCBox } from "./../../model/states/stcBox";
+import { MatrixKind, STCBox } from "./../../model/matrix/stcBox";
 import { HENG_2017_APR, IndexOf } from "./../../tests/testData/heng_2017_apr";
 import { ToggleSubjectSelection } from "./../actions/toggleSubjectSelection";
 
@@ -71,7 +71,7 @@ describe("showAlternateSlot action", () => {
     it("should not show alternate slots that is filtered out by set time constraint", () => {
         const initialState = GetMockInitialState("heng_2017_apr");
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.ASSD));
-        const greenBoxToBeClicked = new STCBox(StateKind.MaybeOccupied, 1, parseInt("10000", 2), 4); // Tuesday 10.30am to 11.00am
+        const greenBoxToBeClicked = new STCBox(MatrixKind.MaybeOccupied, 1, parseInt("10000", 2), 4); // Tuesday 10.30am to 11.00am
         let newState1 = MasterStateReducer(newState0, new FilterTimetable(greenBoxToBeClicked));
         newState1 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlots());
         const slotsToBeClicked = newState1.TimetableListState.SlotViewModelStore.GetAll()

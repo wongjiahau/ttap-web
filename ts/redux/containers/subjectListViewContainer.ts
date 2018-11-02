@@ -15,8 +15,8 @@ import {
     UpdateSlotsTableState
 } from "../actions/updateSlotsTableState";
 import {
-    UpdateTotalState
-} from "../actions/updateTotalState";
+    UpdateTotalMatrix
+} from "../actions/updateTotalMatrix";
 import { IMasterState } from "../reducers/masterState";
 import {
     ISubjectListState} from "../reducers/subjectListState";
@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
             dispatch(new HideSnackbar());
             dispatch(new UpdateSlotsTableState());
             dispatch(new ToggleSetTimeConstraintView(true));
-            dispatch(new UpdateTotalState());
+            dispatch(new UpdateTotalMatrix());
         },
         handleSearch: (searchedText: string) => {
             dispatch(new SearchSubjectList(searchedText));

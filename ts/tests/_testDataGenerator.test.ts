@@ -81,7 +81,7 @@ describe("testDataGenerator", () => {
                 [0, 0, 0, 48, 0, 0, 0]
             ];
             const input1 = GetTinySlotsOf("UEMX3653"); // WWT
-            expect(input1.map((x) => x.State)).to.deep.eq(expected);
+            expect(input1.map((x) => x.DayTimeMatrix)).to.deep.eq(expected);
         });
     });
 });

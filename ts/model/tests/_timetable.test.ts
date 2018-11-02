@@ -1,24 +1,24 @@
 import { expect } from "chai";
-import { CompressState } from "../timetable";
+import { CompressDayTimeMatrix } from "../timetable";
 
-describe("CompressState", () => {
+describe("CompressDayTimeMatrix", () => {
     it("case 1", () => {
-        const state = [
+        const matrix = [
             0,   0, 255, 0, 0, 0, 0,
             0, 255,   0, 0, 0, 0, 0,
         ];
-        const result = CompressState(state);
+        const result = CompressDayTimeMatrix(matrix);
         expect(result).to.deep.eq([
             0, 255, 255, 0, 0, 0, 0
         ]);
     });
 
     it("case 2", () => {
-        const state = [
+        const matrix = [
             0,   0, 255, 0, 0, 0, 0,
             0, 255, 255, 0, 0, 0, 0,
         ];
-        const result = CompressState(state);
+        const result = CompressDayTimeMatrix(matrix);
         expect(result).to.deep.eq([
             0, 255, 255, 0, 0, 0, 0
         ]);

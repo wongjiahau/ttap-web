@@ -95,7 +95,7 @@ describe("ParseSlotToTinySlot", () => {
         expect(isEqual(result[0].SlotIds, [1, 2])).to.eq(true);
     });
 
-    it("should join timeperiod into a state for slots from the same group", () => {
+    it("should join timeperiod into a matrix for slots from the same group", () => {
         const slot1: ISlot = {
             Day: 1, // Monday
             Group: 1,
@@ -120,8 +120,8 @@ describe("ParseSlotToTinySlot", () => {
         };
         const input = [slot1, slot2];
         const result = ParseSlotToTinySlot(input);
-        const expectedState = [15, 15, 0, 0, 0, 0, 0];
-        expect(isEqual(result[0].State, expectedState)).to.eq(true);
+        const expectedMatrix= [15, 15, 0, 0, 0, 0, 0];
+        expect(isEqual(result[0].DayTimeMatrix, expectedMatrix)).to.eq(true);
     });
 
 });

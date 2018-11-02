@@ -36,8 +36,8 @@ describe("ParseSlotToBigSlot", () => {
         expect(rawSlots[0].WeekNumber).to.eq("3,9");
         const bigSlots = ParseSlotToBigSlot(ParseRawSlotToSlot(rawSlots));
         expect(bigSlots).to.have.lengthOf(1);
-        expect(bigSlots[0].State).to.have.lengthOf(14 * 7);
-        expect(bigSlots[0].State).to.deep.eq(
+        expect(bigSlots[0].DayTimeMatrix).to.have.lengthOf(14 * 7);
+        expect(bigSlots[0].DayTimeMatrix).to.deep.eq(
             [
                 0,      0, 0, 0, 0, 0, 0, // week 1
                 0,      0, 0, 0, 0, 0, 0, // week 2

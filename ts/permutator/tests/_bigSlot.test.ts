@@ -17,39 +17,39 @@ import {
 } from "../bigSlot";
 import {
     GotIntersection
-} from "../state";
+} from "../matrix";
 
 const testSlots = ParseHtmlToRawSlot(new TestManager().GetDataFrom(FileName.cf_2017_nov));
 describe("BigSlot", () => {
-    it("State should have length of 7 * 14 (case 1)", () => {
+    it("DayTimeMatrix should have length of 7 * 14 (case 1)", () => {
         const rawSlot = find(testSlots, {
             Number: "129"
         });
         expect(rawSlot.WeekNumber).to.eq("2,8");
         const slot = CreateSlotFromRaw(rawSlot);
         const result = new BigSlot(slot);
-        expect(result.State).to.have.lengthOf(7 * 14);
+        expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
     });
 
-    it("State should have length of 7 * 14 (case 2)", () => {
+    it("DayTimeMatrix should have length of 7 * 14 (case 2)", () => {
         const rawSlot = find(testSlots, {
             Number: "1"
         });
         expect(rawSlot.WeekNumber).to.eq("1-14");
         const slot = CreateSlotFromRaw(rawSlot);
         const result = new BigSlot(slot);
-        expect(result.State).to.have.lengthOf(7 * 14);
+        expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
     });
 
-    it("State should be array of number, where every 7 number represent state of a week", () => {
+    it("DayTimeMatrix should be array of number, where every 7 number represent matrix of a week", () => {
         const rawSlot = find(testSlots, {
             Number: "1"
         });
         rawSlot.WeekNumber = "2";
         const slot = CreateSlotFromRaw(rawSlot);
         const result = new BigSlot(slot);
-        expect(result.State).to.have.lengthOf(7 * 14);
-        expect(result.State).to.deep.eq(
+        expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
+        expect(result.DayTimeMatrix).to.deep.eq(
             [
                 0, 0, 0, 0, 0, 0, 0, // week 1
                 63, 0, 0, 0, 0, 0, 0,
@@ -85,7 +85,7 @@ describe("BigSlot", () => {
         y.Type = "T";
         const slot1 = new BigSlot(CreateSlotFromRaw(x));
         const slot2 = new BigSlot(CreateSlotFromRaw(y));
-        expect(GotIntersection(slot1.State, slot2.State)).to.eq(false);
+        expect(GotIntersection(slot1.DayTimeMatrix, slot2.DayTimeMatrix)).to.eq(false);
     });
 
     it("check for intersection 2", () => {
@@ -105,7 +105,7 @@ describe("BigSlot", () => {
         y.Type = "T";
         const slot1 = new BigSlot(CreateSlotFromRaw(x));
         const slot2 = new BigSlot(CreateSlotFromRaw(y));
-        expect(GotIntersection(slot1.State, slot2.State)).to.eq(true);
+        expect(GotIntersection(slot1.DayTimeMatrix, slot2.DayTimeMatrix)).to.eq(true);
     });
 
 });

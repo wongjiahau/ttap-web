@@ -22,16 +22,16 @@ export function GenerateSlotAndDayLayouts(
         const Y = ParseDay(slot.Day) - 1;
         const timePeriod = TimePeriod.Parse(slot.TimePeriod);
         let extraYOffset = 0;
-        for (let i = 0; i < dayRows[Y].state.length; i++) {
-            const state = dayRows[Y].state[i];
-            if ((timePeriod.BinaryData & state) === 0) {
+        for (let i = 0; i < dayRows[Y].timeMatrix.length; i++) {
+            const matrix = dayRows[Y].timeMatrix[i];
+            if ((timePeriod.BinaryData & matrix) === 0) {
                 extraYOffset = i;
-                if (i > 0 && state === 0) {
+                if (i > 0 && matrix === 0) {
                     for (let j = Y + 1; j <= 6; j++) {
                         dayRows[j].rowIndex++;
                     }
                 }
-                dayRows[Y].state[i] |= timePeriod.BinaryData;
+                dayRows[Y].timeMatrix[i] |= timePeriod.BinaryData;
                 break;
             }
         }
@@ -51,7 +51,7 @@ export function GenerateSlotAndDayLayouts(
 
 export interface IDayRow {
     rowIndex : number;
-    state : number[];
+    timeMatrix : number[];
 }
 
 export const MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW = 20;
@@ -61,7 +61,7 @@ export function GetDayRows() : IDayRow[] {
     for (let i = 0; i < NUMBER_OF_DAY_PER_WEEK; i++) {
         dayRows.push({
             rowIndex: i,
-            state: new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0)
+            timeMatrix: new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0)
         });
     }
     return dayRows;

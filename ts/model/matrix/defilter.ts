@@ -3,7 +3,7 @@ import {
     Timetable
 } from "../timetable";
 import {
-    StateKind,
+    MatrixKind,
     STCBox
 } from "./stcBox";
 
@@ -17,7 +17,7 @@ export function Defilter(residueTimetables: Timetable[], clickedTimeConstraint: 
         const t = residueTimetables[i];
         let canBeRescued = true;
         for (let day = 0; day < 7; day++) {
-            if ((t.State[day] & clickedTimeConstraint[day]) > 0) {
+            if ((t.DayTimeMatrix[day] & clickedTimeConstraint[day]) > 0) {
                 canBeRescued = false;
                 break;
             }

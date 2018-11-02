@@ -3,7 +3,7 @@ import * as React from "react";
 import {TimePeriod} from "../../att/timePeriod";
 import {RawSlot} from "../../model/rawSlot";
 import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
-import {STCBox} from "../../model/states/stcBox";
+import {STCBox} from "../../model/matrix/stcBox";
 import {Timetable} from "../../model/timetable";
 import * as ReactGridLayout from "../../modified_node_modules/react-grid-layout";
 import {Colors} from "../colors/colors";

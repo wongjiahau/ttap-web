@@ -12,14 +12,14 @@ import {
     GetTestTimetables1
 } from "./../../../tests/testDataGenerator";
 import {
-    StateKind,
+    MatrixKind,
     STCBox
 } from "./../stcBox";
 
-const state1 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
-const state2 = new STCBox(StateKind.Clicked,       0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
-const state3 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
-const state4 = new STCBox(StateKind.Clicked,       2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
+const box1 = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
+const box2 = new STCBox(MatrixKind.Clicked,       0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
+const box3 = new STCBox(MatrixKind.MaybeOccupied, 2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
+const box4 = new STCBox(MatrixKind.Clicked,       2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
 const timetables = GetTestTimetables1();
 
 describe("Defilter()", () => {
@@ -47,8 +47,8 @@ describe("Defilter()", () => {
     });
 
     it("case 1", () => {
-        const state = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 0); // Monday 10.00 am to 10.30 am
-        const [filtrate, residue] = Filter(timetables, state);
+        const box = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("1000000", 2), 0); // Monday 10.00 am to 10.30 am
+        const [filtrate, residue] = Filter(timetables, box);
         const clickedTimeConstraint = [0, 0, 0, 0, 0, 0, 0];
         expect(residue.length).to.eq(5);
         const [rescuedTimetables, unrescuedTimetables] = Defilter(residue, clickedTimeConstraint);
@@ -57,8 +57,8 @@ describe("Defilter()", () => {
     });
 
     it("case 2", () => {
-        const [filtrate1, residue1] = Filter(timetables, state1);
-        const [filtrate2, residue2] = Filter(filtrate1, state3);
+        const [filtrate1, residue1] = Filter(timetables, box1);
+        const [filtrate2, residue2] = Filter(filtrate1, box3);
         const totalResidue = residue1.concat(residue2);
         expect(totalResidue.length).to.eq(13);
         const clickedTimeConstraint = [parseInt("1000000", 2), 0, 0, 0, 0, 0, 0];

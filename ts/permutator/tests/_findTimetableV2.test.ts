@@ -96,10 +96,10 @@ describe.skip("FindTimetableV2", () => {
         expect(result.length).to.eq(0);
     });
 
-    it("case 1 on Timetable.State", () => {
+    it("case 1 on Timetable.DayTimeMatrix", () => {
         const bkaSlots = GetRawSlotsOf(CodeOf.BKA);
         const result = FindTimetableV2(bkaSlots);
-        expect(result[0].State).to.deep.eq([
+        expect(result[0].DayTimeMatrix).to.deep.eq([
             0,
             parseInt("11111100", 2),
             parseInt("11111100", 2),

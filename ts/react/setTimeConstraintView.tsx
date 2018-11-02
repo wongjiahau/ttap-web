@@ -5,7 +5,7 @@ import Typography from "material-ui/Typography";
 import * as React from "react";
 //@ts-ignore
 import CountUp from "react-countup";
-import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/states/stcBox";
+import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/matrix/stcBox";
 import {Colors} from "./colors/colors";
 import {StackPanel} from "./panels/stackPanel";
 import {TimetableView} from "./timetableView/timetableView";
@@ -89,7 +89,7 @@ const Legend = (props : ILegendProps) => {
 };
 
 export interface ISetTimeConstraintViewStateProps {
-    totalState : STCBox[];
+    totalMatrix : STCBox[];
     isOpen : boolean;
     numberOfRemovedTimetables : number;
     numberOfRemainingTimetables : number;
@@ -137,7 +137,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                         <TimetableView
                             slots={[]}
                             alternateSlots={null}
-                            states={this.props.totalState}
+                            states={this.props.totalMatrix}
                             handleSelectSlotChoice={NO_OPERATION}
                             handleGoToThisAlternateSlot={NO_OPERATION}
                             handleShowAlternateSlot={NO_OPERATION}

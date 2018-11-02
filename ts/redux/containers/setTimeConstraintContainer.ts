@@ -3,7 +3,7 @@ import { FindAlternativeSlotsOfCurrentSlots } from "./../actions/findAlternative
 import {
     connect
 } from "react-redux";
-import { STCBox } from "../../model/states/stcBox";
+import { STCBox } from "../../model/matrix/stcBox";
 import { ISetTimeConstraintViewDispatchProps, ISetTimeConstraintViewStateProps, SetTimeConstraintView } from "../../react/setTimeConstraintView";
 import { DefilterTimetable } from "../actions/defilterTimetable";
 import { FilterTimetable } from "../actions/filterTimetable";
@@ -18,7 +18,7 @@ const mapStateToProps = (state: any): ISetTimeConstraintViewStateProps => {
         isOpen:                      stcState.IsOpen,
         numberOfRemainingTimetables: timetableListState.FiltrateTimetables.length,
         numberOfRemovedTimetables:   timetableListState.ResidueTimetables.length,
-        totalState:                  stcState.TotalState
+        totalMatrix:                  stcState.TotalMatrix
     };
 };
 

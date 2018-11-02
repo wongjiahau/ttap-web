@@ -26,8 +26,8 @@ import {
     UpdateSlotsTableState
 } from "../actions/updateSlotsTableState";
 import {
-    UpdateTotalState
-} from "../actions/updateTotalState";
+    UpdateTotalMatrix
+} from "../actions/updateTotalMatrix";
 import {
     ISBCWDialogState
 } from "../reducers/sbcwDialogState";
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch: any): ITurnOnSBCWDialogDispatchProps => {
         handleTurnOn: () => {
             dispatch(new TurnOnSBCW());
             dispatch(new FindTimetablesBasedOnChosenSlots());
-            dispatch(new UpdateTotalState());
+            dispatch(new UpdateTotalMatrix());
             dispatch(new NotifyIfTimetableIsFound());
             dispatch(new FindAlternativeSlotsOfCurrentSlots());
         },

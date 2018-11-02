@@ -108,11 +108,11 @@ describe("FindTimetable()", () => {
         expect(result.length).to.eq(0);
     });
 
-    it("case 1 on Timetable.State", () => {
+    it("case 1 on Timetable.DayTimeMatrix", () => {
         TimePeriod.SetMinTo8am();
         const bkaSlots = GetTinySlotsOf(CodeOf.BKA);
         const result = FindTimetable(bkaSlots);
-        expect(result[0].State).to.deep.eq([
+        expect(result[0].DayTimeMatrix).to.deep.eq([
             0,
             parseInt("111111", 2),
             parseInt("111111", 2),

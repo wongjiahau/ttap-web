@@ -11,7 +11,7 @@ import { ToggleIsOpenOfSubjectListView } from "../actions/toggleIsOpenOfSubjectL
 import { TurnOffSBCW } from "../actions/turnOffSBCW";
 import { ISettingsState } from "../reducers/settingsState";
 import { ITimetableCreatorState } from "../reducers/timetableCreatorState";
-import { UpdateTotalState } from "./../actions/updateTotalState";
+import { UpdateTotalMatrix } from "../actions/updateTotalMatrix";
 
 const mapStateToProps = (state: any): ITimetableCreatorViewStateProps => {
     const target = state.MasterStateReducer.TimetableCreatorState as ITimetableCreatorState;
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch: any): ITimetableCreatorViewDispatchProps =
         handleTurnOffSBCW:               () => {
             dispatch(new TurnOffSBCW());
             dispatch(new FindTimetablesBasedOnChosenSlots());
-            dispatch(new UpdateTotalState());
+            dispatch(new UpdateTotalMatrix());
             dispatch(new NotifyIfTimetableIsFound());
         },
     };

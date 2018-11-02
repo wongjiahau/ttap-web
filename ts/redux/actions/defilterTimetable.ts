@@ -1,29 +1,29 @@
 import {
     Defilter
-} from "../../model/states/defilter";
+} from "../../model/matrix/defilter";
 import {
-    GenerateTotalState
-} from "../../model/states/generateTotalState";
+    GenerateTotalMatrix
+} from "../../model/matrix/generateTotalMatrix";
 import {
     STCBox
-} from "../../model/states/stcBox";
+} from "../../model/matrix/stcBox";
 import {
     IMasterState,
     MasterStateAction
 } from "../reducers/masterState";
 
 export class DefilterTimetable extends MasterStateAction {
-    public constructor(private clickedState: STCBox) {
+    public constructor(private clickedBox: STCBox) {
         super();
     }
     public TypeName(): string {
-        return `defilter timetable at [${this.clickedState.Uid}]`;
+        return `defilter timetable at [${this.clickedBox.Uid}]`;
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
         const newClickedTimeConstraint = state.SetTimeConstraintState.ClickedTimeConstraint.slice();
-        newClickedTimeConstraint[this.clickedState.Day] ^= this.clickedState.TimePeriod;
-        const newUidsOfClickedState = state.SetTimeConstraintState.UidsOfClickedState
-            .filter((x) => x !== this.clickedState.Uid);
+        newClickedTimeConstraint[this.clickedBox.Day] ^= this.clickedBox.TimePeriod;
+        const newUidsOfClickedBox = state.SetTimeConstraintState.UidsOfClickedBoxes
+            .filter((x) => x !== this.clickedBox.Uid);
         const [rescued, unrescued] = Defilter(state.TimetableListState.ResidueTimetables, newClickedTimeConstraint);
         const newFiltrateTimetables = state.TimetableListState.FiltrateTimetables.concat(rescued);
         const newResidueTimetables = unrescued;
@@ -37,8 +37,8 @@ export class DefilterTimetable extends MasterStateAction {
             },
             SetTimeConstraintState: {
                 ...state.SetTimeConstraintState,
-                UidsOfClickedState: newUidsOfClickedState,
-                TotalState: GenerateTotalState(newFiltrateTimetables, newUidsOfClickedState),
+                UidsOfClickedBoxes: newUidsOfClickedBox,
+                TotalMatrix: GenerateTotalMatrix(newFiltrateTimetables, newUidsOfClickedBox),
                 ClickedTimeConstraint: newClickedTimeConstraint
             }
         };

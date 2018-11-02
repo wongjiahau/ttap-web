@@ -5,9 +5,9 @@ import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 import {
-    StateKind,
+    MatrixKind,
     STCBox
-} from "./../../model/states/stcBox";
+} from "./../../model/matrix/stcBox";
 import {
     GetTestRawSlot1, GetTestTimetables1
 } from "./../../tests/testDataGenerator";
@@ -23,7 +23,7 @@ import {
     NewMasterState
 } from "./../reducers/masterState";
 
-const state = new STCBox(StateKind.MaybeOccupied, 0, parseInt("1000000", 2), 5);
+const state = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("1000000", 2), 5);
 
 function getInitialState(): IMasterState {
     const result = NewMasterState();
@@ -57,18 +57,18 @@ describe("FilterTimetable action", () => {
     it("should set property of SetTimeConstraintState.TotalState based on the filtered timetables", () => {
         const action = new FilterTimetable(state);
         const initialState = getInitialState();
-        expect(initialState.SetTimeConstraintState.TotalState).to.deep.eq([]);
+        expect(initialState.SetTimeConstraintState.TotalMatrix).to.deep.eq([]);
         const newState = MasterStateReducer(initialState, action);
-        expect(newState.SetTimeConstraintState.TotalState).to.not.deep.eq([]);
+        expect(newState.SetTimeConstraintState.TotalMatrix).to.not.deep.eq([]);
     });
 
     it("should set property of SetTimeConstraintState.UidsOfClickedState", () => {
         const action = new FilterTimetable(state);
         const initialState = getInitialState();
-        expect(initialState.SetTimeConstraintState.UidsOfClickedState.length).to.eq(0);
+        expect(initialState.SetTimeConstraintState.UidsOfClickedBoxes.length).to.eq(0);
         const newState = MasterStateReducer(initialState, action);
-        expect(newState.SetTimeConstraintState.UidsOfClickedState.length).to.eq(1);
-        expect(newState.SetTimeConstraintState.UidsOfClickedState[0]).to.eq("05");
+        expect(newState.SetTimeConstraintState.UidsOfClickedBoxes.length).to.eq(1);
+        expect(newState.SetTimeConstraintState.UidsOfClickedBoxes[0]).to.eq("05");
     });
 
     it("should set property of SetTimeConstraintState.ClickedTimeConstraint", () => {

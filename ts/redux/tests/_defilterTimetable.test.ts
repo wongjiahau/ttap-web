@@ -3,9 +3,9 @@ import {
 } from "chai";
 import { TimePeriod } from "../../att/timePeriod";
 import {
-    StateKind,
+    MatrixKind,
     STCBox
-} from "../../model/states/stcBox";
+} from "../../model/matrix/stcBox";
 import {
     GetTestRawSlot1, GetTestTimetables1
 } from "../../tests/testDataGenerator";
@@ -19,8 +19,8 @@ import {
     GoToNextTimetable
 } from "../actions/goToNextTimetable";
 import {
-    UpdateTotalState
-} from "../actions/updateTotalState";
+    UpdateTotalMatrix
+} from "../actions/updateTotalMatrix";
 import {
     IMasterState,
     MasterStateReducer,
@@ -30,10 +30,10 @@ import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 
-const state0 = new STCBox(StateKind.MaybeOccupied, 0, parseInt("10000", 2), 5); // Monday 10-10.30 am
-const state1 = new STCBox(StateKind.Clicked,       0, parseInt("10000", 2), 5); // Monday 10-10.30 am
-const state2 = new STCBox(StateKind.MaybeOccupied, 2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
-const state3 = new STCBox(StateKind.Clicked,       2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
+const state0 = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("10000", 2), 5); // Monday 10-10.30 am
+const state1 = new STCBox(MatrixKind.Clicked,       0, parseInt("10000", 2), 5); // Monday 10-10.30 am
+const state2 = new STCBox(MatrixKind.MaybeOccupied, 2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
+const state3 = new STCBox(MatrixKind.Clicked,       2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
 
 function getInitialState(): IMasterState {
     const result = NewMasterState();
@@ -62,19 +62,19 @@ describe("DefilterTimetable action", () => {
 
     it("should set property of TotalState based on the filtered timetables", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new UpdateTotalState());
+        const newState1 = MasterStateReducer(initialState, new UpdateTotalMatrix());
         const newState2 = MasterStateReducer(newState1, new FilterTimetable(state0));
         const newState3 = MasterStateReducer(newState2, new DefilterTimetable(state1));
-        expect(newState3.SetTimeConstraintState.TotalState)
-            .to.deep.eq(newState1.SetTimeConstraintState.TotalState);
+        expect(newState3.SetTimeConstraintState.TotalMatrix)
+            .to.deep.eq(newState1.SetTimeConstraintState.TotalMatrix);
     });
 
     it("should set property of UidsOfClickedState", () => {
         const initialState = getInitialState();
         const newState1 = MasterStateReducer(initialState, new FilterTimetable(state0));
-        expect(newState1.SetTimeConstraintState.UidsOfClickedState.length).to.eq(1);
+        expect(newState1.SetTimeConstraintState.UidsOfClickedBoxes.length).to.eq(1);
         const newState2 = MasterStateReducer(newState1, new DefilterTimetable(state1));
-        expect(newState2.SetTimeConstraintState.UidsOfClickedState.length).to.eq(0);
+        expect(newState2.SetTimeConstraintState.UidsOfClickedBoxes.length).to.eq(0);
     });
 
     it("should set property of ClickedTimeConstraint", () => {
@@ -96,7 +96,7 @@ describe("DefilterTimetable action", () => {
 
     it("case 1", () => {
         const initialState = getInitialState();
-        const newState1 = MasterStateReducer(initialState, new UpdateTotalState());
+        const newState1 = MasterStateReducer(initialState, new UpdateTotalMatrix());
         const newState2 = MasterStateReducer(newState1, new FilterTimetable(state0));
         expect(newState2.TimetableListState.ResidueTimetables.length).to.eq(5);
         expect(newState2.TimetableListState.FiltrateTimetables.length).to.eq(24);
