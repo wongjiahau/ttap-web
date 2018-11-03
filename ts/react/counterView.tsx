@@ -4,8 +4,6 @@ import IconRight from "material-ui-icons/KeyboardArrowRight";
 import IconUp from "material-ui-icons/KeyboardArrowUp";
 import Button from "material-ui/Button";
 import * as React from "react";
-import {StackPanel} from "./panels/stackPanel";
-import { NO_OPERATION } from "./setTimeConstraintView";
 
 export interface ICounterProps {
     leftTooltip :        string;
@@ -29,9 +27,16 @@ export class CounterView extends React.Component < ICounterProps, {} > {
     }
 
     public render() {
-        const getButton = (handler: any, icon: any, tooltip: string, tooltipPosition: "up" | "down" = "up") => {
+        const getButton = (
+            handler: any, icon: any, tooltip: string,
+            tooltipPosition: "up" | "down" | "left" | "right" = "up") => {
             return (
-                <div data-balloon={tooltip} data-balloon-pos={tooltipPosition}>
+                // Refer https://kazzkiq.github.io/balloon.css/
+                <div
+                    data-balloon={tooltip}
+                    data-balloon-pos={tooltipPosition}
+                    data-balloon-length="xlarge"
+                    >
                     <Button onClick={handler} raised={true} style={{width: "100%"}}>
                         {icon}
                     </Button>
@@ -50,7 +55,7 @@ export class CounterView extends React.Component < ICounterProps, {} > {
                     {getButton(this.props.handleClickUp, < IconUp />, this.props.upTooltip)} </div>
                 <div className="grid-item"/>
                 <div className="grid-item">
-                    {getButton(this.props.handleClickLeft, < IconLeft />, this.props.leftTooltip)}
+                    {getButton(this.props.handleClickLeft, < IconLeft />, this.props.leftTooltip, "left")}
                 </div>
                 <div className="grid-item">
                     <div data-balloon={this.props.middleTooltip} data-balloon-pos="up">
@@ -63,7 +68,7 @@ export class CounterView extends React.Component < ICounterProps, {} > {
                     </div>
                 </div>
                 <div className="grid-item">
-                    {getButton(this.props.handleClickRight, < IconRight />, this.props.rightTooltip)}
+                    {getButton(this.props.handleClickRight, < IconRight />, this.props.rightTooltip, "right")}
                 </div>
                 <div className="grid-item"/>
                 <div className="grid-item">

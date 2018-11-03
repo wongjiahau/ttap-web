@@ -5,6 +5,7 @@ import { Timetable } from "../model/timetable";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
+import { BoundedInt } from "./boundedInt";
 import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "./findTimetableVisualizer";
 import {GenerateIndices} from "./generateIndices";
 import {AppendMatrix, GotIntersection} from "./matrix";

@@ -3,7 +3,7 @@ import ButtonBase from "material-ui/ButtonBase";
 import Menu, {MenuItem} from "material-ui/Menu";
 import Typography from "material-ui/Typography";
 import * as React from "react";
-//@ts-ignore
+// @ts-ignore
 import {Tooltip} from "react-tippy";
 import {ISlotViewModel} from "../model/slotViewModel";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
@@ -140,7 +140,7 @@ ISlotViewState > {
 
 function tooltipTitle(s : ISlotViewModel) {
     const style : React.CSSProperties = {
-        fontSize: "12px"
+        fontSize: "18px"
     };
     return (
         <div style={style}>
