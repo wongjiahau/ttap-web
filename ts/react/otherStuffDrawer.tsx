@@ -57,7 +57,9 @@ export const OtherStuffDrawer = (props : IOtherStuffDrawerProps) => {
                 {newTabLink( <BugIcon/>, "Report a bug", BugFormUrl)}
                 {routerLink( <InfoIcon/>, "About TTAP", "about")}
                 {routerLink( <SchoolIcon/>, "Terms of Service", "tospp")}
-                {routerLink( <LogoutIcon/>, "Logout", "login")}
+                {/* {routerLink( <LogoutIcon/>, "Logout", "login")}
+                    Temporarily removed, because we have a Back button already
+                */}
             </List>
         </Drawer >
     );
