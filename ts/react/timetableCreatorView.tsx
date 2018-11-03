@@ -67,7 +67,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                         <IconList style={iconStyle}/>
                         Select subjects
                     </Button>
-                    <div style={switchStyle}>
+                    <div style={{...switchStyle, display: "none"}}>
                         <StackPanel horizontalAlignment="right" orientation="horizontal">
                             <FormControlLabel
                                 label="Search by considering week number"
