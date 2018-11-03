@@ -15,7 +15,10 @@ export interface IAlgorithmVisualizerViewDispatchProps {
 
 export interface IAlgorithmVisualizerViewStateProps {
     open: boolean;
-    expectedHitCount: number;
+    expectedHitCount: () => number; // we use a callback instead of property, because
+                                    // the cost to compute this value is expensive
+                                    // so, it will be computed only when necessary
+                                    // For more info, refer algorithmVisualizerContainer.ts
     actualHitCount: number;
     fullSearchPathCount: number;
     timeTaken: number;
@@ -25,7 +28,8 @@ export interface IAlgorithmVisualizerViewStateProps {
 export class AlgorithmVisualizerView extends React.Component<
     IAlgorithmVisualizerViewDispatchProps & IAlgorithmVisualizerViewStateProps, {}> {
     public render() {
-        const percentage = (this.props.expectedHitCount / this.props.actualHitCount * 100).toFixed(2);
+        const expectedHitCount = this.props.expectedHitCount();
+        const percentage = (expectedHitCount / this.props.actualHitCount * 100).toFixed(2);
         return (
             <Dialog open={this.props.open} fullScreen={true}>
                 <AppBar style={{position: "relative"}}>
@@ -45,7 +49,7 @@ export class AlgorithmVisualizerView extends React.Component<
                     as it is required by findTimetableVisualizer.ts */}
                 <div id="for-algo-visualization" style={innerDivStyle}/>
                 <p style={{marginLeft: 15, position: "absolute", left: 0, bottom: 0}}>
-                    Hit rate = {this.props.expectedHitCount} / {this.props.actualHitCount} = <b>{percentage}%</b>
+                    Hit rate = {expectedHitCount} / {this.props.actualHitCount} = <b>{percentage}%</b>
                     <br/>
                     Brute force search paths = <b>{this.props.fullSearchPathCount}</b>
                     <br/>
