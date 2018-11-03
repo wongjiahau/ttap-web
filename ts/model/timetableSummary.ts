@@ -14,8 +14,8 @@ export class SubjectSummary {
         const extract = (type: string) => {
             const slot = this.GetSlotOf(slots, type);
             return slot
-            ? `${type}-` + slot.Group[slot.CurrentChoice]
-            : "-";
+            ? `${type}(${slot.Group[slot.CurrentChoice]})`
+            : "-"; // dash means none
         };
         this.Lecture =  extract("L");
         this.Tutorial = extract("T");
