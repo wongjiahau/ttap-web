@@ -1,18 +1,13 @@
-const sum = require("lodash.sum");
-import {
-    Timetable
-} from "../timetable";
-import {
-    MatrixKind,
-    STCBox
-} from "./stcBox";
+import { IGroupedTimetable } from "../groupedTimetable";
 
-export function Defilter(residueTimetables: Timetable[], clickedTimeConstraint: number[]): [Timetable[], Timetable[]] {
+const sum = require("lodash.sum");
+
+export function Defilter(residueTimetables: IGroupedTimetable[], clickedTimeConstraint: number[]): [IGroupedTimetable[], IGroupedTimetable[]] {
     if (clickedTimeConstraint.length !== 7) {
         throw new Error("Length clickedTimeConstraint must be exactly 7.");
     }
-    const rescuedTimetables: Timetable[] = [];
-    const unrescuedTimetables: Timetable[] = [];
+    const rescuedTimetables: IGroupedTimetable[] = [];
+    const unrescuedTimetables: IGroupedTimetable[] = [];
     for (let i = 0; i < residueTimetables.length; i++) {
         const t = residueTimetables[i];
         let canBeRescued = true;

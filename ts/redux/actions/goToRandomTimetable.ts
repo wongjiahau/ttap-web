@@ -26,7 +26,8 @@ export class GoToRandomTimetable extends MasterStateAction {
             TimetableListState: {
                 ...state.TimetableListState,
                 CurrentIndex: x,
-                AlternateSlots: []
+                CurrentSubIndex: 0,
+                AlternativeSlots: []
             }
         };
     }

@@ -1,6 +1,8 @@
 import {FindClashes} from "../clashFinder/findClashes";
 import {ObjectStore} from "../dataStructure/objectStore";
+import { IGroupedTimetable } from "../model/groupedTimetable";
 import {Slot} from "../model/slot";
+import { Timetable } from "../model/timetable";
 import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseRawSlotToSubject} from "../parser/parseRawSlotToSubject";
@@ -8,13 +10,13 @@ import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
 import {BigSlot} from "../permutator/bigSlot";
 import {FindTimetable} from "../permutator/findTimetable";
+import { GroupSimilarTimetables } from "../permutator/groupSimilarTimetables";
 import {TinySlot} from "../permutator/tinySlot";
 import {NotifyDataLoaded} from "../redux/actions/notifyDataLoaded";
 import {MasterStateReducer, NewMasterState} from "../redux/reducers/masterState";
 import {heng_2017_sept} from "../tests/testData/heng_2017_sept";
-import {RawSlot, IRawSlot} from "./../model/rawSlot";
+import {IRawSlot, RawSlot} from "./../model/rawSlot";
 import {Subject} from "./../model/subject";
-import {Timetable} from "./../model/timetable";
 import {HENG_2017_APR} from "./testData/heng_2017_apr";
 
 export const GetTestSubjects1 = () : Subject[] => {
@@ -62,14 +64,14 @@ export const GetBigSlotsOf = (subjectCode : string) : BigSlot[] => {
     return ParseSlotToBigSlot(slots);
 };
 
-export const GetTestTimetables1 = () : Timetable[] => {
+export const GetTestTimetables1 = () : IGroupedTimetable[] => {
     const input1 = GetTinySlotsOf("UEMX3653"); // WWT
     const input2 = GetTinySlotsOf("MPU3123"); // Titas
     const input3 = GetTinySlotsOf("UKMM1011"); // Sun Zi
     const allSlots = input1
         .concat(input2)
         .concat(input3);
-    return FindTimetable(allSlots);
+    return GroupSimilarTimetables(FindTimetable(allSlots));
 };
 
 export const GetMockInitialState = (source : "heng_2017_sept" | "heng_2017_apr" = "heng_2017_sept") => {

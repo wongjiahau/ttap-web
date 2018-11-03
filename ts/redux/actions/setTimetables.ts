@@ -1,5 +1,5 @@
+import { Timetable } from "../../model/timetable";
 import { MasterStateAction } from "../reducers/masterState";
-import { Timetable } from "./../../model/timetable";
 import { IMasterState } from "./../reducers/masterState";
 
 export class SetTimetables extends MasterStateAction {

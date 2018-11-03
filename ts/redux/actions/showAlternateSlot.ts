@@ -21,7 +21,7 @@ export class ShowAlternateSlot extends MasterStateAction {
                 },
                 TimetableListState: {
                     ...state.TimetableListState,
-                    AlternateSlots: [],
+                    AlternativeSlots: [],
                     ShowingAlternateSlotOf: null
                 }
             };
@@ -41,7 +41,7 @@ export class ShowAlternateSlot extends MasterStateAction {
             },
             TimetableListState: {
                 ...state.TimetableListState,
-                AlternateSlots: alternativeSlots,
+                AlternativeSlots: alternativeSlots,
                 ShowingAlternateSlotOf: this.slot
             }
         };

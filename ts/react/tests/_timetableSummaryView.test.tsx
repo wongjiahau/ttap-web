@@ -17,7 +17,7 @@ describe("<TimetableSummaryView/>", () => {
     const slots = ParseRawSlotToSlot(rawSlots);
     const tinyslots = ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots));
     const timetable = FindTimetable(tinyslots)[0];
-    const slotViewModels = CreateSlotViewModels(rawSlotStore.GetBunch(timetable.Uids));
+    const slotViewModels = CreateSlotViewModels(rawSlotStore.GetBunch(timetable.SlotUids));
     ReactDOM.render( <TimetableSummaryView slots={slotViewModels} />,  div);
   });
 });

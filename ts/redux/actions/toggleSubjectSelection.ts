@@ -5,13 +5,13 @@ const includes = require("lodash.includes");
 import {IStringDicionary} from "../../interfaces/dictionary";
 import {RawSlot} from "../../model/rawSlot";
 import {ClashReport, Subject} from "../../model/subject";
-import {Timetable} from "../../model/timetable";
+import { Timetable } from "../../model/timetable";
 import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "../../permutator/findTimetableVisualizer";
+import { GroupSimilarTimetables } from "../../permutator/groupSimilarTimetables";
 import { BeautifySubjectName } from "../../util/beautifySubjectName";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction, MasterStateReducer} from "./../reducers/masterState";
 import {ToggleSubjectListViewingOptions} from "./toggleSubjectListViewingOption";
-import { GroupSimilarTimetables } from "../../permutator/groupSimilarTimetables";
 
 let CurrentTimetableFinder : (rawSlots : RawSlot[]) => Timetable[];
 let RawSlotStore : ObjectStore<RawSlot>;
@@ -26,10 +26,7 @@ export class ToggleSubjectSelection extends MasterStateAction {
             new FindTimetableVisualizer() :
             new NullFindTimetableVisualizer();
 
-        CurrentTimetableFinder = (x) => 
-            GroupSimilarTimetables(
-                state.SettingsState.TimetableFinder(x, visualizer)
-            ).map((x) => x[0]);
+        CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x, visualizer);
 
         RawSlotStore = state.DataState.RawSlotDataRouter.GetCurrentData();
         const newSubjects = state
@@ -87,7 +84,7 @@ export function SelectSubject(subjectToBeSelected : Subject, allSubjects : Subje
     subjectToBeSelected.IsSelected = true;
     return {
         ...result,
-        TimetableListState: NewTimetableListState(timetables, selectedSlots)
+        TimetableListState: NewTimetableListState(GroupSimilarTimetables(timetables), selectedSlots)
     };
 }
 
@@ -105,7 +102,7 @@ export function DeselectSubject(subjectToBeDeselected : Subject, allSubjects : S
             ...state.SubjectListState,
             Subjects: allSubjects
         },
-        TimetableListState: NewTimetableListState(timetables, selectedSlots)
+        TimetableListState: NewTimetableListState(GroupSimilarTimetables(timetables), selectedSlots)
     };
 
     const allSubjectIsDeselected = allSubjects.every((x) => !x.IsSelected);
@@ -122,7 +119,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects : Subject[], 
     const disabledSubjects = allSubjects.filter((s) => s.ClashReport !== null);
     for (let i = 0; i < disabledSubjects.length; i++) {
         const s = disabledSubjects[i];
-        if(s.ClashReport === null) continue;
+        if (s.ClashReport === null) { continue; }
         switch (s.ClashReport.Type) {
             case "single":
                 let stillGotClashes = false;
@@ -146,7 +143,7 @@ export function ReleaseDisabledSubjectsIfPossible(selectedSubjects : Subject[], 
     }
 }
 
-export function CheckForClashesBetween(s : Subject, subjects : Subject[]) : ClashReport | null{
+export function CheckForClashesBetween(s : Subject, subjects : Subject[]) : ClashReport | null {
     for (let i = 0; i < subjects.length; i++) {
         for (let j = 0; j < subjects[i].ClashingCounterparts.length; j++) {
             if (s.Code === subjects[i].ClashingCounterparts[j]) {

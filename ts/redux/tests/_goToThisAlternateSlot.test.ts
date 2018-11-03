@@ -25,10 +25,14 @@ describe("showAlternateSlot action", () => {
 
         const newState2 = MasterStateReducer(newState1, new ShowAlternateSlot(slotsToBeClicked));
         expect(newState2.TimetableListState.CurrentIndex).to.eq(0);
-        const newState3 = MasterStateReducer(newState2, new GoToThisAlternateSlot(newState2.TimetableListState.AlternateSlots[0].Uid));
+        const newState3 = MasterStateReducer(newState2, new GoToThisAlternateSlot(newState2.TimetableListState.AlternativeSlots[0].Uid));
         expect(newState3.TimetableListState.CurrentIndex).to.eq(1);
+        expect(newState3.TimetableListState.CurrentSubIndex).to.eq(0);
         expect(newState3.SnackbarState.IsOpen).to.eq(false);
-        expect(newState3.TimetableListState.FiltrateTimetables[newState3.TimetableListState.CurrentIndex].Uids).to.have.lengthOf(3);
+        expect(newState3
+                .TimetableListState
+                .FiltrateTimetables[newState3.TimetableListState.CurrentIndex]
+                    .ListOfSlotUids[0]).to.have.lengthOf(3);
     });
 
 });

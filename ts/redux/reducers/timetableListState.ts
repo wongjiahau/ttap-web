@@ -1,37 +1,38 @@
 import * as typeName from "type-name";
 import { ObjectStore } from "../../dataStructure/objectStore";
+import { IGroupedTimetable } from "../../model/groupedTimetable";
 import { RawSlot } from "../../model/rawSlot";
 import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
 import {Action} from "../actions/action";
-import {Timetable} from "./../../model/timetable";
-import { IMasterState, NewMasterState } from "./masterState";
 
 export interface ITimetableListState {
-    CurrentIndex:           number;
-    FiltrateTimetables:     Timetable[];
+    CurrentIndex:           number; // Means the index for the current timetable variation
+    CurrentSubIndex:        number; // Means the index for identical timetables from the same timetable variants
+    FiltrateTimetables:     IGroupedTimetable[];
     IsSummaryOpen:          boolean;
-    ResidueTimetables:      Timetable[];
+    ResidueTimetables:      IGroupedTimetable[];
     SlotViewModelStore:     ObjectStore<ISlotViewModel>;
-    AlternateSlots:         ISlotViewModel[];
+    AlternativeSlots:         ISlotViewModel[];
     ShowingAlternateSlotOf: ISlotViewModel | null;
 }
 
 export function NewTimetableListState(
-    timetables: Timetable[],
+    groupedTimetables: IGroupedTimetable[],
     selectedSlots: RawSlot[]
 ) : ITimetableListState {
     const slotVMs = CreateSlotViewModels(selectedSlots);
 
-    const slotStateStore = timetables.length > 0 ?
+    const slotStateStore = groupedTimetables.length > 0 ?
         new ObjectStore(slotVMs) :
         new ObjectStore([]);
     return {
         CurrentIndex: 0,
-        FiltrateTimetables: timetables,
+        CurrentSubIndex: 0,
+        FiltrateTimetables: groupedTimetables,
         IsSummaryOpen: false,
         ResidueTimetables: [],
         SlotViewModelStore: slotStateStore,
-        AlternateSlots: [],
+        AlternativeSlots: [],
         ShowingAlternateSlotOf: null
     };
 }

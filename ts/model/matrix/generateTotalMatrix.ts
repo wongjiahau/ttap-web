@@ -2,15 +2,13 @@
 import { TimePeriod } from "../../att/timePeriod";
 import {DecToBin} from "../../util/decToBin";
 import { Str } from "../../util/str";
+import { IGroupedTimetable } from "../groupedTimetable";
 import {
-    Timetable
-} from "../timetable";
-import {
-    MatrixKind,
+    BoxKind,
     STCBox
 } from "./stcBox";
 
-export function GenerateTotalMatrix(timetables: Timetable[], uidsOfClickedMatrix: string[] = []): STCBox[] {
+export function GenerateTotalMatrix(timetables: IGroupedTimetable[], uidsOfClickedMatrix: string[] = []): STCBox[] {
     const result = new Array < STCBox > ();
     const definitelyOccupiedMatrix = GetDefinitelyOccupiedMatrix(timetables); // dos
     const definitelyUnoccupiedMatrix = GetDefinitelyUnoccupiedMatrix(timetables); // dus
@@ -21,7 +19,7 @@ export function GenerateTotalMatrix(timetables: Timetable[], uidsOfClickedMatrix
         for (let j = 0; j < dos.length; j++) {
             if (dos[j] === "1") {
                 const timeperiod = parseInt("1" + new Array(j + 1).join("0"), 2);
-                result.push(new STCBox(MatrixKind.DefinitelyOccupied, day, timeperiod, j));
+                result.push(new STCBox(BoxKind.DefinitelyOccupied, day, timeperiod, j));
             }
 
         }
@@ -33,7 +31,7 @@ export function GenerateTotalMatrix(timetables: Timetable[], uidsOfClickedMatrix
         for (let j = 0; j < dus.length; j++) {
             if (dus[j] === "0") {
                 const timeperiod = parseInt("1" + new Array(j + 1).join("0"), 2);
-                result.push(new STCBox(MatrixKind.DefinitelyUnoccupied, day, timeperiod, j));
+                result.push(new STCBox(BoxKind.DefinitelyUnoccupied, day, timeperiod, j));
             }
         }
     }
@@ -43,7 +41,7 @@ export function GenerateTotalMatrix(timetables: Timetable[], uidsOfClickedMatrix
         for (let j = 0; j < mos.length; j++) {
             if (mos[j] === "1") {
                 const timeperiod = parseInt("1" + new Array(j + 1).join("0"), 2);
-                result.push(new STCBox(MatrixKind.MaybeOccupied, day, timeperiod, j));
+                result.push(new STCBox(BoxKind.MaybeOccupied, day, timeperiod, j));
             }
         }
     }
@@ -52,7 +50,7 @@ export function GenerateTotalMatrix(timetables: Timetable[], uidsOfClickedMatrix
         // change to clicked based on uidsOfClickedMatrix
         for (let j = 0; j < result.length; j++) {
             if (result[j].Uid === uidsOfClickedMatrix[i]) {
-                result[j].Kind = MatrixKind.Clicked;
+                result[j].Kind = BoxKind.Clicked;
             }
         }
     }
@@ -60,7 +58,7 @@ export function GenerateTotalMatrix(timetables: Timetable[], uidsOfClickedMatrix
     return result;
 }
 
-export function GetDefinitelyOccupiedMatrix(timetables: Timetable[]): number[ /*7*/ ] {
+export function GetDefinitelyOccupiedMatrix(timetables: IGroupedTimetable[]): number[ /*7*/ ] {
     const result = [-1, -1, -1, -1, -1, -1, -1];
     for (let i = 0; i < timetables.length; i++) {
         for (let j = 0; j < 7; j++) {
@@ -70,7 +68,7 @@ export function GetDefinitelyOccupiedMatrix(timetables: Timetable[]): number[ /*
     return result;
 }
 
-export function GetDefinitelyUnoccupiedMatrix(timetables: Timetable[]): number[ /*7*/ ] {
+export function GetDefinitelyUnoccupiedMatrix(timetables: IGroupedTimetable[]): number[ /*7*/ ] {
     const result = [0, 0, 0, 0, 0, 0, 0];
     for (let i = 0; i < timetables.length; i++) {
         for (let j = 0; j < 7; j++) {

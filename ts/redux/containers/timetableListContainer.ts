@@ -1,6 +1,8 @@
 import {connect} from "react-redux";
 import {ITimetableListViewDispatchProps, ITimetableListViewStateProps, TimetableListView} from "../../react/timetableListView";
 import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { GoToNextSubTimetable } from "../actions/goToNextSubTimetable";
+import { GoToPreviousSubTimetable } from "../actions/goToPreviousSubTimetable";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";
 import {ToggleIsOpenOfSlotsTable} from "../actions/toggleIsOpenOfSlotsTable";
@@ -24,10 +26,11 @@ const mapStateToProps = (state: any) : ITimetableListViewStateProps => {
     return {
         currentIndex:       index,
         currentTimetable:   timetable,
+        currentSubIndex:    timetableListState.CurrentSubIndex,
         isSummaryOpen:      timetableListState.IsSummaryOpen,
         maxIndex:           timetableListState.FiltrateTimetables.length - 1,
         slotViewModelStore: timetableListState.SlotViewModelStore,
-        alternateSlots:     timetableListState.AlternateSlots
+        alternativeSlots:     timetableListState.AlternativeSlots
     };
 };
 
@@ -37,9 +40,11 @@ const mapDispatchToProps = (triggerlessDispatch: any) : ITimetableListViewDispat
         triggerlessDispatch(new FindAlternativeSlotsOfCurrentSlots());
     };
     return {
-        handleGoToNext:                  () => dispatch(new GoToNextTimetable()),
-        handleGoToPrevious:              () => dispatch(new GoToPrevTimetable()),
-        handleGoToRandom:                () => dispatch(new GoToRandomTimetable()),
+        handleGoToNextTimetable:         () => dispatch(new GoToNextTimetable()),
+        handleGoToPreviousTimetable:     () => dispatch(new GoToPrevTimetable()),
+        handleGoToRandomTimetable:       () => dispatch(new GoToRandomTimetable()),
+        handleGoToNextSubTimetable:      () => dispatch(new GoToNextSubTimetable()),
+        handleGoToPreviousSubTimetable:  () => dispatch(new GoToPreviousSubTimetable()),
         handleOpenSaveTimetableDialog:   () => triggerlessDispatch(new ToggleIsOpenOfSaveDialog(true)),
         handleOpenSetTimeConstraintView: () => triggerlessDispatch(new ToggleSetTimeConstraintView(true)),
         handleOpenSlotsTable:            () => triggerlessDispatch(new ToggleIsOpenOfSlotsTable(true)),

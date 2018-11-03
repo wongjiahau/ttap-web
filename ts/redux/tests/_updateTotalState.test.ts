@@ -2,7 +2,7 @@ import {
     expect
 } from "chai";
 import {
-    MatrixKind,
+    BoxKind,
     STCBox
 } from "../../model/matrix/stcBox";
 import {
@@ -47,7 +47,7 @@ describe("UpdateTotalState action", () => {
     it("should clear UidsOfClickedState", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new UpdateTotalMatrix());
-        const stcBox = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
+        const stcBox = new STCBox(BoxKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
         newState = MasterStateReducer(newState, new FilterTimetable(stcBox));
         expect(newState.SetTimeConstraintState.UidsOfClickedBoxes).to.deep.eq(["05"]);
         newState = MasterStateReducer(newState, new UpdateTotalMatrix());
@@ -57,7 +57,7 @@ describe("UpdateTotalState action", () => {
     it("should reset ClickedTimeConstraint", () => {
         const initialState = getInitialState();
         let newState = MasterStateReducer(initialState, new UpdateTotalMatrix());
-        const stcBox = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
+        const stcBox = new STCBox(BoxKind.MaybeOccupied, 0, parseInt("1000000", 2), 5); // Monday 10-10.30 am
         newState = MasterStateReducer(newState, new FilterTimetable(stcBox));
         expect(newState.SetTimeConstraintState.ClickedTimeConstraint).to.deep.eq([64, 0, 0, 0, 0, 0, 0]);
         newState = MasterStateReducer(newState, new UpdateTotalMatrix());

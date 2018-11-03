@@ -1,20 +1,20 @@
 import {MasterStateAction} from "../reducers/masterState";
 import {IMasterState} from "./../reducers/masterState";
 
-export class GoToPrevTimetable extends MasterStateAction {
-    public TypeName() : string {return "go to previous timetable"; }
+export class GoToPreviousSubTimetable extends MasterStateAction {
+    public TypeName() : string {return "go to previous sub timetable"; }
 
     protected GenerateNewState(state : IMasterState) : IMasterState {
-        let newIndex = state.TimetableListState.CurrentIndex - 1;
+        const s = state.TimetableListState;
+        let newIndex = s.CurrentSubIndex - 1;
         if (newIndex < 0) {
-            newIndex = state.TimetableListState.FiltrateTimetables.length - 1;
+            newIndex = s.FiltrateTimetables[s.CurrentIndex].ListOfSlotUids.length - 1;
         }
         return {
             ...state,
             TimetableListState: {
                 ...state.TimetableListState,
-                CurrentIndex: newIndex,
-                CurrentSubIndex: 0,
+                CurrentSubIndex: newIndex,
                 AlternativeSlots: []
             }
         };

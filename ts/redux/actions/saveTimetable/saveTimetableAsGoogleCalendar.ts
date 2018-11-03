@@ -14,9 +14,7 @@ import { ObjectStore } from "../../../dataStructure/objectStore";
 import {
     IRawSlot, RawSlot
 } from "../../../model/rawSlot";
-import {
-    Timetable
-} from "../../../model/timetable";
+import { Timetable } from "../../../model/timetable";
 import { BeautifySubjectName } from "../../../util/beautifySubjectName";
 import {
     TimePeriod
@@ -40,7 +38,7 @@ export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
     }
 
     protected Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>) {
-        this.rawSlots = rawSlotStore.GetBunch(timetable.Uids);
+        this.rawSlots = rawSlotStore.GetBunch(timetable.SlotUids);
 
         gapi // eslint-disable-line
             .auth2

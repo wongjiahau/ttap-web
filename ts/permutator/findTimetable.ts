@@ -1,15 +1,14 @@
 const concat = require("lodash.concat");
 const sortBy = require("lodash.sortby");
 import {RawSlot} from "../model/rawSlot";
-import {Timetable} from "../model/timetable";
+import { Timetable } from "../model/timetable";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
-import {BoundedInt} from "./boundedInt";
 import { FindTimetableVisualizer, NullFindTimetableVisualizer } from "./findTimetableVisualizer";
 import {GenerateIndices} from "./generateIndices";
-import {Partitionize} from "./partitionize";
 import {AppendMatrix, GotIntersection} from "./matrix";
+import {Partitionize} from "./partitionize";
 import {IOptimizedSlot} from "./tinySlot";
 
 interface ISnapshot {

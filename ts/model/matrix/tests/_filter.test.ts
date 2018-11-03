@@ -2,10 +2,10 @@ import { expect } from "chai";
 import { TimePeriod } from "../../../att/timePeriod";
 import { Filter } from "../filter";
 import { GetTestTimetables1 } from "./../../../tests/testDataGenerator";
-import { MatrixKind, STCBox } from "./../stcBox";
+import { BoxKind, STCBox } from "./../stcBox";
 
-const box1 = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
-const box2 = new STCBox(MatrixKind.MaybeOccupied, 2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
+const box1 = new STCBox(BoxKind.MaybeOccupied, 0, parseInt("10000", 2), 0); // Monday 10.00 am to 10.30 am
+const box2 = new STCBox(BoxKind.MaybeOccupied, 2, parseInt("10000", 2), 0); // Wednesday 10.00 am to 10.30 am
 const timetables = GetTestTimetables1();
 
 describe("Filter()", () => {
@@ -14,10 +14,10 @@ describe("Filter()", () => {
     });
 
     it("should throw error if box kind is not MaybeOccupied", () => {
-        expect(() => {Filter(timetables, new STCBox(MatrixKind.DefinitelyUnoccupied, 0, 0, 0)); }).to.throw();
-        expect(() => {Filter(timetables, new STCBox(MatrixKind.DefinitelyOccupied, 0, 0, 0)); }).to.throw();
-        expect(() => {Filter(timetables, new STCBox(MatrixKind.Clicked, 0, 0, 0)); }).to.throw();
-        expect(() => {Filter(timetables, new STCBox(MatrixKind.MaybeOccupied, 0, 0, 0)); }).to.not.throw();
+        expect(() => {Filter(timetables, new STCBox(BoxKind.DefinitelyUnoccupied, 0, 0, 0)); }).to.throw();
+        expect(() => {Filter(timetables, new STCBox(BoxKind.DefinitelyOccupied, 0, 0, 0)); }).to.throw();
+        expect(() => {Filter(timetables, new STCBox(BoxKind.Clicked, 0, 0, 0)); }).to.throw();
+        expect(() => {Filter(timetables, new STCBox(BoxKind.MaybeOccupied, 0, 0, 0)); }).to.not.throw();
     });
 
     it("should return a tuple : [filtrate, residue]", () => {

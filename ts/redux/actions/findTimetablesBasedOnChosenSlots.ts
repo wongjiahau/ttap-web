@@ -2,13 +2,13 @@ const find = require("lodash.find");
 const sortBy = require("lodash.sortby");
 import { IStringDicionary } from "../../interfaces/dictionary";
 import {RawSlot} from "../../model/rawSlot";
-import {ISlotViewModel} from "../../model/slotViewModel";
 import {DiffReport, GenerateSubjectSchema, GetDiff, SubjectSchema} from "../../model/subjectSchema";
-import {Timetable} from "../../model/timetable";
+import { Timetable } from "../../model/timetable";
+import { NullFindTimetableVisualizer } from "../../permutator/findTimetableVisualizer";
+import { GroupSimilarTimetables } from "../../permutator/groupSimilarTimetables";
 import {PartitionizeByKey} from "../../permutator/partitionize";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction} from "./../reducers/masterState";
-import { NullFindTimetableVisualizer } from "../../permutator/findTimetableVisualizer";
 
 export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
     public constructor() {
@@ -70,7 +70,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
                 IsOpen: false,
                 ErrorMessages: null
             },
-            TimetableListState: NewTimetableListState(newTimetables, selectedSlots)
+            TimetableListState: NewTimetableListState(GroupSimilarTimetables(newTimetables), selectedSlots)
         };
     }
 }

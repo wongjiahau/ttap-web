@@ -15,7 +15,7 @@ export class GoToThisAlternateSlot extends MasterStateAction {
         const indexOfPossibleDestinations: number[] = [];
         for (let i = 0; i < timetables.length; i++) {
             const t = state.TimetableListState.FiltrateTimetables[i];
-            if (t.Uids.indexOf(this.slotUid) > -1) {
+            if (t.ListOfSlotUids[0].indexOf(this.slotUid) > -1) {
                 indexOfPossibleDestinations.push(i);
             }
         }
@@ -23,14 +23,14 @@ export class GoToThisAlternateSlot extends MasterStateAction {
         const currentTimetable = timetables[state.TimetableListState.CurrentIndex];
 
         let indexOfDestinationTimetable = -1; // indexOfPossibleDestinations[0];
-        let destinationTimetableUids = [...currentTimetable.Uids];
+        let destinationTimetableUids = [...currentTimetable.ListOfSlotUids[0]];
         destinationTimetableUids[destinationTimetableUids.indexOf(state.TimetableListState.ShowingAlternateSlotOf.Uid)] = this.slotUid;
         destinationTimetableUids = destinationTimetableUids.sort();
 
         for (let i = 0; i < indexOfPossibleDestinations.length; i++) {
             const index = indexOfPossibleDestinations[i];
             const t = timetables[index];
-            if (arrayEqual(destinationTimetableUids, t.Uids.sort())) {
+            if (arrayEqual(destinationTimetableUids, t.ListOfSlotUids[0].sort())) {
                 indexOfDestinationTimetable = index;
                 break;
             }
@@ -46,7 +46,8 @@ export class GoToThisAlternateSlot extends MasterStateAction {
             TimetableListState: {
                 ...state.TimetableListState,
                 CurrentIndex: indexOfDestinationTimetable,
-                AlternateSlots: []
+                CurrentSubIndex: 0,
+                AlternativeSlots: []
             },
             SnackbarState: {
                 ...state.SnackbarState,

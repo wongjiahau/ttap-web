@@ -1,15 +1,12 @@
 import Button from "material-ui/Button";
 import * as React from "react";
 import {TimePeriod} from "../../att/timePeriod";
-import {RawSlot} from "../../model/rawSlot";
-import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
 import {STCBox} from "../../model/matrix/stcBox";
-import {Timetable} from "../../model/timetable";
+import { ISlotViewModel } from "../../model/slotViewModel";
 import * as ReactGridLayout from "../../modified_node_modules/react-grid-layout";
 import {Colors} from "../colors/colors";
 import {StackPanel} from "../panels/stackPanel";
 import {TimetableSummaryView} from "../timetableSummaryView";
-import { GenerateAlternateSlotViewsAndDayColumn } from "./generateAlternateSlotViewsAndDayColumn";
 import {GenerateSlotViewsAndDayColumn} from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
 import {ISkeleton, Skeleton} from "./skeleton";

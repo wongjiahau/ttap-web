@@ -6,29 +6,31 @@ import Button from "material-ui/Button";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";
+import { IGroupedTimetable } from "../model/groupedTimetable";
 import { RawSlot } from "../model/rawSlot";
 import { ISlotViewModel } from "../model/slotViewModel";
-import {Timetable} from "../model/timetable";
 import {CounterView} from "./counterView";
 import {StackPanel} from "./panels/stackPanel";
+import { NO_OPERATION } from "./setTimeConstraintView";
 import {iconStyle} from "./styles";
 import {TimetableView} from "./timetableView/timetableView";
-import { Z_NO_COMPRESSION } from "zlib";
-import { NO_OPERATION } from "./setTimeConstraintView";
 
 export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
-    currentTimetable:   Timetable | null;
-    alternateSlots:     ISlotViewModel[];
+    currentSubIndex:    number; // nonzero based
+    currentTimetable:   IGroupedTimetable | null;
+    alternativeSlots:   ISlotViewModel[];
     isSummaryOpen:      boolean;
     maxIndex:           number; // non-zero based
     slotViewModelStore: ObjectStore<ISlotViewModel>;
 }
 
 export interface ITimetableListViewDispatchProps {
-    handleGoToNext:                  ()     => void;
-    handleGoToPrevious:              ()     => void;
-    handleGoToRandom:                ()     => void;
+    handleGoToNextTimetable:         ()     => void;
+    handleGoToPreviousTimetable:     ()     => void;
+    handleGoToRandomTimetable:       ()     => void;
+    handleGoToNextSubTimetable:      ()     => void;
+    handleGoToPreviousSubTimetable:  ()     => void;
     handleOpenSaveTimetableDialog:   ()     => void;
     handleOpenSetTimeConstraintView: ()     => void;
     handleOpenSlotsTable:            ()     => void;
@@ -49,8 +51,9 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         }
         const slotsToBeRendered =
             this.props.currentTimetable !== null ?
-            this.props.slotViewModelStore.GetBunch(this.props.currentTimetable.Uids) :
-            [];
+            this.props.slotViewModelStore.GetBunch(
+                this.props.currentTimetable.ListOfSlotUids[this.props.currentSubIndex]
+            ) : [];
 
         return (
             <div onKeyDown={this.checkKeys} tabIndex={0}>
@@ -58,7 +61,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <TimetableView
                         slots={slotsToBeRendered}
-                        alternateSlots={this.props.alternateSlots}
+                        alternateSlots={this.props.alternativeSlots}
                         states={null}
                         handleDesetTimeContraintAt={NO_OPERATION}
                         handleSetTimeContraintAt={NO_OPERATION}
@@ -76,14 +79,20 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                             Set time constraint
                         </Button>
                         <CounterView
-                            current={this.props.currentIndex + 1}
-                            maxInclusive={this.props.maxIndex + 1}
+                            currentIndex={this.props.currentIndex + 1}
+                            currentSubIndex={this.props.currentSubIndex + 1}
+                            maxIndex={this.props.maxIndex + 1}
                             leftTooltip={"Go to previous timetable (Left arrow)"}
                             middleTooltip={"Go to random timetable (R)"}
                             rightTooltip={"Go to next timetable (Right arrow)"}
-                            handleClickLeft={this.props.handleGoToPrevious}
-                            handleClickMiddle={this.props.handleGoToRandom}
-                            handleClickRight={this.props.handleGoToNext}/>
+                            upTooltip={"Go to previous IDENTICAL timetable (Up arrow)"}
+                            downTooltip={"Go to next IDENTICAL timetable (Down arrow)"}
+                            handleClickLeft={this.props.handleGoToPreviousTimetable}
+                            handleClickMiddle={this.props.handleGoToRandomTimetable}
+                            handleClickRight={this.props.handleGoToNextTimetable}
+                            handleClickUp={this.props.handleGoToPreviousSubTimetable}
+                            handleClickDown={this.props.handleGoToNextSubTimetable}
+                            />
                         <Button
                             raised={true}
                             color="primary"
@@ -102,23 +111,17 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         );
     }
 
-    private checkKeys = (e: any) => {
+    private checkKeys = (e: KeyboardEvent) => {
         // refer
         // https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-ja
         // v ascript
         e = e || window.event;
-        if (e.keyCode === Key.LeftArrow || e.keyCode === Key.UpArrow) {
-            this
-                .props
-                .handleGoToPrevious();
-        } else if (e.keyCode === Key.RightArrow || e.keyCode === Key.DownArrow) {
-            this
-                .props
-                .handleGoToNext();
-        } else if (e.keyCode === Key.R) {
-            this
-                .props
-                .handleGoToRandom();
+        switch (e.keyCode) {
+            case Key.LeftArrow:  this.props.handleGoToPreviousTimetable();    break;
+            case Key.RightArrow: this.props.handleGoToNextTimetable();        break;
+            case Key.DownArrow:  this.props.handleGoToNextSubTimetable();     break;
+            case Key.UpArrow:    this.props.handleGoToPreviousSubTimetable(); break;
+            case Key.R:          this.props.handleGoToRandomTimetable();      break;
         }
     }
 }

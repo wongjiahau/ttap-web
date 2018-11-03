@@ -1,4 +1,8 @@
+import { ParseDay } from "../../att/day";
+import { TimePeriod } from "../../att/timePeriod";
+import { Week } from "../../att/week";
 import { ObjectStore } from "../../dataStructure/objectStore";
+import { RawSlot } from "../../model/rawSlot";
 import { CreateSlotFromRaw } from "../../model/slot";
 import { CreateSlotViewModel, FromSlotViewModelToRawSlot, ISlotViewModel } from "../../model/slotViewModel";
 import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
@@ -8,10 +12,6 @@ import { AppendMatrix, GotIntersection } from "../../permutator/matrix";
 import {MasterStateAction} from "../reducers/masterState";
 import { TinySlot } from "./../../permutator/tinySlot";
 import {IMasterState} from "./../reducers/masterState";
-import { TimePeriod } from "../../att/timePeriod";
-import { Week } from "../../att/week";
-import { ParseDay } from "../../att/day";
-import { RawSlot } from "../../model/rawSlot";
 
 /**
  * CurrentSlots means the slots that are being displayed at the moment.
@@ -29,8 +29,8 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
 
         for (let i = 0; i < state.TimetableListState.FiltrateTimetables.length; i++) {
             const t = state.TimetableListState.FiltrateTimetables[i];
-            for (let j = 0; j < t.Uids.length; j++) {
-                uidsOfFiltratedSlots.add(t.Uids[j]);
+            for (let j = 0; j < t.ListOfSlotUids[0].length; j++) {
+                uidsOfFiltratedSlots.add(t.ListOfSlotUids[0][j]);
             }
         }
 
@@ -42,8 +42,8 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
             let result: number[] = [];
             for (let i = 0; i < currentSlots.length; i++) {
                 const x = currentSlots[i];
-                if(currentTimetable.Uids.indexOf(x.Uid) > -1) {
-                    result = AppendMatrix( 
+                if (currentTimetable.ListOfSlotUids[0].indexOf(x.Uid) > -1) {
+                    result = AppendMatrix(
                         GetDayTimeMatrixOfBigSlot(
                             ParseDay(x.Day),
                             Week.Parse(x.WeekNumber[0]).BinaryData,
@@ -61,8 +61,8 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
                 // with the targetSlot
                 // alternativeSlots are also those that do not clashes with the current timetable (that are displayed at that moment)
                 const result: ISlotViewModel[] = [];
-                for (let i = 0; i < allSlots.length; i++) {
-                    const x = allSlots[i];
+                for (let j = 0; j < allSlots.length; j++) {
+                    const x = allSlots[j];
                     if (x.Uid !== targetSlot.Uid
                         && uidsOfFiltratedSlots.has(x.Uid)
                         && x.SubjectCode === targetSlot.SubjectCode

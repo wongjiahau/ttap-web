@@ -6,7 +6,7 @@ export class LeftRightPanel extends React.Component {
         if (childCount !== 2) {
             throw new Error("LeftRightPanel expected only TWO children, but you gave it " + childCount);
         }
-        const children = this.props.children as Array<any>;
+        const children = this.props.children as any[];
         return (
             <table style={{width: "100%"}}>
                 <tbody>

@@ -1,10 +1,8 @@
 const sortBy = require("lodash.sortby");
+import { GetDefinitelyOccupiedMatrix } from "../model/matrix/generateTotalMatrix";
 import {
     RawSlot
 } from "../model/rawSlot";
-import {
-    Timetable
-} from "../model/timetable";
 import {
     ParseRawSlotToSlot
 } from "../parser/parseRawSlotToSlot";
@@ -15,15 +13,15 @@ import {
     FindTimetable
 } from "./findTimetable";
 import {
-    PartitionizeByKey
-} from "./partitionize";
-import {
     GotIntersection
 } from "./matrix";
 import {
+    PartitionizeByKey
+} from "./partitionize";
+import {
     TinySlot
 } from "./tinySlot";
-import { GetDefinitelyOccupiedMatrix } from "../model/matrix/generateTotalMatrix";
+import { Timetable } from "../model/timetable";
 
 export function FindTimetableV2(input: RawSlot[]): Timetable[] {
     const partitioned: RawSlot[][] = sortBy(PartitionizeByKey(input, "SubjectCode"), ["length"]);

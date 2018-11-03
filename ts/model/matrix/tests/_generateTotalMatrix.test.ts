@@ -3,6 +3,9 @@ import {
 } from "chai";
 import { Time } from "../../../att/time";
 import { TimePeriod } from "../../../att/timePeriod";
+import {
+    GetTestTimetables1
+} from "../../../tests/testDataGenerator";
 import { DecToBin } from "../../../util/decToBin";
 import {
     GenerateTotalMatrix,
@@ -11,9 +14,6 @@ import {
     GetMaybeOccupiedMatrix,
     StringifyTotalMatrix
 } from "../generateTotalMatrix";
-import {
-    GetTestTimetables1
-} from "./../../../tests/testDataGenerator";
 
 describe("GenerateTotalMatrix", () => {
     it("case 1", () => {

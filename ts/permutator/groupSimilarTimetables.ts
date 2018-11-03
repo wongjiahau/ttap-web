@@ -1,15 +1,19 @@
+import { IGroupedTimetable } from "../model/groupedTimetable";
 import { Timetable } from "../model/timetable";
 
-export function GroupSimilarTimetables(timetables: Timetable[]): Timetable[][] {
-    const result: {[matrix: string]: Timetable[]} = {};
+export function GroupSimilarTimetables(timetables: Timetable[]): IGroupedTimetable[] {
+    const partition: {[matrix: string]: IGroupedTimetable} = {};
     for (let i = 0; i < timetables.length; i++) {
         const t = timetables[i];
         const matrix = t.DayTimeMatrix.toString();
-        if(result[matrix]) {
-            result[matrix].push(t);
+        if (partition[matrix] !== undefined) {
+            partition[matrix].ListOfSlotUids.push(t.SlotUids);
         } else {
-            result[matrix] = [t];
+            partition[matrix] = {
+                DayTimeMatrix: t.DayTimeMatrix,
+                ListOfSlotUids: [t.SlotUids]
+            };
         }
     }
-    return Object.keys(result).map((x) => result[x]);
+    return Object.keys(partition).map((key) => partition[key]);
 }

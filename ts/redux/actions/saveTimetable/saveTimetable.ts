@@ -3,10 +3,8 @@ import {
 } from "file-saver";
 import { ObjectStore } from "../../../dataStructure/objectStore";
 import { IRawSlot } from "../../../model/rawSlot";
+import { Timetable } from "../../../model/timetable";
 import { ISaveTimetableDialogState, NewSaveTimetableDialogState } from "../../reducers/saveTimetableDialogState";
-import {
-    Timetable
-} from "./../../../model/timetable";
 import {
     TimetableSummary
 } from "./../../../model/timetableSummary";
@@ -24,7 +22,10 @@ export abstract class SaveTimetable extends MasterStateAction {
     }
     protected GenerateNewState(state: IMasterState): IMasterState {
         const x = state.TimetableListState;
-        const currentTimetable = x.FiltrateTimetables[x.CurrentIndex];
+        const currentTimetable = new Timetable(
+            x.FiltrateTimetables[x.CurrentIndex].ListOfSlotUids[x.CurrentSubIndex],
+            x.FiltrateTimetables[x.CurrentIndex].DayTimeMatrix
+        );
         if (currentTimetable) {
             this.Save(currentTimetable, state.DataState.RawSlotDataRouter.GetCurrentData());
         }

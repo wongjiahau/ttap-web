@@ -3,10 +3,10 @@ import {
 } from "./rawSlot";
 
 export class Timetable {
-    public readonly Uids : number[];
+    public readonly SlotUids : number[];
     public readonly DayTimeMatrix : number[];
     public constructor(Uids: number[], dayTimeMatrix : number[]) {
-        this.Uids = Uids;
+        this.SlotUids = Uids;
         this.DayTimeMatrix = CompressDayTimeMatrix(dayTimeMatrix);
     }
 }

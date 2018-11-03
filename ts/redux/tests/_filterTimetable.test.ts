@@ -5,7 +5,7 @@ import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 import {
-    MatrixKind,
+    BoxKind,
     STCBox
 } from "./../../model/matrix/stcBox";
 import {
@@ -23,7 +23,7 @@ import {
     NewMasterState
 } from "./../reducers/masterState";
 
-const state = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("1000000", 2), 5);
+const state = new STCBox(BoxKind.MaybeOccupied, 0, parseInt("1000000", 2), 5);
 
 function getInitialState(): IMasterState {
     const result = NewMasterState();

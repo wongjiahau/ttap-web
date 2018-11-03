@@ -3,7 +3,7 @@ import {
 } from "chai";
 import { TimePeriod } from "../../att/timePeriod";
 import {
-    MatrixKind,
+    BoxKind,
     STCBox
 } from "../../model/matrix/stcBox";
 import {
@@ -30,10 +30,10 @@ import {
     NewTimetableListState
 } from "../reducers/timetableListState";
 
-const state0 = new STCBox(MatrixKind.MaybeOccupied, 0, parseInt("10000", 2), 5); // Monday 10-10.30 am
-const state1 = new STCBox(MatrixKind.Clicked,       0, parseInt("10000", 2), 5); // Monday 10-10.30 am
-const state2 = new STCBox(MatrixKind.MaybeOccupied, 2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
-const state3 = new STCBox(MatrixKind.Clicked,       2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
+const state0 = new STCBox(BoxKind.MaybeOccupied, 0, parseInt("10000", 2), 5); // Monday 10-10.30 am
+const state1 = new STCBox(BoxKind.Clicked,       0, parseInt("10000", 2), 5); // Monday 10-10.30 am
+const state2 = new STCBox(BoxKind.MaybeOccupied, 2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
+const state3 = new STCBox(BoxKind.Clicked,       2, parseInt("10000", 2), 5); // Wednesday 10-10.30 am
 
 function getInitialState(): IMasterState {
     const result = NewMasterState();
