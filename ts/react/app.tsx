@@ -33,7 +33,7 @@ interface IAppState {
 }
 
 export function ToggleLoadingCircle(show: boolean) {
-    const x = document.getElementById("loading-circle");
+    const x = document.getElementById("loading-words");
     if (x) {
         x.style.display = show ? "" : "none";
     }

@@ -8,26 +8,20 @@
     position: fixed;
     top: 0; right: 0;
     bottom: 0; left: 0;
-    background: #fff;
-    opacity: 0.75;
+    background: white;
+    opacity: 0.50;
+    z-index: 2000;
+    cursor: wait !important;
 }
 
-.loader, .loader:after {
-    width: 8em;
-    height: 8em;
-    display: block;
-    position: absolute;
-    top: 50%;
-    margin-top: -2.05em;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.center{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 66px;
+    cursor: wait !important;
 }
 
 body {
