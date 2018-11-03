@@ -135,27 +135,24 @@ code {
 }
 
 .get-user-attention {
-    -webkit-animation: fade 2s ease-in 1s infinite;
-    -moz-animation:    fade 2s ease-in 1s infinite;
-    -o-animation:      fade 2s ease-in 1s infinite;
-    animation:         fade 2s ease-in 1s infinite;
+    -webkit-animation: glowing 1s ease-in 0.5s infinite;
+    -moz-animation:    glowing 1s ease-in 0.5s infinite;
+    -o-animation:      glowing 1s ease-in 0.5s infinite;
+    animation:         glowing 1s ease-in 0.5s infinite;
     animation-delay: 1s;
 }
 
-@keyframes fade {
-  0% {
-    opacity: 1
-  }
-  12.5% {
-      opacity: 0.75
-  }
-  25% {
-      opacity: 1
-  }
+@keyframes glowing {
+  0%   { box-shadow: 0 0 -10px  grey; }
+  40%  { box-shadow: 0 0  10px  grey; }
+  60%  { box-shadow: 0 0  10px  grey; }
+  100% { box-shadow: 0 0 -10px  grey; }
 }
+
 
 .slot-view {
     border:        0.5px;
+    border-color: lightslategray;
     border-radius: 5px;
     border-style: solid;
     font-family: "roboto";
@@ -163,4 +160,12 @@ code {
     width: 100%;
     text-align: center;
     margin-top: 0.5px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.grid-item {
+  text-align: center;
 }
