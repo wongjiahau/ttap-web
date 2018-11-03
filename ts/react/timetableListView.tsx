@@ -111,7 +111,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         );
     }
 
-    private checkKeys = (e: KeyboardEvent) => {
+    private checkKeys = (e: any) => {
         // refer
         // https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-ja
         // v ascript

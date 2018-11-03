@@ -9,11 +9,8 @@ import {
     GetTestRawSlot1, GetTestTimetables1
 } from "../../tests/testDataGenerator";
 import {
-    NewTimetableListState
-} from "../reducers/timetableListState";
-import {
     FilterTimetable
-} from "./../actions/filterTimetable";
+} from "../actions/filterTimetable";
 import {
     UpdateTotalMatrix
 } from "../actions/updateTotalMatrix";
@@ -21,7 +18,10 @@ import {
     IMasterState,
     MasterStateReducer,
     NewMasterState
-} from "./../reducers/masterState";
+} from "../reducers/masterState";
+import {
+    NewTimetableListState
+} from "../reducers/timetableListState";
 
 function getInitialState(): IMasterState {
     return {
