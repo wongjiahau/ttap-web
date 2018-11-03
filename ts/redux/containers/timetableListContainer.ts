@@ -4,6 +4,7 @@ import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSl
 import { GoToNextSubTimetable } from "../actions/goToNextSubTimetable";
 import { GoToPreviousSubTimetable } from "../actions/goToPreviousSubTimetable";
 import {GoToRandomTimetable} from "../actions/goToRandomTimetable";
+import { GoToThisAlternativeSlot } from "../actions/goToThisAlternativeSlot";
 import {ToggleIsOpenOfSaveDialog} from "../actions/toggleIsOpenOfSaveDialog";
 import {ToggleIsOpenOfSlotsTable} from "../actions/toggleIsOpenOfSlotsTable";
 import {ToggleIsOpenOfSummary} from "../actions/toggleIsOpenOfSummary";
@@ -12,7 +13,6 @@ import {ITimetableListState} from "../reducers/timetableListState";
 import { ISlotViewModel } from "./../../model/slotViewModel";
 import {GoToNextTimetable} from "./../actions/goToNextTimetable";
 import {GoToPrevTimetable} from "./../actions/goToPrevTimetable";
-import { GoToThisAlternateSlot } from "./../actions/goToThisAlternateSlot";
 import {SelectSlotChoice} from "./../actions/selectSlotChoice";
 import {ShowAlternateSlot} from "./../actions/showAlternateSlot";
 import {ToggleSetTimeConstraintView} from "./../actions/toggleSetTimeConstraintView";
@@ -30,7 +30,7 @@ const mapStateToProps = (state: any) : ITimetableListViewStateProps => {
         isSummaryOpen:      timetableListState.IsSummaryOpen,
         maxIndex:           timetableListState.FiltrateTimetables.length - 1,
         slotViewModelStore: timetableListState.SlotViewModelStore,
-        alternativeSlots:     timetableListState.AlternativeSlots
+        alternativeSlots:   timetableListState.AlternativeSlots
     };
 };
 
@@ -50,7 +50,7 @@ const mapDispatchToProps = (triggerlessDispatch: any) : ITimetableListViewDispat
         handleOpenSlotsTable:            () => triggerlessDispatch(new ToggleIsOpenOfSlotsTable(true)),
         handleToggleIsOpenOfSummary:     () => triggerlessDispatch(new ToggleIsOpenOfSummary()),
         handleShowAlternateSlot:         (s: ISlotViewModel) => triggerlessDispatch(new ShowAlternateSlot(s)),
-        handleGoToThisAlternateSlot:     (slotUid: number) => dispatch(new GoToThisAlternateSlot(slotUid)),
+        handleGoToThisAlternateSlot:     (slotUid: number) => dispatch(new GoToThisAlternativeSlot(slotUid)),
         handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => dispatch(new SelectSlotChoice(slotUid, newSlotChoice)),
     };
 };
