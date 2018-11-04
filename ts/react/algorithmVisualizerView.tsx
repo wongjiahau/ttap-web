@@ -1,4 +1,4 @@
-import { AppBar, Button, Dialog, IconButton, Toolbar } from "material-ui";
+ import { AppBar, Button, Dialog, IconButton, Toolbar } from "material-ui";
 import CloseIcon from "material-ui-icons/Close";
 import Typography from "material-ui/Typography";
 import * as React from "react";

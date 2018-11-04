@@ -9,6 +9,7 @@ import { GroupSimilarTimetables } from "../../permutator/groupSimilarTimetables"
 import {PartitionizeByKey} from "../../permutator/partitionize";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction} from "./../reducers/masterState";
+import { IGroupedTimetable } from "../../model/groupedTimetable";
 
 export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
     public constructor() {
@@ -20,11 +21,11 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         const slotTableState = state.SlotTableState;
         const slotNumbersOfSelectedSlots = GetSlotNumbers(slotTableState.SlotStates);
         let currentSubjectSchemas: SubjectSchema[] = [];
-        let newTimetables: Timetable[] = [];
+        let newTimetables: IGroupedTimetable[] = [];
         let selectedSlots: RawSlot[] = [];
         if (slotNumbersOfSelectedSlots.length > 0) {
             selectedSlots = GetSlotsFromSlotNumbers(slotStore.GetAll(), slotNumbersOfSelectedSlots);
-            newTimetables = state.SettingsState.TimetableFinder(selectedSlots, new NullFindTimetableVisualizer());
+            newTimetables = GroupSimilarTimetables(state.SettingsState.TimetableFinder(selectedSlots, new NullFindTimetableVisualizer()));
             const slotsOfSubjects = PartitionizeByKey(selectedSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
             sortBy(currentSubjectSchemas, [(o: SubjectSchema) => o.SubjectCode]);
@@ -70,7 +71,7 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
                 IsOpen: false,
                 ErrorMessages: null
             },
-            TimetableListState: NewTimetableListState(GroupSimilarTimetables(newTimetables), selectedSlots)
+            TimetableListState: NewTimetableListState((newTimetables), selectedSlots)
         };
     }
 }

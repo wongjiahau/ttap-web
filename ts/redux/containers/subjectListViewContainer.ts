@@ -70,13 +70,11 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
             dispatch(new HideSnackbar());
         },
         handleSelection: (subjectIndex: number) => {
-            ToggleLoadingCircle(true);
-            setTimeout(() => {
+            ToggleLoadingCircle(() => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new NotifyIfTimetableIsFound());
                 dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
-                ToggleLoadingCircle(false);
-            }, 1);
+            });
         },
         handleToggleView: () => dispatch(new ToggleSubjectListViewingOptions()),
         handleToggleIsEnabledOfFindTimetableVisualization: () => dispatch(new ToggleIsEnabledOfAlgorithmVisualizer()),

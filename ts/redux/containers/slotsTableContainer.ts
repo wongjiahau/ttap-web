@@ -39,6 +39,8 @@ import {
     ISubjectListState
 } from "../reducers/subjectListState";
 import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
+import { ToggleLoadingBar } from "../actions/toggleLoadingBar";
+import { ToggleLoadingCircle } from "../../react/app";
 
 const mapStateToProps = (state: any): ISlotsTableViewStateProps => {
     const slotsTableState = state.MasterStateReducer.SlotTableState as ISlotsTableState;
@@ -56,9 +58,11 @@ const mapStateToProps = (state: any): ISlotsTableViewStateProps => {
 const mapDispatchToProps = (dispatch: any): ISlotsTableViewDispatchProps => {
     return {
         handleDone: () => {
-            dispatch(new FindTimetablesBasedOnChosenSlots());
-            dispatch(new UpdateTotalMatrix());
-            dispatch(new FindAlternativeSlotsOfCurrentSlots());
+            ToggleLoadingCircle(() => {
+                dispatch(new FindTimetablesBasedOnChosenSlots());
+                dispatch(new UpdateTotalMatrix());
+                dispatch(new FindAlternativeSlotsOfCurrentSlots());
+            });
         },
         handleCancel: () => dispatch(new ToggleIsOpenOfSlotsTable(false)),
         handleSlotCheckChanged: (slotNumber: string, checked: boolean, subjectCode: string) =>

@@ -113,6 +113,7 @@ describe("FindTimetablesBasedOnChosenSlots action", () => {
         newState = MasterStateReducer(newState, new FindTimetablesBasedOnChosenSlots());
         expect(newState.SlotTableState.ErrorMessages).to.eq(null);
         expect(newState.SnackbarState.IsOpen).to.eq(true);
+        expect(newState.SnackbarState.Message).to.eq("1 possible timetables found.");
     });
 });
 

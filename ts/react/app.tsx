@@ -32,10 +32,14 @@ interface IAppState {
     isSecondaryDrawerOpen: boolean;
 }
 
-export function ToggleLoadingCircle(show: boolean) {
+export function ToggleLoadingCircle(work: () => void) {
     const x = document.getElementById("loading-words");
     if (x) {
-        x.style.display = show ? "" : "none";
+        x.style.display =  "";
+        setTimeout(() => {
+            work();
+            x.style.display =  "none";
+        }, 5)
     }
 }
 
@@ -45,7 +49,6 @@ export class App extends React.Component < {}, IAppState > {
         this.state = {
             isSecondaryDrawerOpen: false
         };
-        ToggleLoadingCircle(false);
     }
 
     public handleOpenDrawer = () => this.setState({isSecondaryDrawerOpen: true});
