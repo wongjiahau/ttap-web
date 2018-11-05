@@ -144,7 +144,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
         this.setState({openErrorDialog: false});
     }
 
-    public componentDidMount = () => {
+    public componentDidMount() {
         // Check if user is using the Electron-based TTAP Desktop Client
         // Refer https://github.com/electron/electron/issues/2288
         const userAgent = navigator.userAgent.toLowerCase();
