@@ -41,7 +41,7 @@ ITutorialState > {
     }
     public render() {
         if (this.state.redirect) {
-            return <Redirect push={true} to="/select"/>;
+            return <Redirect push={true} to="/login"/>;
         }
         return (
             <div>

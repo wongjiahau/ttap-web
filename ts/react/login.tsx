@@ -32,6 +32,7 @@ interface ILoginStateProps {
     openErrorDialog: boolean;
     loading:         boolean;
 }
+
 export class Login extends React.Component < ILoginDispatchProps, ILoginStateProps > {
     private currentPage : number = 1;
     private html = "";
@@ -60,7 +61,11 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         style={iframeStyle}
                         onLoad={this.handleIFrameOnLoad}
                         src={URL}/>
-                    <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
+                    <StackPanel orientation="horizontal" horizontalAlignment="center">
+                        <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
+                        <p></p>
+                        <Button raised={true} color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
+                    </StackPanel>
                 </StackPanel>
                 <Dialog open={this.state.openErrorDialog}>
                     <DialogTitle>
@@ -136,6 +141,19 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
 
     public handleClose = () => {
         this.setState({openErrorDialog: false});
+    }
+
+    public componentDidMount = () => {
+        // Check if user is using the Electron-based TTAP Desktop Client
+        // Refer https://github.com/electron/electron/issues/2288
+        const userAgent = navigator.userAgent.toLowerCase();
+        if (userAgent.indexOf(' electron/') > -1) {
+            // OK, good
+        } else {
+            // Redirect the user to go download TTAP-Desktop
+            alert("Please download the desktop version of TTAP.");
+            window.location.href = "https://get-ttap.surge.sh";
+        }
     }
 
 }
