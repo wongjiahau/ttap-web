@@ -69,7 +69,7 @@ ISlotViewState > {
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div className={className} style={slotStyle} onClick={clickHandler}>
                     <b>
-                        {getSlotContent(slot)} {slot.AlternativeSlots.length > 0 ? "*" : ""}
+                        {getSlotContent(slot)} 
                         {slot.Group.length > 1
                             ? this.arrowDownButton()
                             : ""}

@@ -119,15 +119,15 @@ code {
 
 
 .slot-view {
-    border:        0.5px;
+    border:        1px;
     border-color: lightslategray;
     border-radius: 5px;
     border-style: solid;
     font-family: "roboto";
-    font-size: 13.5px;
+    font-size: 13px;
+    height: 100%;
     width: 100%;
     text-align: center;
-    margin-top: 0.5px;
 }
 
 .grid-container {
