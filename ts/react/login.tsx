@@ -35,7 +35,7 @@ interface ILoginStateProps {
 
 export class Login extends React.Component < ILoginDispatchProps, ILoginStateProps > {
     private currentPage : number = 1;
-    private html = "";
+    private htmls: string[] = [];
     public constructor(props: ILoginDispatchProps) {
         super(props);
         this.state = {
@@ -118,13 +118,14 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
         if (iframe.contentWindow === null) { throw new Error(); }
         const newLocation = iframe.contentWindow.location.href;
         if ((new Str(newLocation)).Contains("masterSchedule")) {
-            this.html += iframe.contentWindow.document.body.innerHTML;
-            if ((new Str(this.html)).Contains(`changePage('${this.currentPage + 1}')`)) {
+            const currentHtml = iframe.contentWindow.document.body.innerHTML;
+            this.htmls.push(currentHtml);
+            if ((new Str(currentHtml)).Contains(`changePage('${this.currentPage + 1}')`)) {
                 this.currentPage++;
                 (iframe.contentWindow as any)["changePage"](this.currentPage); // changePage is a function defined in <script></script>
             } else {
                 try {
-                    this.props.handleLoadSlots(ParseHtmlToRawSlot(this.html));
+                    this.props.handleLoadSlots(this.htmls.map(ParseHtmlToRawSlot).reduce((x, y) => x.concat(y)));
                     this.setState({redirect: true});
                 } catch (error) {
                     this.setState({openErrorDialog: true});
