@@ -49,6 +49,12 @@ export class App extends React.Component < {}, IAppState > {
         this.state = {
             isSecondaryDrawerOpen: false
         };
+
+        // hide loading words
+        const x = document.getElementById("loading-words");
+        if (x) {
+            x.style.display = "none";
+        }
     }
 
     public handleOpenDrawer = () => this.setState({isSecondaryDrawerOpen: true});

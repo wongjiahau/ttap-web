@@ -28,8 +28,24 @@
     </noscript>
     <div id="errorMessage" style="padding-left:20px;"></div>
     <div id="root"> </div>
-    <div id="loading-words" class="loading" style="display: none">
-        <div class="center">LOADING<br> . . . . . .
+    <div id="loading-words" class="loading" style="
+        position: fixed;
+        top: 0; right: 0;
+        bottom: 0; left: 0;
+        background: white;
+        opacity: 0.50;
+        z-index: 2000;
+        cursor: wait !important;
+    ">
+        <div class="center" style="
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 66px;
+            cursor: wait !important;
+        ">LOADING<br> . . . . . .
         </div>
     </div>
     <!-- This iframe is to trigger goo.gl, so that page visits can be analyzed. -->
