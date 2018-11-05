@@ -247,7 +247,6 @@ export const LoadSlotsFromUrl = (
             }
             try {
                 const slots = parser(xhr.responseText).map(RawSlot.ResetUid);
-                console.log(slots);
                 successed(slots);
             } catch (error) {
                 console.log(error);

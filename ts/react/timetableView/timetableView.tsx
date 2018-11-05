@@ -15,7 +15,7 @@ const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
 interface ITimetableViewProps {
     slots : ISlotViewModel[];
-    states : STCBox[] | null;
+    stcBoxes : STCBox[] | null;
     alternateSlots: ISlotViewModel[] | null;
     handleSetTimeContraintAt: (state : STCBox) => void;
     handleDesetTimeContraintAt: (state : STCBox) => void;
@@ -37,7 +37,6 @@ interface ITimetableViewState {
 export class TimetableView extends React.Component < ITimetableViewProps, ITimetableViewState> {
     public constructor(props : ITimetableViewProps) {
         super(props);
-        window.onresize = this.handleWindowResizing;
         this.state = {
             width: getTimetableViewWidth(),
         };
@@ -55,8 +54,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             const horizontalDividers = GenerateHorizontalDividers(skeleton);
             skeleton.Concat(horizontalDividers);
         }
-        if (this.props.states) { // render set time constraint view
-            const stateViews = GenerateStateViews(this.props.states, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
+        if (this.props.stcBoxes) { // render set time constraint view
+            const stateViews = GenerateStateViews(this.props.stcBoxes, this.props.handleSetTimeContraintAt, this.props.handleDesetTimeContraintAt);
             skeleton.Concat(stateViews);
             skeleton.Layouts = skeleton
                 .Layouts
@@ -106,6 +105,18 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                 </StackPanel>
             </div>
         );
+    }
+
+    private previousOnResizeHandler: any = () => {};
+    public componentDidMount() {
+        this.previousOnResizeHandler = window.onresize;
+        window.onresize = this.handleWindowResizing;
+    }
+
+    public componentWillUnmount() {
+        // This is needed to fix issue #133
+        // Refer https://github.com/wongjiahau/ttap-web/issues/133
+        window.onresize = this.previousOnResizeHandler;
     }
 
     public handleWindowResizing = () => {

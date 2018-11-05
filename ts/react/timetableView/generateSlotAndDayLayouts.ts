@@ -35,8 +35,7 @@ export function GenerateSlotAndDayLayouts(
                 break;
             }
         }
-        const [X,
-            W] = GetXandW(timePeriod);
+        const [X, W] = GetXandW(timePeriod);
         const layout : ReactGridLayout.Layout = {
             h: 1,
             i: "s" + h,
