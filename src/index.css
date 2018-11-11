@@ -103,18 +103,20 @@ code {
 }
 
 .get-user-attention {
-    -webkit-animation: glowing 1s ease-in 0.5s infinite;
-    -moz-animation:    glowing 1s ease-in 0.5s infinite;
-    -o-animation:      glowing 1s ease-in 0.5s infinite;
-    animation:         glowing 1s ease-in 0.5s infinite;
+    -webkit-animation: glowing 2s ease-in 0.5s infinite;
+    -moz-animation:    glowing 2s ease-in 0.5s infinite;
+    -o-animation:      glowing 2s ease-in 0.5s infinite;
+    animation:         glowing 2s ease-in 0.5s infinite;
     animation-delay: 1s;
 }
 
 @keyframes glowing {
-  0%   { box-shadow: 0 0 -10px  grey; }
-  40%  { box-shadow: 0 0  10px  grey; }
-  60%  { box-shadow: 0 0  10px  grey; }
-  100% { box-shadow: 0 0 -10px  grey; }
+  0%   { box-shadow: 0 0 -10px  black }
+  20%  { box-shadow: 0 0  8px  red }
+  40%  { box-shadow: 0 0  8px  yellow; }
+  60%  { box-shadow: 0 0  8px  green; }
+  80%  { box-shadow: 0 0  8px  blue; }
+  100% { box-shadow: 0 0 -10px  black; }
 }
 
 
