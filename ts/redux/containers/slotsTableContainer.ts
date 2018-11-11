@@ -4,12 +4,14 @@ import {
 import {
     Subject
 } from "../../model/subject";
+import { ToggleLoadingScreen } from "../../react/app";
 import {
     ISlotsTableViewDispatchProps,
     ISlotsTableViewInternalState,
     ISlotsTableViewStateProps,
     SlotsTable
 } from "../../react/slotsTableView";
+import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {
     FindTimetablesBasedOnChosenSlots
 } from "../actions/findTimetablesBasedOnChosenSlots";
@@ -22,6 +24,7 @@ import {
 import {
     ToggleIsOpenOfSlotsTable
 } from "../actions/toggleIsOpenOfSlotsTable";
+import { ToggleLoadingBar } from "../actions/toggleLoadingBar";
 import {
     ToggleSelectionOnGroupOfSlots
 } from "../actions/toggleSelectionOnGroupOfSlots";
@@ -38,9 +41,6 @@ import {
 import {
     ISubjectListState
 } from "../reducers/subjectListState";
-import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
-import { ToggleLoadingBar } from "../actions/toggleLoadingBar";
-import { ToggleLoadingCircle } from "../../react/app";
 
 const mapStateToProps = (state: any): ISlotsTableViewStateProps => {
     const slotsTableState = state.MasterStateReducer.SlotTableState as ISlotsTableState;
@@ -58,7 +58,7 @@ const mapStateToProps = (state: any): ISlotsTableViewStateProps => {
 const mapDispatchToProps = (dispatch: any): ISlotsTableViewDispatchProps => {
     return {
         handleDone: () => {
-            ToggleLoadingCircle(() => {
+            ToggleLoadingScreen(() => {
                 dispatch(new FindTimetablesBasedOnChosenSlots());
                 dispatch(new UpdateTotalMatrix());
                 dispatch(new FindAlternativeSlotsOfCurrentSlots());

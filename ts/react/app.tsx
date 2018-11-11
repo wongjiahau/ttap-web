@@ -23,7 +23,6 @@ import { OtherStuffDrawer } from "./otherStuffDrawer";
 // However, it is currently disable as it causes some unknown runtime error on ocassion
 // TouchRipple.prototype.render = () => null;
 
-
 const theme = createMuiTheme({
   palette: {
     primary: indigo,
@@ -34,14 +33,14 @@ interface IAppState {
     isSecondaryDrawerOpen: boolean;
 }
 
-export function ToggleLoadingCircle(work: () => void) {
+export function ToggleLoadingScreen(work: () => void) {
     const x = document.getElementById("loading-words");
     if (x) {
         x.style.display =  "";
         setTimeout(() => {
             work();
             x.style.display =  "none";
-        }, 5)
+        }, 100 /*ms*/);
     }
 }
 
@@ -98,5 +97,13 @@ export class App extends React.Component < {}, IAppState > {
         // raised={true} onClick={this.handleCloseDrawer}>         hide drawer
         // </Button>     {/* < DrawerContent onItemClick={this.handleCloseDrawer}/> */}
         // </Drawer> <GetFeedbackDialog/> {/* <Main/> */}
+    }
+
+    public componentDidMount() {
+        const x = document.getElementById("loading-inner-word");
+        if (x) {
+            x.innerHTML
+            = "Finding possible timetables <br> . . . . . .";
+        }
     }
 }

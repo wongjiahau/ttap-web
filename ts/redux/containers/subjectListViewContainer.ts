@@ -1,6 +1,7 @@
 import {
     connect
 } from "react-redux";
+import { ToggleLoadingScreen } from "../../react/app";
 import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import {
     HideSnackbar
@@ -40,7 +41,6 @@ import {
 import {
     ToggleSubjectSelection
 } from "./../actions/toggleSubjectSelection";
-import { ToggleLoadingCircle } from "../../react/app";
 
 const mapStateToProps = (state: any): ISubjectListViewStateProps => {
     const masterState = state.MasterStateReducer as IMasterState;
@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
             dispatch(new HideSnackbar());
         },
         handleSelection: (subjectIndex: number) => {
-            ToggleLoadingCircle(() => {
+            ToggleLoadingScreen(() => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new NotifyIfTimetableIsFound());
                 dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));
