@@ -128,6 +128,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                     this.props.handleLoadSlots(this.htmls.map(ParseHtmlToRawSlot).reduce((x, y) => x.concat(y)));
                     this.setState({redirect: true});
                 } catch (error) {
+                    this.htmls = []; // Clear previous stored HTMLS
                     this.setState({openErrorDialog: true});
                     console.log(error);
                 }
@@ -148,7 +149,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
         // Check if user is using the Electron-based TTAP Desktop Client
         // Refer https://github.com/electron/electron/issues/2288
         const userAgent = navigator.userAgent.toLowerCase();
-        if (userAgent.indexOf(' electron/') > -1) {
+        if (userAgent.indexOf(" electron/") > -1) {
             // OK, good
         } else {
             // Redirect the user to go download TTAP-Desktop
