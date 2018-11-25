@@ -113,6 +113,7 @@ ISlotsTableViewInternalState > {
                                                     <TableCell padding="dense">Time</TableCell>
                                                     <TableCell padding="dense">Week</TableCell>
                                                     <TableCell padding="dense">Room</TableCell>
+                                                    <TableCell padding="dense">Remark</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -135,6 +136,7 @@ ISlotsTableViewInternalState > {
                                                                 <TableCell padding="dense">{slot.TimePeriod}</TableCell>
                                                                 <TableCell padding="dense">{slot.WeekNumber}</TableCell>
                                                                 <TableCell padding="dense">{slot.Room}</TableCell>
+                                                                <TableCell padding="dense">{slot.Remark}</TableCell>
                                                             </TableRow>
                                                         );
                                                     })}
