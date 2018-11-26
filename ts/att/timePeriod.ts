@@ -52,7 +52,7 @@ export class TimePeriod {
             TimePeriod.Min = startTime;
         }
         if (endTime.MoreThan(TimePeriod.Max)) {
-            TimePeriod.Max = endTime;
+            TimePeriod.Max.Hour = endTime.Hour + (endTime.Minute > 0 ? 1 : 0);
         }
         this.StartTime = startTime;
         this.EndTime = endTime;

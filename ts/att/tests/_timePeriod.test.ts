@@ -21,8 +21,18 @@ describe("constructor of TimePeriod", () => {
         TimePeriod.Max  = Time.CreateTime12Hour(1, 0, false);
         const startTime = Time.CreateTime24Hour(9, 0);
         const endTime   = Time.CreateTime24Hour(23, 0);
-        const input     = new TimePeriod(startTime, endTime);
+        const input     = new TimePeriod(startTime, endTime); // this line has side effects
         expect(TimePeriod.Max.Equal(endTime)).to.eq(true);
+    });
+
+    it("should set TimePeriod.Max to be 1 more hour than endTime if endTime contains minutes", () => {
+        TimePeriod.Max  = Time.CreateTime12Hour(1, 0, false);
+        const startTime = Time.CreateTime24Hour(9, 0);
+        const endTime   = Time.CreateTime24Hour(22, 30);
+        const input     = new TimePeriod(startTime, endTime); // this line has side effects (holy crap)
+        expect(TimePeriod.Max.Hour).to.eq(endTime.Hour + 1);
+        expect(TimePeriod.Max.Minute).to.not.eq(endTime.Minute);
+        expect(TimePeriod.Max.Minute).to.eq(0);
     });
 
     it("should throw error when endTime is less than startTime", () => {
