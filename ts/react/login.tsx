@@ -28,9 +28,10 @@ export interface ILoginDispatchProps {
 }
 
 interface ILoginStateProps {
-    redirect:        boolean;
-    openErrorDialog: boolean;
-    loading:         boolean;
+    redirect:                  boolean;
+    openErrorDialog:           boolean;
+    loading:                   boolean;
+    openAddSlotManuallyDialog: boolean;
 }
 
 export class Login extends React.Component < ILoginDispatchProps, ILoginStateProps > {
@@ -41,6 +42,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
         this.state = {
             redirect: false,
             openErrorDialog: false,
+            openAddSlotManuallyDialog: false,
             loading: false,
         };
     }
@@ -66,7 +68,28 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         <p/>
                         <Button raised={true} color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
                     </StackPanel>
+                    <Button onClick={() => this.setState({openAddSlotManuallyDialog: true})}>Add slots manually</Button>
                 </StackPanel>
+                <Dialog open={this.state.openAddSlotManuallyDialog}>
+                    <DialogTitle>
+                        Add slots manually
+                    </DialogTitle>
+                    <DialogContent>
+                        <textarea style={{height: "100px"}} id="htmlarea" placeholder="Paste HTML here"/>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => this.setState({openAddSlotManuallyDialog: false})}>Cancel</Button>
+                        <Button color="primary" raised={true} onClick={() => {
+                            const textarea = document.getElementById("htmlarea") as HTMLTextAreaElement;
+                            try {
+                                this.props.handleLoadSlots(ParseHtmlToRawSlot(textarea.value));
+                                this.setState({redirect: true});
+                            } catch (error) {
+                                alert("Failed. Make sure you paste in the correct content.");
+                            }
+                        }}>ADD SLOTS</Button>
+                    </DialogActions>
+                </Dialog>
                 <Dialog open={this.state.openErrorDialog}>
                     <DialogTitle>
                             We can't load the data :(
