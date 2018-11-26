@@ -76,6 +76,8 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                     </DialogTitle>
                     <DialogContent>
                         <textarea style={{height: "100px"}} id="htmlarea" placeholder="Paste HTML here"/>
+                        <br/>
+                        <a href="https://github.com/wongjiahau/ttap-web/blob/master/HowToAddSlotManually.md">How to add slots manually?</a>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => this.setState({openAddSlotManuallyDialog: false})}>Cancel</Button>
