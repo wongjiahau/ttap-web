@@ -15,7 +15,13 @@ import {
 export class SaveTimetableAsTextFile extends SaveTimetable {
     protected Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>) {
         const rawSlots = rawSlotStore.GetBunch(timetable.SlotUids);
-        const data = new TimetableSummary(CreateSlotViewModels(rawSlots)).ToString();
+        const data = "NOTE:\r\n"
+        + "\tThe subjects below are ordered by their slots scarcity (a.k.a rareness).\r\n"
+        + "\tSo, you should bid the TOPMOST subject first.\r\n\r\n"
+        + new TimetableSummary(CreateSlotViewModels(rawSlots))
+            .SortByScarcity(rawSlotStore.GetAll())
+            .ToString();
+
         const file = new File([data], "MyTimetable.txt", {
             type: "text/plain;charset=utf-8"
         });

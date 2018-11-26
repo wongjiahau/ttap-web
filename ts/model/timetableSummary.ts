@@ -1,5 +1,6 @@
 import {PartitionizeByKey} from "../permutator/partitionize";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
+import { RawSlot } from "./rawSlot";
 import {ISlotViewModel} from "./slotViewModel";
 
 export class SubjectSummary {
@@ -37,10 +38,10 @@ export class SubjectSummary {
 }
 
 export class TimetableSummary {
-    public readonly SubjectSummaries : SubjectSummary[];
-    public constructor(slots : ISlotViewModel[]) {
+    public SubjectSummaries : SubjectSummary[];
+    public constructor(chosenSlots : ISlotViewModel[]) {
         this.SubjectSummaries =
-            PartitionizeByKey(slots, "SubjectCode")
+            PartitionizeByKey(chosenSlots, "SubjectCode")
             .map((partition) => new SubjectSummary(partition));
     }
 
@@ -53,5 +54,15 @@ export class TimetableSummary {
                 result += "\r\n";
             });
         return result;
+    }
+
+    public SortByScarcity(allSlots: RawSlot[]): TimetableSummary {
+        this.SubjectSummaries = (this.SubjectSummaries.sort((x, y) => {
+            const relatedSlots = (subject: SubjectSummary) =>
+                allSlots.filter((s) => s.SubjectCode === subject.SubjectCode);
+
+            return relatedSlots(x).length - relatedSlots(y).length;
+        }));
+        return this;
     }
 }

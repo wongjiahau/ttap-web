@@ -1,6 +1,7 @@
 import {
     expect
 } from "chai";
+import { ObjectStore } from "../../dataStructure/objectStore";
 import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
 import { ParseSlotToTinySlot } from "../../parser/parseSlotToTinySlot";
 import {
@@ -78,6 +79,27 @@ describe("TimetableSummary", () => {
         const svm = CreateSlotViewModels(MockRawSlotStore.GetBunch(timetable.SlotUids));
         const timetableSummary = new TimetableSummary(svm);
         expect(timetableSummary.SubjectSummaries).to.have.lengthOf(1);
+    });
+
+    it("test sort by scarcity", () => {
+        // Refer heng_2017_sept.ts for number of slots for each subjects
+        const rawSlotStore = new ObjectStore(HENG_2017_APR());
+        const input1 = HENG_2017_APR().filter((x) => x.SubjectCode ===  CodeOf.FM1);
+        const input2 = HENG_2017_APR().filter((x) => x.SubjectCode ===  CodeOf.HT);
+        const timetables = FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(input1.concat(input2))));
+        const svm = CreateSlotViewModels(rawSlotStore.GetBunch(timetables[0].SlotUids));
+        const unsortedTimetableSummary = new TimetableSummary(svm);
+
+        expect(unsortedTimetableSummary.SubjectSummaries.map((x) => x.SubjectCode)).to.deep.eq([
+            CodeOf.FM1, // 47 slots
+            CodeOf.HT,  // 27 slots
+        ]);
+
+        const sortedTimetableSummary = unsortedTimetableSummary.SortByScarcity(rawSlotStore.GetAll());
+        expect(sortedTimetableSummary.SubjectSummaries.map((x) => x.SubjectCode)).to.deep.eq([
+            CodeOf.HT,  // 27 slots
+            CodeOf.FM1, // 47 slots
+        ]);
     });
 
 });
