@@ -22,11 +22,13 @@ export class SubjectSummary {
         this.Lecture =  extract("L");
         this.Tutorial = extract("T");
         this.Practical = extract("P");
-        this.CreditHour = parseFloat(slots[0].CreditHour ? slots[0].CreditHour : "0.0");
+
+        const creditHour = slots[0].CreditHour;
             // Why slots[0] ?
             // Actually it can be any slots, because the CreditHour of each slots
             // from the same subject will have the same value
             // This is a form of data denormalization
+        this.CreditHour = parseFloat(creditHour ? creditHour : "0.0");
     }
 
     public ToString() : string {

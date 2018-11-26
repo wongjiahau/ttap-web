@@ -85,8 +85,8 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                             leftTooltip={"Go to previous timetable (Left arrow)"}
                             middleTooltip={"Go to random timetable (R)"}
                             rightTooltip={"Go to next timetable (Right arrow)"}
-                            upTooltip={"Go to previous IDENTICAL timetable (Up arrow)"}
-                            downTooltip={"Go to next IDENTICAL timetable (Down arrow)"}
+                            upTooltip={"Go to previous similar timetable (Up arrow)"}
+                            downTooltip={"Go to next similar timetable (Down arrow)"}
                             handleClickLeft={this.props.handleGoToPreviousTimetable}
                             handleClickMiddle={this.props.handleGoToRandomTimetable}
                             handleClickRight={this.props.handleGoToNextTimetable}
