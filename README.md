@@ -1,14 +1,15 @@
 # [Timetable Arranging Program - Web (TTAP)](https://github.com/wongjiahau/ttap-web)
 ## Special thanks to
-- My parents
-- Keli
-- Dr. Madhavan
-- Dr. Victor
-- Mr. James
-- Sean Ho
-- Heng
-- Dheeno 
-- Sheng Hong
+- My parents (for raising me)
+- Keli (for accompanying me)
+- Dr. Madhavan (for helping me)
+- Dr. Victor (for helping me)
+- Mr. James (for helping me)
+- Sean Ho (for challenging me)
+- Heng (for lending me his username and password)
+- Dheeno (for pushing me)
+- Sheng Hong (for aiding me)
+- Cheng Feng (for suggesting the show alternative slots feature)
 - All those who tested TTAP
 
 

@@ -1259,7 +1259,7 @@ return [
         ClassSize: "25",
         Day: "Tue",
         TimePeriod: "10:00 AM - 11:00 AM",
-        CreditHour: "1.0",
+        CreditHour: "3.0",
         WeekNumber: "2-7",
         Room: "KB326",
         Remark: ""
@@ -1273,7 +1273,7 @@ return [
         ClassSize: "25",
         Day: "Tue",
         TimePeriod: "11:00 AM - 12:00 PM",
-        CreditHour: "1.0",
+        CreditHour: "3.0",
         WeekNumber: "2-7",
         Room: "KB326",
         Remark: ""
@@ -1287,7 +1287,7 @@ return [
         ClassSize: "25",
         Day: "Wed",
         TimePeriod: "10:00 AM - 11:00 AM",
-        CreditHour: "1.0",
+        CreditHour: "3.0",
         WeekNumber: "2-7",
         Room: "KB319",
         Remark: ""
@@ -1301,7 +1301,7 @@ return [
         ClassSize: "25",
         Day: "Thu",
         TimePeriod: "08:00 AM - 09:00 AM",
-        CreditHour: "1.0",
+        CreditHour: "3.0",
         WeekNumber: "2-7",
         Room: "KB319",
         Remark: ""
@@ -1315,7 +1315,7 @@ return [
         ClassSize: "25",
         Day: "Thu",
         TimePeriod: "09:00 AM - 10:00 AM",
-        CreditHour: "1.0",
+        CreditHour: "3.0",
         WeekNumber: "2-7",
         Room: "KB319",
         Remark: ""
@@ -1329,7 +1329,7 @@ return [
         ClassSize: "25",
         Day: "Thu",
         TimePeriod: "10:00 AM - 11:00 AM",
-        CreditHour: "1.0",
+        CreditHour: "3.0",
         WeekNumber: "2-7",
         Room: "KB323",
         Remark: ""

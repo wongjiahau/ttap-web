@@ -68,7 +68,7 @@ describe("TimetableSummary", () => {
         expect(subjectSummary1.Lecture).to.eq("L(1)");
         expect(subjectSummary1.Tutorial).to.eq("T(1)");
         expect(subjectSummary1.Practical).to.eq("-");
-        expect(subjectSummary1.CreditHour).to.eq(7);
+        expect(subjectSummary1.CreditHour).to.eq(3);
     });
 
     it("case 3", () => {

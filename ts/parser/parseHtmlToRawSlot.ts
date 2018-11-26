@@ -5,7 +5,7 @@ import { Str } from "../util/str";
 export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");
-    //@ts-ignore
+    // @ts-ignore
     const tableRows = htmlDoc
         .getElementById("overviewSector")
         .getElementsByTagName("table")[0]
@@ -14,6 +14,7 @@ export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
     // i = 1 because we need to skip the first <tr> which is the header of the table
     let currentSubjectName: string = "";
     let currentSubjectCode: string = "";
+    let currentCreditHour : string = "";
     for (let i = 1; i < tableRows.length; i++) {
         const currentRow = tableRows[i];
         const cells = currentRow.getElementsByTagName("td");
@@ -28,6 +29,12 @@ export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
                     .split("[")[0]
                     .replace("&amp;", "&")
                     .trim();
+                currentCreditHour = cells[0]
+                    .innerHTML
+                    .split(" - ")[1]
+                    .split("[")[1]
+                    .split("]")[0];
+
                 continue;
             } catch (error) {
                 console.log("Error: " + error);
@@ -37,6 +44,7 @@ export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
         const newSlot = new RawSlot();
         newSlot.SubjectCode = currentSubjectCode;
         newSlot.SubjectName = currentSubjectName;
+        newSlot.CreditHour  = currentCreditHour;
         let offset = 0;
         if (new Str(currentRow.id).Contains("subRow")) {
             offset = 4;
@@ -66,7 +74,7 @@ export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
                     newSlot.TimePeriod = cellValue;
                     break;
                 case 6:
-                    newSlot.CreditHour = cellValue;
+                    // NOTE: Credit Hour is not the same as Hour
                     break;
                 case 7:
                     newSlot.WeekNumber = cellValue;

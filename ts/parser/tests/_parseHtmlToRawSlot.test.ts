@@ -22,7 +22,7 @@ describe("ParseHtmlToRawSlot", () => {
             ClassSize: "90",
             Day: "Mon",
             TimePeriod: "08:00 AM - 11:00 AM",
-            CreditHour: "3.0",
+            CreditHour: "3.00",
             WeekNumber: "1-7",
             Room: "KB207",
             Remark: "",
