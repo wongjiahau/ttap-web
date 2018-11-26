@@ -63,7 +63,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         src={URL}/>
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
                         <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
-                        <p></p>
+                        <p/>
                         <Button raised={true} color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
                     </StackPanel>
                 </StackPanel>

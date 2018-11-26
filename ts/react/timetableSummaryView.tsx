@@ -21,7 +21,7 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
             borderCollapse: "collapse"
         };
         return (
-            //@ts-ignore
+            // @ts-ignore
             <table cellPadding="0" cellSpacing="0" style={tableStyle} border="1">
                 <tbody>
                     <tr>
@@ -30,11 +30,17 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
                         {getTd("Lecture")}
                         {getTd("Tutorial")}
                         {getTd("Practical")}
-                    </tr>
-                    {colorSchemes.map((c, index) => {
+                        {getTd("Credit Hour")}
+                    </tr>{colorSchemes.map((c, index) => {
                         return this.generateSubjectSummaryView(find(subjectSummaries, {SubjectCode: c.SubjectCode}), c.Color, index);
-                    })
-}</tbody>
+                    })}
+                    <tr>
+                        {getTd("Total Credit Hour", "right", 5)}
+                        {getTd(subjectSummaries
+                                .reduce((x, y) => x + y.CreditHour, 0)
+                                .toFixed(1))}
+                    </tr>
+                    </tbody>
             </table>
         );
     }
@@ -50,19 +56,20 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
                 {getTd(x.Lecture)}
                 {getTd(x.Tutorial)}
                 {getTd(x.Practical)}
+                {getTd(x.CreditHour.toFixed(1))}
             </tr>
         );
     }
 
 }
 
-function getTd(content: any) {
+function getTd(content: string, textAlign = "center", colSpan = 1) {
     const style : React.CSSProperties = {
-        textAlign: "center",
+        textAlign,
         padding: "5px",
         fontFamily: "roboto"
     };
     return (
-        <td style={style}>{content}</td>
+        <td style={style} colSpan={colSpan}>{content}</td>
     );
 }

@@ -8,6 +8,7 @@ export class SubjectSummary {
     public readonly Lecture : string;
     public readonly Tutorial : string;
     public readonly Practical : string;
+    public readonly CreditHour: number;
     public constructor(slots : ISlotViewModel[]) {
         this.SubjectCode = slots[0].SubjectCode;
         this.SubjectName = BeautifySubjectName(slots[0].SubjectName);
@@ -20,6 +21,9 @@ export class SubjectSummary {
         this.Lecture =  extract("L");
         this.Tutorial = extract("T");
         this.Practical = extract("P");
+        this.CreditHour = slots
+            .map((x) => x.CreditHour ? parseFloat(x.CreditHour) : 0)
+            .reduce((x, y) => x + y);
     }
 
     public ToString() : string {
@@ -35,11 +39,9 @@ export class SubjectSummary {
 export class TimetableSummary {
     public readonly SubjectSummaries : SubjectSummary[];
     public constructor(slots : ISlotViewModel[]) {
-        this.SubjectSummaries = [];
-        const subjects = PartitionizeByKey(slots, "SubjectCode");
-        subjects.forEach((partition) => {
-                this.SubjectSummaries.push(new SubjectSummary(partition));
-        });
+        this.SubjectSummaries =
+            PartitionizeByKey(slots, "SubjectCode")
+            .map((partition) => new SubjectSummary(partition));
     }
 
     public ToString() : string {

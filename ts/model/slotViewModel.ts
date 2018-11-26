@@ -10,6 +10,7 @@ export interface ISlotViewModel {
     Group: string[];
     Day: string;
     TimePeriod: string;
+    CreditHour?: string;
     WeekNumber: string[];
     Room: string[];
     AlternativeSlots: ISlotViewModel[]; // This property is to be populated by FindAlternativeSlotsOfCurrentSlots action
@@ -27,6 +28,7 @@ export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
         Group:            rawSlot.Group.split("/"),
         Day:              rawSlot.Day,
         TimePeriod:       rawSlot.TimePeriod,
+        CreditHour:       rawSlot.CreditHour,
         WeekNumber:       rawSlot.WeekNumber.split("/"),
         Room:             rawSlot.Room.split("/"),
         AlternativeSlots: [],
@@ -50,5 +52,6 @@ export function FromSlotViewModelToRawSlot(s: ISlotViewModel): RawSlot {
         TimePeriod:       s.TimePeriod,
         WeekNumber:       s.WeekNumber.join("/"),
         Room:             s.Room.join("/"),
+        CreditHour:       s.CreditHour
     };
 }
