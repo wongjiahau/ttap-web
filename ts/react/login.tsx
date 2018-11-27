@@ -154,8 +154,16 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                 (iframe.contentWindow as any)["changePage"](this.currentPage); // changePage is a function defined in <script></script>
             } else {
                 try {
+
+                    // Logout from the unitreg page
+                    // To free up the connection to server
+                    // So that the server won't be overwhelmed
+                    iframe.src = "https://unitreg.utar.edu.my/portal/courseRegStu/logout.jsp";
+
+                    // Parse the HTML data
                     this.props.handleLoadSlots(this.htmls.map(ParseHtmlToRawSlot).reduce((x, y) => x.concat(y)));
                     this.setState({redirect: true});
+
                 } catch (error) {
                     this.htmls = []; // Clear previous stored HTMLS
                     this.setState({openErrorDialog: true});
