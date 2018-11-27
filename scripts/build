@@ -16,7 +16,7 @@ sed -i "s/LGCH/$HASH/g" ./public/index.html
 sed -i "s/LAST_REVISION/$(git rev-list --count master)/g" ./public/index.html
 
 # Build the React app
-npm run build
+npm run build || exit 1
 
 sed -i 's|/static|./static|g' ./build/index.html  # this is to fix some relative path bug
 
