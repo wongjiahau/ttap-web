@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch: any): ISubjectListViewDispatchProps => {
             dispatch(new HideSnackbar());
         },
         handleSelection: (subjectIndex: number) => {
-            ToggleLoadingScreen(() => {
+            ToggleLoadingScreen("Finding possible timetables", () => {
                 dispatch(new ToggleSubjectSelection(subjectIndex));
                 dispatch(new NotifyIfTimetableIsFound());
                 dispatch(new ToggleIsOpenOfAlgorithmVisualizerView(true));

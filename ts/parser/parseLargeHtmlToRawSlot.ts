@@ -1,5 +1,5 @@
-//@ts-ignore
-import { JSDOM } from "jsdom"; 
+// @ts-ignore
+import { JSDOM } from "jsdom";
 const last = require("lodash.last");
 const uniqWith = require("lodash.uniqwith");
 const omit = require("lodash.omit");

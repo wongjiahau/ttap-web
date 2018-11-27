@@ -2,6 +2,7 @@ import * as React from "react";
 import {Redirect} from "react-router";
 import {Route, Switch} from "react-router-dom";
 import {RawReadmeUrl, RawTosppUrl} from "../constants";
+import { FgoViewContainer } from "../redux/containers/fgoViewContainer";
 import {LoginContainer} from "../redux/containers/loginContainer";
 import {SelectCourseViewContainer} from "../redux/containers/selectCourseContainer";
 import {GetStarted} from "./getStarted";
@@ -24,6 +25,7 @@ export const MainRouter = () => (
         <Route exact={true} path="/playground" component={Playground}/>
         <Route exact={true} path="/tospp" component={Page(RawTosppUrl)}/>
         <Route exact={true} path="/about" component={Page(RawReadmeUrl)}/>
+        <Route exact={true} path="/fgo" component={FgoViewContainer}/>
     </Switch>
 );
 

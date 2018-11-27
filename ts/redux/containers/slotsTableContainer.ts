@@ -58,7 +58,7 @@ const mapStateToProps = (state: any): ISlotsTableViewStateProps => {
 const mapDispatchToProps = (dispatch: any): ISlotsTableViewDispatchProps => {
     return {
         handleDone: () => {
-            ToggleLoadingScreen(() => {
+            ToggleLoadingScreen("Finding possible timetables", () => {
                 dispatch(new FindTimetablesBasedOnChosenSlots());
                 dispatch(new UpdateTotalMatrix());
                 dispatch(new FindAlternativeSlotsOfCurrentSlots());

@@ -33,10 +33,15 @@ interface IAppState {
     isSecondaryDrawerOpen: boolean;
 }
 
-export function ToggleLoadingScreen(work: () => void) {
+export function ToggleLoadingScreen(loadingWord: string, work: () => void) {
     const x = document.getElementById("loading-words");
     if (x) {
         x.style.display =  "";
+
+        const y = document.getElementById("loading-inner-word");
+        if (y) {
+            y.innerHTML = loadingWord + "<br> . . . . . .";
+        }
         setTimeout(() => {
             work();
             x.style.display =  "none";
