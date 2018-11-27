@@ -49,7 +49,7 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
                     <List>
                         {getListItem("Text file"      , <FileIcon/>   , this.props.handleSaveAsTextFile)}
                         {getListItem("Picture"        , <PictureIcon/>, this.props.handleSaveAsPicture)}
-                        {getListItem("Google Calendar", <CloudIcon/>  , this.props.handleOpenGetDateDialog)}
+                        {/* {getListItem("Google Calendar", <CloudIcon/>  , this.props.handleOpenGetDateDialog)} */}
                     </List>
                     <Button color="primary" style={cancelButtonStyle} onClick={this.props.handleClose}>cancel</Button>
                 </div>
