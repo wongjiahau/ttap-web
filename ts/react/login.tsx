@@ -141,8 +141,12 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
         const iframe = (document.getElementById("unitregiframe")as HTMLIFrameElement);
         if (iframe === null) { throw new Error(); }
         if (iframe.contentWindow === null) { throw new Error(); }
-        const newLocation = iframe.contentWindow.location.href;
-        if ((new Str(newLocation)).Contains("masterSchedule")) {
+        const newLocation = new Str(iframe.contentWindow.location.href);
+        if (newLocation.Contains("studentRegistration")) {
+            iframe.src = "http://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
+            return;
+        }
+        if (newLocation.Contains("masterSchedule")) {
             const currentHtml = iframe.contentWindow.document.body.innerHTML;
             this.htmls.push(currentHtml);
             if ((new Str(currentHtml)).Contains(`changePage('${this.currentPage + 1}')`)) {
