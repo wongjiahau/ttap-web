@@ -1,5 +1,4 @@
 // @ts-ignore
-import { JSDOM } from "jsdom";
 const last = require("lodash.last");
 const uniqWith = require("lodash.uniqwith");
 const omit = require("lodash.omit");
@@ -12,7 +11,7 @@ import { Str } from "../util/str";
  */
 export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
-    const htmlDoc = new JSDOM(html).window.document;
+    const htmlDoc = new DOMParser().parseFromString(html, "text/html");
 
     const tableRows = htmlDoc.getElementsByTagName("table")[10].getElementsByTagName("tr");
     // i = 1 because we need to skip the first <tr> which is the header of the table
