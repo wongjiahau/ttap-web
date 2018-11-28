@@ -3,7 +3,7 @@ import { RawSlot } from "./../../model/rawSlot";
 import {GetTestTimetables1} from "./../../tests/testDataGenerator";
 import {ToggleSubjectSelection} from "./../actions/toggleSubjectSelection";
 const isEqual = require("lodash.isequal");
-import ParseHtmlToRawSlot from "../../parser/parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../../parser/parseStudentHtmlToRawSlot";
 import {ParseRawSlotToSubject} from "../../parser/parseRawSlotToSubject";
 import TestManager, {FileName} from "../../tests/testManager";
 import { NotifyDataLoaded } from "../actions/notifyDataLoaded";
@@ -13,7 +13,7 @@ import {SelectSlotChoice} from "./../actions/selectSlotChoice";
 import {IMasterState, MasterStateReducer, NewMasterState} from "./../reducers/masterState";
 
 function getInitialState() : IMasterState {
-    const slots = ParseHtmlToRawSlot(new TestManager().GetDataFrom(FileName.cf_2017_nov));
+    const slots = ParseStudentHtmlToRawSlot(new TestManager().GetDataFrom(FileName.cf_2017_nov));
     const state = MasterStateReducer(NewMasterState(), new NotifyDataLoaded(slots));
     return state;
 }

@@ -4,7 +4,7 @@ import Typography from "material-ui/Typography";
 import * as React from "react";
 import {Redirect} from "react-router";
 import { IRawSlot } from "../model/rawSlot";
-import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../parser/parseStudentHtmlToRawSlot";
 import {Str} from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
 import { getLoadingElement, LoadSlotsFromUrl } from "./selectCourseView";
@@ -84,7 +84,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         <Button color="primary" raised={true} onClick={() => {
                             const textarea = document.getElementById("htmlarea") as HTMLTextAreaElement;
                             try {
-                                this.props.handleLoadSlots(ParseHtmlToRawSlot(textarea.value));
+                                this.props.handleLoadSlots(ParseStudentHtmlToRawSlot(textarea.value));
                                 this.setState({redirect: true});
                             } catch (error) {
                                 alert("Failed. Make sure you paste in the correct content.");
@@ -161,7 +161,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                     iframe.src = "https://unitreg.utar.edu.my/portal/courseRegStu/logout.jsp";
 
                     // Parse the HTML data
-                    this.props.handleLoadSlots(this.htmls.map(ParseHtmlToRawSlot).reduce((x, y) => x.concat(y)));
+                    this.props.handleLoadSlots(this.htmls.map(ParseStudentHtmlToRawSlot).reduce((x, y) => x.concat(y)));
                     this.setState({redirect: true});
 
                 } catch (error) {

@@ -12,7 +12,7 @@ import { CantFindMyCourseFormUrl, ReportLoadDataErrorFormUrl } from "../constant
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {IRawSlot, RawSlot} from "../model/rawSlot";
-import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../parser/parseStudentHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
 // import { HENG_2017_APR } from "../tests/testData/heng_2017_apr";
 import { Str } from "../util/str";
@@ -239,7 +239,7 @@ export const LoadSlotsFromUrl = (
             // What do when the request is successful
             let parser : (src: string) => RawSlot[];
             if (fileType === "html") {
-                parser = ParseHtmlToRawSlot;
+                parser = ParseStudentHtmlToRawSlot;
             } else if (fileType === "json") {
                 parser = ParseJsonToRawSlot;
             } else {

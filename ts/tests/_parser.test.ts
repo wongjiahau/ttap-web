@@ -3,7 +3,7 @@ import {expect} from "chai";
 const find = require("lodash.find");
 const last = require("lodash.last");
 
-import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
+import ParseHtmlToSlots from "../parser/parseStudentHtmlToRawSlot";
 import {ParseRawSlotToSubject} from "../parser/parseRawSlotToSubject";
 import { Str } from "../util/str";
 import testManager from "./testManager";

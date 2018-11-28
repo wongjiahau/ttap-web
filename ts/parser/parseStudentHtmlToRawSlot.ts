@@ -2,7 +2,7 @@ const last = require("lodash.last");
 
 import {RawSlot} from "../model/rawSlot";
 import { Str } from "../util/str";
-export default function ParseHtmlToRawSlot(html: string): RawSlot[] {
+export default function ParseStudentHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");
     // @ts-ignore

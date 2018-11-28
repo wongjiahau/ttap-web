@@ -3,12 +3,12 @@ const last = require("lodash.last");
 const omit = require("lodash.omit");
 const uniqWith = require("lodash.uniqwith");
 import TestManager, { FileName } from "../../tests/testManager";
-import { IsRawSlotEquals, ParseLargeHtmlToRawSlot } from "../parseLargeHtmlToRawSlot";
+import { IsRawSlotEquals, ParseFgoHtmlToRawSlot } from "../parseFgoHtmlToRawSlot";
 import { IRawSlot } from "./../../model/rawSlot";
 
 describe.skip("ParseHtmlToRawSlot", () => {
     const html = new TestManager().GetDataFrom(FileName.all_fes_slots);
-    const rawSlots = ParseLargeHtmlToRawSlot(html);
+    const rawSlots = ParseFgoHtmlToRawSlot(html);
     it("should not contain duplicates", () => {
         const uniques = uniqWith(rawSlots, IsRawSlotEquals);
         expect(uniques.length).to.eq(rawSlots.length);

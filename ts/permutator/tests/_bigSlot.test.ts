@@ -8,7 +8,7 @@ import {
 import {
     CreateSlotFromRaw
 } from "../../model/slot";
-import ParseHtmlToRawSlot from "../../parser/parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../../parser/parseStudentHtmlToRawSlot";
 import TestManager, {
     FileName
 } from "../../tests/testManager";
@@ -19,7 +19,7 @@ import {
     GotIntersection
 } from "../matrix";
 
-const testSlots = ParseHtmlToRawSlot(new TestManager().GetDataFrom(FileName.cf_2017_nov));
+const testSlots = ParseStudentHtmlToRawSlot(new TestManager().GetDataFrom(FileName.cf_2017_nov));
 describe("BigSlot", () => {
     it("DayTimeMatrix should have length of 7 * 14 (case 1)", () => {
         const rawSlot = find(testSlots, {

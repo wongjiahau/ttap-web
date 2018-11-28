@@ -4,7 +4,7 @@ import {
 import * as Combinatorics from "js-combinatorics";
 import { ObjectStore } from "../dataStructure/objectStore";
 import { Subject } from "../model/subject";
-import ParseHtmlToRawSlot from "../parser/parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../parser/parseStudentHtmlToRawSlot";
 import { ParseRawSlotToSubject } from "../parser/parseRawSlotToSubject";
 import { CodeOf } from "../tests/testData/heng_2017_apr";
 import {

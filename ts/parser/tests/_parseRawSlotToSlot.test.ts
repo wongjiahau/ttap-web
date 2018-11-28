@@ -5,7 +5,7 @@ import { Time } from "../../att/time";
 import { TimePeriod } from "../../att/timePeriod";
 import { IRawSlot } from "../../model/rawSlot";
 import TestManager, { FileName } from "../../tests/testManager";
-import ParseHtmlToRawSlot from "../parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../parseStudentHtmlToRawSlot";
 import {
     GetTestRawSlot1
 } from "./../../tests/testDataGenerator";
@@ -31,14 +31,14 @@ describe("parseRawSlotToSlot", () => {
     it("case 2", () => {
         const input = new TestManager().GetDataFrom(FileName.heng_2017_nov);
         expect(() => {
-            const result = ParseRawSlotToSlot(ParseHtmlToRawSlot(input));
+            const result = ParseRawSlotToSlot(ParseStudentHtmlToRawSlot(input));
         }).to.not.throw();
     });
 
     it("case 3", () => {
         const input = new TestManager().GetDataFrom(FileName.keli_2017_sept);
         expect(() => {
-            const result = ParseRawSlotToSlot(ParseHtmlToRawSlot(input));
+            const result = ParseRawSlotToSlot(ParseStudentHtmlToRawSlot(input));
         }).to.not.throw();
     });
 

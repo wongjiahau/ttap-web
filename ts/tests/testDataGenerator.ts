@@ -3,7 +3,7 @@ import {ObjectStore} from "../dataStructure/objectStore";
 import { IGroupedTimetable } from "../model/groupedTimetable";
 import {Slot} from "../model/slot";
 import { Timetable } from "../model/timetable";
-import ParseHtmlToSlots from "../parser/parseHtmlToRawSlot";
+import ParseHtmlToSlots from "../parser/parseStudentHtmlToRawSlot";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseRawSlotToSubject} from "../parser/parseRawSlotToSubject";
 import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";

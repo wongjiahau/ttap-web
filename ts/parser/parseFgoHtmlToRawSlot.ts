@@ -9,7 +9,7 @@ import { Str } from "../util/str";
 /**
  * This function is only needed for parse file manually
  */
-export function ParseLargeHtmlToRawSlot(html: string): RawSlot[] {
+export function ParseFgoHtmlToRawSlot(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");
 

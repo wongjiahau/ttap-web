@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RawSlot } from "../../model/rawSlot";
-import ParseHtmlToRawSlot from "../../parser/parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../../parser/parseStudentHtmlToRawSlot";
 import { ITimetableCreatorViewDispatchProps, ITimetableCreatorViewStateProps, TimetableCreatorView } from "../../react/timetableCreatorView";
 import { FindAlternativeSlotsOfCurrentSlots } from "../actions/findAlternativeSlotsOfCurrentSlots";
 import { FindTimetablesBasedOnChosenSlots } from "../actions/findTimetablesBasedOnChosenSlots";

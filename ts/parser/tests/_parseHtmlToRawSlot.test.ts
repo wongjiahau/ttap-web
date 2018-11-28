@@ -3,7 +3,7 @@ const isEqual = require("lodash.isequal");
 const omit = require("lodash.omit");
 import { RawSlot } from "../../model/rawSlot";
 import TestManager, { FileName } from "../../tests/testManager";
-import ParseHtmlToRawSlot from "../parseHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot from "../parseStudentHtmlToRawSlot";
 import {
     IRawSlot
 } from "./../../model/rawSlot";
@@ -11,7 +11,7 @@ import {
 describe("ParseHtmlToRawSlot", () => {
     it("case 1", () => {
         const input = new TestManager().GetDataFrom(FileName.heng_2017_sept);
-        const result = ParseHtmlToRawSlot(input);
+        const result = ParseStudentHtmlToRawSlot(input);
         const expected: IRawSlot = {
             Uid: 0,
             SubjectCode: "MPU3113",
