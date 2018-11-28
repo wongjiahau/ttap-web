@@ -42,6 +42,7 @@ export function ParseFgoHtmlToRawSlot(html: string): RawSlot[] {
         const newSlot = new RawSlot();
         newSlot.SubjectCode = currentSubjectCode;
         newSlot.SubjectName = currentSubjectName;
+        newSlot.CreditHour = currentSubjectCode.slice(-1);
         let offset = 0;
         if (new Str(currentRow.id).Contains("subRow")) {
             offset = 4;
@@ -71,7 +72,7 @@ export function ParseFgoHtmlToRawSlot(html: string): RawSlot[] {
                     newSlot.TimePeriod = cellValue;
                     break;
                 case 6:
-                    newSlot.CreditHour = cellValue;
+                    // NOTE: Credit Hour is not the same as Hour
                     break;
                 case 7:
                     newSlot.WeekNumber = cellValue;

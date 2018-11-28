@@ -1,10 +1,8 @@
 import { expect } from "chai";
 const last = require("lodash.last");
-const omit = require("lodash.omit");
 const uniqWith = require("lodash.uniqwith");
 import TestManager, { FileName } from "../../tests/testManager";
 import { IsRawSlotEquals, ParseFgoHtmlToRawSlot } from "../parseFgoHtmlToRawSlot";
-import { IRawSlot } from "./../../model/rawSlot";
 
 describe.skip("ParseHtmlToRawSlot", () => {
     const html = new TestManager().GetDataFrom(FileName.all_fes_slots);

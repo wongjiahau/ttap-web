@@ -2,11 +2,11 @@ import { expect } from "chai";
 const isEqual = require("lodash.isequal");
 const omit = require("lodash.omit");
 import { RawSlot } from "../../model/rawSlot";
-import TestManager, { FileName } from "../../tests/testManager";
-import ParseStudentHtmlToRawSlot from "../parseStudentHtmlToRawSlot";
 import {
     IRawSlot
-} from "./../../model/rawSlot";
+} from "../../model/rawSlot";
+import TestManager, { FileName } from "../../tests/testManager";
+import ParseStudentHtmlToRawSlot from "../parseStudentHtmlToRawSlot";
 
 describe("ParseHtmlToRawSlot", () => {
     it("case 1", () => {
