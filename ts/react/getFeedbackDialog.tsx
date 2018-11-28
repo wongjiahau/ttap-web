@@ -32,7 +32,7 @@ IGetFeedbackDialogState > {
     public render() {
         return (
             <Dialog open={this.state.isOpen}>
-                <img style={{height: "350px"}} src="https://image.ibb.co/gaKihc/thank_3148710_640.png"/>
+                <img style={{height: "350px"}} src="thank_3148710_640.png"/>
                 <DialogTitle>
                         Thank you for using TTAP!
                 </DialogTitle>

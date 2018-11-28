@@ -77,7 +77,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
         };
         return (
             <div id="timetable-view">
-                {/* Tippy css */} <link rel="stylesheet" href="https://cdn.rawgit.com/tvkhoa/react-tippy/master/dist/tippy.css"/>
+                {/* Tippy css */} <link rel="stylesheet" href="tippy.css"/>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <div style={divStyle}>
                         <ReactGridLayout
@@ -106,8 +106,6 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             </div>
         );
     }
-
-    private previousOnResizeHandler: any = () => {};
     public componentDidMount() {
         this.previousOnResizeHandler = window.onresize;
         window.onresize = this.handleWindowResizing;
@@ -122,6 +120,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
     public handleWindowResizing = () => {
         this.setState({width: getTimetableViewWidth()});
     }
+
+    private previousOnResizeHandler: any = () => {};
 }
 
 export const GetStandardDayColumnLayout = () : ReactGridLayout.Layout[] => {

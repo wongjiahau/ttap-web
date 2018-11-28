@@ -10,7 +10,6 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="balloon.min.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -65,7 +64,7 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <!-- Js cookies -->
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="js.cookie.min.js"></script>
 
     <!-- Roboto font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
@@ -138,8 +137,7 @@
             document.getElementById("errorMessage").innerHTML = message;
         }
     </script>
-
-    <!-- Cytoscape for plotting graph animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.17/cytoscape.min.js"></script>
+    <!-- Cytoscape for plotting graph animation -->  
+    <script defer src="cytoscape.min.js"></script>
 </body>
 </html>

@@ -45,7 +45,7 @@ export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownP
         };
         return (
             <div id={this.props.id} style={divStyle} className="markdown-body">
-                {/* Markdown css */} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.min.css"/>
+                {/* Markdown css */} <link rel="stylesheet" href="github-markdown.min.css"/>
                 <Paper style={paperStyle}>
                     <ReactMarkdown source={this.state.markdownSource}/>
                 </Paper>

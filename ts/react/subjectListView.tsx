@@ -134,7 +134,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         return (
             <div>
                 <Drawer elevation={16} open={this.props.IsOpen} onClose={this.handleClose}>
-                    {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/4b65000a/components/sidebar.min.css"/>
+                    {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="sidebar.min.css"/>
                     <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                         <header style={headerStyle}>
                             <Typography gutterBottom={true} type="display1" color="primary">

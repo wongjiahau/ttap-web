@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as ReactGridLayout from "react-grid-layout";
-//@ts-ignore
+// @ts-ignore
 import {Tooltip} from "react-tippy";
 import {
+    BoxKind,
     ColorOfClicked,
     ColorOfDefinitelyOccupied,
     ColorOfDefinitelyUnoccupied,
     ColorOfMaybeOccupied,
-    BoxKind,
     STCBox
 } from "../../model/matrix/stcBox";
 import {Colors} from "../colors/colors";
