@@ -37,6 +37,10 @@ This software is used to helps student's of UTAR to arrange their timetable with
 [Node.js](https://nodejs.org/en/).
 
 2. It is highly recommended to use [Visual Studio Code](https://code.visualstudio.com/) for this project.
+Also, please install the following extensions:
+
+- Git Lens
+- TS Lint
 
 ### Steps
 #### 1. Clone the project
@@ -80,6 +84,7 @@ It is also hosted at https://ttap-source-analysis.surge.sh
 
 ### How many visits are there to ttap.surge.sh?
 To view the analytical data, go to https://goo.gl/#analytics/goo.gl/nHNNCF/all_time
+Or https://app.bitly.com/Bi451JE8j4x/bitlinks/2JmBftW
 
 ### How to view the feedback report?
 
