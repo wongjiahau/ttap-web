@@ -21,7 +21,7 @@ const mapStateToProps = (state: any): ITimetableCreatorViewStateProps => {
     return {
         isSbcwTurnedOn:   settingsState.SearchByConsideringWeekNumber,
         isSlotLoaded: target.IsSlotLoaded,
-        isDisableClashCheckingTurnedOn: settingsState.DisableClashChecking
+        isDccTurnedOn: settingsState.DisableClashChecking
     };
 };
 

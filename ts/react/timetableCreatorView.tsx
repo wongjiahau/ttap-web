@@ -1,4 +1,4 @@
-import { FormControlLabel } from "material-ui";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel } from "material-ui";
 import IconList from "material-ui-icons/List";
 import Button from "material-ui/Button";
 import Switch from "material-ui/Switch";
@@ -32,8 +32,8 @@ const selectSubjectButtonStyle : React.CSSProperties = {
 
 export interface ITimetableCreatorViewStateProps {
     isSlotLoaded : boolean;
-    isSbcwTurnedOn : boolean;
-    isDisableClashCheckingTurnedOn: boolean;
+    isSbcwTurnedOn : boolean; // sbcw = search by considering week number
+    isDccTurnedOn: boolean; // dcc = disable clash checking
 }
 
 export interface ITimetableCreatorViewDispatchProps {
@@ -48,7 +48,16 @@ interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
 ITimetableCreatorViewDispatchProps {
 }
 
-export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {} > {
+export class TimetableCreatorView extends React.Component < ITimetableCreatorViewProps, {
+    isDccDialogOpen: boolean;
+} > {
+    public constructor(props: ITimetableCreatorViewProps) {
+        super(props);
+        this.state = {
+            isDccDialogOpen: false
+        };
+    }
+
     public render() {
         // const DEBUGGING = false; // Please change to false during production
         // if (DEBUGGING) {
@@ -75,7 +84,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                                 label="Disable clash-checking"
                                 control={<Switch style={switchStyle}
                                             color="primary"
-                                            checked={this.props.isDisableClashCheckingTurnedOn}
+                                            checked={this.props.isDccTurnedOn}
                                             onChange={this.handleToggleDisableClashChecking}/>}/>
 
                             {/* This feature below is currently disabled,
@@ -92,6 +101,32 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                         </StackPanel>
                     </div>
                 </LeftRightPanel>
+
+                <Dialog open={this.state.isDccDialogOpen}>
+                    <DialogTitle>Disable clash-checking?</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Turning on this feature might cause TTAP to generate <b>invalid</b> timetables.
+                            <br/>
+                            <br/>
+                            You should only turn on this feature if you want to to visualize clashes between different subjects.
+                            <br/>
+                            <br/>
+                            WARNING: This will also <b><i>slow</i></b> down the search process.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => this.setState({isDccDialogOpen: false})} color="primary">
+                            cancel
+                        </Button>
+                        <Button onClick={() => {
+                            this.setState({isDccDialogOpen: false});
+                            this.props.handleToggleDisableClashChecking(true);
+                        }} color="primary">
+                            Turn on
+                        </Button>
+                    </DialogActions>
+                </Dialog>
                 <TimetableListContainer/>
                 <SaveTimetableDialogContainer/>
                 <SBCWDialogContainer/>
@@ -113,6 +148,10 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
     }
 
     private handleToggleDisableClashChecking = (event: object, checked: boolean) => {
-        this.props.handleToggleDisableClashChecking(checked);
+        if (checked) {
+            this.setState({isDccDialogOpen: true});
+        } else {
+            this.props.handleToggleDisableClashChecking(false);
+        }
     }
 }

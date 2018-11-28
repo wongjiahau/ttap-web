@@ -15,6 +15,10 @@ export class ToggleDisableClashChecking extends MasterStateAction {
             SettingsState: {
                 ...state.SettingsState,
                 DisableClashChecking: this.disable
+            },
+            SnackbarState: {
+                IsOpen: true,
+                Message: `Clash-checking ${this.disable ? "disabled" : "enabled"}.`
             }
         };
     }
