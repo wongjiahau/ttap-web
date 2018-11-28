@@ -33,6 +33,7 @@ const selectSubjectButtonStyle : React.CSSProperties = {
 export interface ITimetableCreatorViewStateProps {
     isSlotLoaded : boolean;
     isSbcwTurnedOn : boolean;
+    isDisableClashCheckingTurnedOn: boolean;
 }
 
 export interface ITimetableCreatorViewDispatchProps {
@@ -40,6 +41,7 @@ export interface ITimetableCreatorViewDispatchProps {
     handleOpenSubjectListView: ()      => void;
     handleSlotLoaded:          (rawSlots: RawSlot[]) => void;
     handleTurnOffSBCW:         ()      => void;
+    handleToggleDisableClashChecking: (disable: boolean)  => void;
 }
 
 interface ITimetableCreatorViewProps extends ITimetableCreatorViewStateProps,
@@ -67,14 +69,25 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                         <IconList style={iconStyle}/>
                         Select subjects
                     </Button>
-                    <div style={{...switchStyle, display: "none"}}>
+                    <div style={{...switchStyle}}>
                         <StackPanel horizontalAlignment="right" orientation="horizontal">
                             <FormControlLabel
+                                label="Disable clash-checking"
+                                control={<Switch style={switchStyle}
+                                            color="primary"
+                                            checked={this.props.isDisableClashCheckingTurnedOn}
+                                            onChange={this.handleToggleDisableClashChecking}/>}/>
+
+                            {/* This feature below is currently disabled,
+                                because its necessity is diminished
+                                due to better timetable-finding algorithm */}
+                            <FormControlLabel
+                                style={{display: "none"}}
                                 label="Search by considering week number"
                                 control={<Switch style={switchStyle}
                                             color="primary"
                                             checked={this.props.isSbcwTurnedOn}
-                                            onChange={this.handleSwitchToggled}/>}/>
+                                            onChange={this.handleToggleSBCW}/>}/>
                             {""/*This is for overcoming a bug of StackPanel */}
                         </StackPanel>
                     </div>
@@ -91,11 +104,15 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         );
     }
 
-    private handleSwitchToggled = (event : object, checked : boolean) => {
+    private handleToggleSBCW = (event : object, checked : boolean) => {
         if (checked) {
             this.props.handleOpenSbcwDialog();
         } else {
             this.props.handleTurnOffSBCW();
         }
+    }
+
+    private handleToggleDisableClashChecking = (event: object, checked: boolean) => {
+        this.props.handleToggleDisableClashChecking(checked);
     }
 }

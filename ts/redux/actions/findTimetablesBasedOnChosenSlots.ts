@@ -1,6 +1,7 @@
 const find = require("lodash.find");
 const sortBy = require("lodash.sortby");
 import { IStringDicionary } from "../../interfaces/dictionary";
+import { IGroupedTimetable } from "../../model/groupedTimetable";
 import {RawSlot} from "../../model/rawSlot";
 import {DiffReport, GenerateSubjectSchema, GetDiff, SubjectSchema} from "../../model/subjectSchema";
 import { Timetable } from "../../model/timetable";
@@ -9,7 +10,6 @@ import { GroupSimilarTimetables } from "../../permutator/groupSimilarTimetables"
 import {PartitionizeByKey} from "../../permutator/partitionize";
 import {NewTimetableListState} from "../reducers/timetableListState";
 import {IMasterState, MasterStateAction} from "./../reducers/masterState";
-import { IGroupedTimetable } from "../../model/groupedTimetable";
 
 export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
     public constructor() {
@@ -25,7 +25,11 @@ export class FindTimetablesBasedOnChosenSlots extends MasterStateAction {
         let selectedSlots: RawSlot[] = [];
         if (slotNumbersOfSelectedSlots.length > 0) {
             selectedSlots = GetSlotsFromSlotNumbers(slotStore.GetAll(), slotNumbersOfSelectedSlots);
-            newTimetables = GroupSimilarTimetables(state.SettingsState.TimetableFinder(selectedSlots, new NullFindTimetableVisualizer()));
+            newTimetables = GroupSimilarTimetables(state.SettingsState.TimetableFinder(
+                selectedSlots,
+                state.SettingsState.DisableClashChecking,
+                new NullFindTimetableVisualizer())
+            );
             const slotsOfSubjects = PartitionizeByKey(selectedSlots, "SubjectCode");
             currentSubjectSchemas = slotsOfSubjects.map((x) => GenerateSubjectSchema(x));
             sortBy(currentSubjectSchemas, [(o: SubjectSchema) => o.SubjectCode]);

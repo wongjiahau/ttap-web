@@ -26,7 +26,8 @@ export class ToggleSubjectSelection extends MasterStateAction {
             new FindTimetableVisualizer() :
             new NullFindTimetableVisualizer();
 
-        CurrentTimetableFinder = (x) => state.SettingsState.TimetableFinder(x, visualizer);
+        CurrentTimetableFinder = (x) =>
+            state.SettingsState.TimetableFinder(x, state.SettingsState.DisableClashChecking, visualizer);
 
         RawSlotStore = state.DataState.RawSlotDataRouter.GetCurrentData();
         const newSubjects = state

@@ -20,7 +20,8 @@ interface ISnapshot {
 const LIMIT = 1000000;
 export function FindTimetable(
     input : IOptimizedSlot[],
-    visualizer?: FindTimetableVisualizer<IOptimizedSlot>
+    disableClashChecking = false,
+    visualizer?: FindTimetableVisualizer<IOptimizedSlot>,
 ) : Timetable[] {
     if (!visualizer) {
         visualizer = new NullFindTimetableVisualizer();
@@ -55,7 +56,7 @@ export function FindTimetable(
             const previousSlot = partitioned[prevPtr][indices[prevPtr].Value];
             visualizer.connect(previousSlot, current); // this is for animation purpose
         }
-        if (!GotIntersection(current.DayTimeMatrix, prevSnapshot.DayTimeMatrix)) {
+        if (disableClashChecking || !GotIntersection(current.DayTimeMatrix, prevSnapshot.DayTimeMatrix)) {
             snapshots.push({
                 SlotIds: concat(current.SlotIds, prevSnapshot.SlotIds),
                 DayTimeMatrix: AppendMatrix(current.DayTimeMatrix, prevSnapshot.DayTimeMatrix)
@@ -104,14 +105,16 @@ export function FindTimetable(
 
 export function FindTimetableWithoutConsideringWeekNumber(
     rawSlots : RawSlot[],
+    disableClashChecking = false,
     visualizer?: FindTimetableVisualizer<IOptimizedSlot>
 ) : Timetable[] {
-    return FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)), visualizer);
+    return FindTimetable(ParseSlotToTinySlot(ParseRawSlotToSlot(rawSlots)), disableClashChecking, visualizer);
 }
 
 export function FindTimetableByConsideringWeekNumber(
     rawSlots : RawSlot[],
+    disableClashChecking = false,
     visualizer?: FindTimetableVisualizer<IOptimizedSlot>
 ) : Timetable[] {
-    return FindTimetable(ParseSlotToBigSlot(ParseRawSlotToSlot(rawSlots)), visualizer);
+    return FindTimetable(ParseSlotToBigSlot(ParseRawSlotToSlot(rawSlots)), disableClashChecking, visualizer);
 }
