@@ -1,6 +1,7 @@
-import Button from "material-ui/Button";
-import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
-import Typography from "material-ui/Typography";
+import { DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import Typography from "@material-ui/core/Typography";
 import * as React from "react";
 import {Redirect} from "react-router";
 import { IRawSlot } from "../model/rawSlot";
@@ -64,9 +65,9 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         onLoad={this.handleIFrameOnLoad}
                         src={URL}/>
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
-                        <Button raised={true} color="secondary" onClick={this.handleRefresh}>Refresh</Button>
+                        <Button variant="contained" color="secondary" onClick={this.handleRefresh}>Refresh</Button>
                         <p/>
-                        <Button raised={true} color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
+                        <Button variant="contained" color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
                     </StackPanel>
                     <Button onClick={() => this.setState({openAddSlotManuallyDialog: true})}>Add slots manually</Button>
                 </StackPanel>
@@ -81,7 +82,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => this.setState({openAddSlotManuallyDialog: false})}>Cancel</Button>
-                        <Button color="primary" raised={true} onClick={() => {
+                        <Button color="primary" variant="contained" onClick={() => {
                             const textarea = document.getElementById("htmlarea") as HTMLTextAreaElement;
                             try {
                                 this.props.handleLoadSlots(ParseStudentHtmlToRawSlot(textarea.value));
@@ -113,7 +114,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         <Button onClick={this.handleClose}>
                             No thanks
                         </Button>
-                        <Button raised={true} onClick={this.handleLoadDemo} color="primary">
+                        <Button variant="contained" onClick={this.handleLoadDemo} color="primary">
                             TRY DEMO
                         </Button>
                     </DialogActions>

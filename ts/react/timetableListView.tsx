@@ -1,8 +1,8 @@
+import Button from "@material-ui/core/Button";
 import IconClock from "material-ui-icons/Alarm";
 import IconGrid from "material-ui-icons/GridOn";
 import IconSave from "material-ui-icons/Save";
 import IconViewList from "material-ui-icons/ViewList";
-import Button from "material-ui/Button";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";
@@ -72,7 +72,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <StackPanel orientation="horizontal">
                         <Button
-                            raised={true}
+                            variant="contained"
                             color="primary"
                             onClick={this.props.handleOpenSetTimeConstraintView}>
                             <IconClock style={iconStyle}/>
@@ -94,13 +94,13 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                             handleClickDown={this.props.handleGoToNextSubTimetable}
                             />
                         <Button
-                            raised={true}
+                            variant="contained"
                             color="primary"
                             onClick={this.props.handleOpenSaveTimetableDialog}>
                             <IconSave style={iconStyle}/>
                             Save as . . .
                         </Button>
-                        <Button raised={true} color="primary" onClick={this.props.handleOpenSlotsTable}>
+                        <Button variant="contained" color="primary" onClick={this.props.handleOpenSlotsTable}>
                             <IconViewList style={iconStyle}/>
                             Show slots
                         </Button>

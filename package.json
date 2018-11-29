@@ -4,6 +4,7 @@
   "author": "Wong Jia Hau <hou32hou@gmail.com>",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.6.0",
     "@types/react": "16.3.0",
     "@types/react-dom": "16.0.1",
     "chai": "4.1.2",
@@ -27,7 +28,6 @@
     "lodash.uniq": "4.5.0",
     "lodash.uniqby": "4.7.0",
     "lodash.uniqwith": "^4.5.0",
-    "material-ui": "1.0.0-beta.30",
     "material-ui-icons": "1.0.0-beta.15",
     "phin": "2.5.4",
     "raf": "3.4.0",

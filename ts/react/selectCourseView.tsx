@@ -1,19 +1,20 @@
-import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
-import CircularProgress from "material-ui/Progress/CircularProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Dialog from "@material-ui/core/Dialog";
 import * as React from "react";
-//@ts-ignore
+// @ts-ignore
 import * as Autosuggest from "react-autosuggest";
 import Highlighter = require("react-highlight-words");
 import {Redirect} from "react-router";
 
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
+import { DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { CantFindMyCourseFormUrl, ReportLoadDataErrorFormUrl } from "../constants";
 import { Key } from "../enums/keyCodeEnum";
 import {IGithubApiObject} from "../interfaces/githubApiObject";
 import {IRawSlot, RawSlot} from "../model/rawSlot";
-import ParseStudentHtmlToRawSlot from "../parser/parseStudentHtmlToRawSlot";
 import {ParseJsonToRawSlot} from "../parser/parseJsonToRawSlot";
+import ParseStudentHtmlToRawSlot from "../parser/parseStudentHtmlToRawSlot";
 // import { HENG_2017_APR } from "../tests/testData/heng_2017_apr";
 import { Str } from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
@@ -99,13 +100,13 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                             <Button onClick={() => this.setState({openErrorDialog: false})}>
                                 No, thanks
                             </Button>
-                            <Button raised={true} onClick={this.handleReportBug} color="primary">
+                            <Button variant="contained" onClick={this.handleReportBug} color="primary">
                                 Report problem
                             </Button>
                         </DialogActions>
                     </Dialog>
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
-                        <Typography type="headline">Type in your course name ⇨ </Typography>
+                        <Typography variant="headline">Type in your course name ⇨ </Typography>
                         <Autosuggest
                             suggestions={this.state.currentSuggestions}
                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -120,7 +121,7 @@ export class SelectCourseView extends React.Component < ISelectCourseViewDispatc
                     </StackPanel>
                     <Button style={{visibility: this.state.suggestionIsFound ? "hidden" : "visible" }}
                         onClick={openGetIdForm}
-                        color="secondary" raised={true}>I can't find my course</Button>
+                        color="secondary" variant="contained">I can't find my course</Button>
                     {!this.state.serverError ? null : <p style={{color: "Red"}}>{this.state.serverError}</p>}
 
                 </StackPanel>

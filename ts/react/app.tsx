@@ -1,16 +1,16 @@
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple";
+import indigo from "@material-ui/core/colors/indigo";
+import pink from "@material-ui/core/colors/pink";
+import IconButton from "@material-ui/core/IconButton";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import ArrowBack from "material-ui-icons/ArrowBack";
 import GridIcon from "material-ui-icons/GridOn";
 import MenuIcon from "material-ui-icons/Menu";
-import AppBar from "material-ui/AppBar";
-import Button from "material-ui/Button";
-import TouchRipple from "material-ui/ButtonBase/TouchRipple";
-import indigo from "material-ui/colors/indigo";
-import pink from "material-ui/colors/pink";
-import IconButton from "material-ui/IconButton";
-import createMuiTheme from "material-ui/styles/createMuiTheme";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
 import * as React from "react";
 import {HashRouter as Router} from "react-router-dom";
 import {GetFeedbackDialog} from "./getFeedbackDialog";
@@ -81,7 +81,7 @@ export class App extends React.Component < {}, IAppState > {
                                     <ArrowBack style={{color: "white"}}/>
                                 </Button>
                                 {/* <GridIcon style={{ marginRight: "12px", color: "white" }}/> */}
-                                <Typography style={{ flex: 1 }} type="title" color="inherit">
+                                <Typography style={{ flex: 1 }} variant="title" color="inherit">
                                     Timetable Arranging Program (UTAR)
                                 </Typography>
                                 <IconButton onClick={this.handleOpenDrawer} style={{ marginRight: "-12px", color: "white"}}>
@@ -99,7 +99,7 @@ export class App extends React.Component < {}, IAppState > {
         );
         // <Drawer     width={200}     docked={false}     openSecondary={true}
         // open={this.state.isSecondaryDrawerOpened}Drawer >     <Button color="primary"
-        // raised={true} onClick={this.handleCloseDrawer}>         hide drawer
+        // variant="contained" onClick={this.handleCloseDrawer}>         hide drawer
         // </Button>     {/* < DrawerContent onItemClick={this.handleCloseDrawer}/> */}
         // </Drawer> <GetFeedbackDialog/> {/* <Main/> */}
     }

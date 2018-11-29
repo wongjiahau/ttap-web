@@ -1,6 +1,6 @@
-import { TextField } from "material-ui";
-import Button from "material-ui/Button";
-import Dialog, {DialogTitle} from "material-ui/Dialog";
+import { DialogTitle, TextField } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 import * as React from "react";
 import {StackPanel} from "./panels/stackPanel";
 const format = require("date-fns/format");
@@ -56,8 +56,9 @@ IGetSemStartDateDialogState > {
             <Dialog open={this.props.isOpen}>
                 <DialogTitle>Pick a date that represent the
                     <br/>
-                    Monday of Week One of next semester.</DialogTitle>
-                <div>
+                    Monday of Week One of next semester.
+                </DialogTitle>
+                    <div>
                     <StackPanel orientation="vertical" horizontalAlignment="center">
                         <TextField
                                 id="date"
@@ -78,13 +79,13 @@ IGetSemStartDateDialogState > {
                         <Button style={buttonStyle} onClick={this.props.handleClose}>Cancel</Button>
                         <Button
                             onClick={() => {
-                                if(this.state.date) {
-                                    this.props.handleSaveToGoogleCalendar(this.state.date)
+                                if (this.state.date) {
+                                    this.props.handleSaveToGoogleCalendar(this.state.date);
                                 }
                             }}
                             style={buttonStyle}
                             disabled={!this.state.dateIsSelected}
-                            raised={true}
+                            variant="contained"
                             color="primary">Add to Google Calendar</Button>
                     </StackPanel>
                 </div>

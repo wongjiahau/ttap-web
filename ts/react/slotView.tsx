@@ -1,7 +1,8 @@
+import { MenuItem } from "@material-ui/core";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Menu from "@material-ui/core/Menu";
+import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "material-ui-icons/MoreVert";
-import ButtonBase from "material-ui/ButtonBase";
-import Menu, {MenuItem} from "material-ui/Menu";
-import Typography from "material-ui/Typography";
 import * as React from "react";
 // @ts-ignore
 import {Tooltip} from "react-tippy";
@@ -69,7 +70,7 @@ ISlotViewState > {
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
                 <div className={className} style={slotStyle} onClick={clickHandler}>
                     <b>
-                        {getSlotContent(slot)} 
+                        {getSlotContent(slot)}
                         {slot.Group.length > 1
                             ? this.arrowDownButton()
                             : ""}

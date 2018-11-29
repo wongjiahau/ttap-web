@@ -1,6 +1,6 @@
+import Button from "@material-ui/core/Button";
 import IconLeft from "material-ui-icons/KeyboardArrowLeft";
 import IconRight from "material-ui-icons/KeyboardArrowRight";
-import Button from "material-ui/Button";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {IGithubApiObject} from "../../interfaces/githubApiObject";

@@ -1,6 +1,7 @@
+import { DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 import ThumbUpIcon from "material-ui-icons/ThumbUp";
-import Button from "material-ui/Button";
-import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
 import * as React from "react";
 import { FeedbackFormUrl } from "../constants";
 import {StackPanel} from "./panels/stackPanel";
@@ -45,7 +46,7 @@ IGetFeedbackDialogState > {
                     <Button onClick={this.handleNo} color="primary">
                         No thanks
                     </Button>
-                    <Button raised={true} onClick={this.handleYes} color="primary">
+                    <Button variant="contained" onClick={this.handleYes} color="primary">
                         Rate ttap
                         <ThumbUpIcon
                             style={{

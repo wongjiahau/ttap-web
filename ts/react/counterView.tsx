@@ -1,8 +1,8 @@
+import Button from "@material-ui/core/Button";
 import IconDown from "material-ui-icons/KeyboardArrowDown";
 import IconLeft from "material-ui-icons/KeyboardArrowLeft";
 import IconRight from "material-ui-icons/KeyboardArrowRight";
 import IconUp from "material-ui-icons/KeyboardArrowUp";
-import Button from "material-ui/Button";
 import * as React from "react";
 
 export interface ICounterProps {
@@ -37,7 +37,7 @@ export class CounterView extends React.Component < ICounterProps, {} > {
                     data-balloon-pos={tooltipPosition}
                     data-balloon-length="xlarge"
                     >
-                    <Button onClick={handler} raised={true} style={{width: "100%"}}>
+                    <Button onClick={handler} variant="contained" style={{width: "100%"}}>
                         {icon}
                     </Button>
                 </div>
@@ -62,7 +62,7 @@ export class CounterView extends React.Component < ICounterProps, {} > {
                         <Button
                             style={centerButtonStyle}
                             onClick={this.props.handleClickMiddle}
-                            raised={true}>
+                            variant="contained">
                             {`${this.props.currentIndex}(${this.props.currentSubIndex}) / ${this.props.maxIndex}`}
                         </Button>
                     </div>

@@ -1,6 +1,6 @@
- import { AppBar, Button, Dialog, IconButton, Toolbar } from "material-ui";
+import { AppBar, Dialog, IconButton, Toolbar } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import CloseIcon from "material-ui-icons/Close";
-import Typography from "material-ui/Typography";
 import * as React from "react";
 
 const innerDivStyle: React.CSSProperties = {
@@ -34,7 +34,7 @@ export class AlgorithmVisualizerView extends React.Component<
             <Dialog open={this.props.open} fullScreen={true}>
                 <AppBar style={{position: "relative"}}>
                     <Toolbar>
-                        <Typography type="title" color="inherit" style={{flex: 1}}>
+                        <Typography variant="title" color="inherit" style={{flex: 1}}>
                             Algorithm Visualizer
                         </Typography>
                         <IconButton color="inherit" onClick={() => {

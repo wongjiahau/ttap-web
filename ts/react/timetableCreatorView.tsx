@@ -1,7 +1,7 @@
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel } from "material-ui";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Switch from "@material-ui/core/Switch";
 import IconList from "material-ui-icons/List";
-import Button from "material-ui/Button";
-import Switch from "material-ui/Switch";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {RawSlot} from "../model/rawSlot";
@@ -72,7 +72,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                 <LeftRightPanel>
                     <Button
                         style={selectSubjectButtonStyle}
-                        raised={true}
+                        variant="contained"
                         color="secondary"
                         onClick={this.props.handleOpenSubjectListView}>
                         <IconList style={iconStyle}/>

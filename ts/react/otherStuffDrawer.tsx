@@ -1,3 +1,7 @@
+import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
 import BugIcon from "material-ui-icons/BugReport";
 import LogoutIcon from "material-ui-icons/ExitToApp";
 import FeedbackIcon from "material-ui-icons/Feedback";
@@ -5,9 +9,6 @@ import HelpIcon from "material-ui-icons/Help";
 import HomeIcon from "material-ui-icons/Home";
 import InfoIcon from "material-ui-icons/Info";
 import SchoolIcon from "material-ui-icons/School";
-import Button from "material-ui/Button";
-import Drawer from "material-ui/Drawer";
-import List, {ListItem, ListItemIcon, ListItemText} from "material-ui/List";
 import * as React from "react";
 import {Link} from "react-router-dom";
 import { BugFormUrl, FeedbackFormUrl } from "../constants";

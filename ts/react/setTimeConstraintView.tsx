@@ -1,9 +1,9 @@
-import Button from "material-ui/Button";
-import Dialog from "material-ui/Dialog";
-// import Slide from "material-ui/transitions/Slide";
-import Typography from "material-ui/Typography";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+// import Slide from "@material-ui/core/transitions/Slide";
+import Typography from "@material-ui/core/Typography";
 import * as React from "react";
-//@ts-ignore
+// @ts-ignore
 import CountUp from "react-countup";
 import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/matrix/stcBox";
 import {Colors} from "./colors/colors";
@@ -80,7 +80,7 @@ const Legend = (props : ILegendProps) => {
         <tr>
             <td style={legendSymbol}/>
             <td style={legendLabel}>
-                <Typography type="subheading">
+                <Typography variant="subheading">
                     {props.label}
                 </Typography>
             </td>
@@ -115,7 +115,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                                 <tr>
                                     <td>
                                         <Typography
-                                            type="display3"
+                                            variant="display3"
                                             style={typo1Style}
                                             gutterBottom={false}
                                             align="center">
@@ -158,7 +158,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             style={cancelButtonStyle}
                             color="default"
                             onClick={this.props.handleCancel}>Cancel</Button>
-                        <Button raised={true} color="primary" onClick={this.props.handleCancel}>Done</Button>
+                        <Button variant="contained" color="primary" onClick={this.props.handleCancel}>Done</Button>
                     </div>
                 </Dialog>
             </div>

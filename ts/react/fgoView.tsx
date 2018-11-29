@@ -1,4 +1,4 @@
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 import * as React from "react";
 import { Redirect } from "react-router";
 import { RawSlot } from "../model/rawSlot";
@@ -30,7 +30,7 @@ export class FgoView extends React.Component<IFgoViewDispatchProps, IFgoViewStat
             <VerticalAlign>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
                     <textarea style={{height: "500px", width: "500px"}} id="fgotextarea" placeholder="Paste HTML here"/>
-                    <Button color="primary" raised={true} onClick={() => {
+                    <Button color="primary" variant="contained" onClick={() => {
                         ToggleLoadingScreen("Parsing HTML", () => {
                             try {
                                 const textarea = document.getElementById("fgotextarea") as HTMLTextAreaElement;

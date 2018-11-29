@@ -1,6 +1,6 @@
 // Note: SBCW means Search By Considering Week Number
-import Button from "material-ui/Button";
-import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import * as React from "react";
 
 export interface ITurnOnSBCWDialogStateProps {

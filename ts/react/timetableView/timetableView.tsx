@@ -1,4 +1,4 @@
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 import * as React from "react";
 import {TimePeriod} from "../../att/timePeriod";
 import {STCBox} from "../../model/matrix/stcBox";
@@ -94,7 +94,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                             {skeleton.Children}
                         </ReactGridLayout>
                         {this.props.slots.length > 0 ?
-                        <Button id="summary-btn" raised={true} style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
+                        <Button id="summary-btn" variant="contained" style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
                             {this.props.isSummaryOpen ? "hide summary" : "show summary"}
                         </Button>
                         : null}

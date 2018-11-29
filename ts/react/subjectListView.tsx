@@ -1,13 +1,13 @@
+import Button from "@material-ui/core/Button";
+import Drawer from "@material-ui/core/Drawer";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
 import IconInfo from "material-ui-icons/Info";
-import Button from "material-ui/Button";
-import Drawer from "material-ui/Drawer";
-import Paper from "material-ui/Paper";
-import TextField from "material-ui/TextField";
-import Tooltip from "material-ui/Tooltip";
-import Typography from "material-ui/Typography";
 import * as React from "react";
 
-import { FormControlLabel, Switch } from "material-ui";
+import { FormControlLabel, Switch } from "@material-ui/core";
 import {Key} from "../enums/keyCodeEnum";
 import { ISubjectListState } from "../redux/reducers/subjectListState";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
@@ -112,7 +112,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
             });
 
         const errorMessage = (
-            <Typography style={errorMessageStyle} type="subheading" gutterBottom={true}>
+            <Typography style={errorMessageStyle} variant="subheading" gutterBottom={true}>
                 No result is found . . .
             </Typography>
         );
@@ -137,7 +137,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                     {/*  Semantic UI Sidebar  */} <link rel="stylesheet" href="sidebar.min.css"/>
                     <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                         <header style={headerStyle}>
-                            <Typography gutterBottom={true} type="display1" color="primary">
+                            <Typography gutterBottom={true} variant="display1" color="primary">
                                 Select your desired subjects.
                             </Typography>
                             <TextField
@@ -180,7 +180,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                                             : `Show selected subjects (${numberOfSelectedSubjects})`)}
                                 </Button>
                                 <Button
-                                    raised={true}
+                                    variant="contained"
                                     color="primary"
                                     style={buttonStyle}
                                     disabled={noSubjectIsSelected || this.props.IsShowingLoadingBar}

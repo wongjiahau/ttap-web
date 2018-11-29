@@ -1,10 +1,11 @@
-import Button from "material-ui/Button";
-import Checkbox from "material-ui/Checkbox";
-import Divider from "material-ui/Divider";
-import Drawer from "material-ui/Drawer";
-import Paper from "material-ui/Paper";
-import Table, {TableBody, TableCell, TableHead, TableRow} from "material-ui/Table";
-import Typography from "material-ui/Typography";
+import { TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import Typography from "@material-ui/core/Typography";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {IStringDicionary} from "../interfaces/dictionary";
@@ -84,8 +85,8 @@ ISlotsTableViewInternalState > {
                 <section style={this.state.sectionStyle}>
                     <header style={headerStyle}>
                         <StackPanel orientation="vertical">
-                            <Typography type="display1" color="primary">Below are the time slots of selected subjects.</Typography>
-                            <Typography type="subheading" gutterBottom={true}>You can select or deselect some specific time slots.</Typography>
+                            <Typography variant="display1" color="primary">Below are the time slots of selected subjects.</Typography>
+                            <Typography variant="subheading" gutterBottom={true}>You can select or deselect some specific time slots.</Typography>
                         </StackPanel>
                     </header>
                     <Paper style={divStyle}>{this
@@ -94,7 +95,7 @@ ISlotsTableViewInternalState > {
                             .map((subject) => {
                                 return (
                                     <div key={subject.Code}>
-                                        <Typography style={titleStyle} type="subheading">
+                                        <Typography style={titleStyle} variant="subheading">
                                             {subject.Code + " - " + BeautifySubjectName(subject.Name)}
                                         </Typography>
                                         <Table>
@@ -152,7 +153,7 @@ ISlotsTableViewInternalState > {
                     </div>
                     <footer style={footerStyle}>
                         <StackPanel orientation="horizontal" horizontalAlignment="left">
-                            <Button raised={true} color="primary" onClick={this.props.handleDone}>
+                            <Button variant="contained" color="primary" onClick={this.props.handleDone}>
                                 Find new timetables
                             </Button>
                             <Button onClick={this.props.handleCancel}>

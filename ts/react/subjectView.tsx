@@ -1,5 +1,5 @@
-import Checkbox from "material-ui/Checkbox";
-import List, {ListItem, ListItemSecondaryAction, ListItemText} from "material-ui/List";
+import { ListItem, ListItemText } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
 import * as React from "react";
 import Highlighter = require("react-highlight-words");
 import {ClashReport} from "../model/subject";

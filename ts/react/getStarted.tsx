@@ -1,4 +1,4 @@
-import {Button, Typography} from "material-ui";
+import {Button, Typography} from "@material-ui/core";
 import IconList from "material-ui-icons/PlayArrow";
 import * as React from "react";
 import {Redirect} from "react-router";
@@ -24,9 +24,9 @@ IGetStartedState > {
             return (
                 <VerticalAlign>
                     <StackPanel orientation="vertical" horizontalAlignment="center">
-                        <img src={(window as any)["PUBLIC_URL"] + "/big_calendar.png"}></img>
-                        <Typography type="display3">Welcome to TTAP!</Typography>
-                        <Button raised={true} color="secondary" onClick={this.handleClick}>
+                        <img src={(window as any)["PUBLIC_URL"] + "/big_calendar.png"}/>
+                        <Typography variant="display3">Welcome to TTAP!</Typography>
+                        <Button variant="contained" color="secondary" onClick={this.handleClick}>
                             <IconList style={iconStyle}/>
                             Get started
                         </Button>
