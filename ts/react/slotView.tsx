@@ -22,11 +22,11 @@ export interface ISlotViewProps {
     handleShowAlternateSlot     ?: (s: ISlotViewModel) => void;
     handleGoToThisAlternateSlot ?: (slotUid: number) => void;
     isShowingAlternativeSlot: boolean;
+    isShowingAlternativeSlotsOfThisSlot: boolean;
 }
 
 interface ISlotViewState {
     anchorEl : any;
-    isShowingAlternativeSlotsOfThisSlot: boolean;
     isMenuOpen: boolean;
 }
 
@@ -37,13 +37,11 @@ ISlotViewState > {
         this.state = {
             anchorEl: null,
             isMenuOpen: false,
-            isShowingAlternativeSlotsOfThisSlot: true
         };
     }
 
     public render() {
-        const { slot, color, isShowingAlternativeSlot } = this.props;
-        const {isShowingAlternativeSlotsOfThisSlot} = this.state;
+        const { slot, color, isShowingAlternativeSlot, isShowingAlternativeSlotsOfThisSlot } = this.props;
         let slotStyle: React.CSSProperties = {
             background: color,
             cursor: "pointer", /*a.k.a. the hand, so it looks like its clickable*/
@@ -103,7 +101,7 @@ ISlotViewState > {
                     anchorOrigin={{ vertical: "center", horizontal: "center", }}
                     transformOrigin={{ vertical: "top", horizontal: "left", }}
                     onClose={() => this.setState({
-                        anchorEl: null, 
+                        anchorEl: null,
                         isMenuOpen: false,
                     })}
                     >
@@ -123,7 +121,7 @@ ISlotViewState > {
                                         <NineDotIcon/>
                                     </ListItemIcon>
                                     <ListItemText inset={true} primary={
-                                        isShowingAlternativeSlot ?
+                                        isShowingAlternativeSlot && isShowingAlternativeSlotsOfThisSlot ?
                                          "Hide alternative slots" :
                                          "Show alternative slots"}/>
                                 </MenuItem>)}
@@ -145,9 +143,9 @@ ISlotViewState > {
     }
 
     public componentDidUpdate() {
-        if(this.state.isMenuOpen) {
+        if (this.state.isMenuOpen) {
             console.log(this.state.isMenuOpen);
-            console.log(this.props.slot)
+            console.log(this.props.slot);
         }
     }
 

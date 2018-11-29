@@ -25,6 +25,7 @@ describe("showAlternateSlot action", () => {
         const newState3 = MasterStateReducer(newState2, new GoToThisAlternativeSlot(newState2.TimetableListState.AlternativeSlots[0].Uid));
         expect(newState3.TimetableListState.CurrentIndex).to.eq(1);
         expect(newState3.TimetableListState.CurrentSubIndex).to.eq(0);
+        expect(newState3.TimetableListState.ShowingAlternateSlotOf).to.eq(null);
         expect(newState3.SnackbarState.IsOpen).to.eq(false);
         expect(newState3
                 .TimetableListState

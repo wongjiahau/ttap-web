@@ -63,7 +63,8 @@ export class GoToThisAlternativeSlot extends MasterStateAction {
                 ...state.TimetableListState,
                 CurrentIndex: indexOfDestinationTimetable[0],
                 CurrentSubIndex: indexOfDestinationTimetable[1],
-                AlternativeSlots: []
+                AlternativeSlots: [],
+                ShowingAlternateSlotOf: null
             },
             SnackbarState: {
                 ...state.SnackbarState,

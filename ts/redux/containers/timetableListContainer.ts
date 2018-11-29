@@ -30,7 +30,8 @@ const mapStateToProps = (state: any) : ITimetableListViewStateProps => {
         isSummaryOpen:      timetableListState.IsSummaryOpen,
         maxIndex:           timetableListState.FiltrateTimetables.length - 1,
         slotViewModelStore: timetableListState.SlotViewModelStore,
-        alternativeSlots:   timetableListState.AlternativeSlots
+        alternativeSlots:   timetableListState.AlternativeSlots,
+        isShowingAlternativeSlotOf: timetableListState.ShowingAlternateSlotOf
     };
 };
 

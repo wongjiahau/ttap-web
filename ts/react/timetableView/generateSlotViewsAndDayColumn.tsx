@@ -15,7 +15,7 @@ export function GenerateSlotViewsAndDayColumn(
     selectSlotChoiceHandler: (slotUid : number, newSlotChoice : number) => void,
     goToThisAlternativeSlotHandler: (slotUid: number) => void,
     showAlternateSlotHandler: (s: ISlotViewModel) => void,
-    isShowingAlternativeSlot: boolean
+    isShowingAlternativeSlotOf: ISlotViewModel | null
 ) : ISkeleton {
     const colorSchemes = GenerateColorScheme(slots);
     slots = sortBy(slots, [(o: ISlotViewModel) => ParseDay(o.Day)]);
@@ -31,7 +31,8 @@ export function GenerateSlotViewsAndDayColumn(
                 <SlotView
                     slot={x}
                     color={color}
-                    isShowingAlternativeSlot={isShowingAlternativeSlot}
+                    isShowingAlternativeSlotsOfThisSlot={isShowingAlternativeSlotOf ? x.Uid === isShowingAlternativeSlotOf.Uid : false}
+                    isShowingAlternativeSlot={isShowingAlternativeSlotOf !== null}
                     handleSelectSlotChoice={selectSlotChoiceHandler}
                     handleShowAlternateSlot={!x.IsAlternativeSlot ? showAlternateSlotHandler : () => {/* do nothing*/}}
                     handleGoToThisAlternateSlot={x.IsAlternativeSlot ? goToThisAlternativeSlotHandler : () => {/* do nothing*/}}

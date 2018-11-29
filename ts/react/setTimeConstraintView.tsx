@@ -138,6 +138,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             slots={[]}
                             isShowingAlternativeSlots={false}
                             alternateSlots={null}
+                            isShowingAlternativeSlotOf={null}
                             stcBoxes={this.props.totalMatrix}
                             handleSelectSlotChoice={NO_OPERATION}
                             handleGoToThisAlternateSlot={NO_OPERATION}

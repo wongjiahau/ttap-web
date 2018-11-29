@@ -14,6 +14,7 @@ export function GenerateAlternateSlotViewsAndDayColumn(
     slots : ISlotViewModel[],
     handleSelectSlotChoice: (slotUid : number, newSlotChoice : number) => void,
     handleGoToThisAlternateSlot: (slotUid : number) => void,
+    isShowingAlternativeSlotOf: ISlotViewModel
 ) : ISkeleton {
     slots = sortBy(slots, [(o: ISlotViewModel) => ParseDay(o.Day)]);
     const slotViews = slots.map((x, index) => {
@@ -23,6 +24,7 @@ export function GenerateAlternateSlotViewsAndDayColumn(
                 <SlotView
                     slot={x}
                     isShowingAlternativeSlot={true}
+                    isShowingAlternativeSlotsOfThisSlot={x.Uid === isShowingAlternativeSlotOf.Uid}
                     color={Colors.White}
                     handleSelectSlotChoice={handleSelectSlotChoice}
                     handleGoToThisAlternateSlot={handleGoToThisAlternateSlot}

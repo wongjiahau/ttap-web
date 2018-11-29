@@ -21,6 +21,7 @@ export interface ITimetableListViewStateProps {
     currentTimetable:   IGroupedTimetable | null;
     alternativeSlots:   ISlotViewModel[];
     isSummaryOpen:      boolean;
+    isShowingAlternativeSlotOf: ISlotViewModel | null;
     maxIndex:           number; // non-zero based
     slotViewModelStore: ObjectStore<ISlotViewModel>;
 }
@@ -63,6 +64,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         slots={slotsToBeRendered}
                         alternateSlots={this.props.alternativeSlots}
                         isShowingAlternativeSlots={this.props.alternativeSlots.length > 0}
+                        isShowingAlternativeSlotOf={this.props.isShowingAlternativeSlotOf}
                         stcBoxes={null}
                         handleDesetTimeContraintAt={NO_OPERATION}
                         handleSetTimeContraintAt={NO_OPERATION}
