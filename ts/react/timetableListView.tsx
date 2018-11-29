@@ -62,6 +62,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                     <TimetableView
                         slots={slotsToBeRendered}
                         alternateSlots={this.props.alternativeSlots}
+                        isShowingAlternativeSlots={this.props.alternativeSlots.length > 0}
                         stcBoxes={null}
                         handleDesetTimeContraintAt={NO_OPERATION}
                         handleSetTimeContraintAt={NO_OPERATION}

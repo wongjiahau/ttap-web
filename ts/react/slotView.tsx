@@ -1,9 +1,13 @@
-import { MenuItem } from "@material-ui/core";
+import { ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Popover } from "@material-ui/core";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Menu from "@material-ui/core/Menu";
 import Typography from "@material-ui/core/Typography";
-import MoreVertIcon from "material-ui-icons/MoreVert";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import * as React from "react";
+
+import NineDotIcon from "@material-ui/icons/Apps";
+import LockIcon from "@material-ui/icons/Lock";
+
 // @ts-ignore
 import {Tooltip} from "react-tippy";
 import {ISlotViewModel} from "../model/slotViewModel";
@@ -17,10 +21,13 @@ export interface ISlotViewProps {
     handleSelectSlotChoice       : (slotUid : number, newSlotChoice : number) => void;
     handleShowAlternateSlot     ?: (s: ISlotViewModel) => void;
     handleGoToThisAlternateSlot ?: (slotUid: number) => void;
+    isShowingAlternativeSlot: boolean;
 }
 
 interface ISlotViewState {
     anchorEl : any;
+    isShowingAlternativeSlotsOfThisSlot: boolean;
+    isMenuOpen: boolean;
 }
 
 export class SlotView extends React.Component < ISlotViewProps,
@@ -28,17 +35,24 @@ ISlotViewState > {
     public constructor(props: ISlotViewProps) {
         super(props);
         this.state = {
-            anchorEl: null
+            anchorEl: null,
+            isMenuOpen: false,
+            isShowingAlternativeSlotsOfThisSlot: true
         };
     }
 
     public render() {
-        const slot = this.props.slot;
-        let slotStyle: React.CSSProperties = { background: this.props.color, };
-        if (this.props.slot.AlternativeSlots.length > 0) {
+        const { slot, color, isShowingAlternativeSlot } = this.props;
+        const {isShowingAlternativeSlotsOfThisSlot} = this.state;
+        let slotStyle: React.CSSProperties = {
+            background: color,
+            cursor: "pointer", /*a.k.a. the hand, so it looks like its clickable*/
+            opacity: (isShowingAlternativeSlot && !slot.IsAlternativeSlot && !isShowingAlternativeSlotsOfThisSlot)
+                      ? 0.5 : 1.0
+        };
+        if (slot.AlternativeSlots.length > 0) {
             slotStyle = {
                 ...slotStyle,
-                cursor: "pointer", // a.k.a. the hand, so it looks like its clickable
                 borderStyle: "dashed"
             };
         }
@@ -52,89 +66,89 @@ ISlotViewState > {
                 cursor: "pointer"
             };
         }
-        const clickHandler = () => {
-            if (this.props.handleShowAlternateSlot !== undefined) {
-                if (this.props.slot.AlternativeSlots.length > 0) {
-                    this.props.handleShowAlternateSlot(this.props.slot);
-                }
+        const {handleShowAlternateSlot, handleGoToThisAlternateSlot} = this.props;
+        const clickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+            if (handleShowAlternateSlot !== undefined) {
+                this.setState({
+                    anchorEl: event.currentTarget,
+                    isMenuOpen: true
+                });
             }
-            if (this.props.handleGoToThisAlternateSlot !== undefined) {
-                this.props.handleGoToThisAlternateSlot(this.props.slot.Uid);
+            if (handleGoToThisAlternateSlot !== undefined) {
+                handleGoToThisAlternateSlot(slot.Uid);
             }
         };
         const className /* Refer index.css */
             = "slot-view"
-            + (this.props.slot.AlternativeSlots.length > 0 ? " hvr-glow get-user-attention" : "");
+            + (slot.AlternativeSlots.length > 0 ? " hvr-glow get-user-attention" : "");
 
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
-                <div className={className} style={slotStyle} onClick={clickHandler}>
+                <div className={className} style={slotStyle} onClick={clickHandler}
+                    aria-owns={Boolean(this.state.anchorEl) ? "popover" : undefined}
+                    aria-haspopup="true"
+                    >
                     <b>
                         {getSlotContent(slot)}
-                        {slot.Group.length > 1
-                            ? this.arrowDownButton()
-                            : ""}
                     </b>
                     <br/> {slot.Room[slot.CurrentChoice]}
                     <br/> {slot.WeekNumber[slot.CurrentChoice]}
-                    <Menu
-                        id="long-menu"
-                        anchorEl={this.state.anchorEl}
-                        onClose={() => {
-                            this.setState({anchorEl: null});
-                            this.props.handleSelectSlotChoice(slot.Uid, slot.CurrentChoice);
-                        }}
-                        open={Boolean(this.state.anchorEl)}>
-                        {this.menuItem(slot)}
-                    </Menu>
                 </div>
+                <Popover
+                    id="popover"
+                    open={this.state.isMenuOpen}
+                    anchorEl={this.state.anchorEl}
+                    anchorReference="anchorEl"
+                    anchorPosition={{ top: 200, left: 400 }}
+                    anchorOrigin={{ vertical: "center", horizontal: "center", }}
+                    transformOrigin={{ vertical: "top", horizontal: "left", }}
+                    onClose={() => this.setState({
+                        anchorEl: null, 
+                        isMenuOpen: false,
+                    })}
+                    >
+                    <Paper>
+                        <MenuList>
+                            {slot.AlternativeSlots.length === 0 ? null : (
+                                <MenuItem onClick={() => {
+                                    if (handleShowAlternateSlot) {
+                                        handleShowAlternateSlot(slot);
+                                        this.setState({
+                                            anchorEl: null,
+                                            isMenuOpen: false,
+                                        });
+                                    }
+                                }}>
+                                    <ListItemIcon>
+                                        <NineDotIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText inset={true} primary={
+                                        isShowingAlternativeSlot ?
+                                         "Hide alternative slots" :
+                                         "Show alternative slots"}/>
+                                </MenuItem>)}
+
+                            <MenuItem onClick={() => {
+                                this.setState({anchorEl: null, isMenuOpen: false});
+                            }}>
+                                <ListItemIcon>
+                                    <LockIcon/>
+                                </ListItemIcon>
+                                <ListItemText inset={true} primary={"Lock this slot"}/>
+                            </MenuItem>
+                        </MenuList>
+                    </Paper>
+                </Popover>
             </Tooltip>
 
         );
     }
 
-    public menuItem = (slot : ISlotViewModel) => {
-        const clickHandler = (index: number) => {
-            this.setState({anchorEl: null});
-            this.props.handleSelectSlotChoice(slot.Uid, index);
-        };
-        return slot
-            .Group
-            .map((option, index) => (
-                <MenuItem
-                    selected={index === slot.CurrentChoice}
-                    key={option}
-                    onClick={() => clickHandler(index)}>
-                    {slot.Type + option}
-                </MenuItem>
-            ));
-    }
-    public arrowDownButton = () => {
-        const triangle : React.CSSProperties = {
-            borderLeft:  "3px solid transparent",
-            borderRight: "3px solid transparent",
-            borderTop:   "3px solid black",
-            height:      "0",
-            width:       "0"
-        };
-        const buttonStyle : React.CSSProperties = {
-            height:   "10px",
-            padding:  "0px",
-            position: "absolute",
-            right:    "2px",
-            top:      "2px",
-            width:    "10px",
-        };
-        const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => this.setState({anchorEl: event.currentTarget});
-        return <button
-            className="arrow-down-button"
-            aria-label="More"
-            aria-owns={this.state.anchorEl ? "long-menu" : undefined}
-            aria-haspopup="true"
-            style={buttonStyle}
-            onClick={clickHandler}>
-            <div style={triangle}/>
-        </button>;
+    public componentDidUpdate() {
+        if(this.state.isMenuOpen) {
+            console.log(this.state.isMenuOpen);
+            console.log(this.props.slot)
+        }
     }
 
 }
@@ -149,8 +163,9 @@ function tooltipTitle(s : ISlotViewModel) {
             <br/>
             [{s.SubjectCode}]
             <br/>
-            {s.IsAlternativeSlot ? "(Click to pick this slot)" : ""}
-            {s.AlternativeSlots.length > 0 ? "(Click to show alternative slots)" : ""}
+            {s.IsAlternativeSlot ?
+            "(Click to go to this slot)" :
+            "(Click to show options)"}
         </div>
     );
 }

@@ -28,6 +28,12 @@ const theme = createMuiTheme({
     primary: indigo,
     secondary: pink ,
   },
+  props: {
+    MuiButtonBase: {
+    // The properties to apply
+    disableRipple: true, // No more ripple, on the whole application 💣!
+    },
+  }
 });
 interface IAppState {
     isSecondaryDrawerOpen: boolean;

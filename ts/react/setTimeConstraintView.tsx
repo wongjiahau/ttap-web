@@ -136,6 +136,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                         </table>
                         <TimetableView
                             slots={[]}
+                            isShowingAlternativeSlots={false}
                             alternateSlots={null}
                             stcBoxes={this.props.totalMatrix}
                             handleSelectSlotChoice={NO_OPERATION}

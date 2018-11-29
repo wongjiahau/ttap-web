@@ -17,6 +17,7 @@ interface ITimetableViewProps {
     slots : ISlotViewModel[];
     stcBoxes : STCBox[] | null;
     alternateSlots: ISlotViewModel[] | null;
+    isShowingAlternativeSlots: boolean;
     handleSetTimeContraintAt: (state : STCBox) => void;
     handleDesetTimeContraintAt: (state : STCBox) => void;
     handleToggleIsOpenOfSummary: () => void;
@@ -48,7 +49,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                 this.props.slots.concat(this.props.alternateSlots),
                 this.props.handleSelectSlotChoice,
                 this.props.handleGoToThisAlternateSlot,
-                this.props.handleShowAlternateSlot
+                this.props.handleShowAlternateSlot,
+                this.props.isShowingAlternativeSlots
                 );
             skeleton.Concat(slotViewsAndDayColumn);
             const horizontalDividers = GenerateHorizontalDividers(skeleton);

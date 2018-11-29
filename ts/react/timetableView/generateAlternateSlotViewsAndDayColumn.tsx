@@ -22,6 +22,7 @@ export function GenerateAlternateSlotViewsAndDayColumn(
             <div key={"as" + index}>
                 <SlotView
                     slot={x}
+                    isShowingAlternativeSlot={true}
                     color={Colors.White}
                     handleSelectSlotChoice={handleSelectSlotChoice}
                     handleGoToThisAlternateSlot={handleGoToThisAlternateSlot}
