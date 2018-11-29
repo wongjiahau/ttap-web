@@ -1,8 +1,8 @@
 import Button from "@material-ui/core/Button";
-import IconClock from "material-ui-icons/Alarm";
-import IconGrid from "material-ui-icons/GridOn";
-import IconSave from "material-ui-icons/Save";
-import IconViewList from "material-ui-icons/ViewList";
+import IconClock from "@material-ui/icons/Alarm";
+import IconGrid from "@material-ui/icons/GridOn";
+import IconSave from "@material-ui/icons/Save";
+import IconViewList from "@material-ui/icons/ViewList";
 import * as React from "react";
 import { ObjectStore } from "../dataStructure/objectStore";
 import {Key} from "../enums/keyCodeEnum";

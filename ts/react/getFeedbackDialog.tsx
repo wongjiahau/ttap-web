@@ -1,7 +1,7 @@
 import { DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import ThumbUpIcon from "material-ui-icons/ThumbUp";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import * as React from "react";
 import { FeedbackFormUrl } from "../constants";
 import {StackPanel} from "./panels/stackPanel";

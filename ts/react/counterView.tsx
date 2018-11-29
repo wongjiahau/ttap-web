@@ -1,8 +1,8 @@
 import Button from "@material-ui/core/Button";
-import IconDown from "material-ui-icons/KeyboardArrowDown";
-import IconLeft from "material-ui-icons/KeyboardArrowLeft";
-import IconRight from "material-ui-icons/KeyboardArrowRight";
-import IconUp from "material-ui-icons/KeyboardArrowUp";
+import IconDown from "@material-ui/icons/KeyboardArrowDown";
+import IconLeft from "@material-ui/icons/KeyboardArrowLeft";
+import IconRight from "@material-ui/icons/KeyboardArrowRight";
+import IconUp from "@material-ui/icons/KeyboardArrowUp";
 import * as React from "react";
 
 export interface ICounterProps {

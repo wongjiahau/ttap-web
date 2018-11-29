@@ -1,6 +1,6 @@
 import { AppBar, Dialog, IconButton, Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import CloseIcon from "material-ui-icons/Close";
+import CloseIcon from "@material-ui/icons/Close";
 import * as React from "react";
 
 const innerDivStyle: React.CSSProperties = {

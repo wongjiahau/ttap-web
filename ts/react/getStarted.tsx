@@ -1,5 +1,5 @@
 import {Button, Typography} from "@material-ui/core";
-import IconList from "material-ui-icons/PlayArrow";
+import IconList from "@material-ui/icons/PlayArrow";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {StackPanel} from "./panels/stackPanel";

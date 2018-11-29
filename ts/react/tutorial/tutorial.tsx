@@ -1,7 +1,7 @@
 import { CircularProgress, MobileStepper, Paper } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import IconLeft from "material-ui-icons/KeyboardArrowLeft";
-import IconRight from "material-ui-icons/KeyboardArrowRight";
+import IconLeft from "@material-ui/icons/KeyboardArrowLeft";
+import IconRight from "@material-ui/icons/KeyboardArrowRight";
 import * as React from "react";
 import {Redirect} from "react-router";
 import {IGithubApiObject} from "../../interfaces/githubApiObject";

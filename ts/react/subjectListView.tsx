@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import IconInfo from "material-ui-icons/Info";
+import IconInfo from "@material-ui/icons/Info";
 import * as React from "react";
 
 import { FormControlLabel, Switch } from "@material-ui/core";
