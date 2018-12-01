@@ -1,3 +1,7 @@
+html {
+    overflow-y: auto;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -125,7 +129,6 @@ code {
     border-color: lightslategray;
     border-radius: 5px;
     border-style: solid;
-    font-family: "roboto";
     font-size: 13px;
     height: 100%;
     width: 100%;
