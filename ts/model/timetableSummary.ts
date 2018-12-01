@@ -23,11 +23,10 @@ export class SubjectSummary {
         this.Tutorial = extract("T");
         this.Practical = extract("P");
 
-        const creditHour = slots[0].CreditHour;
-            // Why slots[0] ?
-            // Actually it can be any slots, because the CreditHour of each slots
-            // from the same subject will have the same value
-            // This is a form of data denormalization
+        // According to Dr. Madhavan,
+        // the credit hour can be obtained from the last digit of the subject code
+        const creditHour = this.SubjectCode.slice(-1)[0];
+
         this.CreditHour = parseFloat(creditHour ? creditHour : "0.0");
     }
 

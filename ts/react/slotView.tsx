@@ -90,9 +90,7 @@ ISlotViewState > {
                     aria-owns={Boolean(this.state.anchorEl) ? "popover" : undefined}
                     aria-haspopup="true"
                     >
-                    <b>
-                        {getSlotContent(slot)}
-                    </b>
+                          {getSlotContent(slot)}
                     <br/> {slot.Room[slot.CurrentChoice]}
                     <br/> {slot.WeekNumber[slot.CurrentChoice]}
                 </div>
@@ -145,14 +143,6 @@ ISlotViewState > {
 
         );
     }
-
-    public componentDidUpdate() {
-        if (this.state.isMenuOpen) {
-            console.log(this.state.isMenuOpen);
-            console.log(this.props.slot);
-        }
-    }
-
 }
 
 function tooltipTitle(s : ISlotViewModel, isShowingAlternativeSlotOfThisSlot: boolean) {

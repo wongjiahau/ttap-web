@@ -67,6 +67,8 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
         const divStyle : React.CSSProperties = {
             backgroundColor: Colors.WhiteSmoke,
             borderStyle:     "solid",
+            borderWidth:     "1px",
+            borderRadius:    "5px",
             fontFamily:      "roboto",
             margin:          "auto",
             position:        "relative",

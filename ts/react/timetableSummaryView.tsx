@@ -1,10 +1,7 @@
-const find = require("lodash.find");
 import * as React from "react";
 import {ISlotViewModel} from "../model/slotViewModel";
 import {SubjectSummary, TimetableSummary} from "../model/timetableSummary";
 import { ColorHash } from "../util/colorhash";
-import {Colors} from "./colors/colors";
-import {GenerateColorScheme} from "./colors/generateColorScheme";
 
 interface ITimetableSummaryViewProps {
     slots : ISlotViewModel[];
@@ -16,10 +13,11 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
             return false;
         }
         const subjectSummaries = new TimetableSummary(this.props.slots).SubjectSummaries;
-        const colorSchemes = GenerateColorScheme(this.props.slots);
         const tableStyle : React.CSSProperties = {
             border: "1px solid black",
-            borderCollapse: "collapse"
+            borderCollapse: "collapse",
+            fontSize: "16px",
+            margin: "10px"
         };
         return (
             // @ts-ignore
