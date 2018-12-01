@@ -35,3 +35,16 @@ export function PartitionizeByKey<T>(input : T[], keyName: string) : T[][] {
     return result;
 
 }
+
+export function BinaryPartition<T>(input: T[], check: (elem: T) => boolean): [T[], T[]] {
+    const right: T[] = [];
+    const left: T[] = [];
+    for (let i = 0; i < input.length; i++) {
+        if (check(input[i])) {
+            left.push(input[i]);
+        } else {
+            right.push(input[i]);
+        }
+    }
+    return [left, right];
+}

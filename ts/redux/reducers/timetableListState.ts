@@ -8,12 +8,13 @@ import {Action} from "../actions/action";
 export interface ITimetableListState {
     CurrentIndex:           number; // Means the index for the current timetable variation
     CurrentSubIndex:        number; // Means the index for identical timetables from the same timetable variants
-    FiltrateTimetables:     IGroupedTimetable[];
+    FiltrateTimetables:     IGroupedTimetable[]; // Timetables that pass through the filtration process
     IsSummaryOpen:          boolean;
-    ResidueTimetables:      IGroupedTimetable[];
+    ResidueTimetables:      IGroupedTimetable[]; // Timetables that failed to pass through the filtration process
     SlotViewModelStore:     ObjectStore<ISlotViewModel>;
-    AlternativeSlots:         ISlotViewModel[];
+    AlternativeSlots:       ISlotViewModel[];
     ShowingAlternateSlotOf: ISlotViewModel | null;
+    UidsOfLockedSlot:       number[];
 }
 
 export function NewTimetableListState(
@@ -33,7 +34,8 @@ export function NewTimetableListState(
         ResidueTimetables: [],
         SlotViewModelStore: slotStateStore,
         AlternativeSlots: [],
-        ShowingAlternateSlotOf: null
+        ShowingAlternateSlotOf: null,
+        UidsOfLockedSlot: []
     };
 }
 

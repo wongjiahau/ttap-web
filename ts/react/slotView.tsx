@@ -66,11 +66,15 @@ ISlotViewState > {
         }
         const {handleShowAlternateSlot, handleGoToThisAlternateSlot} = this.props;
         const clickHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-            if (handleShowAlternateSlot !== undefined) {
-                this.setState({
-                    anchorEl: event.currentTarget,
-                    isMenuOpen: true
-                });
+            if (handleShowAlternateSlot !== undefined && slot.AlternativeSlots.length > 0) {
+                handleShowAlternateSlot(slot);
+
+                // The following code is to toggle display menu
+                // Temporarily disabled because still not sure how to implement slot locking
+                // this.setState({
+                //     anchorEl: event.currentTarget,
+                //     isMenuOpen: true
+                // });
             }
             if (handleGoToThisAlternateSlot !== undefined) {
                 handleGoToThisAlternateSlot(slot.Uid);
@@ -81,7 +85,7 @@ ISlotViewState > {
             + (slot.AlternativeSlots.length > 0 ? " hvr-glow get-user-attention" : "");
 
         return (
-            <Tooltip arrow={true} position="left" html={tooltipTitle(slot)}>
+            <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isShowingAlternativeSlotsOfThisSlot)}>
                 <div className={className} style={slotStyle} onClick={clickHandler}
                     aria-owns={Boolean(this.state.anchorEl) ? "popover" : undefined}
                     aria-haspopup="true"
@@ -151,7 +155,7 @@ ISlotViewState > {
 
 }
 
-function tooltipTitle(s : ISlotViewModel) {
+function tooltipTitle(s : ISlotViewModel, isShowingAlternativeSlotOfThisSlot: boolean) {
     const style : React.CSSProperties = {
         fontSize: "18px"
     };
@@ -160,10 +164,11 @@ function tooltipTitle(s : ISlotViewModel) {
             {BeautifySubjectName(s.SubjectName)}
             <br/>
             [{s.SubjectCode}]
-            <br/>
-            {s.IsAlternativeSlot ?
-            "(Click to go to this slot)" :
-            "(Click to show options)"}
+            <br/> {
+            (s.IsAlternativeSlot ? "(Click to go to this slot)" :
+            (s.AlternativeSlots.length === 0 ? "" :
+            (isShowingAlternativeSlotOfThisSlot ? "(Click to hide alternative slots)" :
+            "(Click show alternative slots)")))}
         </div>
     );
 }

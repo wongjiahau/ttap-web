@@ -35,24 +35,24 @@ const mapStateToProps = (state: any) : ITimetableListViewStateProps => {
     };
 };
 
-const mapDispatchToProps = (triggerlessDispatch: any) : ITimetableListViewDispatchProps => {
-    const dispatch = (action: MasterStateAction) => {
-        triggerlessDispatch(action);
-        triggerlessDispatch(new FindAlternativeSlotsOfCurrentSlots());
+const mapDispatchToProps = (dispatch: any) : ITimetableListViewDispatchProps => {
+    const triggerfulDispatch = (action: MasterStateAction) => {
+        dispatch(action);
+        dispatch(new FindAlternativeSlotsOfCurrentSlots());
     };
     return {
-        handleGoToNextTimetable:         () => dispatch(new GoToNextTimetable()),
-        handleGoToPreviousTimetable:     () => dispatch(new GoToPrevTimetable()),
-        handleGoToRandomTimetable:       () => dispatch(new GoToRandomTimetable()),
-        handleGoToNextSubTimetable:      () => dispatch(new GoToNextSubTimetable()),
-        handleGoToPreviousSubTimetable:  () => dispatch(new GoToPreviousSubTimetable()),
-        handleOpenSaveTimetableDialog:   () => triggerlessDispatch(new ToggleIsOpenOfSaveDialog(true)),
-        handleOpenSetTimeConstraintView: () => triggerlessDispatch(new ToggleSetTimeConstraintView(true)),
-        handleOpenSlotsTable:            () => triggerlessDispatch(new ToggleIsOpenOfSlotsTable(true)),
-        handleToggleIsOpenOfSummary:     () => triggerlessDispatch(new ToggleIsOpenOfSummary()),
-        handleShowAlternateSlot:         (s: ISlotViewModel) => triggerlessDispatch(new ShowAlternateSlot(s)),
-        handleGoToThisAlternateSlot:     (slotUid: number) => dispatch(new GoToThisAlternativeSlot(slotUid)),
-        handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => dispatch(new SelectSlotChoice(slotUid, newSlotChoice)),
+        handleGoToNextTimetable:         () => triggerfulDispatch(new GoToNextTimetable()),
+        handleGoToPreviousTimetable:     () => triggerfulDispatch(new GoToPrevTimetable()),
+        handleGoToRandomTimetable:       () => triggerfulDispatch(new GoToRandomTimetable()),
+        handleGoToNextSubTimetable:      () => triggerfulDispatch(new GoToNextSubTimetable()),
+        handleGoToPreviousSubTimetable:  () => triggerfulDispatch(new GoToPreviousSubTimetable()),
+        handleOpenSaveTimetableDialog:   () => dispatch(new ToggleIsOpenOfSaveDialog(true)),
+        handleOpenSetTimeConstraintView: () => dispatch(new ToggleSetTimeConstraintView(true)),
+        handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
+        handleToggleIsOpenOfSummary:     () => dispatch(new ToggleIsOpenOfSummary()),
+        handleShowAlternateSlot:         (s: ISlotViewModel) => dispatch(new ShowAlternateSlot(s)),
+        handleGoToThisAlternateSlot:     (slotUid: number) => triggerfulDispatch(new GoToThisAlternativeSlot(slotUid)),
+        handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => triggerfulDispatch(new SelectSlotChoice(slotUid, newSlotChoice)),
     };
 };
 
