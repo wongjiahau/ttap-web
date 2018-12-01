@@ -17,12 +17,6 @@ import {GetFeedbackDialog} from "./getFeedbackDialog";
 import { MainRouter } from "./mainRouter";
 import { OtherStuffDrawer } from "./otherStuffDrawer";
 
-// The following line is to disable the TouchTipple effect of Material UI
-// This is to increase ui responsiveness (e.g. from 2.25 seconds to 2.13 seconds)
-// For more info, refer https://github.com/mui-org/material-ui/issues/240
-// However, it is currently disable as it causes some unknown runtime error on ocassion
-// TouchRipple.prototype.render = () => null;
-
 const theme = createMuiTheme({
   palette: {
     primary: indigo,

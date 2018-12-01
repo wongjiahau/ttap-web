@@ -26,7 +26,7 @@ export function GenerateSlotViewsAndDayColumn(
             <div key={"s" + index}>
                 <SlotView
                     slot={x}
-                    color={ColorHash(x.SubjectCode + x.SubjectName)}
+                    color={ColorHash(x.SubjectCode)}
                     isShowingAlternativeSlotsOfThisSlot={isShowingAlternativeSlotOf ? x.Uid === isShowingAlternativeSlotOf.Uid : false}
                     isShowingAlternativeSlot={isShowingAlternativeSlotOf !== null}
                     handleSelectSlotChoice={selectSlotChoiceHandler}

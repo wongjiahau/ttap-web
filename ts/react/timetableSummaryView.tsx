@@ -34,7 +34,7 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
                         {getTd("Credit Hour")}
                     </tr>
                     {subjectSummaries.map((x, i) => {
-                        return this.generateSubjectSummaryView(x, ColorHash(x.SubjectCode + x.SubjectName), i);
+                        return this.generateSubjectSummaryView(x, ColorHash(x.SubjectCode), i);
                     })}
                     <tr>
                         {getTd("Total Credit Hour", "right", 5)}
