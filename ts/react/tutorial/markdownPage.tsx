@@ -1,6 +1,4 @@
-// term of service and privacy policy
 import { CircularProgress } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
 import * as React from "react";
 import * as ReactMarkdown from "react-markdown";
 
@@ -31,12 +29,9 @@ export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownP
     }
 
     public render() {
-        if (this.state.markdownSource === null) {
-            return <CircularProgress size={50}/>;
-        }
         const paperStyle : React.CSSProperties = {
             overflowY: "auto",
-            textAlign : "left",
+            textAlign : "center",
             paddingTop: "15px",
             paddingRight: "40px",
             paddingLeft: "40px",
@@ -47,13 +42,16 @@ export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownP
             <div id={this.props.id} style={divStyle} className="markdown-body">
                 {/* Markdown css */} <link rel="stylesheet" href="github-markdown.min.css"/>
                 <div style={paperStyle}>
-                    <ReactMarkdown source={this.state.markdownSource}/>
+                        {this.state.markdownSource === null ?
+                        <CircularProgress size={50}/> :
+                        <ReactMarkdown source={this.state.markdownSource}/>}
                 </div>
             </div>
         );
     }
 
     public componentWillReceiveProps(nextProps: IMarkdownPageProp) {
+        this.setState({markdownSource: null});
         this.requestMarkdownSource(nextProps.src);
     }
 
