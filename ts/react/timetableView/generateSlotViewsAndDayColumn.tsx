@@ -4,6 +4,7 @@ import * as ReactGridLayout from "react-grid-layout";
 import {ParseDay} from "../../att/day";
 import {TimePeriod} from "../../att/timePeriod";
 import { ISlotViewModel } from "../../model/slotViewModel";
+import { ColorHash } from "../../util/colorhash";
 import { Colors } from "../colors/colors";
 import {GenerateColorScheme} from "../colors/generateColorScheme";
 import {SlotView} from "../slotView";
@@ -20,17 +21,12 @@ export function GenerateSlotViewsAndDayColumn(
     const colorSchemes = GenerateColorScheme(slots);
     slots = sortBy(slots, [(o: ISlotViewModel) => ParseDay(o.Day)]);
     const slotViews = slots.map((x, index) => {
-        const color =
-            x.IsAlternativeSlot ?
-            Colors.White :
-            colorSchemes.filter((c) => c.SubjectCode === x.SubjectCode)[0].Color;
-
         return (
             // "s" means "Slot"
             <div key={"s" + index}>
                 <SlotView
                     slot={x}
-                    color={color}
+                    color={ColorHash(x.SubjectCode + x.SubjectName)}
                     isShowingAlternativeSlotsOfThisSlot={isShowingAlternativeSlotOf ? x.Uid === isShowingAlternativeSlotOf.Uid : false}
                     isShowingAlternativeSlot={isShowingAlternativeSlotOf !== null}
                     handleSelectSlotChoice={selectSlotChoiceHandler}

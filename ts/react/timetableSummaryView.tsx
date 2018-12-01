@@ -2,6 +2,7 @@ const find = require("lodash.find");
 import * as React from "react";
 import {ISlotViewModel} from "../model/slotViewModel";
 import {SubjectSummary, TimetableSummary} from "../model/timetableSummary";
+import { ColorHash } from "../util/colorhash";
 import {Colors} from "./colors/colors";
 import {GenerateColorScheme} from "./colors/generateColorScheme";
 
@@ -31,8 +32,9 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
                         {getTd("Tutorial")}
                         {getTd("Practical")}
                         {getTd("Credit Hour")}
-                    </tr>{colorSchemes.map((c, index) => {
-                        return this.generateSubjectSummaryView(find(subjectSummaries, {SubjectCode: c.SubjectCode}), c.Color, index);
+                    </tr>
+                    {subjectSummaries.map((x, i) => {
+                        return this.generateSubjectSummaryView(x, ColorHash(x.SubjectCode + x.SubjectName), i);
                     })}
                     <tr>
                         {getTd("Total Credit Hour", "right", 5)}
@@ -45,7 +47,7 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
         );
     }
 
-    private generateSubjectSummaryView(x : SubjectSummary, backgroundColor : Colors, index : number) {
+    private generateSubjectSummaryView(x : SubjectSummary, backgroundColor : string, index : number) {
         const style : React.CSSProperties = {
             backgroundColor: backgroundColor.toString()
         };

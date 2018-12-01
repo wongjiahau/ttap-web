@@ -17,7 +17,7 @@ import {Colors} from "./colors/colors";
 
 export interface ISlotViewProps {
     slot : ISlotViewModel;
-    color : Colors;
+    color : string;
     handleSelectSlotChoice       : (slotUid : number, newSlotChoice : number) => void;
     handleShowAlternateSlot     ?: (s: ISlotViewModel) => void;
     handleGoToThisAlternateSlot ?: (slotUid: number) => void;
