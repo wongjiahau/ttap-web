@@ -1,8 +1,5 @@
+
 import { ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Popover } from "@material-ui/core";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Menu from "@material-ui/core/Menu";
-import Typography from "@material-ui/core/Typography";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import * as React from "react";
 
 import NineDotIcon from "@material-ui/icons/Apps";
@@ -13,7 +10,7 @@ import {Tooltip} from "react-tippy";
 import {ISlotViewModel} from "../model/slotViewModel";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {GetInitial} from "../util/getInitial";
-import {Colors} from "./colors/colors";
+import { invertColor } from "../util/invertColor";
 
 export interface ISlotViewProps {
     slot : ISlotViewModel;
@@ -43,15 +40,16 @@ ISlotViewState > {
     public render() {
         const { slot, color, isShowingAlternativeSlot, isShowingAlternativeSlotsOfThisSlot } = this.props;
         let slotStyle: React.CSSProperties = {
+            color: invertColor(color),
             background: color,
-            cursor: "pointer", /*a.k.a. the hand, so it looks like its clickable*/
             opacity: (isShowingAlternativeSlot && !slot.IsAlternativeSlot && !isShowingAlternativeSlotsOfThisSlot)
                       ? 0.5 : 1.0
         };
         if (slot.AlternativeSlots.length > 0) {
             slotStyle = {
                 ...slotStyle,
-                borderStyle: "dashed"
+                borderStyle: "dashed",
+                cursor: "pointer", /*a.k.a. the hand, so it looks like its clickable*/
             };
         }
         if (slot.IsAlternativeSlot) {// add border glow

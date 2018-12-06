@@ -2,6 +2,7 @@ import * as React from "react";
 import {ISlotViewModel} from "../model/slotViewModel";
 import {SubjectSummary, TimetableSummary} from "../model/timetableSummary";
 import { ColorHash } from "../util/colorhash";
+import { invertColor } from "../util/invertColor";
 
 interface ITimetableSummaryViewProps {
     slots : ISlotViewModel[];
@@ -47,7 +48,8 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
 
     private generateSubjectSummaryView(x : SubjectSummary, backgroundColor : string, index : number) {
         const style : React.CSSProperties = {
-            backgroundColor: backgroundColor.toString()
+            color: invertColor(backgroundColor),
+            backgroundColor
         };
         return (
             <tr key={index.toString()} style={style}>

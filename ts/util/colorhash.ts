@@ -1,5 +1,5 @@
 const colorhash = new (require("color-hash") as any)({
-        lightness: 0.75,
+        // lightness: 0.75,
         saturation: 0.5,
 });
 
