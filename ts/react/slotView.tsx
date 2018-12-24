@@ -41,7 +41,7 @@ ISlotViewState > {
         const { slot, color, isShowingAlternativeSlot, isShowingAlternativeSlotsOfThisSlot } = this.props;
         let slotStyle: React.CSSProperties = {
             color: invertColor(color),
-            background: color,
+            backgroundColor: color,
             opacity: (isShowingAlternativeSlot && !slot.IsAlternativeSlot && !isShowingAlternativeSlotsOfThisSlot)
                       ? 0.5 : 1.0
         };
