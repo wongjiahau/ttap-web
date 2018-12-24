@@ -82,16 +82,21 @@ ISlotViewState > {
             = "slot-view"
             + (slot.AlternativeSlots.length > 0 ? " hvr-glow get-user-attention" : "");
 
+        const showPopover = false; // Currently this line is disable
+                                   // Why popover is needed?
+                                   //   it is for implementing slot-locking feature
+                                   //   but I haven't figured out how to do it yet
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isShowingAlternativeSlotsOfThisSlot)}>
                 <div className={className} style={slotStyle} onClick={clickHandler}
                     aria-owns={Boolean(this.state.anchorEl) ? "popover" : undefined}
                     aria-haspopup="true"
                     >
-                          {getSlotContent(slot)}
+                        {getSlotContent(slot)}
                     <br/> {slot.Room[slot.CurrentChoice]}
                     <br/> {slot.WeekNumber[slot.CurrentChoice]}
                 </div>
+                {!showPopover ? null :
                 <Popover
                     id="popover"
                     open={this.state.isMenuOpen}
@@ -136,7 +141,7 @@ ISlotViewState > {
                             </MenuItem>
                         </MenuList>
                     </Paper>
-                </Popover>
+                </Popover>}
             </Tooltip>
 
         );

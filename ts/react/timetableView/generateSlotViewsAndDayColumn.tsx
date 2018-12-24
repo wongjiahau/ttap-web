@@ -7,6 +7,7 @@ import { ISlotViewModel } from "../../model/slotViewModel";
 import { ColorHash } from "../../util/colorhash";
 import { Colors } from "../colors/colors";
 import {GenerateColorScheme} from "../colors/generateColorScheme";
+import { NO_OPERATION } from "../setTimeConstraintView";
 import {SlotView} from "../slotView";
 import { GenerateSlotAndDayLayouts } from "./generateSlotAndDayLayouts";
 import {ISkeleton, Skeleton} from "./skeleton";
@@ -18,7 +19,6 @@ export function GenerateSlotViewsAndDayColumn(
     showAlternateSlotHandler: (s: ISlotViewModel) => void,
     isShowingAlternativeSlotOf: ISlotViewModel | null
 ) : ISkeleton {
-    const colorSchemes = GenerateColorScheme(slots);
     slots = sortBy(slots, [(o: ISlotViewModel) => ParseDay(o.Day)]);
     const slotViews = slots.map((x, index) => {
         return (
@@ -30,8 +30,8 @@ export function GenerateSlotViewsAndDayColumn(
                     isShowingAlternativeSlotsOfThisSlot={isShowingAlternativeSlotOf ? x.Uid === isShowingAlternativeSlotOf.Uid : false}
                     isShowingAlternativeSlot={isShowingAlternativeSlotOf !== null}
                     handleSelectSlotChoice={selectSlotChoiceHandler}
-                    handleShowAlternateSlot={!x.IsAlternativeSlot ? showAlternateSlotHandler : () => {/* do nothing*/}}
-                    handleGoToThisAlternateSlot={x.IsAlternativeSlot ? goToThisAlternativeSlotHandler : () => {/* do nothing*/}}
+                    handleShowAlternateSlot={!x.IsAlternativeSlot ? showAlternateSlotHandler : NO_OPERATION}
+                    handleGoToThisAlternateSlot={x.IsAlternativeSlot ? goToThisAlternativeSlotHandler : NO_OPERATION}
                     />
             </div>
         );
