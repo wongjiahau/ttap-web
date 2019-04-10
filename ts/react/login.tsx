@@ -58,6 +58,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
         return (
             <div style={divStyle}>
                 <StackPanel orientation="vertical" horizontalAlignment="center">
+                    <Typography variant="h6">Please wait for the login page to appear.</Typography>
                     <iframe
                         id="unitregiframe"
                         scrolling="no"
@@ -66,8 +67,9 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         src={URL}/>
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
                         <Button variant="contained" color="secondary" onClick={this.handleRefresh}>Refresh</Button>
-                        <p/>
-                        <Button variant="contained" color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
+                        {null}
+                        {/* <p/> */}
+                        {/* <Button variant="contained" color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button> */}
                     </StackPanel>
                     <Button onClick={() => this.setState({openAddSlotManuallyDialog: true})}>Add slots manually</Button>
                 </StackPanel>
