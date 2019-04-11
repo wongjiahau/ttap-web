@@ -104,15 +104,13 @@ ITutorialState > {
     }
 
     private requestTutorialFiles(): void {
-        const request = require("phin");
-        const options = {
-            url: "https://api.github.com/repos/wongjiahau/ttap-web/contents/tutorials",
+        fetch("https://api.github.com/repos/wongjiahau/ttap-web/contents/tutorials", {
             headers: {
                 "User-Agent": "hou32hou"
             }
-        };
-        request(options, (error: any, response: any) => {
-            const result = JSON.parse(response.body.toString())as IGithubApiObject[];
+        })
+        .then((response) => response.json())
+        .then((result: IGithubApiObject[]) => {
             const urls = result.map((x) => x.download_url);
             this.downloadUrls = urls;
             this.setState({
