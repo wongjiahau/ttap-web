@@ -6,6 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import CloudIcon from "@material-ui/icons/CloudUpload";
 import FileIcon from "@material-ui/icons/InsertDriveFile";
 import PictureIcon from "@material-ui/icons/InsertPhoto";
+import HtmlIcon from "@material-ui/icons/Web";
 import * as React from "react";
 import { GetSemStartDateDialog } from "./getSemStartDateDialog";
 
@@ -23,7 +24,8 @@ export interface ISaveTimetableDialogDispatchProps {
     handleClose:                ()          => void;
     handleCloseGetDateDialog:   ()          => void;
     handleOpenGetDateDialog:    ()          => void;
-    handleSaveAsPicture:        ()          => void;
+    handleSaveAsHtml:           ()          => void;
+    handleSaveAsImage:          ()          => void;
     handleSaveAsTextFile:       ()          => void;
     handleSaveToGoogleCalendar: (semStartDate: Date) => void;
 }
@@ -48,8 +50,9 @@ export class SaveTimetableDialog extends React.Component < ISaveTimetableDialogP
                 <DialogTitle>Save this timetable as . . .</DialogTitle>
                 <div>
                     <List>
-                        {getListItem("Text file"      , <FileIcon/>   , this.props.handleSaveAsTextFile)}
-                        {getListItem("Picture"        , <PictureIcon/>, this.props.handleSaveAsPicture)}
+                        {getListItem("Text file", <FileIcon/>   , this.props.handleSaveAsTextFile)}
+                        {getListItem("HTML"     , <HtmlIcon/>   , this.props.handleSaveAsHtml)}
+                        {getListItem("Picture"  , <PictureIcon/>, this.props.handleSaveAsImage)}
                         {/* {getListItem("Google Calendar", <CloudIcon/>  , this.props.handleOpenGetDateDialog)} */}
                     </List>
                     <Button color="primary" style={cancelButtonStyle} onClick={this.props.handleClose}>cancel</Button>
