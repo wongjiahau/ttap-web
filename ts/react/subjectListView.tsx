@@ -41,8 +41,8 @@ const searchBoxStyle : React.CSSProperties = {
     fontSize: "24px",
     fontWeight: "normal",
     marginBottom: "10px",
-    marginTop: "-10px",
-    width: "480px"
+    marginTop: "-5px",
+    width: "95%"
 };
 
 const buttonStyle : React.CSSProperties = {
@@ -84,9 +84,8 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         };
     }
 
-    public handleSearchBoxOnChange = () => {
-        const searchedText = (document.getElementById("searchbar") as HTMLInputElement).value;
-        this.props.handleSearch(searchedText);
+    public handleSearchBoxOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.handleSearch(e.target.value);
     }
 
     public render() {
@@ -136,15 +135,17 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                 <Drawer elevation={16} open={this.props.IsOpen} onClose={this.handleClose}>
                     <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                         <header style={headerStyle}>
-                            <Typography gutterBottom={true} variant="display1" color="primary">
+                            <Typography gutterBottom={true} variant="display1" color="primary" style={{marginRight: "10px"}}>
                                 Select your desired subjects.
                             </Typography>
                             <TextField
                                 id="searchbar"
+                                variant="outlined"
                                 style={searchBoxStyle}
+                                margin="dense"
                                 onChange={this.handleSearchBoxOnChange}
                                 placeholder="example: he/hubungan etnik/mpu3113"
-                                label=" Search . . ."/>
+                                label="🔎 Search . . ."/>
                         </header>
                         <Paper style={divStyle}>
                             <div id="subject-list-container">
