@@ -67,9 +67,8 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         src={URL}/>
                     <StackPanel orientation="horizontal" horizontalAlignment="center">
                         <Button variant="contained" color="secondary" onClick={this.handleRefresh}>Refresh</Button>
-                        {null}
-                        {/* <p/> */}
-                        {/* <Button variant="contained" color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button> */}
+                        <p/>
+                        <Button variant="contained" color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
                     </StackPanel>
                     <Button onClick={() => this.setState({openAddSlotManuallyDialog: true})}>Add slots manually</Button>
                 </StackPanel>
