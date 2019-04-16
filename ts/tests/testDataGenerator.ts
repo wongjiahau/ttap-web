@@ -3,12 +3,12 @@ import {ObjectStore} from "../dataStructure/objectStore";
 import { IGroupedTimetable } from "../model/groupedTimetable";
 import {Slot} from "../model/slot";
 import { Timetable } from "../model/timetable";
-import ParseHtmlToSlots from "../parser/parseStudentHtmlToRawSlot";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseRawSlotToSubject} from "../parser/parseRawSlotToSubject";
 import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
-import {BigSlot} from "../permutator/bigSlot";
+import ParseHtmlToSlots from "../parser/parseStudentHtmlToRawSlot";
+import {IBigSlot} from "../permutator/bigSlot";
 import {FindTimetable} from "../permutator/findTimetable";
 import { GroupSimilarTimetables } from "../permutator/groupSimilarTimetables";
 import {TinySlot} from "../permutator/tinySlot";
@@ -54,7 +54,7 @@ export const GetTinySlotsOf = (subjectCode : string) : TinySlot[] => {
     return ParseSlotToTinySlot(matchingSlots);
 };
 
-export const GetBigSlotsOf = (subjectCode : string) : BigSlot[] => {
+export const GetBigSlotsOf = (subjectCode : string) : IBigSlot[] => {
     const subject = GetTestSubjects1().filter((x) => x.Code === subjectCode);
     if (subject.length === 0) {
         throw new Error("No subject have the code of " + subjectCode);

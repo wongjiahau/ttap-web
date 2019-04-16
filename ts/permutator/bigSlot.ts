@@ -10,26 +10,27 @@ import { IOptimizedSlot } from "./tinySlot";
  * @class BigSlot
  * @implements {IOptimizedSlot}
  */
-export class BigSlot implements IOptimizedSlot {
-    public readonly PartitionKey: number;
-    public DayTimeMatrix: number[ /*7 multiply numberOfWeeks*/ ];
-    public readonly SlotNumber: number;
-    public readonly PartitionGroup: string;
-    public SlotIds: number[];
-    public Uid: number;
-
-    public constructor(s: ISlot) {
-        this.PartitionKey = s.SubjectCode * 10 + ParseType(s.Type);
-        this.SlotNumber = s.SlotNumber;
-        this.Uid = s.SlotNumber;
-        this.SlotIds = [];
-        this.SlotIds.push(s.Uid);
-        this.DayTimeMatrix = GetDayTimeMatrixOfBigSlot(s.Day, s.Week, s.TimePeriod);
-        this.PartitionGroup = `${GetInitial(s.SubjectName)}(${s.Type})`;
-    }
-
+export interface IBigSlot extends IOptimizedSlot {
+    DayTimeMatrix: number[ /*7 multiply numberOfWeeks*/ ];
+    SlotNumber: number;
+    SlotIds: number[];
+    PartitionGroup: string;
+    PartitionKey: number;
+    Uid: number;
 }
-export function GetDayTimeMatrixOfBigSlot(Day:number, Week:number, TimePeriod:number): number[] {
+
+export function newBigSlot(s: ISlot): IBigSlot {
+    return {
+        PartitionKey: s.SubjectCode * 10 + ParseType(s.Type),
+        SlotNumber: s.SlotNumber,
+        Uid: s.SlotNumber,
+        SlotIds: [s.Uid],
+        DayTimeMatrix: GetDayTimeMatrixOfBigSlot(s.Day, s.Week, s.TimePeriod),
+        PartitionGroup: `${GetInitial(s.SubjectName)}(${s.Type})`
+    };
+}
+
+export function GetDayTimeMatrixOfBigSlot(Day: number, Week: number, TimePeriod: number): number[] {
     let result: number[] = [];
     const weekBinary = Week.toString(2);
     const matrix = [0, 0, 0, 0, 0, 0, 0];

@@ -13,7 +13,7 @@ import TestManager, {
     FileName
 } from "../../tests/testManager";
 import {
-    BigSlot
+    IBigSlot, newBigSlot
 } from "../bigSlot";
 import {
     GotIntersection
@@ -27,7 +27,7 @@ describe("BigSlot", () => {
         });
         expect(rawSlot.WeekNumber).to.eq("2,8");
         const slot = CreateSlotFromRaw(rawSlot);
-        const result = new BigSlot(slot);
+        const result = newBigSlot(slot);
         expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
     });
 
@@ -37,7 +37,7 @@ describe("BigSlot", () => {
         });
         expect(rawSlot.WeekNumber).to.eq("1-14");
         const slot = CreateSlotFromRaw(rawSlot);
-        const result = new BigSlot(slot);
+        const result = newBigSlot(slot);
         expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
     });
 
@@ -47,7 +47,7 @@ describe("BigSlot", () => {
         });
         rawSlot.WeekNumber = "2";
         const slot = CreateSlotFromRaw(rawSlot);
-        const result = new BigSlot(slot);
+        const result = newBigSlot(slot);
         expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
         expect(result.DayTimeMatrix).to.deep.eq(
             [
@@ -83,8 +83,8 @@ describe("BigSlot", () => {
         y.SubjectCode = "XXX";
         y.SubjectName = "XXX";
         y.Type = "T";
-        const slot1 = new BigSlot(CreateSlotFromRaw(x));
-        const slot2 = new BigSlot(CreateSlotFromRaw(y));
+        const slot1 = newBigSlot(CreateSlotFromRaw(x));
+        const slot2 = newBigSlot(CreateSlotFromRaw(y));
         expect(GotIntersection(slot1.DayTimeMatrix, slot2.DayTimeMatrix)).to.eq(false);
     });
 
@@ -103,8 +103,8 @@ describe("BigSlot", () => {
         y.SubjectCode = "XXX";
         y.SubjectName = "XXX";
         y.Type = "T";
-        const slot1 = new BigSlot(CreateSlotFromRaw(x));
-        const slot2 = new BigSlot(CreateSlotFromRaw(y));
+        const slot1 = newBigSlot(CreateSlotFromRaw(x));
+        const slot2 = newBigSlot(CreateSlotFromRaw(y));
         expect(GotIntersection(slot1.DayTimeMatrix, slot2.DayTimeMatrix)).to.eq(true);
     });
 

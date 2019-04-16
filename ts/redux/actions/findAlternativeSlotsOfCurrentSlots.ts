@@ -7,7 +7,7 @@ import { CreateSlotFromRaw } from "../../model/slot";
 import { CreateSlotViewModel, FromSlotViewModelToRawSlot, ISlotViewModel } from "../../model/slotViewModel";
 import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
 import { ParseSlotToBigSlot } from "../../parser/parseSlotToBigSlot";
-import { BigSlot, GetDayTimeMatrixOfBigSlot } from "../../permutator/bigSlot";
+import { GetDayTimeMatrixOfBigSlot, IBigSlot, newBigSlot } from "../../permutator/bigSlot";
 import { AppendMatrix, GotIntersection } from "../../permutator/matrix";
 import {MasterStateAction} from "../reducers/masterState";
 import { TinySlot } from "./../../permutator/tinySlot";
@@ -67,7 +67,7 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
                         && uidsOfFiltratedSlots.has(x.Uid)
                         && x.SubjectCode === targetSlot.SubjectCode
                         && x.Type === targetSlot.Type
-                        && !GotIntersection(currentTimetableState, new BigSlot(CreateSlotFromRaw(x)).DayTimeMatrix)) {
+                        && !GotIntersection(currentTimetableState, newBigSlot(CreateSlotFromRaw(x)).DayTimeMatrix)) {
                             const temp = CreateSlotViewModel(x);
                             temp.IsAlternativeSlot = true;
                             result.push(temp);

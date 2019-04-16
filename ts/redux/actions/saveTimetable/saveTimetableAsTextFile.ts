@@ -6,7 +6,7 @@ import { IRawSlot } from "../../../model/rawSlot";
 import { CreateSlotFromRaw } from "../../../model/slot";
 import { CreateSlotViewModels } from "../../../model/slotViewModel";
 import { Timetable } from "../../../model/timetable";
-import { BigSlot } from "../../../permutator/bigSlot";
+import { IBigSlot, newBigSlot } from "../../../permutator/bigSlot";
 import { AppendMatrix, GotIntersection } from "../../../permutator/matrix";
 import {
     TimetableSummary
@@ -28,7 +28,7 @@ const uniq = require("lodash.uniq");
  */
 export function findSisterSlots(slotsOfCurrentTimetable: IRawSlot[], allSlots: IRawSlot[])
     : IRawSlot[] {
-    const currentSlotsAsBigSlots = slotsOfCurrentTimetable.map((x) => new BigSlot(CreateSlotFromRaw(x)));
+    const currentSlotsAsBigSlots = slotsOfCurrentTimetable.map((x) => newBigSlot(CreateSlotFromRaw(x)));
     const uncompressedDayTimeMatrix = currentSlotsAsBigSlots
         .reduce((acc, next) => AppendMatrix(acc, next.DayTimeMatrix), currentSlotsAsBigSlots[0].DayTimeMatrix);
 
@@ -40,7 +40,7 @@ export function findSisterSlots(slotsOfCurrentTimetable: IRawSlot[], allSlots: I
                 && x.Type === y.Type
                 && x.Day === y.Day
                 && x.TimePeriod === y.TimePeriod
-                && !GotIntersection(uncompressedDayTimeMatrix, new BigSlot(CreateSlotFromRaw(y)).DayTimeMatrix));
+                && !GotIntersection(uncompressedDayTimeMatrix, newBigSlot(CreateSlotFromRaw(y)).DayTimeMatrix));
         return {
             ...x,
             Group: x.Group + (sisters.length > 0 ? uniq(sisters.map((y) => " or " + y.Group)).join("") : "")
