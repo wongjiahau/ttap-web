@@ -1,7 +1,7 @@
 const concat = require("lodash.concat");
 const sortBy = require("lodash.sortby");
 import {RawSlot} from "../model/rawSlot";
-import { Timetable } from "../model/timetable";
+import { Timetable, newTimetable } from "../model/timetable";
 import {ParseRawSlotToSlot} from "../parser/parseRawSlotToSlot";
 import {ParseSlotToBigSlot} from "../parser/parseSlotToBigSlot";
 import {ParseSlotToTinySlot} from "../parser/parseSlotToTinySlot";
@@ -32,7 +32,7 @@ export function FindTimetable(
     if (input.length === 1) {
         let resultMatrix = [ 0, 0, 0, 0, 0, 0, 0 ];
         resultMatrix = AppendMatrix(resultMatrix, input[0].DayTimeMatrix);
-        return [new Timetable(input[0].SlotIds, resultMatrix)];
+        return [newTimetable(input[0].SlotIds, resultMatrix)];
     }
     const result = new Array < Timetable > ();
     const partitioned = sortBy(Partitionize(input), ["length"]) as IOptimizedSlot[][];
@@ -62,7 +62,7 @@ export function FindTimetable(
                 DayTimeMatrix: AppendMatrix(current.DayTimeMatrix, prevSnapshot.DayTimeMatrix)
             });
             if (ptr === last) {
-                result.push(new Timetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].DayTimeMatrix));
+                result.push(newTimetable(snapshots[ptr + 1].SlotIds, snapshots[ptr + 1].DayTimeMatrix));
                 visualizer.increaseSearchedPathCount();
                 if (result.length >= LIMIT) { // if too much timetable just return the result
                     return result;

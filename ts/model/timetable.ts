@@ -2,13 +2,18 @@ import {
     RawSlot
 } from "./rawSlot";
 
-export class Timetable {
-    public readonly SlotUids : number[];
-    public readonly DayTimeMatrix : number[];
-    public constructor(Uids: number[], dayTimeMatrix : number[]) {
-        this.SlotUids = Uids;
-        this.DayTimeMatrix = CompressDayTimeMatrix(dayTimeMatrix);
-    }
+// tslint:disable-next-line:interface-name
+export interface Timetable {
+    SlotUids : number[];
+    DayTimeMatrix : number[/* 7 */];
+}
+
+// The dimension of uncompressedDayTimeMatrix is 7 multiple the number of study week 
+export function newTimetable(Uids: number[], uncompressedDayTimeMatrix : number[]): Timetable {
+    return {
+        SlotUids : Uids,
+        DayTimeMatrix: CompressDayTimeMatrix(uncompressedDayTimeMatrix),
+    };
 }
 
 export function CompressDayTimeMatrix(dayTimeMatrix: number[]) : number[] {

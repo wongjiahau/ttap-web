@@ -31,7 +31,11 @@ export class SubjectSummary {
     }
 
     public ToString() : string {
-        return this.SubjectCode + "\r\n" + this.SubjectName + "\r\n" + this.Lecture + " " + this.Tutorial + " " + this.Practical + "\r\n";
+        return this.SubjectCode + "\r\n"
+            + this.SubjectName + "\r\n"
+            + "    " + this.Lecture + "\r\n"
+            + "    " + this.Tutorial + "\r\n"
+            + "    " + this.Practical + "\r\n";
     }
 
     private GetSlotOf(slots : ISlotViewModel[], slotType : string) {

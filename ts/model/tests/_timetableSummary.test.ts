@@ -37,7 +37,7 @@ describe("TimetableSummary", () => {
             const timetables = FindTimetable(input1.concat(input2));
             const svm = CreateSlotViewModels(MockRawSlotStore.GetBunch(timetables[0].SlotUids));
             const timetableSummary = new TimetableSummary(svm);
-            expect(timetableSummary.ToString()).to.eq("UEMX3653\r\nWater & Wastewater Treatment\r\nL(1) T(1) -\r\n\r\nUKMM1043\r\nBasic Economics, Accounting & Management\r\nL(1) T(1) -\r\n\r\n");
+            expect(timetableSummary.ToString()).to.eq("UEMX3653\r\nWater & Wastewater Treatment\r\n    L(1)\r\n    T(1)\r\n    -\r\n\r\nUKMM1043\r\nBasic Economics, Accounting & Management\r\n    L(1)\r\n    T(1)\r\n    -\r\n\r\n");
         });
     });
 
