@@ -18,7 +18,8 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
             border: "1px solid black",
             borderCollapse: "collapse",
             fontSize: "16px",
-            margin: "10px"
+            justifySelf: 'center',
+            backgroundColor: 'whitesmoke'
         };
         return (
             // @ts-ignore

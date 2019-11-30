@@ -81,9 +81,9 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             right:    "0",
         };
         return (
-            <div id="timetable-view">
+            <div id="timetable-view" style={{padding: '12px 0', display: 'grid'}}>
                 {/* Tippy css */} <link rel="stylesheet" href="tippy.css"/>
-                <div style={{display: 'grid'}}>
+                <div style={{display: 'grid', gridGap: '12px'}}>
                     <div style={divStyle}>
                         <ReactGridLayout
                             cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour)) * 2 + 2}
@@ -104,9 +104,7 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
                         </Button>
                         : null}
                     </div>
-                    <div style={{display: this.props.isSummaryOpen ? "inline" : "none"}}>
-                        <TimetableSummaryView slots={this.props.slots}/>
-                    </div>
+                    {this.props.isSummaryOpen && <TimetableSummaryView slots={this.props.slots}/>}
                 </div>
             </div>
         );

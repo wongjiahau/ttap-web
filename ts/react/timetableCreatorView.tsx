@@ -64,7 +64,7 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
         }
         return (
             <div style={{display: 'grid', gridTemplateRows: 'auto 1fr auto'}}>
-                <div style={{display: 'grid', padding: '12px', gridTemplateColumns: 'auto auto', alignItems: 'start'}}>
+                <div style={{display: 'grid', gridTemplateColumns: 'auto auto', alignItems: 'start', padding: '18px 18px 0 18px'}}>
                     <Button
                         style={{justifySelf: 'start'}}
                         variant="contained"

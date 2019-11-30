@@ -27,7 +27,7 @@ export interface IMasterState {
     AlgorithmVisualizerState: IAlgorithmVisualizerState;
 }
 
-export function NewMasterState() : IMasterState {
+export function NewMasterState(isSummaryOpen = true) : IMasterState {
     return {
         DataState:                NewDataState(),
         SaveTimetableDialogState: NewSaveTimetableDialogState(),
@@ -38,7 +38,7 @@ export function NewMasterState() : IMasterState {
         SnackbarState:            NewSnackbarState(),
         SubjectListState:         NewSubjectListState([]),
         TimetableCreatorState:    NewTimetableCreatorState(),
-        TimetableListState:       NewTimetableListState([], []),
+        TimetableListState:       NewTimetableListState([], [], isSummaryOpen),
         AlgorithmVisualizerState: NewAlgorithmVisualizerState()
     };
 }

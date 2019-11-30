@@ -9,14 +9,14 @@ describe("ToggleIsOpenOfSummary action", () => {
     });
 
     it("should set IsSummaryOpen to true if it is intially false", () => {
-        const initialState = NewMasterState();
+        const initialState = NewMasterState(false);
         expect(initialState.TimetableListState.IsSummaryOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, new ToggleIsOpenOfSummary());
         expect(newState.TimetableListState.IsSummaryOpen).to.eq(true);
     });
 
     it("should set IsSummaryOpen to false if it is intially true", () => {
-        const initialState = NewMasterState();
+        const initialState = NewMasterState(false);
         let newState = MasterStateReducer(initialState, new ToggleIsOpenOfSummary());
         expect(newState.TimetableListState.IsSummaryOpen).to.eq(true);
         newState = MasterStateReducer(newState, new ToggleIsOpenOfSummary());
@@ -24,14 +24,14 @@ describe("ToggleIsOpenOfSummary action", () => {
     });
 
     it("should set IsSummaryOpen based on passed in argument (1)", () => {
-        const initialState = NewMasterState();
+        const initialState = NewMasterState(false);
         expect(initialState.TimetableListState.IsSummaryOpen).to.eq(false);
         const newState = MasterStateReducer(initialState, new ToggleIsOpenOfSummary(true));
         expect(newState.TimetableListState.IsSummaryOpen).to.eq(true);
     });
 
     it("should set IsSummaryOpen based on passed in argument (2)", () => {
-        const initialState = NewMasterState();
+        const initialState = NewMasterState(false);
         let newState = MasterStateReducer(initialState, new ToggleIsOpenOfSummary());
         expect(newState.TimetableListState.IsSummaryOpen).to.eq(true);
         newState = MasterStateReducer(newState, new ToggleIsOpenOfSummary(false));

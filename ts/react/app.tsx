@@ -74,7 +74,7 @@ export class App extends React.Component < {}, IAppState > {
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
-                    <div style={{display: 'grid', gridTemplateRows: 'auto 1fr'}}>
+                    <div style={{display: 'grid', gridTemplateRows: 'auto 1fr', overflowY: 'auto', overflowX: 'hidden'}}>
                         <AppBar position="static" style={{ width: "100%", alignSelf: 'start' }}>
                             <Toolbar>
                                 <Button onClick={() => window.history.back()}>
