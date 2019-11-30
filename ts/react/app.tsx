@@ -74,8 +74,8 @@ export class App extends React.Component < {}, IAppState > {
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
-                    <div>
-                        <AppBar position="static" style={{ width: "100%" }}>
+                    <div style={{display: 'grid', gridTemplateRows: 'auto 1fr'}}>
+                        <AppBar position="static" style={{ width: "100%", alignSelf: 'start' }}>
                             <Toolbar>
                                 <Button onClick={() => window.history.back()}>
                                     <ArrowBack style={{color: "white"}}/>
@@ -89,7 +89,6 @@ export class App extends React.Component < {}, IAppState > {
                                 </IconButton>
                             </Toolbar>
                         </AppBar>
-                        <br/>
                         <OtherStuffDrawer isOpen={this.state.isSecondaryDrawerOpen} onItemClick={this.handleCloseDrawer}/>
                         <GetFeedbackDialog/>
                         <MainRouter/>

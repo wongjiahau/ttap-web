@@ -106,7 +106,7 @@ ISetTimeConstraintViewDispatchProps {}
 export class SetTimeConstraintView extends React.Component < ISetTimeConstraintViewProps, {} > {
     public render() {
         return (
-            <div>
+            
                 <Dialog open={this.props.isOpen} fullScreen={true}>
                 {/* transition={Transition}> */}
                     <div style={divStyle}>
@@ -163,7 +163,7 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                         <Button variant="contained" color="primary" onClick={this.props.handleCancel}>Done</Button>
                     </div>
                 </Dialog>
-            </div>
+            
         );
     }
 }

@@ -131,7 +131,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
         const noSubjectIsSelected = numberOfSelectedSubjects === 0;
 
         return (
-            <div>
+            
                 <Drawer elevation={16} open={this.props.IsOpen} onClose={this.handleClose}>
                     <section onKeyUp={this.checkKeys} style={this.state.sectionStyle}>
                         <header style={headerStyle}>
@@ -194,7 +194,7 @@ export class SubjectListView extends React.Component < ISubjectListViewProps, {
                         </footer>
                     </section>
                 </Drawer>
-            </div >
+            
         );
     }
 
