@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Backable } from "../backable";
 
-const divStyle = {
+const divStyle: React.CSSProperties = {
     margin: "auto",
     textAlign: "center"
 };
