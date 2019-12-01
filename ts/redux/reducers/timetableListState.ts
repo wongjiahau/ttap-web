@@ -19,7 +19,8 @@ export interface ITimetableListState {
 
 export function NewTimetableListState(
     groupedTimetables: IGroupedTimetable[],
-    selectedSlots: RawSlot[]
+    selectedSlots: RawSlot[],
+    isSummaryOpen = true
 ) : ITimetableListState {
     const slotVMs = CreateSlotViewModels(selectedSlots);
 
@@ -30,7 +31,7 @@ export function NewTimetableListState(
         CurrentIndex: 0,
         CurrentSubIndex: 0,
         FiltrateTimetables: groupedTimetables,
-        IsSummaryOpen: false,
+        IsSummaryOpen: isSummaryOpen,
         ResidueTimetables: [],
         SlotViewModelStore: slotStateStore,
         AlternativeSlots: [],

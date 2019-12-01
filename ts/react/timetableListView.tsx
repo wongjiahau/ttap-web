@@ -57,9 +57,9 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
             ) : [];
 
         return (
-            <div onKeyDown={this.checkKeys} tabIndex={0}>
+            <div style={{display: 'grid'}} onKeyDown={this.checkKeys} tabIndex={0}>
                 {/* Balloon css */} <link rel="stylesheet" href="balloon.min.css"/>
-                <StackPanel orientation="vertical" horizontalAlignment="center">
+                <div style={{display: 'grid', gridGap: '12px', paddingTop: '12px'}}>
                     <TimetableView
                         slots={slotsToBeRendered}
                         alternateSlots={this.props.alternativeSlots}
@@ -73,7 +73,8 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         handleShowAlternateSlot={this.props.handleShowAlternateSlot}
                         handleGoToThisAlternateSlot={this.props.handleGoToThisAlternateSlot}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
-                    <StackPanel orientation="horizontal">
+                    <div style={{display: 'grid', justifyContent: 'center', gridAutoFlow: 'column', 
+                        alignItems: 'center', gridGap: '8px', alignSelf: 'start'}}>
                         <Button
                             variant="contained"
                             color="primary"
@@ -107,8 +108,8 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                             <IconViewList style={iconStyle}/>
                             Show slots
                         </Button>
-                    </StackPanel>
-                </StackPanel>
+                    </div>
+                </div>
 
             </div>
         );

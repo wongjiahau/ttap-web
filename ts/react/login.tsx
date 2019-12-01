@@ -12,6 +12,7 @@ import { getLoadingElement, LoadSlotsFromUrl } from "./selectCourseView";
 
 const divStyle : React.CSSProperties = {
     textAlign: "center",
+    display: 'grid'
 };
 
 const iframeStyle : React.CSSProperties = {
@@ -57,7 +58,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
         }
         return (
             <div style={divStyle}>
-                <StackPanel orientation="vertical" horizontalAlignment="center">
+                <div style={{display: 'grid', alignContent: 'center', justifyContent: 'center', gridGap: '12px', justifyItems: 'center'}}>
                     <Typography variant="h6">Please wait for the login page to appear.</Typography>
                     <iframe
                         id="unitregiframe"
@@ -71,7 +72,7 @@ export class Login extends React.Component < ILoginDispatchProps, ILoginStatePro
                         <Button variant="contained" color="primary" onClick={this.handleLoadDemo}>TRY DEMO</Button>
                     </StackPanel>
                     <Button onClick={() => this.setState({openAddSlotManuallyDialog: true})}>Add slots manually</Button>
-                </StackPanel>
+                </div>
                 <Dialog open={this.state.openAddSlotManuallyDialog}>
                     <DialogTitle>
                         Add slots manually

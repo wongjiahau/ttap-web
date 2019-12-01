@@ -49,7 +49,8 @@ export class CounterView extends React.Component < ICounterProps, {} > {
         };
         return (
             // Copied from https://www.w3schools.com/css/tryit.asp?filename=trycss_grid
-            <div className="grid-container" style={{marginLeft: "5px", marginRight: "5px"}}>
+            <div style={{marginLeft: "5px", marginRight: "5px", display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', 
+                alignItems: 'center'}}>
                 <div className="grid-item"/>
                 <div className="grid-item">
                     {getButton(this.props.handleClickUp, < IconUp />, this.props.upTooltip)} </div>

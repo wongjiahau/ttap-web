@@ -10,6 +10,7 @@ import {TimetableSummaryView} from "../timetableSummaryView";
 import {GenerateSlotViewsAndDayColumn} from "./generateSlotViewsAndDayColumn";
 import {GenerateStateViews} from "./generateStateView";
 import {ISkeleton, Skeleton} from "./skeleton";
+import { ArcherContainer } from "react-archer";
 
 const getTimetableViewWidth = () => 0.9 * window.innerWidth;
 
@@ -81,33 +82,33 @@ export class TimetableView extends React.Component < ITimetableViewProps, ITimet
             right:    "0",
         };
         return (
-            <div id="timetable-view">
+            <div id="timetable-view" style={{padding: '12px 0', display: 'grid'}}>
                 {/* Tippy css */} <link rel="stylesheet" href="tippy.css"/>
-                <StackPanel orientation="vertical" horizontalAlignment="center">
+                <div style={{display: 'grid', gridGap: '12px'}}>
                     <div style={divStyle}>
-                        <ReactGridLayout
-                            cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour)) * 2 + 2}
-                            maxRows={50}
-                            rowHeight={50}
-                            width={this.state.width}
-                            layout={skeleton.Layouts}
-                            margin={[0, 0]}
-                            isDraggable={false}
-                            isResizable={false}
-                            autoSize={true}
-                            verticalCompact={false}>
-                            {skeleton.Children}
-                        </ReactGridLayout>
+                        <ArcherContainer strokeColor='red' arrowLength={0} arrowThickness={0}>
+                            <ReactGridLayout
+                                cols={((TimePeriod.Max.Hour - TimePeriod.Min.Hour)) * 2 + 2}
+                                maxRows={50}
+                                rowHeight={50}
+                                width={this.state.width}
+                                layout={skeleton.Layouts}
+                                margin={[0, 0]}
+                                isDraggable={false}
+                                isResizable={false}
+                                autoSize={true}
+                                verticalCompact={false}>
+                                {skeleton.Children}
+                            </ReactGridLayout>
+                        </ArcherContainer>
                         {this.props.slots.length > 0 ?
                         <Button id="summary-btn" variant="contained" style={buttonStyle} onClick={this.props.handleToggleIsOpenOfSummary}>
                             {this.props.isSummaryOpen ? "hide summary" : "show summary"}
                         </Button>
                         : null}
                     </div>
-                    <div style={{display: this.props.isSummaryOpen ? "inline" : "none"}}>
-                        <TimetableSummaryView slots={this.props.slots}/>
-                    </div>
-                </StackPanel>
+                    {this.props.isSummaryOpen && <TimetableSummaryView slots={this.props.slots}/>}
+                </div>
             </div>
         );
     }

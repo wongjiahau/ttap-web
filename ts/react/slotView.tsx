@@ -11,6 +11,10 @@ import {ISlotViewModel} from "../model/slotViewModel";
 import { BeautifySubjectName } from "../util/beautifySubjectName";
 import {GetInitial} from "../util/getInitial";
 import { invertColor } from "../util/invertColor";
+import { ArcherElement } from 'react-archer';
+import { ParseDay } from "../att/day";
+import { TimePeriod } from "../att/timePeriod";
+
 
 export interface ISlotViewProps {
     slot : ISlotViewModel;
@@ -20,6 +24,7 @@ export interface ISlotViewProps {
     handleGoToThisAlternateSlot ?: (slotUid: number) => void;
     isShowingAlternativeSlot: boolean;
     isShowingAlternativeSlotsOfThisSlot: boolean;
+    alternativeSlots: ISlotViewModel[]
 }
 
 interface ISlotViewState {
@@ -92,10 +97,49 @@ ISlotViewState > {
                     aria-owns={Boolean(this.state.anchorEl) ? "popover" : undefined}
                     aria-haspopup="true"
                     >
-                        {getSlotContent(slot)}
-                    <br/> {slot.Room[slot.CurrentChoice]}
-                    <br/> {slot.WeekNumber[slot.CurrentChoice]}
+                    {getSlotContent(slot)}
+                    {!isShowingAlternativeSlot &&
+                        <React.Fragment>
+                            <br/> {slot.Room[slot.CurrentChoice]} <br/>
+                        </React.Fragment>}
+                    {(isShowingAlternativeSlotsOfThisSlot || isShowingAlternativeSlot) &&
+                        <ArcherElement 
+                            id={'slot' + slot.Uid.toString()}
+                            relations={
+                                isShowingAlternativeSlotsOfThisSlot
+                                    ? this.props.alternativeSlots.map(alternativeSlot => ({
+                                        targetId: 'slot' + alternativeSlot.Uid.toString(),
+                                        ...(
+                                            ParseDay(alternativeSlot.Day) > ParseDay(slot.Day)
+                                                ? {
+                                                    targetAnchor: 'top' as 'top',
+                                                    sourceAnchor: 'bottom' as 'bottom'
+                                                }
+                                            : ParseDay(alternativeSlot.Day) < ParseDay(slot.Day)
+                                                ? {
+                                                    targetAnchor: 'bottom' as 'bottom',
+                                                    sourceAnchor: 'top' as 'top'
+                                                } 
+                                            : TimePeriod.Parse(alternativeSlot.TimePeriod).StartTime.Hour 
+                                                > TimePeriod.Parse(slot.TimePeriod).StartTime.Hour
+                                                ? {
+                                                    targetAnchor: 'left' as 'left',
+                                                    sourceAnchor: 'right' as 'right'
+                                                }
+                                                : {
+                                                    targetAnchor: 'right' as 'right',
+                                                    sourceAnchor: 'left' as 'left',
+                                                }
+                                        )
+                                    }))
+                                    : []
+                            }
+                            >
+                            {slot.Room[slot.CurrentChoice]}
+                        </ArcherElement>}
+                    {slot.WeekNumber[slot.CurrentChoice]}
                 </div>
+                
                 {!showPopover ? null :
                 <Popover
                     id="popover"

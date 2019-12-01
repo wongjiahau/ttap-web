@@ -32,6 +32,7 @@ export function GenerateSlotViewsAndDayColumn(
                     handleSelectSlotChoice={selectSlotChoiceHandler}
                     handleShowAlternateSlot={!x.IsAlternativeSlot ? showAlternateSlotHandler : NO_OPERATION}
                     handleGoToThisAlternateSlot={x.IsAlternativeSlot ? goToThisAlternativeSlotHandler : NO_OPERATION}
+                    alternativeSlots={slots.filter(slot => slot.IsAlternativeSlot)}
                     />
             </div>
         );

@@ -25,11 +25,6 @@ const switchStyle : React.CSSProperties = {
     marginRight: 0.03 * window.innerWidth
 };
 
-const selectSubjectButtonStyle : React.CSSProperties = {
-    marginBottom: "10px",
-    marginLeft: "10px"
-};
-
 export interface ITimetableCreatorViewStateProps {
     isSlotLoaded : boolean;
     isSbcwTurnedOn : boolean; // sbcw = search by considering week number
@@ -68,18 +63,18 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
             return <Redirect push={true} to="/select"/>;
         }
         return (
-            <div>
-                <LeftRightPanel>
+            <div style={{display: 'grid', gridTemplateRows: 'auto 1fr auto'}}>
+                <div style={{display: 'grid', gridTemplateColumns: 'auto auto', alignItems: 'start', padding: '18px 18px 0 18px'}}>
                     <Button
-                        style={selectSubjectButtonStyle}
+                        style={{justifySelf: 'start'}}
                         variant="contained"
                         color="secondary"
                         onClick={this.props.handleOpenSubjectListView}>
                         <IconList style={iconStyle}/>
                         Select subjects
                     </Button>
-                    <div style={{...switchStyle}}>
-                        <StackPanel horizontalAlignment="right" orientation="horizontal">
+                    <div style={{justifySelf: 'end'}}>
+                        <div style={{display: 'grid'}}>
                             <FormControlLabel
                                 label="Disable clash-checking"
                                 control={<Switch style={switchStyle}
@@ -98,9 +93,9 @@ export class TimetableCreatorView extends React.Component < ITimetableCreatorVie
                                             checked={this.props.isSbcwTurnedOn}
                                             onChange={this.handleToggleSBCW}/>}/>
                             {""/*This is for overcoming a bug of StackPanel */}
-                        </StackPanel>
+                        </div>
                     </div>
-                </LeftRightPanel>
+                </div>
 
                 <Dialog open={this.state.isDccDialogOpen}>
                     <DialogTitle>Disable clash-checking?</DialogTitle>

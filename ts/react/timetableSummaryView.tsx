@@ -18,7 +18,8 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
             border: "1px solid black",
             borderCollapse: "collapse",
             fontSize: "16px",
-            margin: "10px"
+            justifySelf: 'center',
+            backgroundColor: 'whitesmoke'
         };
         return (
             // @ts-ignore
@@ -65,7 +66,7 @@ export class TimetableSummaryView extends React.Component < ITimetableSummaryVie
 
 }
 
-function getTd(content: string, textAlign = "center", colSpan = 1) {
+function getTd(content: string, textAlign = 'center' as 'center' | 'right', colSpan = 1) {
     const style : React.CSSProperties = {
         textAlign,
         padding: "5px",

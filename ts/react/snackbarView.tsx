@@ -36,10 +36,10 @@ export class SnackbarView extends React.Component < ISnackbarProps, {} > {
                     anchorOrigin={anchorOrigin}
                     message={snackbarMessage}/>;
         return (
-            <div>
+            <React.Fragment>
                 {getSnackbar(this.props.isOpen && (viewCount % 2 === 0))}
                 {getSnackbar(this.props.isOpen && (viewCount % 2 === 1))}
-            </div>
+            </React.Fragment>
         );
     }
 }
