@@ -48,8 +48,8 @@ ITutorialState > {
         }
 
         return (
-            <div>
-                <StackPanel orientation="vertical" horizontalAlignment="center">
+            <div style={{display: 'grid'}}>
+                <div style={{display: 'grid', alignContent: 'center', justifyContent: 'center'}}>
                     <Paper>
                         <MarkdownPage id="mdtut" src={this.state.currentUrl}
                             width={0.60 * WIDTH} height={HEIGHT}/>
@@ -70,10 +70,8 @@ ITutorialState > {
                                 </Button>}
                         />
                     </Paper>
-                    {""}
-                </StackPanel>
+                </div>
                 <Button style={skipButtonStyle} onClick={this.handleSkip}>Skip tutorial</Button>
-
             </div>
         );
 
