@@ -1,0 +1,1 @@
+{"version":3,"file":"settingsState.js","sourceRoot":"","sources":["../../../../ts/redux/reducers/settingsState.ts"],"names":[],"mappings":";;AAEA,kEAAiI;AAgBjI;IACI,OAAO;QACH,6BAA6B,EAAE,IAAI;QACnC,oBAAoB,EAAE,KAAK;QAC3B,eAAe,EAAE,oDAAoC;KACxD,CAAC;AACN,CAAC;AAND,4CAMC"}
