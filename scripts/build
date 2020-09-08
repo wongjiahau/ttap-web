@@ -4,21 +4,21 @@
 ./scripts/transpile || exit 1
 
 pwd
-sed -i "s/isProductionBuild = false/isProductionBuild = true/g" ./src/index.js # toggle production build to disable redux middleware
+sed -i "" "s/isProductionBuild = false/isProductionBuild = true/g" ./src/index.js # toggle production build to disable redux middleware
 
 
 
 # For checking if the lastest version is the latest
 HASH=$(git rev-parse HEAD)
-sed -i "s/LGCH/$HASH/g" ./public/index.html
+sed -i "" "s/LGCH/$HASH/g" ./public/index.html
 
 # For substituing the latest revision number (i.e. the nth commit)
-sed -i "s/LAST_REVISION/$(git rev-list --count master)/g" ./public/index.html
+sed -i "" "s/LAST_REVISION/$(git rev-list --count master)/g" ./public/index.html
 
 # Build the React app
 npm run build || exit 1
 
-sed -i 's|/static|./static|g' ./build/index.html  # this is to fix some relative path bug
+sed -i "" 's|/static|./static|g' ./build/index.html  # this is to fix some relative path bug
 
 
 # To reset the files modified by this script
