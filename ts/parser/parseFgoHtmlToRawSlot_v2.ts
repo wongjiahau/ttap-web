@@ -9,7 +9,7 @@ import { Str } from "../util/str";
 /**
  * This function is only needed for parse file manually
  */
-export function ParseFgoHtmlToRawSlot_v1(html: string): RawSlot[] {
+export function ParseFgoHtmlToRawSlot_v2(html: string): RawSlot[] {
     const result = new Array < RawSlot > ();
     const htmlDoc = new DOMParser().parseFromString(html, "text/html");
 
@@ -45,10 +45,11 @@ export function ParseFgoHtmlToRawSlot_v1(html: string): RawSlot[] {
         newSlot.CreditHour = currentSubjectCode.slice(-1);
         let offset = 0;
         if (new Str(currentRow.id).Contains("subRow")) {
-            offset = 4;
+            offset = 5;
             newSlot.Number = last(result).Number;
             newSlot.Type = last(result).Type;
             newSlot.Group = last(result).Group;
+            newSlot.ClassMode = last(result).ClassMode;
         }
         for (let j = 0; j < cells.length; j++) {
             const cellValue = cells[j].innerHTML;
@@ -63,24 +64,27 @@ export function ParseFgoHtmlToRawSlot_v1(html: string): RawSlot[] {
                     newSlot.Group = cellValue;
                     break;
                 case 3:
-                    newSlot.ClassSize = cellValue;
+                    newSlot.ClassMode = cellValue
                     break;
                 case 4:
-                    newSlot.Day = cellValue;
+                    newSlot.ClassSize = cellValue;
                     break;
                 case 5:
-                    newSlot.TimePeriod = cellValue;
+                    newSlot.Day = cellValue;
                     break;
                 case 6:
-                    // NOTE: Credit Hour is not the same as Hour
+                    newSlot.TimePeriod = cellValue;
                     break;
                 case 7:
-                    newSlot.WeekNumber = cellValue;
+                    // NOTE: Credit Hour is not the same as Hour
                     break;
                 case 8:
-                    newSlot.Room = cellValue;
+                    newSlot.WeekNumber = cellValue;
                     break;
                 case 9:
+                    newSlot.Room = cellValue;
+                    break;
+                case 10:
                     newSlot.Remark = "";
                     break;
             }

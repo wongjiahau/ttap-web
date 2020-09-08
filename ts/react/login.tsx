@@ -5,10 +5,23 @@ import Typography from "@material-ui/core/Typography";
 import * as React from "react";
 import {Redirect} from "react-router";
 import { IRawSlot } from "../model/rawSlot";
-import ParseStudentHtmlToRawSlot from "../parser/parseStudentHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot_v1 from "../parser/parseStudentHtmlToRawSlot";
+import ParseStudentHtmlToRawSlot_v2 from "../parser/parseStudentHtmlToRawSlot_v2";
 import {Str} from "../util/str";
 import {StackPanel} from "./panels/stackPanel";
 import { getLoadingElement, LoadSlotsFromUrl } from "./selectCourseView";
+
+const ParseStudentHtmlToRawSlot = (() => {
+    const currentYear = new Date().getFullYear()
+    if(currentYear > 2019) {
+        console.log('Using ParseStudentHtmlToRawSlot_v2')
+        return ParseStudentHtmlToRawSlot_v2
+    }
+    else {
+        console.log('Using ParseStudentHtmlToRawSlot_v1')
+        return ParseStudentHtmlToRawSlot_v1
+    }
+})()
 
 const divStyle : React.CSSProperties = {
     textAlign: "center",

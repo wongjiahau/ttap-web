@@ -8,6 +8,7 @@ export interface ISlotViewModel {
     SubjectName: string;
     Type: string;
     Group: string[];
+    ClassMode: string;
     Day: string;
     TimePeriod: string;
     CreditHour?: string;
@@ -27,6 +28,7 @@ export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
         SubjectName:       rawSlot.SubjectName,
         Type:              rawSlot.Type,
         Group:             rawSlot.Group.split("/"),
+        ClassMode:         rawSlot.ClassMode || '',
         Day:               rawSlot.Day,
         TimePeriod:        rawSlot.TimePeriod,
         CreditHour:        rawSlot.CreditHour,

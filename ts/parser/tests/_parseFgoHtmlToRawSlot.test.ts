@@ -2,11 +2,11 @@ import { expect } from "chai";
 const last = require("lodash.last");
 const uniqWith = require("lodash.uniqwith");
 import TestManager, { FileName } from "../../tests/testManager";
-import { IsRawSlotEquals, ParseFgoHtmlToRawSlot } from "../parseFgoHtmlToRawSlot";
+import { IsRawSlotEquals, ParseFgoHtmlToRawSlot_v1 } from "../parseFgoHtmlToRawSlot";
 
 describe.skip("ParseHtmlToRawSlot", () => {
     const html = new TestManager().GetDataFrom(FileName.all_fes_slots);
-    const rawSlots = ParseFgoHtmlToRawSlot(html);
+    const rawSlots = ParseFgoHtmlToRawSlot_v1(html);
     it("should not contain duplicates", () => {
         const uniques = uniqWith(rawSlots, IsRawSlotEquals);
         expect(uniques.length).to.eq(rawSlots.length);
