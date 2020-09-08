@@ -91,6 +91,9 @@ ISlotViewState > {
                                    // Why popover is needed?
                                    //   it is for implementing slot-locking feature
                                    //   but I haven't figured out how to do it yet
+
+        const venue = slot.Room[slot.CurrentChoice] || slot.ClassMode
+
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isShowingAlternativeSlotsOfThisSlot)}>
                 <div className={className} style={slotStyle} onClick={clickHandler}
@@ -100,7 +103,7 @@ ISlotViewState > {
                     {getSlotContent(slot)}
                     {!isShowingAlternativeSlot &&
                         <React.Fragment>
-                            <br/> {slot.Room[slot.CurrentChoice]} <br/>
+                            <br/> {venue} <br/>
                         </React.Fragment>}
                     {(isShowingAlternativeSlotsOfThisSlot || isShowingAlternativeSlot) &&
                         <ArcherElement 
@@ -135,7 +138,7 @@ ISlotViewState > {
                                     : []
                             }
                             >
-                            {slot.Room[slot.CurrentChoice]}
+                            {venue}
                         </ArcherElement>}
                     {slot.WeekNumber[slot.CurrentChoice]}
                 </div>

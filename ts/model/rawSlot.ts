@@ -7,6 +7,7 @@ export interface IRawSlot extends Identifiable {
     Type: string;
     Group: string;
     ClassSize ? : string;
+    ClassMode ? : string;
     Day: string;
     TimePeriod: string;
     CreditHour ? : string;
@@ -28,6 +29,7 @@ export class RawSlot implements IRawSlot {
     public Type: string;
     public Group: string;
     public ClassSize ? : string;
+    public ClassMode ? : string;
     public Day: string;
     public TimePeriod: string;
     public CreditHour ? : string;

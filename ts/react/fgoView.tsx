@@ -2,10 +2,23 @@ import Button from "@material-ui/core/Button";
 import * as React from "react";
 import { Redirect } from "react-router";
 import { RawSlot } from "../model/rawSlot";
-import { ParseFgoHtmlToRawSlot } from "../parser/parseFgoHtmlToRawSlot";
+import { ParseFgoHtmlToRawSlot_v1 } from "../parser/parseFgoHtmlToRawSlot";
+import { ParseFgoHtmlToRawSlot_v2 } from "../parser/parseFgoHtmlToRawSlot_v2";
 import { ToggleLoadingScreen } from "./app";
 import { StackPanel } from "./panels/stackPanel";
 import { VerticalAlign } from "./panels/verticalAlign";
+
+const ParseFgoHtmlToRawSlot = (() => {
+    const currentYear = new Date().getFullYear()
+    if(currentYear > 2019) {
+        console.log('Using ParseFgoHtmlToRawSlot_v2')
+        return ParseFgoHtmlToRawSlot_v2
+    }
+    else {
+        console.log('Using ParseFgoHtmlToRawSlot_v1')
+        return ParseFgoHtmlToRawSlot_v1
+    }
+})()
 
 export interface IFgoViewDispatchProps {
     handleLoadSlot : (rawSlots : RawSlot[]) => void;

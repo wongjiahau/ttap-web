@@ -110,6 +110,7 @@ ISlotsTableViewInternalState > {
                                                     <TableCell padding="dense">No</TableCell>
                                                     <TableCell padding="dense">Type</TableCell>
                                                     <TableCell padding="dense">Group</TableCell>
+                                                    <TableCell padding="dense">Mode</TableCell>
                                                     <TableCell padding="dense">Day</TableCell>
                                                     <TableCell padding="dense">Time</TableCell>
                                                     <TableCell padding="dense">Week</TableCell>
@@ -133,6 +134,7 @@ ISlotsTableViewInternalState > {
                                                                 <TableCell padding="dense">{slot.Number}</TableCell>
                                                                 <TableCell padding="dense">{slot.Type}</TableCell>
                                                                 <TableCell padding="dense">{slot.Group}</TableCell>
+                                                                <TableCell padding="dense">{slot.ClassMode}</TableCell>
                                                                 <TableCell padding="dense">{slot.Day}</TableCell>
                                                                 <TableCell padding="dense">{slot.TimePeriod}</TableCell>
                                                                 <TableCell padding="dense">{slot.WeekNumber}</TableCell>

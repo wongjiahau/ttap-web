@@ -1,4 +1,4 @@
-import { ParseFgoHtmlToRawSlot } from "./parser/parseFgoHtmlToRawSlot";
+import { ParseFgoHtmlToRawSlot_v1 } from "./parser/parseFgoHtmlToRawSlot";
 
 /**
  * This file is suppose to be run as script
@@ -18,7 +18,7 @@ fs.readFile("./new2.html", (err: any, contents: any) => {
         return;
     }
     log("Parsing");
-    const rawSlots2 = ParseFgoHtmlToRawSlot(contents.toString());
+    const rawSlots2 = ParseFgoHtmlToRawSlot_v1(contents.toString());
     log("Finish parsing");
     fs.writeFile("./output.json", JSON.stringify(rawSlots2), (err2: any) => {
         if (!err2) {

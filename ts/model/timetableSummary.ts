@@ -16,7 +16,7 @@ export class SubjectSummary {
         const extract = (type: string) => {
             const slot = this.GetSlotOf(slots, type);
             return slot
-            ? `${type}(${slot.Group[slot.CurrentChoice]})`
+            ? `${type}(${slot.Group[slot.CurrentChoice]}) - ${slot.Room[slot.CurrentChoice] || slot.ClassMode}`
             : "-"; // dash means none
         };
         this.Lecture =  extract("L");
@@ -39,7 +39,7 @@ export class SubjectSummary {
     }
 
     private GetSlotOf(slots : ISlotViewModel[], slotType : string) {
-        return slots.filter((s) => s.Type === slotType)[0];
+        return slots.find((s) => s.Type === slotType);
     }
 
 }
