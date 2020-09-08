@@ -31,4 +31,9 @@ describe("BeautifySubjectName()", () => {
         expect(result).to.eq("Sejarah III");
     });
 
+    it('shoud parse word that contains "AND" properly', () => {
+        const result = BeautifySubjectName("UNDERSTANDING POLITICS");
+        expect(result).to.eq("Understanding Politics")
+    })
+
 });
