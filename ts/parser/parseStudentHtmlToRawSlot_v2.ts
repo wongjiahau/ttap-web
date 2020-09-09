@@ -47,7 +47,7 @@ export default function ParseStudentHtmlToRawSlot_v2(html: string): RawSlot[] {
         newSlot.CreditHour  = currentCreditHour;
         let offset = 0;
         if (new Str(currentRow.id).Contains("subRow")) {
-            offset = 4;
+            offset = 5;
             newSlot.Number = last(result).Number;
             newSlot.Type = last(result).Type;
             newSlot.Group = last(result).Group;
