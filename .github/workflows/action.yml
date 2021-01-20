@@ -24,5 +24,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
+
+    # Build
     - run: ./scripts/build
+
+    # Test
     - run: npm run test
+
+    # Deployment
+    - run: npm install --global surge
+    - run: surge --domain https://ttap.surge.sh --project ./build --token ${{ secrets.SURGE_TOKEN }}
