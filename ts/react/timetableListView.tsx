@@ -62,7 +62,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
         return (
             <div style={{display: 'grid'}} onKeyDown={this.checkKeys} tabIndex={0}>
                 {/* Balloon css */} <link rel="stylesheet" href="balloon.min.css"/>
-                <div style={{display: 'grid', gridGap: '12px', paddingTop: '12px'}}>
+                <div style={{display: 'grid'}}>
                     <TimetableView
                         slots={slotsToBeRendered}
                         alternateSlots={alternativeSlots}
@@ -77,7 +77,9 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                         handleGoToThisAlternateSlot={this.props.handleGoToThisAlternateSlot}
                         handleToggleIsOpenOfSummary={this.props.handleToggleIsOpenOfSummary}/>
                     <div style={{display: 'grid', justifyContent: 'center', gridAutoFlow: 'column', 
-                        alignItems: 'center', gridGap: '8px', alignSelf: 'start'}}>
+                        alignItems: 'center', gridGap: '8px', alignSelf: 'start',
+                        marginBottom:"16px"
+                        }}>
                         <Button
                             variant="contained"
                             color="primary"
@@ -105,7 +107,7 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                             color="primary"
                             onClick={this.props.handleOpenSaveTimetableDialog}>
                             <IconSave style={iconStyle}/>
-                            Save as . . .
+                            Save
                         </Button>
                         <Button variant="contained" color="primary" onClick={this.props.handleOpenSlotsTable}>
                             <IconViewList style={iconStyle}/>

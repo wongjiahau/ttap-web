@@ -45,18 +45,22 @@ export class CounterView extends React.Component < ICounterProps, {} > {
         };
         const centerButtonStyle : React.CSSProperties = {
             height: "40px",
-            margin: "2px"
+            width: "100%"
         };
         return (
-            // Copied from https://www.w3schools.com/css/tryit.asp?filename=trycss_grid
-            <div style={{marginLeft: "5px", marginRight: "5px", display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', 
-                alignItems: 'center'}}>
-                <div className="grid-item"/>
+            <div style={{
+                marginLeft: "5px", 
+                marginRight: "5px", 
+                display: 'grid', 
+                gridTemplateColumns: '2fr 1fr 3fr 1fr 2fr', 
+                alignItems: 'center',
+                gap: '2px',
+            }}>
                 <div className="grid-item">
-                    {getButton(this.props.handleClickUp, < IconUp />, this.props.upTooltip)} </div>
-                <div className="grid-item"/>
+                    {getButton(this.props.handleClickLeft, < IconLeft />, this.props.leftTooltip, "up")}
+                </div>
                 <div className="grid-item">
-                    {getButton(this.props.handleClickLeft, < IconLeft />, this.props.leftTooltip, "left")}
+                    {getButton(this.props.handleClickUp, < IconUp />, this.props.upTooltip)} 
                 </div>
                 <div className="grid-item">
                     <div data-balloon={this.props.middleTooltip} data-balloon-pos="up">
@@ -69,13 +73,11 @@ export class CounterView extends React.Component < ICounterProps, {} > {
                     </div>
                 </div>
                 <div className="grid-item">
-                    {getButton(this.props.handleClickRight, < IconRight />, this.props.rightTooltip, "right")}
+                    {getButton(this.props.handleClickDown, < IconDown />, this.props.downTooltip, "up")}
                 </div>
-                <div className="grid-item"/>
                 <div className="grid-item">
-                    {getButton(this.props.handleClickDown, < IconDown />, this.props.downTooltip, "down")}
+                    {getButton(this.props.handleClickRight, < IconRight />, this.props.rightTooltip, "up")}
                 </div>
-                <div className="grid-item"/>
             </div>
         );
     }

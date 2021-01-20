@@ -2,10 +2,6 @@ import { CircularProgress } from "@material-ui/core";
 import * as React from "react";
 import * as ReactMarkdown from "react-markdown";
 
-const divStyle : React.CSSProperties = {
-    textAlign: "center",
-};
-
 interface IMarkdownPageState {
     markdownSource: string | null;
 }
@@ -31,15 +27,18 @@ export class MarkdownPage extends React.Component <IMarkdownPageProp, IMarkdownP
     public render() {
         const paperStyle : React.CSSProperties = {
             overflowY: "auto",
-            textAlign : "center",
             paddingTop: "15px",
             paddingRight: "40px",
             paddingLeft: "40px",
             width: this.props.width,
-            height: this.props.height
+            height: this.props.height,
+            ...(this.state.markdownSource === null ? {
+                display: "grid",
+                placeContent: "center"
+            } : {})
         };
         return (
-            <div id={this.props.id} style={divStyle} className="markdown-body">
+            <div id={this.props.id} className="markdown-body">
                 {/* Markdown css */} <link rel="stylesheet" href="github-markdown.min.css"/>
                 <div style={paperStyle}>
                         {this.state.markdownSource === null ?

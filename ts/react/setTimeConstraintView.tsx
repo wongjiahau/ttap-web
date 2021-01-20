@@ -1,13 +1,8 @@
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-// import Slide from "@material-ui/core/transitions/Slide";
 import Typography from "@material-ui/core/Typography";
 import * as React from "react";
-// @ts-ignore
-import CountUp from "react-countup";
 import {ColorOfDefinitelyOccupied, ColorOfDefinitelyUnoccupied, ColorOfMaybeOccupied, STCBox} from "../model/matrix/stcBox";
-import {Colors} from "./colors/colors";
-import {StackPanel} from "./panels/stackPanel";
 import {TimetableView} from "./timetableView/timetableView";
 import { DialogContent } from "@material-ui/core";
 
@@ -21,36 +16,17 @@ const typo1Style : React.CSSProperties = {
 
 const divStyle : React.CSSProperties = {
     display: 'grid',
-    gridGap: '18px',
+    gridGap: '8px',
     textAlign: 'center',
     overflowY: "auto",
     padding: '18px',
     justifySelf: 'center',
     alignContent: 'start',
-    marginTop: '36px'
-};
-
-const tableStyle : React.CSSProperties = {
-    width: "100%"
-};
-
-const legendFrameStyle : React.CSSProperties = {
-    height: "100px",
-    margin: "0 auto",
-    width: "400",
-    border: "solid 1px lightgrey",
-    padding: "10px"
 };
 
 const cancelButtonStyle : React.CSSProperties = {
     marginRight: "10px"
 };
-
-// endregion style
-
-// function Transition(props) {
-//     return <Slide direction="up" {...props}/>;
-// }
 
 type LegendType = "red" | "grey" | "green";
 interface ILegendProps {
@@ -171,13 +147,20 @@ export class SetTimeConstraintView extends React.Component < ISetTimeConstraintV
                             numberOfRemovedTimetables={this.props.numberOfRemovedTimetables}
                             numberOfRemainingTimetables={this.props.numberOfRemainingTimetables} />
 
-                        <div style={{display: 'grid', justifyContent: 'center', gridGap: '12px', gridAutoFlow: 'column'}}>
+                        <div style={{
+                            display: 'grid', 
+                            justifyContent: 'center', 
+                            gridGap: '12px', 
+                            gridAutoFlow: 'column',
+                            marginTop: '8px'
+                        }}>
                             <Button
                                 style={cancelButtonStyle}
                                 color="default"
                                 onClick={this.props.handleCancel}>Cancel</Button>
                             <Button variant="contained" color="primary" onClick={this.props.handleCancel}>Done</Button>
                         </div>
+                        <div style={{height: '16px'}}/>
                     </DialogContent>
                 </Dialog>
             
