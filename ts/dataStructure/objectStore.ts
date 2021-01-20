@@ -17,7 +17,7 @@ export class ObjectStore<T extends Identifiable> {
         return this.dict;
     }
 
-    public GetOne(key: number) : T {
+    public GetOne(key: number) : T | undefined {
         return this.dict[key];
     }
 

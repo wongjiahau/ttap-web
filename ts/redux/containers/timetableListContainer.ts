@@ -30,7 +30,6 @@ const mapStateToProps = (state: any) : ITimetableListViewStateProps => {
         isSummaryOpen:      timetableListState.IsSummaryOpen,
         maxIndex:           timetableListState.FiltrateTimetables.length - 1,
         slotViewModelStore: timetableListState.SlotViewModelStore,
-        alternativeSlots:   timetableListState.AlternativeSlots,
         isShowingAlternativeSlotOf: timetableListState.ShowingAlternateSlotOf
     };
 };
@@ -51,7 +50,8 @@ const mapDispatchToProps = (dispatch: any) : ITimetableListViewDispatchProps => 
         handleOpenSlotsTable:            () => dispatch(new ToggleIsOpenOfSlotsTable(true)),
         handleToggleIsOpenOfSummary:     () => dispatch(new ToggleIsOpenOfSummary()),
         handleShowAlternateSlot:         (s: ISlotViewModel) => dispatch(new ShowAlternateSlot(s)),
-        handleGoToThisAlternateSlot:     (slotUid: number) => triggerfulDispatch(new GoToThisAlternativeSlot(slotUid)),
+        handleGoToThisAlternateSlot:     (sourceSlotUid: number, destinationSlotUid: number) => 
+            triggerfulDispatch(new GoToThisAlternativeSlot(sourceSlotUid, destinationSlotUid)),
         handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => triggerfulDispatch(new SelectSlotChoice(slotUid, newSlotChoice)),
     };
 };

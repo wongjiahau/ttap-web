@@ -23,7 +23,12 @@ describe("find alternative slots of current slot", () => {
             )[0]; // Fluid Mechanic I, Lecture 1
 
         state = MasterStateReducer(state, new ShowAlternateSlot(slotsToBeClicked));
-        expect(state.TimetableListState.AlternativeSlots.some((x) => x.Group[0] === "2")).to.eq(false);
+
+        const slot = state.TimetableListState.ShowingAlternateSlotOf
+        if(!slot) {
+            throw new Error(`slot should be defined`)
+        }
+        expect(slot.AlternativeSlots.some((x) => x.slot.Group[0] === "2")).to.eq(false);
         expect(state.TimetableListState.SlotViewModelStore.GetAll()).to.have.lengthOf(79);
 
     });

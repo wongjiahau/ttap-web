@@ -9,6 +9,9 @@ export class SelectSlotChoice extends MasterStateAction {
         const oldObjectStore = state.TimetableListState.SlotViewModelStore;
         const newSlotStateStore = new ObjectStore(oldObjectStore.GetAll());
         const slotsToBeModified = newSlotStateStore.GetOne(this.slotUid);
+        if(!slotsToBeModified) {
+            return state
+        }
         slotsToBeModified.CurrentChoice = this.newSlotChoice;
         return {
             ...state,

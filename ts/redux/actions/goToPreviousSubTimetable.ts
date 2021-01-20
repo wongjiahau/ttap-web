@@ -14,8 +14,8 @@ export class GoToPreviousSubTimetable extends MasterStateAction {
             ...state,
             TimetableListState: {
                 ...state.TimetableListState,
+                ShowingAlternateSlotOf: null,
                 CurrentSubIndex: newIndex,
-                AlternativeSlots: []
             }
         };
     }

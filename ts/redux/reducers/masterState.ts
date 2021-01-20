@@ -1,5 +1,5 @@
 import * as typeName from "type-name";
-import {Action} from "../actions/action";
+import {Action, IAction} from "../actions/action";
 import { IAlgorithmVisualizerState, NewAlgorithmVisualizerState } from "./algorithmVisualizerState";
 import { IDataState, NewDataState } from "./dataState";
 import {GenerateReducer} from "./generateReducer";
@@ -49,3 +49,7 @@ export abstract class MasterStateAction extends Action < IMasterState > {
 }
 
 export const MasterStateReducer = GenerateReducer(NewMasterState());
+
+export const MasterStateReducers = (state: IMasterState, actions: MasterStateAction[]): IMasterState => {
+    return actions.reduce((state, action) => MasterStateReducer(state, action), state)
+}

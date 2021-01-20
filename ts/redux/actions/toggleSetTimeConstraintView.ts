@@ -13,6 +13,10 @@ export class ToggleSetTimeConstraintView extends MasterStateAction {
     protected GenerateNewState(state: IMasterState): IMasterState {
         return {
             ...state,
+            TimetableListState: {
+                ...state.TimetableListState,
+                ShowingAlternateSlotOf: null
+            },
             SetTimeConstraintState: {
                 ...state.SetTimeConstraintState,
                 IsOpen: this.open

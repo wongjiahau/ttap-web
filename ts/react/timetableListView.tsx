@@ -19,7 +19,6 @@ export interface ITimetableListViewStateProps {
     currentIndex:       number; // non-zero based
     currentSubIndex:    number; // nonzero based
     currentTimetable:   IGroupedTimetable | null;
-    alternativeSlots:   ISlotViewModel[];
     isSummaryOpen:      boolean;
     isShowingAlternativeSlotOf: ISlotViewModel | null;
     maxIndex:           number; // non-zero based
@@ -38,7 +37,7 @@ export interface ITimetableListViewDispatchProps {
     handleToggleIsOpenOfSummary:     ()     => void;
     handleSelectSlotChoice:          (slotUid: number, newSlotChoice : number) => void;
     handleShowAlternateSlot:         (s: ISlotViewModel) => void;
-    handleGoToThisAlternateSlot:     (slotUid: number) => void;
+    handleGoToThisAlternateSlot:     (sourceSlotUid: number, destinationSlotUid: number) => void;
 }
 
 export interface ITimetableListViewProps extends
@@ -56,14 +55,18 @@ export class TimetableListView extends React.Component < ITimetableListViewProps
                 this.props.currentTimetable.ListOfSlotUids[this.props.currentSubIndex]
             ) : [];
 
+        const alternativeSlots = this.props.isShowingAlternativeSlotOf 
+            ? this.props.isShowingAlternativeSlotOf.AlternativeSlots.map(({slot}) => slot)
+            : []
+
         return (
             <div style={{display: 'grid'}} onKeyDown={this.checkKeys} tabIndex={0}>
                 {/* Balloon css */} <link rel="stylesheet" href="balloon.min.css"/>
                 <div style={{display: 'grid', gridGap: '12px', paddingTop: '12px'}}>
                     <TimetableView
                         slots={slotsToBeRendered}
-                        alternateSlots={this.props.alternativeSlots}
-                        isShowingAlternativeSlots={this.props.alternativeSlots.length > 0}
+                        alternateSlots={alternativeSlots}
+                        isShowingAlternativeSlots={alternativeSlots.length > 0}
                         isShowingAlternativeSlotOf={this.props.isShowingAlternativeSlotOf}
                         stcBoxes={null}
                         handleDesetTimeContraintAt={NO_OPERATION}

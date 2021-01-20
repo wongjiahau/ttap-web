@@ -2,7 +2,7 @@ import * as typeName from "type-name";
 import { ObjectStore } from "../../dataStructure/objectStore";
 import { IGroupedTimetable } from "../../model/groupedTimetable";
 import { RawSlot } from "../../model/rawSlot";
-import { CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
+import { AlternativeSlot, CreateSlotViewModels, ISlotViewModel } from "../../model/slotViewModel";
 import {Action} from "../actions/action";
 
 export interface ITimetableListState {
@@ -12,7 +12,6 @@ export interface ITimetableListState {
     IsSummaryOpen:          boolean;
     ResidueTimetables:      IGroupedTimetable[]; // Timetables that failed to pass through the filtration process
     SlotViewModelStore:     ObjectStore<ISlotViewModel>;
-    AlternativeSlots:       ISlotViewModel[];
     ShowingAlternateSlotOf: ISlotViewModel | null;
     UidsOfLockedSlot:       number[];
 }
@@ -34,7 +33,6 @@ export function NewTimetableListState(
         IsSummaryOpen: isSummaryOpen,
         ResidueTimetables: [],
         SlotViewModelStore: slotStateStore,
-        AlternativeSlots: [],
         ShowingAlternateSlotOf: null,
         UidsOfLockedSlot: []
     };

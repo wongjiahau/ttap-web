@@ -14,9 +14,18 @@ export interface ISlotViewModel {
     CreditHour?: string;
     WeekNumber: string[];
     Room: string[];
-    AlternativeSlots: ISlotViewModel[]; // This property is to be populated by FindAlternativeSlotsOfCurrentSlots action
-    IsAlternativeSlot: boolean;
+    /** This property is to be populated by FindAlternativeSlotsOfCurrentSlots action */
+    AlternativeSlots: AlternativeSlot[];
+
+    /** If this is defined, that means that this slot is an alternative slot */
+    SourceSlotUid: number | undefined;
     IsLocked: boolean;
+}
+
+export interface AlternativeSlot {
+    slot: ISlotViewModel;
+    destinationTimetableIndex: number;
+    destinationTimetableSubIndex: number;
 }
 
 export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
@@ -35,7 +44,7 @@ export function CreateSlotViewModel(rawSlot: RawSlot): ISlotViewModel {
         WeekNumber:        rawSlot.WeekNumber.split("/"),
         Room:              rawSlot.Room.split("/"),
         AlternativeSlots:  [],
-        IsAlternativeSlot: false,
+        SourceSlotUid:     undefined,
         IsLocked:          false
     };
 }

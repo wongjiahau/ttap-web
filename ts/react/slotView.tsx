@@ -21,7 +21,7 @@ export interface ISlotViewProps {
     color : string;
     handleSelectSlotChoice       : (slotUid : number, newSlotChoice : number) => void;
     handleShowAlternateSlot     ?: (s: ISlotViewModel) => void;
-    handleGoToThisAlternateSlot ?: (slotUid: number) => void;
+    handleGoToThisAlternateSlot ?: (sourceSlotUid: number, destinationSlotUid: number) => void;
     isShowingAlternativeSlot: boolean;
     isShowingAlternativeSlotsOfThisSlot: boolean;
     alternativeSlots: ISlotViewModel[]
@@ -47,7 +47,7 @@ ISlotViewState > {
         let slotStyle: React.CSSProperties = {
             color: invertColor(color),
             backgroundColor: color,
-            opacity: (isShowingAlternativeSlot && !slot.IsAlternativeSlot && !isShowingAlternativeSlotsOfThisSlot)
+            opacity: (isShowingAlternativeSlot && slot.SourceSlotUid === undefined && !isShowingAlternativeSlotsOfThisSlot)
                       ? 0.5 : 1.0
         };
         if (slot.AlternativeSlots.length > 0) {
@@ -57,7 +57,7 @@ ISlotViewState > {
                 cursor: "pointer", /*a.k.a. the hand, so it looks like its clickable*/
             };
         }
-        if (slot.IsAlternativeSlot) {// add border glow
+        if (slot.SourceSlotUid !== undefined) {// add border glow
             slotStyle = {
                 ...slotStyle,
                 color: "white",
@@ -79,8 +79,8 @@ ISlotViewState > {
                 //     isMenuOpen: true
                 // });
             }
-            if (handleGoToThisAlternateSlot !== undefined) {
-                handleGoToThisAlternateSlot(slot.Uid);
+            if (handleGoToThisAlternateSlot !== undefined && slot.SourceSlotUid !== undefined) {
+                handleGoToThisAlternateSlot(slot.SourceSlotUid, slot.Uid);
             }
         };
         const className /* Refer index.css */
@@ -205,7 +205,7 @@ function tooltipTitle(s : ISlotViewModel, isShowingAlternativeSlotOfThisSlot: bo
             <br/>
             [{s.SubjectCode}]
             <br/> {
-            (s.IsAlternativeSlot ? "(Click to go to this slot)" :
+            (s.SourceSlotUid !== undefined ? "(Click to go to this slot)" :
             (s.AlternativeSlots.length === 0 ? "" :
             (isShowingAlternativeSlotOfThisSlot ? "(Click to hide alternative slots)" :
             "(Click show alternative slots)")))}

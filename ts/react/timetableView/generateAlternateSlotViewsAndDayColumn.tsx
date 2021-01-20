@@ -28,7 +28,7 @@ export function GenerateAlternateSlotViewsAndDayColumn(
                     color={Colors.White}
                     handleSelectSlotChoice={handleSelectSlotChoice}
                     handleGoToThisAlternateSlot={handleGoToThisAlternateSlot}
-                    alternativeSlots={slots.filter(slot => slot.IsAlternativeSlot)}
+                    alternativeSlots={slots.filter(slot => slot.SourceSlotUid !== undefined)}
                     />
             </div>
         );

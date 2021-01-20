@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import { RawSlot } from "./../../model/rawSlot";
-import {GetTestTimetables1} from "./../../tests/testDataGenerator";
+import {GetTestSlot1, GetTestTimetables1} from "./../../tests/testDataGenerator";
 import {ToggleSubjectSelection} from "./../actions/toggleSubjectSelection";
 const isEqual = require("lodash.isequal");
 import ParseStudentHtmlToRawSlot from "../../parser/parseStudentHtmlToRawSlot";
@@ -28,8 +28,13 @@ describe("SelectSlotChoice action", () => {
         const initialState = getInitialState();
         const indexOfUEMK3233 = 4; // Bioprocess Engineering
         let newState = MasterStateReducer(initialState, new ToggleSubjectSelection(indexOfUEMK3233));
-        expect(newState.TimetableListState.SlotViewModelStore.GetOne(229).CurrentChoice).to.eq(0);
+
+        const slot1 = newState.TimetableListState.SlotViewModelStore.GetOne(229)
+        expect(slot1 ? slot1.CurrentChoice : null).to.eq(0);
         newState = MasterStateReducer(newState, new SelectSlotChoice(229, 1));
-        expect(newState.TimetableListState.SlotViewModelStore.GetOne(229).CurrentChoice).to.eq(1);
+
+        const slot2 = newState.TimetableListState.SlotViewModelStore.GetOne(229)
+
+        expect(slot2 ? slot2.CurrentChoice : null).to.eq(1);
     });
 });

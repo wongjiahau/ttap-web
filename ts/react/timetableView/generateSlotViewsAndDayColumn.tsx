@@ -15,7 +15,7 @@ import {ISkeleton, Skeleton} from "./skeleton";
 export function GenerateSlotViewsAndDayColumn(
     slots : ISlotViewModel[],
     selectSlotChoiceHandler: (slotUid : number, newSlotChoice : number) => void,
-    goToThisAlternativeSlotHandler: (slotUid: number) => void,
+    goToThisAlternativeSlotHandler: (sourceSlotUid: number, destinationSlotUid: number) => void,
     showAlternateSlotHandler: (s: ISlotViewModel) => void,
     isShowingAlternativeSlotOf: ISlotViewModel | null
 ) : ISkeleton {
@@ -30,9 +30,12 @@ export function GenerateSlotViewsAndDayColumn(
                     isShowingAlternativeSlotsOfThisSlot={isShowingAlternativeSlotOf ? x.Uid === isShowingAlternativeSlotOf.Uid : false}
                     isShowingAlternativeSlot={isShowingAlternativeSlotOf !== null}
                     handleSelectSlotChoice={selectSlotChoiceHandler}
-                    handleShowAlternateSlot={!x.IsAlternativeSlot ? showAlternateSlotHandler : NO_OPERATION}
-                    handleGoToThisAlternateSlot={x.IsAlternativeSlot ? goToThisAlternativeSlotHandler : NO_OPERATION}
-                    alternativeSlots={slots.filter(slot => slot.IsAlternativeSlot)}
+                    handleShowAlternateSlot={!x.SourceSlotUid !== undefined ? showAlternateSlotHandler : NO_OPERATION}
+                    handleGoToThisAlternateSlot={x.SourceSlotUid !== undefined ? goToThisAlternativeSlotHandler : NO_OPERATION}
+                    alternativeSlots={isShowingAlternativeSlotOf 
+                        ? slots.filter(slot => slot.SourceSlotUid !== undefined)
+                        : []
+                    }
                     />
             </div>
         );

@@ -26,6 +26,11 @@ export class RawSlot implements IRawSlot {
     public SubjectCode: string;
     public SubjectName: string;
     public Number: string; // Slot number, which is not necessarily unique for every slot
+
+    /**
+     * Type of this slot, whether it's lecture, tutorial, practical or etc.
+     * Example values: `"L"`, `"T"`, `"P"`
+     */
     public Type: string;
     public Group: string;
     public ClassSize ? : string;

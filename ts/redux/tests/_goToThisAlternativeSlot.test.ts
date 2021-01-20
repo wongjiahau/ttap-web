@@ -22,7 +22,13 @@ describe("showAlternateSlot action", () => {
 
         const newState2 = MasterStateReducer(newState1, new ShowAlternateSlot(slotsToBeClicked));
         expect(newState2.TimetableListState.CurrentIndex).to.eq(0);
-        const newState3 = MasterStateReducer(newState2, new GoToThisAlternativeSlot(newState2.TimetableListState.AlternativeSlots[0].Uid));
+        expect(newState2.TimetableListState.CurrentSubIndex).to.eq(0);
+        const newState3 = MasterStateReducer(newState2, new GoToThisAlternativeSlot(
+            slotsToBeClicked.Uid,
+            newState2.TimetableListState.ShowingAlternateSlotOf
+               ? newState2.TimetableListState.ShowingAlternateSlotOf.AlternativeSlots[1].slot.Uid
+               : -1
+        ));
         expect(newState3.TimetableListState.CurrentIndex).to.eq(1);
         expect(newState3.TimetableListState.CurrentSubIndex).to.eq(0);
         expect(newState3.TimetableListState.ShowingAlternateSlotOf).to.eq(null);
@@ -37,17 +43,21 @@ describe("showAlternateSlot action", () => {
         const initialState = GetMockInitialState("heng_2017_apr");
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.FM1));
         const newState1 = MasterStateReducer(newState0, new ToggleSubjectSelection(IndexOf.FM2));
-        const slotsToBeClicked = newState1.TimetableListState.SlotViewModelStore.GetAll()
+        const newState2 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlots());
+        const slotsToBeClicked = newState2.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.SubjectCode === "UEME2123" &&
                 x.Type === "L" &&
                 x.Group[0] === "1"
             ).filter((x) => x.Day === "Mon")[0]; // FM1 L1 of Monday
-        const newState2 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlots());
         const newState3 = MasterStateReducer(newState2, new ShowAlternateSlot(slotsToBeClicked));
 
         const newState4 = MasterStateReducer(newState3, new GoToThisAlternativeSlot(
-            newState3.TimetableListState.AlternativeSlots[0].Uid)
+            slotsToBeClicked.Uid,
+            newState3.TimetableListState.ShowingAlternateSlotOf
+                ? newState3.TimetableListState.ShowingAlternateSlotOf.AlternativeSlots[0].slot.Uid
+                : -1
+            )
         );
 
         const currentSlots = newState4.TimetableListState.SlotViewModelStore.GetAll()
@@ -68,37 +78,47 @@ describe("showAlternateSlot action", () => {
         const initialState = GetMockInitialState("heng_2017_apr");
         const newState0 = MasterStateReducer(initialState, new ToggleSubjectSelection(IndexOf.FM1));
         const newState1 = MasterStateReducer(newState0, new ToggleSubjectSelection(IndexOf.FM2));
-        const slotsToBeClicked = newState1.TimetableListState.SlotViewModelStore.GetAll()
+        const newState2 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlots());
+        const slotsToBeClicked = newState2.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.SubjectCode === "UEME2123" &&
                 x.Type === "P" &&
                 x.Group[0] === "1"
             )[0]; // FM1 P1 of Tuesday
-        const newState2 = MasterStateReducer(newState1, new FindAlternativeSlotsOfCurrentSlots());
         const newState3 = MasterStateReducer(newState2, new ShowAlternateSlot(slotsToBeClicked));
 
         const newState4 = MasterStateReducer(newState3, new GoToThisAlternativeSlot(
+            slotsToBeClicked.Uid,
             // Go to FM1-P28 of Friday
-            newState3.TimetableListState.AlternativeSlots.filter((x) => x.Group[0] === "28")[0].Uid)
+            newState3.TimetableListState.ShowingAlternateSlotOf
+                ? newState3.TimetableListState.ShowingAlternateSlotOf.AlternativeSlots
+                    .filter((x) => x.slot.Group[0] === "28")[0].slot.Uid
+                : -1
+            )
         );
 
         // this check is because if no destination index is found, it will used back the original index
         expect(newState4.TimetableListState.CurrentIndex).to.not.eq(newState3.TimetableListState.CurrentIndex);
 
+        const newState5 = MasterStateReducer(newState4, new FindAlternativeSlotsOfCurrentSlots());
         // changing back to original slots
-        const slotsToBeClicked2 = newState1.TimetableListState.SlotViewModelStore.GetAll()
+        const slotsToBeClicked2 = newState5.TimetableListState.SlotViewModelStore.GetAll()
             .filter((x) =>
                 x.SubjectCode === "UEME2123" &&
                 x.Type === "P" &&
                 x.Group[0] === "28"
             )[0]; // FM1 P28 of Friday
 
-        const newState5 = MasterStateReducer(newState4, new FindAlternativeSlotsOfCurrentSlots());
         const newState6 = MasterStateReducer(newState5, new ShowAlternateSlot(slotsToBeClicked2));
 
         const newState7 = MasterStateReducer(newState6, new GoToThisAlternativeSlot(
+            slotsToBeClicked2.Uid,
             // Go to FM1-P1 of Tuesday
-            newState6.TimetableListState.AlternativeSlots.filter((x) => x.Group[0] === "1")[0].Uid)
+            newState6.TimetableListState.ShowingAlternateSlotOf
+                ? newState6.TimetableListState.ShowingAlternateSlotOf.AlternativeSlots
+                    .filter((x) => x.slot.Group[0] === "1")[0].slot.Uid
+                : -1
+            )
         );
         expect(newState7.TimetableListState.CurrentIndex).to.not.eq(newState6.TimetableListState.CurrentIndex);
     });

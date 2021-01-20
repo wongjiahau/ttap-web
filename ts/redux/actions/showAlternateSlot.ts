@@ -11,6 +11,12 @@ export class ShowAlternateSlot extends MasterStateAction {
     }
     public TypeName() : string {return "show alternate slot"; }
     protected GenerateNewState(state : IMasterState) : IMasterState {
+        if(state.TimetableListState.ShowingAlternateSlotOf &&
+            this.slot.Uid !== state.TimetableListState.ShowingAlternateSlotOf.Uid) {
+            // Why?
+            // Refer to https://github.com/wongjiahau/ttap-web/issues/193#issuecomment-763494226
+                return state
+        }
         if (state.TimetableListState.ShowingAlternateSlotOf &&
             this.slot.Uid === state.TimetableListState.ShowingAlternateSlotOf.Uid) {
             return {
@@ -21,7 +27,6 @@ export class ShowAlternateSlot extends MasterStateAction {
                 },
                 TimetableListState: {
                     ...state.TimetableListState,
-                    AlternativeSlots: [],
                     ShowingAlternateSlotOf: null
                 }
             };
@@ -41,7 +46,6 @@ export class ShowAlternateSlot extends MasterStateAction {
             },
             TimetableListState: {
                 ...state.TimetableListState,
-                AlternativeSlots: alternativeSlots,
                 ShowingAlternateSlotOf: this.slot
             }
         };

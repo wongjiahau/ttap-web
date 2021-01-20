@@ -25,7 +25,7 @@ interface ITimetableViewProps {
     handleToggleIsOpenOfSummary: () => void;
     handleSelectSlotChoice:      (slotUid: number, newSlotChoice: number) => void;
     handleShowAlternateSlot:      (s: ISlotViewModel) => void;
-    handleGoToThisAlternateSlot:  (slotUid: number) => void;
+    handleGoToThisAlternateSlot:  (sourceSloutUid: number, destinationSlotUid: number) => void;
     isSummaryOpen?: boolean;
 }
 
