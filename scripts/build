@@ -12,8 +12,8 @@ sed -i "" "s/isProductionBuild = false/isProductionBuild = true/g" ./src/index.j
 HASH=$(git rev-parse HEAD)
 sed -i "" "s/LGCH/$HASH/g" ./public/index.html
 
-# For substituing the latest revision number (i.e. the nth commit)
-sed -i "" "s/LAST_REVISION/$(git rev-list --count master)/g" ./public/index.html
+# For substituing the latest revision number (i.e. the UNIX timestamp of the latest commit)
+sed -i "" "s/LAST_REVISION/$(git log -1 --format=%ct)/g" ./public/index.html
 
 # Build the React app
 npm run build || exit 1
