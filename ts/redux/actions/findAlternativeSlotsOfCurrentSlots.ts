@@ -49,9 +49,9 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
 
 
             const filtrateTimetables = state.TimetableListState.FiltrateTimetables
-            for (let index = 0; index < filtrateTimetables.length - 1; index++) {
+            for (let index = 0; index < filtrateTimetables.length; index++) {
                 const timetable = filtrateTimetables[index]
-                for (let subIndex = 0; subIndex < timetable.ListOfSlotUids.length - 1; subIndex++) {
+                for (let subIndex = 0; subIndex < timetable.ListOfSlotUids.length; subIndex++) {
                     result.push({
                         slotUids: timetable.ListOfSlotUids[subIndex],
                         timetableIndex: index,
