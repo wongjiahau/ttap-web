@@ -1,0 +1,1 @@
+{"version":3,"file":"slotsTableState.js","sourceRoot":"","sources":["../../../../ts/redux/reducers/slotsTableState.ts"],"names":[],"mappings":";;AAWA;IACI,OAAO;QACH,MAAM,EAAS,KAAK;QACpB,UAAU,EAAK,EAAE;QACjB,aAAa,EAAE,EAAE;QACjB,aAAa,EAAE,IAAI;KACtB,CAAC;AACN,CAAC;AAPD,gDAOC"}

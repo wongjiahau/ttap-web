@@ -1,0 +1,1 @@
+{"version":3,"file":"timetableCreatorState.js","sourceRoot":"","sources":["../../../../ts/redux/reducers/timetableCreatorState.ts"],"names":[],"mappings":";;AAAA,sCAAsC;AAItC,8CAE2B;AAY3B;IACI,OAAO;QACH,YAAY,EAAE,KAAK;KACtB,CAAC;AACN,CAAC;AAJD,4DAIC;AAED,iCAAkD,SAAQ,eAAiC;IAChF,SAAS;QACZ,OAAO,QAAQ,CAAC,wBAAwB,EAAE,CAAC,CAAC;IAChD,CAAC;CACJ;AAJD,kEAIC"}

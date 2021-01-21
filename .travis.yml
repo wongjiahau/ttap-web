@@ -4,7 +4,6 @@ notifications:
   email:
     recipients:
       - hou32hou@gmail.com
-      - dheenodararao@gmail.com
     on_success: always
     on_failure: always
 
@@ -16,30 +15,14 @@ node_js: # specify version of node js
 cache: # cache node modules so that every build don't have to reinstall those node package again
   directories:
     - "node_modules"
-    
+
 before_script:
-  # This is needed so that the command $(git rev-list --count --all) can work properly 
-  # That command will be run by ./scripts/build
-  # For more info, refer https://github.com/travis-ci/travis-ci/issues/3412
-  - git fetch --unshallow 
+  - sed -i "s/polyfill/polyfill --coverage/g" ./package.json #Add --coverage option for running test
+  - sed -i "s/es5/es6/g" ./ts/tsconfig.json # Let TS compiler to transpile into ES6, so that the code coverage result will be more accurate
 
 script:
-  - echo "Running script:"
-  - ./scripts/build
-  - npm test
-  # Only upload coverage report if is on master branch and not on a PR
-  - if [ $(git branch | grep master | wc -l) = 1 -a "$TRAVIS_PULL_REQUEST" = "false" ]; then ./scripts/upload-coverage-report; fi
-  - rm -rf  ./src/core/tests/ # remove test data which is not needed in production build
+  - ./scripts/transpile
+  - npm run test
 
 after_script:
-  - echo "script finished."
-
-after_success: # upload source-analysis-report
-  - source-map-explorer --html build/static/js/main.* > source_analysis/index.html
-  - surge -d ttap-source-analysis.surge.sh -p ./source_analysis/
-
-deploy:
-  provider: surge
-  project: ./build/
-  domain: https://ttap.surge.sh  
-  skip_cleanup: true
+  - codecov
