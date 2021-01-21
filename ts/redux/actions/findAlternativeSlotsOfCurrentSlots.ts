@@ -1,17 +1,6 @@
-import { ParseDay } from "../../att/day";
-import { TimePeriod } from "../../att/timePeriod";
-import { Week } from "../../att/week";
 import { ObjectStore } from "../../dataStructure/objectStore";
-import { IGroupedTimetable } from "../../model/groupedTimetable";
-import { RawSlot } from "../../model/rawSlot";
-import { CreateSlotFromRaw } from "../../model/slot";
-import { CreateSlotViewModel, FromSlotViewModelToRawSlot, ISlotViewModel } from "../../model/slotViewModel";
-import { ParseRawSlotToSlot } from "../../parser/parseRawSlotToSlot";
-import { ParseSlotToBigSlot } from "../../parser/parseSlotToBigSlot";
-import { GetDayTimeMatrixOfBigSlot, IBigSlot, newBigSlot } from "../../permutator/bigSlot";
-import { AppendMatrix, GotIntersection } from "../../permutator/matrix";
+import { ISlotViewModel } from "../../model/slotViewModel";
 import { MasterStateAction } from "../reducers/masterState";
-import { TinySlot } from "./../../permutator/tinySlot";
 import { IMasterState } from "./../reducers/masterState";
 
 /**
@@ -19,68 +8,80 @@ import { IMasterState } from "./../reducers/masterState";
  * So, this function is to search for all the alternative slots for each CurrentSlots
  */
 export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
+    public constructor() {
+        super()
+    }
     public TypeName(): string { return "find alternative slots of current slots"; }
 
     protected GenerateNewState(state: IMasterState): IMasterState {
-        // Due to performance issues, don't calculate if there are too many timetables
-        if(state.TimetableListState.FiltrateTimetables.length > 7000) {
-            return {
-                ...state,
-                SnackbarState: {
-                    ...state.SnackbarState,
-                    IsOpen: true,
-                    Message: [
-                        "Not calculating alternative slots due to performance reason,", 
-                        " because there are more than 7000 possible timetables. ",
-                        "\nTo allow the calculation, use Set Time Constraint feature",
-                        " to decrease the number of possible timetables.",
-                    ].join("")
-                }
-            }
-        }
-
         const currentTimetable = state.TimetableListState.FiltrateTimetables[state.TimetableListState.CurrentIndex];
         if (!currentTimetable) {
             return state
         }
         const slotStore = state.TimetableListState.SlotViewModelStore
+
+        const allSlots = slotStore.GetAll()
         const currentTimetableSlots = slotStore.GetBunch(
             currentTimetable.ListOfSlotUids[state.TimetableListState.CurrentSubIndex]
         )
+            .map(slot => ({
+                ...slot,
 
-        const filtrateTimetables = state.TimetableListState.FiltrateTimetables
-            .map((timetable, index) => ({
-                index,
-                subtimetables: timetable.ListOfSlotUids
-                    .map((slotUids, subIndex) => ({
-                        subIndex,
-                        slotUids
-                    }))
+                /**
+                 * This means how many slots is the same kind with this slot.
+                 * For example FM2-T1 is the same kind as FM2-T2 
+                 * but not the same as FM2-P1 or FM1-T1.
+                 * 
+                 * This property is needed for sorting.
+                 * This sort is important in optimizing the reduction in the later iteration.
+                 * We want to reduce as much timetables as possible during the initial iteration.
+                 */
+                sameKindLength: allSlots.filter(otherSlot => sameKind(otherSlot, slot)).length
             }))
+            .sort((a, b) => b.sameKindLength - a.sameKindLength)
 
+        const filtrateTimetables = (() => {
+            let result: {
+                timetableIndex: number,
+                timetableSubIndex: number,
+                slotUids: number[]
+            }[] = []
+
+
+            const filtrateTimetables = state.TimetableListState.FiltrateTimetables
+            for (let index = 0; index < filtrateTimetables.length - 1; index++) {
+                const timetable = filtrateTimetables[index]
+                for (let subIndex = 0; subIndex < timetable.ListOfSlotUids.length - 1; subIndex++) {
+                    result.push({
+                        slotUids: timetable.ListOfSlotUids[subIndex],
+                        timetableIndex: index,
+                        timetableSubIndex: subIndex
+                    })
+                }
+            }
+            return result
+        })()
         const slots = currentTimetableSlots.reduce(({ filtrateTimetables, resultSlots }, slot) => {
-            const newSlots = findAlternativeSlot({
+            const { result, remainingTimetables } = findAlternativeSlot({
                 targetSlot: slot,
                 currentTimetableSlots,
                 slotStore,
                 filtrateTimetables
             })
-            return {
-                filtrateTimetables: filtrateTimetables.map(timetable => {
-                    return {
-                        ...timetable,
 
-                        // This filter is important to reduce search space for the next iteration
-                        subtimetables: timetable.subtimetables.filter(subtimetable =>
-                            subtimetable.slotUids.some(uid => uid === slot.Uid)
-                        )
-                    }
-                }),
-                resultSlots: resultSlots.concat(newSlots)
+            // Uncomment the following line to see the timetable length reduction over each iteration.
+            // This is related to the `sameKindLength` above.
+            // console.log({
+            //     filtrateTimetablesLength: filtrateTimetables.length,
+            //     possibleTimetablesLength: result.alternativeTimetables.length
+            // })
+            return {
+                filtrateTimetables: remainingTimetables,
+                resultSlots: concat(resultSlots, [result])
             }
         }, { filtrateTimetables, resultSlots: [] } as {
             filtrateTimetables: typeof filtrateTimetables,
-            resultSlots: ReturnType<typeof findAlternativeSlot>[]
+            resultSlots: ResultSlot[]
         })
             .resultSlots
 
@@ -96,7 +97,7 @@ export class FindAlternativeSlotsOfCurrentSlots extends MasterStateAction {
                             destinationTimetableSubIndex: timetableSubIndex
                         }))
                     )
-                    .reduce((a, b) => a.concat(b), [])
+                    .reduce((a, b) => concat(a, b), [])
             }
         })
 
@@ -119,6 +120,19 @@ const sameKind = (a: ISlotViewModel, b: ISlotViewModel): boolean => {
     return a.Type === b.Type && a.SubjectCode === b.SubjectCode
 }
 
+type ResultSlot = {
+    slot: ISlotViewModel
+    alternativeTimetables: {
+        timetableIndex: number;
+        timetableSubIndex: number;
+        alternativeSlots: ISlotViewModel[];
+    }[]
+}
+type Timetable = {
+    timetableIndex: number;
+    timetableSubIndex: number;
+    slotUids: number[];
+}
 export const findAlternativeSlot = ({
     targetSlot,
     currentTimetableSlots,
@@ -132,55 +146,76 @@ export const findAlternativeSlot = ({
     currentTimetableSlots: ISlotViewModel[]
     slotStore: ObjectStore<ISlotViewModel>,
     filtrateTimetables: {
-        index: number;
-        subtimetables: {
-            subIndex: number;
-            slotUids: number[];
-        }[];
+        timetableIndex: number;
+        timetableSubIndex: number;
+        slotUids: number[];
     }[]
-}) => {
+}): {
+    result: ResultSlot,
+    remainingTimetables: Timetable[]
+} => {
     const slotsExceptCurrentSlotKind = currentTimetableSlots.filter((slot) =>
         !sameKind(slot, targetSlot)
     )
-    type Timetable = (typeof filtrateTimetables)[0]
+    const { possibleDestinationTimetables, remainingTimetables } = slotsExceptCurrentSlotKind
+        .reduce((result, slot) => {
+            let possibleDestinationTimetables: Timetable[] = []
+            let remainingTimetables: Timetable[] = []
 
-    const possibleDestinationTimetables = slotsExceptCurrentSlotKind
-        .reduce<Timetable[]>((timetables, slot) => {
-            return timetables.map(timetable => {
-                const remainingSubtimetables = timetable.subtimetables
-                    .filter(({ slotUids }) =>
-                        !slotUids.some(Uid => Uid === targetSlot.Uid) &&
-                        slotUids.some(Uid => Uid === slot.Uid)
-                    )
-                if (remainingSubtimetables.length > 0) {
-                    return [{
-                        ...timetable,
-                        subtimetables: remainingSubtimetables
-                    }]
+            for (let i = 0; i < result.possibleDestinationTimetables.length; i++) {
+                const timetable = result.possibleDestinationTimetables[i]
+                if (timetable.slotUids.some(Uid => Uid === targetSlot.Uid)) {
+                    remainingTimetables.push(timetable)
+                }
+                else if (timetable.slotUids.some(Uid => Uid === slot.Uid)) {
+                    possibleDestinationTimetables.push(timetable)
                 }
                 else {
-                    return []
+                    // ditch this timetable
                 }
-            })
-                .reduce((a, b) => a.concat(b), [])
-        }, filtrateTimetables)
+            }
+
+            return {
+                possibleDestinationTimetables,
+                remainingTimetables: concat(result.remainingTimetables, remainingTimetables)
+            }
+        }, {
+            possibleDestinationTimetables: filtrateTimetables,
+            remainingTimetables: []
+        } as {
+            possibleDestinationTimetables: Timetable[],
+            remainingTimetables: Timetable[]
+        })
 
     return {
-        slot: targetSlot,
-        alternativeTimetables: possibleDestinationTimetables.map(timetable => {
-            return timetable.subtimetables.map(subtimetable => {
+        remainingTimetables,
+        result: {
+            slot: targetSlot,
+            alternativeTimetables: possibleDestinationTimetables.map(timetable => {
                 return {
-                    timetableIndex: timetable.index,
-                    timetableSubIndex: subtimetable.subIndex,
+                    timetableIndex: timetable.timetableIndex,
+                    timetableSubIndex: timetable.timetableSubIndex,
                     alternativeSlots: slotStore.GetBunch(
-                        subtimetable.slotUids.filter(uid =>
+                        timetable.slotUids.filter(uid =>
                             !slotsExceptCurrentSlotKind.some(slot => slot.Uid === uid)
                         )
                     )
                 }
             })
-        })
-            .reduce((a, b) => a.concat(b), [])
+        }
     }
 
+}
+
+/**
+ * Why use this instead of `Array.prototype.concat`?
+ * Because `push` is much faster.
+ * Refer https://dev.to/uilicious/javascript-array-push-is-945x-faster-than-array-concat-1oki
+ */
+function concat<T>(xs: T[], ys: T[]): T[] {
+    let result = [...xs]
+    for (let index = 0; index < ys.length; index++) {
+        result.push(ys[index])
+    }
+    return result
 }
