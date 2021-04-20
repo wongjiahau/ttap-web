@@ -92,7 +92,7 @@ ISlotViewState > {
                                    //   it is for implementing slot-locking feature
                                    //   but I haven't figured out how to do it yet
 
-        const venue = slot.Room[slot.CurrentChoice] || slot.ClassMode
+        const venue = `${slot.Room[slot.CurrentChoice]}${slot.ClassMode ? ` [${[slot.ClassMode]}]` : ""}`
 
         return (
             <Tooltip arrow={true} position="left" html={tooltipTitle(slot, isShowingAlternativeSlotsOfThisSlot)}>
@@ -214,5 +214,5 @@ function tooltipTitle(s : ISlotViewModel, isShowingAlternativeSlotOfThisSlot: bo
 }
 
 export function getSlotContent (slot : ISlotViewModel) {
-    return GetInitial(slot.SubjectName) + "-" + slot.Type + slot.Group[slot.CurrentChoice] + " ";
+    return `${GetInitial(slot.SubjectName)} - ${slot.Type}(${slot.Group[slot.CurrentChoice]})`
 }

@@ -15,9 +15,13 @@ export class SubjectSummary {
         this.SubjectName = BeautifySubjectName(slots[0].SubjectName);
         const extract = (type: string) => {
             const slot = this.GetSlotOf(slots, type);
-            return slot
-            ? `${type}(${slot.Group[slot.CurrentChoice]}) - ${slot.Room[slot.CurrentChoice] || slot.ClassMode}`
-            : "-"; // dash means none
+            if(!slot) {
+                return "-"; // dash means none
+            }
+            const group = slot.Group[slot.CurrentChoice]
+            const room = slot.Room[slot.CurrentChoice]
+            const mode = slot.ClassMode
+            return `${type}(${group}) - ${room}${mode ? ` [${mode}]` : ''}`
         };
         this.Lecture =  extract("L");
         this.Tutorial = extract("T");
