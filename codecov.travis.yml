@@ -1,6 +1,6 @@
 warnings_are_errors: false # So that travis don't treat warning as errors
 # set notification options
-notifications: 
+notifications:
   email:
     recipients:
       - hou32hou@gmail.com

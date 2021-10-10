@@ -7,10 +7,7 @@ import { SubjectListViewContainer } from "../redux/containers/subjectListViewCon
 import { TimetableCreatorContainer } from "../redux/containers/timetableCreatorContainer";
 
 export class MasterView extends React.Component<{}, {}> {
-    public render() {
-        return (
-            <TimetableCreatorContainer/>
-        );
-
-    }
+  public render() {
+    return <TimetableCreatorContainer />;
+  }
 }

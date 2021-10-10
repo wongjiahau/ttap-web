@@ -1,25 +1,22 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended",
-        "tslint-react"
-    ],
-    "jsRules": {},
-    "rules": {
-        "jsx-alignment": false,
-        "jsx-no-lambda": false,
-        "jsx-no-multiline-js": false,
-        "jsx-wrap-multiline": false,
-        "max-classes-per-file" : false,
-        "max-line-length": false,
-        "no-bitwise": false,
-        "no-string-literal": false,
-        "no-var-requires": false,
-        "object-literal-sort-keys": false,
-        "prefer-for-of": false,
-        "space-before-function-paren" : false,
-        "trailing-comma": false,
-        "typedef-whitespace": false
-    },
-    "rulesDirectory": []
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react"],
+  "jsRules": {},
+  "rules": {
+    "jsx-alignment": false,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "jsx-wrap-multiline": false,
+    "max-classes-per-file": false,
+    "max-line-length": false,
+    "no-bitwise": false,
+    "no-string-literal": false,
+    "no-var-requires": false,
+    "object-literal-sort-keys": false,
+    "prefer-for-of": false,
+    "space-before-function-paren": false,
+    "trailing-comma": false,
+    "typedef-whitespace": false
+  },
+  "rulesDirectory": []
 }

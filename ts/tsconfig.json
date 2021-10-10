@@ -1,16 +1,16 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "sourceMap": true,
-        "outDir": "../src/core/",
-        "pretty": true,
-        "jsx": "react",
-        "strictNullChecks": true,
-        "allowJs": true,
-        "strict": true,
-        "lib": ["es5", "es6", "dom"],
-        "checkJs": true,
-        "skipLibCheck": true
-    }
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "../src/core/",
+    "pretty": true,
+    "jsx": "react",
+    "strictNullChecks": true,
+    "allowJs": true,
+    "strict": true,
+    "lib": ["es5", "es6", "dom"],
+    "checkJs": true,
+    "skipLibCheck": true
+  }
 }

@@ -4,245 +4,236 @@ const format = require("date-fns/format");
 const addDays = require("date-fns/add_days");
 const max = require("lodash.max");
 /* global gapi */
-import {
-    ParseDay
-} from "../../../att/day";
-import {
-    Time
-} from "../../../att/time";
+import { ParseDay } from "../../../att/day";
+import { Time } from "../../../att/time";
 import { ObjectStore } from "../../../dataStructure/objectStore";
-import {
-    IRawSlot, RawSlot
-} from "../../../model/rawSlot";
+import { IRawSlot, RawSlot } from "../../../model/rawSlot";
 import { Timetable } from "../../../model/timetable";
 import { BeautifySubjectName } from "../../../util/beautifySubjectName";
-import {
-    TimePeriod
-} from "./../../../att/timePeriod";
-import {
-    Week
-} from "./../../../att/week";
-import {
-    SaveTimetable
-} from "./saveTimetable";
+import { TimePeriod } from "./../../../att/timePeriod";
+import { Week } from "./../../../att/week";
+import { SaveTimetable } from "./saveTimetable";
 
 const NUMBER_OF_DAYS_PER_WEEK = 7;
 
 export class SaveTimetableAsGoogleCalendar extends SaveTimetable {
-    private loginAlready = false;
-    private rawSlots: RawSlot[] = [];
+  private loginAlready = false;
+  private rawSlots: RawSlot[] = [];
 
-    public constructor(private semStartDate: Date) {
-        super();
-        // the gapi client is already initialized at index.html
+  public constructor(private semStartDate: Date) {
+    super();
+    // the gapi client is already initialized at index.html
+  }
+
+  protected Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>) {
+    this.rawSlots = rawSlotStore.GetBunch(timetable.SlotUids);
+
+    gapi.auth2 // eslint-disable-line
+      .getAuthInstance()
+      .isSignedIn.listen(this.updateSigninStatus);
+
+    // Handle the initial sign-in state.
+    this.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()); // eslint-disable-line
+  }
+
+  protected SaveType(): string {
+    return "google calendar";
+  }
+
+  private updateSigninStatus = (isSignedIn: boolean) => {
+    if (!this.loginAlready && isSignedIn) {
+      this.loginAlready = true;
+      this.addTimetable();
+      this.handleSignoutClick();
+      alert("The timetable is successfully added to your Google Calendar!");
+    } else {
+      if (!this.loginAlready) {
+        this.handleAuthClick();
+      }
     }
+  };
 
-    protected Save(timetable: Timetable, rawSlotStore: ObjectStore<IRawSlot>) {
-        this.rawSlots = rawSlotStore.GetBunch(timetable.SlotUids);
+  private addTimetable() {
+    const semStartDate = this.semStartDate;
+    this.rawSlots.forEach((s) => {
+      this.addEvents(CreateEvent(s, semStartDate));
+    });
+    GetWeekNumberHeaders(semStartDate, GetMaxWeek(this.rawSlots)).forEach(
+      (event) => {
+        this.addEvents(event);
+      }
+    );
+    window.open("https://calendar.google.com/");
+  }
 
-        gapi // eslint-disable-line
-            .auth2
-            .getAuthInstance()
-            .isSignedIn
-            .listen(this.updateSigninStatus);
+  private addEvents(calenderEvent: any) {
+    gapi.client.calendar.events // eslint-disable-line
+      .insert({
+        calendarId: "primary",
+        resource: calenderEvent,
+      })
+      .execute((event: any) => {
+        // TODO: Implement snackbar confirmation.
+      });
+  }
 
-        // Handle the initial sign-in state.
-        this.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get()); // eslint-disable-line
-    }
+  private handleAuthClick = () => {
+    gapi.auth2 // eslint-disable-line
+      .getAuthInstance()
+      .signIn();
+  };
 
-    protected SaveType(): string {
-        return "google calendar";
-    }
-
-    private updateSigninStatus = (isSignedIn: boolean) => {
-        if (!this.loginAlready && isSignedIn) {
-            this.loginAlready = true;
-            this.addTimetable();
-            this.handleSignoutClick();
-            alert("The timetable is successfully added to your Google Calendar!");
-        } else {
-            if (!this.loginAlready) {
-                this.handleAuthClick();
-            }
-        }
-    }
-
-    private addTimetable() {
-        const semStartDate = this.semStartDate;
-        this.rawSlots.forEach((s) => {
-            this.addEvents(CreateEvent(s, semStartDate));
-        });
-        GetWeekNumberHeaders(semStartDate, GetMaxWeek(this.rawSlots)).forEach((event) => {
-            this.addEvents(event);
-        });
-        window.open("https://calendar.google.com/");
-    }
-
-    private addEvents(calenderEvent: any) {
-        gapi // eslint-disable-line
-            .client
-            .calendar
-            .events
-            .insert({
-                calendarId: "primary",
-                resource: calenderEvent
-            })
-            .execute((event: any) => {
-                // TODO: Implement snackbar confirmation.
-            });
-    }
-
-    private handleAuthClick = () => {
-        gapi // eslint-disable-line
-            .auth2
-            .getAuthInstance()
-            .signIn();
-    }
-
-    private handleSignoutClick = () => {
-        gapi // eslint-disable-line
-            .auth2
-            .getAuthInstance()
-            .signOut();
-    }
-
+  private handleSignoutClick = () => {
+    gapi.auth2 // eslint-disable-line
+      .getAuthInstance()
+      .signOut();
+  };
 }
 
 function sampleAddEvent() {
-    gapi // eslint-disable-line
-        .client
-        .calendar
-        .events
-        .insert({
-            calendarId: "primary",
-            resource: {
-                summary: "test event",
-                location: "test location",
-                description: "test description",
-                start: {
-                    dateTime: "2017-11-15T03:30:00+08:00", // +08:00 means UTC+08:00
+  gapi.client.calendar.events // eslint-disable-line
+    .insert({
+      calendarId: "primary",
+      resource: {
+        summary: "test event",
+        location: "test location",
+        description: "test description",
+        start: {
+          dateTime: "2017-11-15T03:30:00+08:00", // +08:00 means UTC+08:00
 
-                    timeZone: "UTC+08:00"
-                },
-                end: {
-                    dateTime: "2017-11-15T05:30:00+08:00",
-                    timeZone: "UTC+08:00"
-                },
-                // Recur on 2017-11-22 3:30 am, 2017-11-29 3:30 am
-                recurrence: [`RDATE;TZID=Asia/Kuala_Lumpur:20171122T033000,20171129T033000`]
-            }
-        })
-        .execute((event: any) => {
-            // TODO: Implement snackbar confirmation.
-        });
-
+          timeZone: "UTC+08:00",
+        },
+        end: {
+          dateTime: "2017-11-15T05:30:00+08:00",
+          timeZone: "UTC+08:00",
+        },
+        // Recur on 2017-11-22 3:30 am, 2017-11-29 3:30 am
+        recurrence: [
+          `RDATE;TZID=Asia/Kuala_Lumpur:20171122T033000,20171129T033000`,
+        ],
+      },
+    })
+    .execute((event: any) => {
+      // TODO: Implement snackbar confirmation.
+    });
 }
 
 export function CreateEvent(slot: RawSlot, semesterStartDate: Date) {
-    const semStartDate = new Date(semesterStartDate.getTime());
-    if (semStartDate.getDay() !== 1) {
-        throw new Error("Expected semesterStartDay to be Monday but was " + semStartDate.toString());
-    }
-    const t = TimePeriod.Parse(slot.TimePeriod);
-    const w = Week.Parse(slot.WeekNumber);
-    semStartDate.setHours(t.StartTime.Hour);
-    semStartDate.setMinutes(t.StartTime.Minute);
-    semStartDate.setDate(semStartDate.getDate() + ParseDay(slot.Day) - 1);
-    const dates = GetListOfDates(semStartDate, w.WeekNumberList);
-    const startDate = format(dates[0], "YYYY-MM-DD");
-    const recurrence = GetRecurrence(dates.slice(1));
-    const event = {
-        summary: `${BeautifySubjectName(slot.SubjectName)} (${slot.Type}-${slot.Group})`,
-        location: slot.Room,
-        description: `Subject code : ${slot.SubjectCode}, Week : ${slot.WeekNumber}`,
-        start: {
-            // dateTime: "2017-11-15T03:30:00+08:00", // +08:00 means UTC+08:00
-            dateTime: startDate + "T" + t.GetStartTimeInIsoFormat() + ":00+08:00",
-            timeZone: "UTC+08:00"
-        },
-        end: {
-            dateTime: startDate + "T" + t.GetEndTimeInIsoFormat() + ":00+08:00",
-            timeZone: "UTC+08:00"
-        },
-        recurrence: [recurrence]
-    };
-    return event;
+  const semStartDate = new Date(semesterStartDate.getTime());
+  if (semStartDate.getDay() !== 1) {
+    throw new Error(
+      "Expected semesterStartDay to be Monday but was " +
+        semStartDate.toString()
+    );
+  }
+  const t = TimePeriod.Parse(slot.TimePeriod);
+  const w = Week.Parse(slot.WeekNumber);
+  semStartDate.setHours(t.StartTime.Hour);
+  semStartDate.setMinutes(t.StartTime.Minute);
+  semStartDate.setDate(semStartDate.getDate() + ParseDay(slot.Day) - 1);
+  const dates = GetListOfDates(semStartDate, w.WeekNumberList);
+  const startDate = format(dates[0], "YYYY-MM-DD");
+  const recurrence = GetRecurrence(dates.slice(1));
+  const event = {
+    summary: `${BeautifySubjectName(slot.SubjectName)} (${slot.Type}-${
+      slot.Group
+    })`,
+    location: slot.Room,
+    description: `Subject code : ${slot.SubjectCode}, Week : ${slot.WeekNumber}`,
+    start: {
+      // dateTime: "2017-11-15T03:30:00+08:00", // +08:00 means UTC+08:00
+      dateTime: startDate + "T" + t.GetStartTimeInIsoFormat() + ":00+08:00",
+      timeZone: "UTC+08:00",
+    },
+    end: {
+      dateTime: startDate + "T" + t.GetEndTimeInIsoFormat() + ":00+08:00",
+      timeZone: "UTC+08:00",
+    },
+    recurrence: [recurrence],
+  };
+  return event;
 }
 
 export function AddByWeek(date: Date, numberOfWeeks: number): Date {
-    const clone = new Date(date.getTime());
-    clone.setDate(clone.getDate() + numberOfWeeks * NUMBER_OF_DAYS_PER_WEEK);
-    return clone;
+  const clone = new Date(date.getTime());
+  clone.setDate(clone.getDate() + numberOfWeeks * NUMBER_OF_DAYS_PER_WEEK);
+  return clone;
 }
 
 export function GetRecurrence(dates: Date[]): string {
-    let header = "RDATE;TZID=Asia/Kuala_Lumpur:";
-    dates.forEach((x) => {
-        header += ToPureIsoString(x) + ",";
-    });
-    return header.substring(0, header.length - 1);
+  let header = "RDATE;TZID=Asia/Kuala_Lumpur:";
+  dates.forEach((x) => {
+    header += ToPureIsoString(x) + ",";
+  });
+  return header.substring(0, header.length - 1);
 }
 
 export function GetListOfDates(startDate: Date, week: number[]): Date[] {
-    const result: Date[] = [];
-    week.forEach((x) => {
-        result.push(AddByWeek(startDate, x - 1));
-    });
-    return result;
+  const result: Date[] = [];
+  week.forEach((x) => {
+    result.push(AddByWeek(startDate, x - 1));
+  });
+  return result;
 }
 
 export function ToPureIsoString(date: Date): string {
-    function pad(input: number): string {
-        if (input < 10) {
-            return "0" + input;
-        }
-        return input.toString();
+  function pad(input: number): string {
+    if (input < 10) {
+      return "0" + input;
     }
-    return date.getFullYear() +
-        pad(date.getMonth() + 1) +
-        pad(date.getDate()) + "T" +
-        pad(date.getHours()) +
-        pad(date.getMinutes()) +
-        pad(date.getSeconds());
+    return input.toString();
+  }
+  return (
+    date.getFullYear() +
+    pad(date.getMonth() + 1) +
+    pad(date.getDate()) +
+    "T" +
+    pad(date.getHours()) +
+    pad(date.getMinutes()) +
+    pad(date.getSeconds())
+  );
 }
 
 export function GetMaxWeek(slots: RawSlot[]) {
-    return max(slots.map((s) => max(Week.Parse(s.WeekNumber).WeekNumberList)));
+  return max(slots.map((s) => max(Week.Parse(s.WeekNumber).WeekNumberList)));
 }
 
 export interface IGoogleCalendarEvent {
-    summary: string;
-    start: IGoogleCalendarDate;
-    end: IGoogleCalendarDate;
+  summary: string;
+  start: IGoogleCalendarDate;
+  end: IGoogleCalendarDate;
 }
 
 export interface IGoogleCalendarDate {
-    date: string;
-    timeZone: string;
+  date: string;
+  timeZone: string;
 }
 
-export function GetWeekNumberHeaders(semStartDate: Date, maxWeek: number): IGoogleCalendarEvent[] {
-    const result: IGoogleCalendarEvent[] = [];
-    if (semStartDate.getDay() !== 1) {
-        throw new Error("Semester start date must be a Monday");
-    }
-    let startDate = semStartDate;
-    let endDate = addDays(semStartDate, 5);
-    for (let i = 0; i < maxWeek; i++) {
-        const event: IGoogleCalendarEvent = {
-            summary: "Week " + (i + 1),
-            start: {
-                date: format(startDate, "YYYY-MM-DD"),
-                timeZone: "UTC+08:00"
-            },
-            end: {
-                date: format(endDate, "YYYY-MM-DD"),
-                timeZone: "UTC+08:00"
-            }
-        };
-        result.push(event);
-        startDate = addWeeks(startDate, 1);
-        endDate = addWeeks(endDate, 1);
-    }
-    return result;
+export function GetWeekNumberHeaders(
+  semStartDate: Date,
+  maxWeek: number
+): IGoogleCalendarEvent[] {
+  const result: IGoogleCalendarEvent[] = [];
+  if (semStartDate.getDay() !== 1) {
+    throw new Error("Semester start date must be a Monday");
+  }
+  let startDate = semStartDate;
+  let endDate = addDays(semStartDate, 5);
+  for (let i = 0; i < maxWeek; i++) {
+    const event: IGoogleCalendarEvent = {
+      summary: "Week " + (i + 1),
+      start: {
+        date: format(startDate, "YYYY-MM-DD"),
+        timeZone: "UTC+08:00",
+      },
+      end: {
+        date: format(endDate, "YYYY-MM-DD"),
+        timeZone: "UTC+08:00",
+      },
+    };
+    result.push(event);
+    startDate = addWeeks(startDate, 1);
+    endDate = addWeeks(endDate, 1);
+  }
+  return result;
 }

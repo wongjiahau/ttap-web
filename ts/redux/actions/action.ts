@@ -1,7 +1,7 @@
-export interface IAction < T > {
-    stateName: string;
-    type: string;
-    generateNewState(state: T): T;
+export interface IAction<T> {
+  stateName: string;
+  type: string;
+  generateNewState(state: T): T;
 }
 
 /**
@@ -11,17 +11,15 @@ export interface IAction < T > {
  * @class Action
  * @template T is the type of Redux State where the action will return
  */
-export abstract class Action < T > {
-    public Action(): IAction < T > {
-        return {
-            generateNewState: this
-                .GenerateNewState
-                .bind(this),
-            stateName: this.StateName(),
-            type: this.TypeName().toUpperCase()
-        };
-    }
-    public abstract TypeName(): string;
-    public abstract StateName(): string;
-    protected abstract GenerateNewState(state: T): T;
+export abstract class Action<T> {
+  public Action(): IAction<T> {
+    return {
+      generateNewState: this.GenerateNewState.bind(this),
+      stateName: this.StateName(),
+      type: this.TypeName().toUpperCase(),
+    };
+  }
+  public abstract TypeName(): string;
+  public abstract StateName(): string;
+  protected abstract GenerateNewState(state: T): T;
 }

@@ -1,6 +1,6 @@
 warnings_are_errors: false # So that travis don't treat warning as errors
 # set notification options
-notifications: 
+notifications:
   email:
     recipients:
       - hou32hou@gmail.com
@@ -16,12 +16,12 @@ node_js: # specify version of node js
 cache: # cache node modules so that every build don't have to reinstall those node package again
   directories:
     - "node_modules"
-    
+
 before_script:
-  # This is needed so that the command $(git rev-list --count --all) can work properly 
+  # This is needed so that the command $(git rev-list --count --all) can work properly
   # That command will be run by ./scripts/build
   # For more info, refer https://github.com/travis-ci/travis-ci/issues/3412
-  - git fetch --unshallow 
+  - git fetch --unshallow
 
 script:
   - echo "Running script:"
@@ -41,5 +41,5 @@ after_success: # upload source-analysis-report
 deploy:
   provider: surge
   project: ./build/
-  domain: https://ttap.surge.sh  
+  domain: https://ttap.surge.sh
   skip_cleanup: true

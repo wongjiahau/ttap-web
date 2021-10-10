@@ -60,7 +60,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "./node_modules/prettier/bin-prettier.js --write ."
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
@@ -82,6 +83,7 @@
     "is-ci": "^1.0.10",
     "jsdom": "^12.0.0",
     "node-stopwatch": "0.0.1",
+    "prettier": "2.4.1",
     "prompt-sync": "^4.1.5",
     "shelljs": "^0.8.0",
     "source-map-explorer": "^1.5.0",

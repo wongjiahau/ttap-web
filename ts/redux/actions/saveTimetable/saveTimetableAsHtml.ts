@@ -1,23 +1,17 @@
+import { saveAs } from "file-saver";
+import { Timetable } from "../../../model/timetable";
 import {
-    saveAs
-} from "file-saver";
-import {
-    Timetable
-} from "../../../model/timetable";
-import {
-    ITimetableListState,
-    TimetableListStateAction
+  ITimetableListState,
+  TimetableListStateAction,
 } from "../../reducers/timetableListState";
-import {
-    SaveTimetable
-} from "./saveTimetable";
+import { SaveTimetable } from "./saveTimetable";
 
 export class SaveTimetableAsHtml extends SaveTimetable {
-    protected Save(timetable: Timetable) {
-        let html = (document.getElementById("timetable-view") as HTMLElement).outerHTML;
-        html = html.replace("display: none", "display: inline"); // display timetable summary
-        const data =
-`
+  protected Save(timetable: Timetable) {
+    let html = (document.getElementById("timetable-view") as HTMLElement)
+      .outerHTML;
+    html = html.replace("display: none", "display: inline"); // display timetable summary
+    const data = `
 <!-- Roboto font -->
 <html>
 <body>
@@ -44,12 +38,12 @@ export class SaveTimetableAsHtml extends SaveTimetable {
 </body>
 </html>
 `;
-        const file = new File([data], "MyTimetable.html", {
-            type: "text/plain;charset=utf-8"
-        });
-        saveAs(file);
-    }
-    protected SaveType(): string {
-        return "html";
-    }
+    const file = new File([data], "MyTimetable.html", {
+      type: "text/plain;charset=utf-8",
+    });
+    saveAs(file);
+  }
+  protected SaveType(): string {
+    return "html";
+  }
 }

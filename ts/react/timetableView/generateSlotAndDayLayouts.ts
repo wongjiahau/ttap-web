@@ -1,7 +1,7 @@
 const sortBy = require("lodash.sortby");
-import {ParseDay} from "../../att/day";
-import {TimePeriod} from "../../att/timePeriod";
-import {ISlotViewModel} from "../../model/slotViewModel";
+import { ParseDay } from "../../att/day";
+import { TimePeriod } from "../../att/timePeriod";
+import { ISlotViewModel } from "../../model/slotViewModel";
 
 /**
  * @export
@@ -11,91 +11,92 @@ import {ISlotViewModel} from "../../model/slotViewModel";
  * @returns {[ReactGridLayout.Layout[], ReactGridLayout.Layout[]]} [0] is the SlotsLayout, [1] is the DayColumnLayouts
  */
 export function GenerateSlotAndDayLayouts(
-    rawSlots : ISlotViewModel[],
-    xOffset : number,
-    yOffset : number,
-) : [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
-    const dayRows = GetDayRows();
-    const slotLayouts: ReactGridLayout.Layout[] = [];
-    for (let h = 0; h < rawSlots.length; h++) {
-        const slot = rawSlots[h];
-        const Y = ParseDay(slot.Day) - 1;
-        const timePeriod = TimePeriod.Parse(slot.TimePeriod);
-        let extraYOffset = 0;
-        for (let i = 0; i < dayRows[Y].timeMatrix.length; i++) {
-            const matrix = dayRows[Y].timeMatrix[i];
-            if ((timePeriod.BinaryData & matrix) === 0) {
-                extraYOffset = i;
-                if (i > 0 && matrix === 0) {
-                    for (let j = Y + 1; j <= 6; j++) {
-                        dayRows[j].rowIndex++;
-                    }
-                }
-                dayRows[Y].timeMatrix[i] |= timePeriod.BinaryData;
-                break;
-            }
+  rawSlots: ISlotViewModel[],
+  xOffset: number,
+  yOffset: number
+): [ReactGridLayout.Layout[], ReactGridLayout.Layout[]] {
+  const dayRows = GetDayRows();
+  const slotLayouts: ReactGridLayout.Layout[] = [];
+  for (let h = 0; h < rawSlots.length; h++) {
+    const slot = rawSlots[h];
+    const Y = ParseDay(slot.Day) - 1;
+    const timePeriod = TimePeriod.Parse(slot.TimePeriod);
+    let extraYOffset = 0;
+    for (let i = 0; i < dayRows[Y].timeMatrix.length; i++) {
+      const matrix = dayRows[Y].timeMatrix[i];
+      if ((timePeriod.BinaryData & matrix) === 0) {
+        extraYOffset = i;
+        if (i > 0 && matrix === 0) {
+          for (let j = Y + 1; j <= 6; j++) {
+            dayRows[j].rowIndex++;
+          }
         }
-        const [X, W] = GetXandW(timePeriod);
-        const layout : ReactGridLayout.Layout = {
-            h: 1,
-            i: "s" + h,
-            w: W,
-            x: X + xOffset,
-            y: dayRows[Y].rowIndex + yOffset + extraYOffset
-        };
-        slotLayouts.push(layout);
+        dayRows[Y].timeMatrix[i] |= timePeriod.BinaryData;
+        break;
+      }
     }
-    return [slotLayouts, GetDayColumnLayouts(dayRows)];
+    const [X, W] = GetXandW(timePeriod);
+    const layout: ReactGridLayout.Layout = {
+      h: 1,
+      i: "s" + h,
+      w: W,
+      x: X + xOffset,
+      y: dayRows[Y].rowIndex + yOffset + extraYOffset,
+    };
+    slotLayouts.push(layout);
+  }
+  return [slotLayouts, GetDayColumnLayouts(dayRows)];
 }
 
 export interface IDayRow {
-    rowIndex : number;
-    timeMatrix : number[];
+  rowIndex: number;
+  timeMatrix: number[];
 }
 
 export const MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW = 20;
-export function GetDayRows() : IDayRow[] {
-    const dayRows : IDayRow[] = [];
-    const NUMBER_OF_DAY_PER_WEEK = 7;
-    for (let i = 0; i < NUMBER_OF_DAY_PER_WEEK; i++) {
-        dayRows.push({
-            rowIndex: i,
-            timeMatrix: new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(0)
-        });
-    }
-    return dayRows;
-}
-
-export function GetDayColumnLayouts(dayRows : IDayRow[]) : ReactGridLayout.Layout[] {
-    const result : ReactGridLayout.Layout[] = [];
-    result.push({x: 0, w: 2, i: "d0", y: 0, h: 1}); // for the extra box on top of day column
-    for (let i = 0; i < dayRows.length - 1; i++) {
-        result.push({
-            x: 0,
-            w: 2,
-            i: "d" + (i + 1),
-            y: dayRows[i].rowIndex + 1, // +1 because of the extra box on top of day column
-            h: dayRows[i + 1].rowIndex - dayRows[i].rowIndex
-        });
-    }
-    result.push({
-        x: 0,
-        w: 2,
-        i: "d7",
-        y: dayRows[6].rowIndex + 1,
-        h: 1
+export function GetDayRows(): IDayRow[] {
+  const dayRows: IDayRow[] = [];
+  const NUMBER_OF_DAY_PER_WEEK = 7;
+  for (let i = 0; i < NUMBER_OF_DAY_PER_WEEK; i++) {
+    dayRows.push({
+      rowIndex: i,
+      timeMatrix: new Array(MAXIMUM_NUMBER_OF_OVERLAPPING_SLOTS_PER_ROW).fill(
+        0
+      ),
     });
-    return result;
+  }
+  return dayRows;
 }
 
-export function GetXandW(timePeriod : TimePeriod) : [number, number] {
-    let x = (timePeriod.StartTime.Hour - TimePeriod.Min.Hour) * 2;
-    if (timePeriod.StartTime.Minute === 30) {
-        x++;
-    }
-    const w = timePeriod
-        .EndTime
-        .Minus(timePeriod.StartTime)
-        .TotalHours() * 2;
-    return [x, w];
+export function GetDayColumnLayouts(
+  dayRows: IDayRow[]
+): ReactGridLayout.Layout[] {
+  const result: ReactGridLayout.Layout[] = [];
+  result.push({ x: 0, w: 2, i: "d0", y: 0, h: 1 }); // for the extra box on top of day column
+  for (let i = 0; i < dayRows.length - 1; i++) {
+    result.push({
+      x: 0,
+      w: 2,
+      i: "d" + (i + 1),
+      y: dayRows[i].rowIndex + 1, // +1 because of the extra box on top of day column
+      h: dayRows[i + 1].rowIndex - dayRows[i].rowIndex,
+    });
+  }
+  result.push({
+    x: 0,
+    w: 2,
+    i: "d7",
+    y: dayRows[6].rowIndex + 1,
+    h: 1,
+  });
+  return result;
+}
+
+export function GetXandW(timePeriod: TimePeriod): [number, number] {
+  let x = (timePeriod.StartTime.Hour - TimePeriod.Min.Hour) * 2;
+  if (timePeriod.StartTime.Minute === 30) {
+    x++;
+  }
+  const w = timePeriod.EndTime.Minus(timePeriod.StartTime).TotalHours() * 2;
+  return [x, w];
 }
