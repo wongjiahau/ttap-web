@@ -206,18 +206,26 @@ export class Login extends React.Component<
     );
   };
 
+  private iframeOnLoadCount = 0;
   public handleIFrameOnLoad = () => {
+    this.iframeOnLoadCount++;
     const iframe = document.getElementById(
       "unitregiframe"
     ) as HTMLIFrameElement;
     if (iframe === null) {
-      throw new Error();
+      return alert("iframe is null");
     }
     if (iframe.contentWindow === null) {
-      throw new Error();
+      return alert("iframe.contentWindow is null");
     }
     const newLocation = new Str(iframe.contentWindow.location.href);
     const loggedIn = !newLocation.Contains("login");
+
+    // this is to prevent infinite loading the same page
+    if (this.iframeOnLoadCount > 10) {
+      this.setState({ openErrorDialog: true });
+      return;
+    }
 
     if (loggedIn && !newLocation.Contains("masterSchedule")) {
       iframe.src =
