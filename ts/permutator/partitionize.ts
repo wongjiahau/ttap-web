@@ -1,50 +1,52 @@
 const sortBy = require("lodash.sortby");
 export interface IPartitionable {
-    PartitionKey: number;
+  PartitionKey: number;
 }
 
-export function Partitionize < T extends IPartitionable > (input: T[]): T[][] {
-    return PartitionizeByKey(input, "PartitionKey");
+export function Partitionize<T extends IPartitionable>(input: T[]): T[][] {
+  return PartitionizeByKey(input, "PartitionKey");
 }
 
-export function PartitionizeByKey<T>(input : T[], keyName: string) : T[][] {
-    if (input.length === 0) {
-        return [];
+export function PartitionizeByKey<T>(input: T[], keyName: string): T[][] {
+  if (input.length === 0) {
+    return [];
+  }
+  const result = new Array<T[]>();
+  let column = new Array<T>();
+  const copy = sortBy(input, [keyName]);
+  column.push(copy[0]);
+  let currentKey = copy[0][keyName];
+  for (let i = 1; i < copy.length; i++) {
+    if (copy[i][keyName] === currentKey) {
+      column.push(copy[i]);
+    } else {
+      currentKey = copy[i][keyName];
+      result.push(column.slice());
+      column = [];
+      column.push(copy[i]);
     }
-    const result = new Array < T[] > ();
-    let column = new Array < T > ();
-    const copy = sortBy(input, [keyName]);
-    column.push(copy[0]);
-    let currentKey = copy[0][keyName];
-    for (let i = 1; i < copy.length; i++) {
-        if (copy[i][keyName] === currentKey) {
-            column.push(copy[i]);
-        } else {
-            currentKey = copy[i][keyName];
-            result.push(column.slice());
-            column = [];
-            column.push(copy[i]);
-        }
-        if (i === copy.length - 1) {
-            result.push(column);
-        }
+    if (i === copy.length - 1) {
+      result.push(column);
     }
-    if (result.length === 0) {
-        result.push(column);
-    }
-    return result;
-
+  }
+  if (result.length === 0) {
+    result.push(column);
+  }
+  return result;
 }
 
-export function BinaryPartition<T>(input: T[], check: (elem: T) => boolean): [T[], T[]] {
-    const right: T[] = [];
-    const left: T[] = [];
-    for (let i = 0; i < input.length; i++) {
-        if (check(input[i])) {
-            left.push(input[i]);
-        } else {
-            right.push(input[i]);
-        }
+export function BinaryPartition<T>(
+  input: T[],
+  check: (elem: T) => boolean
+): [T[], T[]] {
+  const right: T[] = [];
+  const left: T[] = [];
+  for (let i = 0; i < input.length; i++) {
+    if (check(input[i])) {
+      left.push(input[i]);
+    } else {
+      right.push(input[i]);
     }
-    return [left, right];
+  }
+  return [left, right];
 }

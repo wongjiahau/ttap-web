@@ -1,9 +1,9 @@
 export interface ISBCWDialogState {
-    IsOpen: boolean;
+  IsOpen: boolean;
 }
 
 export function NewSbcwDialogstate(): ISBCWDialogState {
-    return {
-        IsOpen: false
-    };
+  return {
+    IsOpen: false,
+  };
 }

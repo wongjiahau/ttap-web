@@ -1,4 +1,4 @@
 export interface IGroupedTimetable {
-    DayTimeMatrix: number[];
-    ListOfSlotUids: number[][];
+  DayTimeMatrix: number[];
+  ListOfSlotUids: number[][];
 }

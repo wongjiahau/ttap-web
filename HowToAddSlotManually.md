@@ -4,7 +4,6 @@
 
 Go to https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp
 
-
 ![image](https://user-images.githubusercontent.com/23183656/49019660-6335f080-f1c9-11e8-89b3-b1d06d62ae60.png)
 
 ---
@@ -22,7 +21,6 @@ You can do this by either pressing `Ctrl + U` or right click anywhere and select
 Then you should see something as the following (it is quite empty, but if you scroll down you will see a bunch of code)
 
 ![image](https://user-images.githubusercontent.com/23183656/49019835-d5a6d080-f1c9-11e8-9ca6-01f347a08441.png)
-
 
 ![image](https://user-images.githubusercontent.com/23183656/49019866-ee16eb00-f1c9-11e8-8c8d-a0735360e806.png)
 

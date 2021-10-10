@@ -1,11 +1,11 @@
 export interface ISnackbarState {
-    IsOpen: boolean;
-    Message: string;
+  IsOpen: boolean;
+  Message: string;
 }
 
-export function NewSnackbarState() : ISnackbarState {
-    return {
-        IsOpen: false,
-        Message: "",
-    };
+export function NewSnackbarState(): ISnackbarState {
+  return {
+    IsOpen: false,
+    Message: "",
+  };
 }

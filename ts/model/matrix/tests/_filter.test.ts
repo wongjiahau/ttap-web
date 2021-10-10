@@ -9,32 +9,40 @@ const box2 = new STCBox(BoxKind.MaybeOccupied, 2, parseInt("10000", 2), 0); // W
 const timetables = GetTestTimetables1();
 
 describe("Filter()", () => {
-    beforeEach(() => {
-        TimePeriod.SetMinTo8am();
-    });
+  beforeEach(() => {
+    TimePeriod.SetMinTo8am();
+  });
 
-    it("should throw error if box kind is not MaybeOccupied", () => {
-        expect(() => {Filter(timetables, new STCBox(BoxKind.DefinitelyUnoccupied, 0, 0, 0)); }).to.throw();
-        expect(() => {Filter(timetables, new STCBox(BoxKind.DefinitelyOccupied, 0, 0, 0)); }).to.throw();
-        expect(() => {Filter(timetables, new STCBox(BoxKind.Clicked, 0, 0, 0)); }).to.throw();
-        expect(() => {Filter(timetables, new STCBox(BoxKind.MaybeOccupied, 0, 0, 0)); }).to.not.throw();
-    });
+  it("should throw error if box kind is not MaybeOccupied", () => {
+    expect(() => {
+      Filter(timetables, new STCBox(BoxKind.DefinitelyUnoccupied, 0, 0, 0));
+    }).to.throw();
+    expect(() => {
+      Filter(timetables, new STCBox(BoxKind.DefinitelyOccupied, 0, 0, 0));
+    }).to.throw();
+    expect(() => {
+      Filter(timetables, new STCBox(BoxKind.Clicked, 0, 0, 0));
+    }).to.throw();
+    expect(() => {
+      Filter(timetables, new STCBox(BoxKind.MaybeOccupied, 0, 0, 0));
+    }).to.not.throw();
+  });
 
-    it("should return a tuple : [filtrate, residue]", () => {
-        const result = Filter(timetables, box1);
-        expect(result.length).to.eq(2);
-    });
+  it("should return a tuple : [filtrate, residue]", () => {
+    const result = Filter(timetables, box1);
+    expect(result.length).to.eq(2);
+  });
 
-    it("case 1", () => {
-        const [filtrate, residue] = Filter(timetables, box1);
-        expect(filtrate.length).to.eq(24);
-        expect(residue.length).to.eq(5);
-    });
+  it("case 1", () => {
+    const [filtrate, residue] = Filter(timetables, box1);
+    expect(filtrate.length).to.eq(24);
+    expect(residue.length).to.eq(5);
+  });
 
-    it("case 2", () => {
-        const [filtrate1, residue1] = Filter(timetables, box1);
-        const [filtrate2, residue2] = Filter(filtrate1, box2);
-        expect(filtrate2.length).to.eq(16);
-        expect(residue1.length + residue2.length).to.eq(13);
-    });
+  it("case 2", () => {
+    const [filtrate1, residue1] = Filter(timetables, box1);
+    const [filtrate2, residue2] = Filter(filtrate1, box2);
+    expect(filtrate2.length).to.eq(16);
+    expect(residue1.length + residue2.length).to.eq(13);
+  });
 });
