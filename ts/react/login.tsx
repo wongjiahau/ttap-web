@@ -174,7 +174,14 @@ export class Login extends React.Component<
               <li>Internal error of TTAP.</li>
             </ul>
             <Typography gutterBottom={true}>
-              Do you want to try the demo instead?
+              To understand what's wrong, log in to{" "}
+              <a href="https://unitreg.utar.edu.my/" target="_blank">
+                https://unitreg.utar.edu.my/
+              </a>{" "}
+              with your account.
+            </Typography>
+            <Typography gutterBottom={true}>
+              Or do you want to try the demo instead?
             </Typography>
           </DialogContent>
           <DialogActions>
