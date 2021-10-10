@@ -61,7 +61,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill",
     "eject": "react-scripts eject",
-    "format": "./node_modules/prettier/bin-prettier.js --write ."
+    "format": "./node_modules/prettier/bin-prettier.js --write .",
+    "format:check": "./node_modules/prettier/bin-prettier.js --check ."
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",

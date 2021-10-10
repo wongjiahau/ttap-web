@@ -25,6 +25,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
 
+      # Check format
+      - run: npm run format:check
+
       # Build
       - run: ./scripts/build
 
