@@ -1,4 +1,4 @@
-import * as invert from "invert-color";
+import invert from "invert-color";
 
 // Memoization to improve performance
 const memo: { [color: string]: string } = {};

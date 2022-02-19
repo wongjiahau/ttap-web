@@ -7,12 +7,13 @@ import TestManager, { FileName } from "../../tests/testManager";
 import { IBigSlot, newBigSlot } from "../bigSlot";
 import { GotIntersection } from "../matrix";
 
-const testSlots = ParseStudentHtmlToRawSlot(
-  new TestManager().GetDataFrom(FileName.cf_2017_nov)
-);
+const testSlots = (async () =>
+  ParseStudentHtmlToRawSlot(
+    await new TestManager().GetDataFrom(FileName.cf_2017_nov)
+  ))();
 describe("BigSlot", () => {
-  it("DayTimeMatrix should have length of 7 * 14 (case 1)", () => {
-    const rawSlot = find(testSlots, {
+  it("DayTimeMatrix should have length of 7 * 14 (case 1)", async () => {
+    const rawSlot = find(await testSlots, {
       Number: "129",
     });
     expect(rawSlot.WeekNumber).to.eq("2,8");
@@ -21,8 +22,8 @@ describe("BigSlot", () => {
     expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
   });
 
-  it("DayTimeMatrix should have length of 7 * 14 (case 2)", () => {
-    const rawSlot = find(testSlots, {
+  it("DayTimeMatrix should have length of 7 * 14 (case 2)", async () => {
+    const rawSlot = find(await testSlots, {
       Number: "1",
     });
     expect(rawSlot.WeekNumber).to.eq("1-14");
@@ -31,8 +32,8 @@ describe("BigSlot", () => {
     expect(result.DayTimeMatrix).to.have.lengthOf(7 * 14);
   });
 
-  it("DayTimeMatrix should be array of number, where every 7 number represent matrix of a week", () => {
-    const rawSlot = find(testSlots, {
+  it("DayTimeMatrix should be array of number, where every 7 number represent matrix of a week", async () => {
+    const rawSlot = find(await testSlots, {
       Number: "1",
     });
     rawSlot.WeekNumber = "2";

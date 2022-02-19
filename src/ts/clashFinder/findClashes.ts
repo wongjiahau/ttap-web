@@ -1,4 +1,4 @@
-import * as Combinatorics from "js-combinatorics";
+import Combinatorics from "js-combinatorics";
 import { ObjectStore } from "../dataStructure/objectStore";
 import { RawSlot } from "../model/rawSlot";
 import { Subject } from "../model/subject";

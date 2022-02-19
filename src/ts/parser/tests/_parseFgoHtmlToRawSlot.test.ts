@@ -7,15 +7,17 @@ import {
   ParseFgoHtmlToRawSlot_v1,
 } from "../parseFgoHtmlToRawSlot";
 
-describe.skip("ParseHtmlToRawSlot", () => {
-  const html = new TestManager().GetDataFrom(FileName.all_fes_slots);
-  const rawSlots = ParseFgoHtmlToRawSlot_v1(html);
-  it("should not contain duplicates", () => {
+describe.skip("ParseFgoHtmlToRawSlot", () => {
+  it("should not contain duplicates", async () => {
+    const html = await new TestManager().GetDataFrom(FileName.all_fes_slots);
+    const rawSlots = ParseFgoHtmlToRawSlot_v1(html);
     const uniques = uniqWith(rawSlots, IsRawSlotEquals);
     expect(uniques.length).to.eq(rawSlots.length);
   });
 
-  it("case 1", () => {
+  it("case 1", async () => {
+    const html = await new TestManager().GetDataFrom(FileName.all_fes_slots);
+    const rawSlots = ParseFgoHtmlToRawSlot_v1(html);
     expect(rawSlots[0]).to.deep.eq({
       Uid: 0,
       SubjectCode: "MPU32033",

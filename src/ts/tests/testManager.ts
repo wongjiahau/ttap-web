@@ -1,5 +1,5 @@
 export default class TestManager {
-  public GetDataFrom(file: FileName): string {
+  public GetDataFrom(file: FileName): Promise<string> {
     return LoadFileFromGitHub(this.GetDownloadLinkOf(file));
   }
 
@@ -11,10 +11,8 @@ export default class TestManager {
   }
 }
 
-function LoadFileFromGitHub(downloadLink: string): string {
-  const request = require("sync-request");
-  const res = request("GET", downloadLink);
-  return res.getBody().toString();
+function LoadFileFromGitHub(downloadLink: string): Promise<string> {
+  return fetch(downloadLink).then((res) => res.text());
 }
 
 export enum FileName {

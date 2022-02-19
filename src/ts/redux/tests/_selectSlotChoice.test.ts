@@ -19,9 +19,9 @@ import {
   NewMasterState,
 } from "./../reducers/masterState";
 
-function getInitialState(): IMasterState {
+async function getInitialState(): Promis<IMasterState> {
   const slots = ParseStudentHtmlToRawSlot(
-    new TestManager().GetDataFrom(FileName.cf_2017_nov)
+    await new TestManager().GetDataFrom(FileName.cf_2017_nov)
   );
   const state = MasterStateReducer(
     NewMasterState(),
@@ -36,8 +36,8 @@ describe("SelectSlotChoice action", () => {
     expect(action.TypeName()).to.eq("select slot choice");
   });
 
-  it("case 1", () => {
-    const initialState = getInitialState();
+  it("case 1", async () => {
+    const initialState = await getInitialState();
     const indexOfUEMK3233 = 4; // Bioprocess Engineering
     let newState = MasterStateReducer(
       initialState,

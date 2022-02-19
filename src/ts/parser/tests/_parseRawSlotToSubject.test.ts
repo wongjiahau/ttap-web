@@ -1,6 +1,6 @@
 import { expect } from "chai";
 //@ts-ignore
-import uniq = require("lodash.uniq");
+import uniq from "lodash.uniq";
 import { IRawSlot } from "../../model/rawSlot";
 import { IndexOf } from "../../tests/testData/heng_2017_sept";
 import { GetTestRawSlot1 } from "../../tests/testDataGenerator";

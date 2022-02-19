@@ -30,15 +30,15 @@ describe("parseRawSlotToSlot", () => {
     }).to.not.throw();
   });
 
-  it("case 2", () => {
-    const input = new TestManager().GetDataFrom(FileName.heng_2017_nov);
+  it("case 2", async () => {
+    const input = await new TestManager().GetDataFrom(FileName.heng_2017_nov);
     expect(() => {
       const result = ParseRawSlotToSlot(ParseStudentHtmlToRawSlot(input));
     }).to.not.throw();
   });
 
-  it("case 3", () => {
-    const input = new TestManager().GetDataFrom(FileName.keli_2017_sept);
+  it("case 3", async () => {
+    const input = await new TestManager().GetDataFrom(FileName.keli_2017_sept);
     expect(() => {
       const result = ParseRawSlotToSlot(ParseStudentHtmlToRawSlot(input));
     }).to.not.throw();

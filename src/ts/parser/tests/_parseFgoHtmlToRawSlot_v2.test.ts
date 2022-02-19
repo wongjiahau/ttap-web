@@ -1,4 +1,3 @@
-import { expect } from "chai";
 const last = require("lodash.last");
 const uniqWith = require("lodash.uniqwith");
 import {
@@ -12,11 +11,11 @@ describe("ParseFgoHtmlToRawSlot_v2", () => {
   const rawSlots = ParseFgoHtmlToRawSlot_v2(html);
   it("should not contain duplicates", () => {
     const uniques = uniqWith(rawSlots, IsRawSlotEquals);
-    expect(uniques.length).to.eq(rawSlots.length);
+    expect(uniques.length).toEqual(rawSlots.length);
   });
 
   it("case 1", () => {
-    expect(rawSlots[0]).to.deep.eq({
+    expect(rawSlots[0]).toEqual({
       Uid: 0,
       SubjectCode: "MPU3113",
       SubjectName: "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)",
@@ -32,7 +31,7 @@ describe("ParseFgoHtmlToRawSlot_v2", () => {
       ClassSize: "100",
       Remark: "",
     });
-    expect(rawSlots[1]).to.deep.eq({
+    expect(rawSlots[1]).toEqual({
       Uid: 1,
       SubjectCode: "MPU3113",
       SubjectName: "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)",
@@ -49,7 +48,7 @@ describe("ParseFgoHtmlToRawSlot_v2", () => {
   });
 
   it("case 2", () => {
-    expect(last(rawSlots)).to.deep.eq({
+    expect(last(rawSlots)).toEqual({
       Uid: 532,
       SubjectCode: "UKTC1013",
       SubjectName: "CROSS CULTURAL MANAGEMENT",
@@ -74,7 +73,7 @@ describe("ParseFgoHtmlToRawSlot_v2", () => {
     const numberOfSubSlots = 144;
 
     const numberOfDuplicatedSlots = 8;
-    expect(rawSlots).to.have.lengthOf(
+    expect(rawSlots).toHaveLength(
       maxSlotNumber + numberOfSubSlots - numberOfDuplicatedSlots
     );
   });

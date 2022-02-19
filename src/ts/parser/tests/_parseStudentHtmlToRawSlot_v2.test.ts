@@ -1,4 +1,3 @@
-import { expect } from "chai";
 const last = require("lodash.last");
 const uniqWith = require("lodash.uniqwith");
 import * as fs from "fs";
@@ -10,12 +9,12 @@ describe("ParseStudentHtmlToRawSlot_v2", () => {
   const rawSlots = ParseStudentHtmlToRawSlot_v2(html);
   it("should not contain duplicates", () => {
     const uniques = uniqWith(rawSlots, IsRawSlotEquals);
-    expect(uniques.length).to.eq(rawSlots.length);
+    expect(uniques.length).toEqual(rawSlots.length);
   });
 
   it("case 1", () => {
     const slot = rawSlots.find((slot) => slot.Uid === 76);
-    expect(slot).to.deep.eq({
+    expect(slot).toEqual({
       Uid: 76,
       SubjectCode: "UALL3033",
       SubjectName: "PUBLIC SPEAKING AND ORAL PRESENTATION",
@@ -32,7 +31,7 @@ describe("ParseStudentHtmlToRawSlot_v2", () => {
   });
 
   it("case 2", () => {
-    expect(rawSlots[0]).to.deep.eq({
+    expect(rawSlots[0]).toEqual({
       Uid: 0,
       SubjectCode: "MPU3113",
       SubjectName: "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)",
@@ -49,7 +48,7 @@ describe("ParseStudentHtmlToRawSlot_v2", () => {
       Remark: "",
     });
 
-    expect(last(rawSlots)).to.deep.eq({
+    expect(last(rawSlots)).toEqual({
       Uid: 148,
       SubjectCode: "UKTC1013",
       SubjectName: "CROSS CULTURAL MANAGEMENT",
@@ -73,6 +72,6 @@ describe("ParseStudentHtmlToRawSlot_v2", () => {
     // By counting occurence of subRows in the raw HTML by running `document.querySelectorAll("[id^=subRow]").length`
     const numberOfSubSlots = 34;
 
-    expect(rawSlots).to.have.lengthOf(maxSlotNumber + numberOfSubSlots);
+    expect(rawSlots).toHaveLength(maxSlotNumber + numberOfSubSlots);
   });
 });

@@ -1,5 +1,4 @@
 import { expect } from "chai";
-import * as Combinatorics from "js-combinatorics";
 import { ObjectStore } from "../dataStructure/objectStore";
 import { Subject } from "../model/subject";
 import ParseStudentHtmlToRawSlot from "../parser/parseStudentHtmlToRawSlot";
