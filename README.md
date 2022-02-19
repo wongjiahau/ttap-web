@@ -65,16 +65,7 @@ cd ttap-web
 npm install
 ```
 
-#### 3. Compile TypeScript files into JavaScripts
-
-Make sure you are in the `ttap-web` directory.  
-This will start the `Typescript compiler` in --watch mode
-
-```
-./scripts/watch
-```
-
-#### 4. Run the server
+#### 3. Run the server
 
 You need to run this in another terminal.
 
@@ -82,14 +73,13 @@ You need to run this in another terminal.
 npm run start
 ```
 
-#### 5. Enjoy!
+#### 4. Enjoy!
 
 ## Extra
 
 ### How to run test?
 
 ```
-./transpile
 npm run test
 ```
 
