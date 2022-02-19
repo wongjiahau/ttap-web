@@ -29,9 +29,9 @@ const theme = createMuiTheme({
     },
   },
 });
-interface IAppState {
+type IAppState = {
   isSecondaryDrawerOpen: boolean;
-}
+};
 
 export function ToggleLoadingScreen(loadingWord: string, work: () => void) {
   const x = document.getElementById("loading-words");

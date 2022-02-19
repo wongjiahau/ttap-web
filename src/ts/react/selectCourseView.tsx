@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import * as React from "react";
 // @ts-ignore
 import * as Autosuggest from "react-autosuggest";
-import Highlighter = require("react-highlight-words");
+import Highlighter from "react-highlight-words";
 import { Redirect } from "react-router";
 
 import {

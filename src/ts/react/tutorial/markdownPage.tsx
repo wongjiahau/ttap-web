@@ -1,6 +1,6 @@
 import { CircularProgress } from "@material-ui/core";
 import * as React from "react";
-import * as ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 
 interface IMarkdownPageState {
   markdownSource: string | null;
@@ -50,7 +50,7 @@ export class MarkdownPage extends React.Component<
           {this.state.markdownSource === null ? (
             <CircularProgress size={50} />
           ) : (
-            <ReactMarkdown source={this.state.markdownSource} />
+            <ReactMarkdown>{this.state.markdownSource}</ReactMarkdown>
           )}
         </div>
       </div>
@@ -63,11 +63,13 @@ export class MarkdownPage extends React.Component<
   }
 
   private requestMarkdownSource(src: string | null) {
-    const http = require("http");
-    const request = http.get(src, (response: any) => {
-      response.on("data", (loadedData: any) => {
-        this.setState({ markdownSource: loadedData.toString() });
-      });
-    });
+    if (src) {
+      fetch(src)
+        .then((response) => response.text())
+        .then((markdownSource) => {
+          this.setState({ markdownSource });
+        })
+        .catch(alert);
+    }
   }
 }
