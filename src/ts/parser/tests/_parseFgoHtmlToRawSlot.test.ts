@@ -35,7 +35,9 @@ describe.skip("ParseFgoHtmlToRawSlot", () => {
     });
   });
 
-  it("case 2", () => {
+  it("case 2", async () => {
+    const html = await new TestManager().GetDataFrom(FileName.all_fes_slots);
+    const rawSlots = ParseFgoHtmlToRawSlot_v1(html);
     expect(last(rawSlots)).to.deep.eq({
       Uid: 1688,
       SubjectCode: "UJLL1093",
@@ -53,7 +55,9 @@ describe.skip("ParseFgoHtmlToRawSlot", () => {
     });
   });
 
-  it("case 3: subslots will not have property of ClassSize and Remark", () => {
+  it("case 3: subslots will not have property of ClassSize and Remark", async () => {
+    const html = await new TestManager().GetDataFrom(FileName.all_fes_slots);
+    const rawSlots = ParseFgoHtmlToRawSlot_v1(html);
     expect(rawSlots.filter((x) => x.Number === "660")[1]).to.deep.eq({
       Uid: 799,
       SubjectCode: "UEEP2623",
@@ -71,7 +75,9 @@ describe.skip("ParseFgoHtmlToRawSlot", () => {
     });
   });
 
-  it("case 4", () => {
+  it("case 4", async () => {
+    const html = await new TestManager().GetDataFrom(FileName.all_fes_slots);
+    const rawSlots = ParseFgoHtmlToRawSlot_v1(html);
     const maxSlotNumber = 1311; // The slot number of the last slot
     const numberOfSubSlots = 378; // By counting occurence of subRows in the raw HTML
     const numberOfDuplicatedSlots = 37;

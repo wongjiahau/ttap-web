@@ -19,7 +19,7 @@ import {
   NewMasterState,
 } from "./../reducers/masterState";
 
-async function getInitialState(): Promis<IMasterState> {
+async function getInitialState(): Promise<IMasterState> {
   const slots = ParseStudentHtmlToRawSlot(
     await new TestManager().GetDataFrom(FileName.cf_2017_nov)
   );
