@@ -7,6 +7,11 @@ import { AllReducers } from "./ts/redux/reducers/allReducers";
 import { App } from "./ts/react/app";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
+import init from "ttap-wasm";
+
+// Initialize WASM modules
+// Refer https://tkat0.github.io/posts/how-to-create-a-react-app-with-rust-and-wasm#call-the-wasm-function-from-the-react-app
+init();
 
 const actionExtractor = (store: any) => (next: any) => (action: any) => {
   next(action.Action());
