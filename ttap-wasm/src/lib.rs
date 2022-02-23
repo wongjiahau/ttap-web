@@ -31,14 +31,14 @@ struct Snapshot {
 /// "newTnewTimetable"  function in JavaScript.
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
-struct PartialTimetable {
+pub struct PartialTimetable {
     slot_ids: Vec<SlotId>,
     uncompressed_day_time_matrix: DayTimeMatrix,
 }
 
 #[wasm_bindgen]
 pub fn find_timetable_json(json_optimized_slots: String, disable_clash_checking: bool) -> String {
-    set_panic_hook();
+    // set_panic_hook();
     match serde_json::from_str(json_optimized_slots.as_str()) {
         Ok(input) => serde_json::to_string(&find_timetable(input, disable_clash_checking)).unwrap(),
         Err(err) => {
@@ -53,11 +53,11 @@ const LIMIT: usize = 10000000;
 ///
 /// Assumptions:
 /// - the length of each day_time_matrix of every slot should be the same
-fn find_timetable(
+pub fn find_timetable(
     input: Vec<OptimizedSlot>,
     disable_clash_checking: bool,
 ) -> Vec<PartialTimetable> {
-    if input.len() == 0 {
+    if input.is_empty() {
         return vec![];
     }
     if input.len() == 1 {
@@ -80,7 +80,7 @@ fn find_timetable(
             .into_iter()
             .map(|(_, slots)| slots.collect::<Vec<OptimizedSlot>>())
             .collect::<Vec<Vec<OptimizedSlot>>>();
-        partitioned.sort_by(|a, b| a.len().cmp(&b.len()));
+        partitioned.sort_by_key(|a| a.len());
         partitioned
     };
 
@@ -155,15 +155,17 @@ fn find_timetable(
 /// Look at the code and test about bigSlot in TypeScript to understand more about DayTimeMatrix
 type DayTimeMatrix = Vec<u32>;
 
+#[inline]
 fn append_matrix(original_matrix: &DayTimeMatrix, new_matrix: &DayTimeMatrix) -> DayTimeMatrix {
-    let mut result = vec![];
     let length = original_matrix.len();
+    let mut result = Vec::with_capacity(length);
     for i in 0..(length - 1) {
         result.push(original_matrix[i] | new_matrix[i]);
     }
     result
 }
 
+#[inline]
 fn got_intersection(matrix1: &DayTimeMatrix, matrix2: &DayTimeMatrix) -> bool {
     let length = matrix1.len();
     for i in 0..length - 1 {
@@ -171,15 +173,14 @@ fn got_intersection(matrix1: &DayTimeMatrix, matrix2: &DayTimeMatrix) -> bool {
             return true;
         }
     }
-    return false;
+    false
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "PascalCase")]
-struct OptimizedSlot {
+pub struct OptimizedSlot {
     partition_key: u64,
     day_time_matrix: DayTimeMatrix,
-    uid: usize,
     slot_ids: Vec<SlotId>,
 }
 
@@ -188,7 +189,7 @@ struct BoundedInt {
     value: usize,
 }
 
-fn generate_indices<T>(partitions: &Vec<Vec<T>>) -> Vec<BoundedInt> {
+fn generate_indices<T>(partitions: &[Vec<T>]) -> Vec<BoundedInt> {
     partitions
         .iter()
         .map(|partition| BoundedInt {
