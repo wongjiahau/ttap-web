@@ -20,6 +20,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: actions/upload-artifact@master
+        with:
+          name: build
+          path: ./build
       - run: npm install
 
       # Check format
@@ -46,5 +50,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+          path: ./build
       - run: npm install --global surge
       - run: surge --domain https://ttap.surge.sh --project ./build --token ${{ secrets.SURGE_TOKEN }}
