@@ -187,9 +187,9 @@
       const ttapDesktopClientVersion = parseInt(
         new URLSearchParams(window.location.search.slice(1)).get(
           "desktop-client-version"
-        ) || "0"
+        ) || "1"
       );
-      const CURRENT_SUPPORTED_DESKTOP_CLIENT_VERSION = 20220313;
+      const CURRENT_SUPPORTED_DESKTOP_CLIENT_VERSION = 2;
       if (
         isNaN(ttapDesktopClientVersion) ||
         ttapDesktopClientVersion < CURRENT_SUPPORTED_DESKTOP_CLIENT_VERSION
