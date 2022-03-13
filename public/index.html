@@ -1,15 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" style="overflow: hidden">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -20,38 +23,54 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>TTAP-UTAR</title>
-</head>
-<body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="errorMessage" style="padding-left:20px;"></div>
-    <div id="root" style="display: grid; height: 100vh;"> </div>
-    <div id="loading-words" class="loading" style="
+  </head>
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <div id="errorMessage" style="padding-left: 20px"></div>
+    <div id="root" style="display: grid; height: 100vh"></div>
+    <div
+      id="loading-words"
+      class="loading"
+      style="
         position: fixed;
-        top: 0; right: 0;
-        bottom: 0; left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         background: white;
-        opacity: 0.50;
+        opacity: 0.5;
         z-index: 2000;
         cursor: wait !important;
-    ">
-        <div id="loading-inner-word" class="center" style="
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-size: 66px;
-            cursor: wait !important;
-        ">LOADING<br> . . . . . .
-        </div>
+      "
+    >
+      <div
+        id="loading-inner-word"
+        class="center"
+        style="
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          font-size: 66px;
+          cursor: wait !important;
+        "
+      >
+        LOADING<br />
+        . . . . . .
+      </div>
     </div>
     <!-- This iframe is to trigger goo.gl, so that page visits can be analyzed. -->
-    <iframe src="https://goo.gl/nHNNCF" style="width:0;height:0;border:0; border:none;"></iframe>
+    <iframe
+      src="https://goo.gl/nHNNCF"
+      style="width: 0; height: 0; border: 0; border: none"
+    ></iframe>
 
     <!-- This iframe is to trigger bit.ly, so that page visits can be analyzed. -->
-    <iframe src="https://bit.ly/2JmBftW" style="width:0;height:0;border:0; border:none;"></iframe>
+    <iframe
+      src="https://bit.ly/2JmBftW"
+      style="width: 0; height: 0; border: 0; border: none"
+    ></iframe>
 
     <!--
       This HTML file is a template.
@@ -67,64 +86,87 @@
     <script src="js.cookie.min.js"></script>
 
     <!-- Roboto font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+    />
 
     <!--Load script for Google Calendar API-->
     <script type="text/javascript">
-        function handleClientLoad() {
-            // Loads the client library and the auth2 library together for efficiency.
-            // Loading the auth2 library is optional here since `gapi.client.init` function will load
-            // it if not already loaded. Loading it upfront can save one network request.
-            gapi.load('client:auth2', initClient);
-        }
+      function handleClientLoad() {
+        // Loads the client library and the auth2 library together for efficiency.
+        // Loading the auth2 library is optional here since `gapi.client.init` function will load
+        // it if not already loaded. Loading it upfront can save one network request.
+        gapi.load("client:auth2", initClient);
+      }
 
-        function initClient() {
-            // Initialize the client with API key and People API, and initialize OAuth with an
-            // OAuth 2.0 client ID and scopes (space delimited string) to request access.
-            gapi.client.init({
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-                clientId: "747215402741-95mierrdvdvh2ap8vn5jdk2i0u2totia.apps.googleusercontent.com",
-                scope: "https://www.googleapis.com/auth/calendar"
-            }).then(function() {
-                // refer saveTimetableAsGoogleCalendar.ts
-            });
-        }
-
+      function initClient() {
+        // Initialize the client with API key and People API, and initialize OAuth with an
+        // OAuth 2.0 client ID and scopes (space delimited string) to request access.
+        gapi.client
+          .init({
+            discoveryDocs: [
+              "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+            ],
+            clientId:
+              "747215402741-95mierrdvdvh2ap8vn5jdk2i0u2totia.apps.googleusercontent.com",
+            scope: "https://www.googleapis.com/auth/calendar",
+          })
+          .then(function () {
+            // refer saveTimetableAsGoogleCalendar.ts
+          });
+      }
     </script>
-    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
+    <script
+      async
+      defer
+      src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()"
+    ></script>
 
-    <header id="header" style="position:absolute;top:4px; right:24px;font-size:10px;z-index:1200;color:white">
-        Revision: LAST_REVISION. Made by UTAR students.
+    <header
+      id="header"
+      style="
+        position: absolute;
+        top: 4px;
+        right: 24px;
+        font-size: 10px;
+        z-index: 1200;
+        color: white;
+      "
+    >
+      Revision: LAST_REVISION. Made by UTAR students.
     </header>
     <script>
-        function httpGetAsync(theUrl, callback)
-        {
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange = function() { 
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                    callback(xmlHttp.responseText);
-            }
-            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-            xmlHttp.send(null);
-        }
+      function httpGetAsync(theUrl, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+        };
+        xmlHttp.open("GET", theUrl, true); // true for asynchronous
+        xmlHttp.send(null);
+      }
     </script>
     <script>
-        window.PUBLIC_URL = "%PUBLIC_URL%"; // This is required by getStarted.tsx
-        // CheckIfThisIsTheLatestVersion();
+      window.PUBLIC_URL = "%PUBLIC_URL%"; // This is required by getStarted.tsx
+      // CheckIfThisIsTheLatestVersion();
 
-        function CheckIfThisIsTheLatestVersion() {
-            const lastGitCommitHash = "LGCH"; 
-            httpGetAsync("https://raw.githubusercontent.com/wongjiahau/ttap-web/code-cov/lastcommithash.txt", (response) => {
-                const currentGitCommitHash = response.trim();
-                if(lastGitCommitHash !== currentGitCommitHash) {
-                    WhatToDoIfNewerVersionOfTTAPdetected();
-                }
-            });
-        }
-        function WhatToDoIfNewerVersionOfTTAPdetected() {
-            const message = 
-            `
+      function CheckIfThisIsTheLatestVersion() {
+        const lastGitCommitHash = "LGCH";
+        httpGetAsync(
+          "https://raw.githubusercontent.com/wongjiahau/ttap-web/code-cov/lastcommithash.txt",
+          (response) => {
+            const currentGitCommitHash = response.trim();
+            if (lastGitCommitHash !== currentGitCommitHash) {
+              WhatToDoIfNewerVersionOfTTAPdetected();
+            }
+          }
+        );
+      }
+      function WhatToDoIfNewerVersionOfTTAPdetected() {
+        const message = `
             <br/>
             <span>A newer version of TTAP is detected. Do you want to reload to get the latest version of TTAP?</span>
             <button class="MuiButtonBase-root-51 MuiButton-root-37 MuiButton-raised-43 MuiButton-raisedSecondary-46" 
@@ -135,16 +177,15 @@
                 Nevermind </button>
             <br/><br/>
             `;
-            document.getElementById("errorMessage").innerHTML = message;
-        }
+        document.getElementById("errorMessage").innerHTML = message;
+      }
     </script>
 
-
     <!-- Semantic UI Sidebar -->
-    <link rel="stylesheet" href="sidebar.min.css"/>
+    <link rel="stylesheet" href="sidebar.min.css" />
 
-    <!-- Cytoscape for plotting graph animation -->	
+    <!-- Cytoscape for plotting graph animation -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.17/cytoscape.min.js"></script> -->
     <script src="cytoscape.min.js"></script>
-</body>
+  </body>
 </html>
