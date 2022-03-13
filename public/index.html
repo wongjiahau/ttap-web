@@ -27,6 +27,7 @@
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <div id="errorMessage" style="padding-left: 20px"></div>
+    <div id="errorMessage2" style="padding: 64px"></div>
     <div id="root" style="display: grid; height: 100vh"></div>
     <div
       id="loading-words"
@@ -178,6 +179,39 @@
             <br/><br/>
             `;
         document.getElementById("errorMessage").innerHTML = message;
+      }
+    </script>
+
+    <!-- Check for Desktop Client compatibility -->
+    <script>
+      const ttapDesktopClientVersion = parseInt(
+        new URLSearchParams(window.location.search.slice(1)).get(
+          "desktop-client-version"
+        ) || "0"
+      );
+      const CURRENT_SUPPORTED_DESKTOP_CLIENT_VERSION = 20220313;
+      if (
+        isNaN(ttapDesktopClientVersion) ||
+        ttapDesktopClientVersion < CURRENT_SUPPORTED_DESKTOP_CLIENT_VERSION
+      ) {
+        const message = `
+          <div>Your TTAP Desktop Client (v ${ttapDesktopClientVersion}) is outdated. </div>        
+          <br/>
+          <div>
+            Please download the latest version (v ${CURRENT_SUPPORTED_DESKTOP_CLIENT_VERSION}) at 
+            <a href="https://get-ttap.surge.sh">https://get-ttap.surge.sh</a>
+          </div>        
+        `;
+        document.getElementById("errorMessage2").innerHTML = message;
+        document.getElementById("root").remove();
+        document.getElementById("loading-words").remove();
+      }
+      // If desktop client is compatible
+      else {
+        const e = document.getElementById("errorMessage2");
+        if (e) {
+          e.remove();
+        }
       }
     </script>
 
