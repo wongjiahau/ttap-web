@@ -74,4 +74,39 @@ describe("ParseStudentHtmlToRawSlot_v2", () => {
 
     expect(rawSlots).toHaveLength(maxSlotNumber + numberOfSubSlots);
   });
+
+  it("should be able to parse subjects noted with 'Subject to change'", () => {
+    const html = fs
+      .readFileSync("./testData/unitreg-2023-04-25-ng-kai-en.html")
+      .toString();
+
+    const rawSlots = ParseStudentHtmlToRawSlot_v2(html);
+
+    const assert = (
+      subjectCode: string,
+      lectureCount: number,
+      tutorialCount: number
+    ) => {
+      const slots = rawSlots.filter(
+        (rawSlot) => rawSlot.SubjectCode === subjectCode
+      );
+      expect(slots.filter((slot) => slot.Type === "L")).toHaveLength(
+        lectureCount
+      );
+      expect(slots.filter((slot) => slot.Type === "T")).toHaveLength(
+        tutorialCount
+      );
+    };
+
+    // The following subjects are noted with "Subject to change" in the page
+    assert("UALJ2013", 1, 2);
+    assert("UBFB3743", 1, 1);
+    assert("UBFF2033", 1, 2);
+    assert("UBFF2083", 1, 3);
+    assert("UBFF3713", 1, 2);
+    assert("UBFF3763", 1, 2);
+    assert("UBFF3983", 1, 3);
+    assert("UBFF3993", 1, 4);
+    assert("UBFF4014", 1, 3);
+  });
 });

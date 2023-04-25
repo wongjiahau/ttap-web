@@ -1,0 +1,2869 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0081)https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterScheduleSurvey.jsp -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>myUTAR - The Universiti Tunku Abdul Rahman Web Portal</title>
+
+<script language="javascript">
+function MM_openBrWindow(theURL,winName,features) { 
+  window.open(theURL,winName,features);
+}
+function mypopup(url, sbar, resize, width, height, top, left){
+	tit=''
+	reWin=window.open(url, tit, 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=' + sbar + ',resizable=' + resize + ',width=' + width + ',height=' + height + ',top=' + top + ',left=' + left) 
+}
+function checkPhone(evt){
+	evt = (evt) ? evt : window.event
+	var charCode = (evt.which) ? evt.which : evt.keyCode
+	
+	if ((charCode > 46 && charCode < 58) || charCode==45 || charCode==13){				
+		return true
+	}
+	else{
+		alert("You can only key in numeric number")
+		return false
+	}
+}
+function checkNumeric(evt){
+	evt = (evt) ? evt : window.event
+	var charCode = (evt.which) ? evt.which : evt.keyCode
+	
+	if((charCode > 47 && charCode < 58) || charCode==13){				
+		return true
+	}
+	else{
+		alert("You can only key in numeric number")
+		return false
+	}
+}
+function IsNumeric(strString)
+{
+   var strValidChars = "0123456789.-/";
+   var strChar;
+   var blnResult = true;
+
+   if (strString.length == 0) return false;
+   for (i = 0; i < strString.length && blnResult == true; i++)
+   {
+      strChar = strString.charAt(i);
+      if (strValidChars.indexOf(strChar) == -1)
+      {
+         blnResult = false;
+      }
+   }
+   return blnResult;
+}
+function logout(myPath,logoutURL){	
+	//alert(myPath+logoutURL)
+	if(confirm("Are you sure to log out?")){
+		window.location=myPath+logoutURL;
+	}else
+		return false;
+}
+function expireSession(){
+	alert("Session Expired !!!");
+	window.location="https://unitreg.utar.edu.my/portal/courseRegStu/logoutSurvey.jsp";
+}
+
+setTimeout('expireSession()',360000);
+</script>
+<link href="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/main.css" rel="stylesheet" type="text/css">
+<link href="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/print.css" rel="stylesheet" type="text/css">
+</head>
+<body> 
+<table cellspacing="0" cellpadding="0" width="100%" border="0" id="notDisplay"> 
+  <tbody> 
+    <tr class="utarbgcolor"> 
+      <td width="70" class="utar_logo"> </td> 
+      <td width="693" valign="bottom"><div class="topmenu">&nbsp;</div> 
+        <table height="23" cellspacing="0" cellpadding="0" border="0"> 
+          <tbody> 
+            <tr class="utarbgcolor"> 
+               
+	  
+              <td class="tab_back_on"> <a class="tab-on" onmouseover="window.status=&#39;Done&#39;; return true;" href="https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterScheduleSurvey.jsp#"> <span class="tab-on">Home</span></a> </td> 
+              <td width="7" class="tab_right_on"></td> 
+              <td width="7"><img height="23" hspace="0" src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/tab_left_off.gif" width="7" border="0"><br></td> 
+			  <td align="center" nowrap="" background="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/tab_back_off.gif" bgcolor="#21455a">&nbsp;&nbsp; 
+			  <a class="tab-off" href="https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterScheduleSurvey.jsp#" onclick="logout(&#39;https://unitreg.utar.edu.my/portal/courseRegStu/&#39;,&#39;logoutBeforeSurvey.jsp&#39;);"> <span class="tab-off">Log Out</span></a>&nbsp;&nbsp;</td> 
+              <td width="7"><img height="23" hspace="0" src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/tab_right_off.gif" width="7" border="0"><br></td> 
+            </tr> 
+          </tbody> 
+        </table></td> 
+    </tr> 
+    <tr> 
+      <td colspan="2" nowrap="" class="menubgcolor">&nbsp; </td> 
+    </tr> 
+  </tbody> 
+</table> 
+<table width="100%" height="530" border="0" cellpadding="0" cellspacing="0"> 
+<tbody><tr>
+	<td>Welcome, NG KAI EN (21ABB02737)
+	<!--<img src="../images/help_icon.gif" border="0" style="margin-left:5em "> <a href="../GD-ICTC-001.pdf" target="_blank">User Guide</a>-->
+	<img src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/help_icon.gif" border="0" style="margin-left:5em "> <a href="https://unitreg.utar.edu.my/portal/courseRegStu/MN-SODEMC-042V3.pdf" target="_blank">User Guide</a>
+	</td>
+</tr>
+<tr> 
+ 
+
+
+
+
+ 
+	
+								
+																
+
+	
+
+
+
+
+
+
+<td width="100%" valign="top">
+	<table width="100%" height="520" border="0" cellpadding="0" cellspacing="0">        			
+		<tbody><tr>
+			<td width="100%" valign="top">					
+				<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">            				
+					<tbody><tr>
+						<td>						
+<!--  Start Content -->
+<script language="javascript">
+	function changePage(pageNo){
+		document.frmRefresh.reqCPage.value=pageNo;
+		document.frmRefresh.submit();	
+	}	
+	
+	function checkUnit(){
+		
+		try{
+		
+			if(!validateSpecialChar(document.frmParam.reqUnit, "Unit")){
+				return false;
+			}
+			
+			if("Any"==document.frmParam.reqFrom.value && "Any"!=document.frmParam.reqTo.value){
+				alert("Please select from time");
+				return false;
+			}
+			
+			if("Any"!=document.frmParam.reqFrom.value && "Any"==document.frmParam.reqTo.value){
+				alert("Please select to time");
+				return false;
+			}		
+			
+			if("Any"!=document.frmParam.reqFrom.value && "Any"!=document.frmParam.reqTo.value){
+				if(!checkFTtime(document.frmParam.reqFrom,document.frmParam.reqTo))
+					return false
+			}
+			
+			document.frmParam.search.disabled = true;
+			return true;
+		}catch(e){alert(e);}		
+	}	
+
+	function validateSpecialChar(objectField, msg){
+	
+		var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+		
+		for (var i = 0; i < objectField.value.length; i++) {
+			if (iChars.indexOf(objectField.value.charAt(i)) != -1) {
+				alert ("Your "+msg+" has special characters. \nThese are not allowed.\n Please remove them and try again.");
+				return false;
+			}
+		}
+		return true;
+	}	
+	
+
+	function checkFTtime(objFrom,objTo)
+	{
+		if (objTo.value != "" && objFrom.value!=""){	
+			if (objFrom.value == objTo.value){
+				alert('Cant be the same time');
+				return false;
+			} else {
+				var Fh=0, Fhh=0,Fmm=0;
+				var Fmin=0;
+				Fhh = objFrom.value.substr(0,objFrom.value.indexOf(":"));
+				Fmm = objFrom.value.substr(objFrom.value.indexOf(":")+1,2);
+				if ((objFrom.value.indexOf("PM") > 2) && Fhh < 12)
+					{Fh=12;}
+				Fmin=(((Fhh-0)+Fh)*60)+(Fmm-0);
+				
+				var Th=0, Thh=0,Tmm=0;
+				var Tmin=0;
+				Thh = objTo.value.substr(0,objTo.value.indexOf(":"));
+				Tmm = objTo.value.substr(objTo.value.indexOf(":")+1,2);
+				if ((objTo.value.indexOf("PM") > 2) && Thh < 12){
+					Th=12;
+				}
+				Tmin=(((Thh-0)+Th)*60)+(Tmm-0);
+				
+				if (Fmin > Tmin){
+					alert("(From time) can't bigger than the (To time)");
+					return false;
+				}
+				return true;
+			}
+		}
+	}	
+	
+	function viewUnit(){
+		document.getElementById('unit').style.display='';	
+	}
+</script>
+
+
+		<script language="javascript">
+		 //alert("Please choose your Academic Study Mode before proceed to [Course Preview Timetable].");
+		 //location.href = "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/defaultSurvey.jsp";
+		</script>
+		
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0"> 
+	<tbody><tr>
+		<td class="dotted"><img src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" height="1px" width="1px"></td>
+	</tr>								
+	<tr>
+		<td width="100%">
+			<h2><img src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/link1.gif"> Course Timetable Preview</h2> 
+		</td>
+	</tr>
+	<tr>
+		<td class="dotted"><img src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" height="1px" width="1px"></td>
+	</tr>								
+</tbody></table>
+<table id="notDisplay" cellspacing="0" cellpadding="0" border="0">
+ <tbody>
+  <tr>
+   <td class="tab-selected"><img height="19" alt="" src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" width="9"></td>
+   <td class="tab-selected">
+    <a class="tab-link-selected" href="https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterScheduleSurvey.jsp">Course Timetable Preview
+    </a></td>
+   <td class="tab-mid2">
+    <img height="8" alt="" src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" width="30">
+   </td>
+   <td class="tab-unselected">
+    <a class="tab-link-unselected" href="https://unitreg.utar.edu.my/portal/courseRegStu/registration/studentRegistrationSurvey.jsp">My Course Registration
+    </a></td>
+   <td class="tab-mid-end">
+    <img height="8" alt="" src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" width="30">
+   </td>
+  </tr>
+ </tbody>
+</table>
+<table id="notDisplay" width="100%" height="6" border="0" cellpadding="0" cellspacing="0">
+ <tbody>
+  <tr>
+   <td class="tab-dblue-table"><img src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" height="4" width="1"></td>
+  </tr>
+  <tr>
+   <td class="tab-dwhite-table"><img src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" height="4" width="1"></td>
+  </tr>
+  </tbody>
+</table>
+
+
+<div>
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="normal">
+		<tbody><tr>
+			<td class="normalTbl-subheader">Session</td>
+			<td>202305</td>
+				
+			<td class="normalTbl-subheader">Class Type</td>
+			<td>Full-time</td>			
+			<td class="normalTbl-subheader">Faculty</td>
+			<td>null</td>		
+					
+			<td class="normalTbl-subheader">Campus</td>
+			<td>Kampar Campus</td>		
+			<td class="normalTbl-subheader">Duration (Weeks)</td>				
+			<td>19/06/2023 - 24/09/2023 (14)</td>					
+		</tr>
+	</tbody></table>
+</div>
+<div id="debugSql"></div>
+
+<br>
+
+
+<div align="center">	
+	<table id="tblGrid" width="60%" class="normal">			
+	<form name="frmParam" action="https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterScheduleSurvey.jsp" method="POST" onsubmit="return checkUnit();"></form>
+		<input type="hidden" name="act" value="view">
+		<tbody><tr>
+			<td align="left" class="normalTbl-subheader" width="35%">Course</td>
+			<td align="left">
+				<input type="text" id="reqUnit" name="reqUnit" value="" maxlength="15" size="17" class="iform">
+				<input type="submit" name="search" value="Search" class="button">
+			</td>
+		</tr>		
+		<tr>
+			<td align="left" class="normalTbl-subheader">Day</td>
+			<td align="left">
+				<select name="reqDay" class="iform">
+<option value="" selected="">Any</option>
+<option value="1">Mon</option>
+<option value="2">Tue</option>
+<option value="3">Wed</option>
+<option value="4">Thu</option>
+<option value="5">Fri</option>
+<option value="6">Sat</option>
+<option value="7">Sun</option>
+</select>
+
+			</td>					
+		</tr>
+		<tr>
+			<td align="left" class="normalTbl-subheader">Duration</td>
+			<td align="left">
+				From&nbsp;<select name="reqFrom" class="iform">
+<option value="Any" selected="">Any</option>
+<option value="7:00 AM">7:00 AM</option>
+<option value="7:30 AM">7:30 AM</option>
+<option value="8:00 AM">8:00 AM</option>
+<option value="8:30 AM">8:30 AM</option>
+<option value="9:00 AM">9:00 AM</option>
+<option value="9:30 AM">9:30 AM</option>
+<option value="10:00 AM">10:00 AM</option>
+<option value="10:30 AM">10:30 AM</option>
+<option value="11:00 AM">11:00 AM</option>
+<option value="11:30 AM">11:30 AM</option>
+<option value="12:00 PM">12:00 PM</option>
+<option value="12:30 PM">12:30 PM</option>
+<option value="1:00 PM">1:00 PM</option>
+<option value="1:30 PM">1:30 PM</option>
+<option value="2:00 PM">2:00 PM</option>
+<option value="2:30 PM">2:30 PM</option>
+<option value="3:00 PM">3:00 PM</option>
+<option value="3:30 PM">3:30 PM</option>
+<option value="4:00 PM">4:00 PM</option>
+<option value="4:30 PM">4:30 PM</option>
+<option value="5:00 PM">5:00 PM</option>
+<option value="5:30 PM">5:30 PM</option>
+<option value="6:00 PM">6:00 PM</option>
+<option value="6:30 PM">6:30 PM</option>
+<option value="7:00 PM">7:00 PM</option>
+<option value="7:30 PM">7:30 PM</option>
+<option value="8:00 PM">8:00 PM</option>
+<option value="8:30 PM">8:30 PM</option>
+<option value="9:00 PM">9:00 PM</option>
+<option value="9:30 PM">9:30 PM</option>
+<option value="10:00 PM">10:00 PM</option>
+<option value="10:30 PM">10:30 PM</option>
+<option value="11:00 PM">11:00 PM</option>
+</select>
+
+				To&nbsp;<select name="reqTo" class="iform">
+<option value="Any" selected="">Any</option>
+<option value="7:00 AM">7:00 AM</option>
+<option value="7:30 AM">7:30 AM</option>
+<option value="8:00 AM">8:00 AM</option>
+<option value="8:30 AM">8:30 AM</option>
+<option value="9:00 AM">9:00 AM</option>
+<option value="9:30 AM">9:30 AM</option>
+<option value="10:00 AM">10:00 AM</option>
+<option value="10:30 AM">10:30 AM</option>
+<option value="11:00 AM">11:00 AM</option>
+<option value="11:30 AM">11:30 AM</option>
+<option value="12:00 PM">12:00 PM</option>
+<option value="12:30 PM">12:30 PM</option>
+<option value="1:00 PM">1:00 PM</option>
+<option value="1:30 PM">1:30 PM</option>
+<option value="2:00 PM">2:00 PM</option>
+<option value="2:30 PM">2:30 PM</option>
+<option value="3:00 PM">3:00 PM</option>
+<option value="3:30 PM">3:30 PM</option>
+<option value="4:00 PM">4:00 PM</option>
+<option value="4:30 PM">4:30 PM</option>
+<option value="5:00 PM">5:00 PM</option>
+<option value="5:30 PM">5:30 PM</option>
+<option value="6:00 PM">6:00 PM</option>
+<option value="6:30 PM">6:30 PM</option>
+<option value="7:00 PM">7:00 PM</option>
+<option value="7:30 PM">7:30 PM</option>
+<option value="8:00 PM">8:00 PM</option>
+<option value="8:30 PM">8:30 PM</option>
+<option value="9:00 PM">9:00 PM</option>
+<option value="9:30 PM">9:30 PM</option>
+<option value="10:00 PM">10:00 PM</option>
+<option value="10:30 PM">10:30 PM</option>
+<option value="11:00 PM">11:00 PM</option>
+</select>
+
+			</td>					
+		</tr>	
+									
+	
+	</tbody></table>		
+</div>	
+
+<div><blockquote>During the pre-registration period, it is highly recommended that you <u>plan
+carefully by referring to the programme structure of your programme</u> and <u>seek
+the advice and guidance of your <strong>Academic Advisor</strong></u> in registering units for
+the following trimester. It is your responsibility to ensure that you fulfil
+all requirements and conditions of your programme for graduation.<br></blockquote></div>
+
+
+<table width="100%" border="0">
+<tbody><tr><td width="100%" align="left"></td>
+
+				<td align="left">|<font size="2"><strong>1</strong></font></td>	
+
+				<td align="left">|<a href="javascript:changePage(&#39;2&#39;)">2</a></td>
+
+</tr></tbody></table>	
+
+<br>
+<div id="overviewSector">
+
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="normal">
+		<form name="frmSummary" action="https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedulePro.jsp" method="post"></form>
+		<input type="hidden" name="act" value="">
+		<tbody><tr align="center"> 
+			<td width="3%" class="normalTbl-subheader">No</td>
+			<td width="3%" class="normalTbl-subheader">Type</td>
+			<td width="5%" class="normalTbl-subheader">Group</td>
+			<td width="5%" class="normalTbl-subheader">Mode</td>
+			<td width="5%" class="normalTbl-subheader">Class Size</td>
+			<td width="4%" class="normalTbl-subheader">Day</td>
+			<td width="14%" class="normalTbl-subheader">Time</td>
+			<td width="5%" class="normalTbl-subheader">Hour</td>
+			<td width="10%" class="normalTbl-subheader">Week</td>
+			<td width="15%" class="normalTbl-subheader">Room</td>		
+			<td width="5%" class="normalTbl-subheader">Remark</td>		
+		</tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU3143 - BAHASA MELAYU KOMUNIKASI 2 [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU3153 - PENGHAYATAN ETIKA DAN PERADABAN (FOR LOCAL STUDENTS) [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU3183 - FALSAFAH DAN ISU SEMASA [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU3193 - PHILOSOPHY AND CURRENT ISSUES (FOR INTERNATIONAL STUDENTS) [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU32013 - BAHASA KEBANGSAAN A [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>1</td>	
+						<td>L</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">58</td>
+					
+							
+							<td>Mon</td>
+							<td>10:00 AM - 01:00 PM</td>
+							<td>3.0</td>
+							<td>1-14</td>
+							<td>LDK1</td>
+
+							<td>ICS-8,FAS-5,FICT-68</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">MPU33023 - BUSINESS AND SOCIETY [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU34012 - SOCIAL ENTREPRENEURSHIP PROJECT [2.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>2</td>	
+						<td>L</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">10</td>
+					
+							
+							<td>Wed</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td>FAS-5,FSC-5,FEGT-10,FICT-5</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">MPU34022 - ARTS AND CULTURAL PERFORMANCE [2.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU34082 - ORAL COMMUNICATION [2.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>3</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">10</td>
+					
+							
+							<td>Wed</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>EDK4</td>
+
+							<td>FAS-5,FSC-5,FEGT-10,FICT-5</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">MPU34112 - WORK ETHICS AND EQ [2.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU34132 - MANAGEMENT OF SPORTS ACTIVITY [2.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU34142 - CRITICAL THINKING, CREATIVE THINKING AND PROBLEM SOLVING [2.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU34152 - LEADERSHIP AND TEAMBUILDING [2.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">MPU34162 - BUSINESS PLAN WRITING &amp; PREPARATION [2.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">UALB1003 - INTRODUCTION TO GERMAN LANGUAGE [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>4</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">122</td>
+					
+							
+							<td>Mon</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK3</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>5</td>	
+						<td>L</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">47</td>
+					
+							
+							<td>Tue</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td>FEGT-56,FSC-50</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>6</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">31</td>
+					
+							
+							<td>Tue</td>
+							<td>01:00 PM - 02:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H001</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>7</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">31</td>
+					
+							
+							<td>Wed</td>
+							<td>01:00 PM - 02:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H002</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UALE1123 - ENGLISH PROFICIENCY 2 [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>8</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">145</td>
+					
+							
+							<td>Tue</td>
+							<td>08:00 AM - 10:00 AM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>9</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">28</td>
+					
+							
+							<td>Fri</td>
+							<td>11:00 AM - 12:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H002</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>10</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">28</td>
+					
+							
+							<td>Mon</td>
+							<td>09:00 AM - 10:00 AM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H004</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>11</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">28</td>
+					
+							
+							<td>Fri</td>
+							<td>10:00 AM - 11:00 AM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H002</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>12</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Fri</td>
+							<td>10:00 AM - 11:00 AM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H001</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>13</td>	
+						<td>T</td>
+						<td>5</td>
+						<td>Physical</td>
+						
+						<td align="center">28</td>
+					
+							
+							<td>Fri</td>
+							<td>11:00 AM - 12:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H001</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UALF1003 - INTRODUCTION TO FRENCH [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>14</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">27</td>
+					
+							
+							<td>Tue</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>EDK4</td>
+
+							<td>FEGT-56,FSC-30,FBF-29</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>15</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">27</td>
+					
+							
+							<td>Wed</td>
+							<td>12:00 PM - 01:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H220</td>
+
+							<td>FSC-4</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UALJ2013 - INTRODUCTION TO JAPANESE [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Book (optional)</td><td align="center">70-80</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>16</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">46</td>
+					
+							
+							<td>Mon</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H121</td>
+
+							<td>FEGT-28</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>17</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">23</td>
+					
+							
+							<td>Wed</td>
+							<td>12:00 PM - 01:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td>FSC-10</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>18</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">23</td>
+					
+							
+							<td>Wed</td>
+							<td>01:00 PM - 02:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UALM1003 - INTRODUCTION TO TAMIL LANGUAGE [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>19</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td>ICS-3,FAS-28,FICT-8</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>20</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">32</td>
+					
+							
+							<td>Thu</td>
+							<td>10:00 AM - 11:00 AM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H002</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UAMG1043 - INTERPERSONAL COMMUNICATION [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">UAPP3073 - POSITIVE PSYCHOLOGY [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">UBAE3033 - CORPORATE ETHICS AND GOVERNANCE [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>21</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">78</td>
+					
+							
+							<td>Mon</td>
+							<td>08:00 AM - 10:00 AM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H215</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>22</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">31</td>
+					
+							
+							<td>Thu</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>23</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>24</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">14</td>
+					
+							
+							<td>Wed</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H115</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBAF1013 - FINANCIAL ACCOUNTING FRAMEWORK I [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>25</td>	
+						<td>L</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">10</td>
+					
+							
+							<td>Mon</td>
+							<td>02:00 PM - 04:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK1</td>
+
+							<td>UBAF1023-10</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>26</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">15</td>
+					
+							
+							<td>Mon</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H006</td>
+
+							<td>UBAF1023-15</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBAF1163 - FINANCIAL ACCOUNTING FRAMEWORK II [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>27</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">59</td>
+					
+							
+							<td>Fri</td>
+							<td>08:00 AM - 10:00 AM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td>UBAF1183-25</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>28</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">26</td>
+					
+							
+							<td>Tue</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H108</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBAI3113 - APPLIED ECOMMERCE [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>29</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">229</td>
+					
+							
+							<td>Wed</td>
+							<td>02:00 PM - 04:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK4</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>30</td>	
+						<td>P</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>11:00 AM - 12:00 PM</td>
+							<td>1.0</td>
+							<td>1-14</td>
+							<td>H209(T/P LAB6)</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBAM1013 - FINANCIAL INFORMATION FOR MANAGEMENT [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>31</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">108</td>
+					
+							
+							<td>Thu</td>
+							<td>08:00 AM - 10:00 AM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>32</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">25</td>
+					
+							
+							<td>Wed</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H120</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>33</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H006</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>34</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">17</td>
+					
+							
+							<td>Tue</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H115</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>35</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Wed</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H120</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBAM3013 - MANAGEMENT ACCOUNTING [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>36</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">36</td>
+					
+							
+							<td>Thu</td>
+							<td>04:00 PM - 06:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK3</td>
+
+							<td>UBAM3023-116</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>37</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">3</td>
+					
+							
+							<td>Tue</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H114</td>
+
+							<td>UBAM3023-17</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>38</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H115</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBAT3013 - BUSINESS TAXATION [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>39</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">133</td>
+					
+							
+							<td>Wed</td>
+							<td>02:00 PM - 04:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK1</td>
+
+							<td>UBAT3063-50</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>40</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">7</td>
+					
+							
+							<td>Tue</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H120</td>
+
+							<td>UBAT3063-15</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>41</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">27</td>
+					
+							
+							<td>Tue</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H120</td>
+
+							<td>UBAT3063-2</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>42</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Wed</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H115</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>43</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H115</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>44</td>	
+						<td>T</td>
+						<td>5</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H115</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBEA2183 - MONEY AND FINANCIAL TECHNOLOGY [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>45</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">56</td>
+					
+							
+							<td>Thu</td>
+							<td>12:00 PM - 02:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>46</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">30</td>
+					
+							
+							<td>Tue</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBEA3033 - INTERNATIONAL TRADE [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>47</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">32</td>
+					
+							
+							<td>Wed</td>
+							<td>04:00 PM - 06:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>48</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">32</td>
+					
+							
+							<td>Thu</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H121</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBEQ1123 - QUANTITATIVE TECHNIQUES II [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>49</td>	
+						<td>L</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">113</td>
+					
+							
+							<td>Wed</td>
+							<td>04:00 PM - 06:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK2</td>
+
+							<td>FEGT-6,UBEQ1223-141</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>50</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">28</td>
+					
+							
+							<td>Thu</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H118</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>51</td>	
+						<td>T</td>
+						<td>7</td>
+						<td>Physical</td>
+						
+						<td align="center">25</td>
+					
+							
+							<td>Mon</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H118</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>52</td>	
+						<td>T</td>
+						<td>8</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H118</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBEQ2013 - BASIC ECONOMETRICS [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">UBEQ2123 - ECONOMETRICS [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>53</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">71</td>
+					
+							
+							<td>Mon</td>
+							<td>12:00 PM - 02:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td>UBEQ2223-67</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>54</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">14</td>
+					
+							
+							<td>Fri</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H121</td>
+
+							<td>UBEQ2223-12</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>55</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">21</td>
+					
+							
+							<td>Tue</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H216</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>56</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H216</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBEQ3013 - TIME SERIES ANALYSIS [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>57</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">40</td>
+					
+							
+							<td>Tue</td>
+							<td>08:00 AM - 10:00 AM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H121</td>
+
+							<td>UBEQ3113-5</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>58</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">20</td>
+					
+							
+							<td>Mon</td>
+							<td>10:00 AM - 01:00 PM</td>
+							<td>3.0</td>
+							<td>3-4,6,8,10-11,13</td>
+							<td>H210(T/P LAB7)</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>59</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">20</td>
+					
+							
+							<td>Fri</td>
+							<td>02:30 PM - 05:30 PM</td>
+							<td>3.0</td>
+							<td>3-4,6,8,10-11,13</td>
+							<td>H209(T/P LAB6)</td>
+
+							<td>UBEQ3113-5</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBEZ3013 - RESEARCH METHODS [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>60</td>	
+						<td>L</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>09:00 AM - 12:00 PM</td>
+							<td>3.0</td>
+							<td>1-14</td>
+							<td>H210(T/P LAB7)</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>61</td>	
+						<td>L</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">38</td>
+					
+							
+							<td>Wed</td>
+							<td>08:00 AM - 11:00 AM</td>
+							<td>3.0</td>
+							<td>1-14</td>
+							<td>H210(T/P LAB7)</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFB3123 - ISLAMIC BANKING [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>62</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">105</td>
+					
+							
+							<td>Tue</td>
+							<td>12:00 PM - 02:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK1</td>
+
+							<td>UBFB3223-138</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>63</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">17</td>
+					
+							
+							<td>Mon</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H119</td>
+
+							<td>UBFB3223-8</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>64</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">27</td>
+					
+							
+							<td>Wed</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H120</td>
+
+							<td>UBFB3223-6</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>65</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H120</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFB3743 - FINANCIAL MARKETS AND INSTITUTIONS [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>66</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">29</td>
+					
+							
+							<td>Thu</td>
+							<td>02:00 PM - 04:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td>UBFB3043-66</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>67</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">29</td>
+					
+							
+							<td>Wed</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H108</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFB4094 - INTERNATIONAL MONETARY SYSTEMS AND BANKING [4.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>68</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">132</td>
+					
+							
+							<td>Fri</td>
+							<td>02:30 PM - 05:30 PM</td>
+							<td>3.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>69</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H113</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>70</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Wed</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H006</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>71</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H108</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>72</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H108</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF2033 - FINANCIAL INVESTMENT [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>73</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">66</td>
+					
+							
+							<td>Wed</td>
+							<td>08:00 AM - 10:00 AM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H220</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>74</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H113</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>75</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H113</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF2083 - FINANCIAL MANAGEMENT [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>76</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">81</td>
+					
+							
+							<td>Wed</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H220</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>77</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">25</td>
+					
+							
+							<td>Mon</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>78</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">23</td>
+					
+							
+							<td>Thu</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>79</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">23</td>
+					
+							
+							<td>Fri</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF2763 - INVESTMENT MANAGEMENT [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>80</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">29</td>
+					
+							
+							<td>Thu</td>
+							<td>12:00 PM - 02:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H216</td>
+
+							<td>UBFF2063-37</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>81</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">13</td>
+					
+							
+							<td>Thu</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td>UBFF2063-17</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>82</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">16</td>
+					
+							
+							<td>Fri</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H121</td>
+
+							<td>UBFF2063-17</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF3403 - INTRODUCTION TO FINANCIAL PREDICTION WITH MACHINE LEARNING IN PYTHON [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>83</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">55</td>
+					
+							
+							<td>Wed</td>
+							<td>02:00 PM - 04:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td>UBFF3143-55</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>84</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">12</td>
+					
+							
+							<td>Mon</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H210(T/P LAB7)</td>
+
+							<td>UBFF3143-5</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>85</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H210(T/P LAB7)</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF3713 - CORPORATE FINANCE [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator (optional)</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>86</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">36</td>
+					
+							
+							<td>Thu</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK3</td>
+
+							<td>UBFF3013-78</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>87</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Wed</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>88</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">3</td>
+					
+							
+							<td>Mon</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H108</td>
+
+							<td>UBFF3013-12</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF3763 - FINANCIAL DERIVATIVES [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>89</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">66</td>
+					
+							
+							<td>Wed</td>
+							<td>04:00 PM - 06:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H220</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>90</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>91</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF3783 - FINANCIAL STATEMENT ANALYSIS [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>92</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">28</td>
+					
+							
+							<td>Thu</td>
+							<td>08:00 AM - 10:00 AM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>H216</td>
+
+							<td>UBFF3083-5</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>93</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">28</td>
+					
+							
+							<td>Tue</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H113</td>
+
+							<td>UBFF3083-5</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF3963 - ISLAMIC FINANCE [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>94</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">137</td>
+					
+							
+							<td>Wed</td>
+							<td>12:00 PM - 02:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK2</td>
+
+							<td>UBFF3363-73</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>95</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">9</td>
+					
+							
+							<td>Tue</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td>UBFF3363-20</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>96</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">12</td>
+					
+							
+							<td>Wed</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H118</td>
+
+							<td>UBFF3363-20</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>97</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>98</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>99</td>	
+						<td>T</td>
+						<td>5</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>100</td>	
+						<td>T</td>
+						<td>6</td>
+						<td>Physical</td>
+						
+						<td align="center">17</td>
+					
+							
+							<td>Fri</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF3983 - PORTFOLIO MANAGEMENT [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator (optional)</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>101</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">46</td>
+					
+							
+							<td>Thu</td>
+							<td>10:00 AM - 12:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK1</td>
+
+							<td>UBFF3283-58,UBFF3383-188</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>102</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Wed</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>103</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">7</td>
+					
+							
+							<td>Wed</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td>UBFF3383-22</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>104</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">6</td>
+					
+							
+							<td>Tue</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H118</td>
+
+							<td>UBFF3383-27</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF3993 - RISK MANAGEMENT [3.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>105</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">107</td>
+					
+							
+							<td>Mon</td>
+							<td>04:00 PM - 06:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK1</td>
+
+							<td>UBFF3293-30,UBFF3393-122,FSC-18</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>106</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">14</td>
+					
+							
+							<td>Mon</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H113</td>
+
+							<td>UBFF3393-19</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>107</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Wed</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H113</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>108</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">27</td>
+					
+							
+							<td>Tue</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H113</td>
+
+							<td>UBFF3393-3</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>109</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Wed</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H114</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF4014 - FIXED INCOME SECURITIES [4.00]
+<br><font color="red">Additional Information </font><font color="red"><i> <small>*Subject to Change </small></i></font><table class="normal" width="100%" border="0"><tbody><tr><th class="normalTbl-sub2header" align="center" width="5%"><span style="text-transform: none;"><b>No.</b></span></th><th class="normalTbl-sub2header" align="left" width="60%"><span style="text-transform: none;"><b>Brief Description</b></span></th><th class="normalTbl-sub2header" align="center" width="35%"><span style="text-transform: none;"><b>Approx. Cost (&#8805; RM50)</b></span></th></tr><tr><td align="center">1.&nbsp;</td><td>Financial calculator</td><td align="center">150</td></tr></tbody></table><br>
+</td></tr>
+				
+					<tr align="center">
+						<td>110</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">80</td>
+					
+							
+							<td>Tue</td>
+							<td>04:00 PM - 07:00 PM</td>
+							<td>3.0</td>
+							<td>1-14</td>
+							<td>H219</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>111</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Mon</td>
+							<td>12:30 PM - 02:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>112</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H119</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>113</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">14</td>
+					
+							
+							<td>Wed</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H108</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBFF4024 - MULTINATIONAL FINANCE [4.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>114</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">152</td>
+					
+							
+							<td>Fri</td>
+							<td>08:00 AM - 11:00 AM</td>
+							<td>3.0</td>
+							<td>1-14</td>
+							<td>IDK6</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>115</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>116</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">26</td>
+					
+							
+							<td>Wed</td>
+							<td>09:30 AM - 11:00 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H112</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>117</td>	
+						<td>T</td>
+						<td>3</td>
+						<td>Physical</td>
+						
+						<td align="center">27</td>
+					
+							
+							<td>Wed</td>
+							<td>11:00 AM - 12:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>118</td>	
+						<td>T</td>
+						<td>4</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Thu</td>
+							<td>03:30 PM - 05:00 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H109</td>
+
+							<td></td>
+						</tr>			
+					
+					<tr align="center">
+						<td>119</td>	
+						<td>T</td>
+						<td>5</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>08:00 AM - 09:30 AM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H108</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBML1013 - CORPORATE AND BUSINESS LAW [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>120</td>	
+						<td>L</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">56</td>
+					
+							
+							<td>Tue</td>
+							<td>04:00 PM - 06:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK1</td>
+
+							<td>UBML1513-92,FSC-88</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>121</td>	
+						<td>T</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">23</td>
+					
+							
+							<td>Mon</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H118</td>
+
+							<td>UBML1013-8</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>122</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">33</td>
+					
+							
+							<td>Tue</td>
+							<td>02:00 PM - 03:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H006</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBMM1011 - SUN ZI'S ART OF WAR AND BUSINESS STRATEGIES [1.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>123</td>	
+						<td>L</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">319</td>
+					
+							
+							<td>Thu</td>
+							<td>04:00 PM - 06:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>EDK1</td>
+
+							<td></td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UBMM1013 - MANAGEMENT PRINCIPLES [3.00]
+</td></tr>
+<tr align="center"><td colspan="11" class="red">No record found!!!</td></tr>
+<tr><td class="normalTbl-sub3header" colspan="11">UBTM3023 - DIGITAL MARKETING [3.00]
+</td></tr>
+				
+					<tr align="center">
+						<td>124</td>	
+						<td>L</td>
+						<td>1</td>
+						<td>Physical</td>
+						
+						<td align="center">36</td>
+					
+							
+							<td>Thu</td>
+							<td>02:00 PM - 04:00 PM</td>
+							<td>2.0</td>
+							<td>1-14</td>
+							<td>IDK1</td>
+
+							<td>UBTM3043-224</td>
+						</tr>			
+					
+					<tr align="center">
+						<td>125</td>	
+						<td>T</td>
+						<td>2</td>
+						<td>Physical</td>
+						
+						<td align="center">19</td>
+					
+							
+							<td>Tue</td>
+							<td>05:00 PM - 06:30 PM</td>
+							<td>1.5</td>
+							<td>1-14</td>
+							<td>H121</td>
+
+							<td>UBTM3043-10</td>
+						</tr>			
+	<tr><td class="normalTbl-sub3header" colspan="11">UCCG1213 - FUNDAMENTALS OF DIGITAL MEDIA TECHNOLOGY [3.00]
+</td></tr>
+		
+		
+	</tbody></table>
+	
+
+<br><br><br>
+</div>
+<form name="frmRefresh" action="https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp" method="get">
+	<input type="hidden" name="reqCPage" value="1">
+	<input type="hidden" name="reqUnit" value="">
+	<input type="hidden" name="reqDay" value="">
+	<input type="hidden" name="reqFrom" value="Any">
+	<input type="hidden" name="reqTo" value="Any">
+</form>
+
+
+
+
+
+<div>
+<font color="black" id="notDisplay">Page Loaded In 188 miliseconds </font>
+</div>
+
+<!-- End Content -->								
+							</td>
+  						</tr>  								 																
+          			</tbody></table>            
+				</td>
+          		<td width="10" rowspan="2"><img src="./myUTAR - The Universiti Tunku Abdul Rahman Web Portal_files/clear.gif" width="10px"></td>
+        	</tr>   
+		</tbody></table>
+	</td>
+  </tr>
+ 
+<!--<script src="https://unitreg.utar.edu.my/portal/publicFunction.js"></script>-->
+<tr id="notDisplay">
+  <td valign="top" class="footerFont">
+	<hr align="center" width="99%" size="1" noshade="">
+	Copyright © 2023, Universiti Tunku Abdul Rahman. All rights reserved. <br>
+	Info Optimized for  Internet Explorer 5.0 and above. Best viewed with 1024 x 768 pixels.<br>
+	Terms of Usage
+	
+	</td>
+
+  </tr>
+</tbody></table>
+
+
+ </body></html>

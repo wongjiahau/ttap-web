@@ -6,19 +6,20 @@ export default function ParseStudentHtmlToRawSlot_v2(html: string): RawSlot[] {
   const result = new Array<RawSlot>();
   const htmlDoc = new DOMParser().parseFromString(html, "text/html");
   // @ts-ignore
-  const tableRows = htmlDoc
-    .getElementById("overviewSector")
-    .getElementsByTagName("table")[0]
-    .getElementsByTagName("tbody")[0]
-    .getElementsByTagName("tr");
+  const tableRows = Array.from(
+    htmlDoc
+      .getElementById("overviewSector")
+      ?.getElementsByTagName("table")[0]
+      .getElementsByTagName("tbody")[0].childNodes ?? []
+  ).filter((x) => x.nodeName === "TR");
   // i = 1 because we need to skip the first <tr> which is the header of the table
   let currentSubjectName: string = "";
   let currentSubjectCode: string = "";
   let currentCreditHour: string = "";
   for (let i = 1; i < tableRows.length; i++) {
-    const currentRow = tableRows[i];
+    const currentRow = tableRows[i] as HTMLTableRowElement;
     const cells = currentRow.getElementsByTagName("td");
-    if (cells.length === 1) {
+    if (cells.length === 1 || cells.length === 4) {
       try {
         currentSubjectCode = cells[0].innerHTML.split(" - ")[0];
         currentSubjectName = cells[0].innerHTML
