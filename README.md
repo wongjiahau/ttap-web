@@ -101,10 +101,11 @@ Or https://app.bitly.com/Bi451JE8j4x/bitlinks/2JmBftW
 Go to https://wongjiahau.github.io/ttap-feedback-report/
 
 ### How to open on Mac OS?
-After opening TTAP, you should see the following prompt:  
+
+After opening TTAP, you should see the following prompt:
 
 ![image](https://user-images.githubusercontent.com/23183656/204980269-fd85f693-07fd-4b58-bfb8-643f51199f1c.png)
 
-Then, open *System Preferences*, go to *Security & Privacy*, click on *Open Anyway*:
+Then, open _System Preferences_, go to _Security & Privacy_, click on _Open Anyway_:
 
 ![image](https://user-images.githubusercontent.com/23183656/204980538-2529b152-2319-4e9d-8a77-8154b86b92a7.png)
