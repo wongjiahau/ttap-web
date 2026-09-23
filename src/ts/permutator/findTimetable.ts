@@ -14,6 +14,7 @@ import { GenerateIndices } from "./generateIndices";
 import { AppendMatrix, GotIntersection } from "./matrix";
 import { Partitionize } from "./partitionize";
 import { IOptimizedSlot } from "./tinySlot";
+import init, { find_timetable_json } from "ttap-wasm";
 
 interface ISnapshot {
   SlotIds: number[];
@@ -26,6 +27,14 @@ export function FindTimetable(
   disableClashChecking = false,
   visualizer?: FindTimetableVisualizer<IOptimizedSlot>
 ): Timetable[] {
+  let data = JSON.stringify(input);
+  const now = Date.now();
+  const timetables = find_timetable_json(data, disableClashChecking);
+  console.log((Date.now() - now) / 1000);
+  return JSON.parse(timetables).map((timetable) =>
+    newTimetable(timetable.slotIds, timetable.uncompressedDayTimeMatrix)
+  );
+
   if (!visualizer) {
     visualizer = new NullFindTimetableVisualizer();
   }
@@ -33,9 +42,7 @@ export function FindTimetable(
     throw new Error("Input slots should not be an empty array");
   }
   if (input.length === 1) {
-    let resultMatrix = [0, 0, 0, 0, 0, 0, 0];
-    resultMatrix = AppendMatrix(resultMatrix, input[0].DayTimeMatrix);
-    return [newTimetable(input[0].SlotIds, resultMatrix)];
+    return [newTimetable(input[0].SlotIds, input[0].DayTimeMatrix)];
   }
   const result = new Array<Timetable>();
   const partitioned = sortBy(Partitionize(input), [
@@ -50,9 +57,12 @@ export function FindTimetable(
   const last = length - 1;
   let current: IOptimizedSlot;
   const snapshots = new Array<ISnapshot>();
+
+  // Push an null-ish snapshot, so that the following code do not need to
+  // bother about prevSnapshot being nullable
   snapshots.push({
     SlotIds: [],
-    DayTimeMatrix: [0, 0, 0, 0, 0, 0, 0], // 7 because there are 7 days in a week
+    DayTimeMatrix: [],
   });
   let prevSnapshot: ISnapshot;
   let ptr = 0;

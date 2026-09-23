@@ -1,5 +1,8 @@
 const min = require("lodash.min");
 
+/**
+ * This function combines 2 matrices together using bitwise-OR.
+ */
 export function AppendMatrix(
   originalMatrix: number[],
   newMatrix: number[]
@@ -12,6 +15,9 @@ export function AppendMatrix(
   return result;
 }
 
+/**
+ * This function checks if 2 matrices has intersection using bitwise-AND.
+ */
 export function GotIntersection(matrix1: number[], matrix2: number[]): boolean {
   let sum = 0;
   const length = matrix1.length;
